@@ -7,82 +7,74 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tctools\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-08-22 10:16+0300\n"
-"PO-Revision-Date: 2010-09-15 15:42+0000\n"
-"Last-Translator: jyf <Unknown>\n"
+"POT-Creation-Date: 2011-03-10 13:13+0200\n"
+"PO-Revision-Date: 2011-03-20 06:35+0000\n"
+"Last-Translator: 英华 <wantinghard@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-06 13:12+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-04-02 06:20+0000\n"
+"X-Generator: Launchpad (build 12710)\n"
 
-#: ../mousetool/mousetool.cxx:97 ../network/network.cxx:238
+#: ../mousetool/mousetool.cxx:98 ../network/network.cxx:239
 msgid "&Apply"
 msgstr "应用(&A)"
 
-#: ../fdtool/fdtool.cxx:99
+#: ../fdtool/fdtool.cxx:100
 msgid "&Apply Image"
 msgstr "应用图片(&A)"
 
-#: ../filetool/filetool.cxx:69
-msgid "&Backup"
-msgstr "备份(&B)"
-
-#: ../datetool/datetool.cxx:171 ../exittc/exittc.cxx:122
-#: ../fdtool/fdtool.cxx:104 ../flrun/flrun.cxx:66 ../swapfile/swapfile.cxx:56
+#: ../datetool/datetool.cxx:173 ../exittc/exittc.cxx:147
+#: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:66 ../swapfile/swapfile.cxx:69
 msgid "&Cancel"
-msgstr "取消"
+msgstr "取消(&C)"
 
-#: ../mousetool/mousetool.cxx:100
+#: ../mousetool/mousetool.cxx:101
 msgid "&Exit"
 msgstr "退出(&E)"
 
-#: ../fdtool/fdtool.cxx:90
+#: ../fdtool/fdtool.cxx:91
 msgid "&Format"
 msgstr "格式化(&F)"
 
-#: ../fdtool/fdtool.cxx:94
+#: ../fdtool/fdtool.cxx:95
 msgid "&Make Image"
-msgstr "创建图像"
+msgstr "创建图像（&M）"
 
-#: ../filetool/filetool.cxx:65
-msgid "&None"
-msgstr "无(&N)"
-
-#: ../datetool/datetool.cxx:168 ../exittc/exittc.cxx:119
+#: ../datetool/datetool.cxx:170 ../exittc/exittc.cxx:144
 msgid "&OK"
-msgstr "接受"
+msgstr "确定(&O)"
 
-#: ../swapfile/swapfile.cxx:59
+#: ../swapfile/swapfile.cxx:72
 msgid "&Proceed"
 msgstr "继续(&P)"
 
-#: ../filetool/filetool.cxx:73
-msgid "&Restore"
-msgstr "恢复(&R)"
-
-#: ../fdtool/fdtool.cxx:75
+#: ../fdtool/fdtool.cxx:76
 msgid "1440k"
 msgstr "1440k"
 
-#: ../fdtool/fdtool.cxx:81
+#: ../fdtool/fdtool.cxx:82
 msgid "1722k"
 msgstr "1722k"
 
-#: ../datetool/datetool.cxx:130 ../datetool/datetool.cxx:138
-#: ../datetool/datetool.cxx:146 ../datetool/datetool.cxx:154
-#: ../datetool/datetool.cxx:162 ../mnttool/mnttool.cxx:103
+#: ../datetool/datetool.cxx:132 ../datetool/datetool.cxx:140
+#: ../datetool/datetool.cxx:148 ../datetool/datetool.cxx:156
+#: ../datetool/datetool.cxx:164 ../mnttool_save/mnttool.cxx:111
 msgid "@<"
 msgstr "@<"
 
-#: ../datetool/datetool.cxx:133 ../datetool/datetool.cxx:141
-#: ../datetool/datetool.cxx:149 ../datetool/datetool.cxx:157
-#: ../datetool/datetool.cxx:165 ../mnttool/mnttool.cxx:106
+#: ../datetool/datetool.cxx:135 ../datetool/datetool.cxx:143
+#: ../datetool/datetool.cxx:151 ../datetool/datetool.cxx:159
+#: ../datetool/datetool.cxx:167 ../mnttool_save/mnttool.cxx:114
 msgid "@>"
 msgstr "@>"
 
-#: ../appbrowser/appbrowser.cxx:383
+#: ../filetool/filetool.cxx:95
+msgid "Action:"
+msgstr "操作："
+
+#: ../appbrowser/appbrowser.cxx:439
 msgid "Appbrowser"
 msgstr "应用浏览器"
 
@@ -90,23 +82,39 @@ msgstr "应用浏览器"
 msgid "Application Launcher"
 msgstr "程序启动器"
 
-#: ../cpanel/cpanel.cxx:21
-msgid "Apps Audit"
-msgstr "应用审计"
+#: ../wbarconf/wbarconf.cxx:163
+msgid "Apply"
+msgstr "应用"
 
-#: ../appsaudit/appsaudit.cxx:405
+#: ../appsaudit/appsaudit.cxx:600 ../cpanel/cpanel.cxx:39
 msgid "AppsAudit"
 msgstr "应用审计"
 
-#: ../exittc/exittc.cxx:113
+#: ../exittc/exittc.cxx:104 ../filetool/filetool.cxx:78
 msgid "Backup"
 msgstr "备份"
 
-#: ../cpanel/cpanel.cxx:24
+#: ../exittc/exittc.cxx:139
+msgid "Backup Options:"
+msgstr "备份操作"
+
+#: ../cpanel/cpanel.cxx:48
 msgid "Backup/Restore"
 msgstr "备份/还原"
 
-#: ../network/network.cxx:200
+#: ../wbarconf/wbarconf.cxx:121
+msgid "Bottom"
+msgstr "底部"
+
+#: ../wbarconf/wbarconf.cxx:126
+msgid "Bottom Left"
+msgstr "左下角"
+
+#: ../wbarconf/wbarconf.cxx:127
+msgid "Bottom Right"
+msgstr "右下角"
+
+#: ../network/network.cxx:201
 msgid "Broadcast"
 msgstr "广播"
 
@@ -114,408 +122,563 @@ msgstr "广播"
 msgid "Browse"
 msgstr "浏览"
 
-#: ../appsaudit/appsaudit.cxx:362
+#: ../appsaudit/appsaudit.cxx:549
 msgid "Build Reporting Database"
 msgstr "创建报告数据库"
 
-#: ../wallpaper/wallpaper.cxx:99
-msgid "Center"
-msgstr "居中"
+#: ../wallpaper/wallpaper.cxx:275 ../wallpaper/wallpaper.cxx:300
+msgid "Cancel"
+msgstr "取消"
 
-#: ../appsaudit/appsaudit.cxx:379
+#: ../wallpaper/wallpaper.cxx:332
+msgid "Center"
+msgstr "中心"
+
+#: ../appsaudit/appsaudit.cxx:571
+msgid "Check Md5sums"
+msgstr "检查Md5值"
+
+#: ../appsaudit/appsaudit.cxx:567
 msgid "Check for Updates"
 msgstr "检查更新"
 
-#: ../appsaudit/appsaudit.cxx:371
+#: ../appsaudit/appsaudit.cxx:558
 msgid "Clear Marked for Deletion"
 msgstr "清理删除标记"
 
-#: ../wallpaper/wallpaper.cxx:113
+#: ../wallpaper/wallpaper.cxx:350
 msgid "Color"
 msgstr "颜色"
 
-#: ../appbrowser/appbrowser.cxx:385
+#: ../appbrowser/appbrowser.cxx:441
 msgid "Connect"
 msgstr "连接"
 
-#: ../fdtool/fdtool.cxx:95
+#: ../cpanel/cpanel.cxx:22
+msgid "ControlPanel"
+msgstr "控制面板"
+
+#: ../fdtool/fdtool.cxx:96
 msgid "Copies floppy to image path entered,"
 msgstr "复制软盘镜像至指定目录"
 
-#: ../cpanel/cpanel.cxx:30
+#: ../cpanel/cpanel.cxx:57
 msgid "Date/Time"
 msgstr "日期/时间"
 
-#: ../datetool/datetool.cxx:126
+#: ../datetool/datetool.cxx:128
 msgid "Datetool"
 msgstr "日期工具"
 
-#: ../datetool/datetool.cxx:144
+#: ../datetool/datetool.cxx:146
 msgid "Day:"
 msgstr "日:"
 
-#: ../appsaudit/appsaudit.cxx:360
+#: ../appsaudit/appsaudit.cxx:547
 msgid "Dependencies"
-msgstr "依赖"
+msgstr "依赖关系"
 
-#: ../appbrowser/appbrowser.cxx:433
+#: ../appbrowser/appbrowser.cxx:491
 msgid "Depends"
-msgstr "依赖"
+msgstr "依赖关系"
 
-#: ../filetool/filetool.cxx:61
+#: ../filetool/filetool.cxx:91
 msgid "Device:"
 msgstr "设备"
 
-#: ../appsaudit/appsaudit.cxx:367
+#: ../wallpaper/wallpaper.cxx:255
+msgid "Diagonal Gradient"
+msgstr "对角线倾斜度"
+
+#: ../appsaudit/appsaudit.cxx:554
 msgid "Display All Not Depended On"
 msgstr "显示所有非依赖关系"
 
-#: ../appsaudit/appsaudit.cxx:368
+#: ../appsaudit/appsaudit.cxx:555
 msgid "Display All with Missing Dependencies"
-msgstr "显示所有(包括未补全的依赖)"
+msgstr "显示所有缺失的依赖关系"
 
-#: ../appsaudit/appsaudit.cxx:366
+#: ../appsaudit/appsaudit.cxx:553
 msgid "Display All with No Dependencies"
-msgstr "显示所有(不包括依赖)"
+msgstr "显示所有独立扩展"
 
-#: ../appsaudit/appsaudit.cxx:370
+#: ../appsaudit/appsaudit.cxx:557
 msgid "Display Marked for Deletion"
-msgstr "显示所有表明为删除的"
+msgstr "显示所有要删除的扩展"
 
-#: ../appbrowser/appbrowser.cxx:460
-msgid "DownLoad"
-msgstr "下载"
+#: ../wallpaper/wallpaper.cxx:272 ../wallpaper/wallpaper.cxx:297
+#: ../wallpaper/wallpaper.cxx:346
+msgid "Done"
+msgstr "完成"
 
-#: ../appbrowser/appbrowser.cxx:461
-msgid "Download Only."
-msgstr "只下载"
+#: ../appbrowser/appbrowser.cxx:386
+msgid "Download + Load"
+msgstr "下载+安装"
 
-#: ../appbrowser/appbrowser.cxx:456
-msgid "Downloads  and updates OnDemand menu."
-msgstr "下载并更新即时菜单"
+#: ../appbrowser/appbrowser.cxx:387
+msgid "Download Only"
+msgstr "仅下载"
 
-#: ../appbrowser/appbrowser.cxx:451
-msgid "Downloads, updates menu and onboot.lst."
-msgstr "下载,更新菜单与onboot.lst"
-
-#: ../network/network.cxx:241
+#: ../network/network.cxx:242
 msgid "E&xit"
-msgstr "退出(&x)"
+msgstr "退出(&X)"
 
-#: ../appsaudit/appsaudit.cxx:376
+#: ../appsaudit/appsaudit.cxx:559
+msgid "Exit Dependencies Mode"
+msgstr "退出依赖关系程序"
+
+#: ../appsaudit/appsaudit.cxx:564
 msgid "Exit Install Options"
 msgstr "退出安装选项"
 
-#: ../appsaudit/appsaudit.cxx:384
+#: ../appsaudit/appsaudit.cxx:572
+msgid "Exit Md5 Check Mode"
+msgstr "退出Md5检查程序"
+
+#: ../appsaudit/appsaudit.cxx:576
 msgid "Exit OnBoot"
-msgstr "退出启动"
+msgstr "退出启动设置"
 
-#: ../appsaudit/appsaudit.cxx:388
+#: ../appsaudit/appsaudit.cxx:580
 msgid "Exit OnDemand"
-msgstr "退出即时响应"
+msgstr "退出按需设置"
 
-#: ../appsaudit/appsaudit.cxx:380
+#: ../appsaudit/appsaudit.cxx:568
 msgid "Exit Update Mode"
 msgstr "退出更新模式"
 
-#: ../exittc/exittc.cxx:102
+#: ../exittc/exittc.cxx:128
 msgid "Exit to Prompt"
 msgstr "退出至命令行"
 
-#: ../appsaudit/appsaudit.cxx:357
-msgid "File"
-msgstr "文件"
+#: ../flrun/flrun.cxx:55
+msgid "FLRun"
+msgstr "FLRun"
 
-#: ../appbrowser/appbrowser.cxx:424
+#: ../filetool/filetool.cxx:90
+msgid "FileTool"
+msgstr "文件工具"
+
+#: ../appbrowser/appbrowser.cxx:481
 msgid "Files"
 msgstr "文件"
 
-#: ../filetool/filetool.cxx:59
-msgid "Filetool"
-msgstr "文件工具"
-
-#: ../wallpaper/wallpaper.cxx:104
+#: ../wallpaper/wallpaper.cxx:337
 msgid "Fill"
 msgstr "填充"
 
-#: ../fdtool/fdtool.cxx:71
+#: ../fdtool/fdtool.cxx:72
 msgid "Floppy Disk Tool"
 msgstr "软盘工具"
 
-#: ../cpanel/cpanel.cxx:48
+#: ../cpanel/cpanel.cxx:42
 msgid "Floppy Tool"
 msgstr "软盘工具"
 
-#: ../fdtool/fdtool.cxx:91
-msgid "Formats FAT of selected size."
-msgstr "讲所选分区格式化为FAT"
+#: ../fdtool/fdtool.cxx:70
+msgid "FloppyTool"
+msgstr "软盘工具"
 
-#: ../wallpaper/wallpaper.cxx:88
+#: ../fdtool/fdtool.cxx:92
+msgid "Formats FAT of selected size."
+msgstr "将所选分区格式化为FAT"
+
+#: ../wallpaper/wallpaper.cxx:321
 msgid "Full"
 msgstr "全屏"
 
-#: ../network/network.cxx:206
+#: ../filetool/filetool.cxx:100
+msgid "GO"
+msgstr "执行"
+
+#: ../network/network.cxx:207
 msgid "Gateway"
 msgstr "网关"
 
-#: ../wallpaper/wallpaper.cxx:116
-msgid "Help"
-msgstr "帮助"
+#: ../appbrowser/appbrowser.cxx:515
+msgid "Go"
+msgstr "执行"
 
-#: ../datetool/datetool.cxx:152
+#: ../wallpaper/wallpaper.cxx:219 ../wallpaper/wallpaper.cxx:353
+msgid "Gradient"
+msgstr "渐变的"
+
+#: ../wallpaper/wallpaper.cxx:220
+msgid "Gradient Color #1"
+msgstr "渐变的颜色 #1"
+
+#: ../wallpaper/wallpaper.cxx:233
+msgid "Gradient Color #2"
+msgstr "渐变的颜色 #2"
+
+#: ../cpanel/cpanel.cxx:45
+msgid "HD/USB Install"
+msgstr "硬盘/U盘 安装"
+
+#: ../wallpaper/wallpaper.cxx:251
+msgid "Horizontal Gradient"
+msgstr "水平渐变"
+
+#: ../datetool/datetool.cxx:154
 msgid "Hour:"
-msgstr "时"
+msgstr "小时："
 
-#: ../network/network.cxx:187
+#: ../cpanel/cpanel.cxx:54
+msgid "Hybrid Mode"
+msgstr "混合模式"
+
+#: ../network/network.cxx:188
 msgid "IP Address"
-msgstr "IP地址"
+msgstr "IP 地址"
 
-#: ../fdtool/fdtool.cxx:86
+#: ../fdtool/fdtool.cxx:87
 msgid "Image Path:"
-msgstr "镜像目录"
+msgstr "映像路径"
 
-#: ../appbrowser/appbrowser.cxx:415
+#: ../appbrowser/appbrowser.cxx:471
 msgid "Info"
 msgstr "备注"
 
-#: ../wallpaper/wallpaper.cxx:109
-msgid "Install"
-msgstr "安装"
-
-#: ../appsaudit/appsaudit.cxx:373
+#: ../appsaudit/appsaudit.cxx:561
 msgid "Install Options"
-msgstr "选项安装"
+msgstr "安装选项"
 
-#: ../network/network.cxx:163
+#: ../wallpaper/wallpaper.cxx:312
+msgid "Install images from /opt/backgrounds directory"
+msgstr "从/opt/backgrounds目录安装图片"
+
+#: ../stats/stats.cxx:162
+msgid "Installed"
+msgstr "已安装"
+
+#: ../network/network.cxx:164
 msgid "Interface"
 msgstr "网络接口"
 
-#: ../mousetool/mousetool.cxx:92
+#: ../wbarconf/wbarconf.cxx:122
+msgid "Left"
+msgstr "左"
+
+#: ../wbarconf/wbarconf.cxx:129
+msgid "Left Bottom"
+msgstr "左下"
+
+#: ../mousetool/mousetool.cxx:93
 msgid "Left Button"
 msgstr "左键"
 
-#: ../appsaudit/appsaudit.cxx:363
+#: ../wbarconf/wbarconf.cxx:128
+msgid "Left Top"
+msgstr "左上"
+
+#: ../appsaudit/appsaudit.cxx:550
 msgid "List Dependencies"
 msgstr "列出所有依赖"
 
-#: ../appsaudit/appsaudit.cxx:365
+#: ../appsaudit/appsaudit.cxx:552
 msgid "List Missing Dependencies"
 msgstr "列出缺失的依赖"
 
-#: ../appsaudit/appsaudit.cxx:364
+#: ../appsaudit/appsaudit.cxx:551
 msgid "List Required By"
-msgstr "列出所有被依赖的"
+msgstr "列出所依赖的包"
 
-#: ../appbrowser/appbrowser.cxx:388
+#: ../appbrowser/appbrowser.cxx:444
 msgid "Local"
 msgstr "本地"
 
-#: ../appsaudit/appsaudit.cxx:383 ../appsaudit/appsaudit.cxx:387
+#: ../appsaudit/appsaudit.cxx:575 ../appsaudit/appsaudit.cxx:579
+#: ../cpanel/cpanel.cxx:24
 msgid "Maintenance"
 msgstr "维护"
 
-#: ../swapfile/swapfile.cxx:50
-msgid "Make tc.swap EXT2 Swapfile"
-msgstr "创建 tc.swap为 EXT2 交换文件"
-
-#: ../appsaudit/appsaudit.cxx:369
+#: ../appsaudit/appsaudit.cxx:556
 msgid "Mark for Deletion"
 msgstr "标记为删除"
 
-#: ../datetool/datetool.cxx:160
+#: ../appsaudit/appsaudit.cxx:570
+msgid "Md5Check"
+msgstr "Md5检查"
+
+#: ../datetool/datetool.cxx:162
 msgid "Min:"
 msgstr "最小:"
 
-#: ../appbrowser/appbrowser.cxx:391
+#: ../appbrowser/appbrowser.cxx:447
 msgid "Mirrors"
 msgstr "镜像"
 
-#: ../datetool/datetool.cxx:136
+#: ../datetool/datetool.cxx:138
 msgid "Month:"
-msgstr "月："
+msgstr "月份:"
 
-#: ../cpanel/cpanel.cxx:27
+#: ../cpanel/cpanel.cxx:51
 msgid "Mount Tool"
 msgstr "挂载工具"
 
-#: ../swapfile/swapfile.cxx:52
+#: ../swapfile/swapfile.cxx:65
 msgid "Mounted Partition:"
 msgstr "已挂载分区"
 
-#: ../mousetool/mousetool.cxx:75
+#: ../mousetool/mousetool.cxx:76
 msgid "Mouse Speed"
 msgstr "鼠标速率"
 
-#: ../cpanel/cpanel.cxx:51 ../mousetool/mousetool.cxx:73
+#: ../cpanel/cpanel.cxx:60
 msgid "Mouse Tool"
 msgstr "鼠标工具"
 
-#: ../network/network.cxx:212
+#: ../mousetool/mousetool.cxx:74
+msgid "MouseTool"
+msgstr "鼠标工具"
+
+#: ../network/network.cxx:213
 msgid "NameServers"
 msgstr "域名服务器"
 
-#: ../cpanel/cpanel.cxx:42 ../network/network.cxx:157
-#: ../network/network.cxx:159
+#: ../cpanel/cpanel.cxx:66 ../network/network.cxx:158
+#: ../network/network.cxx:160
 msgid "Network"
 msgstr "网络"
 
-#: ../network/network.cxx:194
+#: ../network/network.cxx:195
 msgid "Network Mask"
 msgstr "子网掩码"
+
+#: ../exittc/exittc.cxx:103 ../filetool/filetool.cxx:77
+msgid "None"
+msgstr "无"
 
 #: ../flrun/flrun.cxx:63
 msgid "OK"
 msgstr "确定"
 
-#: ../appbrowser/appbrowser.cxx:450 ../appsaudit/appsaudit.cxx:382
+#: ../appbrowser/appbrowser.cxx:384 ../appsaudit/appsaudit.cxx:574
 msgid "OnBoot"
-msgstr "OnBoot"
+msgstr "启动装载"
 
-#: ../appbrowser/appbrowser.cxx:455 ../appsaudit/appsaudit.cxx:386
+#: ../appbrowser/appbrowser.cxx:385 ../appsaudit/appsaudit.cxx:578
 msgid "OnDemand"
-msgstr "即时响应"
+msgstr "按需装载"
 
 #: ../wbar_exclude/wbar_exclude.cxx:59
 msgid "Onboot Items"
-msgstr "Onboot Items"
+msgstr "启动的装载项目"
 
-#: ../appsaudit/appsaudit.cxx:358
-msgid "Quit"
-msgstr "退出"
+#: ../wallpaper/wallpaper.cxx:280 ../wallpaper/wallpaper.cxx:281
+msgid "Pick Color"
+msgstr "选择颜色"
 
-#: ../exittc/exittc.cxx:97
+#: ../wbarconf/wbarconf.cxx:158
+msgid "Position"
+msgstr "位置"
+
+#: ../wallpaper/wallpaper.cxx:303
+msgid "Preview"
+msgstr "预览"
+
+#: ../appsaudit/appsaudit.cxx:623
+msgid "Process Selected Item(s)"
+msgstr "处理所选项目"
+
+#: ../appbrowser/appbrowser.cxx:353
+msgid "Provides"
+msgstr "提供"
+
+#: ../exittc/exittc.cxx:123
 msgid "Reboot"
 msgstr "重启"
 
-#: ../appsaudit/appsaudit.cxx:414
+#: ../filetool/filetool.cxx:80
+msgid "Restore"
+msgstr "恢复"
+
+#: ../appsaudit/appsaudit.cxx:608
 msgid "Results"
 msgstr "结果"
 
-#: ../mousetool/mousetool.cxx:86
+#: ../wbarconf/wbarconf.cxx:123
+msgid "Right"
+msgstr "右"
+
+#: ../wbarconf/wbarconf.cxx:131
+msgid "Right Bottom"
+msgstr "右下"
+
+#: ../mousetool/mousetool.cxx:87
 msgid "Right Button"
 msgstr "右键"
 
-#: ../cpanel/cpanel.cxx:63
-msgid "Run Command"
-msgstr "运行命令"
+#: ../wbarconf/wbarconf.cxx:130
+msgid "Right Top"
+msgstr "右上"
 
-#: ../network/network.cxx:222
+#: ../exittc/exittc.cxx:105 ../filetool/filetool.cxx:79
+msgid "Safe"
+msgstr "安全"
+
+#: ../network/network.cxx:223
 msgid "Save Configuration?"
-msgstr "保存配置"
+msgstr "保存配置?"
 
-#: ../appbrowser/appbrowser.cxx:394
+#: ../appbrowser/appbrowser.cxx:352
 msgid "Search"
 msgstr "搜索"
+
+#: ../appsaudit/appsaudit.cxx:605
+msgid "Select"
+msgstr "选择"
 
 #: ../add2file/add2file.cxx:22
 msgid "Select File to be added to "
 msgstr "选择待添加文件 "
 
-#: ../appsaudit/appsaudit.cxx:375
+#: ../appsaudit/appsaudit.cxx:563
 msgid "Selective Copy Install"
 msgstr "可选的复制安装"
 
-#: ../services/services.cxx:129
-msgid "Services"
-msgstr "服务"
+#: ../appbrowser/appbrowser.cxx:523 ../wallpaper/wallpaper.cxx:269
+#: ../wallpaper/wallpaper.cxx:294 ../wallpaper/wallpaper.cxx:342
+msgid "Set"
+msgstr "设置"
 
-#: ../cpanel/cpanel.cxx:39
-msgid "Set TCE Drive"
-msgstr "设置TCE驱动"
+#: ../cpanel/cpanel.cxx:34
+msgid "Setup"
+msgstr "安装"
 
-#: ../exittc/exittc.cxx:91
+#: ../exittc/exittc.cxx:117
 msgid "Shutdown"
 msgstr "关机"
 
-#: ../appbrowser/appbrowser.cxx:440
+#: ../appbrowser/appbrowser.cxx:500
 msgid "Size"
 msgstr "大小"
 
-#: ../appbrowser/appbrowser.cxx:465
+#: ../appbrowser/appbrowser.cxx:519
 msgid "Status"
 msgstr "状态"
 
-#: ../cpanel/cpanel.cxx:36
-msgid "Swapfile Tool"
-msgstr "交换文件工具"
+#: ../swapfile/swapfile.cxx:63
+msgid "Swapfile"
+msgstr "Swap文件"
 
-#: ../cpanel/cpanel.cxx:54
+#: ../cpanel/cpanel.cxx:72
+msgid "Swapfile Tool"
+msgstr "Swap文件工具"
+
+#: ../cpanel/cpanel.cxx:69
 msgid "System Stats"
 msgstr "系统状态"
 
-#: ../exittc/exittc.cxx:88
+#: ../exittc/exittc.cxx:113
 msgid "TC Exit Options"
 msgstr "TC退出选项"
 
-#: ../wallpaper/wallpaper.cxx:94
+#: ../cpanel/cpanel.cxx:63
+msgid "Terminal Server"
+msgstr "终端服务"
+
+#: ../wallpaper/wallpaper.cxx:327
 msgid "Tile"
 msgstr "平铺"
 
-#: ../stats/stats.cxx:35
+#: ../stats/stats.cxx:74
 msgid "Tiny Core System Stats"
 msgstr "Tiny Core 系统状态"
 
-#: ../appsaudit/appsaudit.cxx:374
+#: ../appsaudit/appsaudit.cxx:562
 msgid "Toggle Default Copy Install"
 msgstr "切换默认复制安装"
 
-#: ../appbrowser/appbrowser.cxx:395
-msgid "Toggle Search / Provides"
-msgstr "切换搜索/提供"
+#: ../wbarconf/wbarconf.cxx:120
+msgid "Top"
+msgstr "顶部"
 
-#: ../cpanel/cpanel.cxx:60
-msgid "USB Install"
-msgstr "u盘安装"
+#: ../wbarconf/wbarconf.cxx:124
+msgid "Top Left"
+msgstr "左上角"
 
-#: ../appsaudit/appsaudit.cxx:361
+#: ../wbarconf/wbarconf.cxx:125
+msgid "Top Right"
+msgstr "右上角"
+
+#: ../appsaudit/appsaudit.cxx:548
 msgid "Update .dep files."
-msgstr "更新依赖文件"
+msgstr "更新 .dep 文件"
 
-#: ../cpanel/cpanel.cxx:57
-msgid "Update Apps"
-msgstr "更新应用程序"
-
-#: ../appsaudit/appsaudit.cxx:378
+#: ../appsaudit/appsaudit.cxx:566
 msgid "Updates"
 msgstr "更新"
 
-#: ../network/network.cxx:169
+#: ../network/network.cxx:170
 msgid "Use DHCP Broadcast?"
 msgstr "使用DHCP广播?"
 
-#: ../cpanel/cpanel.cxx:33
+#: ../cpanel/cpanel.cxx:29
+msgid "Utilities"
+msgstr "实用程序"
+
+#: ../wallpaper/wallpaper.cxx:246
+msgid "Vertical Gradient"
+msgstr "垂直渐变"
+
+#: ../cpanel/cpanel.cxx:79 ../wallpaper/wallpaper.cxx:311
 msgid "Wallpaper"
 msgstr "壁纸"
 
-#: ../fdtool/fdtool.cxx:100
+#: ../cpanel/cpanel.cxx:75
+msgid "Wbar Conf"
+msgstr "Wbar配置"
+
+#: ../wbarconf/wbarconf.cxx:174
+msgid "Wbar Icon Size"
+msgstr "Wbar图标大小"
+
+#: ../wbarconf/wbarconf.cxx:146
+msgid "Wbar Icons"
+msgstr "Wbar图标"
+
+#: ../wbarconf/wbarconf.cxx:182
+msgid "Wbar Text Labels"
+msgstr "Wbar文本标签"
+
+#: ../wbarconf/wbarconf.cxx:166
+msgid "Wbar Zoom"
+msgstr "Wbar缩放"
+
+#: ../fdtool/fdtool.cxx:101
 msgid "Writes image path file to floppy."
 msgstr "将镜像文件写至软盘"
 
-#: ../cpanel/cpanel.cxx:45
-msgid "Xvesa Setup"
-msgstr "Xvesa设置"
+#: ../cpanel/cpanel.cxx:82
+msgid "Xvesa"
+msgstr "Xvesa"
 
-#: ../datetool/datetool.cxx:128
+#: ../datetool/datetool.cxx:130
 msgid "Year:"
 msgstr "年"
 
-#: ../stats/stats.cxx:96
+#: ../stats/stats.cxx:171
+msgid "bigHomeFiles"
+msgstr "大的Home文件"
+
+#: ../stats/stats.cxx:153
 msgid "boot"
 msgstr "启动"
 
-#: ../mnttool/mnttool.cxx:109
+#: ../mnttool_save/mnttool.cxx:117
 msgid "button"
 msgstr "按钮"
 
-#: ../stats/stats.cxx:39
+#: ../stats/stats.cxx:80
 msgid "cpu"
 msgstr "cpu"
 
-#: ../stats/stats.cxx:75
+#: ../stats/stats.cxx:126
 msgid "dmesg"
-msgstr "Onboot Items"
+msgstr "开机信息"
 
-#: ../wbar_exclude/wbar_exclude.cxx:58
+#: ../wbarconf/wbarconf.cxx:145 ../wbar_exclude/wbar_exclude.cxx:58
 msgid "eXclude Wbar Icons"
 msgstr "不包含Wbar图标"
 
@@ -523,46 +686,114 @@ msgstr "不包含Wbar图标"
 msgid "eXclude Wbar Items"
 msgstr "不包含Wbar元素"
 
-#: ../stats/stats.cxx:103
-msgid "extensions"
-msgstr "扩展"
+#: ../wbarconf/wbarconf.cxx:152
+msgid "eXcluded Items"
+msgstr "不包括的项目"
 
-#: ../stats/stats.cxx:89
+#: ../stats/stats.cxx:144
 msgid "filesystems"
 msgstr "文件系统"
 
-#: ../flrun/flrun.cxx:55
-msgid "flrun"
-msgstr "flrun"
-
-#: ../stats/stats.cxx:47
+#: ../stats/stats.cxx:90
 msgid "mem"
 msgstr "内存"
 
-#: ../stats/stats.cxx:61
+#: ../stats/stats.cxx:108
 msgid "modules"
 msgstr "模块"
 
-#: ../stats/stats.cxx:82
+#: ../stats/stats.cxx:135
 msgid "mounts"
 msgstr "已挂载"
 
-#: ../stats/stats.cxx:54
+#: ../stats/stats.cxx:99
 msgid "net"
 msgstr "网络"
 
-#: ../network/network.cxx:178 ../network/network.cxx:231
+#: ../network/network.cxx:179 ../network/network.cxx:232
 msgid "no"
 msgstr "否"
 
-#: ../stats/stats.cxx:68
+#: ../stats/stats.cxx:117
 msgid "processes"
 msgstr "进程"
 
-#: ../swapfile/swapfile.cxx:54
+#: ../swapfile/swapfile.cxx:67
 msgid "tc.swp in k bytes:"
 msgstr "tc.swp 以 kb 计数"
 
-#: ../network/network.cxx:172 ../network/network.cxx:225
+#: ../network/network.cxx:173 ../network/network.cxx:226
 msgid "yes"
 msgstr "是"
+
+#~ msgid "&Backup"
+#~ msgstr "备份(&B)"
+
+#~ msgid "&None"
+#~ msgstr "无(&N)"
+
+#~ msgid "Apps Audit"
+#~ msgstr "应用审计"
+
+#~ msgid "&Restore"
+#~ msgstr "恢复(&R)"
+
+#~ msgid "Download Only."
+#~ msgstr "只下载"
+
+#~ msgid "Downloads  and updates OnDemand menu."
+#~ msgstr "下载并更新即时菜单"
+
+#~ msgid "DownLoad"
+#~ msgstr "下载"
+
+#~ msgid "Downloads, updates menu and onboot.lst."
+#~ msgstr "下载,更新菜单与onboot.lst"
+
+#~ msgid "Help"
+#~ msgstr "帮助"
+
+#~ msgid "File"
+#~ msgstr "文件"
+
+#~ msgid "Filetool"
+#~ msgstr "文件工具"
+
+#~ msgid "Install"
+#~ msgstr "安装"
+
+#~ msgid "Make tc.swap EXT2 Swapfile"
+#~ msgstr "创建 tc.swap为 EXT2 交换文件"
+
+#~ msgid "Quit"
+#~ msgstr "退出"
+
+#~ msgid "Run Command"
+#~ msgstr "运行命令"
+
+#~ msgid "Set TCE Drive"
+#~ msgstr "设置TCE驱动"
+
+#~ msgid "Services"
+#~ msgstr "服务"
+
+#~ msgid "Toggle Search / Provides"
+#~ msgstr "切换搜索/提供"
+
+#~ msgid "USB Install"
+#~ msgstr "u盘安装"
+
+#~ msgid "Update Apps"
+#~ msgstr "更新应用程序"
+
+#~ msgid "Xvesa Setup"
+#~ msgstr "Xvesa设置"
+
+#~ msgid "extensions"
+#~ msgstr "扩展"
+
+#~ msgid "flrun"
+#~ msgstr "flrun"
+
+#~ msgid "Wbar Position"
+#~ msgstr "Wbar状况"

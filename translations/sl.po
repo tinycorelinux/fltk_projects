@@ -1,4 +1,4 @@
-# French translation for tctools
+# Slovenian translation for tctools
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the tctools package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: tctools\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-10 13:13+0200\n"
-"PO-Revision-Date: 2010-12-11 21:22+0000\n"
-"Last-Translator: Jean-François Huck <Unknown>\n"
-"Language-Team: French <fr@li.org>\n"
+"PO-Revision-Date: 2011-03-19 14:45+0000\n"
+"Last-Translator: Sasa Batistic <Unknown>\n"
+"Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,36 +19,36 @@ msgstr ""
 
 #: ../mousetool/mousetool.cxx:98 ../network/network.cxx:239
 msgid "&Apply"
-msgstr "&Appliquer"
+msgstr "&Uporabi"
 
 #: ../fdtool/fdtool.cxx:100
 msgid "&Apply Image"
-msgstr "&Appliquer l'image"
+msgstr "&Uporabi Sliko"
 
 #: ../datetool/datetool.cxx:173 ../exittc/exittc.cxx:147
 #: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:66 ../swapfile/swapfile.cxx:69
 msgid "&Cancel"
-msgstr "&Annuler"
+msgstr "&Prekliči"
 
 #: ../mousetool/mousetool.cxx:101
 msgid "&Exit"
-msgstr "&Quitter"
+msgstr "&Izhod"
 
 #: ../fdtool/fdtool.cxx:91
 msgid "&Format"
-msgstr "&Formater"
+msgstr "&Formatiraj"
 
 #: ../fdtool/fdtool.cxx:95
 msgid "&Make Image"
-msgstr "&Créer l'image"
+msgstr "&Izdelaj Sliko"
 
 #: ../datetool/datetool.cxx:170 ../exittc/exittc.cxx:144
 msgid "&OK"
-msgstr "&Ok"
+msgstr "&V redu"
 
 #: ../swapfile/swapfile.cxx:72
 msgid "&Proceed"
-msgstr "Procéder"
+msgstr "&Nadaljuj"
 
 #: ../fdtool/fdtool.cxx:76
 msgid "1440k"
@@ -72,607 +72,607 @@ msgstr "@>"
 
 #: ../filetool/filetool.cxx:95
 msgid "Action:"
-msgstr ""
+msgstr "Dejanje:"
 
 #: ../appbrowser/appbrowser.cxx:439
 msgid "Appbrowser"
-msgstr "Navigateur d'applications"
+msgstr "Aplikacijsko Središče"
 
 #: ../flrun/flrun.cxx:57
 msgid "Application Launcher"
-msgstr "Lanceur d'applications"
+msgstr "Zaganjalnik Aplikacij"
 
 #: ../wbarconf/wbarconf.cxx:163
 msgid "Apply"
-msgstr ""
+msgstr "Uveljavi"
 
 #: ../appsaudit/appsaudit.cxx:600 ../cpanel/cpanel.cxx:39
 msgid "AppsAudit"
-msgstr "Application audio"
+msgstr "Revizor Aplikacij"
 
 #: ../exittc/exittc.cxx:104 ../filetool/filetool.cxx:78
 msgid "Backup"
-msgstr "Sauvegarde"
+msgstr "Varnostna Kopija"
 
 #: ../exittc/exittc.cxx:139
 msgid "Backup Options:"
-msgstr "Options de sauvegarde :"
+msgstr "Nastavitve Varnostne Kopije"
 
 #: ../cpanel/cpanel.cxx:48
 msgid "Backup/Restore"
-msgstr "Sauvegarder/Restaurer"
+msgstr "Shrani/Naloži Varnostne Kopije"
 
 #: ../wbarconf/wbarconf.cxx:121
 msgid "Bottom"
-msgstr ""
+msgstr "Spodaj"
 
 #: ../wbarconf/wbarconf.cxx:126
 msgid "Bottom Left"
-msgstr ""
+msgstr "Spodaj levo"
 
 #: ../wbarconf/wbarconf.cxx:127
 msgid "Bottom Right"
-msgstr ""
+msgstr "Spodaj desno"
 
 #: ../network/network.cxx:201
 msgid "Broadcast"
-msgstr "Diffuser"
+msgstr "Oddajanje"
 
 #: ../flrun/flrun.cxx:69
 msgid "Browse"
-msgstr "Parcourir"
+msgstr "Prebrskaj"
 
 #: ../appsaudit/appsaudit.cxx:549
 msgid "Build Reporting Database"
-msgstr "Créer base de données pour faire rapport"
+msgstr "Baza Sporočil o Gradnji"
 
 #: ../wallpaper/wallpaper.cxx:275 ../wallpaper/wallpaper.cxx:300
 msgid "Cancel"
-msgstr ""
+msgstr "Prekliči"
 
 #: ../wallpaper/wallpaper.cxx:332
 msgid "Center"
-msgstr "Centre"
+msgstr "Središče"
 
 #: ../appsaudit/appsaudit.cxx:571
 msgid "Check Md5sums"
-msgstr ""
+msgstr "Preveri Md5sums"
 
 #: ../appsaudit/appsaudit.cxx:567
 msgid "Check for Updates"
-msgstr "Vérifier les mises à jour."
+msgstr "Preveri za posodobitve"
 
 #: ../appsaudit/appsaudit.cxx:558
 msgid "Clear Marked for Deletion"
-msgstr "decrocher les fichiers marqués pour suppression"
+msgstr "Počisti Trgovino za Izbris"
 
 #: ../wallpaper/wallpaper.cxx:350
 msgid "Color"
-msgstr "Couleurs"
+msgstr "Barve"
 
 #: ../appbrowser/appbrowser.cxx:441
 msgid "Connect"
-msgstr "Connexion"
+msgstr "Vzpostavi povezavo"
 
 #: ../cpanel/cpanel.cxx:22
 msgid "ControlPanel"
-msgstr ""
+msgstr "Nadzorno Stredišče"
 
 #: ../fdtool/fdtool.cxx:96
 msgid "Copies floppy to image path entered,"
-msgstr "Copie disquette a voie spécifié"
+msgstr "Kopiraj iz diskete v podano pot slike"
 
 #: ../cpanel/cpanel.cxx:57
 msgid "Date/Time"
-msgstr "Date/Heure"
+msgstr "Datum/Čas"
 
 #: ../datetool/datetool.cxx:128
 msgid "Datetool"
-msgstr "Outil de date"
+msgstr "Orodje za datum"
 
 #: ../datetool/datetool.cxx:146
 msgid "Day:"
-msgstr "Jour"
+msgstr "Dan:"
 
 #: ../appsaudit/appsaudit.cxx:547
 msgid "Dependencies"
-msgstr "Dépendances"
+msgstr "Zahtevano"
 
 #: ../appbrowser/appbrowser.cxx:491
 msgid "Depends"
-msgstr "Dépend de"
+msgstr "Zahteva"
 
 #: ../filetool/filetool.cxx:91
 msgid "Device:"
-msgstr "Périphérique:"
+msgstr "Naprava:"
 
 #: ../wallpaper/wallpaper.cxx:255
 msgid "Diagonal Gradient"
-msgstr ""
+msgstr "Diagonalni preliv"
 
 #: ../appsaudit/appsaudit.cxx:554
 msgid "Display All Not Depended On"
-msgstr "Afficher tous les fichiers n'avant pas de dépendances"
+msgstr "Prikaži vse neodvisne"
 
 #: ../appsaudit/appsaudit.cxx:555
 msgid "Display All with Missing Dependencies"
-msgstr "Afficher tous les fichiers ayant des dépendances manquantes"
+msgstr "Prikaži vse z manjkajočimi zahtevami"
 
 #: ../appsaudit/appsaudit.cxx:553
 msgid "Display All with No Dependencies"
-msgstr "Afficher tous les fichiers sans dépendance"
+msgstr "Prikaži vse brez zahtevkov"
 
 #: ../appsaudit/appsaudit.cxx:557
 msgid "Display Marked for Deletion"
-msgstr "Afficher les fichiers marqués pour suppression"
+msgstr "Prikaži označene za izbris"
 
 #: ../wallpaper/wallpaper.cxx:272 ../wallpaper/wallpaper.cxx:297
 #: ../wallpaper/wallpaper.cxx:346
 msgid "Done"
-msgstr ""
+msgstr "Končano"
 
 #: ../appbrowser/appbrowser.cxx:386
 msgid "Download + Load"
-msgstr "Télécharger + charger"
+msgstr "Prenesi in naloži"
 
 #: ../appbrowser/appbrowser.cxx:387
 msgid "Download Only"
-msgstr "Télécharger seulement"
+msgstr "Samo prenesi"
 
 #: ../network/network.cxx:242
 msgid "E&xit"
-msgstr "Quitter"
+msgstr "I&zhod"
 
 #: ../appsaudit/appsaudit.cxx:559
 msgid "Exit Dependencies Mode"
-msgstr ""
+msgstr "Končaj način odvisnosti"
 
 #: ../appsaudit/appsaudit.cxx:564
 msgid "Exit Install Options"
-msgstr "Quitter les options d'installation"
+msgstr "Izhod iz nastavitev nalaganja"
 
 #: ../appsaudit/appsaudit.cxx:572
 msgid "Exit Md5 Check Mode"
-msgstr ""
+msgstr "Končaj način preverjanja Md5"
 
 #: ../appsaudit/appsaudit.cxx:576
 msgid "Exit OnBoot"
-msgstr "Quitter OnBoot"
+msgstr "Izhod ob ponovnem zagonu"
 
 #: ../appsaudit/appsaudit.cxx:580
 msgid "Exit OnDemand"
-msgstr "Quitter SurDemande"
+msgstr "Izhod na zahtevo"
 
 #: ../appsaudit/appsaudit.cxx:568
 msgid "Exit Update Mode"
-msgstr "Quitter le mode mise à jour"
+msgstr "Izhod iz načina nadgradnje"
 
 #: ../exittc/exittc.cxx:128
 msgid "Exit to Prompt"
-msgstr "Quitter pour linge de commande"
+msgstr "Izhod v ukazno vrstico"
 
 #: ../flrun/flrun.cxx:55
 msgid "FLRun"
-msgstr ""
+msgstr "FLRun"
 
 #: ../filetool/filetool.cxx:90
 msgid "FileTool"
-msgstr ""
+msgstr "Datotečno orodje"
 
 #: ../appbrowser/appbrowser.cxx:481
 msgid "Files"
-msgstr "Fichiers"
+msgstr "Datoteke"
 
 #: ../wallpaper/wallpaper.cxx:337
 msgid "Fill"
-msgstr "Remplir"
+msgstr "Zapolni"
 
 #: ../fdtool/fdtool.cxx:72
 msgid "Floppy Disk Tool"
-msgstr "Outil Disquette"
+msgstr "Disketno orodje"
 
 #: ../cpanel/cpanel.cxx:42
 msgid "Floppy Tool"
-msgstr "Outil Disquette"
+msgstr "Disketno orodje"
 
 #: ../fdtool/fdtool.cxx:70
 msgid "FloppyTool"
-msgstr ""
+msgstr "Disketno orodje"
 
 #: ../fdtool/fdtool.cxx:92
 msgid "Formats FAT of selected size."
-msgstr "Formatter FAT de taille sélectionné"
+msgstr "Formatira FAT izbrane velikosti"
 
 #: ../wallpaper/wallpaper.cxx:321
 msgid "Full"
-msgstr "Plein"
+msgstr "Polno"
 
 #: ../filetool/filetool.cxx:100
 msgid "GO"
-msgstr ""
+msgstr "Poženi"
 
 #: ../network/network.cxx:207
 msgid "Gateway"
-msgstr "Passerelle"
+msgstr "Prehod"
 
 #: ../appbrowser/appbrowser.cxx:515
 msgid "Go"
-msgstr ""
+msgstr "Pojdi"
 
 #: ../wallpaper/wallpaper.cxx:219 ../wallpaper/wallpaper.cxx:353
 msgid "Gradient"
-msgstr ""
+msgstr "Preliv"
 
 #: ../wallpaper/wallpaper.cxx:220
 msgid "Gradient Color #1"
-msgstr ""
+msgstr "Barva preliva št. 1"
 
 #: ../wallpaper/wallpaper.cxx:233
 msgid "Gradient Color #2"
-msgstr ""
+msgstr "Barva preliva št. 2"
 
 #: ../cpanel/cpanel.cxx:45
 msgid "HD/USB Install"
-msgstr ""
+msgstr "Namestitev HD/USB"
 
 #: ../wallpaper/wallpaper.cxx:251
 msgid "Horizontal Gradient"
-msgstr ""
+msgstr "Vodoravni preliv"
 
 #: ../datetool/datetool.cxx:154
 msgid "Hour:"
-msgstr "Heure :"
+msgstr "Ura:"
 
 #: ../cpanel/cpanel.cxx:54
 msgid "Hybrid Mode"
-msgstr ""
+msgstr "Mešani način"
 
 #: ../network/network.cxx:188
 msgid "IP Address"
-msgstr "Adresse IP"
+msgstr "Naslov IP"
 
 #: ../fdtool/fdtool.cxx:87
 msgid "Image Path:"
-msgstr "Chemin de l'image"
+msgstr "Pot slike"
 
 #: ../appbrowser/appbrowser.cxx:471
 msgid "Info"
-msgstr "Information"
+msgstr "Informacije"
 
 #: ../appsaudit/appsaudit.cxx:561
 msgid "Install Options"
-msgstr "Options d'installation"
+msgstr "Možnosti namestitve"
 
 #: ../wallpaper/wallpaper.cxx:312
 msgid "Install images from /opt/backgrounds directory"
-msgstr ""
+msgstr "Namesti slike iz mape /opt/backgrounds"
 
 #: ../stats/stats.cxx:162
 msgid "Installed"
-msgstr ""
+msgstr "Nameščeno"
 
 #: ../network/network.cxx:164
 msgid "Interface"
-msgstr "Interface"
+msgstr "Vmesnik"
 
 #: ../wbarconf/wbarconf.cxx:122
 msgid "Left"
-msgstr ""
+msgstr "Levo"
 
 #: ../wbarconf/wbarconf.cxx:129
 msgid "Left Bottom"
-msgstr ""
+msgstr "Levo spodaj"
 
 #: ../mousetool/mousetool.cxx:93
 msgid "Left Button"
-msgstr "Bouton de gauche"
+msgstr "Levi gumb"
 
 #: ../wbarconf/wbarconf.cxx:128
 msgid "Left Top"
-msgstr ""
+msgstr "Levo zgoraj"
 
 #: ../appsaudit/appsaudit.cxx:550
 msgid "List Dependencies"
-msgstr "Liste des dépendances"
+msgstr "Prikaži zahteve"
 
 #: ../appsaudit/appsaudit.cxx:552
 msgid "List Missing Dependencies"
-msgstr "Liste des dépendances manquantes"
+msgstr "Prikaži manjkajoče zahteve"
 
 #: ../appsaudit/appsaudit.cxx:551
 msgid "List Required By"
-msgstr "Liste Requise Par"
+msgstr "Prikaži zahtevano od"
 
 #: ../appbrowser/appbrowser.cxx:444
 msgid "Local"
-msgstr "Local"
+msgstr "Jezik"
 
 #: ../appsaudit/appsaudit.cxx:575 ../appsaudit/appsaudit.cxx:579
 #: ../cpanel/cpanel.cxx:24
 msgid "Maintenance"
-msgstr "Maintenance"
+msgstr "Vzdrževanje"
 
 #: ../appsaudit/appsaudit.cxx:556
 msgid "Mark for Deletion"
-msgstr "Marquer pour effacement"
+msgstr "Označi za brisanje"
 
 #: ../appsaudit/appsaudit.cxx:570
 msgid "Md5Check"
-msgstr ""
+msgstr "Md5Check"
 
 #: ../datetool/datetool.cxx:162
 msgid "Min:"
-msgstr "Min. :"
+msgstr "Najmanj:"
 
 #: ../appbrowser/appbrowser.cxx:447
 msgid "Mirrors"
-msgstr "Miroirs"
+msgstr "Ogledala"
 
 #: ../datetool/datetool.cxx:138
 msgid "Month:"
-msgstr "Mois"
+msgstr "Mesec:"
 
 #: ../cpanel/cpanel.cxx:51
 msgid "Mount Tool"
-msgstr "Outil de Montage"
+msgstr "Orodje za vezavo"
 
 #: ../swapfile/swapfile.cxx:65
 msgid "Mounted Partition:"
-msgstr "Partition montée :"
+msgstr "Vezana particija"
 
 #: ../mousetool/mousetool.cxx:76
 msgid "Mouse Speed"
-msgstr "Vitesse de la souris"
+msgstr "Hitrost miške"
 
 #: ../cpanel/cpanel.cxx:60
 msgid "Mouse Tool"
-msgstr "Outils de la souris"
+msgstr "Orodje za miško"
 
 #: ../mousetool/mousetool.cxx:74
 msgid "MouseTool"
-msgstr ""
+msgstr "Orodje za miško"
 
 #: ../network/network.cxx:213
 msgid "NameServers"
-msgstr "Nom des serveurs"
+msgstr "Imenski strežniki"
 
 #: ../cpanel/cpanel.cxx:66 ../network/network.cxx:158
 #: ../network/network.cxx:160
 msgid "Network"
-msgstr "Réseau"
+msgstr "Omrežje"
 
 #: ../network/network.cxx:195
 msgid "Network Mask"
-msgstr "Masque réseau"
+msgstr "Maska omrežja"
 
 #: ../exittc/exittc.cxx:103 ../filetool/filetool.cxx:77
 msgid "None"
-msgstr ""
+msgstr "Brez"
 
 #: ../flrun/flrun.cxx:63
 msgid "OK"
-msgstr "Ok"
+msgstr "V redu"
 
 #: ../appbrowser/appbrowser.cxx:384 ../appsaudit/appsaudit.cxx:574
 msgid "OnBoot"
-msgstr "SurDemarrage"
+msgstr "Ob zagonu"
 
 #: ../appbrowser/appbrowser.cxx:385 ../appsaudit/appsaudit.cxx:578
 msgid "OnDemand"
-msgstr "SurDemande"
+msgstr "Na zahtevo"
 
 #: ../wbar_exclude/wbar_exclude.cxx:59
 msgid "Onboot Items"
-msgstr "articles SurDémarrage"
+msgstr "Elementi ob zagonu"
 
 #: ../wallpaper/wallpaper.cxx:280 ../wallpaper/wallpaper.cxx:281
 msgid "Pick Color"
-msgstr ""
+msgstr "Izberite barvo"
 
 #: ../wbarconf/wbarconf.cxx:158
 msgid "Position"
-msgstr ""
+msgstr "Položaj"
 
 #: ../wallpaper/wallpaper.cxx:303
 msgid "Preview"
-msgstr ""
+msgstr "Predogled"
 
 #: ../appsaudit/appsaudit.cxx:623
 msgid "Process Selected Item(s)"
-msgstr ""
+msgstr "Obdelaj izbran(e) predmet(e)"
 
 #: ../appbrowser/appbrowser.cxx:353
 msgid "Provides"
-msgstr "Fournit"
+msgstr "Ponuja"
 
 #: ../exittc/exittc.cxx:123
 msgid "Reboot"
-msgstr "Redémarrer"
+msgstr "Ponovni zagon"
 
 #: ../filetool/filetool.cxx:80
 msgid "Restore"
-msgstr ""
+msgstr "Obnovi"
 
 #: ../appsaudit/appsaudit.cxx:608
 msgid "Results"
-msgstr "Résultats"
+msgstr "Rezultati"
 
 #: ../wbarconf/wbarconf.cxx:123
 msgid "Right"
-msgstr ""
+msgstr "Desno"
 
 #: ../wbarconf/wbarconf.cxx:131
 msgid "Right Bottom"
-msgstr ""
+msgstr "Desno spodaj"
 
 #: ../mousetool/mousetool.cxx:87
 msgid "Right Button"
-msgstr "Bouton droit"
+msgstr "Desni gumb"
 
 #: ../wbarconf/wbarconf.cxx:130
 msgid "Right Top"
-msgstr ""
+msgstr "Desno zgoraj"
 
 #: ../exittc/exittc.cxx:105 ../filetool/filetool.cxx:79
 msgid "Safe"
-msgstr ""
+msgstr "Varno"
 
 #: ../network/network.cxx:223
 msgid "Save Configuration?"
-msgstr "Sauvegarder la configuration ?"
+msgstr "Sharni konfiguracijo"
 
 #: ../appbrowser/appbrowser.cxx:352
 msgid "Search"
-msgstr "Rechercher"
+msgstr "Išči"
 
 #: ../appsaudit/appsaudit.cxx:605
 msgid "Select"
-msgstr ""
+msgstr "Izberi"
 
 #: ../add2file/add2file.cxx:22
 msgid "Select File to be added to "
-msgstr "Sélectionnez à le fichier a ajouter "
+msgstr "Izberi datoteko za dodajanje k "
 
 #: ../appsaudit/appsaudit.cxx:563
 msgid "Selective Copy Install"
-msgstr ""
+msgstr "Selektvni nameščanje s kopiranjem"
 
 #: ../appbrowser/appbrowser.cxx:523 ../wallpaper/wallpaper.cxx:269
 #: ../wallpaper/wallpaper.cxx:294 ../wallpaper/wallpaper.cxx:342
 msgid "Set"
-msgstr ""
+msgstr "Nastavi"
 
 #: ../cpanel/cpanel.cxx:34
 msgid "Setup"
-msgstr ""
+msgstr "Nastavi"
 
 #: ../exittc/exittc.cxx:117
 msgid "Shutdown"
-msgstr "Arrêter"
+msgstr "Izklop"
 
 #: ../appbrowser/appbrowser.cxx:500
 msgid "Size"
-msgstr "Taille"
+msgstr "Velikost"
 
 #: ../appbrowser/appbrowser.cxx:519
 msgid "Status"
-msgstr "État"
+msgstr "Stanje"
 
 #: ../swapfile/swapfile.cxx:63
 msgid "Swapfile"
-msgstr ""
+msgstr "Datoteka za izmenljivi prostor"
 
 #: ../cpanel/cpanel.cxx:72
 msgid "Swapfile Tool"
-msgstr "Outil Fichier d'échange"
+msgstr "Swap orodje"
 
 #: ../cpanel/cpanel.cxx:69
 msgid "System Stats"
-msgstr "Statistiques du système"
+msgstr "Statistika sistema"
 
 #: ../exittc/exittc.cxx:113
 msgid "TC Exit Options"
-msgstr "Options d'extinction de TC"
+msgstr "Nastavitev izhoda iz TC"
 
 #: ../cpanel/cpanel.cxx:63
 msgid "Terminal Server"
-msgstr ""
+msgstr "Terminalski strežnik"
 
 #: ../wallpaper/wallpaper.cxx:327
 msgid "Tile"
-msgstr "Mosaïquer"
+msgstr "Razdeli"
 
 #: ../stats/stats.cxx:74
 msgid "Tiny Core System Stats"
-msgstr "Statistiques du système Tiny Core"
+msgstr "Statistika sistema Tiny Core"
 
 #: ../appsaudit/appsaudit.cxx:562
 msgid "Toggle Default Copy Install"
-msgstr ""
+msgstr "Preklopi na privzeto nameščanje s kopiranjem"
 
 #: ../wbarconf/wbarconf.cxx:120
 msgid "Top"
-msgstr ""
+msgstr "Zgoraj"
 
 #: ../wbarconf/wbarconf.cxx:124
 msgid "Top Left"
-msgstr ""
+msgstr "Zgoraj levo"
 
 #: ../wbarconf/wbarconf.cxx:125
 msgid "Top Right"
-msgstr ""
+msgstr "Zgoraj desno"
 
 #: ../appsaudit/appsaudit.cxx:548
 msgid "Update .dep files."
-msgstr "Mettre à jour les fichiers .deb ."
+msgstr "Posodobi datoteke .dep."
 
 #: ../appsaudit/appsaudit.cxx:566
 msgid "Updates"
-msgstr "Mises à jour"
+msgstr "Posodobitve"
 
 #: ../network/network.cxx:170
 msgid "Use DHCP Broadcast?"
-msgstr "Utiliser la diffusion DHCP ?"
+msgstr "Uporabi DHCP oddajanje"
 
 #: ../cpanel/cpanel.cxx:29
 msgid "Utilities"
-msgstr ""
+msgstr "Orodja"
 
 #: ../wallpaper/wallpaper.cxx:246
 msgid "Vertical Gradient"
-msgstr ""
+msgstr "Navpični preliv"
 
 #: ../cpanel/cpanel.cxx:79 ../wallpaper/wallpaper.cxx:311
 msgid "Wallpaper"
-msgstr "Fond d'écran"
+msgstr "Ozadje"
 
 #: ../cpanel/cpanel.cxx:75
 msgid "Wbar Conf"
-msgstr ""
+msgstr "Nastavitve Wbar"
 
 #: ../wbarconf/wbarconf.cxx:174
 msgid "Wbar Icon Size"
-msgstr ""
+msgstr "Velikost ikon Wbar"
 
 #: ../wbarconf/wbarconf.cxx:146
 msgid "Wbar Icons"
-msgstr ""
+msgstr "Ikone Wbar"
 
 #: ../wbarconf/wbarconf.cxx:182
 msgid "Wbar Text Labels"
-msgstr ""
+msgstr "Besedilne oznake Wbar"
 
 #: ../wbarconf/wbarconf.cxx:166
 msgid "Wbar Zoom"
-msgstr ""
+msgstr "Prilagoditev Wbar"
 
 #: ../fdtool/fdtool.cxx:101
 msgid "Writes image path file to floppy."
-msgstr "Ecrit fichier de chemin d'image sur la disquette."
+msgstr "Zapiše pot slike na disketo."
 
 #: ../cpanel/cpanel.cxx:82
 msgid "Xvesa"
-msgstr ""
+msgstr "Xvesa"
 
 #: ../datetool/datetool.cxx:130
 msgid "Year:"
-msgstr "Année"
+msgstr "Leto:"
 
 #: ../stats/stats.cxx:171
 msgid "bigHomeFiles"
-msgstr ""
+msgstr "velikeMojeDatoteke"
 
 #: ../stats/stats.cxx:153
 msgid "boot"
-msgstr "Démarrage"
+msgstr "zagon"
 
 #: ../mnttool_save/mnttool.cxx:117
 msgid "button"
-msgstr "bouton"
+msgstr "gumb"
 
 #: ../stats/stats.cxx:80
 msgid "cpu"
-msgstr "CPU"
+msgstr "cpe"
 
 #: ../stats/stats.cxx:126
 msgid "dmesg"
@@ -680,19 +680,19 @@ msgstr "dmesg"
 
 #: ../wbarconf/wbarconf.cxx:145 ../wbar_exclude/wbar_exclude.cxx:58
 msgid "eXclude Wbar Icons"
-msgstr "exclure icones Wbar"
+msgstr "Izključi ikone Wbar"
 
 #: ../wbar_exclude/wbar_exclude.cxx:65
 msgid "eXclude Wbar Items"
-msgstr "exclure articles Wbar"
+msgstr "Izključi elemente Wbar"
 
 #: ../wbarconf/wbarconf.cxx:152
 msgid "eXcluded Items"
-msgstr ""
+msgstr "Predmeti eXcluded"
 
 #: ../stats/stats.cxx:144
 msgid "filesystems"
-msgstr "systèmes des fichiers"
+msgstr "datotečni sitemi"
 
 #: ../stats/stats.cxx:90
 msgid "mem"
@@ -700,11 +700,11 @@ msgstr "mem"
 
 #: ../stats/stats.cxx:108
 msgid "modules"
-msgstr "modules"
+msgstr "moduli"
 
 #: ../stats/stats.cxx:135
 msgid "mounts"
-msgstr "monter"
+msgstr "vezave"
 
 #: ../stats/stats.cxx:99
 msgid "net"
@@ -712,82 +712,49 @@ msgstr "net"
 
 #: ../network/network.cxx:179 ../network/network.cxx:232
 msgid "no"
-msgstr "non"
+msgstr "ne"
 
 #: ../stats/stats.cxx:117
 msgid "processes"
-msgstr "processus"
+msgstr "procesi"
 
 #: ../swapfile/swapfile.cxx:67
 msgid "tc.swp in k bytes:"
-msgstr "tc.swp après k octets :"
+msgstr "tc.swp v k bajtih"
 
 #: ../network/network.cxx:173 ../network/network.cxx:226
 msgid "yes"
-msgstr "oui"
-
-#~ msgid "&None"
-#~ msgstr "&Aucun"
-
-#~ msgid "&Restore"
-#~ msgstr "&Restaurer"
-
-#~ msgid "DownLoad"
-#~ msgstr "Télécharger"
-
-#~ msgid "Download Only."
-#~ msgstr "Télécharger uniquement"
-
-#~ msgid "Help"
-#~ msgstr "Aide"
-
-#~ msgid "File"
-#~ msgstr "Fichier"
-
-#~ msgid "Filetool"
-#~ msgstr "Outil Fichiers"
-
-#~ msgid "&Backup"
-#~ msgstr "Sauvegarde"
-
-#~ msgid "Install"
-#~ msgstr "Installer"
-
-#~ msgid "Quit"
-#~ msgstr "Quitter"
-
-#~ msgid "Run Command"
-#~ msgstr "Exécuter la commande"
-
-#~ msgid "Set TCE Drive"
-#~ msgstr "Sélectionner le lecteur TCE"
-
-#~ msgid "Services"
-#~ msgstr "Services"
-
-#~ msgid "USB Install"
-#~ msgstr "Installation USB"
-
-#~ msgid "Update Apps"
-#~ msgstr "Mettre à jour les applications"
-
-#~ msgid "Downloads  and updates OnDemand menu."
-#~ msgstr "Télécharge et mets à jour le menu SurDemande"
+msgstr "da"
 
 #~ msgid "Apps Audit"
-#~ msgstr "Vérification des applications"
+#~ msgstr "Revizija Aplkacij"
 
-#~ msgid "Make tc.swap EXT2 Swapfile"
-#~ msgstr "Créer fichier d'échange EXT2 tc.swap"
+#~ msgid "File"
+#~ msgstr "Datoteka"
 
-#~ msgid "Downloads, updates menu and onboot.lst."
-#~ msgstr "Télécharge, mets à jour le menu et onboot.Ist"
+#~ msgid "Install"
+#~ msgstr "Namestitev"
 
-#~ msgid "flrun"
-#~ msgstr "flrun"
+#~ msgid "Help"
+#~ msgstr "Pomoč"
 
-#~ msgid "extensions"
-#~ msgstr "extensions"
+#~ msgid "Quit"
+#~ msgstr "Končaj"
+
+#~ msgid "Run Command"
+#~ msgstr "Zaženi ukaz"
+
+#~ msgid "Set TCE Drive"
+#~ msgstr "Izberi TCE pogon"
+
+#~ msgid "Services"
+#~ msgstr "Storitve"
+
+#~ msgid "Update Apps"
+#~ msgstr "Posodobi aplikacije"
+
+#~ msgid "USB Install"
+#~ msgstr "Nameščanje USB"
 
 #~ msgid "Xvesa Setup"
-#~ msgstr "Configuration Xvesa"
+#~ msgstr "Nastavitve Xvesa"

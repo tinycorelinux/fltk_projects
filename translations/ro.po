@@ -7,82 +7,74 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tctools\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-08-22 10:16+0300\n"
-"PO-Revision-Date: 2010-10-14 15:00+0000\n"
-"Last-Translator: Lucian Adrian Grijincu <lucian.grijincu@gmail.com>\n"
+"POT-Creation-Date: 2011-03-10 13:13+0200\n"
+"PO-Revision-Date: 2010-11-26 17:06+0000\n"
+"Last-Translator: Nicolae Crefelean <Unknown>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-06 13:12+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-04-02 06:20+0000\n"
+"X-Generator: Launchpad (build 12710)\n"
 
-#: ../mousetool/mousetool.cxx:97 ../network/network.cxx:238
+#: ../mousetool/mousetool.cxx:98 ../network/network.cxx:239
 msgid "&Apply"
 msgstr "&Aplică"
 
-#: ../fdtool/fdtool.cxx:99
+#: ../fdtool/fdtool.cxx:100
 msgid "&Apply Image"
 msgstr "&Aplică imaginea"
 
-#: ../filetool/filetool.cxx:69
-msgid "&Backup"
-msgstr "&Salvează"
-
-#: ../datetool/datetool.cxx:171 ../exittc/exittc.cxx:122
-#: ../fdtool/fdtool.cxx:104 ../flrun/flrun.cxx:66 ../swapfile/swapfile.cxx:56
+#: ../datetool/datetool.cxx:173 ../exittc/exittc.cxx:147
+#: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:66 ../swapfile/swapfile.cxx:69
 msgid "&Cancel"
 msgstr "&Anulează"
 
-#: ../mousetool/mousetool.cxx:100
+#: ../mousetool/mousetool.cxx:101
 msgid "&Exit"
 msgstr "&Ieșire"
 
-#: ../fdtool/fdtool.cxx:90
+#: ../fdtool/fdtool.cxx:91
 msgid "&Format"
 msgstr "&Formatează"
 
-#: ../fdtool/fdtool.cxx:94
+#: ../fdtool/fdtool.cxx:95
 msgid "&Make Image"
 msgstr "&Creează imaginea"
 
-#: ../filetool/filetool.cxx:65
-msgid "&None"
-msgstr "&Nimic"
-
-#: ../datetool/datetool.cxx:168 ../exittc/exittc.cxx:119
+#: ../datetool/datetool.cxx:170 ../exittc/exittc.cxx:144
 msgid "&OK"
 msgstr "&Bine"
 
-#: ../swapfile/swapfile.cxx:59
+#: ../swapfile/swapfile.cxx:72
 msgid "&Proceed"
 msgstr "&Continuă"
 
-#: ../filetool/filetool.cxx:73
-msgid "&Restore"
-msgstr "&Restaurează"
-
-#: ../fdtool/fdtool.cxx:75
+#: ../fdtool/fdtool.cxx:76
 msgid "1440k"
 msgstr "1440k"
 
-#: ../fdtool/fdtool.cxx:81
+#: ../fdtool/fdtool.cxx:82
 msgid "1722k"
 msgstr "1722k"
 
-#: ../datetool/datetool.cxx:130 ../datetool/datetool.cxx:138
-#: ../datetool/datetool.cxx:146 ../datetool/datetool.cxx:154
-#: ../datetool/datetool.cxx:162 ../mnttool/mnttool.cxx:103
+#: ../datetool/datetool.cxx:132 ../datetool/datetool.cxx:140
+#: ../datetool/datetool.cxx:148 ../datetool/datetool.cxx:156
+#: ../datetool/datetool.cxx:164 ../mnttool_save/mnttool.cxx:111
 msgid "@<"
 msgstr "@<"
 
-#: ../datetool/datetool.cxx:133 ../datetool/datetool.cxx:141
-#: ../datetool/datetool.cxx:149 ../datetool/datetool.cxx:157
-#: ../datetool/datetool.cxx:165 ../mnttool/mnttool.cxx:106
+#: ../datetool/datetool.cxx:135 ../datetool/datetool.cxx:143
+#: ../datetool/datetool.cxx:151 ../datetool/datetool.cxx:159
+#: ../datetool/datetool.cxx:167 ../mnttool_save/mnttool.cxx:114
 msgid "@>"
 msgstr "@>"
 
-#: ../appbrowser/appbrowser.cxx:383
+#: ../filetool/filetool.cxx:95
+msgid "Action:"
+msgstr "Acțiune:"
+
+#: ../appbrowser/appbrowser.cxx:439
 msgid "Appbrowser"
 msgstr "Gestionar aplicații"
 
@@ -90,23 +82,39 @@ msgstr "Gestionar aplicații"
 msgid "Application Launcher"
 msgstr "Lansator de aplicații"
 
-#: ../cpanel/cpanel.cxx:21
-msgid "Apps Audit"
-msgstr "Audit aplicații"
+#: ../wbarconf/wbarconf.cxx:163
+msgid "Apply"
+msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:405
+#: ../appsaudit/appsaudit.cxx:600 ../cpanel/cpanel.cxx:39
 msgid "AppsAudit"
 msgstr "Audit aplicații"
 
-#: ../exittc/exittc.cxx:113
+#: ../exittc/exittc.cxx:104 ../filetool/filetool.cxx:78
 msgid "Backup"
 msgstr "Salvare de siguranță"
 
-#: ../cpanel/cpanel.cxx:24
+#: ../exittc/exittc.cxx:139
+msgid "Backup Options:"
+msgstr "Opțiuni salvare:"
+
+#: ../cpanel/cpanel.cxx:48
 msgid "Backup/Restore"
 msgstr "Salvare/Restaurare"
 
-#: ../network/network.cxx:200
+#: ../wbarconf/wbarconf.cxx:121
+msgid "Bottom"
+msgstr ""
+
+#: ../wbarconf/wbarconf.cxx:126
+msgid "Bottom Left"
+msgstr ""
+
+#: ../wbarconf/wbarconf.cxx:127
+msgid "Bottom Right"
+msgstr ""
+
+#: ../network/network.cxx:201
 msgid "Broadcast"
 msgstr "Broadcast"
 
@@ -114,264 +122,342 @@ msgstr "Broadcast"
 msgid "Browse"
 msgstr "Navigare"
 
-#: ../appsaudit/appsaudit.cxx:362
+#: ../appsaudit/appsaudit.cxx:549
 msgid "Build Reporting Database"
 msgstr "Construiește baza de raportare"
 
-#: ../wallpaper/wallpaper.cxx:99
+#: ../wallpaper/wallpaper.cxx:275 ../wallpaper/wallpaper.cxx:300
+msgid "Cancel"
+msgstr ""
+
+#: ../wallpaper/wallpaper.cxx:332
 msgid "Center"
 msgstr "Centru"
 
-#: ../appsaudit/appsaudit.cxx:379
+#: ../appsaudit/appsaudit.cxx:571
+msgid "Check Md5sums"
+msgstr ""
+
+#: ../appsaudit/appsaudit.cxx:567
 msgid "Check for Updates"
 msgstr "Verificare actualizări"
 
-#: ../appsaudit/appsaudit.cxx:371
+#: ../appsaudit/appsaudit.cxx:558
 msgid "Clear Marked for Deletion"
 msgstr "Anulează marcajele pentru ștergere"
 
-#: ../wallpaper/wallpaper.cxx:113
+#: ../wallpaper/wallpaper.cxx:350
 msgid "Color"
 msgstr "Culoare"
 
-#: ../appbrowser/appbrowser.cxx:385
+#: ../appbrowser/appbrowser.cxx:441
 msgid "Connect"
 msgstr "Conectare"
 
-#: ../fdtool/fdtool.cxx:95
+#: ../cpanel/cpanel.cxx:22
+msgid "ControlPanel"
+msgstr "Panou de control"
+
+#: ../fdtool/fdtool.cxx:96
 msgid "Copies floppy to image path entered,"
 msgstr "Salvează discheta ca imagine, în calea aleasă"
 
-#: ../cpanel/cpanel.cxx:30
+#: ../cpanel/cpanel.cxx:57
 msgid "Date/Time"
 msgstr "Data/Ora"
 
-#: ../datetool/datetool.cxx:126
+#: ../datetool/datetool.cxx:128
 msgid "Datetool"
 msgstr "Configurare dată și oră"
 
-#: ../datetool/datetool.cxx:144
+#: ../datetool/datetool.cxx:146
 msgid "Day:"
 msgstr "Ziua:"
 
-#: ../appsaudit/appsaudit.cxx:360
+#: ../appsaudit/appsaudit.cxx:547
 msgid "Dependencies"
 msgstr "Dependințe"
 
-#: ../appbrowser/appbrowser.cxx:433
+#: ../appbrowser/appbrowser.cxx:491
 msgid "Depends"
 msgstr "Depinde"
 
-#: ../filetool/filetool.cxx:61
+#: ../filetool/filetool.cxx:91
 msgid "Device:"
 msgstr "Dispozitiv:"
 
-#: ../appsaudit/appsaudit.cxx:367
+#: ../wallpaper/wallpaper.cxx:255
+msgid "Diagonal Gradient"
+msgstr ""
+
+#: ../appsaudit/appsaudit.cxx:554
 msgid "Display All Not Depended On"
 msgstr "Afișează toate pachetele de care nu depinde instalarea"
 
-#: ../appsaudit/appsaudit.cxx:368
+#: ../appsaudit/appsaudit.cxx:555
 msgid "Display All with Missing Dependencies"
 msgstr "Afișează toate pachetele cu dependințe lipsă"
 
-#: ../appsaudit/appsaudit.cxx:366
+#: ../appsaudit/appsaudit.cxx:553
 msgid "Display All with No Dependencies"
 msgstr "Afișează toate pachetele fără dependințe"
 
-#: ../appsaudit/appsaudit.cxx:370
+#: ../appsaudit/appsaudit.cxx:557
 msgid "Display Marked for Deletion"
 msgstr "Afișează marcajele pentru ștergere"
 
-#: ../appbrowser/appbrowser.cxx:460
-msgid "DownLoad"
-msgstr "Descarcă"
+#: ../wallpaper/wallpaper.cxx:272 ../wallpaper/wallpaper.cxx:297
+#: ../wallpaper/wallpaper.cxx:346
+msgid "Done"
+msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:461
-msgid "Download Only."
+#: ../appbrowser/appbrowser.cxx:386
+msgid "Download + Load"
+msgstr "Descărcare + încărcare"
+
+#: ../appbrowser/appbrowser.cxx:387
+msgid "Download Only"
 msgstr "Doar descărcare"
 
-#: ../appbrowser/appbrowser.cxx:456
-msgid "Downloads  and updates OnDemand menu."
-msgstr "Descarcă și actualizează meniul LaCerere"
-
-#: ../appbrowser/appbrowser.cxx:451
-msgid "Downloads, updates menu and onboot.lst."
-msgstr "Descarcă și actualizează meniul și onboot.lst"
-
-#: ../network/network.cxx:241
+#: ../network/network.cxx:242
 msgid "E&xit"
 msgstr "&Ieșire"
 
-#: ../appsaudit/appsaudit.cxx:376
+#: ../appsaudit/appsaudit.cxx:559
+msgid "Exit Dependencies Mode"
+msgstr ""
+
+#: ../appsaudit/appsaudit.cxx:564
 msgid "Exit Install Options"
 msgstr "Închide opțiunile de instalare"
 
-#: ../appsaudit/appsaudit.cxx:384
+#: ../appsaudit/appsaudit.cxx:572
+msgid "Exit Md5 Check Mode"
+msgstr ""
+
+#: ../appsaudit/appsaudit.cxx:576
 msgid "Exit OnBoot"
 msgstr "Închide LaPornire"
 
-#: ../appsaudit/appsaudit.cxx:388
+#: ../appsaudit/appsaudit.cxx:580
 msgid "Exit OnDemand"
 msgstr "Închide LaCerere"
 
-#: ../appsaudit/appsaudit.cxx:380
+#: ../appsaudit/appsaudit.cxx:568
 msgid "Exit Update Mode"
 msgstr "Închide Actualizare"
 
-#: ../exittc/exittc.cxx:102
+#: ../exittc/exittc.cxx:128
 msgid "Exit to Prompt"
 msgstr "Ieșire în consolă"
 
-#: ../appsaudit/appsaudit.cxx:357
-msgid "File"
-msgstr "Fișier"
+#: ../flrun/flrun.cxx:55
+msgid "FLRun"
+msgstr "FLRun"
 
-#: ../appbrowser/appbrowser.cxx:424
+#: ../filetool/filetool.cxx:90
+msgid "FileTool"
+msgstr "Utilitar fișiere"
+
+#: ../appbrowser/appbrowser.cxx:481
 msgid "Files"
 msgstr "Fișiere"
 
-#: ../filetool/filetool.cxx:59
-msgid "Filetool"
-msgstr "Utilitar salvări"
-
-#: ../wallpaper/wallpaper.cxx:104
+#: ../wallpaper/wallpaper.cxx:337
 msgid "Fill"
 msgstr "Umple"
 
-#: ../fdtool/fdtool.cxx:71
+#: ../fdtool/fdtool.cxx:72
 msgid "Floppy Disk Tool"
 msgstr "Utilitar dischete"
 
-#: ../cpanel/cpanel.cxx:48
+#: ../cpanel/cpanel.cxx:42
 msgid "Floppy Tool"
 msgstr "Utilitar dischete"
 
-#: ../fdtool/fdtool.cxx:91
+#: ../fdtool/fdtool.cxx:70
+msgid "FloppyTool"
+msgstr "Utiliar dischete"
+
+#: ../fdtool/fdtool.cxx:92
 msgid "Formats FAT of selected size."
 msgstr "Formatare FAT la capacitatea aleasă"
 
-#: ../wallpaper/wallpaper.cxx:88
+#: ../wallpaper/wallpaper.cxx:321
 msgid "Full"
 msgstr "Întreg"
 
-#: ../network/network.cxx:206
+#: ../filetool/filetool.cxx:100
+msgid "GO"
+msgstr "Du-te"
+
+#: ../network/network.cxx:207
 msgid "Gateway"
 msgstr "Gateway"
 
-#: ../wallpaper/wallpaper.cxx:116
-msgid "Help"
-msgstr "Ajutor"
+#: ../appbrowser/appbrowser.cxx:515
+msgid "Go"
+msgstr "Du-te"
 
-#: ../datetool/datetool.cxx:152
+#: ../wallpaper/wallpaper.cxx:219 ../wallpaper/wallpaper.cxx:353
+msgid "Gradient"
+msgstr ""
+
+#: ../wallpaper/wallpaper.cxx:220
+msgid "Gradient Color #1"
+msgstr ""
+
+#: ../wallpaper/wallpaper.cxx:233
+msgid "Gradient Color #2"
+msgstr ""
+
+#: ../cpanel/cpanel.cxx:45
+msgid "HD/USB Install"
+msgstr ""
+
+#: ../wallpaper/wallpaper.cxx:251
+msgid "Horizontal Gradient"
+msgstr ""
+
+#: ../datetool/datetool.cxx:154
 msgid "Hour:"
 msgstr "Oră:"
 
-#: ../network/network.cxx:187
+#: ../cpanel/cpanel.cxx:54
+msgid "Hybrid Mode"
+msgstr ""
+
+#: ../network/network.cxx:188
 msgid "IP Address"
 msgstr "Adresă IP"
 
-#: ../fdtool/fdtool.cxx:86
+#: ../fdtool/fdtool.cxx:87
 msgid "Image Path:"
 msgstr "Cale imagine:"
 
-#: ../appbrowser/appbrowser.cxx:415
+#: ../appbrowser/appbrowser.cxx:471
 msgid "Info"
 msgstr "Informații"
 
-#: ../wallpaper/wallpaper.cxx:109
-msgid "Install"
-msgstr "Aplică"
-
-#: ../appsaudit/appsaudit.cxx:373
+#: ../appsaudit/appsaudit.cxx:561
 msgid "Install Options"
 msgstr "Opțiuni instalare"
 
-#: ../network/network.cxx:163
+#: ../wallpaper/wallpaper.cxx:312
+msgid "Install images from /opt/backgrounds directory"
+msgstr ""
+
+#: ../stats/stats.cxx:162
+msgid "Installed"
+msgstr "Instalate"
+
+#: ../network/network.cxx:164
 msgid "Interface"
 msgstr "Interfață"
 
-#: ../mousetool/mousetool.cxx:92
+#: ../wbarconf/wbarconf.cxx:122
+msgid "Left"
+msgstr ""
+
+#: ../wbarconf/wbarconf.cxx:129
+msgid "Left Bottom"
+msgstr ""
+
+#: ../mousetool/mousetool.cxx:93
 msgid "Left Button"
 msgstr "Buton stânga"
 
-#: ../appsaudit/appsaudit.cxx:363
+#: ../wbarconf/wbarconf.cxx:128
+msgid "Left Top"
+msgstr ""
+
+#: ../appsaudit/appsaudit.cxx:550
 msgid "List Dependencies"
 msgstr "Afișează dependințele"
 
-#: ../appsaudit/appsaudit.cxx:365
+#: ../appsaudit/appsaudit.cxx:552
 msgid "List Missing Dependencies"
 msgstr "Afișează dependințele lipsă"
 
-#: ../appsaudit/appsaudit.cxx:364
+#: ../appsaudit/appsaudit.cxx:551
 msgid "List Required By"
 msgstr "Afișează de care depind"
 
-#: ../appbrowser/appbrowser.cxx:388
+#: ../appbrowser/appbrowser.cxx:444
 msgid "Local"
 msgstr "Local"
 
-#: ../appsaudit/appsaudit.cxx:383 ../appsaudit/appsaudit.cxx:387
+#: ../appsaudit/appsaudit.cxx:575 ../appsaudit/appsaudit.cxx:579
+#: ../cpanel/cpanel.cxx:24
 msgid "Maintenance"
 msgstr "Întreținere"
 
-#: ../swapfile/swapfile.cxx:50
-msgid "Make tc.swap EXT2 Swapfile"
-msgstr "Creează fișierul swap EXT2 tc.swap"
-
-#: ../appsaudit/appsaudit.cxx:369
+#: ../appsaudit/appsaudit.cxx:556
 msgid "Mark for Deletion"
 msgstr "Marchează pentru ștergere"
 
-#: ../datetool/datetool.cxx:160
+#: ../appsaudit/appsaudit.cxx:570
+msgid "Md5Check"
+msgstr ""
+
+#: ../datetool/datetool.cxx:162
 msgid "Min:"
 msgstr "Minut:"
 
-#: ../appbrowser/appbrowser.cxx:391
+#: ../appbrowser/appbrowser.cxx:447
 msgid "Mirrors"
 msgstr "Clone"
 
-#: ../datetool/datetool.cxx:136
+#: ../datetool/datetool.cxx:138
 msgid "Month:"
 msgstr "Luna:"
 
-#: ../cpanel/cpanel.cxx:27
+#: ../cpanel/cpanel.cxx:51
 msgid "Mount Tool"
 msgstr "Utilitar montare"
 
-#: ../swapfile/swapfile.cxx:52
+#: ../swapfile/swapfile.cxx:65
 msgid "Mounted Partition:"
 msgstr "Partiția montată:"
 
-#: ../mousetool/mousetool.cxx:75
+#: ../mousetool/mousetool.cxx:76
 msgid "Mouse Speed"
 msgstr "Viteza mausului"
 
-#: ../cpanel/cpanel.cxx:51 ../mousetool/mousetool.cxx:73
+#: ../cpanel/cpanel.cxx:60
 msgid "Mouse Tool"
 msgstr "Utilitar maus"
 
-#: ../network/network.cxx:212
+#: ../mousetool/mousetool.cxx:74
+msgid "MouseTool"
+msgstr "Utilitar maus"
+
+#: ../network/network.cxx:213
 msgid "NameServers"
 msgstr "Servere de nume"
 
-#: ../cpanel/cpanel.cxx:42 ../network/network.cxx:157
-#: ../network/network.cxx:159
+#: ../cpanel/cpanel.cxx:66 ../network/network.cxx:158
+#: ../network/network.cxx:160
 msgid "Network"
 msgstr "Rețea"
 
-#: ../network/network.cxx:194
+#: ../network/network.cxx:195
 msgid "Network Mask"
 msgstr "Masca de rețea"
+
+#: ../exittc/exittc.cxx:103 ../filetool/filetool.cxx:77
+msgid "None"
+msgstr "Niciunul"
 
 #: ../flrun/flrun.cxx:63
 msgid "OK"
 msgstr "Bine"
 
-#: ../appbrowser/appbrowser.cxx:450 ../appsaudit/appsaudit.cxx:382
+#: ../appbrowser/appbrowser.cxx:384 ../appsaudit/appsaudit.cxx:574
 msgid "OnBoot"
 msgstr "LaPornire"
 
-#: ../appbrowser/appbrowser.cxx:455 ../appsaudit/appsaudit.cxx:386
+#: ../appbrowser/appbrowser.cxx:385 ../appsaudit/appsaudit.cxx:578
 msgid "OnDemand"
 msgstr "LaCerere"
 
@@ -379,143 +465,220 @@ msgstr "LaCerere"
 msgid "Onboot Items"
 msgstr "Obiecte LaPornire"
 
-#: ../appsaudit/appsaudit.cxx:358
-msgid "Quit"
-msgstr "Ieșire"
+#: ../wallpaper/wallpaper.cxx:280 ../wallpaper/wallpaper.cxx:281
+msgid "Pick Color"
+msgstr ""
 
-#: ../exittc/exittc.cxx:97
+#: ../wbarconf/wbarconf.cxx:158
+msgid "Position"
+msgstr ""
+
+#: ../wallpaper/wallpaper.cxx:303
+msgid "Preview"
+msgstr ""
+
+#: ../appsaudit/appsaudit.cxx:623
+msgid "Process Selected Item(s)"
+msgstr ""
+
+#: ../appbrowser/appbrowser.cxx:353
+msgid "Provides"
+msgstr "Furnizează"
+
+#: ../exittc/exittc.cxx:123
 msgid "Reboot"
 msgstr "Repornește"
 
-#: ../appsaudit/appsaudit.cxx:414
+#: ../filetool/filetool.cxx:80
+msgid "Restore"
+msgstr "Restaurează"
+
+#: ../appsaudit/appsaudit.cxx:608
 msgid "Results"
 msgstr "Rezultate"
 
-#: ../mousetool/mousetool.cxx:86
+#: ../wbarconf/wbarconf.cxx:123
+msgid "Right"
+msgstr ""
+
+#: ../wbarconf/wbarconf.cxx:131
+msgid "Right Bottom"
+msgstr ""
+
+#: ../mousetool/mousetool.cxx:87
 msgid "Right Button"
 msgstr "Buton dreapta"
 
-#: ../cpanel/cpanel.cxx:63
-msgid "Run Command"
-msgstr "Executare comandă"
+#: ../wbarconf/wbarconf.cxx:130
+msgid "Right Top"
+msgstr ""
 
-#: ../network/network.cxx:222
+#: ../exittc/exittc.cxx:105 ../filetool/filetool.cxx:79
+msgid "Safe"
+msgstr "Sigur"
+
+#: ../network/network.cxx:223
 msgid "Save Configuration?"
 msgstr "Salvez configurația?"
 
-#: ../appbrowser/appbrowser.cxx:394
+#: ../appbrowser/appbrowser.cxx:352
 msgid "Search"
 msgstr "Căutare"
+
+#: ../appsaudit/appsaudit.cxx:605
+msgid "Select"
+msgstr ""
 
 #: ../add2file/add2file.cxx:22
 msgid "Select File to be added to "
 msgstr "Alege fișierul pentru adăugare "
 
-#: ../appsaudit/appsaudit.cxx:375
+#: ../appsaudit/appsaudit.cxx:563
 msgid "Selective Copy Install"
 msgstr "Instalare prin copiere selectivă"
 
-#: ../services/services.cxx:129
-msgid "Services"
-msgstr "Servicii"
+#: ../appbrowser/appbrowser.cxx:523 ../wallpaper/wallpaper.cxx:269
+#: ../wallpaper/wallpaper.cxx:294 ../wallpaper/wallpaper.cxx:342
+msgid "Set"
+msgstr ""
 
-#: ../cpanel/cpanel.cxx:39
-msgid "Set TCE Drive"
-msgstr "Stabilește unitatea TCE"
+#: ../cpanel/cpanel.cxx:34
+msgid "Setup"
+msgstr ""
 
-#: ../exittc/exittc.cxx:91
+#: ../exittc/exittc.cxx:117
 msgid "Shutdown"
 msgstr "Oprire"
 
-#: ../appbrowser/appbrowser.cxx:440
+#: ../appbrowser/appbrowser.cxx:500
 msgid "Size"
 msgstr "Mărime"
 
-#: ../appbrowser/appbrowser.cxx:465
+#: ../appbrowser/appbrowser.cxx:519
 msgid "Status"
 msgstr "Stare"
 
-#: ../cpanel/cpanel.cxx:36
+#: ../swapfile/swapfile.cxx:63
+msgid "Swapfile"
+msgstr "Fișier swap"
+
+#: ../cpanel/cpanel.cxx:72
 msgid "Swapfile Tool"
 msgstr "Utilitar swap"
 
-#: ../cpanel/cpanel.cxx:54
+#: ../cpanel/cpanel.cxx:69
 msgid "System Stats"
 msgstr "Stare sistem"
 
-#: ../exittc/exittc.cxx:88
+#: ../exittc/exittc.cxx:113
 msgid "TC Exit Options"
 msgstr "Opțiuni oprire"
 
-#: ../wallpaper/wallpaper.cxx:94
+#: ../cpanel/cpanel.cxx:63
+msgid "Terminal Server"
+msgstr ""
+
+#: ../wallpaper/wallpaper.cxx:327
 msgid "Tile"
 msgstr "Mozaic"
 
-#: ../stats/stats.cxx:35
+#: ../stats/stats.cxx:74
 msgid "Tiny Core System Stats"
 msgstr "Statistici de sistem Tiny Core"
 
-#: ../appsaudit/appsaudit.cxx:374
+#: ../appsaudit/appsaudit.cxx:562
 msgid "Toggle Default Copy Install"
 msgstr "Comută instalarea prin copiere selectivă"
 
-#: ../appbrowser/appbrowser.cxx:395
-msgid "Toggle Search / Provides"
-msgstr "Comută Căutare / Conține"
+#: ../wbarconf/wbarconf.cxx:120
+msgid "Top"
+msgstr ""
 
-#: ../cpanel/cpanel.cxx:60
-msgid "USB Install"
-msgstr "Instalare pe USB"
+#: ../wbarconf/wbarconf.cxx:124
+msgid "Top Left"
+msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:361
+#: ../wbarconf/wbarconf.cxx:125
+msgid "Top Right"
+msgstr ""
+
+#: ../appsaudit/appsaudit.cxx:548
 msgid "Update .dep files."
 msgstr "Actualizează fișierele .dep"
 
-#: ../cpanel/cpanel.cxx:57
-msgid "Update Apps"
-msgstr "Actualizare aplicații"
-
-#: ../appsaudit/appsaudit.cxx:378
+#: ../appsaudit/appsaudit.cxx:566
 msgid "Updates"
 msgstr "Actualizări"
 
-#: ../network/network.cxx:169
+#: ../network/network.cxx:170
 msgid "Use DHCP Broadcast?"
 msgstr "Folosesc broadcast DHCP?"
 
-#: ../cpanel/cpanel.cxx:33
+#: ../cpanel/cpanel.cxx:29
+msgid "Utilities"
+msgstr ""
+
+#: ../wallpaper/wallpaper.cxx:246
+msgid "Vertical Gradient"
+msgstr ""
+
+#: ../cpanel/cpanel.cxx:79 ../wallpaper/wallpaper.cxx:311
 msgid "Wallpaper"
 msgstr "Fundal"
 
-#: ../fdtool/fdtool.cxx:100
+#: ../cpanel/cpanel.cxx:75
+msgid "Wbar Conf"
+msgstr ""
+
+#: ../wbarconf/wbarconf.cxx:174
+msgid "Wbar Icon Size"
+msgstr ""
+
+#: ../wbarconf/wbarconf.cxx:146
+msgid "Wbar Icons"
+msgstr ""
+
+#: ../wbarconf/wbarconf.cxx:182
+msgid "Wbar Text Labels"
+msgstr ""
+
+#: ../wbarconf/wbarconf.cxx:166
+msgid "Wbar Zoom"
+msgstr ""
+
+#: ../fdtool/fdtool.cxx:101
 msgid "Writes image path file to floppy."
 msgstr "Scrie imaginea din cale pe dischetă"
 
-#: ../cpanel/cpanel.cxx:45
-msgid "Xvesa Setup"
-msgstr "Setare Xvesa"
+#: ../cpanel/cpanel.cxx:82
+msgid "Xvesa"
+msgstr ""
 
-#: ../datetool/datetool.cxx:128
+#: ../datetool/datetool.cxx:130
 msgid "Year:"
 msgstr "Anul:"
 
-#: ../stats/stats.cxx:96
+#: ../stats/stats.cxx:171
+msgid "bigHomeFiles"
+msgstr ""
+
+#: ../stats/stats.cxx:153
 msgid "boot"
 msgstr "pornire"
 
-#: ../mnttool/mnttool.cxx:109
+#: ../mnttool_save/mnttool.cxx:117
 msgid "button"
 msgstr "buton"
 
-#: ../stats/stats.cxx:39
+#: ../stats/stats.cxx:80
 msgid "cpu"
 msgstr "procesor"
 
-#: ../stats/stats.cxx:75
+#: ../stats/stats.cxx:126
 msgid "dmesg"
 msgstr "dmesg"
 
-#: ../wbar_exclude/wbar_exclude.cxx:58
+#: ../wbarconf/wbarconf.cxx:145 ../wbar_exclude/wbar_exclude.cxx:58
 msgid "eXclude Wbar Icons"
 msgstr "exclude iconițele Wbar"
 
@@ -523,46 +686,111 @@ msgstr "exclude iconițele Wbar"
 msgid "eXclude Wbar Items"
 msgstr "exclude obiectele Wbar"
 
-#: ../stats/stats.cxx:103
-msgid "extensions"
-msgstr "extensii"
+#: ../wbarconf/wbarconf.cxx:152
+msgid "eXcluded Items"
+msgstr ""
 
-#: ../stats/stats.cxx:89
+#: ../stats/stats.cxx:144
 msgid "filesystems"
 msgstr "sisteme de fișiere"
 
-#: ../flrun/flrun.cxx:55
-msgid "flrun"
-msgstr "flrun"
-
-#: ../stats/stats.cxx:47
+#: ../stats/stats.cxx:90
 msgid "mem"
 msgstr "memorie"
 
-#: ../stats/stats.cxx:61
+#: ../stats/stats.cxx:108
 msgid "modules"
 msgstr "module"
 
-#: ../stats/stats.cxx:82
+#: ../stats/stats.cxx:135
 msgid "mounts"
 msgstr "montări"
 
-#: ../stats/stats.cxx:54
+#: ../stats/stats.cxx:99
 msgid "net"
 msgstr "rețea"
 
-#: ../network/network.cxx:178 ../network/network.cxx:231
+#: ../network/network.cxx:179 ../network/network.cxx:232
 msgid "no"
 msgstr "nu"
 
-#: ../stats/stats.cxx:68
+#: ../stats/stats.cxx:117
 msgid "processes"
 msgstr "procese"
 
-#: ../swapfile/swapfile.cxx:54
+#: ../swapfile/swapfile.cxx:67
 msgid "tc.swp in k bytes:"
 msgstr "tc.swp în k octeți:"
 
-#: ../network/network.cxx:172 ../network/network.cxx:225
+#: ../network/network.cxx:173 ../network/network.cxx:226
 msgid "yes"
 msgstr "da"
+
+#~ msgid "&Backup"
+#~ msgstr "&Salvează"
+
+#~ msgid "&None"
+#~ msgstr "&Nimic"
+
+#~ msgid "&Restore"
+#~ msgstr "&Restaurează"
+
+#~ msgid "Download Only."
+#~ msgstr "Doar descărcare"
+
+#~ msgid "DownLoad"
+#~ msgstr "Descarcă"
+
+#~ msgid "Help"
+#~ msgstr "Ajutor"
+
+#~ msgid "Filetool"
+#~ msgstr "Utilitar salvări"
+
+#~ msgid "Install"
+#~ msgstr "Aplică"
+
+#~ msgid "Run Command"
+#~ msgstr "Executare comandă"
+
+#~ msgid "Services"
+#~ msgstr "Servicii"
+
+#~ msgid "Xvesa Setup"
+#~ msgstr "Setare Xvesa"
+
+#~ msgid "USB Install"
+#~ msgstr "Instalare pe USB"
+
+#~ msgid "flrun"
+#~ msgstr "flrun"
+
+#~ msgid "extensions"
+#~ msgstr "extensii"
+
+#~ msgid "Quit"
+#~ msgstr "Ieșire"
+
+#~ msgid "Apps Audit"
+#~ msgstr "Audit aplicații"
+
+#~ msgid "Downloads  and updates OnDemand menu."
+#~ msgstr "Descarcă și actualizează meniul LaCerere"
+
+#~ msgid "Downloads, updates menu and onboot.lst."
+#~ msgstr "Descarcă și actualizează meniul și onboot.lst"
+
+#~ msgid "File"
+#~ msgstr "Fișier"
+
+#~ msgid "Make tc.swap EXT2 Swapfile"
+#~ msgstr "Creează fișierul swap EXT2 tc.swap"
+
+#~ msgid "Set TCE Drive"
+#~ msgstr "Stabilește unitatea TCE"
+
+#~ msgid "Toggle Search / Provides"
+#~ msgstr "Comută Căutare / Conține"
+
+#~ msgid "Update Apps"
+#~ msgstr "Actualizare aplicații"
