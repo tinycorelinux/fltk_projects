@@ -13,8 +13,8 @@ static string command;
 static string select_extn, select_results; 
 static string option_type, report_type, update_type; 
 static ifstream ifaberr; 
-static string aberr; 
-static string msg; 
+static string aberr, msg; 
+static int results; 
 static string copy2fsList, copy2fsFlag, onbootList; 
 
 void depends_callback(Fl_Widget *, void* userdata) {
@@ -197,7 +197,6 @@ if (userdata == "quit")
 void ondemand_callback(Fl_Widget *, void* userdata) {
   if (userdata == "ondemand" )
 {
-//  target_dir = tcedir + "/optional/";
   report_type = "ondemand";
   brw_extn->clear();
   window->cursor(FL_CURSOR_WAIT);
@@ -206,8 +205,12 @@ void ondemand_callback(Fl_Widget *, void* userdata) {
   system(command.c_str());
   box_extn->label("Select for OnDemand");
   brw_extn->load("/tmp/ondemand.tmp");
-  box_results->label("On Demand Results");
   brw_results->clear();
+  box_results->label("Current OnDemand Items");
+  command = "ls -1 $HOME/.OnDemand 2>/dev/null | sort -f > /tmp/ondemand.tmp";
+  results = system(command.c_str());
+  if (results == 0 )
+    brw_results->load("/tmp/ondemand.tmp");
   system("rm /tmp/ondemand.tmp");
   window->cursor(FL_CURSOR_DEFAULT);
   Fl::flush();
@@ -249,7 +252,7 @@ void brw_extn_callback(Fl_Widget *, void *) {
    {
      window->cursor(FL_CURSOR_WAIT);
      Fl::flush();
-     command = "tce-update update " + select_extn + ".md5.txt >/tmp/apps_upd.lst";
+     command = "tce-update update " + target_dir +"/" + select_extn + ".md5.txt >/tmp/apps_upd.lst";
      brw_results->load("");
      system(command.c_str());
      brw_results->load("/tmp/apps_upd.lst");
@@ -269,16 +272,19 @@ void brw_extn_callback(Fl_Widget *, void *) {
    {
      window->cursor(FL_CURSOR_WAIT);
      Fl::flush();
+     box_results->label("Current OnDemand Items");
      command = "ondemand " + select_extn;
 //     cout << command << endl;
      brw_results->load("");
-     int results = system(command.c_str());
+     results = system(command.c_str());
      if ( results == 0 ) 
      {
-       msg = select_extn + " OK.";
-       box_results->label(msg.c_str());
+       command = "ls -1 $HOME/.OnDemand | sort -f > /tmp/ondemand.tmp";
+       results = system(command.c_str());
+       if (results == 0 )
+         brw_results->load("/tmp/ondemand.tmp");
      } else  
-       brw_results->load("/tmp/ondemand.tmp");
+         brw_results->load("/tmp/ondemand.tmp");
      window->cursor(FL_CURSOR_DEFAULT);
      Fl::flush();
    }
@@ -310,6 +316,18 @@ void brw_results_callback(Fl_Widget *, void *) {
      system(command.c_str());
      box_results->label("On Boot Items");
      brw_results->load(onbootList.c_str());
+   }  
+
+   if (report_type == "ondemand")
+   {
+     command = "rm -f $HOME/.OnDemand/" + select_results;
+     results = system(command.c_str());
+     system(command.c_str());   
+     command = "ls -1 $HOME/.OnDemand > /tmp/ondemand.tmp";
+     results = system(command.c_str());
+     if (results == 0 )
+       brw_results->load("/tmp/ondemand.tmp");
+     system("rm /tmp/ondemand.tmp");
    }  
 }
 }
@@ -346,7 +364,7 @@ Fl_Menu_Item menu_[] = {
  {"Exit OnBoot", 0,  (Fl_Callback*)onboot_callback, (void*)("exit_onboot"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
  {"OnDemand", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
- {"Selection", 0,  (Fl_Callback*)ondemand_callback, (void*)("ondemand"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"Maintenance", 0,  (Fl_Callback*)ondemand_callback, (void*)("ondemand"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {"Exit OnDemand", 0,  (Fl_Callback*)ondemand_callback, (void*)("exit_ondemand"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
  {0,0,0,0,0,0,0,0,0}
@@ -405,15 +423,6 @@ int results = system(command.c_str());
 if (results == 0)
 {
   report_type = "updatedeps";
-/*  
-  string listfile = target_dir + "/tce.lst";
-  box_extn->label(target_dir.c_str());
-  brw_extn->load(listfile.c_str());
-  menu_nodepends->activate();
-  menu_notrequired->activate();
-  menu_auditall->activate();
-  menu_marked->activate();
-*/  
 }
   window->show(argc, argv);
   return Fl::run();
