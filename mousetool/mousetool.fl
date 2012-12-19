@@ -1,0 +1,120 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0109 
+header_name {.h} 
+code_name {.cxx}
+decl {// (c) Robert Shingledecker 2008} {} 
+
+decl {\#include <stdio.h>} {} 
+
+decl {\#include <iostream>} {} 
+
+decl {\#include <sstream>} {} 
+
+decl {\#include <fstream>} {} 
+
+decl {\#include <string>} {} 
+
+decl {using namespace std;} {} 
+
+decl {string mouseType;} {} 
+
+decl {string selectedSpeed="3";} {} 
+
+Function {dial_callback(Fl_Widget*, void*)} {open return_type {static void}
+} {
+  code {ostringstream myStrStream;
+myStrStream << (int)dial_speed->value();
+selectedSpeed = myStrStream.str();
+box_speed->label(selectedSpeed.c_str());} {}
+} 
+
+Function {btn_callback(Fl_Widget*, void* userdata)} {open return_type {static void}
+} {
+  code {if (userdata == "exit")
+   exit(0);
+
+string pointerOrder;
+
+if (btn_right->value() == 1)
+{
+   if (mouseType == "3")
+      pointerOrder = "1 2 3";
+   else
+      pointerOrder = "1 2 3 4 5";
+} else 
+{
+   if (mouseType == "3")
+      pointerOrder = "3 2 1";
+   else
+      pointerOrder = "3 2 1 4 5";
+}
+         
+string speedCmd = "xset m " + selectedSpeed + "/1 0";
+string handednessCmd = "xmodmap -e \\'pointer = " + pointerOrder +"\\'";
+
+ofstream fout(".mouse_config", ios::out | ios::out);
+if (!fout.is_open() )
+{
+   cerr << "Can't open .mouse_config for output." << endl;
+   exit(EXIT_FAILURE);
+}
+fout << speedCmd << endl;
+fout << handednessCmd << endl;
+fout.close();
+system( speedCmd.c_str() );
+system( handednessCmd.c_str() );
+system( "chmod +x .mouse_config" );} {}
+} 
+
+Function {} {open
+} {
+  Fl_Window {} {
+    label {Mouse Tool} open
+    xywh {529 64 145 200} type Double hide
+  } {
+    Fl_Dial dial_speed {
+      label {Mouse Speed}
+      callback dial_callback selected
+      xywh {45 20 50 50} align 1 minimum 1 maximum 10 step 1 value 3
+    }
+    Fl_Box box_speed {
+      xywh {55 75 30 23}
+      code0 {box_speed->label("3");}
+    }
+    Fl_Round_Button btn_right {
+      label {Right Button}
+      xywh {20 100 103 20} down_box ROUND_DOWN_BOX value 1 selection_color 2
+      code0 {btn_right->type(FL_RADIO_BUTTON);}
+    }
+    Fl_Round_Button btn_left {
+      label {Left Button}
+      xywh {20 120 103 20} down_box ROUND_DOWN_BOX selection_color 2
+      code0 {btn_left->type(FL_RADIO_BUTTON);}
+    }
+    Fl_Button {} {
+      label {&Apply}
+      user_data {"apply"}
+      callback btn_callback
+      xywh {20 155 50 25}
+    }
+    Fl_Button {} {
+      label {&Exit}
+      user_data {"exit"}
+      callback btn_callback
+      xywh {75 155 50 25}
+    }
+  }
+  code {FILE *CMD_fp = NULL;
+if ((CMD_fp = popen("xmodmap -pp|head -1|cut -f3 -d' '","r"))==NULL)
+{
+   cerr << "popen failed" << endl;
+   return 1;
+}
+char result[1024];
+if ( fgets(result,1023,CMD_fp)==NULL)
+{
+   cerr << "popen results returned NULL" << endl;
+   return 1;
+}
+mouseType = result;} {}
+} 

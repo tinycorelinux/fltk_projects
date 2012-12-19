@@ -1,0 +1,107 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0109 
+header_name {.h} 
+code_name {.cxx}
+decl {// (c) Robert Shingledecker} {} 
+
+decl {\#include <iostream>} {} 
+
+decl {using namespace std;} {} 
+
+Function {btnCallback(Fl_Widget*, void* userdata)} {open return_type {static void}
+} {
+  code {if (userdata == "cancel")
+   exit(1);
+
+string command;   
+string commandA = "aterm +tr -bg white -fg black -geometry 80x4 -T ";
+string commandB = " -e floppytool.sh ";  
+if (userdata == "format")
+{
+   command = commandA + "\\"Resizing and Formatting Floppy\\" " + commandB;
+   if (btn1440 -> value() == 1)
+      command += "format 1440";
+   else
+      command += "format 1722";
+} else
+{
+   string strImagePath = inpImagePath -> value();     
+
+   if (userdata == "mkimage" )
+   {
+      command = commandA + "\\"Creating Floppy Image\\"" + commandB;
+      if (btn1440 -> value() == 1)
+         command += "makeimage 1440 " + strImagePath;
+      else
+         command += "makeimage 1722 " + strImagePath;
+   }
+
+   if (userdata == "apimage")
+   {
+      command = commandA + "\\"Creating Floppy from Image File\\"" + commandB;
+      if (btn1440 -> value() == 1)
+         command += "applyimage 1440 " + strImagePath;
+      else
+         command += "applyimage 1449 " + strImagePath;
+   }
+}
+system(command.c_str());} {selected
+  }
+} 
+
+Function {inp_callback(Fl_Widget*, void*)} {open return_type {static void}
+} {
+  code {btnMkImage->activate();
+btnApImage->activate();} {}
+} 
+
+Function {} {open
+} {
+  Fl_Window {} {open
+    xywh {46 93 490 155} type Double hide
+  } {
+    Fl_Box {} {
+      label {Floppy Disk Tool}
+      xywh {10 29 470 116} box EMBOSSED_FRAME align 1
+    }
+    Fl_Round_Button btn1440 {
+      label 1440k
+      xywh {125 40 64 15} down_box ROUND_DOWN_BOX value 1 selection_color 2
+      code0 {btn1440->type(FL_RADIO_BUTTON);}
+    }
+    Fl_Round_Button btn1722 {
+      label 1722k
+      xywh {265 40 64 15} down_box ROUND_DOWN_BOX selection_color 2
+      code0 {btn1722->type(FL_RADIO_BUTTON);}
+    }
+    Fl_Input inpImagePath {
+      label {Image Path:}
+      callback inp_callback
+      xywh {105 65 355 25} when 1
+    }
+    Fl_Button {} {
+      label {&Format}
+      user_data {"format"}
+      callback btnCallback
+      tooltip {Formats FAT of selected size.} xywh {40 100 90 25}
+    }
+    Fl_Button btnMkImage {
+      label {&Make Image}
+      user_data {"mkimage"}
+      callback btnCallback
+      tooltip {Copies floppy to image path entered,} xywh {145 100 90 25} deactivate
+    }
+    Fl_Button btnApImage {
+      label {&Apply Image}
+      user_data {"apimage"}
+      callback btnCallback
+      tooltip {Writes image path file to floppy.} xywh {250 100 90 25} deactivate
+    }
+    Fl_Button {} {
+      label {&Cancel}
+      user_data {"cancel"}
+      callback btnCallback
+      xywh {355 100 90 25}
+    }
+  }
+} 

@@ -1,0 +1,97 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0109 
+header_name {.h} 
+code_name {.cxx}
+decl {// (c) Robert Shingledecker 2008} {} 
+
+decl {\#include <iostream>} {} 
+
+decl {\#include <fstream>} {} 
+
+decl {\#include <string>} {} 
+
+decl {\#include <Fl/fl_ask.H>} {} 
+
+decl {\#include <FL/fl_message.H>} {} 
+
+decl {using namespace std;} {} 
+
+decl {string device_name;} {} 
+
+decl {string command = "sudo /usr/bin/filetool.sh ";} {} 
+
+Function {input_callback(Fl_Widget*, void*)} {open return_type {static void}
+} {
+  code {btn_none->activate();
+btn_backup->activate();
+btn_restore->activate();} {}
+} 
+
+Function {btn_callback(Fl_Widget*, void* userdata)} {open return_type {static void}
+} {
+  code {device_name = (const char*)input_device->value();
+if (device_name.size() == 0)
+   return;
+if (userdata == "none")
+{
+   if (fl_ask("This will clear the selected backup device\\nand prevent the backup from occuring."))
+   {
+      system("> /opt/.backup_device");
+      exit(0);
+   }
+}
+
+string action = (const char*)userdata;
+command += action + " noprompt " + device_name;
+
+if (system(command.c_str()) !=0)
+{
+   fl_message("Error occured.\\nMake sure you are using a valid backup/restore device. Some errors are logged in /tmp/backup_status");
+   return;
+} else
+   exit(0);} {selected
+  }
+} 
+
+Function {} {open
+} {
+  Fl_Window {} {
+    label Filetool open
+    xywh {131 421 225 80} type Double hide
+  } {
+    Fl_Input input_device {
+      label {Device:}
+      callback input_callback
+      xywh {65 7 150 25} when 1
+    }
+    Fl_Button btn_none {
+      label {&None}
+      user_data {"none"}
+      callback btn_callback
+      xywh {10 40 64 30} deactivate
+    }
+    Fl_Button btn_backup {
+      label {&Backup}
+      user_data {"backup"}
+      callback btn_callback
+      xywh {80 40 64 30} deactivate
+    }
+    Fl_Button btn_restore {
+      label {&Restore}
+      user_data {"restore"}
+      callback btn_callback
+      xywh {150 40 64 30} deactivate
+    }
+  }
+  code {ifstream fin("/opt/.backup_device");                                  
+getline(fin,device_name);                                        
+fin.close();
+
+if (device_name.size() != 0)
+{
+    input_device->value(device_name.c_str());
+    btn_none->activate();
+    btn_backup->activate();
+    btn_restore->activate();
+}} {}
+} 

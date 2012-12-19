@@ -1,0 +1,74 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0109 
+header_name {.h} 
+code_name {.cxx}
+decl {// (c) Robert Shingledecker 2008} {selected
+} 
+
+decl {\#include <iostream>} {} 
+
+decl {\#include <sstream>} {} 
+
+decl {\#include <string>} {} 
+
+decl {\#include <Fl/fl_ask.H>} {} 
+
+decl {using namespace std;} {} 
+
+Function {btn_callback(Fl_Widget*, void* userdata)} {open return_type {static void}
+} {
+  code {if (userdata == "cancel")
+   exit(1);
+string str_mount = inp_mount->value();
+if ( str_mount == "" )
+   return;
+string str_size = inp_size->value();
+if (str_size == "")
+   return;
+   
+int size;
+istringstream ins;
+ins.str(str_size);
+ins >> size;   
+
+if ( size < 1 )
+   return;
+   
+string command = "dd if=/dev/zero of=" + str_mount + "/tc.swap bs=1024 count=" + str_size; 
+if ( fl_ask(command.c_str()) )
+{
+   system(command.c_str());
+   system( ("mkswap " + str_mount + "/tc.swap").c_str());
+   system( ("swapon " + str_mount + "/tc.swap").c_str());
+   exit(0);
+}} {}
+} 
+
+Function {} {open
+} {
+  Fl_Window {} {
+    label {Make tc.swap EXT2 Swapfile} open
+    xywh {487 412 275 105} type Double hide
+  } {
+    Fl_Input inp_mount {
+      label {Mounted Partition:}
+      xywh {130 11 135 24}
+    }
+    Fl_Input inp_size {
+      label {tc.swap in k bytes:}
+      xywh {130 41 55 24}
+    }
+    Fl_Button {} {
+      label {&Cancel}
+      user_data {"cancel"}
+      callback btn_callback
+      xywh {65 75 64 20}
+    }
+    Fl_Button {} {
+      label {&Proceed}
+      user_data {"proceed"}
+      callback btn_callback
+      xywh {140 75 64 20}
+    }
+  }
+} 

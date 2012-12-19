@@ -1,0 +1,253 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0109 
+header_name {.h} 
+code_name {.cxx}
+decl {// (c) Robert Shingledecker} {selected
+} 
+
+decl {\#include <iostream>} {} 
+
+decl {\#include <fstream>} {} 
+
+decl {\#include <string>} {} 
+
+decl {using namespace std;} {} 
+
+decl {string hostname;} {} 
+
+Function {btnCallback(Fl_Widget*, void* userdata)} {open return_type {static void}
+} {
+  code {if (userdata == "dhcpYes" )
+{
+   ipAddressInput->deactivate();
+   netMaskInput->deactivate();
+   broadcastInput->deactivate();
+   gatewayInput->deactivate();
+   nameserv1Input->deactivate();
+   nameserv2Input->deactivate();
+}
+if (userdata == "dhcpNo" )
+{
+   ipAddressInput->activate();
+   netMaskInput->activate();
+   broadcastInput->activate();
+   gatewayInput->activate();
+   nameserv1Input->activate();
+   nameserv2Input->activate();
+}
+if (userdata == "ip" )
+{
+   string commandHead = "ipcalc -b ";
+   string commandTail = "| cut -f2 -d=";
+   string command = commandHead + ipAddressInput->value() + " " + netMaskInput->value() + commandTail;
+   cout << command << endl;
+   FILE *CMD_fp = NULL;
+   if ((CMD_fp = popen(command.c_str(),"r"))==NULL)
+   {
+      cerr << "popen failed" << endl;
+   }
+   char result[1024];
+   if ( fgets(result,1023,CMD_fp)==NULL)
+   {
+      cerr << "popen results returned NULL" << endl;
+   }
+   string broadcast = result;
+   broadcast = broadcast.substr(0,broadcast.length()-1);
+   broadcastInput->value(broadcast.c_str());
+   
+   string ip = ipAddressInput->value();
+   int loc = ip.rfind(".");            
+   string gw = ip.substr(0,loc) + ".254";
+   gatewayInput->value(gw.c_str());
+}   
+
+if (userdata == "apply")
+{
+   string interface = interfaceInput->value();
+   string ipaddress = ipAddressInput->value();
+   string netmask   = netMaskInput->value();
+   string broadcast = broadcastInput->value();
+   string gateway   = gatewayInput->value();
+   string nameserver1 = nameserv1Input->value();
+   string nameserver2 = nameserv2Input->value();
+   string command;
+   if (dhcpYesBtn->value() == 1)
+   {
+      command = command + "sudo udhcpc -H " + hostname + " -b -i " + interfaceInput->value() + " &";
+      system(command.c_str());
+   }
+   if (dhcpNoBtn->value() == 1)
+   {
+      command = "sudo /usr/bin/pkill udhcpc >/dev/null";
+      system(command.c_str());
+      command = "sudo /sbin/ifconfig ";
+      command = command + interface + " " + ipaddress + " netmask " + netmask + " broadcast " + broadcast + " up";
+      system(command.c_str());
+      command = "sudo /sbin/route add default gw ";
+      command = command + gateway;
+      system(command.c_str());
+      command = "echo nameserver ";
+      command = command + nameserver1 + "|sudo tee /etc/resolv.conf";
+      system(command.c_str());
+      if ( ! nameserver2.empty() )
+      {
+         command = "echo nameserver ";
+         command = command + nameserver2 + "|sudo tee -a /etc/resolv.conf";
+         system(command.c_str());
+      
+      }
+   }
+   if (SaveYesBtn->value() == 1 )
+   {
+      ofstream fout(("/opt/"+interface + ".sh").c_str());
+      if (! fout.is_open())
+      {
+         cerr << "Can't open output file." << endl;
+         exit(EXIT_FAILURE);
+      }
+      fout << "\#!/bin/sh" << endl;
+      fout << "pkill udhcpc" << endl;
+      if ( dhcpYesBtn->value() == 1)
+         fout << "udhcpc -H " << hostname << " -b -i " << interface << endl;
+      else
+      {
+         fout << "ifconfig " << interface << " " << ipaddress << " netmask " << netmask << " broadcast " << broadcast << " up" << endl;
+         fout << "route add default gw " << gateway << endl;
+         fout << "echo nameserver " << nameserver1 << " > /etc/resolv.conf" << endl;
+         if ( ! nameserver2.empty() )
+            fout << "echo nameserver " << nameserver2 << " >> /etc/resolv.conf" << endl; 
+      }
+      command = "sudo chmod +x /opt/" + interface +".sh";
+      system(command.c_str());
+      command = "sed -i '/" + interface +".sh/d' /opt/bootlocal.sh";
+      system(command.c_str());
+      command = "echo '/opt/" + interface + ".sh &' >> /opt/bootlocal.sh";
+      system(command.c_str());
+      command = "sed -i '/" + interface + ".sh/d' /opt/.filetool.lst";
+      system(command.c_str());
+      command = "echo opt/" + interface + ".sh >> /opt/.filetool.lst";
+      system(command.c_str());
+   }        
+}      
+if (userdata == "exit")
+   exit(0);} {}
+} 
+
+Function {} {open
+} {
+  Fl_Window {} {
+    label {Netcard Conf} open
+    xywh {159 276 160 415} type Double hide
+  } {
+    Fl_Box {} {
+      label {Netcard Conf}
+      xywh {5 2 150 28} labeltype ENGRAVED_LABEL labelsize 18
+    }
+    Fl_Input interfaceInput {
+      label Interface
+      xywh {20 41 115 24} labelfont 1 labelsize 12 align 5
+      code0 {interfaceInput->align(1);interfaceInput->value("eth0");}
+    }
+    Fl_Group {} {
+      label {Use DHCP Broadcast?} open
+      xywh {5 85 155 20} labelfont 1 labelsize 12
+    } {
+      Fl_Round_Button dhcpYesBtn {
+        label yes
+        user_data {"dhcpYes"}
+        callback btnCallback
+        xywh {30 90 45 15} down_box ROUND_DOWN_BOX selection_color 2
+        code0 {dhcpYesBtn->type(FL_RADIO_BUTTON);}
+      }
+      Fl_Round_Button dhcpNoBtn {
+        label no
+        user_data {"dhcpNo"}
+        callback btnCallback
+        xywh {75 90 45 15} down_box ROUND_DOWN_BOX value 1 selection_color 2
+        code0 {dhcpNoBtn->type(FL_RADIO_BUTTON);}
+      }
+    }
+    Fl_Input ipAddressInput {
+      label {IP Address}
+      user_data {"ip"}
+      callback btnCallback
+      xywh {20 121 115 24} labelfont 1 labelsize 12 align 5
+      code0 {ipAddressInput->align(1);}
+    }
+    Fl_Input netMaskInput {
+      label {Network Mask}
+      xywh {20 161 115 24} labelfont 1 labelsize 12 align 5
+      code0 {netMaskInput->align(1); netMaskInput->value("255.255.255.0");}
+    }
+    Fl_Input broadcastInput {
+      label Broadcast
+      xywh {20 201 115 24} labelfont 1 labelsize 12 align 5
+      code0 {broadcastInput->align(1);}
+    }
+    Fl_Input gatewayInput {
+      label Gateway
+      xywh {20 241 115 24} labelfont 1 labelsize 12 align 5
+      code0 {gatewayInput->align(1);}
+    }
+    Fl_Input nameserv1Input {
+      label NameServers
+      xywh {20 281 115 24} labelfont 1 labelsize 12 align 5
+      code0 {nameserv1Input->align(1);}
+    }
+    Fl_Input nameserv2Input {
+      xywh {20 306 115 24} labeltype NO_LABEL align 5
+    }
+    Fl_Group {} {
+      label {Save Configuration?} open
+      xywh {20 350 130 10} labelfont 1 labelsize 12
+    } {
+      Fl_Round_Button SaveYesBtn {
+        label yes
+        xywh {30 350 45 10} down_box ROUND_DOWN_BOX value 1 selection_color 2
+        code0 {SaveYesBtn->type(FL_RADIO_BUTTON);}
+      }
+      Fl_Round_Button SaveNoBtn {
+        label no
+        xywh {75 350 50 10} down_box ROUND_DOWN_BOX selection_color 2
+        code0 {SaveNoBtn->type(FL_RADIO_BUTTON);}
+      }
+    }
+    Fl_Button {} {
+      label {&Apply}
+      user_data {"apply"}
+      callback btnCallback
+      xywh {15 375 65 25}
+    }
+    Fl_Button {} {
+      label {E&xit}
+      user_data {"exit"}
+      callback btnCallback
+      xywh {85 375 65 25}
+    }
+  }
+  code {FILE *CMD_fp = NULL;
+if ((CMD_fp = popen("grep '^nameserver' /etc/resolv.conf|cut -f2 -d' '","r"))==NULL)
+{
+   cerr << "popen failed" << endl;
+   return 1;
+}
+char result[1024];
+string ns;
+if ( fgets(result,1023,CMD_fp)!=NULL)
+{
+   ns = result;
+   ns = ns.substr(0,ns.length()-1);
+   nameserv1Input->value(ns.c_str());
+}
+if ( fgets(result,1023,CMD_fp)!=NULL)
+{
+   ns = result;
+   ns = ns.substr(0,ns.length()-1);
+   nameserv2Input->value(ns.c_str());
+}
+fclose(CMD_fp);
+
+ifstream fin("/etc/hostname");
+getline(fin,hostname);
+fin.close();} {}
+} 

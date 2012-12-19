@@ -1,0 +1,17 @@
+   btnState->label("Mounted");
+//   btnState->value(1);
+   btnState->color((Fl_Color)1);
+   btnState->label("Unmounted");
+//   btnState->value(0);
+   btnState->color((Fl_Color)2);
+      btnState->label("Mounted");
+      btnState->value(1);
+      btnState->label("Unmounted");
+      btnState->value(0);
+         btnState->label("Unmounted");
+//         btnState->value(0);
+         btnState->label("Mounted");
+//         btnState->value(1);
+   btnState->redraw();        
+      btnState->selection_color((Fl_Color)2);
+      btnState->callback((Fl_Callback*)btnCallback, (void*)("state"));

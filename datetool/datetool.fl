@@ -1,0 +1,234 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0109 
+header_name {.h} 
+code_name {.cxx}
+decl {// (c) Robert Shingledecker 2008} {selected
+} 
+
+decl {\#include <iostream>} {} 
+
+decl {\#include <sstream>} {} 
+
+decl {\#include <string>} {} 
+
+decl {using namespace std;} {} 
+
+Function {fmtoutput(const string target, char action, int min, int max, int width)} {open return_type string
+} {
+  code {istringstream iss;
+ostringstream oss;
+int result;
+iss.str(target);
+iss >> result;
+
+if (action == '+')
+   result++;
+else
+   result--;
+   
+if (max > 0)
+{
+   if ( result < min )
+      result = max;
+   if ( result > max )
+      result = min;
+}           
+      
+if (width > 0) 
+{
+  oss.fill('0');
+  oss.width(width);
+}
+oss << result;
+return oss.str();} {}
+} 
+
+Function {btnCallback(Fl_Widget*, void* userdata)} {open return_type {static void}
+} {
+  code {if (userdata == "cancel" )
+   exit(1);
+string target;
+if (userdata == "yearDown")
+{
+   target = fmtoutput(yearInput->value(),'-',0,0,0);
+   yearInput->value(target.c_str());
+}
+if (userdata == "yearUp")
+{
+   target = fmtoutput(yearInput->value(),'+',0,0,0);
+   yearInput->value(target.c_str());
+}
+if (userdata == "monthDown")
+{
+   target = fmtoutput(monthInput->value(),'-',1,12,2);
+   monthInput->value(target.c_str());
+}
+if (userdata == "monthUp")
+{
+   target = fmtoutput(monthInput->value(),'+',1,12,2);
+   monthInput->value(target.c_str());
+}
+if (userdata == "dayDown")
+{
+   target = fmtoutput(dayInput->value(),'-',1,31,2);
+   dayInput->value(target.c_str());
+}
+if (userdata == "dayUp")
+{
+   target = fmtoutput(dayInput->value(),'+',1,31,2);
+   dayInput->value(target.c_str());
+}
+if (userdata == "hourDown")
+{
+   target = fmtoutput(hourInput->value(),'-',0,23,2);
+   hourInput->value(target.c_str());
+}
+if (userdata == "hourUp")
+{
+   target = fmtoutput(hourInput->value(),'+',0,23,2);
+   hourInput->value(target.c_str());
+}
+if (userdata == "minDown")
+{
+   target = fmtoutput(minInput->value(),'-',0,59,2);
+   minInput->value(target.c_str());
+}
+if (userdata == "minUp")
+{
+   target = fmtoutput(minInput->value(),'+',0,59,2);
+   minInput->value(target.c_str());
+}
+if (userdata == "ok")
+{
+   string command;
+   string month = monthInput->value();
+   string day = dayInput->value();
+   string hour = hourInput->value();
+   string min = minInput->value();
+   string year = yearInput->value();
+   command = "sudo date " + month + day + hour + min + year;
+   system(command.c_str());
+   command = "sudo hwclock --systohc";
+   system(command.c_str());
+   exit(0);
+}} {}
+} 
+
+Function {} {open
+} {
+  Fl_Window {} {
+    label Datetool open
+    xywh {258 457 195 195} type Double hide
+  } {
+    Fl_Input yearInput {
+      label {Year:}
+      xywh {60 11 60 25}
+    }
+    Fl_Button {} {
+      label {@<}
+      user_data {"yearDown"}
+      callback btnCallback
+      xywh {125 10 25 25}
+    }
+    Fl_Button {} {
+      label {@>}
+      user_data {"yearUp"}
+      callback btnCallback
+      xywh {155 10 25 25}
+    }
+    Fl_Input monthInput {
+      label {Month:}
+      xywh {60 40 60 25}
+    }
+    Fl_Button {} {
+      label {@<}
+      user_data {"monthDown"}
+      callback btnCallback
+      xywh {125 39 25 25}
+    }
+    Fl_Button {} {
+      label {@>}
+      user_data {"monthUp"}
+      callback btnCallback
+      xywh {155 39 25 25}
+    }
+    Fl_Input dayInput {
+      label {Day:}
+      xywh {60 70 60 25}
+    }
+    Fl_Button {} {
+      label {@<}
+      user_data {"dayDown"}
+      callback btnCallback
+      xywh {125 69 25 25}
+    }
+    Fl_Button {} {
+      label {@>}
+      user_data {"dayUp"}
+      callback btnCallback
+      xywh {155 69 25 25}
+    }
+    Fl_Input hourInput {
+      label {Hour:}
+      xywh {60 100 60 25}
+    }
+    Fl_Button {} {
+      label {@<}
+      user_data {"hourDown"}
+      callback btnCallback
+      xywh {125 99 25 25}
+    }
+    Fl_Button {} {
+      label {@>}
+      user_data {"hourUp"}
+      callback btnCallback
+      xywh {155 99 25 25}
+    }
+    Fl_Input minInput {
+      label {Min:}
+      xywh {60 130 60 25}
+    }
+    Fl_Button {} {
+      label {@<}
+      user_data {"minDown"}
+      callback btnCallback
+      xywh {125 129 25 25}
+    }
+    Fl_Button {} {
+      label {@>}
+      user_data {"minUp"}
+      callback btnCallback
+      xywh {155 129 25 25}
+    }
+    Fl_Button {} {
+      label {&OK}
+      user_data {"ok"}
+      callback btnCallback
+      xywh {28 163 64 25}
+    }
+    Fl_Button {} {
+      label {&Cancel}
+      user_data {"cancel"}
+      callback btnCallback
+      xywh {103 163 64 25}
+    }
+  }
+  code {FILE *CMD_fp = NULL;
+if ((CMD_fp = popen("date +'%Y %m %d %H %M'","r"))==NULL)
+{
+   cerr << "popen failed" << endl;
+   return 1;
+}
+char result[1024];
+if ( fgets(result,1023,CMD_fp)==NULL)
+{
+   cerr << "popen results returned NULL" << endl;
+   return 1;
+}
+string results = result;
+yearInput->value(results.substr(0,4).c_str());
+monthInput->value(results.substr(5,2).c_str());
+dayInput->value(results.substr(8,2).c_str());
+hourInput->value(results.substr(11,2).c_str());
+minInput->value(results.substr(14,2).c_str());} {}
+} 

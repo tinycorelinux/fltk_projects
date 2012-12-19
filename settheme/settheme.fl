@@ -1,0 +1,41 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0109 
+header_name {.h} 
+code_name {.cxx}
+decl {// (c) Robert Shingledecker 2008} {} 
+
+decl {\#include <iostream>} {} 
+
+decl {\#include <string>} {} 
+
+decl {\#include <FL/Fl_File_Chooser.H>} {} 
+
+decl {using namespace std;} {} 
+
+Function {} {open
+} {
+  code {string home;
+FILE *CMD_fp = NULL;
+if ((CMD_fp = popen("env | awk -F'=' /HOME/'{printf \\"%s\\",$2}'","r"))==NULL)
+{
+   cout << "popen failed" << endl;
+   return 1;
+}
+char result[1024];
+if ( fgets(result,1023,CMD_fp)==NULL)     // If no result from above then default is to backup.
+   home = "/home/tc";
+else    
+   home = result;        
+
+Fl_File_Chooser chooser("/opt/jwmThemes","*.thm", Fl_File_Chooser::SINGLE,"Select Theme for JWM");
+chooser.show();                                             
+while(chooser.shown())
+  { Fl::wait(); }
+if ( chooser.value() != NULL )  
+{
+   string command = "cp " + (string)chooser.value() + " " + home +"/.jwmrc-theme";
+   system(command.c_str());
+   system("jwm -restart");
+}} {selected
+  }
+} 

@@ -1,0 +1,85 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0109 
+header_name {.h} 
+code_name {.cxx}
+decl {// (c) Robert Shingledecker 2008} {selected
+} 
+
+decl {\#include <iostream>} {} 
+
+decl {\#include <string>} {} 
+
+decl {\#include <FL/Fl_File_Chooser.H>} {} 
+
+decl {using namespace std;} {} 
+
+Function {btn_callback(Fl_Widget*, void* userdata)} {open return_type {static void}
+} {
+  code {if (userdata == "ok")
+{
+  string commandStr1 = in_command->value();
+  string commandStr2 = " 2>/dev/null &";
+  string command = commandStr1 + commandStr2;
+  system(command.c_str());
+  exit(0);
+} else { 
+  if (userdata == "cancel") 
+  {
+    exit(0);
+  }
+}} {}
+} 
+
+Function {choose_cb(Fl_Widget*, void*)} {open return_type {static void}
+} {
+  code {Fl_File_Chooser chooser(".",                        // directory
+                            "*",                        // filter
+                            Fl_File_Chooser::SINGLE,     // chooser type
+                            "Select Application to Run");  // title
+    chooser.show();                                             
+
+    // Block until user picks something.
+    //     (The other way to do this is to use a callback())
+    //                                                      
+    while(chooser.shown())
+        { Fl::wait(); }
+
+    // User hit cancel?
+    if ( chooser.value() == NULL )
+       return; 
+ 
+    in_command->value(chooser.value());} {}
+} 
+
+Function {} {open
+} {
+  Fl_Window {} {
+    label flrun open
+    xywh {30 173 260 100} type Double hide
+  } {
+    Fl_Box {} {
+      label {Application Launcher}
+      xywh {15 25 215 0} align 1
+    }
+    Fl_Input in_command {
+      xywh {25 31 215 24} labeltype NO_LABEL
+    }
+    Fl_Return_Button {} {
+      label OK
+      user_data {"ok"}
+      callback btn_callback
+      xywh {25 65 66 20}
+    }
+    Fl_Button {} {
+      label {&Cancel}
+      user_data {"cancel"}
+      callback btn_callback
+      xywh {100 65 64 20}
+    }
+    Fl_Button {} {
+      label Browse
+      callback choose_cb
+      xywh {175 65 64 20}
+    }
+  }
+} 

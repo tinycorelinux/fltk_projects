@@ -1,0 +1,279 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0109 
+header_name {.h} 
+code_name {.cxx}
+decl {// (c) Robert Shingledecker 2008} {} 
+
+decl {\#include <iostream>} {} 
+
+decl {\#include <fstream>} {} 
+
+decl {\#include <FL/fl_message.H>} {} 
+
+decl {\#include <FL/Fl_File_Chooser.H>} {} 
+
+decl {using namespace std;} {} 
+
+decl {string download_dir;} {} 
+
+decl {string select_extn;} {} 
+
+decl {string repository;} {} 
+
+Function {btn_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
+} {
+  code {if (userdata == "tce" or userdata == "tcz")
+{
+   repository = (const char*) userdata;
+   string command = "/usr/bin/tce-fetch.sh info.lst " + repository;
+   int results = system(command.c_str());
+   if (results == 0 )
+   {
+      brw_extn->load("info.lst");
+      btn_install->deactivate();
+      btn_download->deactivate();
+      box_extensions->activate();
+      search_field->activate();                                              
+      system("rm -f info.lst"); 
+    } else
+      fl_message("Error trying to connect. Try Later.");  
+} else if (userdata == "install")
+{
+   string loadit = "tce-load " + select_extn + " wget install";
+//  cout << select_extn << endl;
+   int results = system(loadit.c_str());
+   if (results == 0 )
+   {
+      string msg = select_extn + " installed successfully!";
+      fl_message(msg.c_str());
+   } else
+      fl_message("An Error Occured. Try Later.");
+} else if (userdata == "download")
+{
+   string grabit = "tce-load " + select_extn + " wget";
+// cout << grabit << endl;
+   int results = system(grabit.c_str());
+   if (results == 0 )
+   {
+      string msg = select_extn + " downloaded successfully!";
+      fl_message(msg.c_str());
+   } else
+      fl_message("An Error Occured. Try Later.");
+} else if (userdata == "search")
+{
+  string command = "/usr/bin/search.sh " + repository + " " + (string)search_field->value();
+  int results = system(command.c_str());
+  if (results == 0 )
+  {
+    brw_extn->load("info.lst");
+    btn_install->deactivate();
+    btn_download->deactivate();
+    search_field->activate();                                              
+    system("rm -f info.lst");
+  } 
+} else if (userdata == "quit")
+  exit(0);} {}
+} 
+
+Function {brw_extn_callback(Fl_Widget *, void *)} {open return_type {static void}
+} {
+  code {if (brw_extn->value())
+{
+   select_extn = brw_extn->text(brw_extn->value());
+   string select_extn_file = select_extn + (string)".info";
+   string command = "/usr/bin/tce-fetch.sh " + select_extn_file;
+   int results = system(command.c_str());
+   if (results == 0)
+   {
+      brw_info->load(select_extn_file.c_str());
+      command = "rm -f " + select_extn_file;
+      system(command.c_str());
+      btn_install->activate();
+      btn_download->activate();
+      tab_info->activate();
+      tab_files->activate();
+      brw_list->load("");
+      tab_depends->activate();
+      brw_dep->load("");
+      tab_info->show();
+   }
+}} {selected
+  }
+} 
+
+Function {local_btn_callback(Fl_Widget*, void* userdata)} {open return_type {static void}
+} {
+  code {string title = "Install Local Extension";
+string target_dir = download_dir;
+if (userdata == "File/Optional")
+{
+   target_dir = download_dir + "/optional";
+   title = "Install Optional Extension";
+}   
+Fl_File_Chooser chooser(target_dir.c_str(),"*",Fl_File_Chooser::SINGLE,title.c_str());
+chooser.show();                                             
+// Block until user picks something.
+//     (The other way to do this is to use a callback())                                                      
+while(chooser.shown())
+    { Fl::wait(); }
+// User hit cancel?
+if ( chooser.value() == NULL )
+   return; 
+// cout << chooser.value() << endl;
+string command = "tce-load " + (string)chooser.value();
+int results = system(command.c_str());
+if (results == 0)
+{
+   string msg = (string)chooser.value() + " successfully loaded!";
+   fl_message(msg.c_str());
+} else
+   fl_message("Unable to load extension.");} {}
+} 
+
+Function {tabs_callback(Fl_Widget*, void* userdata)} {open return_type {static void}
+} {
+  code {if (brw_extn->value())
+{
+   int results;
+   select_extn = brw_extn->text(brw_extn->value());
+   if (tab_files->visible())
+   {
+     string select_extn_file = select_extn + (string)".list";
+     string command = "/usr/bin/tce-fetch.sh " + select_extn_file;
+     results = system(command.c_str());
+     if (results == 0)
+     {
+        brw_list->load(select_extn_file.c_str());
+        command = "rm -f " + select_extn_file;
+        system(command.c_str());
+     }
+   }
+   
+   if (tab_depends->visible())
+   {
+     string select_extn_file = select_extn + (string)".dep";
+     string command = "/usr/bin/tce-fetch.sh " + select_extn_file;
+     results = system(command.c_str());
+     if (results == 0)
+     {
+        brw_dep->load(select_extn_file.c_str());
+        command = "rm -f " + select_extn_file;
+        system(command.c_str());
+     }
+   }
+}} {}
+} 
+
+Function {} {open
+} {
+  Fl_Window {} {open
+    xywh {17 134 685 405} type Double resizable visible
+  } {
+    Fl_Menu_Bar {} {open
+      xywh {0 0 685 20}
+    } {
+      Submenu {} {
+        label File open
+        xywh {0 0 63 20}
+      } {
+        MenuItem {} {
+          label {Install Local}
+          user_data {"File/Local"}
+          callback local_btn_callback
+          xywh {0 0 30 20}
+        }
+        MenuItem menuitem_optional {
+          label {Install Optional}
+          user_data {"File/Optional"}
+          callback local_btn_callback
+          xywh {10 10 30 20} deactivate
+        }
+        MenuItem {} {
+          label Quit
+          user_data {"quit"}
+          callback btn_callback
+          xywh {0 0 30 20}
+        }
+      }
+      Submenu {} {
+        label Connect open
+        xywh {0 0 63 20}
+      } {
+        MenuItem {} {
+          label TCE
+          user_data {"tce"}
+          callback btn_callback
+          xywh {0 0 30 20}
+        }
+        MenuItem {} {
+          label TCZ
+          user_data {"tcz"}
+          callback btn_callback
+          xywh {10 10 30 20}
+        }
+      }
+    }
+    Fl_Box box_extensions {
+      label Extensions
+      xywh {40 24 100 16} deactivate
+    }
+    Fl_Browser brw_extn {
+      callback brw_extn_callback
+      xywh {0 45 200 325} type Select textfont 4
+    }
+    Fl_Tabs tabs {
+      callback tabs_callback open
+      xywh {205 20 475 350}
+    } {
+      Fl_Group tab_info {
+        label Info open
+        xywh {205 45 475 325} when 1 hide deactivate
+      } {
+        Fl_Browser brw_info {
+          xywh {210 50 470 318} textfont 4
+        }
+      }
+      Fl_Group tab_files {
+        label Files open
+        xywh {205 45 475 325} when 1 hide deactivate
+      } {
+        Fl_Browser brw_list {
+          xywh {210 50 470 318} textfont 4
+        }
+      }
+      Fl_Group tab_depends {
+        label Depends open
+        xywh {205 45 475 325} deactivate
+      } {
+        Fl_Browser brw_dep {
+          xywh {210 50 470 318} textfont 4
+        }
+      }
+    }
+    Fl_Button btn_install {
+      label {Install Selected}
+      user_data {"install"}
+      callback btn_callback
+      xywh {5 374 110 25} deactivate
+    }
+    Fl_Button btn_download {
+      label {Download Only}
+      user_data {"download"}
+      callback btn_callback
+      xywh {120 374 110 25} deactivate
+    }
+    Fl_Input search_field {
+      label Search
+      user_data {"search"}
+      callback btn_callback
+      xywh {288 375 392 21} when 8 deactivate
+    }
+  }
+  code {ifstream download_dir_file("/opt/.tce_dir");
+getline(download_dir_file,download_dir);
+download_dir_file.close();
+string command = "ls -d " + download_dir +"/optional 2>/dev/null";
+int results = system(command.c_str());
+if (results == 0)
+   menuitem_optional->activate();} {}
+} 

@@ -1,0 +1,129 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0109 
+header_name {.h} 
+code_name {.cxx}
+decl {// (c) Robert Shingledecker 2008} {} 
+
+decl {\#include <iostream>} {} 
+
+decl {\#include <fstream>} {} 
+
+decl {\#include <vector>} {} 
+
+decl {int cycle;} {} 
+
+decl {int size;} {} 
+
+decl {int selected;} {} 
+
+decl {using namespace std;} {} 
+
+decl {vector<string> mountList;} {global
+} 
+
+decl {vector<int> mountState;} {} 
+
+Function {getMountables()} {open return_type int
+} {
+  code {mountList.clear();
+mountState.clear();
+
+system("/usr/bin/mountables.sh");
+
+ifstream fin("/tmp/mountables");
+string line;
+string commandHead = "grep /mnt/";
+string commandTail = " /etc/mtab >/dev/null";
+
+while ( getline(fin,line) )
+{
+   mountList.push_back(line);
+   mountState.push_back(system((commandHead + line + commandTail).c_str()));
+}   
+fin.close();
+
+size = mountList.size();
+cycle = 0;
+btnDevice->label(mountList[0].c_str());
+if ( mountState[0] == 0)
+{  
+   btnState->label("Mounted");
+   btnState->color((Fl_Color)2);
+} else
+{
+   btnState->label("Unmounted");
+   btnState->color((Fl_Color)1);
+}      
+selected = 0;} {}
+} 
+
+Function {btnCallback(Fl_Widget*, void* userdata)} {open return_type {static void}
+} {
+  code {if (userdata == "device")
+{
+   cycle++;
+   if (cycle >= size)
+       getMountables();
+
+   btnDevice->label(mountList.at(cycle).c_str());
+   if ( mountState[cycle] == 0)
+   {  
+      btnState->label("Mounted");
+      btnState->color((Fl_Color)2);
+   } else
+   {
+      btnState->label("Unmounted");
+      btnState->color((Fl_Color)1);      
+   }      
+   selected = cycle;
+}
+       
+if (userdata == "state")
+{
+   int results;
+   if (mountState.at(selected) == 0)   // mounted
+   {
+      results = system(("sudo umount /dev/" + mountList.at(selected)).c_str());
+      if (results == 0)
+      {
+         btnState->label("Unmounted");
+         btnState->color((Fl_Color)1);         
+         btnState->redraw_label();        
+         mountState.at(selected)=256;
+      }    
+   }   
+   else
+   {
+      results = system(("sudo mount /dev/" + mountList.at(selected)).c_str());
+      if (results == 0)
+      {
+         btnState->label("Mounted");
+         btnState->color((Fl_Color)2);         
+         btnState->redraw_label();        
+         mountState.at(selected)=0;
+         cout << "after mount" << endl;
+      }
+   }
+}} {}
+} 
+
+Function {} {open
+} {
+  Fl_Window {} {open selected
+    xywh {508 599 80 45} type Double hide
+  } {
+    Fl_Button btnDevice {
+      label button
+      user_data {"device"}
+      callback btnCallback
+      xywh {0 0 80 20}
+    }
+    Fl_Button btnState {
+      label button
+      user_data {"state"}
+      callback btnCallback
+      xywh {0 25 80 20}
+    }
+  }
+  code {getMountables();} {}
+} 

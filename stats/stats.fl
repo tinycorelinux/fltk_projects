@@ -1,0 +1,136 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0109 
+header_name {.h} 
+code_name {.cxx}
+decl {// (c) Robert Shingledecker 2008} {selected
+} 
+
+decl {\#include <iostream>} {} 
+
+decl {using namespace std;} {} 
+
+Function {} {open
+} {
+  Fl_Window {} {
+    label {Tiny Core System Stats} open
+    xywh {22 381 610 355} type Double hide
+  } {
+    Fl_Tabs {} {open
+      xywh {0 0 610 356} selection_color 228
+    } {
+      Fl_Group {} {
+        label cpu
+        user_data {"cpu"} open
+        xywh {0 0 610 335} hide
+      } {
+        Fl_Browser cpuBrowser {
+          xywh {0 0 610 335} textfont 4
+        }
+      }
+      Fl_Group {} {
+        label mem open
+        xywh {0 0 610 335} hide
+      } {
+        Fl_Browser memBrowser {
+          xywh {0 0 610 335} textfont 4
+        }
+      }
+      Fl_Group {} {
+        label net open
+        xywh {0 0 610 336} hide
+      } {
+        Fl_Browser netBrowser {
+          xywh {0 0 610 335} textfont 4
+        }
+      }
+      Fl_Group {} {
+        label modules open
+        xywh {0 0 610 335} hide
+      } {
+        Fl_Browser modulesBrowser {
+          xywh {0 0 610 335} textfont 4
+        }
+      }
+      Fl_Group {} {
+        label pci open
+        xywh {0 0 610 335} hide
+      } {
+        Fl_Browser pciBrowser {
+          xywh {0 0 610 335} textfont 4
+        }
+      }
+      Fl_Group {} {
+        label processes open
+        xywh {0 0 610 335} hide
+      } {
+        Fl_Browser processesBrowser {
+          xywh {0 0 610 335} textfont 4
+        }
+      }
+      Fl_Group {} {
+        label dmesg open
+        xywh {0 0 610 335} hide
+      } {
+        Fl_Browser dmesgBrowser {
+          xywh {0 0 610 335} textfont 4
+        }
+      }
+      Fl_Group {} {
+        label mounts open
+        xywh {0 0 610 335} hide
+      } {
+        Fl_Browser mountsBrowser {
+          xywh {0 0 610 335} textfont 4
+        }
+      }
+      Fl_Group {} {
+        label filesystems open
+        xywh {0 0 610 335} hide
+      } {
+        Fl_Browser filesystemsBrowser {
+          xywh {0 0 610 335} textfont 4
+        }
+      }
+      Fl_Group {} {
+        label boot open
+        xywh {0 0 610 335} hide
+      } {
+        Fl_Browser bootBrowser {
+          xywh {0 0 610 335} textfont 4
+        }
+      }
+      Fl_Group {} {
+        label extensions open
+        xywh {0 0 610 335}
+      } {
+        Fl_Browser extensionsBrowser {
+          xywh {0 0 610 335} textfont 4
+        }
+      }
+    }
+  }
+  code {system("cat /proc/cpuinfo|tee -a stats.txt > /tmp/stats.txt");
+cpuBrowser->load("/tmp/stats.txt");
+system("cat /proc/meminfo|tee -a stats.txt > /tmp/stats.txt");
+memBrowser->load("/tmp/stats.txt");
+system("cat /etc/resolv.conf > /tmp/stats.txt");               
+system("ifconfig >> /tmp/stats.txt");                          
+system("cat /tmp/stats.txt >> stats.txt");
+netBrowser->load("/tmp/stats.txt");
+system("cat /proc/modules | tee /tmp/stats.txt >> stats.txt");
+modulesBrowser->load("/tmp/stats.txt");
+system("lspci | tee /tmp/stats.txt  >> stats.txt");
+pciBrowser->load("/tmp/stats.txt");
+system("ps ax | tee /tmp/stats.txt >> stats.txt");
+processesBrowser->load("/tmp/stats.txt");
+system("dmesg  | tee /tmp/stats.txt >> stats.txt");
+dmesgBrowser->load("/tmp/stats.txt");
+system("mount | tee /tmp/stats.txt  >> stats.txt");
+mountsBrowser->load("/tmp/stats.txt");
+system("df -h | tee /tmp/stats.txt >> stats.txt");
+filesystemsBrowser->load("/tmp/stats.txt");
+system("sed 's/ /\\\\n/g' /proc/cmdline | tee /tmp/stats.txt >> stats.txt");
+bootBrowser->load("/tmp/stats.txt");
+system("ls -1 /usr/local/tce.installed | sort -f | tee /tmp/stats.txt >> stats.txt");
+extensionsBrowser->load("/tmp/stats.txt");} {}
+} 

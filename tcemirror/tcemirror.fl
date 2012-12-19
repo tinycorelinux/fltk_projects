@@ -1,0 +1,94 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0109 
+header_name {.h} 
+code_name {.cxx}
+decl {// (c) Robert Shingledecker 2008} {selected
+} 
+
+decl {\#include <iostream>} {} 
+
+decl {\#include <fstream>} {} 
+
+decl {using namespace std;} {} 
+
+decl {string url, protocol, repository;} {} 
+
+Function {btnCallback(Fl_Widget*, void* userdata)} {open return_type {static void}
+} {
+  code {if (userdata == "cancel" )
+   exit(1);
+if (userdata == "ok")
+{
+    url = urlInput->value();
+    protocol = protocolInput->value();
+    repository = repositoryInput->value();
+    ofstream fout("/opt/.tcrc", ios::out|ios::out);
+    if (! fout.is_open())
+    {
+       cerr << "Can't open .tcrc for output!" << endl;
+       exit(EXIT_FAILURE);
+    }
+    fout << "Mirror: " << url << endl;
+    fout << "Protocol: " << protocol << endl;
+    fout << "Repository: " << repository << endl;
+    fout.close();
+    exit(0);
+}} {}
+} 
+
+Function {} {open
+} {
+  Fl_Window {} {
+    label {Select Download Mirror} open
+    xywh {55 220 430 130} type Double visible
+  } {
+    Fl_Input urlInput {
+      label {URL:}
+      xywh {78 11 345 24}
+      code0 {urlInput->value("www.tinycorelinux.com/files");}
+    }
+    Fl_Input protocolInput {
+      label {Protocol:}
+      xywh {78 40 45 24}
+      code0 {protocolInput->value("http");}
+    }
+    Fl_Input repositoryInput {
+      label {Repository:}
+      xywh {80 68 45 24}
+      code0 {repositoryInput->value("tce");}
+    }
+    Fl_Button {} {
+      label {&Select}
+      user_data {"select"}
+      callback btnCallback
+      xywh {115 100 64 20} deactivate
+    }
+    Fl_Button {} {
+      label {&OK}
+      user_data {"ok"}
+      callback btnCallback
+      xywh {185 100 64 20}
+    }
+    Fl_Button {} {
+      label {&Cancel}
+      user_data {"cancel"}
+      callback btnCallback
+      xywh {255 100 64 20}
+    }
+  }
+  code {ifstream fin("/opt/.tcrc");
+getline(fin,url);
+getline(fin,protocol);
+getline(fin,repository);
+fin.close();
+int i;
+i = url.find(":");
+url = url.substr(i+2,url.size());
+i = protocol.find(":");
+protocol = protocol.substr(i+2,url.size());
+i = repository.find(":");
+repository = repository.substr(i+2,repository.size());
+urlInput->value(url.c_str());
+protocolInput->value(protocol.c_str());
+repositoryInput->value(repository.c_str());} {}
+} 
