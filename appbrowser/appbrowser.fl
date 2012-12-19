@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {// (c) Robert Shingledecker 2008, 2009} {} 
@@ -16,9 +16,7 @@ decl {\#include <FL/Fl_File_Chooser.H>} {}
 
 decl {using namespace std;} {} 
 
-decl {string download_dir;} {} 
-
-decl {string last_dir;} {} 
+decl {string download_dir, last_dir;} {} 
 
 decl {string select_extn;} {} 
 
@@ -28,7 +26,7 @@ decl {ifstream ifaberr;} {}
 
 decl {string aberr;} {} 
 
-decl {string msg;} {} 
+decl {string command, msg;} {} 
 
 Function {btn_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
 } {
@@ -37,16 +35,18 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open return_type {static v
    repository = (const char*) userdata;
    window->cursor(FL_CURSOR_WAIT);
    Fl::flush();
-   string command = "/usr/bin/tce-fetch.sh info.lst " + repository;
+   command = "/usr/bin/tce-fetch.sh info.lst.gz";
+   int results = system(command.c_str());
    window->cursor(FL_CURSOR_DEFAULT);
    Fl::flush();
-   int results = system(command.c_str());
    if (results == 0 )
    {
+      system("gunzip info.lst.gz");
       brw_extn->load("info.lst");
       btn_install->deactivate();
       btn_download->deactivate();
       box_extensions->activate();
+      btn_search->activate();
       search_field->activate();                                              
       system("rm -f info.lst"); 
     } else
@@ -56,54 +56,60 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open return_type {static v
    string loadit = "tce-load -w -i ";
    loadit = loadit + select_extn;
    int results = system(loadit.c_str());
-   if (results == 0 )
+   ifstream ifaberr("/tmp/aberr");
+   msg = "";
+   getline(ifaberr,aberr);
+   while (ifaberr)     
    {
-      msg = select_extn + " installed successfully!";
-      fl_message(msg.c_str());
-      system("/usr/bin/wbar.sh");
-   } else {
-      ifstream ifaberr("/tmp/aberr");
-      msg = "Error: ";
-      getline(ifaberr,aberr);
-      while (ifaberr) 
-      {
-         msg = msg + aberr + "\\n";
-         getline(ifaberr,aberr);
-      }
-      ifaberr.close();
-      fl_message(msg.c_str());
+     msg = msg + aberr + "\\n";
+     getline(ifaberr,aberr);
    }
+   ifaberr.close();
+     fl_message(msg.c_str());  
+   if (results == 0 ) system("/usr/bin/wbar.sh");
 } else if (userdata == "download")
 {
    string grabit = "tce-load -w " + select_extn;
 // cout << grabit << endl;
    int results = system(grabit.c_str());
-   if (results == 0 )
+   ifstream ifaberr("/tmp/aberr");
+   msg = " ";
+   getline(ifaberr,aberr);
+   while (ifaberr) 
    {
-      msg = select_extn + " downloaded successfully!";
-      fl_message(msg.c_str());
-      system("/usr/bin/wbar.sh");
-   } else {
-      ifstream ifaberr("/tmp/aberr");
-      msg = "Error: ";
-      getline(ifaberr,aberr);
-      while (ifaberr) 
-      {
-         msg = msg + aberr + "\\n";
-         getline(ifaberr,aberr);
-      }
-      ifaberr.close();
-      fl_message(msg.c_str());
+     msg = msg + aberr + "\\n";
+     getline(ifaberr,aberr);
    }
+   ifaberr.close();
+   fl_message(msg.c_str());  
+   if (results == 0 ) system("/usr/bin/wbar.sh");
+} else if (userdata == "toggle")
+{
+   brw_extn->clear();
+   search_field->value("");
+   if (btn_search->label() == "Search")
+      btn_search->label("Provides");
+   else
+      btn_search->label("Search");
 } else if (userdata == "search")
 {
-  string command = "/usr/bin/search.sh " + repository + " " + (string)search_field->value();
+   if (btn_search->label() == "Search")
+      command = "/usr/bin/search.sh";
+   else
+      command = "/usr/bin/provides.sh";
+      
+  window->cursor(FL_CURSOR_WAIT);
+  Fl::flush();
+  command = command + " " + (string)search_field->value();
   int results = system(command.c_str());
+  window->cursor(FL_CURSOR_DEFAULT);
+  Fl::flush();
   if (results == 0 )
   {
     brw_extn->load("info.lst");
     btn_install->deactivate();
     btn_download->deactivate();
+    btn_search->activate();
     search_field->activate();                                              
     system("rm -f info.lst");
   } 
@@ -117,7 +123,8 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open return_type {static v
        last_dir_fout.close();
     }
     exit(0);
-  }} {}
+  }} {selected
+  }
 } 
 
 Function {brw_extn_callback(Fl_Widget *, void *)} {open return_type {static void}
@@ -126,7 +133,7 @@ Function {brw_extn_callback(Fl_Widget *, void *)} {open return_type {static void
 {
    select_extn = brw_extn->text(brw_extn->value());
    string select_extn_file = select_extn + (string)".info";
-   string command = "/usr/bin/tce-fetch.sh " + select_extn_file;
+   command = "/usr/bin/tce-fetch.sh " + select_extn_file;
    int results = system(command.c_str());
    if (results == 0)
    {
@@ -173,26 +180,19 @@ selected = (string)chooser.value();
 last_dir = chooser.directory();
 // cout << last_dir << endl;
 
-string command = "tce-load" + flags + (string)chooser.value();
-cout << command << endl;
+command = "tce-load" + flags + (string)chooser.value();
+// cout << command << endl;
 int results = system(command.c_str());
-if (results == 0)
+ifstream ifaberr("/tmp/aberr");
+msg = "";
+getline(ifaberr,aberr);
+while (ifaberr) 
 {
-   string msg = selected + " successfully loaded!";
-   fl_message(msg.c_str());
-} else {
-   ifstream ifaberr("/tmp/aberr");
-   msg = "Error: ";
+   msg = msg + aberr + "\\n";
    getline(ifaberr,aberr);
-   while (ifaberr) 
-   {
-      msg = msg + aberr + "\\n";
-      getline(ifaberr,aberr);
-   }
-   ifaberr.close();
-   fl_message(msg.c_str());
-}} {selected
-  }
+}
+ifaberr.close();
+fl_message(msg.c_str());} {}
 } 
 
 Function {tabs_callback(Fl_Widget*, void* userdata)} {open return_type {static void}
@@ -204,7 +204,7 @@ Function {tabs_callback(Fl_Widget*, void* userdata)} {open return_type {static v
    if (tab_files->visible())
    {
      string select_extn_file = select_extn + (string)".list";
-     string command = "/usr/bin/tce-fetch.sh " + select_extn_file;
+     command = "/usr/bin/tce-fetch.sh " + select_extn_file;
      results = system(command.c_str());
      if (results == 0)
      {
@@ -217,7 +217,7 @@ Function {tabs_callback(Fl_Widget*, void* userdata)} {open return_type {static v
    if (tab_depends->visible())
    {
      string select_extn_file = select_extn + (string)".dep";
-     string command = "/usr/bin/tce-fetch.sh " + select_extn_file;
+     command = "/usr/bin/tce-fetch.sh " + select_extn_file;
      results = system(command.c_str());
      if (results == 0)
      {
@@ -245,15 +245,21 @@ Function {} {open
         xywh {0 0 63 20}
       } {
         MenuItem {} {
-          label Connect
+          label {Connect to Repository}
           user_data {"tcz"}
           callback btn_callback
           xywh {20 20 30 20}
         }
         MenuItem {} {
-          label {Install Local}
+          label {Install Local Extension}
           user_data {"File/Local"}
           callback local_btn_callback
+          xywh {0 0 30 20}
+        }
+        MenuItem {} {
+          label {Toggle Search/Provides}
+          user_data {"toggle"}
+          callback btn_callback
           xywh {0 0 30 20}
         }
         MenuItem {} {
@@ -305,19 +311,24 @@ Function {} {open
       label {Install }
       user_data {"install"}
       callback btn_callback
-      xywh {20 374 50 25} deactivate
+      xywh {10 374 50 25} deactivate
     }
     Fl_Button btn_download {
       label OnDemand
       user_data {"download"}
       callback btn_callback
-      tooltip {Downloads to optional directory.} xywh {80 374 110 25} deactivate
+      tooltip {Downloads to optional directory.} xywh {65 374 90 25} deactivate
+    }
+    Fl_Button btn_search {
+      label Search
+      user_data {"toggle"}
+      callback btn_callback
+      xywh {210 375 70 25} deactivate
     }
     Fl_Input search_field {
-      label Search
       user_data {"search"}
       callback btn_callback
-      xywh {265 375 392 21} when 8 deactivate
+      xywh {285 375 392 25} labeltype NO_LABEL when 8 deactivate
     }
   }
   code {ifstream download_dir_file("/opt/.tce_dir");
@@ -330,6 +341,5 @@ if ( last_dir_file.is_open() )
 {
    getline(last_dir_file,last_dir);
    last_dir_file.close();
-}
-// cout << last_dir << endl;} {}
+}} {}
 } 

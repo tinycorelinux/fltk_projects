@@ -96,7 +96,7 @@ int main(int argc, char **argv) {
       crond->selection_color((Fl_Color)2);
       crond->callback((Fl_Callback*)btn_callback, (void*)("crond"));
     } // Fl_Light_Button* crond
-    { Fl_Button* o = new Fl_Button(10, 170, 120, 30, "TCE Update");
+    { Fl_Button* o = new Fl_Button(10, 170, 120, 30, "Update Apps");
       o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -e /usr/bin/tce-update &"));
     } // Fl_Button* o
     { Fl_Button* o = new Fl_Button(140, 170, 120, 30, "USB Install");
@@ -108,8 +108,8 @@ int main(int argc, char **argv) {
     { Fl_Button* o = new Fl_Button(400, 170, 120, 30, "Xvesa Setup");
       o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -e /usr/bin/xsetup.sh &"));
     } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(400, 130, 120, 30, "Xkill");
-      o->callback((Fl_Callback*)btn_callback, (void*)("xkill &"));
+    { Fl_Button* o = new Fl_Button(400, 130, 120, 30, "Set TCE Drive");
+      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -e /usr/bin/tce-setdrive &"));
     } // Fl_Button* o
     o->end();
   } // Fl_Double_Window* o

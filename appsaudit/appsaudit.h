@@ -27,7 +27,8 @@ extern Fl_Menu_Item menu_[];
 #define menu_requiredby (menu_+6)
 #define menu_missing (menu_+7)
 #define menu_nodepends (menu_+8)
-#define menu_auditall (menu_+9)
-#define menu_delete (menu_+10)
-#define menu_marked (menu_+11)
+#define menu_notrequired (menu_+9)
+#define menu_auditall (menu_+10)
+#define menu_delete (menu_+11)
+#define menu_marked (menu_+12)
 #endif

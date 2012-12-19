@@ -2,7 +2,8 @@
 version 1.0110 
 header_name {.h} 
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2009} {} 
+decl {// (c) Robert Shingledecker 2009-2010} {selected
+} 
 
 decl {\#include <iostream>} {} 
 
@@ -47,6 +48,7 @@ if (userdata == "builddb")
    brw_extn->load(listfile.c_str());
    brw_results->load("/tmp/audit_results.txt");
    menu_nodepends->activate();
+   menu_notrequired->activate();
    menu_auditall->activate();
    menu_marked->activate();
    box_extn->label(target_dir.c_str());
@@ -64,7 +66,7 @@ if (userdata == "builddb")
    } else {
       fl_message("error detected!");
    }
-} else if (userdata == "auditall" or userdata == "nodepends")
+} else if (userdata == "auditall" or userdata == "nodepends" or userdata == "notrequired")
 {
    box_results->label("Results");
    menu_delete->deactivate();
@@ -125,7 +127,7 @@ if (userdata == "default")
      box_results->label("copy2fs.flg removed.");
    } else
    {  
-     command = "touch " + target_dir + "/copy2fs.flg";
+     command = "touch " + tcedir + "/copy2fs.flg";
      system(command.c_str());
      box_results->label("copy2fs.flg set");
    }
@@ -300,7 +302,7 @@ Function {} {open
         xywh {0 0 63 20}
       } {
         MenuItem {} {
-          label {Update Dependencies}
+          label {Update Dep Database}
           user_data {"builddb"}
           callback depends_callback
           xywh {0 0 30 20}
@@ -328,6 +330,12 @@ Function {} {open
           user_data {"nodepends"}
           callback depends_callback
           xywh {5 5 30 20} deactivate
+        }
+        MenuItem menu_notrequired {
+          label {Display All Not Depended On}
+          user_data {"notrequired"}
+          callback depends_callback
+          xywh {15 15 30 20} deactivate
         }
         MenuItem menu_auditall {
           label {Display All with Missing Dependencies}
@@ -428,8 +436,8 @@ tcedir_file.close();
 target_dir = tcedir + "/optional";
 box_extn->label(target_dir.c_str());
 
-copy2fsList = target_dir + "/copy2fs.lst";
-copy2fsFlag = target_dir + "/copy2fs.flg";
+copy2fsList = tcedir + "/copy2fs.lst";
+copy2fsFlag = tcedir + "/copy2fs.flg";
 onbootList = tcedir + "/onboot.lst";
 
 option_type.empty();
@@ -445,8 +453,8 @@ if (results == 0)
   box_extn->label(target_dir.c_str());
   brw_extn->load(listfile.c_str());
   menu_nodepends->activate();
+  menu_notrequired->activate();
   menu_auditall->activate();
   menu_marked->activate();
-}} {selected
-  }
+}} {}
 } 

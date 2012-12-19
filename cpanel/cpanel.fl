@@ -69,7 +69,7 @@ Function {} {open
     Fl_Button {} {
       label OnDemand
       user_data {"aterm +tr +sb -e /usr/bin/ondemand &"}
-      callback btn_callback selected
+      callback btn_callback
       xywh {10 130 120 30}
     }
     Fl_Button {} {
@@ -139,9 +139,9 @@ Function {} {open
       xywh {400 10 120 30} selection_color 2
     }
     Fl_Button {} {
-      label {TCE Update}
+      label {Update Apps}
       user_data {"aterm +tr +sb -e /usr/bin/tce-update &"}
-      callback btn_callback
+      callback btn_callback selected
       xywh {10 170 120 30}
     }
     Fl_Button {} {
@@ -163,8 +163,8 @@ Function {} {open
       xywh {400 170 120 30}
     }
     Fl_Button {} {
-      label Xkill
-      user_data {"xkill &"}
+      label {Set TCE Drive}
+      user_data {"aterm +tr +sb -e /usr/bin/tce-setdrive &"}
       callback btn_callback
       xywh {400 130 120 30}
     }
