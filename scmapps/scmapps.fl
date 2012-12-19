@@ -168,8 +168,7 @@ if (results == 0 )
   msg += " Failed.";
   
 outputStatus->value(msg.c_str());  
-cursor_normal();} {selected
-  }
+cursor_normal();} {}
 } 
 
 Function {errhandler(const string &str)} {private return_type void
@@ -571,7 +570,7 @@ if ( mode == "updates" ) {
 cursor_normal();} {}
 } 
 
-Function {btnMultiCB(Fl_Widget *, void *)} {return_type {static void}
+Function {btnMultiCB(Fl_Widget *, void *)} {open return_type {static void}
 } {
   code {cursor_wait();
 brwResults->clear();
@@ -625,8 +624,9 @@ for ( int t=0; t<=brwMulti->size(); t++ )
 }
 brwMulti->deselect();
 if (mode == "updates" )
-	boxResults->label("Updates complete.");
-cursor_normal();} {}
+	brwResults->add("Updates complete.");
+cursor_normal();} {selected
+  }
 } 
 
 Function {tabsGroupCB(Fl_Widget*, void*)} {private return_type {static void}
@@ -769,6 +769,16 @@ Function {btnGoCB(Fl_Widget *, void* userdata)} {open private return_type {stati
 }} {}
 } 
 
+Function {mirrorpicker()} {open return_type void
+} {
+  code {system("mirrorpicker");
+
+// reload mirror
+ifstream mirror_fin("/opt/tcemirror");
+getline(mirror_fin,mirror);
+mirror_fin.close();} {}
+} 
+
 Function {} {open
 } {
   code {setlocale(LC_ALL, "");
@@ -787,7 +797,14 @@ tce_dir = strdup(buffer);
 
 download_dir = tce_dir + "/optional";
 scmbootList = tce_dir + "/scmboot.lst";
-chdir(download_dir.c_str()); // we go there to more easily handle errors (delete, zsync)} {}
+chdir(download_dir.c_str()); // we go there to more easily handle errors (delete, zsync)
+
+// first run?
+if (access("../firstrun", F_OK)) {
+        creat("../firstrun", S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
+        if (fl_ask("First run - would you like the system to pick the fastest mirror?") == 1)
+                mirrorpicker();
+}} {}
   Fl_Window window {
     label {ScmApps: Self Contained Appllications (scm)}
     user_data {"quit"}
@@ -816,6 +833,12 @@ chdir(download_dir.c_str()); // we go there to more easily handle errors (delete
             user_data {"mirror"}
             callback btnMirrorCB
             xywh {10 10 30 20}
+          }
+          MenuItem {} {
+            label {Select fastest mirror}
+            callback {mirrorpicker();
+uri->value(mirror.c_str());}
+            xywh {5 5 30 20}
           }
         }
         Submenu {} {

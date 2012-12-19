@@ -1,0 +1,65 @@
+commit 452ebc7a09825895165209696672991325309e32
+Author: Lauri Kasanen <curaga@operamail.com>
+Date:   Tue Jul 31 14:52:15 2012 +0300
+
+    apps: Add a menu item to call mirrorpicker, a first-run check
+
+diff --git a/apps.fl b/apps.fl
+index 527cd58..1ba22a1 100644
+--- a/apps.fl
++++ b/apps.fl
+@@ -484,8 +484,7 @@ if (userdata == "tcz")
+     unlink("/tmp/tags.lst");
+     exit(0);
+ 
+-  }} {selected
+-  }
++  }} {}
+ } 
+ 
+ Function {btnCB(Fl_Widget *, void* userdata)} {private return_type {static void}
+@@ -1019,6 +1018,16 @@ Function {btnResultsCB(Fl_Widget *, void *)} {return_type {static void}
+ btnResults->deactivate();} {}
+ } 
+ 
++Function {mirrorpicker()} {open return_type void
++} {
++  code {system("mirrorpicker");
++
++// reload mirror
++ifstream mirror_fin("/opt/tcemirror");
++getline(mirror_fin,mirror);
++mirror_fin.close();} {}
++}
++
+ Function {} {open
+ } {
+   code {setlocale(LC_ALL, "");
+@@ -1066,6 +1075,14 @@ onbootList = tcedir + "/" + onbootName;
+ 
+ chdir(target_dir.c_str()); // we go there to more easily handle errors (delete, zsync)
+ 
++// first run?
++if (access("../firstrun", F_OK)) {
++	creat("../firstrun", S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
++	if (fl_ask("First run - would you like the system to pick the fastest mirror?") == 1)
++		mirrorpicker();
++}
++
++
+ // Test writable 
+ string testfile = target_dir + "/test.test";
+ ofstream writest(testfile.c_str());
+@@ -1104,6 +1121,12 @@ unlink(testfile.c_str());} {}
+             callback mirrorCB
+             xywh {0 0 30 20}
+           }
++          MenuItem {} {
++            label {Select fastest mirror}
++            callback {mirrorpicker();
++outURI->value(mirror.c_str());} selected
++            xywh {0 0 30 20}
++          }
+         }
+         MenuItem {} {
+           label {Load App Locally}

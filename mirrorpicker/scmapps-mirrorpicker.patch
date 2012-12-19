@@ -1,0 +1,56 @@
+commit cbacf810b207c404b20d022753e27a957be0c2b0
+Author: Lauri Kasanen <curaga@operamail.com>
+Date:   Tue Jul 31 15:05:38 2012 +0300
+
+    scmapps: Add a menu item for the mirror picker, and a first-run check
+
+diff --git a/scmapps.fl b/scmapps.fl
+index 5849383..bc8b2c5 100644
+--- a/scmapps.fl
++++ b/scmapps.fl
+@@ -769,6 +769,16 @@ Function {btnGoCB(Fl_Widget *, void* userdata)} {open private return_type {stati
+ }} {}
+ } 
+ 
++Function {mirrorpicker()} {open return_type void
++} {
++  code {system("mirrorpicker");
++
++// reload mirror
++ifstream mirror_fin("/opt/tcemirror");
++getline(mirror_fin,mirror);
++mirror_fin.close();} {}
++}
++
+ Function {} {open
+ } {
+   code {setlocale(LC_ALL, "");
+@@ -787,7 +797,14 @@ tce_dir = strdup(buffer);
+ 
+ download_dir = tce_dir + "/optional";
+ scmbootList = tce_dir + "/scmboot.lst";
+-chdir(download_dir.c_str()); // we go there to more easily handle errors (delete, zsync)} {}
++chdir(download_dir.c_str()); // we go there to more easily handle errors (delete, zsync)
++
++// first run?
++if (access("../firstrun", F_OK)) {
++        creat("../firstrun", S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
++        if (fl_ask("First run - would you like the system to pick the fastest mirror?") == 1)
++                mirrorpicker();
++}} {}
+   Fl_Window window {
+     label {ScmApps: Self Contained Appllications (scm)}
+     user_data {"quit"}
+@@ -817,6 +834,12 @@ chdir(download_dir.c_str()); // we go there to more easily handle errors (delete
+             callback btnMirrorCB
+             xywh {10 10 30 20}
+           }
++          MenuItem {} {
++            label {Select fastest mirror}
++            callback {mirrorpicker();
++uri->value(mirror.c_str());}
++            xywh {5 5 30 20}
++          }
+         }
+         Submenu {} {
+           label Local

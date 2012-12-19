@@ -19,6 +19,7 @@ void brwMultiCB(Fl_Widget *, void *);
 void btnMultiCB(Fl_Widget *, void *);
 void brwResultsCB(Fl_Widget *, void *);
 void btnResultsCB(Fl_Widget *, void *);
+void mirrorpicker();
 extern Fl_Double_Window *window;
 #include <FL/Fl_Menu_Bar.H>
 extern Fl_Menu_Bar *menuBarApps;

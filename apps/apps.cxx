@@ -64,12 +64,12 @@ brwResults->clear();
 boxExtn->label("Select");
 boxResults->label("Results");
 report_type.empty();
-btnSingle->label("Go @>");
-btnResults->label("@< Go");
+btnSingle->label("Add");
+btnResults->label("Delete");
 btnSingle->deactivate();
 btnResults->deactivate();
-btnSingle->show();
-btnResults->show();
+btnSingle->hide();
+btnResults->hide();
 grpAudit->show();
 grpSingle->show();
 Fl::flush();
@@ -282,6 +282,7 @@ if (userdata == "tcz")
 {
   auditView();
   btnSingle->label("Load");
+  btnSingle->show();
   btnResults->hide();
   boxExtn->label("Select Local Extension");
   cursor_wait();
@@ -292,10 +293,8 @@ if (userdata == "tcz")
 } else if (userdata == "onboot" )
 {
   auditView();
-/*  
-  btnSingle->label("Go @>");
-  btnResults->label("@< Go");
-*/  
+  btnSingle->show();
+  btnResults->show();
   target_dir = tcedir + "/optional/";
   cursor_wait();
   
@@ -311,10 +310,8 @@ if (userdata == "tcz")
 } else if (userdata == "ondemand" )
 {
   auditView();
-/*  
-  btnSingle->label("Go @>");
-  btnResults->label("@< Go");
-*/  
+  btnSingle->show();
+  btnResults->show();
   cursor_wait();
   command = "ondemand -l";
   loadBrwExtnData();  
@@ -327,6 +324,7 @@ if (userdata == "tcz")
 {
    auditView();
    grpSingle->hide();
+   btnMulti->deactivate();
    grpMulti->show();
    boxExtn->label("Select Md5s");
    Fl::flush();
@@ -343,6 +341,7 @@ if (userdata == "tcz")
    auditView();
    boxExtn->label("Select Updates");
    grpSingle->hide();
+   btnMulti->deactivate();
    grpMulti->show();
    Fl::flush();
    cursor_wait();
@@ -374,11 +373,25 @@ if (userdata == "tcz")
    }
    brwResults->add("Scan for updates completed.");    
    if ( brwMulti->size() >= 1 )
-      btnMulti->activate();
+      btnMulti->deactivate();
    else {
       if ( brwResults->size() == 1 )
          brwResults->add("Extensions are current. No updates required.");
    }
+   cursor_normal();
+   Fl::flush(); 
+   
+   
+} else if (userdata == "orphans") 
+{
+   string line;
+   auditView();
+   cursor_wait();
+   brwResults->clear();
+
+   command = "tce-status -o";
+   loadBrwResultsData();
+   brwResults->add("Scan for orphans complete.");    
    cursor_normal();
    Fl::flush();      
       
@@ -846,7 +859,8 @@ brwExtn->deselect();
 }
 
 void brwMultiCB(Fl_Widget *, void *) {
-  cursor_wait();
+  btnMulti->activate();
+cursor_wait();
 brwResults->clear();
 if ( report_type == "updates" ) { 
    for (int t=0; t<=brwMulti->size(); t++) {
@@ -860,12 +874,13 @@ if ( report_type == "updates" ) {
          continue;
       }
    }
-}   
+}
 cursor_normal();
 }
 
 void btnMultiCB(Fl_Widget *, void *) {
-  cursor_wait();
+  btnMulti->deactivate();
+cursor_wait();
 brwResults->clear();
 for ( int t=0; t<=brwMulti->size(); t++ )
 {
@@ -898,8 +913,10 @@ for ( int t=0; t<=brwMulti->size(); t++ )
    }
 }
 brwMulti->deselect();
-if (report_type == "update" )
-   boxResults->label("Updates complete. Reboot to effect.");
+if (report_type == "md5s" )
+   brwResults->add("Md5 checking complete.");
+if (report_type == "updates" )
+   brwResults->add("Updates complete. Reboot to effect.");
 cursor_normal();
 }
 
@@ -966,20 +983,36 @@ void btnResultsCB(Fl_Widget *, void *) {
 btnResults->deactivate();
 }
 
+void mirrorpicker() {
+  system("mirrorpicker");
+
+// reload mirror
+ifstream mirror_fin("/opt/tcemirror");
+getline(mirror_fin,mirror);
+mirror_fin.close();
+}
+
 Fl_Double_Window *window=(Fl_Double_Window *)0;
 
 Fl_Menu_Bar *menuBarApps=(Fl_Menu_Bar *)0;
+
+static void cb_Select(Fl_Menu_*, void*) {
+  mirrorpicker();
+outURI->value(mirror.c_str());
+}
 
 Fl_Menu_Item menu_menuBarApps[] = {
  {mygettext("Apps"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Cloud (Remote)"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Browse"), 0,  (Fl_Callback*)menuCB, (void*)("tcz"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Select Mirror"), 0,  (Fl_Callback*)mirrorCB, (void*)("mirror"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Select fastest mirror"), 0,  (Fl_Callback*)cb_Select, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
  {mygettext("Load App Locally"), 0,  (Fl_Callback*)menuCB, (void*)("LoadLocal"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Maintenance"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Md5 Checking"), 0,  (Fl_Callback*)menuCB, (void*)("md5s"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Check for Updates"), 0,  (Fl_Callback*)menuCB, (void*)("updates"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Check for Orphans"), 0,  (Fl_Callback*)menuCB, (void*)("orphans"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Dependencies And Deletions"), 0,  (Fl_Callback*)menuCB, (void*)("menuDepends"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("OnBoot Maintenance"), 0,  (Fl_Callback*)menuCB, (void*)("onboot"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("OnDemand Maintenance"), 0,  (Fl_Callback*)menuCB, (void*)("ondemand"), 0, FL_NORMAL_LABEL, 0, 14, 0},
@@ -1138,6 +1171,14 @@ if ( sloc == string::npos ) {
 onbootList = tcedir + "/" + onbootName;
 
 chdir(target_dir.c_str()); // we go there to more easily handle errors (delete, zsync)
+
+// first run?
+if (access("../firstrun", F_OK)) {
+	creat("../firstrun", S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
+	if (fl_ask("First run - would you like the system to pick the fastest mirror?") == 1)
+		mirrorpicker();
+}
+
 
 // Test writable 
 string testfile = target_dir + "/test.test";

@@ -96,12 +96,12 @@ brwResults->clear();
 boxExtn->label("Select");
 boxResults->label("Results");
 report_type.empty();
-btnSingle->label("Go @>");
-btnResults->label("@< Go");
+btnSingle->label("Add");
+btnResults->label("Delete");
 btnSingle->deactivate();
 btnResults->deactivate();
-btnSingle->show();
-btnResults->show();
+btnSingle->hide();
+btnResults->hide();
 grpAudit->show();
 grpSingle->show();
 Fl::flush();} {}
@@ -184,7 +184,7 @@ if (pipe)
 }} {}
 } 
 
-Function {fetch_extension()} {open private return_type void
+Function {fetch_extension()} {private return_type void
 } {
   code {outputStatus->activate();
 outputStatus->color(FL_WHITE);
@@ -205,8 +205,7 @@ if (results == 0 )
   msg += " Failed.";
   
 outputStatus->value(msg.c_str());  
-cursor_normal();} {selected
-  }
+cursor_normal();} {}
 } 
 
 Function {builddb()} {private return_type void
@@ -286,7 +285,7 @@ err_extn.replace(0,9,""); // Yes, hardcoded magic value. Bad.
 errwindow->show();} {}
 } 
 
-Function {menuCB(Fl_Widget *, void* userdata)} {private return_type {static void}
+Function {menuCB(Fl_Widget *, void* userdata)} {open private return_type {static void}
 } {
   code {report_type = (const char*)userdata;
 if (userdata == "tcz")
@@ -318,6 +317,7 @@ if (userdata == "tcz")
 {
   auditView();
   btnSingle->label("Load");
+  btnSingle->show();
   btnResults->hide();
   boxExtn->label("Select Local Extension");
   cursor_wait();
@@ -328,10 +328,8 @@ if (userdata == "tcz")
 } else if (userdata == "onboot" )
 {
   auditView();
-/*  
-  btnSingle->label("Go @>");
-  btnResults->label("@< Go");
-*/  
+  btnSingle->show();
+  btnResults->show();
   target_dir = tcedir + "/optional/";
   cursor_wait();
   
@@ -347,10 +345,8 @@ if (userdata == "tcz")
 } else if (userdata == "ondemand" )
 {
   auditView();
-/*  
-  btnSingle->label("Go @>");
-  btnResults->label("@< Go");
-*/  
+  btnSingle->show();
+  btnResults->show();
   cursor_wait();
   command = "ondemand -l";
   loadBrwExtnData();  
@@ -363,6 +359,7 @@ if (userdata == "tcz")
 {
    auditView();
    grpSingle->hide();
+   btnMulti->deactivate();
    grpMulti->show();
    boxExtn->label("Select Md5s");
    Fl::flush();
@@ -379,6 +376,7 @@ if (userdata == "tcz")
    auditView();
    boxExtn->label("Select Updates");
    grpSingle->hide();
+   btnMulti->deactivate();
    grpMulti->show();
    Fl::flush();
    cursor_wait();
@@ -410,11 +408,25 @@ if (userdata == "tcz")
    }
    brwResults->add("Scan for updates completed.");    
    if ( brwMulti->size() >= 1 )
-      btnMulti->activate();
+      btnMulti->deactivate();
    else {
       if ( brwResults->size() == 1 )
          brwResults->add("Extensions are current. No updates required.");
    }
+   cursor_normal();
+   Fl::flush(); 
+   
+   
+} else if (userdata == "orphans") 
+{
+   string line;
+   auditView();
+   cursor_wait();
+   brwResults->clear();
+
+   command = "tce-status -o";
+   loadBrwResultsData();
+   brwResults->add("Scan for orphans complete.");    
    cursor_normal();
    Fl::flush();      
       
@@ -479,7 +491,8 @@ if (userdata == "tcz")
     unlink("/tmp/tags.lst");
     exit(0);
 
-  }} {}
+  }} {selected
+  }
 } 
 
 Function {btnCB(Fl_Widget *, void* userdata)} {private return_type {static void}
@@ -668,7 +681,7 @@ Function {tabsGroupCB(Fl_Widget*, void*)} {private return_type {static void}
 }} {}
 } 
 
-Function {dependsCB(Fl_Widget *, void* userdata)} {open return_type {static void}
+Function {dependsCB(Fl_Widget *, void* userdata)} {return_type {static void}
 } {
   code {option_type = "";
 report_type = (const char*) userdata;
@@ -888,9 +901,10 @@ btnSingle->deactivate();
 brwExtn->deselect();} {}
 } 
 
-Function {brwMultiCB(Fl_Widget *, void *)} {return_type {static void}
+Function {brwMultiCB(Fl_Widget *, void *)} {open return_type {static void}
 } {
-  code {cursor_wait();
+  code {btnMulti->activate();
+cursor_wait();
 brwResults->clear();
 if ( report_type == "updates" ) { 
    for (int t=0; t<=brwMulti->size(); t++) {
@@ -904,13 +918,14 @@ if ( report_type == "updates" ) {
          continue;
       }
    }
-}   
+}
 cursor_normal();} {}
 } 
 
-Function {btnMultiCB(Fl_Widget *, void *)} {return_type {static void}
+Function {btnMultiCB(Fl_Widget *, void *)} {open return_type {static void}
 } {
-  code {cursor_wait();
+  code {btnMulti->deactivate();
+cursor_wait();
 brwResults->clear();
 for ( int t=0; t<=brwMulti->size(); t++ )
 {
@@ -943,8 +958,10 @@ for ( int t=0; t<=brwMulti->size(); t++ )
    }
 }
 brwMulti->deselect();
-if (report_type == "update" )
-   boxResults->label("Updates complete. Reboot to effect.");
+if (report_type == "md5s" )
+   brwResults->add("Md5 checking complete.");
+if (report_type == "updates" )
+   brwResults->add("Updates complete. Reboot to effect.");
 cursor_normal();} {}
 } 
 
@@ -1013,6 +1030,16 @@ Function {btnResultsCB(Fl_Widget *, void *)} {return_type {static void}
 btnResults->deactivate();} {}
 } 
 
+Function {mirrorpicker()} {return_type void
+} {
+  code {system("mirrorpicker");
+
+// reload mirror
+ifstream mirror_fin("/opt/tcemirror");
+getline(mirror_fin,mirror);
+mirror_fin.close();} {}
+} 
+
 Function {} {open
 } {
   code {setlocale(LC_ALL, "");
@@ -1060,6 +1087,14 @@ onbootList = tcedir + "/" + onbootName;
 
 chdir(target_dir.c_str()); // we go there to more easily handle errors (delete, zsync)
 
+// first run?
+if (access("../firstrun", F_OK)) {
+	creat("../firstrun", S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
+	if (fl_ask("First run - would you like the system to pick the fastest mirror?") == 1)
+		mirrorpicker();
+}
+
+
 // Test writable 
 string testfile = target_dir + "/test.test";
 ofstream writest(testfile.c_str());
@@ -1075,11 +1110,11 @@ unlink(testfile.c_str());} {}
     callback menuCB open
     xywh {29 100 690 428} type Double hide resizable
   } {
-    Fl_Menu_Bar menuBarApps {
+    Fl_Menu_Bar menuBarApps {open
       xywh {5 7 55 20}
     } {
       Submenu menuApps {
-        label Apps
+        label Apps open
         xywh {0 0 55 20}
       } {
         Submenu {} {
@@ -1098,6 +1133,12 @@ unlink(testfile.c_str());} {}
             callback mirrorCB
             xywh {0 0 30 20}
           }
+          MenuItem {} {
+            label {Select fastest mirror}
+            callback {mirrorpicker();
+outURI->value(mirror.c_str());}
+            xywh {0 0 30 20}
+          }
         }
         MenuItem {} {
           label {Load App Locally}
@@ -1106,7 +1147,7 @@ unlink(testfile.c_str());} {}
           xywh {5 5 30 20}
         }
         Submenu {} {
-          label Maintenance
+          label Maintenance open
           xywh {5 5 63 20}
         } {
           MenuItem {} {
@@ -1120,6 +1161,12 @@ unlink(testfile.c_str());} {}
             user_data {"updates"}
             callback menuCB
             xywh {10 10 30 20}
+          }
+          MenuItem {} {
+            label {Check for Orphans}
+            user_data {"orphans"}
+            callback menuCB
+            xywh {20 20 30 20}
           }
           MenuItem {} {
             label {Dependencies And Deletions}
@@ -1373,7 +1420,7 @@ unlink(testfile.c_str());} {}
         code0 {outURI->value(mirror.c_str());}
       }
     }
-    Fl_Group grpAudit {
+    Fl_Group grpAudit {open
       xywh {0 -1 690 426} hide
     } {
       Fl_Box boxExtn {

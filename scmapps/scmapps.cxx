@@ -594,7 +594,7 @@ for ( int t=0; t<=brwMulti->size(); t++ )
 }
 brwMulti->deselect();
 if (mode == "updates" )
-	boxResults->label("Updates complete.");
+	brwResults->add("Updates complete.");
 cursor_normal();
 }
 
@@ -735,15 +735,30 @@ static void btnGoCB(Fl_Widget *, void* userdata) {
 }
 }
 
+void mirrorpicker() {
+  system("mirrorpicker");
+
+// reload mirror
+ifstream mirror_fin("/opt/tcemirror");
+getline(mirror_fin,mirror);
+mirror_fin.close();
+}
+
 Fl_Double_Window *window=(Fl_Double_Window *)0;
 
 Fl_Menu_Bar *menuBar=(Fl_Menu_Bar *)0;
+
+static void cb_Select(Fl_Menu_*, void*) {
+  mirrorpicker();
+uri->value(mirror.c_str());
+}
 
 Fl_Menu_Item menu_menuBar[] = {
  {gettext("   Apps"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
  {gettext("Cloud (Remote)"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
  {gettext("Browse"), 0,  (Fl_Callback*)menuCB, (void*)("scm"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {gettext("Select Mirror"), 0,  (Fl_Callback*)btnMirrorCB, (void*)("mirror"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {gettext("Select fastest mirror"), 0,  (Fl_Callback*)cb_Select, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
  {gettext("Local"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
  {gettext("Install"), 0,  (Fl_Callback*)menuCB, (void*)("install"), 0, FL_NORMAL_LABEL, 0, 14, 0},
@@ -838,6 +853,13 @@ tce_dir = strdup(buffer);
 download_dir = tce_dir + "/optional";
 scmbootList = tce_dir + "/scmboot.lst";
 chdir(download_dir.c_str()); // we go there to more easily handle errors (delete, zsync)
+
+// first run?
+if (access("../firstrun", F_OK)) {
+        creat("../firstrun", S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
+        if (fl_ask("First run - would you like the system to pick the fastest mirror?") == 1)
+                mirrorpicker();
+}
   { window = new Fl_Double_Window(685, 433, gettext("ScmApps: Self Contained Appllications (scm)"));
     window->callback((Fl_Callback*)menuCB, (void*)("quit"));
     { menuBar = new Fl_Menu_Bar(0, 7, 85, 20);

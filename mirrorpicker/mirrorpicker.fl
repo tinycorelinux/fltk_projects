@@ -1,0 +1,42 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0110 
+i18n_type 1 
+i18n_include <libintl.h> 
+i18n_function gettext 
+header_name {.h} 
+code_name {.cxx}
+decl {\#include <locale.h>} {public global
+} 
+
+decl {\#include "other.h"} {global
+} 
+
+Function {} {open C return_type int
+} {
+  code {setlocale(LC_ALL, "");
+bindtextdomain("tinycore","/usr/local/share/locale");
+textdomain("tinycore");} {selected
+  }
+  Fl_Window win {
+    label {Mirror picker} open
+    xywh {382 578 265 165} type Double visible
+  } {
+    Fl_Progress prog {
+      xywh {25 20 215 25} selection_color 58
+    }
+    Fl_Box lbl {
+      xywh {25 55 215 45} align 128
+    }
+    Fl_Button okbtn {
+      label OK
+      callback {accept();}
+      xywh {30 110 90 35} deactivate
+    }
+    Fl_Button cancelbtn {
+      label Cancel
+      callback {exit(0);}
+      xywh {145 110 90 35}
+    }
+  }
+  code {init(argc, argv);} {}
+} 
