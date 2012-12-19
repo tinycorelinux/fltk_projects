@@ -14,5 +14,10 @@ extern Fl_Browser *brw_wbarXlist;
 #include <FL/Fl_Choice.H>
 extern Fl_Choice *posChoice;
 #include <FL/Fl_Button.H>
+#include <FL/Fl_Slider.H>
+extern Fl_Slider *zoomChoice;
+extern Fl_Slider *isizeChoice;
+#include <FL/Fl_Check_Button.H>
+extern Fl_Check_Button *textChoice;
 extern Fl_Menu_Item menu_posChoice[];
 #endif

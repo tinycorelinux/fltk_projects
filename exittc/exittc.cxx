@@ -11,7 +11,7 @@
 #include <FL/fl_message.H>
 #include <locale.h>
 using namespace std;
-static string backup_device; 
+static string backup_device, command; 
 static int action=1; 
 static bool backup=true; 
 static string commandStr = "exitcheck.sh "; 
@@ -61,7 +61,8 @@ if (backup) {
          
 if (userdata == "ok") {
   if (action == 3) {
-     system("sudo pkill `cat /etc/sysconfig/Xserver` &");
+     command = "sudo kill $( cat /tmp/.X${DISPLAY:1:1}-lock ) &";
+     system(command.c_str());
      exit(0);
   } else {
     if (backup) {

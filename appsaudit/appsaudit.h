@@ -5,19 +5,25 @@
 #include <FL/Fl.H>
 void cursor_normal();
 void cursor_wait();
+void menu_activate();
+void menu_deactivate();
 void depends_callback(Fl_Widget *, void* userdata);
 void options_callback(Fl_Widget *, void* userdata);
 void updates_callback(Fl_Widget *, void* userdata);
+void md5s_callback(Fl_Widget *, void* userdata);
 void onboot_callback(Fl_Widget *, void* userdata);
 void ondemand_callback(Fl_Widget *, void* userdata);
 void brw_extn_callback(Fl_Widget *, void *);
+void btn_multi_callback(Fl_Widget *, void *);
 void brw_results_callback(Fl_Widget *, void *);
 #include <FL/Fl_Double_Window.H>
 extern Fl_Double_Window *window;
 #include <FL/Fl_Menu_Bar.H>
+extern Fl_Menu_Bar *menuBar;
 extern void depends_callback(Fl_Menu_*, void*);
 extern void options_callback(Fl_Menu_*, void*);
 extern void updates_callback(Fl_Menu_*, void*);
+extern void md5s_callback(Fl_Menu_*, void*);
 extern void onboot_callback(Fl_Menu_*, void*);
 extern void ondemand_callback(Fl_Menu_*, void*);
 #include <FL/Fl_Box.H>
@@ -25,15 +31,26 @@ extern Fl_Box *box_extn;
 extern Fl_Box *box_results;
 #include <FL/Fl_Browser.H>
 extern Fl_Browser *brw_extn;
+#include <FL/Fl_Group.H>
+extern Fl_Group *grp_updates;
+extern Fl_Browser *brw_multi;
+#include <FL/Fl_Button.H>
+extern Fl_Button *btn_multi;
 extern Fl_Browser *brw_results;
-extern Fl_Menu_Item menu_[];
-#define menu_dependson (menu_+6)
-#define menu_requiredby (menu_+7)
-#define menu_missing (menu_+8)
-#define menu_nodepends (menu_+9)
-#define menu_notrequired (menu_+10)
-#define menu_auditall (menu_+11)
-#define menu_delete (menu_+12)
-#define menu_marked (menu_+13)
-#define menu_clearlst (menu_+14)
+extern Fl_Menu_Item menu_menuBar[];
+#define menuDepends (menu_menuBar+3)
+#define menu_dependson (menu_menuBar+6)
+#define menu_requiredby (menu_menuBar+7)
+#define menu_missing (menu_menuBar+8)
+#define menu_nodepends (menu_menuBar+9)
+#define menu_notrequired (menu_menuBar+10)
+#define menu_auditall (menu_menuBar+11)
+#define menu_delete (menu_menuBar+12)
+#define menu_marked (menu_menuBar+13)
+#define menu_clearlst (menu_menuBar+14)
+#define menuInstall (menu_menuBar+17)
+#define menuUpdates (menu_menuBar+22)
+#define menuMd5s (menu_menuBar+26)
+#define menuOnBoot (menu_menuBar+30)
+#define menuOnDemand (menu_menuBar+34)
 #endif

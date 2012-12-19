@@ -7,13 +7,31 @@ char * mygettext(const char *msgid);
 void imageBrowserCallback(Fl_Widget*, void*);
 void btnCallback(Fl_Widget*, void* userdata);
 #include <FL/Fl_Double_Window.H>
+#include <FL/Fl_Color_Chooser.H>
+extern Fl_Double_Window *GradientWindow;
+extern Fl_Color_Chooser *colorChooserGradient1;
+extern Fl_Color_Chooser *colorChooserGradient2;
+#include <FL/Fl_Round_Button.H>
+extern Fl_Round_Button *btnVertical;
+extern Fl_Round_Button *btnHorizontal;
+extern Fl_Round_Button *btnDiagonal;
+#include <FL/Fl_Box.H>
+extern Fl_Box *boxColor1;
+extern Fl_Box *boxColor2;
+#include <FL/Fl_Button.H>
+#include <FL/Fl_Return_Button.H>
+extern Fl_Double_Window *colorChooserWindow;
+extern Fl_Color_Chooser *colorChooser;
+extern Fl_Box *boxColor;
+extern Fl_Double_Window *Wallpaper;
 #include <FL/Fl_File_Browser.H>
 extern Fl_File_Browser *imageBrowser;
-#include <FL/Fl_Round_Button.H>
 extern Fl_Round_Button *btnFull;
 extern Fl_Round_Button *btnTile;
 extern Fl_Round_Button *btnCenter;
 extern Fl_Round_Button *btnFill;
-#include <FL/Fl_Button.H>
 extern Fl_Button *installBtn;
+extern Fl_Button *doneBtn;
+extern Fl_Button *colorBtn;
+extern Fl_Button *gradientBtn;
 #endif

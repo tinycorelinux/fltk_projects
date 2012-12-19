@@ -6,6 +6,7 @@
 int getMountables();
 void btnCallback(Fl_Widget*, void* userdata);
 #include <FL/Fl_Double_Window.H>
-#include <FL/Fl_Button.H>
-extern Fl_Button *btnState;
+extern Fl_Double_Window *w;
+#include <FL/Fl_Pack.H>
+extern Fl_Pack *pack;
 #endif

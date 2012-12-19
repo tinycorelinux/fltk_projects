@@ -7,8 +7,7 @@ header_name {.h}
 code_name {.cxx}
 decl {// (c) Robert Shingledecker 2008-2010} {} 
 
-decl {\#include <cstdlib>} {selected
-} 
+decl {\#include <cstdlib>} {} 
 
 decl {\#include <iostream>} {} 
 
@@ -24,7 +23,7 @@ decl {\#include <locale.h>} {}
 
 decl {using namespace std;} {} 
 
-decl {string backup_device;} {} 
+decl {string backup_device, command;} {} 
 
 decl {int action=1;} {} 
 
@@ -79,7 +78,8 @@ if (backup) {
          
 if (userdata == "ok") {
   if (action == 3) {
-     system("sudo pkill `cat /etc/sysconfig/Xserver` &");
+     command = "sudo kill $( cat /tmp/.X${DISPLAY:1:1}-lock ) &";
+     system(command.c_str());
      exit(0);
   } else {
     if (backup) {
@@ -107,7 +107,8 @@ if (userdata == "ok") {
     system( (const char *)commandStr.c_str());
     exit(0);
   }  
-}} {}
+}} {selected
+  }
 } 
 
 Function {} {open
@@ -116,10 +117,10 @@ Function {} {open
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");} {}
   Fl_Window window {
-    label {TC Exit Options} open
+    label {TC Exit Options}
     xywh {268 17 180 180} type Double box BORDER_BOX align 4 hide
   } {
-    Fl_Group {} {open
+    Fl_Group {} {
       xywh {25 10 115 70}
     } {
       Fl_Round_Button {} {
@@ -145,7 +146,7 @@ textdomain("tinycore");} {}
       xywh {15 120 155 25} color 29 labeltype NO_LABEL
     }
     Fl_Choice choices {
-      label {Backup Options:} open
+      label {Backup Options:}
       xywh {42 87 110 25} down_box BORDER_BOX align 5
     } {
       MenuItem {} {

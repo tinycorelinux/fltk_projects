@@ -2,129 +2,118 @@
 
 #include <libintl.h>
 #include "mnttool.h"
-// (c) Robert Shingledecker 2008
+// (c) Robert Shingledecker 2008-2010
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <locale.h>
-static int cycle; 
-static int size; 
-static int selected; 
+#include <FL/Fl_Button.H>
 using namespace std;
+static int size, selected; 
+static string filemgr; 
 vector<string> mountList; 
 static vector<int> mountState; 
+static vector<Fl_Button*> btn; 
+vector<string> mountLabels; 
 
 int getMountables() {
   mountList.clear();
 mountState.clear();
 
-system("/usr/bin/mountables.sh");
+ system("/usr/bin/mountables.sh");
 
 ifstream fin("/tmp/mountables");
 string line;
-string commandHead = "grep /mnt/";
-string commandTail = " /etc/mtab >/dev/null";
+string commandHead = "grep '/mnt/";
+string commandTail = " ' /etc/mtab >/dev/null";
 
 while ( getline(fin,line) )
 {
-   mountList.push_back(line);
-   mountState.push_back(system((commandHead + line + commandTail).c_str()));
+   int sepator = line.find("~",0);
+   string device = line.substr(0, sepator);
+   string label = line.substr(sepator+1);
+   mountList.push_back(device);
+   mountState.push_back(system((commandHead + device + commandTail).c_str()));
+   mountLabels.push_back(label);
 }   
 fin.close();
+unlink("/tmp/mountables");
 
 size = mountList.size();
 }
 
 void btnCallback(Fl_Widget*, void* userdata) {
-  if (userdata == "R" or userdata == "L")
+  int results;
+selected = (long)userdata;
+if (mountState.at(selected) == 0)   // mounted
 {
-   if (userdata == "R" )
+   results = system(("sudo umount /dev/" + mountList.at(selected)).c_str());
+   if (results == 0)
    {
-      cycle++;
-      if ( cycle >= size )
-      {
-        getMountables();
-        cycle = 0;
-      }
-   } else 
-   {
-      cycle--;
-      if (cycle < 0 )
-      {
-        getMountables();
-        cycle = size-1;
-      }
-   }
-       
-   btnState->label(mountList.at(cycle).c_str());
-   if ( mountState[cycle] == 0)
-      btnState->color((Fl_Color)2);
-   else
-      btnState->color((Fl_Color)1);      
-      
-   selected = cycle;
-}
-       
-if (userdata == "state")
+      pack->child(selected)->color((Fl_Color)1);         
+      mountState.at(selected)=256;
+   }    
+}   
+else
 {
-   int results;
-   if (mountState.at(selected) == 0)   // mounted
+   results = system(("sudo mount /dev/" + mountList.at(selected)).c_str());
+   if (results == 0)
    {
-      results = system(("sudo umount /dev/" + mountList.at(selected)).c_str());
-      if (results == 0)
+      pack->child(selected)->color((Fl_Color)2);         
+      mountState.at(selected)=0;
+      if (filemgr.length() > 0)
       {
-         btnState->color((Fl_Color)1);         
-         btnState->redraw_label();        
-         mountState.at(selected)=256;
-      }    
-   }   
-   else
-   {
-      results = system(("sudo mount /dev/" + mountList.at(selected)).c_str());
-      if (results == 0)
-      {
-         btnState->color((Fl_Color)2);         
-         btnState->redraw_label();        
-         mountState.at(selected)=0;
+         system((filemgr + " /mnt/" + mountList.at(selected) +"&" ).c_str());
+         exit(0);
       }
    }
 }
 }
 
-Fl_Button *btnState=(Fl_Button *)0;
+Fl_Double_Window *w=(Fl_Double_Window *)0;
+
+Fl_Pack *pack=(Fl_Pack *)0;
 
 int main(int argc, char **argv) {
-  Fl_Double_Window* w;
   setlocale(LC_ALL, "");
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");
-  { Fl_Double_Window* o = new Fl_Double_Window(120, 20);
-    w = o;
-    { Fl_Button* o = new Fl_Button(0, 0, 18, 20, gettext("@<"));
-      o->callback((Fl_Callback*)btnCallback, (void*)("L"));
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(100, 0, 18, 20, gettext("@>"));
-      o->callback((Fl_Callback*)btnCallback, (void*)("R"));
-    } // Fl_Button* o
-    { btnState = new Fl_Button(19, 0, 80, 20, gettext("button"));
-      btnState->callback((Fl_Callback*)btnCallback, (void*)("state"));
-    } // Fl_Button* btnState
-    o->end();
-  } // Fl_Double_Window* o
-  getMountables();
+  { w = new Fl_Double_Window(85, 745);
+    { pack = new Fl_Pack(0, 0, 80, 500);
+      pack->end();
+    } // Fl_Pack* pack
+    w->end();
+  } // Fl_Double_Window* w
+  if (getenv("FILEMGR"))
+   filemgr = getenv("FILEMGR");
+
+getMountables();
 if ( size == 0 ) 
   exit(1);
-  
-cycle = 0;
-btnState->label(mountList[0].c_str());
 
-if ( mountState[0] == 0)
-   btnState->color((Fl_Color)2);
-else
-   btnState->color((Fl_Color)1);
+for (int i=0; i < size; i++)
+{  
+   Fl_Button* btn[i];
+   
+   btn[i] = new Fl_Button(0,0,80,30);
+   btn[i]->label(mountList[i].c_str());
+   btn[i]->tooltip(mountLabels[i].c_str());
+   btn[i]->callback((Fl_Callback*)btnCallback,(void*)i);
+
+   if ( mountState[i] == 0)
+      btn[i]->color((Fl_Color)2);
+   else
+      btn[i]->color((Fl_Color)1);
+      
+   pack->add(btn[i]);
+      
+}
 
 selected = 0;
+pack->redraw();
+w->resize(0,0,85,(30*size));
+w->redraw();
   w->show(argc, argv);
   return Fl::run();
 }

@@ -3,8 +3,10 @@
 #include <libintl.h>
 #include "wbarconf.h"
 // (c) Robert Shingledecker 2010
+// Zoom, Icon Size, Icon Text options - Brian Smith
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 #include <FL/fl_message.H>
 #include <FL/Fl_File_Chooser.H>
@@ -59,6 +61,23 @@ switch(pos)
    default : options += "-p bottom";
              break;;
 }
+double zoomf_value = zoomChoice->value();
+if (zoomf_value == 1) {zoomf_value = 1.00001;}
+string zoomf;
+ostringstream stream;
+stream << (double)zoomf_value;
+zoomf = stream.str();
+options += " -zoomf " + zoomf;
+
+stream.str("");
+string isize;
+stream << (double)isizeChoice->value();
+isize = stream.str();
+options += " -isize " + isize;
+
+if (textChoice->value() == 0) {options += " -nofont";}
+
+
 string fname = home + "/.wbar";
 ofstream fout(fname.c_str(), ios::out|ios::out);
 if (! fout.is_open())
@@ -89,11 +108,17 @@ Fl_Menu_Item menu_posChoice[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
+Fl_Slider *zoomChoice=(Fl_Slider *)0;
+
+Fl_Slider *isizeChoice=(Fl_Slider *)0;
+
+Fl_Check_Button *textChoice=(Fl_Check_Button *)0;
+
 int main(int argc, char **argv) {
   setlocale(LC_ALL, "");
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");
-  { window = new Fl_Double_Window(420, 315, gettext("eXclude Wbar Icons"));
+  { window = new Fl_Double_Window(420, 385, gettext("eXclude Wbar Icons"));
     { brw_wbar = new Fl_Browser(5, 20, 200, 265, gettext("Wbar Icons"));
       brw_wbar->type(1);
       brw_wbar->textfont(4);
@@ -111,13 +136,53 @@ textdomain("tinycore");
       posChoice->menu(menu_posChoice);
       posChoice->value(1);
     } // Fl_Choice* posChoice
-    { Fl_Button* o = new Fl_Button(330, 290, 64, 20, gettext("Apply"));
+    { Fl_Button* o = new Fl_Button(165, 350, 80, 25, gettext("Apply"));
       o->callback((Fl_Callback*)btnApplyCB);
     } // Fl_Button* o
+    { zoomChoice = new Fl_Slider(305, 320, 105, 20, gettext("Wbar Zoom"));
+      zoomChoice->type(1);
+      zoomChoice->minimum(1);
+      zoomChoice->maximum(3);
+      zoomChoice->step(0.1);
+      zoomChoice->value(2);
+      zoomChoice->align(FL_ALIGN_LEFT);
+    } // Fl_Slider* zoomChoice
+    { isizeChoice = new Fl_Slider(305, 290, 105, 20, gettext("Wbar Icon Size"));
+      isizeChoice->type(1);
+      isizeChoice->minimum(10);
+      isizeChoice->maximum(80);
+      isizeChoice->step(1);
+      isizeChoice->value(32);
+      isizeChoice->align(FL_ALIGN_LEFT);
+    } // Fl_Slider* isizeChoice
+    { textChoice = new Fl_Check_Button(165, 320, 25, 20, gettext("Wbar Text Labels"));
+      textChoice->down_box(FL_DOWN_BOX);
+      textChoice->align(FL_ALIGN_LEFT);
+    } // Fl_Check_Button* textChoice
+    window->size_range(1, 0, 3, 0);
     window->end();
     window->resizable(window);
   } // Fl_Double_Window* window
-  home = getenv("HOME");
+  FILE* run = popen("zoomf=`cat ~/.wbar` && zoomf=${zoomf##*zoomf} && echo $zoomf | awk '{print $1}'", "r");
+char b[10];
+fscanf(run, "%s", b);
+pclose(run);
+double zoomf = atof(b);
+if (zoomf == 0) { zoomf = 2.0; }
+zoomChoice->value(zoomf);
+
+run = popen("isize=`cat ~/.wbar` && isize=${isize##*isize} && echo $isize | awk '{print $1}'", "r");
+char b2[10];
+fscanf(run, "%s", b2);
+pclose(run);
+double isize = atof(b2);
+if (isize == 0) { isize = 32.0; }
+isizeChoice->value(isize);
+
+int rc = system("cat ~/.wbar | grep nofont >/dev/null 2>&1");
+if (rc == 0){ textChoice->value(0);} else {textChoice->value(1);}
+
+home = getenv("HOME");
 ifstream tcedir_file("/opt/.tce_dir");
 getline(tcedir_file,tcedir);
 tcedir_file.close();

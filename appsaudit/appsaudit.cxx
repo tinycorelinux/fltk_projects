@@ -29,6 +29,26 @@ void cursor_wait() {
 Fl::flush();
 }
 
+void menu_activate() {
+  menuDepends->activate();
+menuInstall->activate();
+menuUpdates->activate();
+menuMd5s->activate();
+menuOnBoot->activate();
+menuOnDemand->activate();
+menuBar->redraw();
+}
+
+void menu_deactivate() {
+  menuDepends->deactivate();
+menuInstall->deactivate();
+menuUpdates->deactivate();
+menuMd5s->deactivate();
+menuOnBoot->deactivate();
+menuOnDemand->deactivate();
+menuBar->redraw();
+}
+
 static char * mygettext(const char *msgid) {
   if (!locales_set) {
 
@@ -46,6 +66,8 @@ return gettext(msgid);
 void depends_callback(Fl_Widget *, void* userdata) {
   report_type = (const char*) userdata;
 option_type = "";
+menu_deactivate();
+menuDepends->activate();
 
 if (userdata == "updatedeps")
 {
@@ -135,15 +157,21 @@ if (userdata == "updatedeps")
         brw_results->clear();
         box_results->label("Marked for deletion cleared");
      }
-} else if (userdata == "quit")
+} else if (userdata == "exit_depends")
 {
+    menu_activate();
+    brw_extn->clear();
+    brw_results->clear();
+} else if (userdata == "quit" )
     exit(0);
-}
 }
 
 void options_callback(Fl_Widget *, void* userdata) {
   option_type = (const char*) userdata;
 report_type = "";
+
+menu_deactivate();
+menuInstall->activate();
 
 if (userdata == "default")
 {
@@ -172,6 +200,7 @@ if (userdata == "default")
    box_results->label("Current copy2fs.lst");
 } else if (userdata == "exit_copy")
 {
+    menu_activate();
     option_type = "";
     box_results->label("Results");
     brw_extn->clear();
@@ -180,34 +209,78 @@ if (userdata == "default")
 }
 
 void updates_callback(Fl_Widget *, void* userdata) {
-  update_type = (const char*) userdata;
-report_type = "";
+  report_type = (const char*) userdata;
 
-if (userdata == "update") 
+if (report_type == "update") 
 {
-   brw_extn->clear();
+   menu_deactivate();
+   menuUpdates->activate();
+   brw_extn->hide();
+   grp_updates->show();
+   grp_updates->activate();
+   brw_multi->clear();
    brw_results->clear();
    box_results->label("Results");
+   Fl::flush();
    cursor_wait();
    command = "tce-update list " + target_dir + " > /tmp/apps_upd.lst";
    system(command.c_str());
-// box_extn->label(target_dir.c_str());
-   brw_extn->load("/tmp/apps_upd.lst");
-   brw_extn->remove(brw_extn->size());
+   box_extn->label(target_dir.c_str());
+   brw_multi->load("/tmp/apps_upd.lst");
+   brw_multi->remove(brw_multi->size());
    cursor_normal();
-} else if (userdata == "exit_updates")
+   btn_multi->activate();
+} else if (report_type == "exit_updates")
 {
-    update_type = "";
+    menu_activate();
+    grp_updates->hide();
+    brw_extn->show();
+    report_type = "";
     box_results->label("Results");
     brw_extn->clear();
     brw_results->clear();
-//    Fl::flush();
+}
+}
+
+void md5s_callback(Fl_Widget *, void* userdata) {
+  report_type = (const char*) userdata;
+
+if (report_type == "md5s") 
+{
+   menu_deactivate();
+   menuMd5s->activate();
+   brw_extn->hide();
+   grp_updates->show();
+   grp_updates->activate();
+   brw_multi->clear();
+   brw_results->clear();
+   box_results->label("Results");
+   Fl::flush();
+   cursor_wait();
+   command = "cd " + target_dir + " && ls *.md5.txt > /tmp/apps_upd.lst";
+   system(command.c_str());
+   box_extn->label(target_dir.c_str());
+   brw_multi->load("/tmp/apps_upd.lst");
+   brw_multi->remove(brw_multi->size());
+   cursor_normal();
+   btn_multi->activate();
+} else if (report_type == "exit_md5s")
+{
+    menu_activate();
+    grp_updates->hide();
+    brw_extn->show();
+    report_type = "";
+    box_results->label("Results");
+    brw_extn->clear();
+    brw_results->clear();
 }
 }
 
 void onboot_callback(Fl_Widget *, void* userdata) {
   if (userdata == "onboot" )
 {
+  menu_deactivate();
+  menuOnBoot->activate();
   target_dir = tcedir + "/optional/";
   report_type = "onboot";
   brw_extn->clear();
@@ -230,6 +303,7 @@ void onboot_callback(Fl_Widget *, void* userdata) {
  
 if (userdata == "exit_onboot")
 {
+  menu_activate();
   report_type.empty();
   box_results->label("Results");
   brw_extn->clear();
@@ -243,6 +317,8 @@ if (userdata == "quit")
 void ondemand_callback(Fl_Widget *, void* userdata) {
   if (userdata == "ondemand" )
 {
+  menu_deactivate();
+  menuOnDemand->activate();
   report_type = "ondemand";
   brw_extn->clear();
   cursor_wait();
@@ -267,6 +343,7 @@ void ondemand_callback(Fl_Widget *, void* userdata) {
  
 if (userdata == "exit_ondemand")
 {
+  menu_activate();
   report_type.empty();
 //box_extn->label(target_dir.c_str());
   box_results->label("Results");
@@ -350,6 +427,50 @@ void brw_extn_callback(Fl_Widget *, void *) {
 }
 }
 
+void btn_multi_callback(Fl_Widget *, void *) {
+  cursor_wait();
+brw_results->clear();
+for ( int t=0; t<=brw_multi->size(); t++ )
+{
+   if ( brw_multi->selected(t) )
+   {
+      select_extn = brw_multi->text(t);
+      if ( report_type == "md5s" )
+      {
+         command = "cd " + target_dir +"/ && md5sum -c " + select_extn;
+         results = system(command.c_str());
+         if ( results == 0 )
+            msg = " OK";
+         else
+            msg = " FAILED";
+             
+         brw_results->add((select_extn + msg).c_str());
+         Fl::flush();      
+      
+      } else {
+         box_results->label(("Fetching " + select_extn).c_str());
+         box_results->redraw();
+         Fl::flush();
+
+         command = "tce-update update " + target_dir +"/" + select_extn + ".md5.txt >/tmp/apps_upd.lst";
+         results = system(command.c_str());
+         if ( results == 0 ) 
+            msg = " OK";
+         else
+            msg = " FAILED";
+
+         brw_results->add((select_extn + msg).c_str());
+         Fl::flush();      
+         
+      }
+   }
+}
+brw_multi->deselect();
+if (report_type == "update" )
+   box_results->label("Updates complete. Reboot to effect.");
+cursor_normal();
+}
+
 void brw_results_callback(Fl_Widget *, void *) {
   if (brw_results->value())
 {
@@ -416,7 +537,9 @@ void brw_results_callback(Fl_Widget *, void *) {
 
 Fl_Double_Window *window=(Fl_Double_Window *)0;
 
-Fl_Menu_Item menu_[] = {
+Fl_Menu_Bar *menuBar=(Fl_Menu_Bar *)0;
+
+Fl_Menu_Item menu_menuBar[] = {
  {mygettext("File"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Quit"), 0,  (Fl_Callback*)depends_callback, (void*)("quit"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
@@ -432,6 +555,7 @@ Fl_Menu_Item menu_[] = {
  {mygettext("Mark for Deletion"), 0,  (Fl_Callback*)depends_callback, (void*)("delete"), 1, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Display Marked for Deletion"), 0,  (Fl_Callback*)depends_callback, (void*)("display_marked"), 1, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Clear Marked for Deletion"), 0,  (Fl_Callback*)depends_callback, (void*)("clearlst"), 1, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Exit Dependencies Mode"), 0,  (Fl_Callback*)depends_callback, (void*)("exit_depends"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
  {mygettext("Install Options"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Toggle Default Copy Install"), 0,  (Fl_Callback*)options_callback, (void*)("default"), 0, FL_NORMAL_LABEL, 0, 14, 0},
@@ -441,6 +565,10 @@ Fl_Menu_Item menu_[] = {
  {mygettext("Updates"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Check for Updates"), 0,  (Fl_Callback*)updates_callback, (void*)("update"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Exit Update Mode"), 0,  (Fl_Callback*)updates_callback, (void*)("exit_updates"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0},
+ {mygettext("Md5Check"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Check Md5sums"), 0,  (Fl_Callback*)md5s_callback, (void*)("md5s"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Exit Md5 Check Mode"), 0,  (Fl_Callback*)md5s_callback, (void*)("exit_md5s"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
  {mygettext("OnBoot"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Maintenance"), 0,  (Fl_Callback*)onboot_callback, (void*)("onboot"), 0, FL_NORMAL_LABEL, 0, 14, 0},
@@ -459,14 +587,20 @@ Fl_Box *box_results=(Fl_Box *)0;
 
 Fl_Browser *brw_extn=(Fl_Browser *)0;
 
+Fl_Group *grp_updates=(Fl_Group *)0;
+
+Fl_Browser *brw_multi=(Fl_Browser *)0;
+
+Fl_Button *btn_multi=(Fl_Button *)0;
+
 Fl_Browser *brw_results=(Fl_Browser *)0;
 
 int main(int argc, char **argv) {
   { window = new Fl_Double_Window(675, 375, mygettext("AppsAudit"));
     window->callback((Fl_Callback*)onboot_callback, (void*)("quit"));
-    { Fl_Menu_Bar* o = new Fl_Menu_Bar(0, 0, 685, 20);
-      o->menu(menu_);
-    } // Fl_Menu_Bar* o
+    { menuBar = new Fl_Menu_Bar(0, 0, 685, 20);
+      menuBar->menu(menu_menuBar);
+    } // Fl_Menu_Bar* menuBar
     { box_extn = new Fl_Box(0, 24, 200, 16, mygettext("Select"));
       box_extn->labelfont(1);
     } // Fl_Box* box_extn
@@ -478,6 +612,19 @@ int main(int argc, char **argv) {
       brw_extn->textfont(4);
       brw_extn->callback((Fl_Callback*)brw_extn_callback);
     } // Fl_Browser* brw_extn
+    { grp_updates = new Fl_Group(0, 45, 200, 325);
+      grp_updates->hide();
+      grp_updates->deactivate();
+      { brw_multi = new Fl_Browser(0, 45, 200, 300);
+        brw_multi->type(3);
+        brw_multi->textfont(4);
+      } // Fl_Browser* brw_multi
+      { btn_multi = new Fl_Button(0, 350, 200, 20, mygettext("Process Selected Item(s)"));
+        btn_multi->callback((Fl_Callback*)btn_multi_callback);
+        btn_multi->deactivate();
+      } // Fl_Button* btn_multi
+      grp_updates->end();
+    } // Fl_Group* grp_updates
     { brw_results = new Fl_Browser(225, 45, 430, 325);
       brw_results->type(1);
       brw_results->textfont(4);

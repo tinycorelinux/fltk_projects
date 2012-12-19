@@ -7,6 +7,8 @@ header_name {.h}
 code_name {.cxx}
 decl {// (c) Robert Shingledecker 2008- 2010} {} 
 
+decl {// Gradient addition by Brian Smith} {} 
+
 decl {\#include <cstdlib>} {} 
 
 decl {\#include <iostream>} {} 
@@ -15,9 +17,7 @@ decl {\#include <fstream>} {}
 
 decl {\#include <sstream>} {} 
 
-decl {\#include <FL/Fl_Color_Chooser.H>} {} 
-
-decl {\#include <FL/fl_message.H>} {} 
+decl {\#include <string.h>} {} 
 
 decl {\#include <stdio.h>} {} 
 
@@ -29,7 +29,7 @@ decl {int locales_set=0;} {}
 
 decl {string target;} {} 
 
-decl {double r,g,b;} {} 
+decl {double r1,g1,b1,r2,g2,b2} {} 
 
 Function {mygettext(const char *msgid)} {open return_type {char *}
 } {
@@ -48,7 +48,10 @@ return gettext(msgid);} {}
 
 Function {imageBrowserCallback(Fl_Widget*, void*)} {open return_type {static void}
 } {
-  code {installBtn->activate();} {}
+  code {if (imageBrowser->value()) { 
+  installBtn->activate(); 
+  doneBtn->activate();
+}} {}
 } 
 
 Function {btnCallback(Fl_Widget*, void* userdata)} {open return_type {static void}
@@ -56,42 +59,86 @@ Function {btnCallback(Fl_Widget*, void* userdata)} {open return_type {static voi
   code {string backgroundType;
 string command;
 
-if (userdata == "install")
+if (userdata == "image_set" || userdata == "image_done")
 {
-   string selectedImage = imageBrowser->text(imageBrowser->value());
+   if (imageBrowser->value()){
+      string selectedImage = imageBrowser->text(imageBrowser->value());
    
-   if ( btnFull->value() == 1 )
-      backgroundType = "full"; 
-   else if ( btnFill->value() == 1 ) 
-      backgroundType = "fill";
-   else if ( btnTile->value() == 1 ) 
-      backgroundType = "tile";
-   else
-      backgroundType = "center"; 
+     if ( btnFull->value() == 1 )
+        backgroundType = "full"; 
+     else if ( btnFill->value() == 1 ) 
+        backgroundType = "fill";
+     else if ( btnTile->value() == 1 ) 
+        backgroundType = "tile";
+     else
+        backgroundType = "center"; 
                                                                             
-   command = "setbackground " + backgroundType + " /opt/backgrounds/" + selectedImage;   
-   system(command.c_str());                                                                                                                                         
-   exit(0);
+     command = "setbackground " + backgroundType + " /opt/backgrounds/" + selectedImage;   
+     system(command.c_str());                                                                                                                                         
+     if (userdata == "image_done") { exit(0); }
+   }
 }   
+
+if (userdata == "color_show"){
+   colorChooserWindow->show();
+}
    
-if (userdata == "color")
+if (userdata == "color_set" || userdata == "color_done")
 {
-   if (!fl_color_chooser("New Color",r,g,b)) return;
    uchar ru,gu,bu;
-   ru = 255*r+.5;
-   gu = 255*g+.5;
-   bu = 255*b+.5;
+   ru = 255*colorChooser->r()+.5;
+   gu = 255*colorChooser->g()+.5;
+   bu = 255*colorChooser->b()+.5;
    char buffer[10];
    int n = sprintf(buffer,"%02X%02X%02X\\n",ru,gu,bu);
    string selectedColor = buffer;
    backgroundType = "solid";                                                  
    command = "setbackground " + backgroundType + " \\'\#" + selectedColor.substr(0,6) + "\\'";
    system(command.c_str());                                                          
-   exit(0);                                                                   
+   if (userdata == "color_done") { exit(0); }
 }
-                                                                               
-if (userdata == "help")
-   fl_message("Install images from /opt/backgrounds directory.");} {}
+              
+if (userdata == "gradient_show")
+{
+   GradientWindow->show();
+}              
+                  
+if (userdata == "gradient_set" || userdata == "gradient_done")
+{
+   uchar ru_g1,gu_g1,bu_g1;
+   uchar ru_g2,gu_g2,bu_g2;
+   char buffer[10];
+   ru_g1 = 255* colorChooserGradient2->r();
+   gu_g1 = 255* colorChooserGradient2->g();
+   bu_g1 = 255* colorChooserGradient2->b();
+   ru_g2 = 255* colorChooserGradient1->r();
+   gu_g2 = 255* colorChooserGradient1->g();
+   bu_g2 = 255* colorChooserGradient1->b();
+   sprintf(buffer,"%02X%02X%02X\\n",ru_g1,gu_g1,bu_g1);
+   string gradientColor1 = buffer;
+   sprintf(buffer,"%02X%02X%02X\\n",ru_g2,gu_g2,bu_g2);
+   string gradientColor2 = buffer;
+   
+   string gradientAngle;
+   if ( btnVertical->value() == 1 )
+      gradientAngle = "0"; 
+   else if ( btnHorizontal->value() == 1 ) 
+      gradientAngle = "90";
+   else if ( btnDiagonal->value() == 1 ) 
+      gradientAngle = "135";
+   else
+      gradientAngle = "0";    
+   
+   backgroundType = "gradient";
+   if (gradientAngle == "0"){
+   	command = "setbackground " + backgroundType + " " + gradientAngle +" \\'\#" + gradientColor2.substr(0,6) + "\\'" + " \\'\#" + gradientColor1.substr(0,6) + "\\'";
+   }else{
+	command = "setbackground " + backgroundType + " " + gradientAngle +" \\'\#" + gradientColor1.substr(0,6) + "\\'" + " \\'\#" + gradientColor2.substr(0,6) + "\\'";  
+   }
+   system(command.c_str()); 
+   
+   if (userdata == "gradient_done") { exit(0); }
+}} {}
 } 
 
 Function {} {open
@@ -105,21 +152,135 @@ if (results == 0 )
 
   getline(rgb_file, rgb_info);
   stm.str(rgb_info);
-  stm >> r >> g >> b;
+  stm >> r1 >> g1 >> b1 >> r2 >> g2 >> b2;
 } else {
-  r = 0.208;
-  g = 0.384;
-  b = 0.400;
+  r1 = 0.208;
+  g1 = 0.384;
+  b1 = 0.400;
+  r2 = 0;
+  g2 = 0;
+  b2 = 0;
 }} {}
-  Fl_Window {} {
-    label Wallpaper open selected
-    xywh {131 426 295 245} type Double hide
+  Fl_Window GradientWindow {
+    label Gradient
+    xywh {386 369 505 205} type Double hide
+    code0 {\#include <FL/Fl_Color_Chooser.H>}
+  } {
+    Fl_Box colorChooserGradient1 {
+      label {Gradient Color \#1}
+      callback {Fl_Color g1Color = fl_rgb_color(colorChooserGradient1->r() * 255,colorChooserGradient1->g() * 255,colorChooserGradient1->b() * 255);
+boxColor1->color(g1Color);
+Fl::wait(0);
+Fl::flush();
+Fl::redraw();}
+      xywh {11 25 200 95} box DOWN_BOX align 1 when 1
+      code0 {colorChooserGradient1->rgb(r1,g1,b1);}
+      class Fl_Color_Chooser
+    }
+    Fl_Box colorChooserGradient2 {
+      label {Gradient Color \#2}
+      callback {Fl_Color g2Color = fl_rgb_color(colorChooserGradient2->r() * 255,colorChooserGradient2->g() * 255,colorChooserGradient2->b() * 255);
+boxColor2->color(g2Color);
+Fl::wait(0);
+Fl::flush();
+Fl::redraw();}
+      xywh {293 25 200 95} box DOWN_BOX align 1 when 1
+      code0 {colorChooserGradient2->rgb(r2,g2,b2);}
+      class Fl_Color_Chooser
+    }
+    Fl_Round_Button btnVertical {
+      label {Vertical Gradient}
+      xywh {15 130 150 25} type Radio down_box ROUND_DOWN_BOX
+      code0 {btnVertical->value(1);}
+    }
+    Fl_Round_Button btnHorizontal {
+      label {Horizontal Gradient}
+      xywh {160 130 150 25} type Radio down_box ROUND_DOWN_BOX
+    }
+    Fl_Round_Button btnDiagonal {
+      label {Diagonal Gradient}
+      xywh {320 130 150 25} type Radio down_box ROUND_DOWN_BOX
+    }
+    Fl_Box boxColor1 {selected
+      xywh {223 55 50 35} box UP_BOX
+      code0 {Fl_Color g1Color = fl_rgb_color(colorChooserGradient1->r() * 255,colorChooserGradient1->g() * 255,colorChooserGradient1->b() * 255);}
+      code1 {boxColor1->color(g1Color);}
+    }
+    Fl_Box boxColor2 {
+      xywh {233 65 50 35} box UP_BOX
+      code0 {Fl_Color g2Color = fl_rgb_color(colorChooserGradient2->r() * 255,colorChooserGradient2->g() * 255,colorChooserGradient2->b() * 255);}
+      code1 {boxColor2->color(g2Color);}
+    }
+    Fl_Button {} {
+      label Set
+      user_data {"gradient_set"}
+      callback btnCallback
+      xywh {96 165 85 30}
+    }
+    Fl_Return_Button {} {
+      label Done
+      user_data {"gradient_done"}
+      callback btnCallback
+      xywh {211 165 85 30}
+    }
+    Fl_Button {} {
+      label Cancel
+      callback {GradientWindow->hide();}
+      xywh {326 165 85 30}
+    }
+  }
+  Fl_Window colorChooserWindow {
+    label {Pick Color}
+    xywh {421 330 335 175} type Double hide
+    code0 {\#include <FL/Fl_Color_Chooser.H>}
+  } {
+    Fl_Box colorChooser {
+      label {Pick Color}
+      user_data {"colorChooserGradient1"}
+      callback {Fl_Color solidColor = fl_rgb_color(colorChooser->r() * 255,colorChooser->g() * 255,colorChooser->b() * 255);
+boxColor->color(solidColor);
+Fl::wait(0);
+Fl::flush();
+Fl::redraw();}
+      xywh {11 25 200 95} box DOWN_BOX align 1 when 1
+      code0 {colorChooser->rgb(r1,g1,b1);}
+      class Fl_Color_Chooser
+    }
+    Fl_Button {} {
+      label Set
+      user_data {"color_set"}
+      callback btnCallback
+      xywh {11 135 85 30}
+    }
+    Fl_Return_Button {} {
+      label Done
+      user_data {"color_done"}
+      callback btnCallback
+      xywh {125 135 85 30}
+    }
+    Fl_Button {} {
+      label Cancel
+      callback {colorChooserWindow->hide();}
+      xywh {235 135 85 30}
+    }
+    Fl_Box boxColor {
+      label Preview
+      xywh {235 25 85 95} box DOWN_BOX align 1
+      code0 {Fl_Color solidColor = fl_rgb_color(colorChooser->r() * 255,colorChooser->g() * 255,colorChooser->b() * 255);}
+      code1 {boxColor->color(solidColor);}
+    }
+  }
+  Fl_Window Wallpaper {
+    label Wallpaper
+    xywh {480 239 300 262} type Double hide
   } {
     Fl_File_Browser imageBrowser {
+      label {Install images from /opt/backgrounds directory}
       callback imageBrowserCallback
-      xywh {0 25 295 190} type Hold
+      xywh {0 38 295 190} type Hold labelsize 12 align 1
       code0 {imageBrowser->filter("*.{png,gif,jpg,jpeg}");}
       code1 {imageBrowser->load("/opt/backgrounds");}
+      code2 {for (int x=1; x <= imageBrowser->size(); x++) { if (strcmp(imageBrowser->text(x), "../") == 0) { imageBrowser->remove(x); } }}
     }
     Fl_Round_Button btnFull {
       label Full
@@ -142,22 +303,28 @@ if (results == 0 )
       code0 {btnFill->type(FL_RADIO_BUTTON);}
     }
     Fl_Button installBtn {
-      label Install
-      user_data {"install"}
+      label Set
+      user_data {"image_set"}
       callback btnCallback
-      xywh {25 220 64 20} deactivate
+      xywh {5 235 64 20} deactivate
     }
-    Fl_Button {} {
+    Fl_Button doneBtn {
+      label Done
+      user_data {"image_done"}
+      callback btnCallback
+      xywh {80 235 64 20} deactivate
+    }
+    Fl_Button colorBtn {
       label Color
-      user_data {"color"}
+      user_data {"color_show"}
       callback btnCallback
-      xywh {110 220 64 20}
+      xywh {155 235 64 20}
     }
-    Fl_Button {} {
-      label Help
-      user_data {"help"}
+    Fl_Button gradientBtn {
+      label Gradient
+      user_data {"gradient_show"}
       callback btnCallback
-      xywh {200 220 64 20}
+      xywh {230 235 64 20}
     }
   }
 } 

@@ -49,6 +49,28 @@ Function {cursor_wait()} {return_type void
 Fl::flush();} {}
 } 
 
+Function {menu_activate()} {return_type void
+} {
+  code {menuDepends->activate();
+menuInstall->activate();
+menuUpdates->activate();
+menuMd5s->activate();
+menuOnBoot->activate();
+menuOnDemand->activate();
+menuBar->redraw();} {}
+} 
+
+Function {menu_deactivate()} {return_type void
+} {
+  code {menuDepends->deactivate();
+menuInstall->deactivate();
+menuUpdates->deactivate();
+menuMd5s->deactivate();
+menuOnBoot->deactivate();
+menuOnDemand->deactivate();
+menuBar->redraw();} {}
+} 
+
 Function {mygettext(const char *msgid)} {private return_type {char *}
 } {
   code {if (!locales_set) {
@@ -64,10 +86,12 @@ locales_set=1;
 return gettext(msgid);} {}
 } 
 
-Function {depends_callback(Fl_Widget *, void* userdata)} {return_type {static void}
+Function {depends_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
 } {
   code {report_type = (const char*) userdata;
 option_type = "";
+menu_deactivate();
+menuDepends->activate();
 
 if (userdata == "updatedeps")
 {
@@ -157,16 +181,22 @@ if (userdata == "updatedeps")
         brw_results->clear();
         box_results->label("Marked for deletion cleared");
      }
-} else if (userdata == "quit")
+} else if (userdata == "exit_depends")
 {
-    exit(0);
-}} {}
+    menu_activate();
+    brw_extn->clear();
+    brw_results->clear();
+} else if (userdata == "quit" )
+    exit(0);} {}
 } 
 
 Function {options_callback(Fl_Widget *, void* userdata)} {return_type {static void}
 } {
   code {option_type = (const char*) userdata;
 report_type = "";
+
+menu_deactivate();
+menuInstall->activate();
 
 if (userdata == "default")
 {
@@ -195,6 +225,7 @@ if (userdata == "default")
    box_results->label("Current copy2fs.lst");
 } else if (userdata == "exit_copy")
 {
+    menu_activate();
     option_type = "";
     box_results->label("Results");
     brw_extn->clear();
@@ -204,35 +235,80 @@ if (userdata == "default")
 
 Function {updates_callback(Fl_Widget *, void* userdata)} {return_type {static void}
 } {
-  code {update_type = (const char*) userdata;
-report_type = "";
+  code {report_type = (const char*) userdata;
 
-if (userdata == "update") 
+if (report_type == "update") 
 {
-   brw_extn->clear();
+   menu_deactivate();
+   menuUpdates->activate();
+   brw_extn->hide();
+   grp_updates->show();
+   grp_updates->activate();
+   brw_multi->clear();
    brw_results->clear();
    box_results->label("Results");
+   Fl::flush();
    cursor_wait();
    command = "tce-update list " + target_dir + " > /tmp/apps_upd.lst";
    system(command.c_str());
-// box_extn->label(target_dir.c_str());
-   brw_extn->load("/tmp/apps_upd.lst");
-   brw_extn->remove(brw_extn->size());
+   box_extn->label(target_dir.c_str());
+   brw_multi->load("/tmp/apps_upd.lst");
+   brw_multi->remove(brw_multi->size());
    cursor_normal();
-} else if (userdata == "exit_updates")
+   btn_multi->activate();
+} else if (report_type == "exit_updates")
 {
-    update_type = "";
+    menu_activate();
+    grp_updates->hide();
+    brw_extn->show();
+    report_type = "";
     box_results->label("Results");
     brw_extn->clear();
     brw_results->clear();
-//    Fl::flush();
 }} {}
 } 
 
-Function {onboot_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
+Function {md5s_callback(Fl_Widget *, void* userdata)} {return_type {static void}
+} {
+  code {report_type = (const char*) userdata;
+
+if (report_type == "md5s") 
+{
+   menu_deactivate();
+   menuMd5s->activate();
+   brw_extn->hide();
+   grp_updates->show();
+   grp_updates->activate();
+   brw_multi->clear();
+   brw_results->clear();
+   box_results->label("Results");
+   Fl::flush();
+   cursor_wait();
+   command = "cd " + target_dir + " && ls *.md5.txt > /tmp/apps_upd.lst";
+   system(command.c_str());
+   box_extn->label(target_dir.c_str());
+   brw_multi->load("/tmp/apps_upd.lst");
+   brw_multi->remove(brw_multi->size());
+   cursor_normal();
+   btn_multi->activate();
+} else if (report_type == "exit_md5s")
+{
+    menu_activate();
+    grp_updates->hide();
+    brw_extn->show();
+    report_type = "";
+    box_results->label("Results");
+    brw_extn->clear();
+    brw_results->clear();
+}} {}
+} 
+
+Function {onboot_callback(Fl_Widget *, void* userdata)} {return_type {static void}
 } {
   code {if (userdata == "onboot" )
 {
+  menu_deactivate();
+  menuOnBoot->activate();
   target_dir = tcedir + "/optional/";
   report_type = "onboot";
   brw_extn->clear();
@@ -255,6 +331,7 @@ Function {onboot_callback(Fl_Widget *, void* userdata)} {open return_type {stati
  
 if (userdata == "exit_onboot")
 {
+  menu_activate();
   report_type.empty();
   box_results->label("Results");
   brw_extn->clear();
@@ -265,10 +342,12 @@ if (userdata == "quit")
   exit(0);} {}
 } 
 
-Function {ondemand_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
+Function {ondemand_callback(Fl_Widget *, void* userdata)} {return_type {static void}
 } {
   code {if (userdata == "ondemand" )
 {
+  menu_deactivate();
+  menuOnDemand->activate();
   report_type = "ondemand";
   brw_extn->clear();
   cursor_wait();
@@ -293,6 +372,7 @@ Function {ondemand_callback(Fl_Widget *, void* userdata)} {open return_type {sta
  
 if (userdata == "exit_ondemand")
 {
+  menu_activate();
   report_type.empty();
 //box_extn->label(target_dir.c_str());
   box_results->label("Results");
@@ -301,8 +381,7 @@ if (userdata == "exit_ondemand")
 } 
  
 if (userdata == "quit") 
-  exit(0);} {selected
-  }
+  exit(0);} {}
 } 
 
 Function {brw_extn_callback(Fl_Widget *, void *)} {return_type {static void}
@@ -378,6 +457,51 @@ Function {brw_extn_callback(Fl_Widget *, void *)} {return_type {static void}
 }} {}
 } 
 
+Function {btn_multi_callback(Fl_Widget *, void *)} {return_type {static void}
+} {
+  code {cursor_wait();
+brw_results->clear();
+for ( int t=0; t<=brw_multi->size(); t++ )
+{
+   if ( brw_multi->selected(t) )
+   {
+      select_extn = brw_multi->text(t);
+      if ( report_type == "md5s" )
+      {
+         command = "cd " + target_dir +"/ && md5sum -c " + select_extn;
+         results = system(command.c_str());
+         if ( results == 0 )
+            msg = " OK";
+         else
+            msg = " FAILED";
+             
+         brw_results->add((select_extn + msg).c_str());
+         Fl::flush();      
+      
+      } else {
+         box_results->label(("Fetching " + select_extn).c_str());
+         box_results->redraw();
+         Fl::flush();
+
+         command = "tce-update update " + target_dir +"/" + select_extn + ".md5.txt >/tmp/apps_upd.lst";
+         results = system(command.c_str());
+         if ( results == 0 ) 
+            msg = " OK";
+         else
+            msg = " FAILED";
+
+         brw_results->add((select_extn + msg).c_str());
+         Fl::flush();      
+         
+      }
+   }
+}
+brw_multi->deselect();
+if (report_type == "update" )
+   box_results->label("Updates complete. Reboot to effect.");
+cursor_normal();} {}
+} 
+
 Function {brw_results_callback(Fl_Widget *, void *)} {return_type {static void}
 } {
   code {if (brw_results->value())
@@ -451,7 +575,7 @@ Function {} {open
     callback onboot_callback open
     xywh {17 134 675 375} type Double hide resizable
   } {
-    Fl_Menu_Bar {} {
+    Fl_Menu_Bar menuBar {open
       xywh {0 0 685 20}
     } {
       Submenu {} {
@@ -465,7 +589,7 @@ Function {} {open
           xywh {25 25 30 20}
         }
       }
-      Submenu {} {
+      Submenu menuDepends {
         label Dependencies
         xywh {0 0 63 20}
       } {
@@ -535,8 +659,14 @@ Function {} {open
           callback depends_callback
           xywh {15 15 30 20} deactivate
         }
+        MenuItem {} {
+          label {Exit Dependencies Mode}
+          user_data {"exit_depends"}
+          callback depends_callback
+          xywh {0 0 30 20}
+        }
       }
-      Submenu {} {
+      Submenu menuInstall {
         label {Install Options}
         xywh {0 0 63 20}
       } {
@@ -559,7 +689,7 @@ Function {} {open
           xywh {0 0 30 20}
         }
       }
-      Submenu {} {
+      Submenu menuUpdates {
         label Updates
         xywh {0 0 63 20}
       } {
@@ -576,7 +706,24 @@ Function {} {open
           xywh {0 0 30 20}
         }
       }
-      Submenu {} {
+      Submenu menuMd5s {
+        label Md5Check open
+        xywh {20 20 63 20}
+      } {
+        MenuItem {} {
+          label {Check Md5sums}
+          user_data {"md5s"}
+          callback md5s_callback
+          xywh {20 20 30 20}
+        }
+        MenuItem {} {
+          label {Exit Md5 Check Mode}
+          user_data {"exit_md5s"}
+          callback md5s_callback selected
+          xywh {20 20 30 20}
+        }
+      }
+      Submenu menuOnBoot {
         label OnBoot
         xywh {0 0 63 20}
       } {
@@ -593,7 +740,7 @@ Function {} {open
           xywh {0 0 30 20}
         }
       }
-      Submenu {} {
+      Submenu menuOnDemand {
         label OnDemand
         xywh {20 20 63 20}
       } {
@@ -622,6 +769,18 @@ Function {} {open
     Fl_Browser brw_extn {
       callback brw_extn_callback
       xywh {0 45 200 325} type Select textfont 4
+    }
+    Fl_Group grp_updates {
+      xywh {0 45 200 325} hide deactivate
+    } {
+      Fl_Browser brw_multi {
+        xywh {0 45 200 300} type Multi textfont 4
+      }
+      Fl_Button btn_multi {
+        label {Process Selected Item(s)}
+        callback btn_multi_callback
+        xywh {0 350 200 20} deactivate
+      }
     }
     Fl_Browser brw_results {
       callback brw_results_callback

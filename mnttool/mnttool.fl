@@ -5,10 +5,9 @@ i18n_include <libintl.h>
 i18n_function gettext 
 header_name {.h} 
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2008} {} 
+decl {// (c) Robert Shingledecker 2008-2010} {} 
 
-decl {\#include <cstdlib>} {selected
-} 
+decl {\#include <cstdlib>} {} 
 
 decl {\#include <iostream>} {} 
 
@@ -18,96 +17,79 @@ decl {\#include <vector>} {}
 
 decl {\#include <locale.h>} {} 
 
-decl {int cycle;} {} 
-
-decl {int size;} {} 
-
-decl {int selected;} {} 
+decl {\#include <FL/Fl_Button.H>} {} 
 
 decl {using namespace std;} {} 
+
+decl {int size, selected;} {} 
+
+decl {string filemgr;} {} 
 
 decl {vector<string> mountList;} {global
 } 
 
 decl {vector<int> mountState;} {} 
 
+decl {vector<Fl_Button*> btn;} {} 
+
+decl {vector<string> mountLabels;} {global
+} 
+
 Function {getMountables()} {open return_type int
 } {
   code {mountList.clear();
 mountState.clear();
 
-system("/usr/bin/mountables.sh");
+ system("/usr/bin/mountables.sh");
 
 ifstream fin("/tmp/mountables");
 string line;
-string commandHead = "grep /mnt/";
-string commandTail = " /etc/mtab >/dev/null";
+string commandHead = "grep '/mnt/";
+string commandTail = " ' /etc/mtab >/dev/null";
 
 while ( getline(fin,line) )
 {
-   mountList.push_back(line);
-   mountState.push_back(system((commandHead + line + commandTail).c_str()));
+   int sepator = line.find("~",0);
+   string device = line.substr(0, sepator);
+   string label = line.substr(sepator+1);
+   mountList.push_back(device);
+   mountState.push_back(system((commandHead + device + commandTail).c_str()));
+   mountLabels.push_back(label);
 }   
 fin.close();
+unlink("/tmp/mountables");
 
 size = mountList.size();} {}
 } 
 
 Function {btnCallback(Fl_Widget*, void* userdata)} {open return_type {static void}
 } {
-  code {if (userdata == "R" or userdata == "L")
+  code {int results;
+selected = (long)userdata;
+if (mountState.at(selected) == 0)   // mounted
 {
-   if (userdata == "R" )
+   results = system(("sudo umount /dev/" + mountList.at(selected)).c_str());
+   if (results == 0)
    {
-      cycle++;
-      if ( cycle >= size )
-      {
-        getMountables();
-        cycle = 0;
-      }
-   } else 
+      pack->child(selected)->color((Fl_Color)1);         
+      mountState.at(selected)=256;
+   }    
+}   
+else
+{
+   results = system(("sudo mount /dev/" + mountList.at(selected)).c_str());
+   if (results == 0)
    {
-      cycle--;
-      if (cycle < 0 )
+      pack->child(selected)->color((Fl_Color)2);         
+      mountState.at(selected)=0;
+      if (filemgr.length() > 0)
       {
-        getMountables();
-        cycle = size-1;
+         system((filemgr + " /mnt/" + mountList.at(selected) +"&" ).c_str());
+         exit(0);
       }
    }
-       
-   btnState->label(mountList.at(cycle).c_str());
-   if ( mountState[cycle] == 0)
-      btnState->color((Fl_Color)2);
-   else
-      btnState->color((Fl_Color)1);      
-      
-   selected = cycle;
-}
-       
-if (userdata == "state")
-{
-   int results;
-   if (mountState.at(selected) == 0)   // mounted
-   {
-      results = system(("sudo umount /dev/" + mountList.at(selected)).c_str());
-      if (results == 0)
-      {
-         btnState->color((Fl_Color)1);         
-         btnState->redraw_label();        
-         mountState.at(selected)=256;
-      }    
-   }   
-   else
-   {
-      results = system(("sudo mount /dev/" + mountList.at(selected)).c_str());
-      if (results == 0)
-      {
-         btnState->color((Fl_Color)2);         
-         btnState->redraw_label();        
-         mountState.at(selected)=0;
-      }
-   }
-}} {}
+}} {selected
+  }
 } 
 
 Function {} {open
@@ -115,39 +97,40 @@ Function {} {open
   code {setlocale(LC_ALL, "");
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");} {}
-  Fl_Window {} {open
-    xywh {357 547 120 20} type Double hide
+  Fl_Window w {open
+    xywh {267 20 85 745} type Double hide
   } {
-    Fl_Button {} {
-      label {@<}
-      user_data {"L"}
-      callback btnCallback
-      xywh {0 0 18 20}
-    }
-    Fl_Button {} {
-      label {@>}
-      user_data {"R"}
-      callback btnCallback
-      xywh {100 0 18 20}
-    }
-    Fl_Button btnState {
-      label button
-      user_data {"state"}
-      callback btnCallback
-      xywh {19 0 80 20}
-    }
+    Fl_Pack pack {open
+      xywh {0 0 80 500}
+    } {}
   }
-  code {getMountables();
+  code {if (getenv("FILEMGR"))
+   filemgr = getenv("FILEMGR");
+
+getMountables();
 if ( size == 0 ) 
   exit(1);
-  
-cycle = 0;
-btnState->label(mountList[0].c_str());
 
-if ( mountState[0] == 0)
-   btnState->color((Fl_Color)2);
-else
-   btnState->color((Fl_Color)1);
+for (int i=0; i < size; i++)
+{  
+   Fl_Button* btn[i];
+   
+   btn[i] = new Fl_Button(0,0,80,30);
+   btn[i]->label(mountList[i].c_str());
+   btn[i]->tooltip(mountLabels[i].c_str());
+   btn[i]->callback((Fl_Callback*)btnCallback,(void*)i);
 
-selected = 0;} {}
+   if ( mountState[i] == 0)
+      btn[i]->color((Fl_Color)2);
+   else
+      btn[i]->color((Fl_Color)1);
+      
+   pack->add(btn[i]);
+      
+}
+
+selected = 0;
+pack->redraw();
+w->resize(0,0,85,(30*size));
+w->redraw();} {}
 } 
