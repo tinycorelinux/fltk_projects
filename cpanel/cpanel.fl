@@ -26,110 +26,92 @@ Function {} {open
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");} {}
   Fl_Window {} {
-    label ControlPanel open
-    xywh {38 333 445 215} type Double hide
+    label ControlPanel open selected
+    xywh {38 333 445 180} type Double visible
   } {
     Fl_Box {} {
       label Maintenance
-      xywh {5 18 140 187} box EMBOSSED_FRAME labeltype ENGRAVED_LABEL align 1
+      xywh {5 18 140 155} box EMBOSSED_FRAME labeltype ENGRAVED_LABEL align 1
     }
     Fl_Box {} {
       label Utilities
-      xywh {150 18 140 187} box EMBOSSED_FRAME labeltype ENGRAVED_LABEL align 1
+      xywh {150 18 140 155} box EMBOSSED_FRAME labeltype ENGRAVED_LABEL align 1
     }
     Fl_Box {} {
       label Setup
-      xywh {295 18 140 187} box EMBOSSED_FRAME labeltype ENGRAVED_LABEL align 1
-    }
-    Fl_Button {} {
-      label AppsAudit
-      user_data {"appsaudit &"}
-      callback btn_callback
-      xywh {15 30 120 30}
-    }
-    Fl_Button {} {
-      label {Floppy Tool}
-      user_data {"fdtool&"}
-      callback btn_callback
-      xywh {160 30 120 30}
-    }
-    Fl_Button {} {
-      label {Load Starter Pack}
-      user_data {"loadpack &"}
-      callback btn_callback
-      xywh {305 30 120 30}
+      xywh {295 18 140 155} box EMBOSSED_FRAME labeltype ENGRAVED_LABEL align 1
     }
     Fl_Button {} {
       label {Backup/Restore}
       user_data {"filetool &"}
       callback btn_callback
-      xywh {15 65 120 30}
+      xywh {15 30 120 30}
     }
     Fl_Button {} {
       label {Mount Tool}
       user_data {"mnttool &"}
       callback btn_callback
-      xywh {160 65 120 30}
+      xywh {160 30 120 30}
     }
     Fl_Button {} {
       label Services
       user_data {"services &"}
       callback btn_callback
-      xywh {305 65 120 30}
+      xywh {305 30 120 30}
     }
     Fl_Button {} {
       label {Date/Time}
       user_data {"datetool &"}
       callback btn_callback
-      xywh {15 100 120 30}
+      xywh {15 65 120 30}
     }
     Fl_Button {} {
       label {Mouse Tool}
       user_data {"mousetool &"}
       callback btn_callback
-      xywh {160 100 120 30}
+      xywh {160 65 120 30}
     }
     Fl_Button {} {
       label {Swapfile Tool}
       user_data {"swapfile &"}
       callback btn_callback
-      xywh {305 100 120 30}
+      xywh {305 65 120 30}
     }
     Fl_Button {} {
       label Network
       user_data {"sudo network &"}
       callback btn_callback
-      xywh {15 135 120 30}
+      xywh {15 100 120 30}
     }
     Fl_Button {} {
       label {System Stats}
       user_data {"stats &"}
       callback btn_callback
-      xywh {160 135 120 30}
+      xywh {160 100 120 30}
     }
     Fl_Button {} {
       label {Terminal Server}
       user_data {"aterm +tr +sb -T \\"Terminal Server Setup\\" -e sudo /usr/bin/tc-terminal-server &"}
-      callback btn_callback selected
-      xywh {305 135 120 30}
+      callback btn_callback
+      xywh {305 100 120 30}
     }
     Fl_Button btnWbarConf {
       label {Wbar Conf}
       user_data {"wbarconf &"}
       callback btn_callback
-      xywh {15 170 120 30} deactivate
+      xywh {15 135 120 30} deactivate
     }
     Fl_Button {} {
       label Wallpaper
       user_data {"wallpaper &"}
       callback btn_callback
-      xywh {160 170 120 30}
+      xywh {160 135 120 30}
     }
     Fl_Button {} {
       label Xvesa
       user_data {"aterm +tr +sb -T \\"Xvesa Setup\\" -e xsetup.sh &"}
       callback btn_callback
-      xywh {305 170 120 30}
+      xywh {305 135 120 30}
     }
   }
   code {int results = system("which wbarconf >/dev/null 2>&1");

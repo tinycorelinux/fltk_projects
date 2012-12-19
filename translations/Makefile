@@ -4,6 +4,8 @@
 
 LOCALESDIR=/usr/local/share/locale
 
+.PHONY: tinycore.pot
+
 SRC=$(wildcard *.po)
 OBJ= $(SRC:.po=.mo)
 INST= $(SRC:.po=.inst)
@@ -21,7 +23,7 @@ translations: $(OBJ)
 clean:
 	rm -f *.mo *~
 
-tinycore.pot: Makefile
+tinycore.pot:
 	xgettext -C -s -o tinycore.pot -kmygettext ../*/*.cxx ../*/*.h
 
 # hack to automate installation dynamicaly, without previous knowledge of 

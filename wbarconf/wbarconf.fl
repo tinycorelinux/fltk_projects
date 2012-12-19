@@ -65,35 +65,35 @@ Function {brw_wbarXlist_callback(Fl_Widget *, void *)} {open return_type {static
 
 Function {btnApplyCB(Fl_Widget *, void *)} {open return_type {static void}
 } {
-  code {options = "-bpress ";
+  code {options = "-bpress -pos ";
 int pos = posChoice->value();
 switch(pos)
 {
-   case 0  : options += "-p top";
+   case 0  : options += "top";
              break;;
-   case 1  : options += "-p bottom";
+   case 1  : options += "bottom";
              break;;
-   case 2  : options += "-p left -vbar";
+   case 2  : options += "left -vbar";
              break;;
-   case 3  : options += "-p right -vbar";
+   case 3  : options += "right -vbar";
              break;;
-   case 4  : options =+ "-p top-left";
+   case 4  : options =+ "top-left";
              break;;
-   case 5  : options =+ "-p top-right";
+   case 5  : options =+ "top-right";
              break;;
-   case 6  : options =+ "-p bot-left";
+   case 6  : options =+ "bot-left";
              break;;
-   case 7  : options =+ "-p bot-right";
+   case 7  : options =+ "bot-right";
              break;;
-   case 8  : options =+ "-p top-left -vbar";
+   case 8  : options =+ "top-left -vbar";
              break;;
-   case 9  : options =+ "-p bot-left -vbar";
+   case 9  : options =+ "bot-left -vbar";
              break;;
-   case 10 : options =+ "-p top-right -vbar";
+   case 10 : options =+ "top-right -vbar";
              break;;
-   case 11 : options =+ "-p bot-right -vbar";
+   case 11 : options =+ "bot-right -vbar";
              break;;
-   default : options += "-p bottom";
+   default : options += "bottom";
              break;;
 }
 double zoomf_value = zoomChoice->value();
@@ -124,7 +124,8 @@ fout << options << endl;
 fout.close();
 
 command = "wbar.sh";
-system(command.c_str());} {}
+system(command.c_str());} {selected
+  }
 } 
 
 Function {} {open
@@ -271,6 +272,5 @@ if (pipe) {
    }
    pclose(pipe);
    free(mbuf);
-}} {selected
-  }
+}} {}
 } 

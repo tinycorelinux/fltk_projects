@@ -158,12 +158,13 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open private return_type {
    mode = "tcz";
    repository = (const char*) userdata;
    cursor_wait();
+   unlink("info.lst");
    command = "/usr/bin/tce-fetch.sh info.lst.gz";
    int results = system(command.c_str());
    cursor_normal();
    if (results == 0 )
    {
-      system("gunzip info.lst.gz");
+      system("gunzip -c info.lst.gz > info.lst");
       brw_select->load("info.lst");
       brw_select->remove(brw_select->size());
       btn_go->deactivate();
@@ -171,7 +172,6 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open private return_type {
       box_select->activate();
       search_choices->activate();
       search_field->activate();                                              
-      unlink("info.lst");
     } else
       fl_message("Connection error, check network or mirror.");
 } else if (userdata == "go")
@@ -215,11 +215,13 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open private return_type {
      
 } else if (userdata == "search")
 {
-   if (search_choices->text() == "Search")
-      command = "/usr/bin/search.sh";
-   else
-      command = "/usr/bin/provides.sh";
-      
+  if (search_choices->text() == "Search")
+     command = "/usr/bin/search.sh";
+  else if (search_choices->text() == "Keyword")
+     command = "/usr/bin/keyword.sh";
+  else
+     command = "/usr/bin/provides.sh";
+   
   cursor_wait();
   command = command + " " + (string)search_field->value();
   int results = system(command.c_str());
@@ -232,7 +234,6 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open private return_type {
     btn_go->deactivate();
     search_choices->activate();
     search_field->activate();                                              
-    unlink("info.lst");
   }
       
 } else if (userdata == "quit")
@@ -249,6 +250,8 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open private return_type {
     command = "quit\\n";
     write(G_out, command.c_str(), command.length());
     unlink("ab2tce.fifo");
+    unlink("info.lst");
+    unlink("info.lst.gz");
     exit(0);
 
   }} {}
@@ -350,8 +353,7 @@ status_out->color(FL_WHITE);
 status_out->value(command.c_str());
 command = command + "\\n";
 write(G_out, command.c_str(), command.length());
-Fl::add_fd(fileno(G_in), HandleInput_CB, (void*)&status_out);} {selected
-  }
+Fl::add_fd(fileno(G_in), HandleInput_CB, (void*)&status_out);} {}
 } 
 
 Function {mirror_btn_callback(Fl_Widget*, void*)} {private return_type {static void}
@@ -506,7 +508,7 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
       callback mirror_btn_callback
       xywh {135 0 65 20}
     }
-    Fl_Choice search_choices {
+    Fl_Choice search_choices {open
       xywh {206 0 93 20} down_box BORDER_BOX deactivate
     } {
       MenuItem {} {
@@ -515,6 +517,10 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
       }
       MenuItem {} {
         label Provides
+        xywh {0 0 30 20}
+      }
+      MenuItem {} {
+        label Keyword selected
         xywh {0 0 30 20}
       }
     }

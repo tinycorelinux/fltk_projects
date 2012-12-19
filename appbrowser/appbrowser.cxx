@@ -134,12 +134,13 @@ static void btn_callback(Fl_Widget *, void* userdata) {
    mode = "tcz";
    repository = (const char*) userdata;
    cursor_wait();
+   unlink("info.lst");
    command = "/usr/bin/tce-fetch.sh info.lst.gz";
    int results = system(command.c_str());
    cursor_normal();
    if (results == 0 )
    {
-      system("gunzip info.lst.gz");
+      system("gunzip -c info.lst.gz > info.lst");
       brw_select->load("info.lst");
       brw_select->remove(brw_select->size());
       btn_go->deactivate();
@@ -147,7 +148,6 @@ static void btn_callback(Fl_Widget *, void* userdata) {
       box_select->activate();
       search_choices->activate();
       search_field->activate();                                              
-      unlink("info.lst");
     } else
       fl_message("Connection error, check network or mirror.");
 } else if (userdata == "go")
@@ -191,11 +191,13 @@ static void btn_callback(Fl_Widget *, void* userdata) {
      
 } else if (userdata == "search")
 {
-   if (search_choices->text() == "Search")
-      command = "/usr/bin/search.sh";
-   else
-      command = "/usr/bin/provides.sh";
-      
+  if (search_choices->text() == "Search")
+     command = "/usr/bin/search.sh";
+  else if (search_choices->text() == "Keyword")
+     command = "/usr/bin/keyword.sh";
+  else
+     command = "/usr/bin/provides.sh";
+   
   cursor_wait();
   command = command + " " + (string)search_field->value();
   int results = system(command.c_str());
@@ -208,7 +210,6 @@ static void btn_callback(Fl_Widget *, void* userdata) {
     btn_go->deactivate();
     search_choices->activate();
     search_field->activate();                                              
-    unlink("info.lst");
   }
       
 } else if (userdata == "quit")
@@ -225,6 +226,8 @@ static void btn_callback(Fl_Widget *, void* userdata) {
     command = "quit\n";
     write(G_out, command.c_str(), command.length());
     unlink("ab2tce.fifo");
+    unlink("info.lst");
+    unlink("info.lst.gz");
     exit(0);
 
   }
@@ -414,6 +417,7 @@ Fl_Choice *search_choices=(Fl_Choice *)0;
 Fl_Menu_Item menu_search_choices[] = {
  {gettext("Search"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {gettext("Provides"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {gettext("Keyword"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
