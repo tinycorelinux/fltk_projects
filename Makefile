@@ -19,6 +19,7 @@ OBJ = $(SRC:.cxx=.o)
 
 CXXFLAGS += -Os -s -Wall -Wextra
 CXXFLAGS += -march=i486 -mtune=i686 # change or comment this out on other arches
+CXXFLAGS += -fno-rtti -fno-exceptions
 CXXFLAGS += -ffunction-sections -fdata-sections
 
 LDFLAGS += -Wl,-O1 -Wl,-gc-sections
@@ -31,6 +32,7 @@ all: $(TARGETS)
 
 $(TARGETS): $(OBJ)
 	$(CXX) -o $@ $(filter $(dir $@)%.o, $(OBJ)) $(CXXFLAGS) $(LDFLAGS)
+	sstrip $@
 
 clean:
 	rm -f $(TARGETS) $(OBJ)
