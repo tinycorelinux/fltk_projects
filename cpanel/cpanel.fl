@@ -30,7 +30,7 @@ textdomain("tinycore");} {}
     xywh {38 333 445 215} type Double hide
   } {
     Fl_Box {} {
-      label Maintenance selected
+      label Maintenance
       xywh {5 18 140 187} box EMBOSSED_FRAME labeltype ENGRAVED_LABEL align 1
     }
     Fl_Box {} {
@@ -55,8 +55,8 @@ textdomain("tinycore");} {}
     }
     Fl_Button {} {
       label {HD/USB Install}
-      user_data {"aterm +tr +sb -T \\"USB Install\\" -e sudo usbinstall &"}
-      callback btn_callback
+      user_data {"tc-install &"}
+      callback btn_callback selected
       xywh {305 30 120 30}
     }
     Fl_Button {} {

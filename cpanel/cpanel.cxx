@@ -43,7 +43,7 @@ textdomain("tinycore");
       o->callback((Fl_Callback*)btn_callback, (void*)("fdtool&"));
     } // Fl_Button* o
     { Fl_Button* o = new Fl_Button(305, 30, 120, 30, gettext("HD/USB Install"));
-      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -T \"USB Install\" -e sudo usbinstall &"));
+      o->callback((Fl_Callback*)btn_callback, (void*)("tc-install &"));
     } // Fl_Button* o
     { Fl_Button* o = new Fl_Button(15, 65, 120, 30, gettext("Backup/Restore"));
       o->callback((Fl_Callback*)btn_callback, (void*)("filetool &"));

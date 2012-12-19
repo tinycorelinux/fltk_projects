@@ -1,0 +1,439 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0110 
+i18n_type 1 
+i18n_include <libintl.h> 
+i18n_function mygettext 
+header_name {.h} 
+code_name {.cxx}
+decl {// (c) Robert Shingledecker 2011} {} 
+
+decl {\#include <cstdlib>} {} 
+
+decl {\#include <iostream>} {} 
+
+decl {\#include <fstream>} {} 
+
+decl {\#include <sstream>} {} 
+
+decl {\#include <string>} {} 
+
+decl {\#include <FL/Fl_File_Chooser.H>} {} 
+
+decl {\#include <FL/fl_message.H>} {} 
+
+decl {\#include <locale.h>} {} 
+
+decl {using namespace std;} {} 
+
+decl {istringstream iss;} {} 
+
+decl {string command,msg,heading;} {} 
+
+decl {int results, locales_set=0, test4syslinux, test4mkdosfs, test4perl;} {} 
+
+decl {string image,type,installMode, target,dev,format,path,boot,flag, markActive;} {} 
+
+decl {string warn="Mark active only if Tiny Core is the only operation system.\\nOtherwise use Grub extension after installation.";} {} 
+
+Function {selectFile()} {return_type void
+} {
+  code {brwTarget->deactivate();
+string target = "*" + image + "*";
+string title = gettext("Select File for ");
+title = title + image;
+Fl_File_Chooser chooser("/",target.c_str(), Fl_File_Chooser::SINGLE, title.c_str());
+chooser.show();                                             
+while(chooser.shown())
+  { Fl::wait(); }
+  
+if ( chooser.value() == NULL )
+{
+   btnMicro->value(0);
+   btnTiny->value(0);
+   return;
+}
+      
+path = chooser.value();
+Fl::flush();} {}
+} 
+
+Function {prepTarget()} {open return_type void
+} {
+  code {btnActive->deactivate();
+if ( installMode =="hdd" || installMode == "zip") 
+{
+   test4mkdosfs = system("which mkdosfs >/dev/null");
+   
+   if ( test4mkdosfs != 0 )
+   {
+      fl_message("HDD and ZIP require dosfstools extension be loaded!\\nZIP also requires perl extension.");
+      exit(1);
+   }
+   
+   if ( installMode == "zip")
+   {
+      test4perl = system("which perl >/dev/null");
+      if ( test4perl != 0 )
+      {
+         fl_message("ZIP installation requires perl extension be loaded.");
+         exit(1);
+      }
+   }
+   
+   btnWhole->value(1);
+   btnPartition->value(0);
+   btnPartition->deactivate();
+   type = "disk";
+} else {
+   btnPartition->activate();
+}
+     
+heading = "Select " + type + " for " + image;
+brwTarget->label(heading.c_str());
+
+flag = "x";
+if ( type == "disk" )
+   flag = "-d";
+if (type == "partition" ) 
+   flag = "-p"; 
+
+if (! image.empty() && flag != "x" )
+{
+    brwTarget->activate();
+    command = "fetch_devices " + flag + " > /tmp/install_work";
+    system(command.c_str());
+    brwTarget->load("/tmp/install_work");
+    unlink("/tmp/install_work");
+}
+grpButtons->deactivate();} {selected
+  }
+} 
+
+Function {cursor_normal()} {return_type void
+} {
+  code {window->cursor(FL_CURSOR_DEFAULT);
+Fl::flush();} {}
+} 
+
+Function {cursor_wait()} {return_type void
+} {
+  code {window->cursor(FL_CURSOR_WAIT);
+Fl::flush();} {}
+} 
+
+Function {mygettext(const char *msgid)} {private return_type {char *}
+} {
+  code {if (!locales_set) {
+
+setlocale(LC_ALL, "");
+bindtextdomain("tinycore","/usr/local/share/locale");
+textdomain("tinycore");
+
+locales_set=1;
+
+}
+
+return gettext(msgid);} {}
+} 
+
+Function {btnCB(Fl_Widget*, void*userdata)} {return_type {static void}
+} {
+  code {if ( userdata == "begin" )
+{
+  wWizard->value(wWizard->child(0));
+}  
+
+if ( userdata == "next" )
+{
+  wWizard->next();
+  if ( grpFormat->visible() && installMode == "zip") 
+     wWizard->next();
+  
+}
+
+if ( userdata == "prev" )
+{
+  wWizard->prev();
+  if ( grpFormat->visible() && installMode == "zip") 
+     wWizard->prev();
+
+}
+
+if ( userdata == "last" )
+{
+  int last = wWizard->children()-1;
+  wWizard->value(wWizard->child(last));
+}
+
+if (grpType->visible())
+   prepTarget();
+   
+if (grpBoot->visible())
+{
+   if ( installMode =="hdd" || installMode == "zip") 
+      options->value("waitusb=5");
+      
+   brwBootRef->load("/usr/share/doc/tc/bootOptions.txt");
+}
+   
+if (grpReview->visible())
+{
+   markActive="0";
+   boot = options->value();
+   brwReview->clear();
+   brwReview->add(("Source: "+path).c_str());
+   brwReview->add(("Type: "+installMode).c_str());
+   brwReview->add(("Target: "+dev).c_str());
+   if (btnActive->value() == 1)
+   {
+      brwReview->add("Mark partition active (bootable)");
+      markActive="1";
+   }
+   if ( installMode != "zip" )
+      brwReview->add(("Format:"+format).c_str());
+   brwReview->add(("Options: "+boot).c_str());
+}} {}
+} 
+
+Function {btnProceedCB(Fl_Widget*, void* userdata)} {return_type {static void}
+} {
+  code {btnProceed->deactivate();
+grpButtons->deactivate();
+cursor_wait();
+command="sudo tc-install.sh "+path+" "+installMode+" "+dev+" "+markActive+" "+format+" "+boot;
+FILE *pipe = popen(command.c_str(),"r");
+char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
+if (pipe)
+{
+   brwReview->clear();
+   while(fgets(mbuf,PATH_MAX,pipe))
+   {
+      string line(mbuf);
+      brwReview->add(line.c_str());
+      Fl::flush();
+      brwReview->bottomline(brwReview->size());
+   }
+   pclose(pipe);
+   free(mbuf);
+}
+cursor_normal();} {}
+} 
+
+Function {} {open
+} {
+  Fl_Window window {
+    label {Tiny Core Installation}
+    user_data {"quit"} open
+    xywh {87 276 480 400} type Double hide resizable
+  } {
+    Fl_Wizard wWizard {
+      label {Tiny Core Installation} open
+      xywh {25 30 435 325} labeltype ENGRAVED_LABEL
+      code0 {wWizard->value(wWizard->child(0));}
+    } {
+      Fl_Group grpType {
+        xywh {25 30 435 325}
+      } {
+        Fl_Group {} {
+          label {Please Select Version to Install}
+          xywh {55 65 375 30} box ENGRAVED_FRAME
+        } {
+          Fl_Check_Button btnMicro {
+            label {Micro Core}
+            user_data {"microcore"}
+            callback {image = (const char*)v;
+selectFile();
+fullpathOutput->value(path.c_str());}
+            xywh {80 70 115 25} type Radio down_box DOWN_BOX
+          }
+          Fl_Check_Button btnTiny {
+            label {Tiny Core}
+            user_data {"tinycore"}
+            callback {image = (const char*)v;
+selectFile();
+fullpathOutput->value(path.c_str());}
+            xywh {265 70 115 25} type Radio down_box DOWN_BOX
+          }
+        }
+        Fl_Output fullpathOutput {
+          xywh {55 98 375 27}
+        }
+        Fl_Group {} {
+          xywh {55 128 375 27}
+        } {
+          Fl_Check_Button {} {
+            label Frugal
+            user_data {"frugal"}
+            callback {installMode = (const char*)v;
+prepTarget();}
+            xywh {80 131 70 22} type Radio down_box DOWN_BOX value 1
+            code0 {installMode = "frugal";}
+          }
+          Fl_Check_Button {} {
+            label {USB-HDD}
+            user_data {"hdd"}
+            callback {installMode = (const char*)v;
+prepTarget();}
+            xywh {195 131 90 22} type Radio down_box DOWN_BOX
+          }
+          Fl_Check_Button {} {
+            label {USB-ZIP}
+            user_data {"zip"}
+            callback {installMode = (const char*)v;
+prepTarget();}
+            xywh {315 131 80 22} type Radio down_box DOWN_BOX
+          }
+        }
+        Fl_Group {} {
+          xywh {55 157 375 33} box ENGRAVED_FRAME
+        } {
+          Fl_Check_Button btnWhole {
+            label {Whole Disk}
+            user_data {"disk"}
+            callback {if (btnWhole->value() == 1 )
+{
+    type = (const char*)v;
+    prepTarget();
+}}
+            xywh {80 162 125 25} type Radio down_box DOWN_BOX
+          }
+          Fl_Check_Button btnPartition {
+            label {Existing Partition}
+            user_data {"partition"}
+            callback {if (btnPartition->value() == 1)
+{
+type = (const char*)v;
+prepTarget();
+}}
+            xywh {265 162 130 25} type Radio down_box DOWN_BOX
+            code0 {type = "partition";}
+          }
+        }
+        Fl_Browser brwTarget {
+          label {Select Target Disk}
+          callback {if ( brwTarget->value() )
+{
+   dev = brwTarget->text(brwTarget->value());
+   int partitionNbr;
+   iss.str(dev.substr(3,dev.length()));
+   iss >> partitionNbr;
+   grpButtons->activate();
+   if (flag == "-p" && partitionNbr < 5)
+      btnActive->activate();
+}}
+          xywh {55 215 375 100} type Hold align 1 deactivate
+        }
+        Fl_Check_Button btnActive {
+          label {Mark Partition Active (bootable)}
+          callback {if (btnActive->value() == 1)
+{
+   fl_message(warn.c_str());
+}}
+          xywh {125 317 230 24} down_box DOWN_BOX deactivate
+        }
+      }
+      Fl_Group grpFormat {
+        xywh {25 30 435 325} hide
+      } {
+        Fl_Group FormatType {
+          label {Formatting Options}
+          xywh {100 95 270 230}
+        } {
+          Fl_Round_Button {} {
+            label {No formatting, use existing.}
+            user_data {"none"}
+            callback {format = (const char*)v;}
+            xywh {140 105 195 20} type Radio down_box ROUND_DOWN_BOX value 1
+            code0 {format = "none";}
+          }
+          Fl_Round_Button {} {
+            label ext2
+            user_data {"ext2"}
+            callback {format = (const char*)v;}
+            xywh {140 125 195 20} type Radio down_box ROUND_DOWN_BOX
+          }
+          Fl_Round_Button {} {
+            label ext3
+            user_data {"ext3"}
+            callback {format = (const char*)v;}
+            xywh {140 145 195 20} type Radio down_box ROUND_DOWN_BOX
+          }
+          Fl_Round_Button {} {
+            label ext4
+            user_data {"ext4"}
+            callback {format = (const char*)v;}
+            xywh {140 165 195 20} type Radio down_box ROUND_DOWN_BOX
+          }
+          Fl_Round_Button {} {
+            label vfat
+            user_data {"vfat"}
+            callback {format = (const char*)v;}
+            xywh {140 185 195 20} type Radio down_box ROUND_DOWN_BOX
+          }
+        }
+      }
+      Fl_Group grpBoot {
+        label {Boot Options}
+        xywh {25 30 435 325} hide
+      } {
+        Fl_Browser brwBootRef {
+          label {Boot Options Reference List}
+          xywh {35 55 415 250} align 1 textfont 4
+        }
+        Fl_Input options {
+          label {Enter Spaces Separated Options From Examples Above}
+          xywh {35 325 415 20} labeltype EMBOSSED_LABEL align 1
+        }
+      }
+      Fl_Group grpReview {
+        xywh {25 30 435 325} hide
+      } {
+        Fl_Browser brwReview {
+          label Review
+          xywh {45 55 390 245} align 1
+        }
+        Fl_Button btnProceed {
+          label Proceed
+          callback btnProceedCB
+          xywh {210 315 64 20}
+        }
+      }
+    }
+    Fl_Group grpButtons {
+      xywh {25 365 440 40} deactivate
+    } {
+      Fl_Button {} {
+        label {@<}
+        user_data {"prev"}
+        callback btnCB
+        xywh {180 365 45 25}
+      }
+      Fl_Button {} {
+        label {@>}
+        user_data {"next"}
+        callback btnCB
+        xywh {230 365 45 25}
+      }
+      Fl_Button {} {
+        label {@<<}
+        user_data {"begin"}
+        callback btnCB
+        xywh {130 365 45 25}
+      }
+      Fl_Button {} {
+        label {@>>}
+        user_data {"last"}
+        callback btnCB
+        xywh {280 365 45 25}
+      }
+    }
+  }
+  code {test4syslinux = system("which syslinux >/dev/null");
+if ( test4syslinux != 0 )
+{
+   fl_message("tc-install requires syslinux extension to be loaded.\\nHDD (vfat) & ZIP installs require dosfstools.\\nZIP will also require perl.");
+   exit(1);
+}
+brwTarget->deactivate();
+prepTarget();} {}
+} 

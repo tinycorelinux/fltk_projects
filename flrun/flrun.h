@@ -3,12 +3,9 @@
 #ifndef flrun_h
 #define flrun_h
 #include <FL/Fl.H>
-void btn_callback(Fl_Widget*, void* userdata);
-void choose_cb(Fl_Widget*, void*);
 #include <FL/Fl_Double_Window.H>
-#include <FL/Fl_Box.H>
-#include <FL/Fl_Input.H>
-extern Fl_Input *in_command;
 #include <FL/Fl_Return_Button.H>
 #include <FL/Fl_Button.H>
+#include <FL/Fl_Input_Choice.H>
+extern Fl_Input_Choice *in_command;
 #endif

@@ -5,8 +5,7 @@ i18n_include <libintl.h>
 i18n_function mygettext 
 header_name {.h} 
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2009-2011} {selected
-} 
+decl {// (c) Robert Shingledecker 2009-2011} {} 
 
 decl {\#include <iostream>} {} 
 
@@ -36,7 +35,7 @@ decl {string aberr, msg, hilite;} {}
 
 decl {int results, locales_set=0;} {} 
 
-decl {string copy2fsList, copy2fsFlag, onbootList;} {} 
+decl {string copy2fsList, copy2fsFlag, onbootName, onbootList, onbootTitle;} {} 
 
 Function {cursor_normal()} {return_type void
 } {
@@ -187,6 +186,7 @@ if (userdata == "updatedeps")
     menu_activate();
     brw_extn->clear();
     brw_results->clear();
+    box_results->label("Results");
 }} {}
 } 
 
@@ -237,7 +237,17 @@ Function {updates_callback(Fl_Widget *, void* userdata)} {return_type {static vo
 } {
   code {report_type = (const char*) userdata;
 
-if (report_type == "update") 
+if (report_type == "select_mirror")
+{
+   system("cat /opt/localmirrors /usr/local/share/mirrors > /tmp/mirrors 2>/dev/null");
+   brw_extn->load("/tmp/mirrors");
+   if ( brw_extn->size() == 1)
+      fl_message("Must load mirrors.tcz extension or have /opt/localmirrors in order to use this feature.");
+   else {
+      brw_extn->remove(brw_extn->size());
+      box_extn->activate();
+   }
+} else if (report_type == "update") 
 {
    menu_deactivate();
    menuUpdates->activate();
@@ -246,7 +256,6 @@ if (report_type == "update")
    grp_updates->activate();
    brw_multi->clear();
    brw_results->clear();
-   box_results->label("Results");
    Fl::flush();
    cursor_wait();
    command = "tce-update list " + target_dir + " > /tmp/apps_upd.lst";
@@ -254,8 +263,11 @@ if (report_type == "update")
    box_extn->label(target_dir.c_str());
    brw_multi->load("/tmp/apps_upd.lst");
    brw_multi->remove(brw_multi->size());
+   if ( brw_multi->size() >= 1 )
+      btn_multi->activate();
+    else
+       brw_results->add("System is Current. No updates required.");
    cursor_normal();
-   btn_multi->activate();
 } else if (report_type == "exit_updates")
 {
     menu_activate();
@@ -322,7 +334,8 @@ Function {onboot_callback(Fl_Widget *, void* userdata)} {return_type {static voi
      unlink("/tmp/ondemand.tmp");
   }
   
-  box_results->label("On Boot Items");
+  onbootTitle = "On Boot Items (" + onbootName +")";
+  box_results->label(onbootTitle.c_str());
   brw_results->load(onbootList.c_str());
   brw_results->remove(brw_results->size());
   
@@ -408,15 +421,19 @@ Function {brw_extn_callback(Fl_Widget *, void *)} {return_type {static void}
      brw_results->load(copy2fsList.c_str());
      brw_results->remove(brw_results->size());
    }
-   if ( update_type == "update" )
+   
+   if ( report_type == "select_mirror" )
    {
-     cursor_wait();
-     command = "tce-update update " + target_dir +"/" + select_extn + ".md5.txt >/tmp/apps_upd.lst";
-     brw_results->load("");
-     system(command.c_str());
-     brw_results->load("/tmp/apps_upd.lst");
-     brw_results->remove(brw_results->size());
-     cursor_normal();
+     string mirror = select_extn;
+     box_results->label(mirror.c_str());
+     ofstream fout("/opt/tcemirror", ios::out|ios::out);
+     if (! fout.is_open())
+     {
+       cerr << "Can't open /opt/tcemirror for output!" << endl;
+       exit(EXIT_FAILURE);
+     }
+     fout << mirror << endl;
+     fout.close();      
    }
    
    if ( report_type == "onboot" && not_duplicate )
@@ -424,7 +441,7 @@ Function {brw_extn_callback(Fl_Widget *, void *)} {return_type {static void}
      command = "echo " + select_extn + " >> " + onbootList;
      system(command.c_str());
      brw_extn->remove(brw_extn->value());
-     box_results->label("On Boot Items");
+     box_results->label(onbootTitle.c_str());
      brw_results->load(onbootList.c_str());
      brw_results->remove(brw_results->size());
    }
@@ -454,7 +471,25 @@ Function {brw_extn_callback(Fl_Widget *, void *)} {return_type {static void}
 }} {}
 } 
 
-Function {btn_multi_callback(Fl_Widget *, void *)} {open return_type {static void}
+Function {brw_multi_callback(Fl_Widget *, void *)} {return_type {static void}
+} {
+  code {cursor_wait();
+brw_results->clear();
+for (int t=0; t<=brw_multi->size(); t++) {
+   if (brw_multi->selected(t) ) {
+      select_extn = brw_multi->text(t);
+      string select_extn_file = select_extn + ".info";
+      command = "tce-fetch.sh " + select_extn_file;
+      int results = system(command.c_str());
+      if (results == 0)
+         brw_results->load(select_extn_file.c_str());
+      continue;
+   }
+}   
+cursor_normal();} {}
+} 
+
+Function {btn_multi_callback(Fl_Widget *, void *)} {return_type {static void}
 } {
   code {cursor_wait();
 brw_results->clear();
@@ -484,6 +519,7 @@ for ( int t=0; t<=brw_multi->size(); t++ )
          Fl::flush();
 
          command = "tce-update update " + target_dir +"/" + select_extn + ".md5.txt >/tmp/apps_upd.lst";
+         cout << command << endl;
          results = system(command.c_str());
          if ( results == 0 ) 
             msg = " OK";
@@ -502,7 +538,7 @@ if (report_type == "update" )
 cursor_normal();} {}
 } 
 
-Function {brw_results_callback(Fl_Widget *, void *)} {return_type {static void}
+Function {brw_results_callback(Fl_Widget *, void *)} {open return_type {static void}
 } {
   code {if (brw_results->value())
 {
@@ -539,7 +575,7 @@ Function {brw_results_callback(Fl_Widget *, void *)} {return_type {static void}
         brw_extn->remove(brw_extn->size());
      }
   
-     box_results->label("On Boot Items");
+     box_results->label(onbootTitle.c_str());
      brw_results->load(onbootList.c_str());
      brw_results->remove(brw_results->size());
   
@@ -575,7 +611,7 @@ Function {} {open
 exit(0);} open
     xywh {17 134 675 375} type Double hide resizable
   } {
-    Fl_Menu_Bar menuBar {open
+    Fl_Menu_Bar menuBar {
       xywh {0 0 685 20}
     } {
       Submenu menuDepends {
@@ -625,7 +661,7 @@ exit(0);} open
           xywh {15 15 30 20} deactivate
         }
         MenuItem menu_auditall {
-          label {Display All with Missing Dependencies}
+          label {Find Missing Dependencies}
           user_data {"auditall"}
           callback depends_callback
           xywh {5 5 30 20} deactivate
@@ -683,6 +719,12 @@ exit(0);} open
         xywh {0 0 63 20}
       } {
         MenuItem {} {
+          label {Select Mirror}
+          user_data {"select_mirror"}
+          callback updates_callback
+          xywh {0 0 30 20}
+        }
+        MenuItem {} {
           label {Check for Updates}
           user_data {"update"}
           callback updates_callback
@@ -696,7 +738,7 @@ exit(0);} open
         }
       }
       Submenu menuMd5s {
-        label Md5Check open
+        label Md5Check
         xywh {20 20 63 20}
       } {
         MenuItem {} {
@@ -759,15 +801,16 @@ exit(0);} open
       callback brw_extn_callback
       xywh {0 45 200 325} type Select textfont 4
     }
-    Fl_Group grp_updates {
+    Fl_Group grp_updates {open
       xywh {0 45 200 325} hide deactivate
     } {
       Fl_Browser brw_multi {
+        callback brw_multi_callback
         xywh {0 45 200 300} type Multi textfont 4
       }
       Fl_Button btn_multi {
         label {Process Selected Item(s)}
-        callback btn_multi_callback
+        callback btn_multi_callback selected
         xywh {0 350 200 20} deactivate
       }
     }
@@ -789,7 +832,22 @@ window->label(target_dir.c_str());
 
 copy2fsList = tcedir + "/copy2fs.lst";
 copy2fsFlag = tcedir + "/copy2fs.flg";
-onbootList = tcedir + "/onboot.lst";
+
+string cmdline, target_boot_option;
+ifstream proc_cmdline("/proc/cmdline");
+getline(proc_cmdline, cmdline);
+proc_cmdline.close();
+target_boot_option = "lst=";
+int sloc = cmdline.find(target_boot_option);
+if ( sloc == string::npos ) {
+   onbootName = "onboot.lst";
+} else {
+   int eloc = cmdline.find(" ",sloc);
+   int work = eloc - (sloc + target_boot_option.length());
+   onbootName = cmdline.substr(sloc+target_boot_option.length(),work);
+}
+
+onbootList = tcedir + "/" + onbootName;
 
 option_type.empty();
 report_type.empty();

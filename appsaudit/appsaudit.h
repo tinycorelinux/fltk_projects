@@ -14,6 +14,7 @@ void md5s_callback(Fl_Widget *, void* userdata);
 void onboot_callback(Fl_Widget *, void* userdata);
 void ondemand_callback(Fl_Widget *, void* userdata);
 void brw_extn_callback(Fl_Widget *, void *);
+void brw_multi_callback(Fl_Widget *, void *);
 void btn_multi_callback(Fl_Widget *, void *);
 void brw_results_callback(Fl_Widget *, void *);
 #include <FL/Fl_Double_Window.H>
@@ -50,7 +51,7 @@ extern Fl_Menu_Item menu_menuBar[];
 #define menu_clearlst (menu_menuBar+11)
 #define menuInstall (menu_menuBar+14)
 #define menuUpdates (menu_menuBar+19)
-#define menuMd5s (menu_menuBar+23)
-#define menuOnBoot (menu_menuBar+27)
-#define menuOnDemand (menu_menuBar+31)
+#define menuMd5s (menu_menuBar+24)
+#define menuOnBoot (menu_menuBar+28)
+#define menuOnDemand (menu_menuBar+32)
 #endif

@@ -30,8 +30,10 @@ extern Fl_Round_Button *btnFull;
 extern Fl_Round_Button *btnTile;
 extern Fl_Round_Button *btnCenter;
 extern Fl_Round_Button *btnFill;
-extern Fl_Button *installBtn;
-extern Fl_Button *doneBtn;
 extern Fl_Button *colorBtn;
 extern Fl_Button *gradientBtn;
+#include <FL/Fl_Check_Button.H>
+extern Fl_Check_Button *logoBtn;
+extern Fl_Button *installBtn;
+extern Fl_Button *doneBtn;
 #endif

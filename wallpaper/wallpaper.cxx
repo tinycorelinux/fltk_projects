@@ -2,7 +2,7 @@
 
 #include <libintl.h>
 #include "wallpaper.h"
-// (c) Robert Shingledecker 2008- 2010
+// (c) Robert Shingledecker 2008- 2011
 // Gradient addition by Brian Smith
 #include <cstdlib>
 #include <iostream>
@@ -13,7 +13,7 @@
 #include <locale.h>
 using namespace std;
 static int locales_set=0; 
-static string target; 
+static string target, logo; 
 static double r1,g1,b1,r2,g2,b2; 
 
 char * mygettext(const char *msgid) {
@@ -34,6 +34,8 @@ void imageBrowserCallback(Fl_Widget*, void*) {
   if (imageBrowser->value()) { 
   installBtn->activate(); 
   doneBtn->activate();
+  logoBtn->value(0);
+  logoBtn->deactivate();
 }
 }
 
@@ -41,6 +43,11 @@ void btnCallback(Fl_Widget*, void* userdata) {
   string backgroundType;
 string command;
 
+if (logoBtn->value() == 1 )
+    logo = "y";
+else
+    logo = "n";
+    
 if (userdata == "image_set" || userdata == "image_done")
 {
    if (imageBrowser->value()){
@@ -55,7 +62,7 @@ if (userdata == "image_set" || userdata == "image_done")
      else
         backgroundType = "center"; 
                                                                             
-     command = "setbackground " + backgroundType + " /opt/backgrounds/" + selectedImage;   
+     command = "setbackground " + logo + " " + backgroundType + " /opt/backgrounds/" + selectedImage;
      system(command.c_str());                                                                                                                                         
      if (userdata == "image_done") { exit(0); }
    }
@@ -63,6 +70,10 @@ if (userdata == "image_set" || userdata == "image_done")
 
 if (userdata == "color_show"){
    colorChooserWindow->show();
+   logoBtn->activate();
+   logoBtn->value(1);
+   installBtn->deactivate();
+   doneBtn->deactivate();
 }
    
 if (userdata == "color_set" || userdata == "color_done")
@@ -75,7 +86,7 @@ if (userdata == "color_set" || userdata == "color_done")
    int n = sprintf(buffer,"%02X%02X%02X\n",ru,gu,bu);
    string selectedColor = buffer;
    backgroundType = "solid";                                                  
-   command = "setbackground " + backgroundType + " \'#" + selectedColor.substr(0,6) + "\'";
+   command = "setbackground " + logo + " " + backgroundType + " \'#" + selectedColor.substr(0,6) + "\'";
    system(command.c_str());                                                          
    if (userdata == "color_done") { exit(0); }
 }
@@ -83,6 +94,10 @@ if (userdata == "color_set" || userdata == "color_done")
 if (userdata == "gradient_show")
 {
    GradientWindow->show();
+   logoBtn->activate();
+   logoBtn->value(1);
+   installBtn->deactivate();
+   doneBtn->deactivate();
 }              
                   
 if (userdata == "gradient_set" || userdata == "gradient_done")
@@ -113,9 +128,9 @@ if (userdata == "gradient_set" || userdata == "gradient_done")
    
    backgroundType = "gradient";
    if (gradientAngle == "0"){
-   	command = "setbackground " + backgroundType + " " + gradientAngle +" \'#" + gradientColor2.substr(0,6) + "\'" + " \'#" + gradientColor1.substr(0,6) + "\'";
+   	command = "setbackground " + logo + " " + backgroundType + " " + gradientAngle +" \'#" + gradientColor2.substr(0,6) + "\'" + " \'#" + gradientColor1.substr(0,6) + "\'";
    }else{
-	command = "setbackground " + backgroundType + " " + gradientAngle +" \'#" + gradientColor1.substr(0,6) + "\'" + " \'#" + gradientColor2.substr(0,6) + "\'";  
+	command = "setbackground " + logo + " " + backgroundType + " " + gradientAngle +" \'#" + gradientColor1.substr(0,6) + "\'" + " \'#" + gradientColor2.substr(0,6) + "\'";  
    }
    system(command.c_str()); 
    
@@ -189,13 +204,15 @@ Fl_Round_Button *btnCenter=(Fl_Round_Button *)0;
 
 Fl_Round_Button *btnFill=(Fl_Round_Button *)0;
 
-Fl_Button *installBtn=(Fl_Button *)0;
-
-Fl_Button *doneBtn=(Fl_Button *)0;
-
 Fl_Button *colorBtn=(Fl_Button *)0;
 
 Fl_Button *gradientBtn=(Fl_Button *)0;
+
+Fl_Check_Button *logoBtn=(Fl_Check_Button *)0;
+
+Fl_Button *installBtn=(Fl_Button *)0;
+
+Fl_Button *doneBtn=(Fl_Button *)0;
 
 int main(int argc, char **argv) {
   int results = system("getRGB");
@@ -339,20 +356,25 @@ if (results == 0 )
       btnFill->selection_color((Fl_Color)2);
       btnFill->type(FL_RADIO_BUTTON);
     } // Fl_Round_Button* btnFill
-    { installBtn = new Fl_Button(5, 235, 64, 20, mygettext("Set"));
+    { colorBtn = new Fl_Button(5, 235, 50, 20, mygettext("Color"));
+      colorBtn->callback((Fl_Callback*)btnCallback, (void*)("color_show"));
+    } // Fl_Button* colorBtn
+    { gradientBtn = new Fl_Button(60, 235, 64, 20, mygettext("Gradient"));
+      gradientBtn->callback((Fl_Callback*)btnCallback, (void*)("gradient_show"));
+    } // Fl_Button* gradientBtn
+    { logoBtn = new Fl_Check_Button(130, 235, 55, 20, mygettext("Logo"));
+      logoBtn->down_box(FL_DOWN_BOX);
+      logoBtn->value(1);
+      logoBtn->value(1);
+    } // Fl_Check_Button* logoBtn
+    { installBtn = new Fl_Button(190, 235, 45, 20, mygettext("Set"));
       installBtn->callback((Fl_Callback*)btnCallback, (void*)("image_set"));
       installBtn->deactivate();
     } // Fl_Button* installBtn
-    { doneBtn = new Fl_Button(80, 235, 64, 20, mygettext("Done"));
+    { doneBtn = new Fl_Button(240, 235, 50, 20, mygettext("Done"));
       doneBtn->callback((Fl_Callback*)btnCallback, (void*)("image_done"));
       doneBtn->deactivate();
     } // Fl_Button* doneBtn
-    { colorBtn = new Fl_Button(155, 235, 64, 20, mygettext("Color"));
-      colorBtn->callback((Fl_Callback*)btnCallback, (void*)("color_show"));
-    } // Fl_Button* colorBtn
-    { gradientBtn = new Fl_Button(230, 235, 64, 20, mygettext("Gradient"));
-      gradientBtn->callback((Fl_Callback*)btnCallback, (void*)("gradient_show"));
-    } // Fl_Button* gradientBtn
     Wallpaper->end();
   } // Fl_Double_Window* Wallpaper
   Wallpaper->show(argc, argv);

@@ -5,7 +5,8 @@ i18n_include <libintl.h>
 i18n_function mygettext 
 header_name {.h} 
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2008- 2010} {} 
+decl {// (c) Robert Shingledecker 2008- 2011} {selected
+} 
 
 decl {// Gradient addition by Brian Smith} {} 
 
@@ -27,11 +28,11 @@ decl {using namespace std;} {}
 
 decl {int locales_set=0;} {} 
 
-decl {string target;} {} 
+decl {string target, logo;} {} 
 
 decl {double r1,g1,b1,r2,g2,b2} {} 
 
-Function {mygettext(const char *msgid)} {open return_type {char *}
+Function {mygettext(const char *msgid)} {return_type {char *}
 } {
   code {if (!locales_set) {                                                      
                                                                           
@@ -46,19 +47,26 @@ locales_set=1;
 return gettext(msgid);} {}
 } 
 
-Function {imageBrowserCallback(Fl_Widget*, void*)} {open return_type {static void}
+Function {imageBrowserCallback(Fl_Widget*, void*)} {return_type {static void}
 } {
   code {if (imageBrowser->value()) { 
   installBtn->activate(); 
   doneBtn->activate();
+  logoBtn->value(0);
+  logoBtn->deactivate();
 }} {}
 } 
 
-Function {btnCallback(Fl_Widget*, void* userdata)} {open return_type {static void}
+Function {btnCallback(Fl_Widget*, void* userdata)} {return_type {static void}
 } {
   code {string backgroundType;
 string command;
 
+if (logoBtn->value() == 1 )
+    logo = "y";
+else
+    logo = "n";
+    
 if (userdata == "image_set" || userdata == "image_done")
 {
    if (imageBrowser->value()){
@@ -73,7 +81,7 @@ if (userdata == "image_set" || userdata == "image_done")
      else
         backgroundType = "center"; 
                                                                             
-     command = "setbackground " + backgroundType + " /opt/backgrounds/" + selectedImage;   
+     command = "setbackground " + logo + " " + backgroundType + " /opt/backgrounds/" + selectedImage;
      system(command.c_str());                                                                                                                                         
      if (userdata == "image_done") { exit(0); }
    }
@@ -81,6 +89,10 @@ if (userdata == "image_set" || userdata == "image_done")
 
 if (userdata == "color_show"){
    colorChooserWindow->show();
+   logoBtn->activate();
+   logoBtn->value(1);
+   installBtn->deactivate();
+   doneBtn->deactivate();
 }
    
 if (userdata == "color_set" || userdata == "color_done")
@@ -93,7 +105,7 @@ if (userdata == "color_set" || userdata == "color_done")
    int n = sprintf(buffer,"%02X%02X%02X\\n",ru,gu,bu);
    string selectedColor = buffer;
    backgroundType = "solid";                                                  
-   command = "setbackground " + backgroundType + " \\'\#" + selectedColor.substr(0,6) + "\\'";
+   command = "setbackground " + logo + " " + backgroundType + " \\'\#" + selectedColor.substr(0,6) + "\\'";
    system(command.c_str());                                                          
    if (userdata == "color_done") { exit(0); }
 }
@@ -101,6 +113,10 @@ if (userdata == "color_set" || userdata == "color_done")
 if (userdata == "gradient_show")
 {
    GradientWindow->show();
+   logoBtn->activate();
+   logoBtn->value(1);
+   installBtn->deactivate();
+   doneBtn->deactivate();
 }              
                   
 if (userdata == "gradient_set" || userdata == "gradient_done")
@@ -131,9 +147,9 @@ if (userdata == "gradient_set" || userdata == "gradient_done")
    
    backgroundType = "gradient";
    if (gradientAngle == "0"){
-   	command = "setbackground " + backgroundType + " " + gradientAngle +" \\'\#" + gradientColor2.substr(0,6) + "\\'" + " \\'\#" + gradientColor1.substr(0,6) + "\\'";
+   	command = "setbackground " + logo + " " + backgroundType + " " + gradientAngle +" \\'\#" + gradientColor2.substr(0,6) + "\\'" + " \\'\#" + gradientColor1.substr(0,6) + "\\'";
    }else{
-	command = "setbackground " + backgroundType + " " + gradientAngle +" \\'\#" + gradientColor1.substr(0,6) + "\\'" + " \\'\#" + gradientColor2.substr(0,6) + "\\'";  
+	command = "setbackground " + logo + " " + backgroundType + " " + gradientAngle +" \\'\#" + gradientColor1.substr(0,6) + "\\'" + " \\'\#" + gradientColor2.substr(0,6) + "\\'";  
    }
    system(command.c_str()); 
    
@@ -201,7 +217,7 @@ Fl::redraw();}
       label {Diagonal Gradient}
       xywh {320 130 150 25} type Radio down_box ROUND_DOWN_BOX
     }
-    Fl_Box boxColor1 {selected
+    Fl_Box boxColor1 {
       xywh {223 55 50 35} box UP_BOX
       code0 {Fl_Color g1Color = fl_rgb_color(colorChooserGradient1->r() * 255,colorChooserGradient1->g() * 255,colorChooserGradient1->b() * 255);}
       code1 {boxColor1->color(g1Color);}
@@ -272,7 +288,7 @@ Fl::redraw();}
   }
   Fl_Window Wallpaper {
     label Wallpaper
-    xywh {480 239 300 262} type Double hide
+    xywh {185 229 300 262} type Double hide
   } {
     Fl_File_Browser imageBrowser {
       label {Install images from /opt/backgrounds directory}
@@ -302,29 +318,34 @@ Fl::redraw();}
       xywh {225 5 50 15} down_box ROUND_DOWN_BOX selection_color 2
       code0 {btnFill->type(FL_RADIO_BUTTON);}
     }
-    Fl_Button installBtn {
-      label Set
-      user_data {"image_set"}
-      callback btnCallback
-      xywh {5 235 64 20} deactivate
-    }
-    Fl_Button doneBtn {
-      label Done
-      user_data {"image_done"}
-      callback btnCallback
-      xywh {80 235 64 20} deactivate
-    }
     Fl_Button colorBtn {
       label Color
       user_data {"color_show"}
       callback btnCallback
-      xywh {155 235 64 20}
+      xywh {5 235 50 20}
     }
     Fl_Button gradientBtn {
       label Gradient
       user_data {"gradient_show"}
       callback btnCallback
-      xywh {230 235 64 20}
+      xywh {60 235 64 20}
+    }
+    Fl_Check_Button logoBtn {
+      label Logo
+      xywh {130 235 55 20} down_box DOWN_BOX value 1
+      code0 {logoBtn->value(1);}
+    }
+    Fl_Button installBtn {
+      label Set
+      user_data {"image_set"}
+      callback btnCallback
+      xywh {190 235 45 20} deactivate
+    }
+    Fl_Button doneBtn {
+      label Done
+      user_data {"image_done"}
+      callback btnCallback
+      xywh {240 235 50 20} deactivate
     }
   }
 } 

@@ -79,7 +79,7 @@ Function {} {open
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");} {}
   Fl_Window {} {
-    label MouseTool open selected
+    label MouseTool open
     xywh {529 64 145 200} type Double hide
   } {
     Fl_Dial dial_speed {
@@ -126,5 +126,6 @@ if ( fgets(result,1023,CMD_fp)==NULL)
    cerr << "popen results returned NULL" << endl;
    return 1;
 }
-mouseType = result;} {}
+mouseType = result[0];} {selected
+  }
 } 

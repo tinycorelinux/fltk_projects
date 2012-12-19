@@ -115,7 +115,7 @@ if ( fgets(result,1023,CMD_fp)==NULL)
    cerr << "popen results returned NULL" << endl;
    return 1;
 }
-mouseType = result;
+mouseType = result[0];
   w->show(argc, argv);
   return Fl::run();
 }

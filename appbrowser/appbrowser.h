@@ -4,13 +4,15 @@
 #define appbrowser_h
 #include <FL/Fl.H>
 #include <FL/Fl_Double_Window.H>
-extern Fl_Double_Window *window;
+extern Fl_Double_Window *errwindow;
+#include <FL/Fl_Box.H>
+extern Fl_Box *errlabel;
 #include <FL/Fl_Button.H>
+extern Fl_Double_Window *window;
 #include <FL/Fl_Choice.H>
 extern Fl_Choice *search_choices;
 #include <FL/Fl_Input.H>
 extern Fl_Input *search_field;
-#include <FL/Fl_Box.H>
 extern Fl_Box *box_select;
 #include <FL/Fl_Browser.H>
 extern Fl_Browser *brw_select;

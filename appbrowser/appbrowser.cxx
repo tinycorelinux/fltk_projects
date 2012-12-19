@@ -21,8 +21,9 @@ static string select_extn;
 static string repository; 
 static ifstream ifaberr; 
 static string aberr; 
-static string mode, command, msg, mirror; 
+static string mode, command, msg, mirror, err_extn; 
 static Fl_Text_Buffer *txtBuffer = new Fl_Text_Buffer; 
+static void errhandler(const string &str); 
 
 static void cursor_normal() {
   window->cursor(FL_CURSOR_DEFAULT);
@@ -34,7 +35,7 @@ static void cursor_wait() {
 Fl::flush();
 }
 
-static void HandleInput_CB(int, void *data) {
+static void HandleInput_CB(int, void *) {
   static int x = 0;
 static char s[1024];
 char c = fgetc(G_in);            // read one char at a time
@@ -43,10 +44,13 @@ if ( c == '\n' || x == (sizeof(s)-1) )
   s[x] = 0;
   status_out->value(s);
   string result = s;
-  int loc = result.find((select_extn + ": OK"));
+  size_t loc = result.find((select_extn + ": OK"));
   if (loc != string::npos)
   {
     status_out->color(175);
+  } else { // Error
+    loc = result.find("Error"); // Only the md5sum error
+    if (loc != string::npos) errhandler(result);
   }
   x = 0;
 } else
@@ -57,9 +61,71 @@ static void fetch_extension() {
   status_out->activate();
 status_out->color(FL_WHITE);
 status_out->value(command.c_str());
-command = command + "\n";
-write(G_out, command.c_str(), command.length());
+string command2 = command + "\n";
+write(G_out, command2.c_str(), command2.length());
 Fl::add_fd(fileno(G_in), HandleInput_CB, (void*)&status_out);
+}
+
+Fl_Double_Window *errwindow=(Fl_Double_Window *)0;
+
+Fl_Box *errlabel=(Fl_Box *)0;
+
+static void cb_Remove(Fl_Button*, void*) {
+  string cmd = "rm -f " + err_extn + "*";
+
+system(cmd.c_str());
+
+fetch_extension();
+errwindow->hide();
+}
+
+static void cb_Try(Fl_Button*, void*) {
+  string cmd = "zsync " + mirror + "3.x/tcz/" + err_extn + ".zsync";
+
+int ret = system(cmd.c_str());
+ret = WEXITSTATUS(ret);
+
+if (ret == 0) fetch_extension();
+else {
+
+	// If zsync also fails, it's a bad hair
+	// day for the network. Nothing we can do.
+
+	status_out->value("Zsync failed.");
+
+	cmd = "rm -f " + err_extn + "*";
+
+	system(cmd.c_str());
+}
+
+errwindow->hide();
+}
+
+static void cb_Cancel(Fl_Button*, void*) {
+  errwindow->hide();
+}
+
+static void errhandler(const string &str) {
+  { errwindow = new Fl_Double_Window(520, 125, gettext("MD5SUM error"));
+    { errlabel = new Fl_Box(162, 25, 195, 30, gettext("Md5sum error on"));
+    } // Fl_Box* errlabel
+    { Fl_Button* o = new Fl_Button(15, 70, 160, 35, gettext("Remove and try again"));
+      o->callback((Fl_Callback*)cb_Remove);
+    } // Fl_Button* o
+    { Fl_Button* o = new Fl_Button(200, 70, 160, 35, gettext("Try to finish download"));
+      o->callback((Fl_Callback*)cb_Try);
+    } // Fl_Button* o
+    { Fl_Button* o = new Fl_Button(385, 70, 115, 35, gettext("Cancel"));
+      o->callback((Fl_Callback*)cb_Cancel);
+    } // Fl_Button* o
+    errwindow->end();
+  } // Fl_Double_Window* errwindow
+  errlabel->label(str.c_str());
+
+err_extn = str;
+err_extn.replace(0,9,""); // Yes, hardcoded magic value. Bad.
+
+errwindow->show();
 }
 
 static void btn_callback(Fl_Widget *, void* userdata) {
@@ -264,13 +330,13 @@ write(G_out, command.c_str(), command.length());
 Fl::add_fd(fileno(G_in), HandleInput_CB, (void*)&status_out);
 }
 
-static void mirror_btn_callback(Fl_Widget*, void* userdata) {
+static void mirror_btn_callback(Fl_Widget*, void*) {
   mode = "mirror";
 tabs->deactivate();
-int results = brw_select->load("/usr/local/share/mirrors");
-cout << results << endl;
-if ( results == 0)
-  fl_message("Must load mirrors.tcz extension in order to use this feature.");
+system("cat /opt/localmirrors /usr/local/share/mirrors > /tmp/mirrors 2>/dev/null");
+brw_select->load("/tmp/mirrors");
+if ( brw_select->size() == 1)
+  fl_message("Must load mirrors.tcz extension or have /opt/localmirrors in order to use this feature.");
 else {
    brw_select->remove(brw_select->size());
    box_select->label("Select Mirror");
@@ -278,7 +344,7 @@ else {
 }
 }
 
-static void tabsGroupCB(Fl_Widget*, void* userdata) {
+static void tabsGroupCB(Fl_Widget*, void*) {
   if (brw_select->value())
 {
    int results;
@@ -415,6 +481,8 @@ if ( last_dir_file.is_open() )
    getline(last_dir_file,last_dir);
    last_dir_file.close();
 }
+
+chdir(download_dir.c_str()); // we go there to more easily handle errors (delete, zsync)
 
 // Make fifo
 unlink("/tmp/ab2tce.fifo");
