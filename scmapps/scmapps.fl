@@ -156,7 +156,6 @@ cursor_wait();
 msg = select_extn;
 command = "aterm -fg black -bg white +tr -g 80x5 -e " + command;
 system(command.c_str());
-cout << command << endl;
 
 // Because using aterm results from system is 0 so look for results in /tmp/appserr/ifappserr
 ifstream ifappserr("/tmp/appserr");
@@ -322,7 +321,6 @@ Function {menuCB(Fl_Widget *, void* userdata)} {private return_type {static void
    results = system(command.c_str());
    if ( results == 0 )
    {
-      cout << "OK" << endl;
       brwResults->load("/tmp/VerChk");
       brwResults->bottomline(brwResults->size());
    }
@@ -701,7 +699,7 @@ Function {brwResultsCB(Fl_Widget *, void *)} {return_type {static void}
 }} {}
 } 
 
-Function {btnGoCB(Fl_Widget *, void* userdata)} {private return_type {static void}
+Function {btnGoCB(Fl_Widget *, void* userdata)} {open private return_type {static void}
 } {
   code {if (mode == "scm")
 {
@@ -724,7 +722,6 @@ Function {btnGoCB(Fl_Widget *, void* userdata)} {private return_type {static voi
    {
       command = "echo " + select_extn.substr(0,(select_extn.length()-4)) + " >>"+scmbootList;
       system(command.c_str());
-      cout << command << endl;
       Fl::flush();
    }
 } else if (mode == "install")
@@ -758,12 +755,12 @@ Function {btnGoCB(Fl_Widget *, void* userdata)} {private return_type {static voi
   cursor_normal();
 } else if ( mode == "delete" )
 {
-  command = "rm -f " + download_dir + "/" + select_extn + ".*";
-  cout << command << endl;
+  command = "rm -f " + download_dir + "/" + select_extn + ".scm*";
   results = system(command.c_str());
   if (results == 0)
   {
     command = "sed -i '/" + select_extn + "/d' " + scmbootList;
+    system(command.c_str());
     msg = select_extn + " deleted.";
     brwExtensions->remove(brwExtensions->value());
   } else
@@ -771,7 +768,8 @@ Function {btnGoCB(Fl_Widget *, void* userdata)} {private return_type {static voi
     
   brwResults->add(msg.c_str());  
   cursor_normal();
-}} {}
+}} {selected
+  }
 } 
 
 Function {} {open
@@ -997,7 +995,7 @@ chdir(download_dir.c_str()); // we go there to more easily handle errors (delete
       code0 {if (download_dir.compare(0,8,"/tmp/tce") == 0 ){btn_tce->activate();outputStatus->color(9);};}
     }
     Fl_Output uri {
-      label {URI:} selected
+      label {URI:}
       xywh {35 405 655 20} color 29
       code0 {uri->value(mirror.c_str());}
     }

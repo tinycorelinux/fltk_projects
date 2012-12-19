@@ -287,7 +287,7 @@ err_extn.replace(0,9,""); // Yes, hardcoded magic value. Bad.
 errwindow->show();} {}
 } 
 
-Function {menuCB(Fl_Widget *, void* userdata)} {open private return_type {static void}
+Function {menuCB(Fl_Widget *, void* userdata)} {private return_type {static void}
 } {
   code {report_type = (const char*)userdata;
 if (userdata == "tcz")
@@ -438,10 +438,6 @@ if (userdata == "tcz")
 } else if (userdata == "SelectiveCopy") 
 {
    auditView();
-/*   
-   btnSingle->label("Go @>");
-   btnResults->label("@< Go");
-*/   
    boxExtn->label("Select to Copy");
    command = "ls " + target_dir + "|grep -E .tcz$ ";
    loadBrwExtnData();
@@ -484,8 +480,7 @@ if (userdata == "tcz")
     unlink("/tmp/tags.lst");
     exit(0);
 
-  }} {selected
-  }
+  }} {}
 } 
 
 Function {btnCB(Fl_Widget *, void* userdata)} {private return_type {static void}
@@ -674,10 +669,11 @@ Function {tabsGroupCB(Fl_Widget*, void*)} {private return_type {static void}
 }} {}
 } 
 
-Function {dependsCB(Fl_Widget *, void* userdata)} {return_type {static void}
+Function {dependsCB(Fl_Widget *, void* userdata)} {open return_type {static void}
 } {
   code {option_type = "";
 report_type = (const char*) userdata;
+btnResults->hide();
 
 if (userdata == "updatedeps")
 {
@@ -801,7 +797,8 @@ menu_dependson->deactivate();
 menu_requiredby->deactivate();
 menu_missing->deactivate();
 menu_delete->deactivate();
-brwExtn->deselect();} {}
+brwExtn->deselect();} {selected
+  }
 } 
 
 Function {brwExtnCB(Fl_Widget *, void *)} {return_type {static void}
@@ -958,7 +955,7 @@ Function {brwResultsCB(Fl_Widget *, void *)} {return_type {static void}
   code {if (brwResults->value())
 {
   btnResults->deactivate();
-  if ( report_type == "ondemand" or report_type == "onboot" or report_type == "SelectiveCopy")
+  if ( report_type == "ondemand" or report_type == "onboot" or report_type == "SelectiveCopy" or report_type == "delete" or report_type == "display_marked" )
   {
      btnResults->show();
      btnResults->activate();

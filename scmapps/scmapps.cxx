@@ -725,12 +725,13 @@ static void btnGoCB(Fl_Widget *, void* userdata) {
   cursor_normal();
 } else if ( mode == "delete" )
 {
-  command = "rm -f " + download_dir + "/" + select_extn + ".*";
+  command = "rm -f " + download_dir + "/" + select_extn + ".scm*";
   cout << command << endl;
   results = system(command.c_str());
   if (results == 0)
   {
     command = "sed -i '/" + select_extn + "/d' " + scmbootList;
+    system(command.c_str());
     msg = select_extn + " deleted.";
     brwExtensions->remove(brwExtensions->value());
   } else

@@ -403,10 +403,6 @@ if (userdata == "tcz")
 } else if (userdata == "SelectiveCopy") 
 {
    auditView();
-/*   
-   btnSingle->label("Go @>");
-   btnResults->label("@< Go");
-*/   
    boxExtn->label("Select to Copy");
    command = "ls " + target_dir + "|grep -E .tcz$ ";
    loadBrwExtnData();
@@ -637,6 +633,7 @@ static void tabsGroupCB(Fl_Widget*, void*) {
 void dependsCB(Fl_Widget *, void* userdata) {
   option_type = "";
 report_type = (const char*) userdata;
+btnResults->hide();
 
 if (userdata == "updatedeps")
 {
@@ -912,7 +909,7 @@ void brwResultsCB(Fl_Widget *, void *) {
   if (brwResults->value())
 {
   btnResults->deactivate();
-  if ( report_type == "ondemand" or report_type == "onboot" or report_type == "SelectiveCopy")
+  if ( report_type == "ondemand" or report_type == "onboot" or report_type == "SelectiveCopy" or report_type == "delete" or report_type == "display_marked" )
   {
      btnResults->show();
      btnResults->activate();
