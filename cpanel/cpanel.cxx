@@ -12,60 +12,80 @@ void btn_callback(Fl_Widget* w, void* userdata) {
   system((const char*)userdata);
 }
 
+Fl_Button *btnWbarConf=(Fl_Button *)0;
+
 int main(int argc, char **argv) {
   Fl_Double_Window* w;
   setlocale(LC_ALL, "");
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");
-  { Fl_Double_Window* o = new Fl_Double_Window(405, 215, gettext("ControlPanel"));
+  { Fl_Double_Window* o = new Fl_Double_Window(445, 215, gettext("ControlPanel"));
     w = o;
-    { Fl_Button* o = new Fl_Button(10, 10, 120, 30, gettext("Apps Audit"));
+    { Fl_Box* o = new Fl_Box(5, 18, 140, 187, gettext("Maintenance"));
+      o->box(FL_EMBOSSED_FRAME);
+      o->labeltype(FL_ENGRAVED_LABEL);
+      o->align(FL_ALIGN_TOP);
+    } // Fl_Box* o
+    { Fl_Box* o = new Fl_Box(150, 18, 140, 187, gettext("Utilities"));
+      o->box(FL_EMBOSSED_FRAME);
+      o->labeltype(FL_ENGRAVED_LABEL);
+      o->align(FL_ALIGN_TOP);
+    } // Fl_Box* o
+    { Fl_Box* o = new Fl_Box(295, 18, 140, 187, gettext("Setup"));
+      o->box(FL_EMBOSSED_FRAME);
+      o->labeltype(FL_ENGRAVED_LABEL);
+      o->align(FL_ALIGN_TOP);
+    } // Fl_Box* o
+    { Fl_Button* o = new Fl_Button(15, 30, 120, 30, gettext("AppsAudit"));
       o->callback((Fl_Callback*)btn_callback, (void*)("appsaudit &"));
     } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(140, 10, 120, 30, gettext("Backup/Restore"));
-      o->callback((Fl_Callback*)btn_callback, (void*)("filetool &"));
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(270, 10, 120, 30, gettext("Mount Tool"));
-      o->callback((Fl_Callback*)btn_callback, (void*)("mnttool &"));
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(10, 50, 120, 30, gettext("Date/Time"));
-      o->callback((Fl_Callback*)btn_callback, (void*)("datetool &"));
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(140, 50, 120, 30, gettext("Wallpaper"));
-      o->callback((Fl_Callback*)btn_callback, (void*)("wallpaper &"));
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(270, 50, 120, 30, gettext("Swapfile Tool"));
-      o->callback((Fl_Callback*)btn_callback, (void*)("swapfile &"));
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(10, 90, 120, 30, gettext("Set TCE Drive"));
-      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -e tce-setdrive &"));
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(140, 90, 120, 30, gettext("Network"));
-      o->callback((Fl_Callback*)btn_callback, (void*)("sudo network &"));
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(270, 90, 120, 30, gettext("Xvesa Setup"));
-      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -e xsetup.sh &"));
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(10, 130, 120, 30, gettext("Floppy Tool"));
+    { Fl_Button* o = new Fl_Button(160, 30, 120, 30, gettext("Floppy Tool"));
       o->callback((Fl_Callback*)btn_callback, (void*)("fdtool&"));
     } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(140, 130, 120, 30, gettext("Mouse Tool"));
+    { Fl_Button* o = new Fl_Button(305, 30, 120, 30, gettext("HD/USB Install"));
+      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -T \"USB Install\" -e sudo usbinstall &"));
+    } // Fl_Button* o
+    { Fl_Button* o = new Fl_Button(15, 65, 120, 30, gettext("Backup/Restore"));
+      o->callback((Fl_Callback*)btn_callback, (void*)("filetool &"));
+    } // Fl_Button* o
+    { Fl_Button* o = new Fl_Button(160, 65, 120, 30, gettext("Mount Tool"));
+      o->callback((Fl_Callback*)btn_callback, (void*)("mnttool &"));
+    } // Fl_Button* o
+    { Fl_Button* o = new Fl_Button(305, 65, 120, 30, gettext("Hybrid Mode"));
+      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -T \"Hybrid Setup\" -e sudo /usr/bin/mktclocal &"));
+    } // Fl_Button* o
+    { Fl_Button* o = new Fl_Button(15, 100, 120, 30, gettext("Date/Time"));
+      o->callback((Fl_Callback*)btn_callback, (void*)("datetool &"));
+    } // Fl_Button* o
+    { Fl_Button* o = new Fl_Button(160, 100, 120, 30, gettext("Mouse Tool"));
       o->callback((Fl_Callback*)btn_callback, (void*)("mousetool &"));
     } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(270, 130, 120, 30, gettext("System Stats"));
+    { Fl_Button* o = new Fl_Button(305, 100, 120, 30, gettext("Terminal Server"));
+      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -T \"Terminal Server Setup\" -e sudo /usr/bin/tc-terminal-server &"));
+    } // Fl_Button* o
+    { Fl_Button* o = new Fl_Button(15, 135, 120, 30, gettext("Network"));
+      o->callback((Fl_Callback*)btn_callback, (void*)("sudo network &"));
+    } // Fl_Button* o
+    { Fl_Button* o = new Fl_Button(160, 135, 120, 30, gettext("System Stats"));
       o->callback((Fl_Callback*)btn_callback, (void*)("stats &"));
     } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(10, 170, 120, 30, gettext("Update Apps"));
-      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -e tce-update &"));
+    { Fl_Button* o = new Fl_Button(305, 135, 120, 30, gettext("Swapfile Tool"));
+      o->callback((Fl_Callback*)btn_callback, (void*)("swapfile &"));
     } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(140, 170, 120, 30, gettext("USB Install"));
-      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -e sudo usbinstall &"));
+    { btnWbarConf = new Fl_Button(15, 170, 120, 30, gettext("Wbar Conf"));
+      btnWbarConf->callback((Fl_Callback*)btn_callback, (void*)("wbarconf &"));
+      btnWbarConf->deactivate();
+    } // Fl_Button* btnWbarConf
+    { Fl_Button* o = new Fl_Button(160, 170, 120, 30, gettext("Wallpaper"));
+      o->callback((Fl_Callback*)btn_callback, (void*)("wallpaper &"));
     } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(270, 170, 120, 30, gettext("Run Command"));
-      o->callback((Fl_Callback*)btn_callback, (void*)("flrun &"));
+    { Fl_Button* o = new Fl_Button(305, 170, 120, 30, gettext("Xvesa"));
+      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -T \"Xvesa Setup\" -e xsetup.sh &"));
     } // Fl_Button* o
     o->end();
   } // Fl_Double_Window* o
+  int results = system("which wbarconf >/dev/null 2>&1");
+if ( results == 0 ) btnWbarConf->activate();
   w->show(argc, argv);
   return Fl::run();
 }

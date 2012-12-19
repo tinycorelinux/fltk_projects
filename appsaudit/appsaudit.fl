@@ -37,19 +37,19 @@ decl {int results, locales_set=0;} {}
 
 decl {string copy2fsList, copy2fsFlag, onbootList;} {} 
 
-Function {cursor_normal()} {open return_type void
+Function {cursor_normal()} {return_type void
 } {
   code {window->cursor(FL_CURSOR_DEFAULT);
 Fl::flush();} {}
 } 
 
-Function {cursor_wait()} {open return_type void
+Function {cursor_wait()} {return_type void
 } {
   code {window->cursor(FL_CURSOR_WAIT);
 Fl::flush();} {}
 } 
 
-Function {mygettext(const char *msgid)} {open private return_type {char *}
+Function {mygettext(const char *msgid)} {private return_type {char *}
 } {
   code {if (!locales_set) {
 
@@ -64,7 +64,7 @@ locales_set=1;
 return gettext(msgid);} {}
 } 
 
-Function {depends_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
+Function {depends_callback(Fl_Widget *, void* userdata)} {return_type {static void}
 } {
   code {report_type = (const char*) userdata;
 option_type = "";
@@ -90,7 +90,7 @@ if (userdata == "updatedeps")
    menu_auditall->activate();
    menu_marked->activate();
    menu_clearlst->activate();
-   box_extn->label(target_dir.c_str());
+// box_extn->label("Select");
    box_results->label("Results");
    cursor_normal();
 } else if (userdata == "dependson" or userdata == "requiredby" or userdata == "audit") 
@@ -163,7 +163,7 @@ if (userdata == "updatedeps")
 }} {}
 } 
 
-Function {options_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
+Function {options_callback(Fl_Widget *, void* userdata)} {return_type {static void}
 } {
   code {option_type = (const char*) userdata;
 report_type = "";
@@ -185,7 +185,7 @@ if (userdata == "default")
    }
 } else if (userdata == "select") 
 {
-   box_extn->label(target_dir.c_str());
+// box_extn->label(target_dir.c_str());
    command = "ls " + target_dir + "|grep -E .tcz$ > tce.lst";
    system(command.c_str());
    brw_extn->load("tce.lst");
@@ -202,7 +202,7 @@ if (userdata == "default")
 }} {}
 } 
 
-Function {updates_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
+Function {updates_callback(Fl_Widget *, void* userdata)} {return_type {static void}
 } {
   code {update_type = (const char*) userdata;
 report_type = "";
@@ -215,7 +215,7 @@ if (userdata == "update")
    cursor_wait();
    command = "tce-update list " + target_dir + " > /tmp/apps_upd.lst";
    system(command.c_str());
-   box_extn->label(target_dir.c_str());
+// box_extn->label(target_dir.c_str());
    brw_extn->load("/tmp/apps_upd.lst");
    brw_extn->remove(brw_extn->size());
    cursor_normal();
@@ -241,9 +241,9 @@ Function {onboot_callback(Fl_Widget *, void* userdata)} {open return_type {stati
   command = "ondemand -l ";
   results = system(command.c_str());
   if (results == 0 ) {
-     box_extn->label(target_dir.c_str());
      brw_extn->load("/tmp/ondemand.tmp");
      brw_extn->remove(brw_extn->size());
+     unlink("/tmp/ondemand.tmp");
   }
   
   box_results->label("On Boot Items");
@@ -275,36 +275,37 @@ Function {ondemand_callback(Fl_Widget *, void* userdata)} {open return_type {sta
   command = "ondemand -l";
   system(command.c_str());
   
-  box_extn->label("Select for OnDemand");
+//box_extn->label("Select for OnDemand");
   brw_extn->load("/tmp/ondemand.tmp");
   brw_extn->remove(brw_extn->size());
   
   brw_results->clear();
   box_results->label("Current OnDemand Items");
-  command = "ls -1 "+ tcedir + "/ondemand 2>/dev/null | sort -f > /tmp/ondemand.tmp";
+  command = "ls -1 "+ tcedir + "/ondemand 2>/dev/null | grep -v \\".img$\\" | sort -f > /tmp/ondemand.tmp";
   results = system(command.c_str());
   if (results == 0 ) {
     brw_results->load("/tmp/ondemand.tmp");
     brw_results->remove(brw_results->size());
+    unlink("/tmp/ondemand.tmp");
   }  
-  unlink("/tmp/ondemand.tmp");
   cursor_normal();
 }
  
 if (userdata == "exit_ondemand")
 {
   report_type.empty();
-  box_extn->label(target_dir.c_str());
+//box_extn->label(target_dir.c_str());
   box_results->label("Results");
   brw_extn->clear();
   brw_results->clear();
 } 
  
 if (userdata == "quit") 
-  exit(0);} {}
+  exit(0);} {selected
+  }
 } 
 
-Function {brw_extn_callback(Fl_Widget *, void *)} {open return_type {static void}
+Function {brw_extn_callback(Fl_Widget *, void *)} {return_type {static void}
 } {
   code {if (brw_extn->value())
 {
@@ -361,7 +362,7 @@ Function {brw_extn_callback(Fl_Widget *, void *)} {open return_type {static void
      results = system(command.c_str());
      if ( results == 0 ) 
      {
-       command = "ls -1 " + tcedir + "/ondemand | sort -f > /tmp/ondemand.tmp";
+       command = "ls -1 " + tcedir + "/ondemand | grep -v \\".img$\\" | sort -f > /tmp/ondemand.tmp";
        results = system(command.c_str());
        if (results == 0 ) {
          brw_extn->remove(brw_extn->value());
@@ -374,11 +375,10 @@ Function {brw_extn_callback(Fl_Widget *, void *)} {open return_type {static void
      }    
      cursor_normal();
    }
-}} {selected
-  }
+}} {}
 } 
 
-Function {brw_results_callback(Fl_Widget *, void *)} {open return_type {static void}
+Function {brw_results_callback(Fl_Widget *, void *)} {return_type {static void}
 } {
   code {if (brw_results->value())
 {
@@ -410,7 +410,7 @@ Function {brw_results_callback(Fl_Widget *, void *)} {open return_type {static v
      command = "ondemand -l ";
      results = system(command.c_str());
      if (results == 0 ) {
-        box_extn->label(target_dir.c_str());
+//      box_extn->label(target_dir.c_str());
         brw_extn->load("/tmp/ondemand.tmp");
         brw_extn->remove(brw_extn->size());
      }
@@ -432,7 +432,7 @@ Function {brw_results_callback(Fl_Widget *, void *)} {open return_type {static v
        brw_extn->load("/tmp/ondemand.tmp");
        brw_extn->remove(brw_extn->size());
      }  
-     command = "ls -1 " + tcedir + "/ondemand | sort -f > /tmp/ondemand.tmp";
+     command = "ls -1 " + tcedir + "/ondemand | grep -v .img$ | sort -f > /tmp/ondemand.tmp";
      results = system(command.c_str());
      if (results == 0 ) {
        brw_results->load("/tmp/ondemand.tmp");
@@ -451,11 +451,11 @@ Function {} {open
     callback onboot_callback open
     xywh {17 134 675 375} type Double hide resizable
   } {
-    Fl_Menu_Bar {} {open
+    Fl_Menu_Bar {} {
       xywh {0 0 685 20}
     } {
       Submenu {} {
-        label File open
+        label File
         xywh {0 0 63 20}
       } {
         MenuItem {} {
@@ -466,7 +466,7 @@ Function {} {open
         }
       }
       Submenu {} {
-        label Dependencies open
+        label Dependencies
         xywh {0 0 63 20}
       } {
         MenuItem {} {
@@ -537,7 +537,7 @@ Function {} {open
         }
       }
       Submenu {} {
-        label {Install Options} open
+        label {Install Options}
         xywh {0 0 63 20}
       } {
         MenuItem {} {
@@ -560,7 +560,7 @@ Function {} {open
         }
       }
       Submenu {} {
-        label Updates open
+        label Updates
         xywh {0 0 63 20}
       } {
         MenuItem {} {
@@ -577,7 +577,7 @@ Function {} {open
         }
       }
       Submenu {} {
-        label OnBoot open
+        label OnBoot
         xywh {0 0 63 20}
       } {
         MenuItem {} {
@@ -594,7 +594,7 @@ Function {} {open
         }
       }
       Submenu {} {
-        label OnDemand open
+        label OnDemand
         xywh {20 20 63 20}
       } {
         MenuItem {} {
@@ -612,7 +612,8 @@ Function {} {open
       }
     }
     Fl_Box box_extn {
-      xywh {0 24 200 16} labelfont 1 align 20
+      label Select
+      xywh {0 24 200 16} labelfont 1
     }
     Fl_Box box_results {
       label Results
@@ -636,7 +637,7 @@ getline(tcedir_file,tcedir);
 tcedir_file.close();
 
 target_dir = tcedir + "/optional";
-box_extn->label(target_dir.c_str());
+window->label(target_dir.c_str());
 
 copy2fsList = tcedir + "/copy2fs.lst";
 copy2fsFlag = tcedir + "/copy2fs.flg";

@@ -1,0 +1,176 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0110 
+i18n_type 1 
+i18n_include <libintl.h> 
+i18n_function gettext 
+header_name {.h} 
+code_name {.cxx}
+decl {// (c) Robert Shingledecker 2010} {} 
+
+decl {\#include <iostream>} {} 
+
+decl {\#include <fstream>} {} 
+
+decl {\#include <string>} {} 
+
+decl {\#include <FL/fl_message.H>} {} 
+
+decl {\#include <FL/Fl_File_Chooser.H>} {} 
+
+decl {\#include <locale.h>} {} 
+
+decl {using namespace std;} {} 
+
+decl {string home, tcedir, command, selected;} {} 
+
+decl {int chosen,results;} {} 
+
+decl {string onbootList, wbarXlist, options;} {} 
+
+decl {string wbarIcons = "/usr/local/tce.icons";} {} 
+
+Function {brw_wbar_callback(Fl_Widget *, void *)} {open return_type {static void}
+} {
+  code {if (brw_wbar->value())
+{
+   chosen = brw_wbar->value();
+   selected = brw_wbar->text(chosen);
+   command = "wbar_mv_icon " + selected.substr(0,selected.length()-1) + " " + wbarIcons + " " + wbarXlist;
+   system(command.c_str());
+   brw_wbarXlist->add(selected.c_str());
+   brw_wbar->remove(chosen);
+//   command = "wbar.sh";
+//   system(command.c_str());
+}} {}
+} 
+
+Function {brw_wbarXlist_callback(Fl_Widget *, void *)} {open return_type {static void}
+} {
+  code {if (brw_wbarXlist->value())
+{
+   chosen = brw_wbarXlist->value();
+   selected = brw_wbarXlist->text(chosen);
+   command = "wbar_mv_icon " + selected.substr(0,selected.length()-1) + " " + wbarXlist + " " + wbarIcons;
+   system(command.c_str());
+   brw_wbarXlist->remove(chosen);
+   brw_wbar->add(selected.c_str());
+//   command = "wbar.sh";
+//   system(command.c_str());
+}} {selected
+  }
+} 
+
+Function {btnApplyCB(Fl_Widget *, void *)} {open return_type {static void}
+} {
+  code {options = "-bpress ";
+int pos = posChoice->value();
+switch(pos)
+{
+   case 0  : options += "-p top";
+             break;;
+   case 1  : options += "-p bottom";
+             break;;
+   case 2  : options += "-p left -vbar";
+             break;;
+   case 3  : options += "-p right -vbar";
+             break;;
+   default : options += "-p bottom";
+             break;;
+}
+string fname = home + "/.wbar";
+ofstream fout(fname.c_str(), ios::out|ios::out);
+if (! fout.is_open())
+{
+   cerr << "Can't open .wbar for output." << endl;
+   exit(EXIT_FAILURE);
+}
+fout << options << endl;
+fout.close();
+
+command = "wbar.sh";
+system(command.c_str());} {}
+} 
+
+Function {} {open
+} {
+  code {setlocale(LC_ALL, "");
+bindtextdomain("tinycore","/usr/local/share/locale");
+textdomain("tinycore");} {}
+  Fl_Window window {
+    label {eXclude Wbar Icons} open
+    xywh {17 124 420 315} type Double hide resizable
+  } {
+    Fl_Browser brw_wbar {
+      label {Wbar Icons}
+      callback brw_wbar_callback
+      xywh {5 20 200 265} type Select align 1 textfont 4
+    }
+    Fl_Browser brw_wbarXlist {
+      label {eXcluded Items}
+      callback brw_wbarXlist_callback
+      xywh {215 20 200 265} type Select align 1 textfont 4
+    }
+    Fl_Choice posChoice {
+      label {Wbar Position} open
+      xywh {100 290 85 20} down_box BORDER_BOX
+      code0 {posChoice->value(1);}
+    } {
+      MenuItem {} {
+        label Top
+        xywh {0 0 30 20}
+      }
+      MenuItem {} {
+        label Bottom
+        xywh {10 10 30 20}
+      }
+      MenuItem {} {
+        label Left
+        xywh {20 20 30 20}
+      }
+      MenuItem {} {
+        label Right
+        xywh {30 30 30 20}
+      }
+    }
+    Fl_Button {} {
+      label Apply
+      callback btnApplyCB
+      xywh {330 290 64 20}
+    }
+  }
+  code {home = getenv("HOME");
+ifstream tcedir_file("/opt/.tce_dir");
+getline(tcedir_file,tcedir);
+tcedir_file.close();
+wbarXlist = tcedir + "/xwbar.lst";
+
+command = "awk '/t: /{if (NR>4)print $2}' < " + wbarIcons;
+FILE *pipe = popen(command.c_str(),"r");
+char *mbuf = (char *) calloc(PATH_MAX,sizeof(char));
+
+if (pipe) {
+  brw_wbar->clear();
+  while (fgets(mbuf,PATH_MAX,pipe)) {
+     string line(mbuf);
+     brw_wbar->add(line.c_str());
+     Fl::flush();
+   }
+   pclose(pipe);
+   free(mbuf);
+}
+
+command = "awk '/t: /{print $2}' < " + wbarXlist + " 2>/dev/null";
+pipe = popen(command.c_str(),"r");
+mbuf = (char *) calloc(PATH_MAX,sizeof(char));
+
+if (pipe) {
+  brw_wbarXlist->clear();
+  while (fgets(mbuf,PATH_MAX,pipe)) {
+     string line(mbuf);
+     brw_wbarXlist->add(line.c_str());
+     Fl::flush();
+   }
+   pclose(pipe);
+   free(mbuf);
+}} {}
+} 

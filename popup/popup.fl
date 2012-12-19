@@ -1,9 +1,8 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2008} {selected
-} 
+decl {// (c) Robert Shingledecker 2008} {} 
 
 decl {\#include <iostream>} {} 
 
@@ -18,5 +17,6 @@ Function {} {open
   code {string msg;
 for (int i=1; i < argc; i++)
    msg = msg + argv[i] + " ";
-fl_message(msg.c_str());} {}
+fl_message(msg.c_str());} {selected
+  }
 } 

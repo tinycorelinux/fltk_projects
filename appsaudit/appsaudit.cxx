@@ -68,7 +68,7 @@ if (userdata == "updatedeps")
    menu_auditall->activate();
    menu_marked->activate();
    menu_clearlst->activate();
-   box_extn->label(target_dir.c_str());
+// box_extn->label("Select");
    box_results->label("Results");
    cursor_normal();
 } else if (userdata == "dependson" or userdata == "requiredby" or userdata == "audit") 
@@ -162,7 +162,7 @@ if (userdata == "default")
    }
 } else if (userdata == "select") 
 {
-   box_extn->label(target_dir.c_str());
+// box_extn->label(target_dir.c_str());
    command = "ls " + target_dir + "|grep -E .tcz$ > tce.lst";
    system(command.c_str());
    brw_extn->load("tce.lst");
@@ -191,7 +191,7 @@ if (userdata == "update")
    cursor_wait();
    command = "tce-update list " + target_dir + " > /tmp/apps_upd.lst";
    system(command.c_str());
-   box_extn->label(target_dir.c_str());
+// box_extn->label(target_dir.c_str());
    brw_extn->load("/tmp/apps_upd.lst");
    brw_extn->remove(brw_extn->size());
    cursor_normal();
@@ -216,9 +216,9 @@ void onboot_callback(Fl_Widget *, void* userdata) {
   command = "ondemand -l ";
   results = system(command.c_str());
   if (results == 0 ) {
-     box_extn->label(target_dir.c_str());
      brw_extn->load("/tmp/ondemand.tmp");
      brw_extn->remove(brw_extn->size());
+     unlink("/tmp/ondemand.tmp");
   }
   
   box_results->label("On Boot Items");
@@ -249,26 +249,26 @@ void ondemand_callback(Fl_Widget *, void* userdata) {
   command = "ondemand -l";
   system(command.c_str());
   
-  box_extn->label("Select for OnDemand");
+//box_extn->label("Select for OnDemand");
   brw_extn->load("/tmp/ondemand.tmp");
   brw_extn->remove(brw_extn->size());
   
   brw_results->clear();
   box_results->label("Current OnDemand Items");
-  command = "ls -1 "+ tcedir + "/ondemand 2>/dev/null | sort -f > /tmp/ondemand.tmp";
+  command = "ls -1 "+ tcedir + "/ondemand 2>/dev/null | grep -v \".img$\" | sort -f > /tmp/ondemand.tmp";
   results = system(command.c_str());
   if (results == 0 ) {
     brw_results->load("/tmp/ondemand.tmp");
     brw_results->remove(brw_results->size());
+    unlink("/tmp/ondemand.tmp");
   }  
-  unlink("/tmp/ondemand.tmp");
   cursor_normal();
 }
  
 if (userdata == "exit_ondemand")
 {
   report_type.empty();
-  box_extn->label(target_dir.c_str());
+//box_extn->label(target_dir.c_str());
   box_results->label("Results");
   brw_extn->clear();
   brw_results->clear();
@@ -334,7 +334,7 @@ void brw_extn_callback(Fl_Widget *, void *) {
      results = system(command.c_str());
      if ( results == 0 ) 
      {
-       command = "ls -1 " + tcedir + "/ondemand | sort -f > /tmp/ondemand.tmp";
+       command = "ls -1 " + tcedir + "/ondemand | grep -v \".img$\" | sort -f > /tmp/ondemand.tmp";
        results = system(command.c_str());
        if (results == 0 ) {
          brw_extn->remove(brw_extn->value());
@@ -381,7 +381,7 @@ void brw_results_callback(Fl_Widget *, void *) {
      command = "ondemand -l ";
      results = system(command.c_str());
      if (results == 0 ) {
-        box_extn->label(target_dir.c_str());
+//      box_extn->label(target_dir.c_str());
         brw_extn->load("/tmp/ondemand.tmp");
         brw_extn->remove(brw_extn->size());
      }
@@ -403,7 +403,7 @@ void brw_results_callback(Fl_Widget *, void *) {
        brw_extn->load("/tmp/ondemand.tmp");
        brw_extn->remove(brw_extn->size());
      }  
-     command = "ls -1 " + tcedir + "/ondemand | sort -f > /tmp/ondemand.tmp";
+     command = "ls -1 " + tcedir + "/ondemand | grep -v .img$ | sort -f > /tmp/ondemand.tmp";
      results = system(command.c_str());
      if (results == 0 ) {
        brw_results->load("/tmp/ondemand.tmp");
@@ -467,9 +467,8 @@ int main(int argc, char **argv) {
     { Fl_Menu_Bar* o = new Fl_Menu_Bar(0, 0, 685, 20);
       o->menu(menu_);
     } // Fl_Menu_Bar* o
-    { box_extn = new Fl_Box(0, 24, 200, 16);
+    { box_extn = new Fl_Box(0, 24, 200, 16, mygettext("Select"));
       box_extn->labelfont(1);
-      box_extn->align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE);
     } // Fl_Box* box_extn
     { box_results = new Fl_Box(225, 24, 430, 16, mygettext("Results"));
       box_results->labelfont(1);
@@ -496,7 +495,7 @@ getline(tcedir_file,tcedir);
 tcedir_file.close();
 
 target_dir = tcedir + "/optional";
-box_extn->label(target_dir.c_str());
+window->label(target_dir.c_str());
 
 copy2fsList = tcedir + "/copy2fs.lst";
 copy2fsFlag = tcedir + "/copy2fs.flg";

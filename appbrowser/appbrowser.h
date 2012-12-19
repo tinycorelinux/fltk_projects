@@ -30,6 +30,7 @@ extern Fl_Choice *install_choices;
 extern Fl_Button *btn_go;
 #include <FL/Fl_Output.H>
 extern Fl_Output *status_out;
+extern Fl_Button *btn_tce;
 extern Fl_Menu_Item menu_search_choices[];
 extern Fl_Menu_Item menu_install_choices[];
 #endif

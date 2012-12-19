@@ -94,9 +94,6 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open private return_type {
   code {if (userdata == "tcz")
 {
    mode = "tcz";
-   status_out->value("");
-   status_out->label("Status");
-   status_out->deactivate();
    repository = (const char*) userdata;
    cursor_wait();
    command = "/usr/bin/tce-fetch.sh info.lst.gz";
@@ -117,6 +114,8 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open private return_type {
       fl_message("Connection error, check network or mirror.");
 } else if (userdata == "go")
 {
+   status_out->value("");
+   status_out->label("Status");
    int action = install_choices->value();
    string action_type;
    switch(action)
@@ -133,8 +132,25 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open private return_type {
    }
    command = "tce-load -" + action_type + " " + select_extn;
    cout << command << endl;
-   fetch_extension();          
-   
+   fetch_extension();
+} else if (userdata == "setdrive")
+{
+   cursor_wait();
+   command = "tce-setdrive -l";
+   int results = system(command.c_str());
+   cursor_normal();
+   cout << results << endl;
+   if (results == 0 )
+   {
+      mode = "setdrive";
+      brw_select->load("/tmp/tcesetdev");
+      brw_select->remove(brw_select->size());
+      box_select->label("Select for TCE dir.");
+      box_select->activate();
+      unlink("/tmp/tcesetdev");
+   } else
+     fl_message("No available drives found!");
+     
 } else if (userdata == "search")
 {
    if (search_choices->text() == "Search")
@@ -154,15 +170,19 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open private return_type {
     search_choices->activate();
     search_field->activate();                                              
     unlink("info.lst");
-  } 
+  }
+      
 } else if (userdata == "quit")
   {
-    ofstream last_dir_fout("/opt/.appbrowser",ios::out|ios::out);
-    if ( last_dir_fout.is_open())
+    if ( last_dir.compare(0,8,"/tmp/tce") != 0 )
     {
-       last_dir_fout << last_dir << endl;
-       last_dir_fout.close();
-    }
+      ofstream last_dir_fout("/opt/.appbrowser",ios::out|ios::out);
+      if ( last_dir_fout.is_open())
+      {
+        last_dir_fout << last_dir << endl;
+        last_dir_fout.close();
+      }
+    }  
     command = "quit\\n";
     write(G_out, command.c_str(), command.length());
     unlink("ab2tce.fifo");
@@ -199,8 +219,8 @@ Function {brw_select_callback(Fl_Widget *, void *)} {open private return_type {s
    }
    if ( mode == "mirror" )
    {
-      status_out->value(select_extn.c_str());
-      mirror = status_out->value();
+     mirror = select_extn;
+     window->label(mirror.c_str());
      ofstream fout("/opt/tcemirror", ios::out|ios::out);
      if (! fout.is_open())
      {
@@ -210,7 +230,30 @@ Function {brw_select_callback(Fl_Widget *, void *)} {open private return_type {s
      fout << mirror << endl;
      fout.close();      
    }
-}} {}
+   if ( mode == "setdrive" )
+   {
+      command = "/usr/bin/tce-setdrive -s " + select_extn;
+      int results = system(command.c_str());
+      if (results == 0)
+      {
+         download_dir = select_extn + "/tce";
+         ofstream fout("/opt/.tce_dir", ios::out|ios::out);
+         if (! fout.is_open())
+         {
+            cerr << "Can't open /opt/.tce_dir for output!" << endl;
+            exit(EXIT_FAILURE);
+         }
+         fout << download_dir << endl;
+         fout.close();      
+         brw_select->clear();
+         box_select->label("");
+         download_dir += "/optional";
+         status_out->value((download_dir).c_str());
+         btn_tce->deactivate();         
+      }
+   }
+}} {selected
+  }
 } 
 
 Function {local_btn_callback(Fl_Widget*, void* userdata)} {open private return_type {static void}
@@ -257,13 +300,17 @@ Function {mirror_btn_callback(Fl_Widget*, void* userdata)} {open private return_
   code {//Get Mirror
 mode = "mirror";
 cursor_wait();
-ifstream fin("/opt/tcemirror");
+/*
+fin("/opt/tcemirror");
 getline(fin,mirror);
 fin.close();
+*/
 tabs->deactivate();
+/*
 status_out->label("  URL:");
 status_out->value(mirror.c_str());
 status_out->activate();
+*/
 command = "/usr/bin/tce-fetch.sh mirrors.lst";
 int results = system(command.c_str());
 cursor_normal();
@@ -342,8 +389,7 @@ Function {tabsGroupCB(Fl_Widget*, void* userdata)} {open private return_type {st
 
      cursor_normal();
    }
-}} {selected
-  }
+}} {}
 } 
 
 Function {} {open
@@ -352,11 +398,16 @@ Function {} {open
 bindtextdomain("tinycore", "/usr/local/share/locale");
 textdomain("tinycore");
 
-ifstream download_dir_file("/opt/.tce_dir");
-getline(download_dir_file,download_dir);
-download_dir_file.close();
+ifstream mirror_fin("/opt/tcemirror");
+getline(mirror_fin,mirror);
+mirror_fin.close();
 
-last_dir = download_dir + "/optional";   
+ifstream dd_fin("/opt/.tce_dir");
+getline(dd_fin,download_dir);
+dd_fin.close();
+
+download_dir += "/optional";
+last_dir = download_dir;   
 ifstream last_dir_file("/opt/.appbrowser");
 if ( last_dir_file.is_open() )
 {
@@ -388,7 +439,8 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
     label Appbrowser
     user_data {"quit"}
     callback btn_callback open
-    xywh {17 252 685 395} type Double hide resizable
+    xywh {17 20 685 395} type Double hide resizable
+    code0 {window->label(mirror.c_str());}
   } {
     Fl_Button {} {
       label Connect
@@ -459,7 +511,7 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
         xywh {205 45 475 325} deactivate
       } {
         Fl_Text_Display dependsDisplay {
-          xywh {210 50 470 318} textfont 4
+          xywh {210 50 470 318} labelfont 1 textfont 4
           code0 {dependsDisplay->buffer(txtBuffer);}
         }
       }
@@ -474,7 +526,7 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
       }
     }
     Fl_Choice install_choices {open
-      xywh {5 373 140 20} down_box BORDER_BOX
+      xywh {3 373 140 20} down_box BORDER_BOX
     } {
       MenuItem {} {
         label OnBoot
@@ -497,11 +549,20 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
       label Go
       user_data {"go"}
       callback btn_callback
-      xywh {150 373 44 20} deactivate
+      xywh {145 373 30 20} deactivate
     }
     Fl_Output status_out {
       label Status
-      xywh {250 373 430 20} deactivate
+      xywh {225 373 420 20}
+      code0 {status_out->value(download_dir.c_str());}
+      code1 {status_out->label("  TCE:");}
+    }
+    Fl_Button btn_tce {
+      label Set
+      user_data {"setdrive"}
+      callback btn_callback
+      xywh {645 373 34 20} deactivate
+      code0 {if (download_dir.compare(0,8,"/tmp/tce") == 0 ){btn_tce->activate();};}
     }
   }
 } 
