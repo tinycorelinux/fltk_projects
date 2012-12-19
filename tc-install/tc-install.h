@@ -8,6 +8,7 @@ void prepTarget();
 void cursor_normal();
 void cursor_wait();
 void btnCB(Fl_Widget*, void*userdata);
+void brwCB(Fl_Widget*, void*userdata);
 void btnProceedCB(Fl_Widget*, void* userdata);
 #include <FL/Fl_Double_Window.H>
 extern Fl_Double_Window *window;
@@ -15,6 +16,8 @@ extern Fl_Double_Window *window;
 extern Fl_Wizard *wWizard;
 #include <FL/Fl_Group.H>
 extern Fl_Group *grpType;
+#include <FL/Fl_Box.H>
+extern Fl_Box *lblPathCore;
 #include <FL/Fl_Output.H>
 extern Fl_Output *fullpathOutput;
 #include <FL/Fl_Check_Button.H>
@@ -24,8 +27,6 @@ extern Fl_Check_Button *btnPartition;
 extern Fl_Browser *brwTarget;
 extern Fl_Check_Button *btnActive;
 extern Fl_Check_Button *btnBootloader;
-#include <FL/Fl_Box.H>
-extern Fl_Box *lblPathCore;
 extern Fl_Group *grpFormat;
 extern Fl_Group *FormatType;
 #include <FL/Fl_Round_Button.H>

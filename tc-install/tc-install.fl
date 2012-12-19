@@ -138,7 +138,7 @@ locales_set=1;
 return gettext(msgid);} {}
 } 
 
-Function {btnCB(Fl_Widget*, void*userdata)} {open return_type {static void}
+Function {btnCB(Fl_Widget*, void*userdata)} {return_type {static void}
 } {
   code {/*if ( userdata == "begin" )
 {
@@ -244,11 +244,30 @@ if (grpReview->visible())
    }else{
    	if (! tcepath.empty()) {brwReview->add(("Install TCE/CDE Dircetory: "+tcepath).c_str());}
    }
+}} {}
+} 
+
+Function {brwCB(Fl_Widget*, void*userdata)} {open return_type {static void}
+} {
+  code {if ( brwTarget->value() )
+{
+   dev = brwTarget->text(brwTarget->value());
+   dev = dev.substr(0,dev.find("\\t",0));
+   int partitionNbr;
+   iss.str(dev.substr(3,dev.length()));
+   iss >> partitionNbr;
+   grpButtons->activate();
+   if (btnPartition->value() == 1  && partitionNbr < 5)
+      btnActive->activate();
+   if (installMode == "frugal")
+   	btnBootloader->activate();
+   else
+   	btnBootloader->value(1);
 }} {selected
   }
 } 
 
-Function {btnProceedCB(Fl_Widget*, void* userdata)} {open return_type {static void}
+Function {btnProceedCB(Fl_Widget*, void* userdata)} {return_type {static void}
 } {
   code {btnProceed->deactivate();
 grpButtons->deactivate();
@@ -314,16 +333,20 @@ Function {} {open
   Fl_Window window {
     label {Tiny Core Installation}
     user_data {"quit"} open
-    xywh {421 249 480 400} type Double hide resizable
+    xywh {34 216 480 400} type Double hide resizable
   } {
     Fl_Wizard wWizard {
       label {Tiny Core Installation} open
       xywh {25 30 435 325} labeltype ENGRAVED_LABEL
       code0 {wWizard->value(wWizard->child(0));}
     } {
-      Fl_Group grpType {
+      Fl_Group grpType {open
         xywh {25 30 435 325}
       } {
+        Fl_Box lblPathCore {
+          label {Path to core.gz:}
+          xywh {55 38 105 25}
+        }
         Fl_Output fullpathOutput {
           user_data {"core"}
           callback {image = (const char*)v;
@@ -332,8 +355,8 @@ fullpathOutput->value(path.c_str());
 prepTarget();}
           xywh {55 63 375 27}
         }
-        Fl_Group {} {
-          xywh {55 104 375 51}
+        Fl_Group {} {open
+          xywh {55 104 375 25}
         } {
           Fl_Check_Button {} {
             label Frugal
@@ -385,20 +408,7 @@ prepTarget();
         }
         Fl_Browser brwTarget {
           label {Select Target Disk}
-          callback {if ( brwTarget->value() )
-{
-   dev = brwTarget->text(brwTarget->value());
-   int partitionNbr;
-   iss.str(dev.substr(3,dev.length()));
-   iss >> partitionNbr;
-   grpButtons->activate();
-   if (btnPartition->value() == 1  && partitionNbr < 5)
-      btnActive->activate();
-   if (installMode == "frugal")
-   	btnBootloader->activate();
-   else
-   	btnBootloader->value(1);
-}}
+          callback brwCB
           xywh {55 189 375 100} type Hold align 1 deactivate
         }
         Fl_Check_Button btnActive {
@@ -414,12 +424,8 @@ prepTarget();
           xywh {130 318 230 24} down_box DOWN_BOX deactivate
           code0 {btnBootloader->value(1);}
         }
-        Fl_Box lblPathCore {
-          label {Path to core.gz:}
-          xywh {55 38 105 25}
-        }
       }
-      Fl_Group grpFormat {
+      Fl_Group grpFormat {open
         xywh {25 30 435 325} hide
       } {
         Fl_Group FormatType {
@@ -583,8 +589,8 @@ outputTCEDir->value(tcepath.c_str());}
         }
       }
     }
-    Fl_Group grpButtons {
-      xywh {25 365 440 40} deactivate
+    Fl_Group grpButtons {open
+      xywh {25 365 440 25} deactivate
     } {
       Fl_Button {} {
         label {@<}

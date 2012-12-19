@@ -27,19 +27,19 @@ bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");} {}
   Fl_Window {} {
     label ControlPanel open
-    xywh {40 335 445 180} type Double hide
+    xywh {41 336 445 180} type Double hide
   } {
     Fl_Box {} {
       label Maintenance
-      xywh {5 18 140 155} box EMBOSSED_FRAME labeltype ENGRAVED_LABEL align 1
+      xywh {5 18 140 155} box EMBOSSED_FRAME align 1
     }
     Fl_Box {} {
       label Utilities
-      xywh {150 18 140 155} box EMBOSSED_FRAME labeltype ENGRAVED_LABEL align 1
+      xywh {150 18 140 155} box EMBOSSED_FRAME align 1
     }
     Fl_Box {} {
       label Setup
-      xywh {295 18 140 155} box EMBOSSED_FRAME labeltype ENGRAVED_LABEL align 1
+      xywh {295 18 140 155} box EMBOSSED_FRAME align 1
     }
     Fl_Button {} {
       label {Backup/Restore}
@@ -96,9 +96,9 @@ textdomain("tinycore");} {}
       xywh {305 100 120 30}
     }
     Fl_Button btnWbarConf {
-      label {Wbar Conf}
-      user_data {"wbarconf &"}
-      callback btn_callback selected
+      label tcWbarConf
+      user_data {"tc-wbarconf &"}
+      callback btn_callback
       xywh {15 135 120 30} deactivate
     }
     Fl_Button {} {
@@ -110,11 +110,11 @@ textdomain("tinycore");} {}
     Fl_Button btnXvesa {
       label Xvesa
       user_data {"aterm +tr +sb -T \\"Xvesa Setup\\" -e xsetup.sh &"}
-      callback btn_callback
+      callback btn_callback selected
       xywh {305 135 120 30} deactivate
     }
   }
-  code {int results = system("which wbarconf >/dev/null 2>&1");
+  code {int results = system("which tc-wbarconf >/dev/null 2>&1");
 if ( results == 0 ) btnWbarConf->activate();
 
 results = system("which Xvesa >/dev/null 2>&1");

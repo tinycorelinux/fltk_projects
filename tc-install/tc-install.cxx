@@ -223,6 +223,24 @@ if (grpReview->visible())
 }
 }
 
+void brwCB(Fl_Widget*, void*userdata) {
+  if ( brwTarget->value() )
+{
+   dev = brwTarget->text(brwTarget->value());
+   dev = dev.substr(0,dev.find("\t",0));
+   int partitionNbr;
+   iss.str(dev.substr(3,dev.length()));
+   iss >> partitionNbr;
+   grpButtons->activate();
+   if (btnPartition->value() == 1  && partitionNbr < 5)
+      btnActive->activate();
+   if (installMode == "frugal")
+   	btnBootloader->activate();
+   else
+   	btnBootloader->value(1);
+}
+}
+
 void btnProceedCB(Fl_Widget*, void* userdata) {
   btnProceed->deactivate();
 grpButtons->deactivate();
@@ -289,6 +307,8 @@ Fl_Wizard *wWizard=(Fl_Wizard *)0;
 
 Fl_Group *grpType=(Fl_Group *)0;
 
+Fl_Box *lblPathCore=(Fl_Box *)0;
+
 Fl_Output *fullpathOutput=(Fl_Output *)0;
 
 static void cb_fullpathOutput(Fl_Output*, void* v) {
@@ -335,23 +355,6 @@ prepTarget();
 
 Fl_Browser *brwTarget=(Fl_Browser *)0;
 
-static void cb_brwTarget(Fl_Browser*, void*) {
-  if ( brwTarget->value() )
-{
-   dev = brwTarget->text(brwTarget->value());
-   int partitionNbr;
-   iss.str(dev.substr(3,dev.length()));
-   iss >> partitionNbr;
-   grpButtons->activate();
-   if (btnPartition->value() == 1  && partitionNbr < 5)
-      btnActive->activate();
-   if (installMode == "frugal")
-   	btnBootloader->activate();
-   else
-   	btnBootloader->value(1);
-};
-}
-
 Fl_Check_Button *btnActive=(Fl_Check_Button *)0;
 
 static void cb_btnActive(Fl_Check_Button*, void*) {
@@ -362,8 +365,6 @@ static void cb_btnActive(Fl_Check_Button*, void*) {
 }
 
 Fl_Check_Button *btnBootloader=(Fl_Check_Button *)0;
-
-Fl_Box *lblPathCore=(Fl_Box *)0;
 
 Fl_Group *grpFormat=(Fl_Group *)0;
 
@@ -478,10 +479,12 @@ int main(int argc, char **argv) {
     { wWizard = new Fl_Wizard(25, 30, 435, 325, mygettext("Tiny Core Installation"));
       wWizard->labeltype(FL_ENGRAVED_LABEL);
       { grpType = new Fl_Group(25, 30, 435, 325);
+        { lblPathCore = new Fl_Box(55, 38, 105, 25, mygettext("Path to core.gz:"));
+        } // Fl_Box* lblPathCore
         { fullpathOutput = new Fl_Output(55, 63, 375, 27);
           fullpathOutput->callback((Fl_Callback*)cb_fullpathOutput, (void*)("core"));
         } // Fl_Output* fullpathOutput
-        { Fl_Group* o = new Fl_Group(55, 104, 375, 51);
+        { Fl_Group* o = new Fl_Group(55, 104, 375, 25);
           { Fl_Check_Button* o = new Fl_Check_Button(80, 105, 70, 22, mygettext("Frugal"));
             o->tooltip(mygettext("Use for frugal hard drive installations"));
             o->type(102);
@@ -521,7 +524,7 @@ int main(int argc, char **argv) {
         } // Fl_Group* o
         { brwTarget = new Fl_Browser(55, 189, 375, 100, mygettext("Select Target Disk"));
           brwTarget->type(2);
-          brwTarget->callback((Fl_Callback*)cb_brwTarget);
+          brwTarget->callback((Fl_Callback*)brwCB);
           brwTarget->align(FL_ALIGN_TOP);
           brwTarget->deactivate();
         } // Fl_Browser* brwTarget
@@ -535,8 +538,6 @@ int main(int argc, char **argv) {
           btnBootloader->deactivate();
           btnBootloader->value(1);
         } // Fl_Check_Button* btnBootloader
-        { lblPathCore = new Fl_Box(55, 38, 105, 25, mygettext("Path to core.gz:"));
-        } // Fl_Box* lblPathCore
         grpType->end();
       } // Fl_Group* grpType
       { grpFormat = new Fl_Group(25, 30, 435, 325);
@@ -664,7 +665,7 @@ int main(int argc, char **argv) {
       wWizard->value(wWizard->child(0));
       wWizard->end();
     } // Fl_Wizard* wWizard
-    { grpButtons = new Fl_Group(25, 365, 440, 40);
+    { grpButtons = new Fl_Group(25, 365, 440, 25);
       grpButtons->deactivate();
       { Fl_Button* o = new Fl_Button(180, 365, 45, 25, mygettext("@<"));
         o->callback((Fl_Callback*)btnCB, (void*)("prev"));

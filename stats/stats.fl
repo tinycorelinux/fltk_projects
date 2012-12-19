@@ -49,8 +49,7 @@ if (userdata == "installed")
   system("ls -1 /usr/local/tce.installed | sort -f >/tmp/stats.txt");
 if (userdata=="big")
   system("bigHomeFiles.sh > /tmp/stats.txt");
-txtBuffer->loadfile("/tmp/stats.txt");} {selected
-  }
+txtBuffer->loadfile("/tmp/stats.txt");} {}
 } 
 
 Function {} {open
@@ -59,8 +58,8 @@ Function {} {open
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");} {}
   Fl_Window {} {
-    label {Tiny Core System Stats} open
-    xywh {20 136 660 385} type Double hide
+    label {Tiny Core System Stats} open selected
+    xywh {21 137 660 385} type Double hide resizable
   } {
     Fl_Tabs tabs {
       callback tabsGroupCB open
@@ -180,7 +179,7 @@ textdomain("tinycore");} {}
         label bigHomeFiles
         user_data {"big"}
         callback tabCB open
-        xywh {0 5 660 350} hide
+        xywh {0 5 660 350}
       } {
         Fl_Text_Display bigDisplay {
           xywh {0 0 660 335} textfont 4

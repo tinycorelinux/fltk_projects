@@ -25,17 +25,14 @@ textdomain("tinycore");
     w = o;
     { Fl_Box* o = new Fl_Box(5, 18, 140, 155, gettext("Maintenance"));
       o->box(FL_EMBOSSED_FRAME);
-      o->labeltype(FL_ENGRAVED_LABEL);
       o->align(FL_ALIGN_TOP);
     } // Fl_Box* o
     { Fl_Box* o = new Fl_Box(150, 18, 140, 155, gettext("Utilities"));
       o->box(FL_EMBOSSED_FRAME);
-      o->labeltype(FL_ENGRAVED_LABEL);
       o->align(FL_ALIGN_TOP);
     } // Fl_Box* o
     { Fl_Box* o = new Fl_Box(295, 18, 140, 155, gettext("Setup"));
       o->box(FL_EMBOSSED_FRAME);
-      o->labeltype(FL_ENGRAVED_LABEL);
       o->align(FL_ALIGN_TOP);
     } // Fl_Box* o
     { Fl_Button* o = new Fl_Button(15, 30, 120, 30, gettext("Backup/Restore"));
@@ -65,8 +62,8 @@ textdomain("tinycore");
     { Fl_Button* o = new Fl_Button(305, 100, 120, 30, gettext("Terminal Server"));
       o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -T \"Terminal Server Setup\" -e sudo /usr/bin/tc-terminal-server &"));
     } // Fl_Button* o
-    { btnWbarConf = new Fl_Button(15, 135, 120, 30, gettext("Wbar Conf"));
-      btnWbarConf->callback((Fl_Callback*)btn_callback, (void*)("wbarconf &"));
+    { btnWbarConf = new Fl_Button(15, 135, 120, 30, gettext("tcWbarConf"));
+      btnWbarConf->callback((Fl_Callback*)btn_callback, (void*)("tc-wbarconf &"));
       btnWbarConf->deactivate();
     } // Fl_Button* btnWbarConf
     { Fl_Button* o = new Fl_Button(160, 135, 120, 30, gettext("Wallpaper"));
@@ -78,7 +75,7 @@ textdomain("tinycore");
     } // Fl_Button* btnXvesa
     o->end();
   } // Fl_Double_Window* o
-  int results = system("which wbarconf >/dev/null 2>&1");
+  int results = system("which tc-wbarconf >/dev/null 2>&1");
 if ( results == 0 ) btnWbarConf->activate();
 
 results = system("which Xvesa >/dev/null 2>&1");

@@ -170,7 +170,6 @@ textdomain("tinycore");
       } // Fl_Group* o
       { Fl_Group* o = new Fl_Group(0, 5, 660, 350, gettext("bigHomeFiles"));
         o->callback((Fl_Callback*)tabCB, (void*)("big"));
-        o->hide();
         { bigDisplay = new Fl_Text_Display(0, 0, 660, 335);
           bigDisplay->textfont(4);
           bigDisplay->buffer(txtBuffer);
@@ -180,6 +179,7 @@ textdomain("tinycore");
       tabs->end();
     } // Fl_Tabs* tabs
     o->end();
+    o->resizable(o);
   } // Fl_Double_Window* o
   system("bigHomeFiles.sh > /tmp/stats.txt");
 txtBuffer->loadfile("/tmp/stats.txt");

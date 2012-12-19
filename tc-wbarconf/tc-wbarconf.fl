@@ -1,0 +1,350 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0110 
+i18n_type 1 
+i18n_include <libintl.h> 
+i18n_function gettext 
+header_name {.h} 
+code_name {.cxx}
+decl {// (c) Robert Shingledecker 2010-2012} {} 
+
+decl {// Zoom, Icon Size, Icon - Brian Smith} {} 
+
+decl {\#include <iostream>} {} 
+
+decl {\#include <fstream>} {} 
+
+decl {\#include <sstream>} {} 
+
+decl {\#include <string>} {} 
+
+decl {\#include <FL/fl_message.H>} {} 
+
+decl {\#include <FL/Fl_File_Chooser.H>} {} 
+
+decl {\#include <locale.h>} {} 
+
+decl {\#include <unistd.h>} {} 
+
+decl {\#include <string.h>} {} 
+
+decl {using namespace std;} {} 
+
+decl {string home, tcedir, command, selected;} {} 
+
+decl {int chosen,results;} {} 
+
+decl {string widgetArray[4];} {} 
+
+decl {string onbootList, wbarXlist, options;} {} 
+
+decl {string wbarIcons = "/usr/local/tce.icons";} {} 
+
+Function {genConf()} {return_type void
+} {
+  code {options = "c: wbar --bpress --pos ";
+int pos = posChoice->value();
+switch(pos)
+{
+   case 0  : options += "top";
+             break;;
+   case 1  : options += "bottom";
+             break;;
+   case 2  : options += "left --vbar";
+             break;;
+   case 3  : options += "right --vbar";
+             break;;
+   case 4  : options += "top-left";
+             break;;
+   case 5  : options += "top-right";
+             break;;
+   case 6  : options += "bot-left";
+             break;;
+   case 7  : options += "bot-right";
+             break;;
+   case 8  : options += "top-left --vbar";
+             break;;
+   case 9  : options += "bot-left --vbar";
+             break;;
+   case 10 : options += "top-right --vbar";
+             break;;
+   case 11 : options += "bot-right --vbar";
+             break;;
+   default : options += "bottom";
+             break;;
+}
+double zoomf_value = zoomChoice->value();
+if (zoomf_value == 1) {zoomf_value = 1.00001;}
+string zoomf;
+ostringstream stream;
+stream << (double)zoomf_value;
+zoomf = stream.str();
+options += " --zoomf " + zoomf;
+
+stream.str("");
+string isize;
+stream << (double)isizeChoice->value();
+isize = stream.str();
+options += " --isize " + isize;
+txtFromGUI->value(options.c_str());
+options += " ";} {}
+} 
+
+Function {brwWbarCB(Fl_Widget *, void *)} {return_type {static void}
+} {
+  code {if (brwWbar->value())
+{
+   chosen = brwWbar->value();
+   selected = brwWbar->text(chosen);
+   command = "wbar_mv_icon " + selected.substr(0,selected.length()-1) + " " + wbarIcons + " " + wbarXlist;
+   system(command.c_str());
+   brwXlist->add(selected.c_str());
+   brwWbar->remove(chosen);
+}} {}
+} 
+
+Function {brwXlistCB(Fl_Widget *, void *)} {return_type {static void}
+} {
+  code {if (brwXlist->value())
+{
+   chosen = brwXlist->value();
+   selected = brwXlist->text(chosen);
+   command = "wbar_mv_icon " + selected.substr(0,selected.length()-1) + " " + wbarXlist + " " + wbarIcons;
+   system(command.c_str());
+   brwXlist->remove(chosen);
+   brwWbar->add(selected.c_str());
+}} {}
+} 
+
+Function {btnApplyCB(Fl_Widget *, void *)} {return_type {static void}
+} {
+  code {genConf();
+options += txtOptions->value();
+
+string fname = home + "/.wbarconf";
+ofstream fout(fname.c_str(), ios::out|ios::out);
+if (! fout.is_open())
+{
+   cerr << "Can't open .wbarconf for output." << endl;
+   exit(EXIT_FAILURE);
+}
+fout << options << endl;
+fout.close();
+Fl::flush();
+command = "wbar.sh";
+system(command.c_str());} {}
+} 
+
+Function {} {open
+} {
+  code {setlocale(LC_ALL, "");
+bindtextdomain("tinycore","/usr/local/share/locale");
+textdomain("tinycore");} {}
+  Fl_Window window {
+    label {tc-wbarconf} open selected
+    xywh {15 327 435 333} type Double hide resizable
+  } {
+    Fl_Group grpGUI {
+      xywh {9 32 421 293}
+    } {
+      Fl_Browser brwWbar {
+        label {Wbar Icons}
+        callback brwWbarCB
+        xywh {9 33 200 225} type Select align 1 textfont 4
+      }
+      Fl_Browser brwXlist {
+        label {eXclude Icons}
+        callback brwXlistCB
+        xywh {219 33 210 225} type Select align 1 textfont 4
+      }
+      Fl_Choice posChoice {
+        label Position
+        xywh {66 273 165 20} down_box BORDER_BOX
+        code0 {posChoice->value(1);}
+      } {
+        MenuItem {} {
+          label Top
+          xywh {5 5 30 20}
+        }
+        MenuItem {} {
+          label Bottom
+          xywh {15 15 30 20}
+        }
+        MenuItem {} {
+          label {Left Vertical}
+          xywh {25 25 30 20}
+        }
+        MenuItem {} {
+          label {Right Vertical}
+          xywh {35 35 30 20}
+        }
+        MenuItem {} {
+          label {Top Left}
+          xywh {45 45 30 20}
+        }
+        MenuItem {} {
+          label {Top Right}
+          xywh {55 55 30 20}
+        }
+        MenuItem {} {
+          label {Bottom Left}
+          xywh {65 65 30 20}
+        }
+        MenuItem {} {
+          label {Bottom Right}
+          xywh {75 75 30 20}
+        }
+        MenuItem {} {
+          label {Left Top Vertical}
+          xywh {85 85 30 20}
+        }
+        MenuItem {} {
+          label {Left Bottom Vertical}
+          xywh {95 95 30 20}
+        }
+        MenuItem {} {
+          label {Right Top Vertical}
+          xywh {105 105 30 20}
+        }
+        MenuItem {} {
+          label {Right Bottom Vertical}
+          xywh {115 115 30 20}
+        }
+      }
+      Fl_Slider isizeChoice {
+        label {Icon Size}
+        xywh {319 273 105 20} type Horizontal align 4 minimum 10 maximum 80 step 1 value 32
+      }
+      Fl_Slider zoomChoice {
+        label Zoom
+        xywh {115 303 115 20} type Horizontal align 4 minimum 1 maximum 3 step 0.1 value 2
+      }
+      Fl_Button {} {
+        label More
+        callback {grpGUI->hide();
+grpOptions->show();
+genConf();
+txtOptions->take_focus();}
+        xywh {254 303 80 20}
+      }
+      Fl_Button {} {
+        label Apply
+        callback btnApplyCB
+        xywh {343 303 80 20}
+      }
+    }
+    Fl_Group grpOptions {
+      xywh {8 9 426 316} hide
+    } {
+      Fl_Output txtFromGUI {
+        xywh {11 9 415 20} color 29
+      }
+      Fl_Browser brwOptions {
+        label {Optionally Enter Additional Unique Options from above:}
+        xywh {8 39 420 215} textfont 4
+      }
+      Fl_Input txtOptions {
+        xywh {10 271 414 24}
+      }
+      Fl_Button {} {
+        label Back
+        callback {grpOptions->hide();
+grpGUI->show();}
+        xywh {222 303 80 20}
+      }
+      Fl_Button {} {
+        label Apply
+        callback btnApplyCB
+        xywh {324 303 80 20}
+      }
+    }
+  }
+  code {home = getenv("HOME");
+FILE *pipe;
+char *mbuf;
+
+char buffer[1024];
+int length;
+length = readlink("/etc/sysconfig/tcedir", buffer, sizeof(buffer));
+buffer[length]='\\0';
+tcedir = strdup(buffer);
+
+wbarXlist = tcedir + "/xwbar.lst";
+
+command = "awk '/t: /{if (NR>4)print $2}' < " + wbarIcons;
+pipe = popen(command.c_str(),"r");
+mbuf = (char *) calloc(PATH_MAX,sizeof(char));
+
+if (pipe) {
+  brwWbar->clear();
+  while (fgets(mbuf,PATH_MAX,pipe)) {
+     string line(mbuf);
+     brwWbar->add(line.c_str());
+//     Fl::flush();
+   }
+   pclose(pipe);
+   free(mbuf);
+}
+
+command = "awk '/t: /{print $2}' < " + wbarXlist + " 2>/dev/null";
+pipe = popen(command.c_str(),"r");
+mbuf = (char *) calloc(PATH_MAX,sizeof(char));
+
+if (pipe) {
+  brwXlist->clear();
+  while (fgets(mbuf,PATH_MAX,pipe)) {
+     string line(mbuf);
+     brwXlist->add(line.c_str());
+   }
+   pclose(pipe);
+   free(mbuf);
+}
+// Fl::flush();
+
+
+command = "wbar --help 2>/dev/null | tail -23";
+pipe = popen(command.c_str(),"r");
+mbuf = (char *) calloc(PATH_MAX,sizeof(char));
+
+if (pipe) {
+  brwOptions->clear();
+  while (fgets(mbuf,PATH_MAX,pipe)) {
+     string line(mbuf);
+     brwOptions->add(line.c_str());
+//     Fl::flush();
+   }
+   pclose(pipe);
+   free(mbuf);
+}
+
+// Parse .wbarconf to reload basic widgets
+int i=0;
+command = "wbar_parseConf";
+pipe = popen(command.c_str(),"r");
+mbuf = (char *) calloc(PATH_MAX,sizeof(char));
+
+if (pipe) {
+  while (fgets(mbuf,PATH_MAX,pipe)) {
+     string line(mbuf);
+     widgetArray[i++] = line;
+   }
+   pclose(pipe);
+   free(mbuf);
+}
+
+i = atof(widgetArray[0].c_str());
+posChoice->value(i-1);
+   
+double zoomf = atof(widgetArray[1].c_str());
+if (zoomf == 0) { zoomf = 2.0; }
+zoomChoice->value(zoomf);   
+
+double isize = atof(widgetArray[2].c_str());
+if (isize == 0) { isize = 32.0; }
+isizeChoice->value(isize);
+
+string otherOptions = widgetArray[3].substr(0,widgetArray[3].length()-1);
+txtOptions->value(otherOptions.c_str());
+
+grpGUI->show();
+Fl::flush();} {}
+} 
