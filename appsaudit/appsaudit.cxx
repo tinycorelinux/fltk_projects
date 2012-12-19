@@ -21,7 +21,15 @@ void depends_callback(Fl_Widget *, void* userdata) {
   report_type = (const char*) userdata;
 option_type = "";
 
-if (userdata == "builddb")
+if (userdata == "updatedeps")
+{
+   window->cursor(FL_CURSOR_WAIT);
+   Fl::flush();
+   command = "/usr/bin/tce-audit updatedeps " + target_dir +"/";
+   system(command.c_str());
+   window->cursor(FL_CURSOR_DEFAULT);
+   Fl::flush();
+} else if (userdata == "builddb")
 {
    window->cursor(FL_CURSOR_WAIT);
    Fl::flush();
@@ -186,6 +194,38 @@ if (userdata == "quit")
   exit(0);
 }
 
+void ondemand_callback(Fl_Widget *, void* userdata) {
+  if (userdata == "ondemand" )
+{
+//  target_dir = tcedir + "/optional/";
+  report_type = "ondemand";
+  brw_extn->clear();
+  window->cursor(FL_CURSOR_WAIT);
+  Fl::flush();
+  command = "ondemand -l";
+  system(command.c_str());
+  box_extn->label("Select for OnDemand");
+  brw_extn->load("/tmp/ondemand.tmp");
+  box_results->label("On Demand Results");
+  brw_results->clear();
+  system("rm /tmp/ondemand.tmp");
+  window->cursor(FL_CURSOR_DEFAULT);
+  Fl::flush();
+}
+ 
+if (userdata == "exit_ondemand")
+{
+  report_type.empty();
+  box_extn->label(target_dir.c_str());
+  box_results->label("Results");
+  brw_extn->clear();
+  brw_results->clear();
+} 
+ 
+if (userdata == "quit") 
+  exit(0);
+}
+
 void brw_extn_callback(Fl_Widget *, void *) {
   if (brw_extn->value())
 {
@@ -210,7 +250,6 @@ void brw_extn_callback(Fl_Widget *, void *) {
      window->cursor(FL_CURSOR_WAIT);
      Fl::flush();
      command = "tce-update update " + select_extn + ".md5.txt >/tmp/apps_upd.lst";
-//   cout << command << endl;
      brw_results->load("");
      system(command.c_str());
      brw_results->load("/tmp/apps_upd.lst");
@@ -224,7 +263,25 @@ void brw_extn_callback(Fl_Widget *, void *) {
      system(command.c_str());
      box_results->label("On Boot Items");
      brw_results->load(onbootList.c_str());
-   }   
+   }
+      
+   if ( report_type == "ondemand" )
+   {
+     window->cursor(FL_CURSOR_WAIT);
+     Fl::flush();
+     command = "ondemand " + select_extn;
+//     cout << command << endl;
+     brw_results->load("");
+     int results = system(command.c_str());
+     if ( results == 0 ) 
+     {
+       msg = select_extn + " OK.";
+       box_results->label(msg.c_str());
+     } else  
+       brw_results->load("/tmp/ondemand.tmp");
+     window->cursor(FL_CURSOR_DEFAULT);
+     Fl::flush();
+   }
 }
 }
 
@@ -264,9 +321,10 @@ Fl_Menu_Item menu_[] = {
  {"Quit", 0,  (Fl_Callback*)depends_callback, (void*)("quit"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
  {"Dependencies", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
- {"Update Dep Database", 0,  (Fl_Callback*)depends_callback, (void*)("builddb"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"Update .dep files.", 0,  (Fl_Callback*)depends_callback, (void*)("updatedeps"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"Build Reporting Database", 0,  (Fl_Callback*)depends_callback, (void*)("builddb"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {"List Dependencies", 0,  (Fl_Callback*)depends_callback, (void*)("dependson"), 1, FL_NORMAL_LABEL, 0, 14, 0},
- {"LIst Required By", 0,  (Fl_Callback*)depends_callback, (void*)("requiredby"), 1, FL_NORMAL_LABEL, 0, 14, 0},
+ {"List Required By", 0,  (Fl_Callback*)depends_callback, (void*)("requiredby"), 1, FL_NORMAL_LABEL, 0, 14, 0},
  {"List Missing Dependencies", 0,  (Fl_Callback*)depends_callback, (void*)("audit"), 1, FL_NORMAL_LABEL, 0, 14, 0},
  {"Display All with No Dependencies", 0,  (Fl_Callback*)depends_callback, (void*)("nodepends"), 1, FL_NORMAL_LABEL, 0, 14, 0},
  {"Display All Not Depended On", 0,  (Fl_Callback*)depends_callback, (void*)("notrequired"), 1, FL_NORMAL_LABEL, 0, 14, 0},
@@ -287,6 +345,10 @@ Fl_Menu_Item menu_[] = {
  {"Maintenance", 0,  (Fl_Callback*)onboot_callback, (void*)("onboot"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {"Exit OnBoot", 0,  (Fl_Callback*)onboot_callback, (void*)("exit_onboot"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
+ {"OnDemand", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
+ {"Selection", 0,  (Fl_Callback*)ondemand_callback, (void*)("ondemand"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"Exit OnDemand", 0,  (Fl_Callback*)ondemand_callback, (void*)("exit_ondemand"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -294,9 +356,9 @@ Fl_Box *box_extn=(Fl_Box *)0;
 
 Fl_Box *box_results=(Fl_Box *)0;
 
-Fl_Browser *brw_results=(Fl_Browser *)0;
-
 Fl_Browser *brw_extn=(Fl_Browser *)0;
+
+Fl_Browser *brw_results=(Fl_Browser *)0;
 
 int main(int argc, char **argv) {
   { window = new Fl_Double_Window(675, 375, "AppsAudit");
@@ -311,16 +373,16 @@ int main(int argc, char **argv) {
     { box_results = new Fl_Box(225, 24, 430, 16, "Results");
       box_results->labelfont(1);
     } // Fl_Box* box_results
-    { brw_results = new Fl_Browser(225, 45, 430, 325);
-      brw_results->type(1);
-      brw_results->textfont(4);
-      brw_results->callback((Fl_Callback*)brw_results_callback);
-    } // Fl_Browser* brw_results
     { brw_extn = new Fl_Browser(0, 45, 200, 325);
       brw_extn->type(1);
       brw_extn->textfont(4);
       brw_extn->callback((Fl_Callback*)brw_extn_callback);
     } // Fl_Browser* brw_extn
+    { brw_results = new Fl_Browser(225, 45, 430, 325);
+      brw_results->type(1);
+      brw_results->textfont(4);
+      brw_results->callback((Fl_Callback*)brw_results_callback);
+    } // Fl_Browser* brw_results
     window->end();
     window->resizable(window);
   } // Fl_Double_Window* window
@@ -342,7 +404,8 @@ command = "ls " + target_dir + "/tce.db >/dev/null 2>&1";
 int results = system(command.c_str());
 if (results == 0)
 {
-  report_type = "builddb";
+  report_type = "updatedeps";
+/*  
   string listfile = target_dir + "/tce.lst";
   box_extn->label(target_dir.c_str());
   brw_extn->load(listfile.c_str());
@@ -350,6 +413,7 @@ if (results == 0)
   menu_notrequired->activate();
   menu_auditall->activate();
   menu_marked->activate();
+*/  
 }
   window->show(argc, argv);
   return Fl::run();

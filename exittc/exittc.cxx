@@ -147,7 +147,11 @@ if ( loc == string::npos )
     ifstream tce_dir_file("/opt/.tce_dir");                                  
     getline(tce_dir_file,tce_dir);                                        
     tce_dir_file.close();
-    if ( tce_dir != "/tmp/tce/" )
+    if ( tce_dir == "/tmp/tce" )
+    {
+      backup = false;
+      btn_backup->value(0);
+    } else  
       backup_device = tce_dir;
   }      
   

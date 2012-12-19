@@ -20,10 +20,16 @@ string command;
 if (userdata == "install")
 {
    string selectedImage = imageBrowser->text(imageBrowser->value());
-   if (btnScale->value() == 1 )
-      backgroundType = "image"; 
-   else 
-      backgroundType = "tile";                                                                    
+   
+   if ( btnFull->value() == 1 )
+      backgroundType = "full"; 
+   else if ( btnFill->value() == 1 ) 
+      backgroundType = "fill";
+   else if ( btnTile->value() == 1 ) 
+      backgroundType = "tile";
+   else
+      backgroundType = "center"; 
+                                                                            
    command = "setbackground " + backgroundType + " /opt/backgrounds/" + selectedImage;   
    system(command.c_str());                                                                                                                                         
    exit(0);
@@ -53,9 +59,13 @@ if (userdata == "help")
 
 Fl_File_Browser *imageBrowser=(Fl_File_Browser *)0;
 
-Fl_Round_Button *btnScale=(Fl_Round_Button *)0;
+Fl_Round_Button *btnFull=(Fl_Round_Button *)0;
 
 Fl_Round_Button *btnTile=(Fl_Round_Button *)0;
+
+Fl_Round_Button *btnCenter=(Fl_Round_Button *)0;
+
+Fl_Round_Button *btnFill=(Fl_Round_Button *)0;
 
 Fl_Button *installBtn=(Fl_Button *)0;
 
@@ -63,31 +73,41 @@ int main(int argc, char **argv) {
   Fl_Double_Window* w;
   { Fl_Double_Window* o = new Fl_Double_Window(295, 245);
     w = o;
-    { imageBrowser = new Fl_File_Browser(0, 0, 295, 205);
+    { imageBrowser = new Fl_File_Browser(0, 25, 295, 190);
       imageBrowser->type(2);
       imageBrowser->callback((Fl_Callback*)imageBrowserCallback);
       imageBrowser->filter("*.{png,gif,jpg,jpeg}");
       imageBrowser->load("/opt/backgrounds");
     } // Fl_File_Browser* imageBrowser
-    { btnScale = new Fl_Round_Button(15, 210, 64, 15, "Scale");
-      btnScale->down_box(FL_ROUND_DOWN_BOX);
-      btnScale->value(1);
-      btnScale->selection_color((Fl_Color)2);
-      btnScale->type(FL_RADIO_BUTTON);
-    } // Fl_Round_Button* btnScale
-    { btnTile = new Fl_Round_Button(15, 225, 64, 15, "Tile");
+    { btnFull = new Fl_Round_Button(35, 5, 50, 15, "Full");
+      btnFull->down_box(FL_ROUND_DOWN_BOX);
+      btnFull->value(1);
+      btnFull->selection_color((Fl_Color)2);
+      btnFull->type(FL_RADIO_BUTTON);
+    } // Fl_Round_Button* btnFull
+    { btnTile = new Fl_Round_Button(85, 5, 50, 15, "Tile");
       btnTile->down_box(FL_ROUND_DOWN_BOX);
       btnTile->selection_color((Fl_Color)2);
       btnTile->type(FL_RADIO_BUTTON);
     } // Fl_Round_Button* btnTile
-    { installBtn = new Fl_Button(85, 215, 64, 20, "Install");
+    { btnCenter = new Fl_Round_Button(130, 5, 64, 15, "Center");
+      btnCenter->down_box(FL_ROUND_DOWN_BOX);
+      btnCenter->selection_color((Fl_Color)2);
+      btnCenter->type(FL_RADIO_BUTTON);
+    } // Fl_Round_Button* btnCenter
+    { btnFill = new Fl_Round_Button(195, 5, 50, 15, "Fill");
+      btnFill->down_box(FL_ROUND_DOWN_BOX);
+      btnFill->selection_color((Fl_Color)2);
+      btnFill->type(FL_RADIO_BUTTON);
+    } // Fl_Round_Button* btnFill
+    { installBtn = new Fl_Button(25, 220, 64, 20, "Install");
       installBtn->callback((Fl_Callback*)btnCallback, (void*)("install"));
       installBtn->deactivate();
     } // Fl_Button* installBtn
-    { Fl_Button* o = new Fl_Button(155, 215, 64, 20, "Color");
+    { Fl_Button* o = new Fl_Button(110, 220, 64, 20, "Color");
       o->callback((Fl_Callback*)btnCallback, (void*)("color"));
     } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(225, 215, 64, 20, "Help");
+    { Fl_Button* o = new Fl_Button(200, 220, 64, 20, "Help");
       o->callback((Fl_Callback*)btnCallback, (void*)("help"));
     } // Fl_Button* o
     o->end();

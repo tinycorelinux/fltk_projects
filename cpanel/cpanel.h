@@ -6,8 +6,4 @@
 void btn_callback(Fl_Widget* w, void* userdata);
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Button.H>
-#include <FL/Fl_Light_Button.H>
-extern Fl_Light_Button *crond;
-extern Fl_Light_Button *dhcpc;
-extern Fl_Light_Button *tftpd;
 #endif

@@ -38,7 +38,7 @@ decl {ifstream ifaberr;} {}
 
 decl {string aberr;} {} 
 
-decl {string command, msg;} {} 
+decl {string mode, command, msg, url;} {} 
 
 Function {HandleInput_CB(int, void *data)} {open return_type {static void}
 } {
@@ -60,10 +60,24 @@ if ( c == '\\n' || x == (sizeof(s)-1) )
   { s[x++] = c; }} {}
 } 
 
+Function {fetch_extension()} {open return_type void
+} {
+  code {status_out->activate();
+status_out->color(FL_WHITE);
+status_out->value(command.c_str());
+command = command + "\\n";
+write(G_out, command.c_str(), command.length());
+Fl::add_fd(fileno(G_in), HandleInput_CB, (void*)&status_out);} {}
+} 
+
 Function {btn_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
 } {
   code {if (userdata == "tcz")
 {
+   mode = "tcz";
+   status_out->value("");
+   status_out->label("Status");
+   status_out->deactivate();
    repository = (const char*) userdata;
    window->cursor(FL_CURSOR_WAIT);
    Fl::flush();
@@ -74,10 +88,12 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open return_type {static v
    if (results == 0 )
    {
       system("gunzip info.lst.gz");
-      brw_extn->load("info.lst");
+      brw_select->load("info.lst");
       btn_install->deactivate();
       btn_download->deactivate();
-      box_extensions->activate();
+      btn_ondemand->deactivate();
+      box_select->label("Select Extension");
+      box_select->activate();
       btn_search->activate();
       search_field->activate();                                              
       system("rm -f info.lst"); 
@@ -85,23 +101,18 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open return_type {static v
       fl_message("Connection error, check network or mirror.");  
 } else if (userdata == "install")
 {
-   status_out->activate();
-   command = "tce-load -w -i " + select_extn;
-   status_out->color(FL_WHITE);
-   status_out->value(command.c_str());
-   command = command + "\\n";
-   write(G_out, command.c_str(), command.length());
-   Fl::add_fd(fileno(G_in), HandleInput_CB, (void*)&status_out);
+   command = "tce-load -wi " + select_extn;
+   fetch_extension();
 
 } else if (userdata == "download")
 {
-   status_out->activate();
    command = "tce-load -w " + select_extn;
-   status_out->color(FL_WHITE);
-   status_out->value(command.c_str());
-   command = command + "\\n";
-   write(G_out, command.c_str(), command.length());
-   Fl::add_fd(fileno(G_in), HandleInput_CB, (void*)&status_out);
+   fetch_extension();
+
+} else if (userdata == "ondemand")
+{
+   command = "tce-load -wo " + select_extn;
+   fetch_extension();
    
 } else if (userdata == "toggle")
 {
@@ -125,7 +136,7 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open return_type {static v
   Fl::flush();
   if (results == 0 )
   {
-    brw_extn->load("info.lst");
+    brw_select->load("info.lst");
     btn_install->deactivate();
     btn_download->deactivate();
     btn_search->activate();
@@ -148,27 +159,45 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open return_type {static v
   }} {}
 } 
 
-Function {brw_extn_callback(Fl_Widget *, void *)} {open return_type {static void}
+Function {brw_select_callback(Fl_Widget *, void *)} {open return_type {static void}
 } {
-  code {if (brw_extn->value())
+  code {if (brw_select->value())
 {
-   select_extn = brw_extn->text(brw_extn->value());
-   string select_extn_file = select_extn + (string)".info";
-   command = "/usr/bin/tce-fetch.sh " + select_extn_file;
-   int results = system(command.c_str());
-   if (results == 0)
+   select_extn = brw_select->text(brw_select->value());
+   if ( mode == "tcz" )
    {
-      brw_info->load(select_extn_file.c_str());
-      command = "rm -f " + select_extn_file;
-      system(command.c_str());
-      btn_install->activate();
-      btn_download->activate();
-      tab_info->activate();
-      tab_files->activate();
-      brw_list->load("");
-      tab_depends->activate();
-      brw_dep->load("");
-      tab_info->show();
+      string select_extn_file = select_extn + (string)".info";
+      command = "/usr/bin/tce-fetch.sh " + select_extn_file;
+      int results = system(command.c_str());
+      if (results == 0)
+      {
+         brw_info->load(select_extn_file.c_str());
+         command = "rm -f " + select_extn_file;
+         system(command.c_str());
+         btn_install->activate();
+         btn_download->activate();
+         btn_ondemand->activate();
+         tabs->activate();
+         tab_info->activate();
+         tab_files->activate();
+         brw_list->load("");
+         tab_depends->activate();
+         brw_dep->load("");
+         tab_info->show();
+      } 
+   }
+   if ( mode == "mirror" )
+   {
+      status_out->value(select_extn.c_str());
+      url = status_out->value();
+     ofstream fout("/opt/tcemirror", ios::out|ios::out);
+     if (! fout.is_open())
+     {
+       cerr << "Can't open /opt/tcemirror for output!" << endl;
+       exit(EXIT_FAILURE);
+     }
+     fout << url << endl;
+     fout.close();      
    }
 }} {}
 } 
@@ -212,12 +241,40 @@ write(G_out, command.c_str(), command.length());
 Fl::add_fd(fileno(G_in), HandleInput_CB, (void*)&status_out);} {}
 } 
 
+Function {mirror_btn_callback(Fl_Widget*, void* userdata)} {open return_type {static void}
+} {
+  code {//Get Mirror
+mode = "mirror";
+window->cursor(FL_CURSOR_WAIT);
+Fl::flush();
+ifstream fin("/opt/tcemirror");
+getline(fin,url);
+fin.close();
+brw_info->clear();
+tabs->deactivate();
+status_out->label("  URL:");
+status_out->value(url.c_str());
+status_out->activate();
+command = "busybox wget -cq ftp://distro.ibiblio.org/pub/linux/distributions/tinycorelinux/2.x/tcz/mirrors.lst";
+int results = system(command.c_str());
+window->cursor(FL_CURSOR_DEFAULT);
+Fl::flush();
+if ( results == 0)
+{
+   brw_select->load("mirrors.lst");
+   box_select->label("Select Mirror");
+   box_select->activate();
+   system("rm mirrors.lst");
+} else
+   fl_message("Connection error, check network or ibiblio");} {}
+} 
+
 Function {tabs_callback(Fl_Widget*, void* userdata)} {open return_type {static void}
 } {
-  code {if (brw_extn->value())
+  code {if (brw_select->value())
 {
    int results;
-   select_extn = brw_extn->text(brw_extn->value());
+   select_extn = brw_select->text(brw_select->value());
    if (tab_files->visible())
    {
      string select_extn_file = select_extn + (string)".list";
@@ -252,37 +309,42 @@ Function {} {open
     label Appbrowser
     user_data {"quit"}
     callback btn_callback open
-    xywh {2 158 685 400} type Double hide resizable
+    xywh {5 165 685 395} type Double hide resizable
   } {
     Fl_Button {} {
       label Connect
       user_data {"tcz"}
       callback btn_callback
-      xywh {5 0 90 20}
+      xywh {0 0 68 20}
     }
     Fl_Button {} {
       label Local
       user_data {"File/Local"}
       callback local_btn_callback
-      xywh {100 0 90 20}
+      xywh {69 0 65 20}
+    }
+    Fl_Button {} {
+      label Mirrors
+      user_data {"mirror"}
+      callback mirror_btn_callback
+      xywh {135 0 65 20}
     }
     Fl_Button btn_search {
       label Search
       user_data {"toggle"}
-      callback btn_callback selected
-      tooltip {Toggle Search / Provides} xywh {205 0 77 20} deactivate
+      callback btn_callback
+      tooltip {Toggle Search / Provides} xywh {206 0 65 20} deactivate
     }
     Fl_Input search_field {
       user_data {"search"}
       callback btn_callback
-      xywh {282 0 400 20} labeltype NO_LABEL when 8 deactivate
+      xywh {275 0 405 20} labeltype NO_LABEL when 8 deactivate
     }
-    Fl_Box box_extensions {
-      label Extensions
-      xywh {40 24 100 16} deactivate
+    Fl_Box box_select {
+      xywh {40 24 120 16} deactivate
     }
-    Fl_Browser brw_extn {
-      callback brw_extn_callback
+    Fl_Browser brw_select {
+      callback brw_select_callback
       xywh {0 45 200 325} type Select textfont 4
     }
     Fl_Tabs tabs {
@@ -293,7 +355,7 @@ Function {} {open
         label Info open
         xywh {205 45 475 325} when 1 hide deactivate
       } {
-        Fl_Browser brw_info {
+        Fl_Browser brw_info {selected
           xywh {210 50 470 318} textfont 4
         }
       }
@@ -318,17 +380,23 @@ Function {} {open
       label {Install }
       user_data {"install"}
       callback btn_callback
-      xywh {5 375 90 20} deactivate
+      tooltip {Downloads, updates menu and onboot.lst.} xywh {0 373 52 20} deactivate
     }
     Fl_Button btn_download {
-      label OnDemand
+      label DwnLoad
       user_data {"download"}
       callback btn_callback
-      tooltip {Downloads to optional directory.} xywh {100 375 90 20} deactivate
+      tooltip {Download Only.} xywh {53 373 68 20} deactivate
+    }
+    Fl_Button btn_ondemand {
+      label OnDemand
+      user_data {"ondemand"}
+      callback btn_callback
+      tooltip {Downloads  and updates OnDemand menu.} xywh {123 373 76 20} deactivate
     }
     Fl_Output status_out {
       label Status
-      xywh {250 375 430 20} deactivate
+      xywh {250 373 430 20} deactivate
     }
   }
   code {ifstream download_dir_file("/opt/.tce_dir");
@@ -343,27 +411,24 @@ if ( last_dir_file.is_open() )
    last_dir_file.close();
 }
 
-// Process group leader (for killpg())
-// setsid();
-
 // Make fifo
-unlink("ab2tce.fifo");
-if ( mkfifo("ab2tce.fifo", 0666) < 0 ) {
-    perror("mkfifo(ab2tce.fifo)");
+unlink("/tmp/ab2tce.fifo");
+if ( mkfifo("/tmp/ab2tce.fifo", 0666) < 0 ) {
+    perror("mkfifo(/tmp/ab2tce.fifo)");
     exit(1);
 }
 
 // Popen child for reading, set child to read fifo
-if ( ( G_in = popen("ab2tce.sh < ab2tce.fifo", "r") ) == NULL ) {
+if ( ( G_in = popen("ab2tce.sh < /tmp/ab2tce.fifo", "r") ) == NULL ) {
     perror("popen failed");
     exit(1);
 }
 setbuf(G_in, NULL);                         // disable buffering
 
 // Now open fifo
-if ( ( G_out = open("ab2tce.fifo", O_WRONLY) ) < 0 ) {
-    perror("open(ab2tce.fifo) for write failed");
-    unlink("ab2tce.fifo");
+if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
+    perror("open(/tmp/ab2tce.fifo) for write failed");
+    unlink("/tmp/ab2tce.fifo");
     exit(1);
 }} {}
 } 

@@ -12,41 +12,13 @@ decl {string home;} {}
 
 Function {btn_callback(Fl_Widget* w, void* userdata)} {open return_type {static void}
 } {
-  code {Fl_Button* bp = (Fl_Button*)w;
-if (userdata == "tftpd"){
-  if(bp->box() == FL_DOWN_BOX){
-    system("sudo pkill udpsvd");
-    bp->box(FL_UP_BOX);
-  } else {
-    bp->box(FL_DOWN_BOX);
-    string command = "sudo /sbin/udpsvd -E 0 69 tftpd " + home + " &";
-    system(command.c_str());
-  }
-} else if (userdata == "udhcpc") {
-  if(bp->box() == FL_DOWN_BOX){
-    system("sudo pkill udhcpc");
-    bp->box(FL_UP_BOX);
-  } else {
-    bp->box(FL_DOWN_BOX);
-    system("sudo /sbin/udhcpc -b -i eth0");
-  }
-} else if (userdata == "crond") {
-  if(bp->box() == FL_DOWN_BOX){
-    system("sudo pkill crond");
-    bp->box(FL_UP_BOX);
-  } else {
-    bp->box(FL_DOWN_BOX);
-    system("sudo crond");
-  }
-} else {
-  system((const char*)userdata);
-}} {}
+  code {system((const char*)userdata);} {}
 } 
 
 Function {} {open
 } {
   Fl_Window {} {open
-    xywh {38 388 530 215} type Double hide
+    xywh {38 388 405 215} type Double hide
   } {
     Fl_Button {} {
       label {Apps Audit}
@@ -66,12 +38,6 @@ Function {} {open
       callback btn_callback
       xywh {270 10 120 30}
     }
-    Fl_Light_Button crond {
-      label {Cron Daemon}
-      user_data {"crond"}
-      callback btn_callback
-      xywh {400 10 120 30} selection_color 2
-    }
     Fl_Button {} {
       label {Date/Time}
       user_data {"datetool &"}
@@ -79,7 +45,7 @@ Function {} {open
       xywh {10 50 120 30}
     }
     Fl_Button {} {
-      label Backgrounds
+      label Wallpaper
       user_data {"wallpaper &"}
       callback btn_callback
       xywh {140 50 120 30}
@@ -90,39 +56,27 @@ Function {} {open
       callback btn_callback
       xywh {270 50 120 30}
     }
-    Fl_Light_Button dhcpc {
-      label {DHCP Client}
-      user_data {"udhcpc"}
-      callback btn_callback
-      xywh {400 50 120 30} selection_color 2
-    }
     Fl_Button {} {
-      label {Floppy Tool}
-      user_data {"fdtool&"}
+      label {Set TCE Drive}
+      user_data {"aterm +tr +sb -e tce-setdrive &"}
       callback btn_callback
       xywh {10 90 120 30}
     }
     Fl_Button {} {
-      label Netcardconfig
-      user_data {"sudo netcardconf &"}
-      callback btn_callback
+      label Network
+      user_data {"sudo network &"}
+      callback btn_callback selected
       xywh {140 90 120 30}
     }
     Fl_Button {} {
-      label {Select Mirror}
-      user_data {"tcemirror &"}
+      label {Xvesa Setup}
+      user_data {"aterm +tr +sb -e xsetup.sh &"}
       callback btn_callback
       xywh {270 90 120 30}
     }
-    Fl_Light_Button tftpd {
-      label {TFTP Server}
-      user_data {"tftpd"}
-      callback btn_callback
-      xywh {400 90 120 30} selection_color 2
-    }
     Fl_Button {} {
-      label OnDemand
-      user_data {"aterm +tr +sb -e ondemand &"}
+      label {Floppy Tool}
+      user_data {"fdtool&"}
       callback btn_callback
       xywh {10 130 120 30}
     }
@@ -137,12 +91,6 @@ Function {} {open
       user_data {"stats &"}
       callback btn_callback
       xywh {270 130 120 30}
-    }
-    Fl_Button {} {
-      label {Set TCE Drive}
-      user_data {"aterm +tr +sb -e tce-setdrive &"}
-      callback btn_callback selected
-      xywh {400 130 120 30}
     }
     Fl_Button {} {
       label {Update Apps}
@@ -162,12 +110,6 @@ Function {} {open
       callback btn_callback
       xywh {270 170 120 30}
     }
-    Fl_Button {} {
-      label {Xvesa Setup}
-      user_data {"aterm +tr +sb -e xsetup.sh &"}
-      callback btn_callback
-      xywh {400 170 120 30}
-    }
   }
   code {FILE *CMD_fp = NULL;
 if ((CMD_fp = popen("env | awk -F'=' /HOME/'{printf \\"%s\\",$2}'","r"))==NULL)
@@ -179,26 +121,5 @@ char result[1024];
 if ( fgets(result,1023,CMD_fp)==NULL)     // If no result from above then default is to backup.
    home = "/home/tc";
 else    
-   home = result;     
-
-if (system("pidof udpsvd > /dev/null") == 0)
-{
-   tftpd->box(FL_DOWN_BOX);
-   tftpd->value(true);
-} else
-   tftpd->box(FL_UP_BOX); 
-  
-if (system("pidof udhcpc >/dev/null") == 0)
-{
-   dhcpc->value(true);
-   dhcpc->box(FL_DOWN_BOX);
-} else
-   dhcpc->box(FL_UP_BOX);
-   
-if (system("pidof crond >/dev/null") == 0)
-{
-   crond->box(FL_DOWN_BOX);
-   crond->value(true);
-} else
-   crond->box(FL_UP_BOX);} {}
+   home = result;} {}
 } 

@@ -29,10 +29,16 @@ string command;
 if (userdata == "install")
 {
    string selectedImage = imageBrowser->text(imageBrowser->value());
-   if (btnScale->value() == 1 )
-      backgroundType = "image"; 
-   else 
-      backgroundType = "tile";                                                                    
+   
+   if ( btnFull->value() == 1 )
+      backgroundType = "full"; 
+   else if ( btnFill->value() == 1 ) 
+      backgroundType = "fill";
+   else if ( btnTile->value() == 1 ) 
+      backgroundType = "tile";
+   else
+      backgroundType = "center"; 
+                                                                            
    command = "setbackground " + backgroundType + " /opt/backgrounds/" + selectedImage;   
    system(command.c_str());                                                                                                                                         
    exit(0);
@@ -68,37 +74,47 @@ Function {} {open
   } {
     Fl_File_Browser imageBrowser {
       callback imageBrowserCallback
-      xywh {0 0 295 205} type Hold
+      xywh {0 25 295 190} type Hold
       code0 {imageBrowser->filter("*.{png,gif,jpg,jpeg}");}
       code1 {imageBrowser->load("/opt/backgrounds");}
     }
-    Fl_Round_Button btnScale {
-      label Scale
-      xywh {15 210 64 15} down_box ROUND_DOWN_BOX value 1 selection_color 2
-      code0 {btnScale->type(FL_RADIO_BUTTON);}
+    Fl_Round_Button btnFull {
+      label Full
+      xywh {35 5 50 15} down_box ROUND_DOWN_BOX value 1 selection_color 2
+      code0 {btnFull->type(FL_RADIO_BUTTON);}
     }
     Fl_Round_Button btnTile {
       label Tile
-      xywh {15 225 64 15} down_box ROUND_DOWN_BOX selection_color 2
+      xywh {85 5 50 15} down_box ROUND_DOWN_BOX selection_color 2
       code0 {btnTile->type(FL_RADIO_BUTTON);}
+    }
+    Fl_Round_Button btnCenter {
+      label Center
+      xywh {130 5 64 15} down_box ROUND_DOWN_BOX selection_color 2
+      code0 {btnCenter->type(FL_RADIO_BUTTON);}
+    }
+    Fl_Round_Button btnFill {
+      label Fill
+      xywh {195 5 50 15} down_box ROUND_DOWN_BOX selection_color 2
+      code0 {btnFill->type(FL_RADIO_BUTTON);}
     }
     Fl_Button installBtn {
       label Install
       user_data {"install"}
       callback btnCallback
-      xywh {85 215 64 20} deactivate
+      xywh {25 220 64 20} deactivate
     }
     Fl_Button {} {
       label Color
       user_data {"color"}
       callback btnCallback
-      xywh {155 215 64 20}
+      xywh {110 220 64 20}
     }
     Fl_Button {} {
       label Help
       user_data {"help"}
       callback btnCallback
-      xywh {225 215 64 20}
+      xywh {200 220 64 20}
     }
   }
 } 

@@ -1,0 +1,168 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0110 
+header_name {.h} 
+code_name {.cxx}
+decl {// Services gui v0.2.1 (C) Curaga} {global
+} 
+
+decl {// Under the GPLv3} {global
+} 
+
+decl {\#include <stdio.h>} {public global
+} 
+
+decl {\#include <stdlib.h>} {public global
+} 
+
+decl {\#include <unistd.h>} {public global
+} 
+
+decl {\#include <string.h>} {public global
+} 
+
+decl {\#include <FL/Fl_Light_Button.H>} {public global
+} 
+
+decl {\#define bufsize 96} {global
+} 
+
+decl {int s_status[26];} {} 
+
+decl {int s_path[26];} {} 
+
+decl {char *services[26];} {} 
+
+decl {char paths[2][24]={"/usr/local/etc/init.d/","/etc/init.d/services/"};} {} 
+
+decl {char mydir[]="/tmp/servicesXXXXXX";} {} 
+
+Function {scan_services()} {open private return_type int
+} {
+  code {int i=0, total=0;
+FILE *lst;
+char buffer[bufsize];
+
+snprintf(buffer,bufsize,"ls -1 %s > services.lst 2>/dev/null",paths[0]);
+system(buffer);
+
+snprintf(buffer,bufsize,"ls -1 %s >> services.lst 2>/dev/null",paths[1]);
+system(buffer);
+
+system("sort services.lst > services.lst2");
+rename("services.lst2","services.lst");
+
+
+lst=fopen("services.lst","r");
+
+while (fgets(buffer,bufsize,lst)!=NULL) {
+	if (i>=26) break; // At most 26 services.
+	
+	for (total=0;total<bufsize;total++) if (buffer[total]=='\\n') buffer[total]='\\0';
+	
+	services[i]=strdup(buffer);
+	
+	i++;
+}
+
+fclose(lst);
+total=i;
+
+// Services located. Now check status
+
+for (i=0; i<total; i++) {
+
+	snprintf(buffer,bufsize,"%s%s",paths[0],services[i]);
+	if (access(buffer,X_OK)==0) s_path[i]=0;
+	else {
+		snprintf(buffer,bufsize,"%s%s",paths[1],services[i]);
+		if (access(buffer,X_OK)==0) s_path[i]=1;
+		else s_path[i]=-1;
+
+	}
+
+	if (s_path[i]>=0) {
+		snprintf(buffer,bufsize,"sudo %s%s status 2>&1 >/dev/null",paths[s_path[i]],services[i]);
+		s_status[i]=system(buffer);
+		if (s_status[i]) s_status[i]=0;
+		else s_status[i]=1;
+	}
+}
+
+return total;} {selected
+  }
+} 
+
+Function {toggle_service(Fl_Widget*, void* userdata)} {open private return_type void
+} {
+  code {char buffer[bufsize];
+int num=(long)userdata;
+
+if (s_status[num]) fprintf(stderr,"Shutting down %s\\n",services[num]);
+else fprintf(stderr,"Starting %s\\n",services[num]);
+
+if (s_path[num]>=0) {
+	switch (s_status[num]) {
+		case 0:
+			snprintf(buffer,bufsize,"sudo %s%s start",paths[s_path[num]],services[num]);
+		break;
+		default:
+			snprintf(buffer,bufsize,"sudo %s%s stop",paths[s_path[num]],services[num]);
+		break;
+	}
+	system(buffer);
+}
+
+if (s_status[num]) s_status[num]=0;
+else s_status[num]=1;} {}
+} 
+
+Function {cleanup(Fl_Widget*,void*)} {open private return_type void
+} {
+  code {char buffer[bufsize];
+
+chdir("/");
+snprintf(buffer,bufsize,"rm -rf %s",mydir);
+system(buffer);
+
+exit(0);} {}
+} 
+
+Function {} {open
+} {
+  code {int i, total=0, topa=13, topb=26;
+char wintitle[]="Services: XX total";
+Fl_Light_Button *lght[26];
+
+memset(s_status,0,sizeof(int)*26);
+
+mkdtemp(mydir);
+chdir(mydir);
+
+total=scan_services();
+
+if (total<=13) {
+	topa=total;
+	topb=total;
+} else if (total<=26) topb=total;
+
+fprintf(stderr,"Found total %d services.\\n",total);} {}
+  Fl_Window window {
+    label Services open
+    private xywh {66 214 480 425} type Double hide
+    code0 {sprintf(wintitle,"Services: %d total",total); window->label(wintitle);}
+    code1 {if (total<=13) window->size(window->w()/2,window->h());}
+    code2 {window->size(window->w(),35+((total<14?total:13)*30));}
+    code3 {window->callback((Fl_Callback*)cleanup);}
+  } {
+    Fl_Pack left {open
+      private xywh {20 15 200 390}
+      code0 {left->spacing(5);}
+      code1 {for (i=0; i<topa; i++) { lght[i]=new Fl_Light_Button(0,0,25,25,services[i]); lght[i]->selection_color(FL_GREEN); lght[i]->value(s_status[i]); lght[i]->callback((Fl_Callback*)toggle_service, (void*)i); }}
+    } {}
+    Fl_Pack right {open
+      private xywh {260 15 200 390}
+      code0 {right->spacing(5);}
+      code1 {for (i=13; i<topb; i++) { lght[i]=new Fl_Light_Button(0,0,25,25,services[i]); lght[i]->selection_color(FL_GREEN); lght[i]->value(s_status[i]); lght[i]->callback((Fl_Callback*)toggle_service, (void*)i); }}
+    } {}
+  }
+} 

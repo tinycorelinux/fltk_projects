@@ -19,7 +19,7 @@ static string select_extn;
 static string repository; 
 static ifstream ifaberr; 
 static string aberr; 
-static string command, msg; 
+static string mode, command, msg, url; 
 
 void HandleInput_CB(int, void *data) {
   static int x = 0;
@@ -40,9 +40,22 @@ if ( c == '\n' || x == (sizeof(s)-1) )
   { s[x++] = c; }
 }
 
+void fetch_extension() {
+  status_out->activate();
+status_out->color(FL_WHITE);
+status_out->value(command.c_str());
+command = command + "\n";
+write(G_out, command.c_str(), command.length());
+Fl::add_fd(fileno(G_in), HandleInput_CB, (void*)&status_out);
+}
+
 void btn_callback(Fl_Widget *, void* userdata) {
   if (userdata == "tcz")
 {
+   mode = "tcz";
+   status_out->value("");
+   status_out->label("Status");
+   status_out->deactivate();
    repository = (const char*) userdata;
    window->cursor(FL_CURSOR_WAIT);
    Fl::flush();
@@ -53,10 +66,12 @@ void btn_callback(Fl_Widget *, void* userdata) {
    if (results == 0 )
    {
       system("gunzip info.lst.gz");
-      brw_extn->load("info.lst");
+      brw_select->load("info.lst");
       btn_install->deactivate();
       btn_download->deactivate();
-      box_extensions->activate();
+      btn_ondemand->deactivate();
+      box_select->label("Select Extension");
+      box_select->activate();
       btn_search->activate();
       search_field->activate();                                              
       system("rm -f info.lst"); 
@@ -64,23 +79,18 @@ void btn_callback(Fl_Widget *, void* userdata) {
       fl_message("Connection error, check network or mirror.");  
 } else if (userdata == "install")
 {
-   status_out->activate();
-   command = "tce-load -w -i " + select_extn;
-   status_out->color(FL_WHITE);
-   status_out->value(command.c_str());
-   command = command + "\n";
-   write(G_out, command.c_str(), command.length());
-   Fl::add_fd(fileno(G_in), HandleInput_CB, (void*)&status_out);
+   command = "tce-load -wi " + select_extn;
+   fetch_extension();
 
 } else if (userdata == "download")
 {
-   status_out->activate();
    command = "tce-load -w " + select_extn;
-   status_out->color(FL_WHITE);
-   status_out->value(command.c_str());
-   command = command + "\n";
-   write(G_out, command.c_str(), command.length());
-   Fl::add_fd(fileno(G_in), HandleInput_CB, (void*)&status_out);
+   fetch_extension();
+
+} else if (userdata == "ondemand")
+{
+   command = "tce-load -wo " + select_extn;
+   fetch_extension();
    
 } else if (userdata == "toggle")
 {
@@ -104,7 +114,7 @@ void btn_callback(Fl_Widget *, void* userdata) {
   Fl::flush();
   if (results == 0 )
   {
-    brw_extn->load("info.lst");
+    brw_select->load("info.lst");
     btn_install->deactivate();
     btn_download->deactivate();
     btn_search->activate();
@@ -127,26 +137,44 @@ void btn_callback(Fl_Widget *, void* userdata) {
   }
 }
 
-void brw_extn_callback(Fl_Widget *, void *) {
-  if (brw_extn->value())
+void brw_select_callback(Fl_Widget *, void *) {
+  if (brw_select->value())
 {
-   select_extn = brw_extn->text(brw_extn->value());
-   string select_extn_file = select_extn + (string)".info";
-   command = "/usr/bin/tce-fetch.sh " + select_extn_file;
-   int results = system(command.c_str());
-   if (results == 0)
+   select_extn = brw_select->text(brw_select->value());
+   if ( mode == "tcz" )
    {
-      brw_info->load(select_extn_file.c_str());
-      command = "rm -f " + select_extn_file;
-      system(command.c_str());
-      btn_install->activate();
-      btn_download->activate();
-      tab_info->activate();
-      tab_files->activate();
-      brw_list->load("");
-      tab_depends->activate();
-      brw_dep->load("");
-      tab_info->show();
+      string select_extn_file = select_extn + (string)".info";
+      command = "/usr/bin/tce-fetch.sh " + select_extn_file;
+      int results = system(command.c_str());
+      if (results == 0)
+      {
+         brw_info->load(select_extn_file.c_str());
+         command = "rm -f " + select_extn_file;
+         system(command.c_str());
+         btn_install->activate();
+         btn_download->activate();
+         btn_ondemand->activate();
+         tabs->activate();
+         tab_info->activate();
+         tab_files->activate();
+         brw_list->load("");
+         tab_depends->activate();
+         brw_dep->load("");
+         tab_info->show();
+      } 
+   }
+   if ( mode == "mirror" )
+   {
+      status_out->value(select_extn.c_str());
+      url = status_out->value();
+     ofstream fout("/opt/tcemirror", ios::out|ios::out);
+     if (! fout.is_open())
+     {
+       cerr << "Can't open /opt/tcemirror for output!" << endl;
+       exit(EXIT_FAILURE);
+     }
+     fout << url << endl;
+     fout.close();      
    }
 }
 }
@@ -189,11 +217,38 @@ write(G_out, command.c_str(), command.length());
 Fl::add_fd(fileno(G_in), HandleInput_CB, (void*)&status_out);
 }
 
+void mirror_btn_callback(Fl_Widget*, void* userdata) {
+  //Get Mirror
+mode = "mirror";
+window->cursor(FL_CURSOR_WAIT);
+Fl::flush();
+ifstream fin("/opt/tcemirror");
+getline(fin,url);
+fin.close();
+brw_info->clear();
+tabs->deactivate();
+status_out->label("  URL:");
+status_out->value(url.c_str());
+status_out->activate();
+command = "busybox wget -cq ftp://distro.ibiblio.org/pub/linux/distributions/tinycorelinux/2.x/tcz/mirrors.lst";
+int results = system(command.c_str());
+window->cursor(FL_CURSOR_DEFAULT);
+Fl::flush();
+if ( results == 0)
+{
+   brw_select->load("mirrors.lst");
+   box_select->label("Select Mirror");
+   box_select->activate();
+   system("rm mirrors.lst");
+} else
+   fl_message("Connection error, check network or ibiblio");
+}
+
 void tabs_callback(Fl_Widget*, void* userdata) {
-  if (brw_extn->value())
+  if (brw_select->value())
 {
    int results;
-   select_extn = brw_extn->text(brw_extn->value());
+   select_extn = brw_select->text(brw_select->value());
    if (tab_files->visible())
    {
      string select_extn_file = select_extn + (string)".list";
@@ -228,9 +283,9 @@ Fl_Button *btn_search=(Fl_Button *)0;
 
 Fl_Input *search_field=(Fl_Input *)0;
 
-Fl_Box *box_extensions=(Fl_Box *)0;
+Fl_Box *box_select=(Fl_Box *)0;
 
-Fl_Browser *brw_extn=(Fl_Browser *)0;
+Fl_Browser *brw_select=(Fl_Browser *)0;
 
 Fl_Tabs *tabs=(Fl_Tabs *)0;
 
@@ -250,36 +305,41 @@ Fl_Button *btn_install=(Fl_Button *)0;
 
 Fl_Button *btn_download=(Fl_Button *)0;
 
+Fl_Button *btn_ondemand=(Fl_Button *)0;
+
 Fl_Output *status_out=(Fl_Output *)0;
 
 int main(int argc, char **argv) {
-  { window = new Fl_Double_Window(685, 400, "Appbrowser");
+  { window = new Fl_Double_Window(685, 395, "Appbrowser");
     window->callback((Fl_Callback*)btn_callback, (void*)("quit"));
-    { Fl_Button* o = new Fl_Button(5, 0, 90, 20, "Connect");
+    { Fl_Button* o = new Fl_Button(0, 0, 68, 20, "Connect");
       o->callback((Fl_Callback*)btn_callback, (void*)("tcz"));
     } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(100, 0, 90, 20, "Local");
+    { Fl_Button* o = new Fl_Button(69, 0, 65, 20, "Local");
       o->callback((Fl_Callback*)local_btn_callback, (void*)("File/Local"));
     } // Fl_Button* o
-    { btn_search = new Fl_Button(205, 0, 77, 20, "Search");
+    { Fl_Button* o = new Fl_Button(135, 0, 65, 20, "Mirrors");
+      o->callback((Fl_Callback*)mirror_btn_callback, (void*)("mirror"));
+    } // Fl_Button* o
+    { btn_search = new Fl_Button(206, 0, 65, 20, "Search");
       btn_search->tooltip("Toggle Search / Provides");
       btn_search->callback((Fl_Callback*)btn_callback, (void*)("toggle"));
       btn_search->deactivate();
     } // Fl_Button* btn_search
-    { search_field = new Fl_Input(282, 0, 400, 20);
+    { search_field = new Fl_Input(275, 0, 405, 20);
       search_field->labeltype(FL_NO_LABEL);
       search_field->callback((Fl_Callback*)btn_callback, (void*)("search"));
       search_field->when(FL_WHEN_ENTER_KEY);
       search_field->deactivate();
     } // Fl_Input* search_field
-    { box_extensions = new Fl_Box(40, 24, 100, 16, "Extensions");
-      box_extensions->deactivate();
-    } // Fl_Box* box_extensions
-    { brw_extn = new Fl_Browser(0, 45, 200, 325);
-      brw_extn->type(1);
-      brw_extn->textfont(4);
-      brw_extn->callback((Fl_Callback*)brw_extn_callback);
-    } // Fl_Browser* brw_extn
+    { box_select = new Fl_Box(40, 24, 120, 16);
+      box_select->deactivate();
+    } // Fl_Box* box_select
+    { brw_select = new Fl_Browser(0, 45, 200, 325);
+      brw_select->type(1);
+      brw_select->textfont(4);
+      brw_select->callback((Fl_Callback*)brw_select_callback);
+    } // Fl_Browser* brw_select
     { tabs = new Fl_Tabs(205, 20, 475, 350);
       tabs->callback((Fl_Callback*)tabs_callback);
       { tab_info = new Fl_Group(205, 45, 475, 325, "Info");
@@ -309,16 +369,22 @@ int main(int argc, char **argv) {
       } // Fl_Group* tab_depends
       tabs->end();
     } // Fl_Tabs* tabs
-    { btn_install = new Fl_Button(5, 375, 90, 20, "Install ");
+    { btn_install = new Fl_Button(0, 373, 52, 20, "Install ");
+      btn_install->tooltip("Downloads, updates menu and onboot.lst.");
       btn_install->callback((Fl_Callback*)btn_callback, (void*)("install"));
       btn_install->deactivate();
     } // Fl_Button* btn_install
-    { btn_download = new Fl_Button(100, 375, 90, 20, "OnDemand");
-      btn_download->tooltip("Downloads to optional directory.");
+    { btn_download = new Fl_Button(53, 373, 68, 20, "DwnLoad");
+      btn_download->tooltip("Download Only.");
       btn_download->callback((Fl_Callback*)btn_callback, (void*)("download"));
       btn_download->deactivate();
     } // Fl_Button* btn_download
-    { status_out = new Fl_Output(250, 375, 430, 20, "Status");
+    { btn_ondemand = new Fl_Button(123, 373, 76, 20, "OnDemand");
+      btn_ondemand->tooltip("Downloads  and updates OnDemand menu.");
+      btn_ondemand->callback((Fl_Callback*)btn_callback, (void*)("ondemand"));
+      btn_ondemand->deactivate();
+    } // Fl_Button* btn_ondemand
+    { status_out = new Fl_Output(250, 373, 430, 20, "Status");
       status_out->deactivate();
     } // Fl_Output* status_out
     window->end();
@@ -336,27 +402,24 @@ if ( last_dir_file.is_open() )
    last_dir_file.close();
 }
 
-// Process group leader (for killpg())
-// setsid();
-
 // Make fifo
-unlink("ab2tce.fifo");
-if ( mkfifo("ab2tce.fifo", 0666) < 0 ) {
-    perror("mkfifo(ab2tce.fifo)");
+unlink("/tmp/ab2tce.fifo");
+if ( mkfifo("/tmp/ab2tce.fifo", 0666) < 0 ) {
+    perror("mkfifo(/tmp/ab2tce.fifo)");
     exit(1);
 }
 
 // Popen child for reading, set child to read fifo
-if ( ( G_in = popen("ab2tce.sh < ab2tce.fifo", "r") ) == NULL ) {
+if ( ( G_in = popen("ab2tce.sh < /tmp/ab2tce.fifo", "r") ) == NULL ) {
     perror("popen failed");
     exit(1);
 }
 setbuf(G_in, NULL);                         // disable buffering
 
 // Now open fifo
-if ( ( G_out = open("ab2tce.fifo", O_WRONLY) ) < 0 ) {
-    perror("open(ab2tce.fifo) for write failed");
-    unlink("ab2tce.fifo");
+if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
+    perror("open(/tmp/ab2tce.fifo) for write failed");
+    unlink("/tmp/ab2tce.fifo");
     exit(1);
 }
   window->show(argc, argv);

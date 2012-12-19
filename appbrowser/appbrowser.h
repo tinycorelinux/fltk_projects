@@ -4,9 +4,11 @@
 #define appbrowser_h
 #include <FL/Fl.H>
 void HandleInput_CB(int, void *data);
+void fetch_extension();
 void btn_callback(Fl_Widget *, void* userdata);
-void brw_extn_callback(Fl_Widget *, void *);
+void brw_select_callback(Fl_Widget *, void *);
 void local_btn_callback(Fl_Widget*, void* userdata);
+void mirror_btn_callback(Fl_Widget*, void* userdata);
 void tabs_callback(Fl_Widget*, void* userdata);
 #include <FL/Fl_Double_Window.H>
 extern Fl_Double_Window *window;
@@ -15,9 +17,9 @@ extern Fl_Button *btn_search;
 #include <FL/Fl_Input.H>
 extern Fl_Input *search_field;
 #include <FL/Fl_Box.H>
-extern Fl_Box *box_extensions;
+extern Fl_Box *box_select;
 #include <FL/Fl_Browser.H>
-extern Fl_Browser *brw_extn;
+extern Fl_Browser *brw_select;
 #include <FL/Fl_Tabs.H>
 extern Fl_Tabs *tabs;
 #include <FL/Fl_Group.H>
@@ -29,6 +31,7 @@ extern Fl_Group *tab_depends;
 extern Fl_Browser *brw_dep;
 extern Fl_Button *btn_install;
 extern Fl_Button *btn_download;
+extern Fl_Button *btn_ondemand;
 #include <FL/Fl_Output.H>
 extern Fl_Output *status_out;
 #endif

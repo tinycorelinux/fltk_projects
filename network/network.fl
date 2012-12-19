@@ -1,9 +1,8 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
-decl {// (c) Robert Shingledecker} {selected
-} 
+decl {// (c) Robert Shingledecker} {} 
 
 decl {\#include <iostream>} {} 
 
@@ -136,12 +135,12 @@ if (userdata == "exit")
 Function {} {open
 } {
   Fl_Window {} {
-    label {Netcard Conf} open
+    label Network open selected
     xywh {159 276 160 415} type Double hide
   } {
     Fl_Box {} {
-      label {Netcard Conf}
-      xywh {5 2 150 28} labeltype ENGRAVED_LABEL labelsize 18
+      label Network
+      xywh {30 2 90 28} labeltype ENGRAVED_LABEL labelsize 18
     }
     Fl_Input interfaceInput {
       label Interface

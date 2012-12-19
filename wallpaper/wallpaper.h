@@ -9,8 +9,10 @@ void btnCallback(Fl_Widget*, void* userdata);
 #include <FL/Fl_File_Browser.H>
 extern Fl_File_Browser *imageBrowser;
 #include <FL/Fl_Round_Button.H>
-extern Fl_Round_Button *btnScale;
+extern Fl_Round_Button *btnFull;
 extern Fl_Round_Button *btnTile;
+extern Fl_Round_Button *btnCenter;
+extern Fl_Round_Button *btnFill;
 #include <FL/Fl_Button.H>
 extern Fl_Button *installBtn;
 #endif

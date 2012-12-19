@@ -37,7 +37,15 @@ Function {depends_callback(Fl_Widget *, void* userdata)} {open return_type {stat
   code {report_type = (const char*) userdata;
 option_type = "";
 
-if (userdata == "builddb")
+if (userdata == "updatedeps")
+{
+   window->cursor(FL_CURSOR_WAIT);
+   Fl::flush();
+   command = "/usr/bin/tce-audit updatedeps " + target_dir +"/";
+   system(command.c_str());
+   window->cursor(FL_CURSOR_DEFAULT);
+   Fl::flush();
+} else if (userdata == "builddb")
 {
    window->cursor(FL_CURSOR_WAIT);
    Fl::flush();
@@ -205,6 +213,39 @@ if (userdata == "quit")
   exit(0);} {}
 } 
 
+Function {ondemand_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
+} {
+  code {if (userdata == "ondemand" )
+{
+//  target_dir = tcedir + "/optional/";
+  report_type = "ondemand";
+  brw_extn->clear();
+  window->cursor(FL_CURSOR_WAIT);
+  Fl::flush();
+  command = "ondemand -l";
+  system(command.c_str());
+  box_extn->label("Select for OnDemand");
+  brw_extn->load("/tmp/ondemand.tmp");
+  box_results->label("On Demand Results");
+  brw_results->clear();
+  system("rm /tmp/ondemand.tmp");
+  window->cursor(FL_CURSOR_DEFAULT);
+  Fl::flush();
+}
+ 
+if (userdata == "exit_ondemand")
+{
+  report_type.empty();
+  box_extn->label(target_dir.c_str());
+  box_results->label("Results");
+  brw_extn->clear();
+  brw_results->clear();
+} 
+ 
+if (userdata == "quit") 
+  exit(0);} {}
+} 
+
 Function {brw_extn_callback(Fl_Widget *, void *)} {open return_type {static void}
 } {
   code {if (brw_extn->value())
@@ -230,7 +271,6 @@ Function {brw_extn_callback(Fl_Widget *, void *)} {open return_type {static void
      window->cursor(FL_CURSOR_WAIT);
      Fl::flush();
      command = "tce-update update " + select_extn + ".md5.txt >/tmp/apps_upd.lst";
-//   cout << command << endl;
      brw_results->load("");
      system(command.c_str());
      brw_results->load("/tmp/apps_upd.lst");
@@ -244,9 +284,26 @@ Function {brw_extn_callback(Fl_Widget *, void *)} {open return_type {static void
      system(command.c_str());
      box_results->label("On Boot Items");
      brw_results->load(onbootList.c_str());
-   }   
-}} {selected
-  }
+   }
+      
+   if ( report_type == "ondemand" )
+   {
+     window->cursor(FL_CURSOR_WAIT);
+     Fl::flush();
+     command = "ondemand " + select_extn;
+//     cout << command << endl;
+     brw_results->load("");
+     int results = system(command.c_str());
+     if ( results == 0 ) 
+     {
+       msg = select_extn + " OK.";
+       box_results->label(msg.c_str());
+     } else  
+       brw_results->load("/tmp/ondemand.tmp");
+     window->cursor(FL_CURSOR_DEFAULT);
+     Fl::flush();
+   }
+}} {}
 } 
 
 Function {brw_results_callback(Fl_Widget *, void *)} {open return_type {static void}
@@ -306,10 +363,16 @@ Function {} {open
         xywh {0 0 63 20}
       } {
         MenuItem {} {
-          label {Update Dep Database}
-          user_data {"builddb"}
+          label {Update .dep files.}
+          user_data {"updatedeps"}
           callback depends_callback
           xywh {0 0 30 20}
+        }
+        MenuItem {} {
+          label {Build Reporting Database}
+          user_data {"builddb"}
+          callback depends_callback
+          xywh {10 10 30 20}
         }
         MenuItem menu_dependson {
           label {List Dependencies}
@@ -318,7 +381,7 @@ Function {} {open
           xywh {5 5 30 20} deactivate
         }
         MenuItem menu_requiredby {
-          label {LIst Required By}
+          label {List Required By}
           user_data {"requiredby"}
           callback depends_callback
           xywh {15 15 30 20} deactivate
@@ -417,6 +480,23 @@ Function {} {open
           xywh {0 0 30 20}
         }
       }
+      Submenu {} {
+        label OnDemand open
+        xywh {20 20 63 20}
+      } {
+        MenuItem {} {
+          label Selection
+          user_data {"ondemand"}
+          callback ondemand_callback
+          xywh {20 20 30 20}
+        }
+        MenuItem {} {
+          label {Exit OnDemand}
+          user_data {"exit_ondemand"}
+          callback ondemand_callback selected
+          xywh {20 20 30 20}
+        }
+      }
     }
     Fl_Box box_extn {
       xywh {0 24 200 16} labelfont 1 align 20
@@ -425,13 +505,13 @@ Function {} {open
       label Results
       xywh {225 24 430 16} labelfont 1
     }
-    Fl_Browser brw_results {
-      callback brw_results_callback
-      xywh {225 45 430 325} type Select textfont 4
-    }
     Fl_Browser brw_extn {
       callback brw_extn_callback
       xywh {0 45 200 325} type Select textfont 4
+    }
+    Fl_Browser brw_results {
+      callback brw_results_callback
+      xywh {225 45 430 325} type Select textfont 4
     }
   }
   code {ifstream tcedir_file("/opt/.tce_dir");
@@ -452,7 +532,8 @@ command = "ls " + target_dir + "/tce.db >/dev/null 2>&1";
 int results = system(command.c_str());
 if (results == 0)
 {
-  report_type = "builddb";
+  report_type = "updatedeps";
+/*  
   string listfile = target_dir + "/tce.lst";
   box_extn->label(target_dir.c_str());
   brw_extn->load(listfile.c_str());
@@ -460,5 +541,6 @@ if (results == 0)
   menu_notrequired->activate();
   menu_auditall->activate();
   menu_marked->activate();
+*/  
 }} {}
 } 
