@@ -5,7 +5,8 @@ i18n_include <libintl.h>
 i18n_function gettext 
 header_name {.h} 
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2008-2010} {} 
+decl {// (c) Robert Shingledecker 2008-2011} {selected
+} 
 
 decl {\#include <iostream>} {} 
 
@@ -252,8 +253,7 @@ Function {brw_select_callback(Fl_Widget *, void *)} {open private return_type {s
          btn_tce->deactivate();         
       }
    }
-}} {selected
-  }
+}} {}
 } 
 
 Function {local_btn_callback(Fl_Widget*, void* userdata)} {open private return_type {static void}
@@ -297,32 +297,17 @@ Fl::add_fd(fileno(G_in), HandleInput_CB, (void*)&status_out);} {}
 
 Function {mirror_btn_callback(Fl_Widget*, void* userdata)} {open private return_type {static void}
 } {
-  code {//Get Mirror
-mode = "mirror";
-cursor_wait();
-/*
-fin("/opt/tcemirror");
-getline(fin,mirror);
-fin.close();
-*/
+  code {mode = "mirror";
 tabs->deactivate();
-/*
-status_out->label("  URL:");
-status_out->value(mirror.c_str());
-status_out->activate();
-*/
-command = "/usr/bin/tce-fetch.sh mirrors.lst";
-int results = system(command.c_str());
-cursor_normal();
+int results = brw_select->load("/usr/local/share/mirrors");
+cout << results << endl;
 if ( results == 0)
-{
-   brw_select->load("mirrors.lst");
+  fl_message("Must load mirrors.tcz extension in order to use this feature.");
+else {
    brw_select->remove(brw_select->size());
    box_select->label("Select Mirror");
    box_select->activate();
-   unlink("mirrors.lst");
-} else
-   fl_message("Connection error, check network or ibiblio");} {}
+}} {}
 } 
 
 Function {tabsGroupCB(Fl_Widget*, void* userdata)} {open private return_type {static void}
@@ -460,7 +445,7 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
       callback mirror_btn_callback
       xywh {135 0 65 20}
     }
-    Fl_Choice search_choices {open
+    Fl_Choice search_choices {
       xywh {206 0 93 20} down_box BORDER_BOX deactivate
     } {
       MenuItem {} {
@@ -485,7 +470,7 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
       xywh {0 45 200 325} type Select textfont 4
     }
     Fl_Tabs tabs {
-      callback tabsGroupCB open
+      callback tabsGroupCB
       xywh {205 20 475 350}
     } {
       Fl_Group infoTab {
@@ -525,7 +510,7 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
         }
       }
     }
-    Fl_Choice install_choices {open
+    Fl_Choice install_choices {
       xywh {3 373 140 20} down_box BORDER_BOX
     } {
       MenuItem {} {

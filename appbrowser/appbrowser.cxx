@@ -2,7 +2,7 @@
 
 #include <libintl.h>
 #include "appbrowser.h"
-// (c) Robert Shingledecker 2008-2010
+// (c) Robert Shingledecker 2008-2011
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -265,32 +265,17 @@ Fl::add_fd(fileno(G_in), HandleInput_CB, (void*)&status_out);
 }
 
 static void mirror_btn_callback(Fl_Widget*, void* userdata) {
-  //Get Mirror
-mode = "mirror";
-cursor_wait();
-/*
-fin("/opt/tcemirror");
-getline(fin,mirror);
-fin.close();
-*/
+  mode = "mirror";
 tabs->deactivate();
-/*
-status_out->label("  URL:");
-status_out->value(mirror.c_str());
-status_out->activate();
-*/
-command = "/usr/bin/tce-fetch.sh mirrors.lst";
-int results = system(command.c_str());
-cursor_normal();
+int results = brw_select->load("/usr/local/share/mirrors");
+cout << results << endl;
 if ( results == 0)
-{
-   brw_select->load("mirrors.lst");
+  fl_message("Must load mirrors.tcz extension in order to use this feature.");
+else {
    brw_select->remove(brw_select->size());
    box_select->label("Select Mirror");
    box_select->activate();
-   unlink("mirrors.lst");
-} else
-   fl_message("Connection error, check network or ibiblio");
+}
 }
 
 static void tabsGroupCB(Fl_Widget*, void* userdata) {

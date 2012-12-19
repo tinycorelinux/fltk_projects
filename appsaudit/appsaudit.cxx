@@ -2,7 +2,7 @@
 
 #include <libintl.h>
 #include "appsaudit.h"
-// (c) Robert Shingledecker 2009-2010
+// (c) Robert Shingledecker 2009-2011
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -15,7 +15,7 @@ static string command;
 static string select_extn, select_results; 
 static string option_type, report_type, update_type; 
 static ifstream ifaberr; 
-static string aberr, msg; 
+static string aberr, msg, hilite; 
 static int results, locales_set=0; 
 static string copy2fsList, copy2fsFlag, onbootList; 
 
@@ -162,8 +162,7 @@ if (userdata == "updatedeps")
     menu_activate();
     brw_extn->clear();
     brw_results->clear();
-} else if (userdata == "quit" )
-    exit(0);
+}
 }
 
 void options_callback(Fl_Widget *, void* userdata) {
@@ -308,10 +307,7 @@ if (userdata == "exit_onboot")
   box_results->label("Results");
   brw_extn->clear();
   brw_results->clear();
-} 
- 
-if (userdata == "quit") 
-  exit(0);
+}
 }
 
 void ondemand_callback(Fl_Widget *, void* userdata) {
@@ -439,12 +435,15 @@ for ( int t=0; t<=brw_multi->size(); t++ )
       {
          command = "cd " + target_dir +"/ && md5sum -c " + select_extn;
          results = system(command.c_str());
-         if ( results == 0 )
+         if ( results == 0 ) {
             msg = " OK";
-         else
+            hilite = "";
+         } else {
             msg = " FAILED";
+            hilite = "@B17";
+         }   
              
-         brw_results->add((select_extn + msg).c_str());
+         brw_results->add((hilite + select_extn + msg).c_str());
          Fl::flush();      
       
       } else {
@@ -537,12 +536,14 @@ void brw_results_callback(Fl_Widget *, void *) {
 
 Fl_Double_Window *window=(Fl_Double_Window *)0;
 
+static void cb_window(Fl_Double_Window*, void*) {
+  system("tce-remove");
+exit(0);
+}
+
 Fl_Menu_Bar *menuBar=(Fl_Menu_Bar *)0;
 
 Fl_Menu_Item menu_menuBar[] = {
- {mygettext("File"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
- {mygettext("Quit"), 0,  (Fl_Callback*)depends_callback, (void*)("quit"), 0, FL_NORMAL_LABEL, 0, 14, 0},
- {0,0,0,0,0,0,0,0,0},
  {mygettext("Dependencies"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Update .dep files."), 0,  (Fl_Callback*)depends_callback, (void*)("updatedeps"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Build Reporting Database"), 0,  (Fl_Callback*)depends_callback, (void*)("builddb"), 0, FL_NORMAL_LABEL, 0, 14, 0},
@@ -597,7 +598,7 @@ Fl_Browser *brw_results=(Fl_Browser *)0;
 
 int main(int argc, char **argv) {
   { window = new Fl_Double_Window(675, 375, mygettext("AppsAudit"));
-    window->callback((Fl_Callback*)onboot_callback, (void*)("quit"));
+    window->callback((Fl_Callback*)cb_window);
     { menuBar = new Fl_Menu_Bar(0, 0, 685, 20);
       menuBar->menu(menu_menuBar);
     } // Fl_Menu_Bar* menuBar

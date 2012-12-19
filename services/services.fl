@@ -1,11 +1,8 @@
 # data file for the Fltk User Interface Designer (fluid)
 version 1.0110 
-i18n_type 1 
-i18n_include <libintl.h> 
-i18n_function gettext 
 header_name {.h} 
 code_name {.cxx}
-decl {// Services gui v0.2.1 (C) Curaga} {global
+decl {// Services gui v0.3 (C) Curaga} {selected global
 } 
 
 decl {// Under the GPLv3} {global
@@ -26,10 +23,10 @@ decl {\#include <string.h>} {public global
 decl {\#include <FL/Fl_Light_Button.H>} {public global
 } 
 
-decl {\#include <locale.h>} {} 
-
 decl {\#define bufsize 96} {global
 } 
+
+decl {int s_total;} {} 
 
 decl {int s_status[26];} {} 
 
@@ -37,9 +34,31 @@ decl {int s_path[26];} {}
 
 decl {char *services[26];} {} 
 
+decl {Fl_Light_Button *lght[26];} {} 
+
 decl {char paths[2][24]={"/usr/local/etc/init.d/","/etc/init.d/services/"};} {} 
 
 decl {char mydir[]="/tmp/servicesXXXXXX";} {} 
+
+Function {status_check()} {open private return_type void
+} {
+  code {char buffer[bufsize];
+	int i;
+	
+	for (i=0; i<s_total; i++) {
+
+		if (s_path[i]>=0) {
+			snprintf(buffer,bufsize,"sudo %s%s status 2>&1 >/dev/null",paths[s_path[i]],services[i]);
+			s_status[i]=system(buffer);
+			if (s_status[i]) s_status[i]=0;
+			else s_status[i]=1;
+			
+			// Let's stay interactive
+			Fl::check();
+		}
+	
+	}} {}
+} 
 
 Function {scan_services()} {open private return_type int
 } {
@@ -72,7 +91,7 @@ while (fgets(buffer,bufsize,lst)!=NULL) {
 fclose(lst);
 total=i;
 
-// Services located. Now check status
+// Services located. Now check paths
 
 for (i=0; i<total; i++) {
 
@@ -85,13 +104,11 @@ for (i=0; i<total; i++) {
 
 	}
 
-	if (s_path[i]>=0) {
-		snprintf(buffer,bufsize,"sudo %s%s status 2>&1 >/dev/null",paths[s_path[i]],services[i]);
-		s_status[i]=system(buffer);
-		if (s_status[i]) s_status[i]=0;
-		else s_status[i]=1;
-	}
+
 }
+
+s_total = total;
+status_check();
 
 return total;} {}
 } 
@@ -99,7 +116,7 @@ return total;} {}
 Function {toggle_service(Fl_Widget*, void* userdata)} {open private return_type void
 } {
   code {char buffer[bufsize];
-int num=(long)userdata;
+int num=(long)userdata, i;
 
 if (s_status[num]) fprintf(stderr,"Shutting down %s\\n",services[num]);
 else fprintf(stderr,"Starting %s\\n",services[num]);
@@ -116,8 +133,16 @@ if (s_path[num]>=0) {
 	system(buffer);
 }
 
+/*
 if (s_status[num]) s_status[num]=0;
-else s_status[num]=1;} {}
+else s_status[num]=1;
+*/
+
+sleep(1);
+status_check();
+for (i=0; i<s_total; i++) {
+	lght[i]->value(s_status[i]);
+}} {}
 } 
 
 Function {cleanup(Fl_Widget*,void*)} {open private return_type void
@@ -133,13 +158,8 @@ exit(0);} {}
 
 Function {} {open
 } {
-  code {setlocale(LC_ALL, "");
-bindtextdomain("tinycore","/usr/local/share/locale");
-textdomain("tinycore");} {selected
-  }
   code {int i, total=0, topa=13, topb=26;
 char wintitle[]="Services: XX total";
-Fl_Light_Button *lght[26];
 
 memset(s_status,0,sizeof(int)*26);
 
@@ -156,7 +176,7 @@ if (total<=13) {
 fprintf(stderr,"Found total %d services.\\n",total);} {}
   Fl_Window window {
     label Services open
-    private xywh {66 214 480 425} type Double hide
+    private xywh {638 327 480 425} type Double hide
     code0 {sprintf(wintitle,"Services: %d total",total); window->label(wintitle);}
     code1 {if (total<=13) window->size(window->w()/2,window->h());}
     code2 {window->size(window->w(),35+((total<14?total:13)*30));}

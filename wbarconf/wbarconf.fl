@@ -7,8 +7,7 @@ header_name {.h}
 code_name {.cxx}
 decl {// (c) Robert Shingledecker 2010} {} 
 
-decl {// Zoom, Icon Size, Icon Text options - Brian Smith} {selected
-} 
+decl {// Zoom, Icon Size, Icon Text options - Brian Smith} {} 
 
 decl {\#include <iostream>} {} 
 
@@ -78,6 +77,22 @@ switch(pos)
              break;;
    case 3  : options += "-p right -vbar";
              break;;
+   case 4  : options =+ "-p top-left";
+             break;;
+   case 5  : options =+ "-p top-right";
+             break;;
+   case 6  : options =+ "-p bot-left";
+             break;;
+   case 7  : options =+ "-p bot-right";
+             break;;
+   case 8  : options =+ "-p top-left -vbar";
+             break;;
+   case 9  : options =+ "-p bot-left -vbar";
+             break;;
+   case 10 : options =+ "-p top-right -vbar";
+             break;;
+   case 11 : options =+ "-p bot-right -vbar";
+             break;;
    default : options += "-p bottom";
              break;;
 }
@@ -109,7 +124,8 @@ fout << options << endl;
 fout.close();
 
 command = "wbar.sh";
-system(command.c_str());} {}
+system(command.c_str());} {selected
+  }
 } 
 
 Function {} {open
@@ -119,7 +135,7 @@ bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");} {}
   Fl_Window window {
     label {eXclude Wbar Icons} open
-    xywh {242 95 420 385} type Double resizable size_range {1 0 3 0} visible
+    xywh {86 140 420 385} type Double hide resizable
   } {
     Fl_Browser brw_wbar {
       label {Wbar Icons}
@@ -132,8 +148,8 @@ textdomain("tinycore");} {}
       xywh {215 20 200 265} type Select align 1 textfont 4
     }
     Fl_Choice posChoice {
-      label {Wbar Position} open
-      xywh {100 290 85 20} down_box BORDER_BOX
+      label Position
+      xywh {65 290 125 20} down_box BORDER_BOX
       code0 {posChoice->value(1);}
     } {
       MenuItem {} {
@@ -151,6 +167,38 @@ textdomain("tinycore");} {}
       MenuItem {} {
         label Right
         xywh {30 30 30 20}
+      }
+      MenuItem {} {
+        label {Top Left}
+        xywh {40 40 30 20}
+      }
+      MenuItem {} {
+        label {Top Right}
+        xywh {50 50 30 20}
+      }
+      MenuItem {} {
+        label {Bottom Left}
+        xywh {60 60 30 20}
+      }
+      MenuItem {} {
+        label {Bottom Right}
+        xywh {70 70 30 20}
+      }
+      MenuItem {} {
+        label {Left Top}
+        xywh {80 80 30 20}
+      }
+      MenuItem {} {
+        label {Left Bottom}
+        xywh {90 90 30 20}
+      }
+      MenuItem {} {
+        label {Right Top}
+        xywh {100 100 30 20}
+      }
+      MenuItem {} {
+        label {Right Bottom}
+        xywh {110 110 30 20}
       }
     }
     Fl_Button {} {

@@ -58,6 +58,22 @@ switch(pos)
              break;;
    case 3  : options += "-p right -vbar";
              break;;
+   case 4  : options =+ "-p top-left";
+             break;;
+   case 5  : options =+ "-p top-right";
+             break;;
+   case 6  : options =+ "-p bot-left";
+             break;;
+   case 7  : options =+ "-p bot-right";
+             break;;
+   case 8  : options =+ "-p top-left -vbar";
+             break;;
+   case 9  : options =+ "-p bot-left -vbar";
+             break;;
+   case 10 : options =+ "-p top-right -vbar";
+             break;;
+   case 11 : options =+ "-p bot-right -vbar";
+             break;;
    default : options += "-p bottom";
              break;;
 }
@@ -105,6 +121,14 @@ Fl_Menu_Item menu_posChoice[] = {
  {gettext("Bottom"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {gettext("Left"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {gettext("Right"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {gettext("Top Left"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {gettext("Top Right"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {gettext("Bottom Left"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {gettext("Bottom Right"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {gettext("Left Top"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {gettext("Left Bottom"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {gettext("Right Top"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {gettext("Right Bottom"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -131,7 +155,7 @@ textdomain("tinycore");
       brw_wbarXlist->callback((Fl_Callback*)brw_wbarXlist_callback);
       brw_wbarXlist->align(FL_ALIGN_TOP);
     } // Fl_Browser* brw_wbarXlist
-    { posChoice = new Fl_Choice(100, 290, 85, 20, gettext("Wbar Position"));
+    { posChoice = new Fl_Choice(65, 290, 125, 20, gettext("Position"));
       posChoice->down_box(FL_BORDER_BOX);
       posChoice->menu(menu_posChoice);
       posChoice->value(1);
@@ -159,7 +183,6 @@ textdomain("tinycore");
       textChoice->down_box(FL_DOWN_BOX);
       textChoice->align(FL_ALIGN_LEFT);
     } // Fl_Check_Button* textChoice
-    window->size_range(1, 0, 3, 0);
     window->end();
     window->resizable(window);
   } // Fl_Double_Window* window

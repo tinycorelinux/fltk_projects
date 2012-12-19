@@ -5,7 +5,8 @@ i18n_include <libintl.h>
 i18n_function mygettext 
 header_name {.h} 
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2009-2010} {} 
+decl {// (c) Robert Shingledecker 2009-2011} {selected
+} 
 
 decl {\#include <iostream>} {} 
 
@@ -31,7 +32,7 @@ decl {string option_type, report_type, update_type;} {}
 
 decl {ifstream ifaberr;} {} 
 
-decl {string aberr, msg;} {} 
+decl {string aberr, msg, hilite;} {} 
 
 decl {int results, locales_set=0;} {} 
 
@@ -86,7 +87,7 @@ locales_set=1;
 return gettext(msgid);} {}
 } 
 
-Function {depends_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
+Function {depends_callback(Fl_Widget *, void* userdata)} {return_type {static void}
 } {
   code {report_type = (const char*) userdata;
 option_type = "";
@@ -186,8 +187,7 @@ if (userdata == "updatedeps")
     menu_activate();
     brw_extn->clear();
     brw_results->clear();
-} else if (userdata == "quit" )
-    exit(0);} {}
+}} {}
 } 
 
 Function {options_callback(Fl_Widget *, void* userdata)} {return_type {static void}
@@ -336,10 +336,7 @@ if (userdata == "exit_onboot")
   box_results->label("Results");
   brw_extn->clear();
   brw_results->clear();
-} 
- 
-if (userdata == "quit") 
-  exit(0);} {}
+}} {}
 } 
 
 Function {ondemand_callback(Fl_Widget *, void* userdata)} {return_type {static void}
@@ -457,7 +454,7 @@ Function {brw_extn_callback(Fl_Widget *, void *)} {return_type {static void}
 }} {}
 } 
 
-Function {btn_multi_callback(Fl_Widget *, void *)} {return_type {static void}
+Function {btn_multi_callback(Fl_Widget *, void *)} {open return_type {static void}
 } {
   code {cursor_wait();
 brw_results->clear();
@@ -470,12 +467,15 @@ for ( int t=0; t<=brw_multi->size(); t++ )
       {
          command = "cd " + target_dir +"/ && md5sum -c " + select_extn;
          results = system(command.c_str());
-         if ( results == 0 )
+         if ( results == 0 ) {
             msg = " OK";
-         else
+            hilite = "";
+         } else {
             msg = " FAILED";
+            hilite = "@B17";
+         }   
              
-         brw_results->add((select_extn + msg).c_str());
+         brw_results->add((hilite + select_extn + msg).c_str());
          Fl::flush();      
       
       } else {
@@ -571,24 +571,13 @@ Function {} {open
 } {
   Fl_Window window {
     label AppsAudit
-    user_data {"quit"}
-    callback onboot_callback open
+    callback {system("tce-remove");
+exit(0);} open
     xywh {17 134 675 375} type Double hide resizable
   } {
     Fl_Menu_Bar menuBar {open
       xywh {0 0 685 20}
     } {
-      Submenu {} {
-        label File
-        xywh {0 0 63 20}
-      } {
-        MenuItem {} {
-          label Quit
-          user_data {"quit"}
-          callback depends_callback
-          xywh {25 25 30 20}
-        }
-      }
       Submenu menuDepends {
         label Dependencies
         xywh {0 0 63 20}
@@ -719,7 +708,7 @@ Function {} {open
         MenuItem {} {
           label {Exit Md5 Check Mode}
           user_data {"exit_md5s"}
-          callback md5s_callback selected
+          callback md5s_callback
           xywh {20 20 30 20}
         }
       }
