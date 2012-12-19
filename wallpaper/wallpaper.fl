@@ -2,11 +2,13 @@
 version 1.0110 
 header_name {.h} 
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2008} {} 
+decl {// (c) Robert Shingledecker 2008- 2010} {} 
 
 decl {\#include <iostream>} {} 
 
 decl {\#include <fstream>} {} 
+
+decl {\#include <sstream>} {} 
 
 decl {\#include <FL/Fl_Color_Chooser.H>} {} 
 
@@ -15,6 +17,10 @@ decl {\#include <FL/fl_message.H>} {}
 decl {\#include <stdio.h>} {} 
 
 decl {using namespace std;} {} 
+
+decl {string target;} {} 
+
+decl {double r,g,b;} {} 
 
 Function {imageBrowserCallback(Fl_Widget*, void*)} {open return_type {static void}
 } {
@@ -46,8 +52,6 @@ if (userdata == "install")
    
 if (userdata == "color")
 {
-   double r,g,b; 
-   r = 0.067; g =0.161; b=0.286;
    if (!fl_color_chooser("New Color",r,g,b)) return;
    uchar ru,gu,bu;
    ru = 255*r+.5;
@@ -63,8 +67,7 @@ if (userdata == "color")
 }
                                                                                
 if (userdata == "help")
-   fl_message("Install images from /opt/backgrounds directory.");} {selected
-  }
+   fl_message("Install images from /opt/backgrounds directory.");} {}
 } 
 
 Function {} {open
@@ -116,5 +119,25 @@ Function {} {open
       callback btnCallback
       xywh {200 220 64 20}
     }
+  }
+  code {int results = system("getRGB");
+if (results == 0 )
+{
+  ifstream rgb_file("/tmp/current_rgb");
+  istringstream stm;
+  string rgb_info;
+
+  getline(rgb_file, rgb_info);
+  stm.str(rgb_info);
+  stm >> r >> g >> b;
+} else {
+  r = 0.067;
+  g = 0.161;
+  b = 0.286;
+}    
+
+cout << r << endl;
+cout << g << endl;
+cout << b << endl;} {selected
   }
 } 
