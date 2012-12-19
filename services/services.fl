@@ -1,5 +1,8 @@
 # data file for the Fltk User Interface Designer (fluid)
 version 1.0110 
+i18n_type 1 
+i18n_include <libintl.h> 
+i18n_function gettext 
 header_name {.h} 
 code_name {.cxx}
 decl {// Services gui v0.2.1 (C) Curaga} {global
@@ -22,6 +25,8 @@ decl {\#include <string.h>} {public global
 
 decl {\#include <FL/Fl_Light_Button.H>} {public global
 } 
+
+decl {\#include <locale.h>} {} 
 
 decl {\#define bufsize 96} {global
 } 
@@ -88,8 +93,7 @@ for (i=0; i<total; i++) {
 	}
 }
 
-return total;} {selected
-  }
+return total;} {}
 } 
 
 Function {toggle_service(Fl_Widget*, void* userdata)} {open private return_type void
@@ -129,6 +133,10 @@ exit(0);} {}
 
 Function {} {open
 } {
+  code {setlocale(LC_ALL, "");
+bindtextdomain("tinycore","/usr/local/share/locale");
+textdomain("tinycore");} {selected
+  }
   code {int i, total=0, topa=13, topb=26;
 char wintitle[]="Services: XX total";
 Fl_Light_Button *lght[26];

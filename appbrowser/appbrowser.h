@@ -3,17 +3,11 @@
 #ifndef appbrowser_h
 #define appbrowser_h
 #include <FL/Fl.H>
-void HandleInput_CB(int, void *data);
-void fetch_extension();
-void btn_callback(Fl_Widget *, void* userdata);
-void brw_select_callback(Fl_Widget *, void *);
-void local_btn_callback(Fl_Widget*, void* userdata);
-void mirror_btn_callback(Fl_Widget*, void* userdata);
-void tabs_callback(Fl_Widget*, void* userdata);
 #include <FL/Fl_Double_Window.H>
 extern Fl_Double_Window *window;
 #include <FL/Fl_Button.H>
-extern Fl_Button *btn_search;
+#include <FL/Fl_Choice.H>
+extern Fl_Choice *search_choices;
 #include <FL/Fl_Input.H>
 extern Fl_Input *search_field;
 #include <FL/Fl_Box.H>
@@ -29,9 +23,12 @@ extern Fl_Group *tab_files;
 extern Fl_Browser *brw_list;
 extern Fl_Group *tab_depends;
 extern Fl_Browser *brw_dep;
-extern Fl_Button *btn_install;
-extern Fl_Button *btn_download;
-extern Fl_Button *btn_ondemand;
+extern Fl_Group *tab_size;
+extern Fl_Browser *brw_size;
+extern Fl_Choice *install_choices;
+extern Fl_Button *btn_go;
 #include <FL/Fl_Output.H>
 extern Fl_Output *status_out;
+extern Fl_Menu_Item menu_search_choices[];
+extern Fl_Menu_Item menu_install_choices[];
 #endif

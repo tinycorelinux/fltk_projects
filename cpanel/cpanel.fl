@@ -1,10 +1,15 @@
 # data file for the Fltk User Interface Designer (fluid)
 version 1.0110 
+i18n_type 1 
+i18n_include <libintl.h> 
+i18n_function gettext 
 header_name {.h} 
 code_name {.cxx}
 decl {// (c) Robert Shingledecker 2008-2010} {} 
 
 decl {\#include <iostream>} {} 
+
+decl {\#include <locale.h>} {} 
 
 decl {using namespace std;} {} 
 
@@ -15,7 +20,10 @@ Function {btn_callback(Fl_Widget* w, void* userdata)} {open return_type {static 
 
 Function {} {open
 } {
-  Fl_Window {} {open
+  code {setlocale(LC_ALL, "");
+bindtextdomain("tinycore","/usr/local/share/locale");
+textdomain("tinycore");} {}
+  Fl_Window {} {open selected
     xywh {38 388 405 215} type Double hide
   } {
     Fl_Button {} {

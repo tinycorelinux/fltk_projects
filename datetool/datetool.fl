@@ -1,9 +1,11 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
+i18n_type 1 
+i18n_include <libintl.h> 
+i18n_function gettext 
 header_name {.h} 
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2008} {selected
-} 
+decl {// (c) Robert Shingledecker 2008} {} 
 
 decl {\#include <iostream>} {} 
 
@@ -11,9 +13,11 @@ decl {\#include <sstream>} {}
 
 decl {\#include <string>} {} 
 
+decl {\#include <locale.h>} {} 
+
 decl {using namespace std;} {} 
 
-Function {fmtoutput(const string target, char action, int min, int max, int width)} {open return_type string
+Function {fmtoutput(const string target, char action, int min, int max, int width)} {open private return_type string
 } {
   code {istringstream iss;
 ostringstream oss;
@@ -43,7 +47,7 @@ oss << result;
 return oss.str();} {}
 } 
 
-Function {btnCallback(Fl_Widget*, void* userdata)} {open return_type {static void}
+Function {btnCallback(Fl_Widget*, void* userdata)} {open selected private return_type {static void}
 } {
   code {if (userdata == "cancel" )
    exit(1);
@@ -116,6 +120,9 @@ if (userdata == "ok")
 
 Function {} {open
 } {
+  code {setlocale(LC_ALL, "");
+bindtextdomain("tinycore","/usr/local/share/locale");
+textdomain("tinycore");} {}
   Fl_Window {} {
     label Datetool open
     xywh {258 457 195 195} type Double hide

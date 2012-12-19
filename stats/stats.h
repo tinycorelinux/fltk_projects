@@ -17,4 +17,5 @@ extern Fl_Browser *mountsBrowser;
 extern Fl_Browser *filesystemsBrowser;
 extern Fl_Browser *bootBrowser;
 extern Fl_Browser *extensionsBrowser;
+extern Fl_Browser *bigHomeBrowser;
 #endif

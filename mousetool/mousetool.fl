@@ -1,5 +1,8 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
+i18n_type 1 
+i18n_include <libintl.h> 
+i18n_function gettext 
 header_name {.h} 
 code_name {.cxx}
 decl {// (c) Robert Shingledecker 2008} {} 
@@ -13,6 +16,8 @@ decl {\#include <sstream>} {}
 decl {\#include <fstream>} {} 
 
 decl {\#include <string>} {} 
+
+decl {\#include <locale.h>} {} 
 
 decl {using namespace std;} {} 
 
@@ -68,13 +73,17 @@ system( "chmod +x .mouse_config" );} {}
 
 Function {} {open
 } {
+  code {setlocale(LC_ALL, "");
+bindtextdomain("tinycore","/usr/local/share/locale");
+textdomain("tinycore");} {selected
+  }
   Fl_Window {} {
     label {Mouse Tool} open
     xywh {529 64 145 200} type Double hide
   } {
     Fl_Dial dial_speed {
       label {Mouse Speed}
-      callback dial_callback selected
+      callback dial_callback
       xywh {45 20 50 50} align 1 minimum 1 maximum 10 step 1 value 3
     }
     Fl_Box box_speed {

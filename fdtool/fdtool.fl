@@ -1,10 +1,15 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
+i18n_type 1 
+i18n_include <libintl.h> 
+i18n_function gettext 
 header_name {.h} 
 code_name {.cxx}
 decl {// (c) Robert Shingledecker} {} 
 
 decl {\#include <iostream>} {} 
+
+decl {\#include <locale.h>} {} 
 
 decl {using namespace std;} {} 
 
@@ -45,8 +50,7 @@ if (userdata == "format")
          command += "applyimage 1449 " + strImagePath;
    }
 }
-system(command.c_str());} {selected
-  }
+system(command.c_str());} {}
 } 
 
 Function {inp_callback(Fl_Widget*, void*)} {open return_type {static void}
@@ -57,6 +61,10 @@ btnApImage->activate();} {}
 
 Function {} {open
 } {
+  code {setlocale(LC_ALL, "");
+bindtextdomain("tinycore","/usr/local/share/locale");
+textdomain("tinycore");} {selected
+  }
   Fl_Window {} {open
     xywh {46 93 490 155} type Double hide
   } {

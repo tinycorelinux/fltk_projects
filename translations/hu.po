@@ -1,0 +1,568 @@
+# Hungarian translation for tctools
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the tctools package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tctools\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-08-22 10:16+0300\n"
+"PO-Revision-Date: 2010-09-08 15:57+0000\n"
+"Last-Translator: Bela Markus <Unknown>\n"
+"Language-Team: Hungarian <hu@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-09-12 09:16+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: ../mousetool/mousetool.cxx:97 ../network/network.cxx:238
+msgid "&Apply"
+msgstr "&Alkalmaz"
+
+#: ../fdtool/fdtool.cxx:99
+msgid "&Apply Image"
+msgstr "&Képfájl használata"
+
+#: ../filetool/filetool.cxx:69
+msgid "&Backup"
+msgstr "&Biztonsági mentés"
+
+#: ../datetool/datetool.cxx:171 ../exittc/exittc.cxx:122
+#: ../fdtool/fdtool.cxx:104 ../flrun/flrun.cxx:66 ../swapfile/swapfile.cxx:56
+msgid "&Cancel"
+msgstr "&Mégsem"
+
+#: ../mousetool/mousetool.cxx:100
+msgid "&Exit"
+msgstr "&Kilépés"
+
+#: ../fdtool/fdtool.cxx:90
+msgid "&Format"
+msgstr "&Formattálás"
+
+#: ../fdtool/fdtool.cxx:94
+msgid "&Make Image"
+msgstr "&Képfájl készítése"
+
+#: ../filetool/filetool.cxx:65
+msgid "&None"
+msgstr "&Egyik sem"
+
+#: ../datetool/datetool.cxx:168 ../exittc/exittc.cxx:119
+msgid "&OK"
+msgstr "&Ok"
+
+#: ../swapfile/swapfile.cxx:59
+msgid "&Proceed"
+msgstr "&Tovább"
+
+#: ../filetool/filetool.cxx:73
+msgid "&Restore"
+msgstr "&Visszaállítás"
+
+#: ../fdtool/fdtool.cxx:75
+msgid "1440k"
+msgstr "1440k"
+
+#: ../fdtool/fdtool.cxx:81
+msgid "1722k"
+msgstr "1722k"
+
+#: ../datetool/datetool.cxx:130 ../datetool/datetool.cxx:138
+#: ../datetool/datetool.cxx:146 ../datetool/datetool.cxx:154
+#: ../datetool/datetool.cxx:162 ../mnttool/mnttool.cxx:103
+msgid "@<"
+msgstr "@<"
+
+#: ../datetool/datetool.cxx:133 ../datetool/datetool.cxx:141
+#: ../datetool/datetool.cxx:149 ../datetool/datetool.cxx:157
+#: ../datetool/datetool.cxx:165 ../mnttool/mnttool.cxx:106
+msgid "@>"
+msgstr "@>"
+
+#: ../appbrowser/appbrowser.cxx:383
+msgid "Appbrowser"
+msgstr "Appbrowser"
+
+#: ../flrun/flrun.cxx:57
+msgid "Application Launcher"
+msgstr "Alkalmazásindító"
+
+#: ../cpanel/cpanel.cxx:21
+msgid "Apps Audit"
+msgstr "Apps Audit"
+
+#: ../appsaudit/appsaudit.cxx:405
+msgid "AppsAudit"
+msgstr "AppsAudit"
+
+#: ../exittc/exittc.cxx:113
+msgid "Backup"
+msgstr "Biztonsági mentés"
+
+#: ../cpanel/cpanel.cxx:24
+msgid "Backup/Restore"
+msgstr "Mentés/Visszaállítás"
+
+#: ../network/network.cxx:200
+msgid "Broadcast"
+msgstr "Broadcast"
+
+#: ../flrun/flrun.cxx:69
+msgid "Browse"
+msgstr "Böngészés"
+
+#: ../appsaudit/appsaudit.cxx:362
+msgid "Build Reporting Database"
+msgstr "Adatbázis készítése a jelentésekhez"
+
+#: ../wallpaper/wallpaper.cxx:99
+msgid "Center"
+msgstr "Középre igazítás"
+
+#: ../appsaudit/appsaudit.cxx:379
+msgid "Check for Updates"
+msgstr "Frissítések keresése"
+
+#: ../appsaudit/appsaudit.cxx:371
+msgid "Clear Marked for Deletion"
+msgstr "Törlésre kijelölés megszüntetése"
+
+#: ../wallpaper/wallpaper.cxx:113
+msgid "Color"
+msgstr "Szín"
+
+#: ../appbrowser/appbrowser.cxx:385
+msgid "Connect"
+msgstr "Kapcsolódás"
+
+#: ../fdtool/fdtool.cxx:95
+msgid "Copies floppy to image path entered,"
+msgstr "Floopy kép klészítése a megadott helyen"
+
+#: ../cpanel/cpanel.cxx:30
+msgid "Date/Time"
+msgstr "Dátum/Idő"
+
+#: ../datetool/datetool.cxx:126
+msgid "Datetool"
+msgstr "Dátum beállítás"
+
+#: ../datetool/datetool.cxx:144
+msgid "Day:"
+msgstr "Nap:"
+
+#: ../appsaudit/appsaudit.cxx:360
+msgid "Dependencies"
+msgstr "Függőségek"
+
+#: ../appbrowser/appbrowser.cxx:433
+msgid "Depends"
+msgstr "Függőség"
+
+#: ../filetool/filetool.cxx:61
+msgid "Device:"
+msgstr "Eszköz:"
+
+#: ../appsaudit/appsaudit.cxx:367
+msgid "Display All Not Depended On"
+msgstr "Összes listázása mi nem függ ettől"
+
+#: ../appsaudit/appsaudit.cxx:368
+msgid "Display All with Missing Dependencies"
+msgstr "Összes listázása hiányzó függőséggel"
+
+#: ../appsaudit/appsaudit.cxx:366
+msgid "Display All with No Dependencies"
+msgstr "Összes függőség nélküli listázása"
+
+#: ../appsaudit/appsaudit.cxx:370
+msgid "Display Marked for Deletion"
+msgstr "Törlésre kijelöltek listázása"
+
+#: ../appbrowser/appbrowser.cxx:460
+msgid "DownLoad"
+msgstr "Letöltés"
+
+#: ../appbrowser/appbrowser.cxx:461
+msgid "Download Only."
+msgstr "Csak letöltés"
+
+#: ../appbrowser/appbrowser.cxx:456
+msgid "Downloads  and updates OnDemand menu."
+msgstr "Letöltés és frissítés OnDemand menü."
+
+#: ../appbrowser/appbrowser.cxx:451
+msgid "Downloads, updates menu and onboot.lst."
+msgstr "Letöltések, frissítés menü és onboot.lst"
+
+#: ../network/network.cxx:241
+msgid "E&xit"
+msgstr "&Kilépés"
+
+#: ../appsaudit/appsaudit.cxx:376
+msgid "Exit Install Options"
+msgstr "Kilépés"
+
+#: ../appsaudit/appsaudit.cxx:384
+msgid "Exit OnBoot"
+msgstr "Kilépés"
+
+#: ../appsaudit/appsaudit.cxx:388
+msgid "Exit OnDemand"
+msgstr "Kilépés"
+
+#: ../appsaudit/appsaudit.cxx:380
+msgid "Exit Update Mode"
+msgstr "Kilépés"
+
+#: ../exittc/exittc.cxx:102
+msgid "Exit to Prompt"
+msgstr "Kilépés parancsmódba"
+
+#: ../appsaudit/appsaudit.cxx:357
+msgid "File"
+msgstr "Fájl"
+
+#: ../appbrowser/appbrowser.cxx:424
+msgid "Files"
+msgstr "Fájlok"
+
+#: ../filetool/filetool.cxx:59
+msgid "Filetool"
+msgstr "Filetool"
+
+#: ../wallpaper/wallpaper.cxx:104
+msgid "Fill"
+msgstr "Kitöltés"
+
+#: ../fdtool/fdtool.cxx:71
+msgid "Floppy Disk Tool"
+msgstr "Floppy Disk Tool"
+
+#: ../cpanel/cpanel.cxx:48
+msgid "Floppy Tool"
+msgstr "Floppy Tool"
+
+#: ../fdtool/fdtool.cxx:91
+msgid "Formats FAT of selected size."
+msgstr "Formattálás FAT-ra a kiválasztott méretben."
+
+#: ../wallpaper/wallpaper.cxx:88
+msgid "Full"
+msgstr "Teljes"
+
+#: ../network/network.cxx:206
+msgid "Gateway"
+msgstr "Átjáró"
+
+#: ../wallpaper/wallpaper.cxx:116
+msgid "Help"
+msgstr "Súgó"
+
+#: ../datetool/datetool.cxx:152
+msgid "Hour:"
+msgstr "Óra:"
+
+#: ../network/network.cxx:187
+msgid "IP Address"
+msgstr "IP cím"
+
+#: ../fdtool/fdtool.cxx:86
+msgid "Image Path:"
+msgstr "Képfájl helye:"
+
+#: ../appbrowser/appbrowser.cxx:415
+msgid "Info"
+msgstr "Infó"
+
+#: ../wallpaper/wallpaper.cxx:109
+msgid "Install"
+msgstr "Telepítés"
+
+#: ../appsaudit/appsaudit.cxx:373
+msgid "Install Options"
+msgstr "Installálási opciók"
+
+#: ../network/network.cxx:163
+msgid "Interface"
+msgstr "Interfész"
+
+#: ../mousetool/mousetool.cxx:92
+msgid "Left Button"
+msgstr "Bal egérgomb"
+
+#: ../appsaudit/appsaudit.cxx:363
+msgid "List Dependencies"
+msgstr "Függőségek listázása"
+
+#: ../appsaudit/appsaudit.cxx:365
+msgid "List Missing Dependencies"
+msgstr "Hiányzó függőségek"
+
+#: ../appsaudit/appsaudit.cxx:364
+msgid "List Required By"
+msgstr "Az ezt"
+
+#: ../appbrowser/appbrowser.cxx:388
+msgid "Local"
+msgstr "Helyi"
+
+#: ../appsaudit/appsaudit.cxx:383 ../appsaudit/appsaudit.cxx:387
+msgid "Maintenance"
+msgstr "Karbantartás"
+
+#: ../swapfile/swapfile.cxx:50
+msgid "Make tc.swap EXT2 Swapfile"
+msgstr "tc.swap EXT2 swapfájl készítése"
+
+#: ../appsaudit/appsaudit.cxx:369
+msgid "Mark for Deletion"
+msgstr "Megjelölés törlésre"
+
+#: ../datetool/datetool.cxx:160
+msgid "Min:"
+msgstr "Perc:"
+
+#: ../appbrowser/appbrowser.cxx:391
+msgid "Mirrors"
+msgstr "Tükör szerverek"
+
+#: ../datetool/datetool.cxx:136
+msgid "Month:"
+msgstr "Hónap"
+
+#: ../cpanel/cpanel.cxx:27
+msgid "Mount Tool"
+msgstr "Mount Tool"
+
+#: ../swapfile/swapfile.cxx:52
+msgid "Mounted Partition:"
+msgstr "Csatolt partíciók:"
+
+#: ../mousetool/mousetool.cxx:75
+msgid "Mouse Speed"
+msgstr "Egér sebesség"
+
+#: ../cpanel/cpanel.cxx:51 ../mousetool/mousetool.cxx:73
+msgid "Mouse Tool"
+msgstr "Egér beállítás"
+
+#: ../network/network.cxx:212
+msgid "NameServers"
+msgstr "NameServers"
+
+#: ../cpanel/cpanel.cxx:42 ../network/network.cxx:157
+#: ../network/network.cxx:159
+msgid "Network"
+msgstr "Hálózat"
+
+#: ../network/network.cxx:194
+msgid "Network Mask"
+msgstr "Hálózati maszk"
+
+#: ../flrun/flrun.cxx:63
+msgid "OK"
+msgstr "OK"
+
+#: ../appbrowser/appbrowser.cxx:450 ../appsaudit/appsaudit.cxx:382
+msgid "OnBoot"
+msgstr "OnBoot"
+
+#: ../appbrowser/appbrowser.cxx:455 ../appsaudit/appsaudit.cxx:386
+msgid "OnDemand"
+msgstr "OnDemand"
+
+#: ../wbar_exclude/wbar_exclude.cxx:59
+msgid "Onboot Items"
+msgstr "Onboot tételek"
+
+#: ../appsaudit/appsaudit.cxx:358
+msgid "Quit"
+msgstr "Kilépés"
+
+#: ../exittc/exittc.cxx:97
+msgid "Reboot"
+msgstr "Újraindítás"
+
+#: ../appsaudit/appsaudit.cxx:414
+msgid "Results"
+msgstr "Eredmény"
+
+#: ../mousetool/mousetool.cxx:86
+msgid "Right Button"
+msgstr "Jobb egérgomb"
+
+#: ../cpanel/cpanel.cxx:63
+msgid "Run Command"
+msgstr "Parancs végrehajtás"
+
+#: ../network/network.cxx:222
+msgid "Save Configuration?"
+msgstr "Beállítások mentése?"
+
+#: ../appbrowser/appbrowser.cxx:394
+msgid "Search"
+msgstr "Keresés"
+
+#: ../add2file/add2file.cxx:22
+msgid "Select File to be added to "
+msgstr "Hozzáadandó fájl kiválasztása "
+
+#: ../appsaudit/appsaudit.cxx:375
+msgid "Selective Copy Install"
+msgstr "Installálás szelektív másolással"
+
+#: ../services/services.cxx:129
+msgid "Services"
+msgstr "Szolgáltatások"
+
+#: ../cpanel/cpanel.cxx:39
+msgid "Set TCE Drive"
+msgstr "TCE meghajtó megadása"
+
+#: ../exittc/exittc.cxx:91
+msgid "Shutdown"
+msgstr "Leállítás"
+
+#: ../appbrowser/appbrowser.cxx:440
+msgid "Size"
+msgstr "Méret"
+
+#: ../appbrowser/appbrowser.cxx:465
+msgid "Status"
+msgstr "Státusz"
+
+#: ../cpanel/cpanel.cxx:36
+msgid "Swapfile Tool"
+msgstr "Swapfájl beállítás"
+
+#: ../cpanel/cpanel.cxx:54
+msgid "System Stats"
+msgstr "Rendszer statisztikák"
+
+#: ../exittc/exittc.cxx:88
+msgid "TC Exit Options"
+msgstr "Kilépési opciók"
+
+#: ../wallpaper/wallpaper.cxx:94
+msgid "Tile"
+msgstr "Mozaik"
+
+#: ../stats/stats.cxx:35
+msgid "Tiny Core System Stats"
+msgstr "Tiny Core rendszer statisztikák"
+
+#: ../appsaudit/appsaudit.cxx:374
+msgid "Toggle Default Copy Install"
+msgstr "Alapértelmezett másolásos installálás ki/be"
+
+#: ../appbrowser/appbrowser.cxx:395
+msgid "Toggle Search / Provides"
+msgstr "Keresés / Tartalmaz"
+
+#: ../cpanel/cpanel.cxx:60
+msgid "USB Install"
+msgstr "USB telepítés"
+
+#: ../appsaudit/appsaudit.cxx:361
+msgid "Update .dep files."
+msgstr ".dep fájlok frissítése"
+
+#: ../cpanel/cpanel.cxx:57
+msgid "Update Apps"
+msgstr "Alkalmazésok frissítése"
+
+#: ../appsaudit/appsaudit.cxx:378
+msgid "Updates"
+msgstr "Frissítések"
+
+#: ../network/network.cxx:169
+msgid "Use DHCP Broadcast?"
+msgstr "DHCP broadcast használata"
+
+#: ../cpanel/cpanel.cxx:33
+msgid "Wallpaper"
+msgstr "Háttérkép"
+
+#: ../fdtool/fdtool.cxx:100
+msgid "Writes image path file to floppy."
+msgstr "A megadott képfájl írása floppy-ra"
+
+#: ../cpanel/cpanel.cxx:45
+msgid "Xvesa Setup"
+msgstr "Xvesa beállítása"
+
+#: ../datetool/datetool.cxx:128
+msgid "Year:"
+msgstr "Év:"
+
+#: ../stats/stats.cxx:96
+msgid "boot"
+msgstr "Indítás"
+
+#: ../mnttool/mnttool.cxx:109
+msgid "button"
+msgstr "gomb"
+
+#: ../stats/stats.cxx:39
+msgid "cpu"
+msgstr "cpu"
+
+#: ../stats/stats.cxx:75
+msgid "dmesg"
+msgstr "dmesg"
+
+#: ../wbar_exclude/wbar_exclude.cxx:58
+msgid "eXclude Wbar Icons"
+msgstr "Wbar ikonok kizárása"
+
+#: ../wbar_exclude/wbar_exclude.cxx:65
+msgid "eXclude Wbar Items"
+msgstr "Wbar elemek kizárása"
+
+#: ../stats/stats.cxx:103
+msgid "extensions"
+msgstr "bővítmények"
+
+#: ../stats/stats.cxx:89
+msgid "filesystems"
+msgstr "fájlrendszer"
+
+#: ../flrun/flrun.cxx:55
+msgid "flrun"
+msgstr "flrun"
+
+#: ../stats/stats.cxx:47
+msgid "mem"
+msgstr "memória"
+
+#: ../stats/stats.cxx:61
+msgid "modules"
+msgstr "modulok"
+
+#: ../stats/stats.cxx:82
+msgid "mounts"
+msgstr "csatolások"
+
+#: ../stats/stats.cxx:54
+msgid "net"
+msgstr "hálózat"
+
+#: ../network/network.cxx:178 ../network/network.cxx:231
+msgid "no"
+msgstr "nem"
+
+#: ../stats/stats.cxx:68
+msgid "processes"
+msgstr "folyamatok"
+
+#: ../swapfile/swapfile.cxx:54
+msgid "tc.swp in k bytes:"
+msgstr "tc.swp, kbyte:"
+
+#: ../network/network.cxx:172 ../network/network.cxx:225
+msgid "yes"
+msgstr "igen"

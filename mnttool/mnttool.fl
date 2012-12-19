@@ -1,5 +1,8 @@
 # data file for the Fltk User Interface Designer (fluid)
 version 1.0110 
+i18n_type 1 
+i18n_include <libintl.h> 
+i18n_function gettext 
 header_name {.h} 
 code_name {.cxx}
 decl {// (c) Robert Shingledecker 2008} {} 
@@ -9,6 +12,8 @@ decl {\#include <iostream>} {}
 decl {\#include <fstream>} {} 
 
 decl {\#include <vector>} {} 
+
+decl {\#include <locale.h>} {} 
 
 decl {int cycle;} {} 
 
@@ -104,6 +109,10 @@ if (userdata == "state")
 
 Function {} {open
 } {
+  code {setlocale(LC_ALL, "");
+bindtextdomain("tinycore","/usr/local/share/locale");
+textdomain("tinycore");} {selected
+  }
   Fl_Window {} {open
     xywh {357 547 120 20} type Double hide
   } {
@@ -138,6 +147,5 @@ if ( mountState[0] == 0)
 else
    btnState->color((Fl_Color)1);
 
-selected = 0;} {selected
-  }
+selected = 0;} {}
 } 

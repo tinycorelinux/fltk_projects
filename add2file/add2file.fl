@@ -1,5 +1,8 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
+i18n_type 1 
+i18n_include <libintl.h> 
+i18n_function gettext 
 header_name {.h} 
 code_name {.cxx}
 decl {// (c) Robert Shingledecker 2008} {} 
@@ -14,13 +17,20 @@ decl {\#include <FL/Fl_File_Chooser.H>} {}
 
 decl {using namespace std;} {} 
 
+decl {\#include <locale.h>} {} 
+
 Function {} {open
 } {
   code {if (argv[1] == NULL )
    exit(1);
-   
+
+setlocale(LC_ALL, "");
+bindtextdomain("tinycore","/usr/local/share/locale");
+textdomain("tinycore");
+
 string filename = argv[1];
-string title = "Select File to be added to " + filename;
+string title = gettext("Select File to be added to ");
+title = title + filename;
 Fl_File_Chooser chooser(".","*", Fl_File_Chooser::SINGLE, title.c_str());
 chooser.show();                                             
 while(chooser.shown())

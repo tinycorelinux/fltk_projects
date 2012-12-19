@@ -1,5 +1,8 @@
 # data file for the Fltk User Interface Designer (fluid)
 version 1.0110 
+i18n_type 1 
+i18n_include <libintl.h> 
+i18n_function gettext 
 header_name {.h} 
 code_name {.cxx}
 decl {// (c) Robert Shingledecker 2009-2010} {} 
@@ -14,9 +17,11 @@ decl {\#include <FL/fl_message.H>} {}
 
 decl {\#include <FL/Fl_File_Chooser.H>} {} 
 
+decl {\#include <locale.h>} {} 
+
 decl {using namespace std;} {} 
 
-decl {string tcedir, target_dir;} {} 
+decl {string tcedir, target_dir, desktop;} {} 
 
 decl {string command;} {} 
 
@@ -126,8 +131,7 @@ if (userdata == "updatedeps")
 } else if (userdata == "quit")
 {
     exit(0);
-}} {selected
-  }
+}} {}
 } 
 
 Function {options_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
@@ -239,11 +243,11 @@ Function {ondemand_callback(Fl_Widget *, void* userdata)} {open return_type {sta
   brw_extn->load("/tmp/ondemand.tmp");
   brw_results->clear();
   box_results->label("Current OnDemand Items");
-  command = "ls -1 $HOME/.OnDemand 2>/dev/null | sort -f > /tmp/ondemand.tmp";
+  command = "ls -1 "+ tcedir + "/ondemand 2>/dev/null | sort -f > /tmp/ondemand.tmp";
   results = system(command.c_str());
   if (results == 0 )
     brw_results->load("/tmp/ondemand.tmp");
-  system("rm /tmp/ondemand.tmp");
+  unlink("/tmp/ondemand.tmp");
   window->cursor(FL_CURSOR_DEFAULT);
   Fl::flush();
 }
@@ -266,16 +270,22 @@ Function {brw_extn_callback(Fl_Widget *, void *)} {open return_type {static void
   code {if (brw_extn->value())
 {
    select_extn = brw_extn->text(brw_extn->value());
+   bool not_duplicate = true;
+   for ( int x=1; x <= brw_results->size(); x++ ) {
+     if (!strcmp(brw_results->text(x),select_extn.c_str())) {
+       not_duplicate = false;
+     }
+   }   
    if ( report_type.length() > 0 )
    {
-     box_results->label(select_extn.c_str());
+     if ( not_duplicate ) { box_results->label(select_extn.c_str()); }
      menu_dependson->activate();
      menu_requiredby->activate();
      menu_missing->activate();
      menu_delete->activate();
-     brw_results->load("");
+     if ( not_duplicate ) { brw_results->load(""); }
    } 
-   if ( option_type == "select" )
+   if ( option_type == "select" && not_duplicate )
    {
      command = "echo " + select_extn + " >> " + copy2fsList;
      system(command.c_str());
@@ -293,7 +303,7 @@ Function {brw_extn_callback(Fl_Widget *, void *)} {open return_type {static void
      Fl::flush();
    }
    
-   if ( report_type == "onboot" )
+   if ( report_type == "onboot" && not_duplicate )
    {
      command = "echo " + select_extn + " >> " + onbootList;
      system(command.c_str());
@@ -312,7 +322,7 @@ Function {brw_extn_callback(Fl_Widget *, void *)} {open return_type {static void
      results = system(command.c_str());
      if ( results == 0 ) 
      {
-       command = "ls -1 $HOME/.OnDemand | sort -f > /tmp/ondemand.tmp";
+       command = "ls -1 " + tcedir + "/ondemand | sort -f > /tmp/ondemand.tmp";
        results = system(command.c_str());
        if (results == 0 )
          brw_results->load("/tmp/ondemand.tmp");
@@ -335,12 +345,10 @@ Function {brw_results_callback(Fl_Widget *, void *)} {open return_type {static v
      system(command.c_str());
      brw_results->load(copy2fsList.c_str());
    }
-// cout << report_type << endl;
    if (report_type == "delete" or report_type == "display_marked")
    {
      string target = select_results.substr(select_results.find_last_of("/")+1);
      command = "sed -i '/" + target + "/d' /tmp/audit_marked.lst";
-//   cout << command << endl;
      system(command.c_str());
      brw_results->load("/tmp/audit_marked.lst");
    }
@@ -354,20 +362,33 @@ Function {brw_results_callback(Fl_Widget *, void *)} {open return_type {static v
 
    if (report_type == "ondemand")
    {
-     command = "rm -f $HOME/.OnDemand/" + select_results;
-     results = system(command.c_str());
+     command = "rm -f " + tcedir + "/ondemand/" + select_results;
      system(command.c_str());   
-     command = "ls -1 $HOME/.OnDemand > /tmp/ondemand.tmp";
+     command = "rm -f " + tcedir + "/ondemand.ico/" + select_results + ".i* 2>/dev/null";
+     system(command.c_str());   
+     command = "wbar_rm_icon " + select_results + ".img 2>/dev/null";
+     system(command.c_str());   
+     command = "wbar.sh 2>/dev/null";
+     system(command.c_str());   
+     command = "[ $(which " + desktop + "_ondemand) ] && " + desktop +"_ondemand 2>/dev/null";
+     system(command.c_str());   
+     command = "[ $(which " + desktop + "_restart) ] && " + desktop +"_restart 2>/dev/null";
+     system(command.c_str());   
+     command = "ls -1 "+ tcedir + "/ondemand > /tmp/ondemand.tmp";
      results = system(command.c_str());
      if (results == 0 )
        brw_results->load("/tmp/ondemand.tmp");
-     system("rm /tmp/ondemand.tmp");
+     unlink("/tmp/ondemand.tmp");
    }  
-}} {}
+}} {selected
+  }
 } 
 
 Function {} {open
 } {
+  code {setlocale(LC_ALL, "");
+bindtextdomain("tinycore","/usr/local/share/locale");
+textdomain("tinycore");} {}
   Fl_Window window {
     label AppsAudit
     user_data {"quit"}
@@ -550,9 +571,14 @@ Function {} {open
       xywh {225 45 430 325} type Select textfont 4
     }
   }
-  code {ifstream tcedir_file("/opt/.tce_dir");
+  code {ifstream desktop_file("/etc/sysconfig/desktop");
+getline(desktop_file,desktop);
+desktop_file.close();
+
+ifstream tcedir_file("/opt/.tce_dir");
 getline(tcedir_file,tcedir);
 tcedir_file.close();
+
 target_dir = tcedir + "/optional";
 box_extn->label(target_dir.c_str());
 

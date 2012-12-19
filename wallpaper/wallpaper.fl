@@ -1,5 +1,8 @@
 # data file for the Fltk User Interface Designer (fluid)
 version 1.0110 
+i18n_type 1 
+i18n_include <libintl.h> 
+i18n_function gettext 
 header_name {.h} 
 code_name {.cxx}
 decl {// (c) Robert Shingledecker 2008- 2010} {} 
@@ -15,6 +18,8 @@ decl {\#include <FL/Fl_Color_Chooser.H>} {}
 decl {\#include <FL/fl_message.H>} {} 
 
 decl {\#include <stdio.h>} {} 
+
+decl {\#include <locale.h>} {} 
 
 decl {using namespace std;} {} 
 
@@ -70,7 +75,7 @@ if (userdata == "help")
    fl_message("Install images from /opt/backgrounds directory.");} {}
 } 
 
-Function {} {open
+Function {} {open selected
 } {
   Fl_Window {} {open
     xywh {131 426 295 245} type Double hide
@@ -120,7 +125,11 @@ Function {} {open
       xywh {200 220 64 20}
     }
   }
-  code {int results = system("getRGB");
+  code {setlocale(LC_ALL, "");
+bindtextdomain("tinycore","/usr/local/share/locale");
+textdomain("tinycore");
+
+int results = system("getRGB");
 if (results == 0 )
 {
   ifstream rgb_file("/tmp/current_rgb");
@@ -138,6 +147,5 @@ if (results == 0 )
 
 cout << r << endl;
 cout << g << endl;
-cout << b << endl;} {selected
-  }
+cout << b << endl;} {}
 } 

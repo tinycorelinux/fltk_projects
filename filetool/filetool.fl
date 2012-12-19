@@ -1,5 +1,8 @@
 # data file for the Fltk User Interface Designer (fluid)
 version 1.0109 
+i18n_type 1 
+i18n_include <libintl.h> 
+i18n_function gettext 
 header_name {.h} 
 code_name {.cxx}
 decl {// (c) Robert Shingledecker 2008} {} 
@@ -13,6 +16,8 @@ decl {\#include <string>} {}
 decl {\#include <Fl/fl_ask.H>} {} 
 
 decl {\#include <FL/fl_message.H>} {} 
+
+decl {\#include <locale.h>} {} 
 
 decl {using namespace std;} {} 
 
@@ -42,7 +47,7 @@ if (userdata == "none")
 }
 
 string action = (const char*)userdata;
-command += action + " noprompt " + device_name;
+command += action + " " + device_name;
 
 if (system(command.c_str()) !=0)
 {
@@ -55,6 +60,9 @@ if (system(command.c_str()) !=0)
 
 Function {} {open
 } {
+  code {setlocale(LC_ALL, "");
+bindtextdomain("tinycore","/usr/local/share/locale");
+textdomain("tinycore");} {}
   Fl_Window {} {
     label Filetool open
     xywh {131 421 225 80} type Double hide
@@ -72,13 +80,13 @@ Function {} {open
     }
     Fl_Button btn_backup {
       label {&Backup}
-      user_data {"backup"}
+      user_data {"-b"}
       callback btn_callback
       xywh {80 40 64 30} deactivate
     }
     Fl_Button btn_restore {
       label {&Restore}
-      user_data {"restore"}
+      user_data {"-r"}
       callback btn_callback
       xywh {150 40 64 30} deactivate
     }
