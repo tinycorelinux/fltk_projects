@@ -156,7 +156,7 @@ msg = select_extn;
 command = "aterm -fg black -bg white +tr -g 80x5 -e " + command;
 system(command.c_str());
 
-command = "md5sum -cs " + select_extn + ".md5.txt";
+command = "busybox md5sum -cs " + select_extn + ".md5.txt";
 results = system(command.c_str());
 
 if (results == 0 )
@@ -874,7 +874,7 @@ for ( int t=0; t<=brwMulti->size(); t++ )
       select_extn = brwMulti->text(t);
       if ( report_type == "md5s" )
       {
-         command = "cd " + target_dir +"/ && md5sum -c " + select_extn + "> /dev/null";
+         command = "cd " + target_dir +"/ && busybox md5sum -c " + select_extn + "> /dev/null";
          results = system(command.c_str());
          if ( results == 0 ) {
             msg = " OK";
