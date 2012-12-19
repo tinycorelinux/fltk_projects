@@ -42,8 +42,8 @@ textdomain("tinycore");
     { Fl_Button* o = new Fl_Button(160, 30, 120, 30, gettext("Floppy Tool"));
       o->callback((Fl_Callback*)btn_callback, (void*)("fdtool&"));
     } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(305, 30, 120, 30, gettext("HD/USB Install"));
-      o->callback((Fl_Callback*)btn_callback, (void*)("tc-install &"));
+    { Fl_Button* o = new Fl_Button(305, 30, 120, 30, gettext("Load Starter Pack"));
+      o->callback((Fl_Callback*)btn_callback, (void*)("loadpack &"));
     } // Fl_Button* o
     { Fl_Button* o = new Fl_Button(15, 65, 120, 30, gettext("Backup/Restore"));
       o->callback((Fl_Callback*)btn_callback, (void*)("filetool &"));
@@ -51,8 +51,8 @@ textdomain("tinycore");
     { Fl_Button* o = new Fl_Button(160, 65, 120, 30, gettext("Mount Tool"));
       o->callback((Fl_Callback*)btn_callback, (void*)("mnttool &"));
     } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(305, 65, 120, 30, gettext("Hybrid Mode"));
-      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -T \"Hybrid Setup\" -e sudo /usr/bin/mktclocal &"));
+    { Fl_Button* o = new Fl_Button(305, 65, 120, 30, gettext("Services"));
+      o->callback((Fl_Callback*)btn_callback, (void*)("services &"));
     } // Fl_Button* o
     { Fl_Button* o = new Fl_Button(15, 100, 120, 30, gettext("Date/Time"));
       o->callback((Fl_Callback*)btn_callback, (void*)("datetool &"));
@@ -60,8 +60,8 @@ textdomain("tinycore");
     { Fl_Button* o = new Fl_Button(160, 100, 120, 30, gettext("Mouse Tool"));
       o->callback((Fl_Callback*)btn_callback, (void*)("mousetool &"));
     } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(305, 100, 120, 30, gettext("Terminal Server"));
-      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -T \"Terminal Server Setup\" -e sudo /usr/bin/tc-terminal-server &"));
+    { Fl_Button* o = new Fl_Button(305, 100, 120, 30, gettext("Swapfile Tool"));
+      o->callback((Fl_Callback*)btn_callback, (void*)("swapfile &"));
     } // Fl_Button* o
     { Fl_Button* o = new Fl_Button(15, 135, 120, 30, gettext("Network"));
       o->callback((Fl_Callback*)btn_callback, (void*)("sudo network &"));
@@ -69,8 +69,8 @@ textdomain("tinycore");
     { Fl_Button* o = new Fl_Button(160, 135, 120, 30, gettext("System Stats"));
       o->callback((Fl_Callback*)btn_callback, (void*)("stats &"));
     } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(305, 135, 120, 30, gettext("Swapfile Tool"));
-      o->callback((Fl_Callback*)btn_callback, (void*)("swapfile &"));
+    { Fl_Button* o = new Fl_Button(305, 135, 120, 30, gettext("Terminal Server"));
+      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -T \"Terminal Server Setup\" -e sudo /usr/bin/tc-terminal-server &"));
     } // Fl_Button* o
     { btnWbarConf = new Fl_Button(15, 170, 120, 30, gettext("Wbar Conf"));
       btnWbarConf->callback((Fl_Callback*)btn_callback, (void*)("wbarconf &"));

@@ -11,42 +11,56 @@
 using namespace std;
 
 static int matches(const char *param, char ***res, unsigned int *out) {
-  char *origpath = getenv("PATH"), *path, *token, *saveptr;
-        const char s = ':';
+  char *origpath = getenv("PATH");
+        char **dirs, *path, *ptr;
 
         if (!origpath) return 1;
-        path = saveptr = strdup(origpath);
 
         DIR *dir;
         struct dirent *ent;
-        unsigned int i = 0;
+        unsigned int i = 0, j = 1, apps = 0;
 
-        while ((token = strsep(&path,&s))) {
-                dir = opendir(token);
+	for (i = 0;origpath[i]; i++) {
+		if (origpath[i] == ':') j++;
+	}
+	dirs = (char **) calloc(j, sizeof(char *));
+
+	path = strdup(origpath);
+	char *save = path;
+	for (i = 0; path; i++) {
+		dirs[i] = strdup(path);
+		ptr = strchr(dirs[i], ':');
+
+		if (ptr) {
+			*ptr = '\0';
+			path = ptr + 1;
+		} else path = NULL;
+	}
+	free(save);
+
+        for (i = 0; i < j; i++) {
+                dir = opendir(dirs[i]);
                 if (!dir) continue;
 
                 while ((ent = readdir(dir))) {
-                        if (ent->d_type == DT_REG || ent->d_type == DT_LNK) i++;
+                        if (ent->d_type == DT_REG || ent->d_type == DT_LNK) apps++;
                 }
 
                 closedir(dir);
         }
 
-        path = saveptr;
-        strcpy(path, origpath);
-        char **results = (char **) calloc(i,sizeof(char *));
+        char **results = (char **) calloc(apps, sizeof(char *));
         if (!results) return 1;
-        i = 0;
 
-        while ((token = strsep(&path,&s))) {
-                dir = opendir(token);
+        for (i = 0, apps = 0; i < j; i++) {
+                dir = opendir(dirs[i]);
                 if (!dir) continue;
 
                 while ((ent = readdir(dir))) {
                         if (ent->d_type == DT_REG || ent->d_type == DT_LNK) {
                                 if (strcasestr(ent->d_name, param)) {
-                                        results[i] = strdup(ent->d_name);
-                                        i++;
+                                        results[apps] = strdup(ent->d_name);
+                                        apps++;
                                 }
                         }
                 }
@@ -55,8 +69,10 @@ static int matches(const char *param, char ***res, unsigned int *out) {
         }
 
         *res = results;
-        *out = i;
-        free(saveptr);
+        *out = apps;
+
+	for (i = 0; i < j; i++) free(dirs[i]);
+	free(dirs);
 
         return 0;
 }

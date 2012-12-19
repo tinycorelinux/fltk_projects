@@ -54,9 +54,9 @@ textdomain("tinycore");} {}
       xywh {160 30 120 30}
     }
     Fl_Button {} {
-      label {HD/USB Install}
-      user_data {"tc-install &"}
-      callback btn_callback selected
+      label {Load Starter Pack}
+      user_data {"loadpack &"}
+      callback btn_callback
       xywh {305 30 120 30}
     }
     Fl_Button {} {
@@ -72,8 +72,8 @@ textdomain("tinycore");} {}
       xywh {160 65 120 30}
     }
     Fl_Button {} {
-      label {Hybrid Mode}
-      user_data {"aterm +tr +sb -T \\"Hybrid Setup\\" -e sudo /usr/bin/mktclocal &"}
+      label Services
+      user_data {"services &"}
       callback btn_callback
       xywh {305 65 120 30}
     }
@@ -90,8 +90,8 @@ textdomain("tinycore");} {}
       xywh {160 100 120 30}
     }
     Fl_Button {} {
-      label {Terminal Server}
-      user_data {"aterm +tr +sb -T \\"Terminal Server Setup\\" -e sudo /usr/bin/tc-terminal-server &"}
+      label {Swapfile Tool}
+      user_data {"swapfile &"}
       callback btn_callback
       xywh {305 100 120 30}
     }
@@ -108,9 +108,9 @@ textdomain("tinycore");} {}
       xywh {160 135 120 30}
     }
     Fl_Button {} {
-      label {Swapfile Tool}
-      user_data {"swapfile &"}
-      callback btn_callback
+      label {Terminal Server}
+      user_data {"aterm +tr +sb -T \\"Terminal Server Setup\\" -e sudo /usr/bin/tc-terminal-server &"}
+      callback btn_callback selected
       xywh {305 135 120 30}
     }
     Fl_Button btnWbarConf {

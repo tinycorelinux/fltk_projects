@@ -450,8 +450,10 @@ for (int t=0; t<=brw_multi->size(); t++) {
       string select_extn_file = select_extn + ".info";
       command = "tce-fetch.sh " + select_extn_file;
       int results = system(command.c_str());
-      if (results == 0)
+      if (results == 0) {
          brw_results->load(select_extn_file.c_str());
+         unlink(select_extn_file.c_str());
+      }   
       continue;
    }
 }   
@@ -600,8 +602,8 @@ Fl_Menu_Item menu_menuBar[] = {
  {mygettext("Exit Install Options"), 0,  (Fl_Callback*)options_callback, (void*)("exit_copy"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
  {mygettext("Updates"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
- {mygettext("Select Mirror"), 0,  (Fl_Callback*)updates_callback, (void*)("select_mirror"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Check for Updates"), 0,  (Fl_Callback*)updates_callback, (void*)("update"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Select Mirror"), 0,  (Fl_Callback*)updates_callback, (void*)("select_mirror"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Exit Update Mode"), 0,  (Fl_Callback*)updates_callback, (void*)("exit_updates"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
  {mygettext("Md5Check"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},

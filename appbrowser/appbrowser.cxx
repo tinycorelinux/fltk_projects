@@ -585,13 +585,14 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
       btn_go->deactivate();
     } // Fl_Button* btn_go
     { status_out = new Fl_Output(225, 373, 420, 20, gettext("Status"));
+      status_out->color((Fl_Color)55);
       status_out->value(download_dir.c_str());
       status_out->label("  TCE:");
     } // Fl_Output* status_out
     { btn_tce = new Fl_Button(645, 373, 34, 20, gettext("Set"));
       btn_tce->callback((Fl_Callback*)btn_callback, (void*)("setdrive"));
       btn_tce->deactivate();
-      if (download_dir.compare(0,8,"/tmp/tce") == 0 ){btn_tce->activate();};
+      if (download_dir.compare(0,8,"/tmp/tce") == 0 ){btn_tce->activate();status_out->color(9);};
     } // Fl_Button* btn_tce
     window->label(mirror.c_str());
     window->end();

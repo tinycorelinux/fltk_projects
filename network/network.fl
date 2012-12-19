@@ -7,8 +7,7 @@ header_name {.h}
 code_name {.cxx}
 decl {// (c) Robert Shingledecker} {} 
 
-decl {\#include <cstdlib>} {selected
-} 
+decl {\#include <cstdlib>} {} 
 
 decl {\#include <iostream>} {} 
 
@@ -115,7 +114,7 @@ if (userdata == "apply")
       fout << "\#!/bin/sh" << endl;
       fout << "pkill udhcpc" << endl;
       if ( dhcpYesBtn->value() == 1)
-         fout << "udhcpc -H " << hostname << " -b -i " << interface << endl;
+         fout << "udhcpc -b -i " << interface << " -h " << hostname << " -p /var/run/udhcpc.eth0.pid" << endl;
       else
       {
          fout << "ifconfig " << interface << " " << ipaddress << " netmask " << netmask << " broadcast " << broadcast << " up" << endl;
@@ -137,7 +136,8 @@ if (userdata == "apply")
    }        
 }      
 if (userdata == "exit")
-   exit(0);} {}
+   exit(0);} {selected
+  }
 } 
 
 Function {} {open

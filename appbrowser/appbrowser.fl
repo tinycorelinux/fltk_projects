@@ -49,19 +49,19 @@ decl {Fl_Text_Buffer *txtBuffer = new Fl_Text_Buffer;} {}
 
 decl {void errhandler(const string &str);} {} 
 
-Function {cursor_normal()} {open private return_type void
+Function {cursor_normal()} {private return_type void
 } {
   code {window->cursor(FL_CURSOR_DEFAULT);
 Fl::flush();} {}
 } 
 
-Function {cursor_wait()} {open private return_type void
+Function {cursor_wait()} {private return_type void
 } {
   code {window->cursor(FL_CURSOR_WAIT);
 Fl::flush();} {}
 } 
 
-Function {HandleInput_CB(int, void *)} {open private return_type {static void}
+Function {HandleInput_CB(int, void *)} {private return_type {static void}
 } {
   code {static int x = 0;
 static char s[1024];
@@ -356,7 +356,7 @@ write(G_out, command.c_str(), command.length());
 Fl::add_fd(fileno(G_in), HandleInput_CB, (void*)&status_out);} {}
 } 
 
-Function {mirror_btn_callback(Fl_Widget*, void*)} {open private return_type {static void}
+Function {mirror_btn_callback(Fl_Widget*, void*)} {private return_type {static void}
 } {
   code {mode = "mirror";
 tabs->deactivate();
@@ -368,11 +368,10 @@ else {
    brw_select->remove(brw_select->size());
    box_select->label("Select Mirror");
    box_select->activate();
-}} {selected
-  }
+}} {}
 } 
 
-Function {tabsGroupCB(Fl_Widget*, void*)} {open private return_type {static void}
+Function {tabsGroupCB(Fl_Widget*, void*)} {private return_type {static void}
 } {
   code {if (brw_select->value())
 {
@@ -602,16 +601,16 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
     }
     Fl_Output status_out {
       label Status
-      xywh {225 373 420 20}
+      xywh {225 373 420 20} color 55
       code0 {status_out->value(download_dir.c_str());}
       code1 {status_out->label("  TCE:");}
     }
     Fl_Button btn_tce {
       label Set
       user_data {"setdrive"}
-      callback btn_callback
+      callback btn_callback selected
       xywh {645 373 34 20} deactivate
-      code0 {if (download_dir.compare(0,8,"/tmp/tce") == 0 ){btn_tce->activate();};}
+      code0 {if (download_dir.compare(0,8,"/tmp/tce") == 0 ){btn_tce->activate();status_out->color(9);};}
     }
   }
 } 

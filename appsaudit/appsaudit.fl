@@ -481,8 +481,10 @@ for (int t=0; t<=brw_multi->size(); t++) {
       string select_extn_file = select_extn + ".info";
       command = "tce-fetch.sh " + select_extn_file;
       int results = system(command.c_str());
-      if (results == 0)
+      if (results == 0) {
          brw_results->load(select_extn_file.c_str());
+         unlink(select_extn_file.c_str());
+      }   
       continue;
    }
 }   
@@ -538,7 +540,7 @@ if (report_type == "update" )
 cursor_normal();} {}
 } 
 
-Function {brw_results_callback(Fl_Widget *, void *)} {open return_type {static void}
+Function {brw_results_callback(Fl_Widget *, void *)} {return_type {static void}
 } {
   code {if (brw_results->value())
 {
@@ -719,14 +721,14 @@ exit(0);} open
         xywh {0 0 63 20}
       } {
         MenuItem {} {
-          label {Select Mirror}
-          user_data {"select_mirror"}
-          callback updates_callback
+          label {Check for Updates}
+          user_data {"update"}
+          callback updates_callback selected
           xywh {0 0 30 20}
         }
         MenuItem {} {
-          label {Check for Updates}
-          user_data {"update"}
+          label {Select Mirror}
+          user_data {"select_mirror"}
           callback updates_callback
           xywh {0 0 30 20}
         }
@@ -810,7 +812,7 @@ exit(0);} open
       }
       Fl_Button btn_multi {
         label {Process Selected Item(s)}
-        callback btn_multi_callback selected
+        callback btn_multi_callback
         xywh {0 350 200 20} deactivate
       }
     }
