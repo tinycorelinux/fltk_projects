@@ -1,0 +1,932 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0110 
+i18n_type 1 
+i18n_include <libintl.h> 
+i18n_function gettext 
+header_name {.h} 
+code_name {.cxx}
+decl {// (c) Robert Shingledecker 2012} {} 
+
+decl {\#include <iostream>} {} 
+
+decl {\#include <fstream>} {} 
+
+decl {\#include <string>} {} 
+
+decl {\#include <FL/fl_message.H>} {} 
+
+decl {\#include <FL/Fl_File_Chooser.H>} {} 
+
+decl {\#include <sys/types.h>} {} 
+
+decl {\#include <sys/stat.h>} {} 
+
+decl {\#include <fcntl.h>} {} 
+
+decl {\#include <signal.h>} {} 
+
+decl {\#include <locale.h>} {} 
+
+decl {\#include <unistd.h>} {} 
+
+decl {\#include <string.h>} {} 
+
+decl {using namespace std;} {} 
+
+decl {int results, locales_set=0;} {} 
+
+decl {string repository, tce_dir, download_dir, scmbootList;} {} 
+
+decl {string select_extn, select_results, report_type;} {} 
+
+decl {string hilite, mode, command, msg, mirror, err_extn;} {} 
+
+decl {Fl_Text_Buffer *txtBuffer = new Fl_Text_Buffer;} {} 
+
+decl {void errhandler(const string &str);} {} 
+
+Function {mygettext(const char *msgid)} {private return_type {char *}
+} {
+  code {if (!locales_set) {
+
+setlocale(LC_ALL, "");
+bindtextdomain("tinycore","/usr/local/share/locale");
+textdomain("tinycore");
+
+locales_set=1;
+
+}
+
+return gettext(msgid);} {}
+} 
+
+Function {localView()} {private return_type void
+} {
+  code {grpUpdates->deactivate();
+grpUpdates->hide();
+txtBuffer->loadfile("");
+tabs->hide();
+grpSearch->deactivate();
+grpResults->show();
+grpResults->activate();
+boxResults->label("Results");
+brwResults->activate();
+brwResults->clear();
+grpInstall->activate();
+grpInstall->show();
+choiceInstall->hide();
+btnGo->show();
+brwExtensions->activate();
+brwExtensions->show();} {}
+} 
+
+Function {remoteView()} {private return_type void
+} {
+  code {grpResults->hide();
+grpUpdates->deactivate();
+grpUpdates->hide();
+tabs->show();
+tabs->deactivate();
+grpInstall->activate();
+grpInstall->show();
+choiceInstall->show();
+btnGo->show();
+grpSearch->activate();
+brwResults->deactivate();
+txtBuffer->loadfile("");
+brwExtensions->activate();
+brwExtensions->show();} {}
+} 
+
+Function {multiView()} {private return_type void
+} {
+  code {brwExtensions->hide();
+brwExtensions->deactivate();
+tabs->hide();
+grpInstall->hide();
+grpInstall->deactivate();
+grpSearch->deactivate();
+grpUpdates->show();
+grpUpdates->activate();
+grpResults->show();
+grpResults->activate();  
+brwMulti->activate();
+brwMulti->show();
+brwMulti->clear();
+brwResults->activate();
+brwResults->show();
+brwResults->clear();} {}
+} 
+
+Function {cursor_normal()} {private return_type void
+} {
+  code {window->cursor(FL_CURSOR_DEFAULT);
+Fl::flush();} {}
+} 
+
+Function {cursor_wait()} {private return_type void
+} {
+  code {window->cursor(FL_CURSOR_WAIT);
+Fl::flush();} {}
+} 
+
+Function {fetch_extension()} {return_type void
+} {
+  code {cursor_wait();
+results = system(command.c_str());
+if (results == 0 )
+  msg = "Success.";
+else
+  msg = "Failed.";
+  
+outputStatus->value(msg.c_str());  
+cursor_normal();} {}
+} 
+
+Function {errhandler(const string &str)} {private return_type void
+} {
+  Fl_Window errwindow {
+    label {MD5SUM error} open
+    xywh {386 540 520 125} type Double hide
+  } {
+    Fl_Box errlabel {
+      label {Md5sum error on}
+      xywh {162 25 195 30}
+    }
+    Fl_Button {} {
+      label {Remove and try again}
+      callback {string cmd = "rm -f " + err_extn + "*";
+
+system(cmd.c_str());
+
+fetch_extension();
+errwindow->hide();}
+      xywh {15 70 160 35}
+    }
+    Fl_Button {} {
+      label {Try to finish download}
+      callback {string cmd = "zsync " + mirror + "4.x/scm/" + err_extn + ".zsync";
+
+int ret = system(cmd.c_str());
+ret = WEXITSTATUS(ret);
+
+if (ret == 0) fetch_extension();
+else {
+
+	// If zsync also fails, it's a bad hair
+	// day for the network. Nothing we can do.
+
+	outputStatus->value("Zsync failed.");
+
+	cmd = "rm -f " + err_extn + "*";
+
+	system(cmd.c_str());
+}
+
+errwindow->hide();}
+      xywh {200 70 160 35}
+    }
+    Fl_Button {} {
+      label Cancel
+      callback {errwindow->hide();}
+      xywh {385 70 115 35}
+    }
+  }
+  code {errlabel->label(str.c_str());
+
+err_extn = str;
+err_extn.replace(0,9,""); // Yes, hardcoded magic value. Bad.
+
+errwindow->show();} {}
+} 
+
+Function {menuCB(Fl_Widget *, void* userdata)} {private return_type {static void}
+} {
+  code {if (userdata == "scm")
+{
+   mode = "scm";
+   remoteView();   
+   repository = (const char*) userdata;
+   cursor_wait();
+   unlink("scm.lst");
+   command = "scm-fetch.sh scm.lst.gz";
+   int results = system(command.c_str());
+   cursor_normal();
+   if (results == 0 )
+   {
+      system("gunzip -c scm.lst.gz > scm.lst");
+      brwExtensions->load("scm.lst");
+      brwExtensions->remove(brwExtensions->size());
+      btnGo->deactivate();
+      boxLeftSide->label("Select Extension");
+      boxLeftSide->activate();
+      grpSearch->activate();
+//      search_field->activate();                                              
+    } else
+      fl_message("Connection error, check network or mirror.");
+} else if (userdata == "install")
+{
+   mode = "install";
+   localView();   
+   boxResults->label("Results");
+   cursor_wait();
+   command = "scm -i";
+   int results = system(command.c_str());
+   cursor_normal();
+   if (results == 0 )
+   {   
+      brwExtensions->load("/tmp/scm.lst");
+      unlink("/tmp/scm.lst");
+      brwExtensions->remove(brwExtensions->size());
+      btnGo->deactivate();
+      boxLeftSide->label("Select scm to Install");
+      boxLeftSide->activate();
+    } else
+      fl_message("No local scm extensions found.");   
+} else if (userdata == "uninstall")
+{
+   mode = "uninstall";
+   localView();   
+   boxResults->label("Results");
+   cursor_wait();
+   command = "scm -u";
+   int results = system(command.c_str());
+   cursor_normal();
+   if (results == 0 )
+   {   
+      brwExtensions->load("/tmp/scm.lst");
+      unlink("/tmp/scm.lst");
+      brwExtensions->remove(brwExtensions->size());
+      btnGo->deactivate();
+      boxLeftSide->label("Select scm to Uninstall");
+      boxLeftSide->activate();
+    } else
+      fl_message("No installed scm extensions found.");
+} else if (userdata == "updates") 
+{
+   string line;
+   mode = "updates";
+   multiView();
+   boxLeftSide->label("Select SCM to Update");
+   command = "version -c >/tmp/VerChk";
+   results = system(command.c_str());
+   if ( results == 0 )
+   {
+      cout << "OK" << endl;
+      brwResults->load("/tmp/VerChk");
+      brwResults->bottomline(brwResults->size());
+   }
+   brwResults->add("Please Standby... Now checking your SCM extensions.");
+   //   
+
+   command = "scm-update -l " + tce_dir;
+   FILE *pipe = popen(command.c_str(),"r");
+   char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
+   if (pipe)
+   {
+      while(fgets(mbuf,PATH_MAX,pipe))
+      {
+         string line(mbuf);
+         if (line.find("Error ") == string::npos ) {
+            brwMulti->add(line.c_str());
+            brwMulti->bottomline(brwMulti->size());
+         } else { 
+            brwResults->add(line.c_str());
+            brwResults->bottomline(brwResults->size());
+         }
+         Fl::flush();
+      }
+      pclose(pipe);
+      free(mbuf);
+   }
+   Fl::flush();      
+   brwResults->add("Scan for updates completed.");    
+   if ( brwMulti->size() >= 1 ) {
+      btnMulti->show();
+      btnMulti->activate();
+   } else {
+      if ( brwResults->size() == 1 )
+         brwResults->add("Extensions are current. No updates required.");
+   }
+   cursor_normal();
+   Fl::flush();      
+} else if (userdata == "boot")
+{
+   mode = "boot";
+   localView();   
+   boxResults->label("Boot List");
+   cursor_wait();
+   command = "scm -b";
+   int results = system(command.c_str());
+   cursor_normal();
+   if (results == 0 )
+   {   
+      brwExtensions->load("/tmp/scm.lst");
+      unlink("/tmp/scm.lst");
+      brwExtensions->remove(brwExtensions->size());
+      btnGo->deactivate();
+      boxLeftSide->label("Local scms:");
+      boxLeftSide->activate();
+      brwResults->load(scmbootList.c_str());
+    } else
+      fl_message("No local scm extensions found.");   
+} else if (userdata == "setdrive")
+{
+   cursor_wait();
+   command = "tce-setdrive -l";
+   int results = system(command.c_str());
+   cursor_normal();
+   if (results == 0 )
+   {
+      mode = "setdrive";
+      brwExtensions->load("/tmp/tcesetdev");
+      brwExtensions->remove(brwExtensions->size());
+      boxLeftSide->label("Select for TCE dir.");
+      boxLeftSide->activate();
+      unlink("/tmp/tcesetdev");
+   } else
+     fl_message("No available drives found!");
+     
+} else if (userdata == "search")
+{
+  if (choiceSearch->text() == "Search")
+     command = "scm-search.sh";
+  else if (choiceSearch->text() == "Keyword")
+     command = "keyword.sh";
+  else
+     command = "provides.sh";
+  tabs->deactivate();
+  txtBuffer->loadfile(""); 
+  cursor_wait();
+  command = command + " " + (string)search_field->value();
+  int results = system(command.c_str());
+  search_field->value("");
+  cursor_normal();
+  if (results == 0 )
+  {
+    brwExtensions->load("scm.lst");
+    brwExtensions->remove(brwExtensions->size());
+    btnGo->deactivate();
+    choiceSearch->activate();
+    search_field->activate();                                              
+  }
+  
+} else if (userdata == "md5s") 
+{
+   mode = "md5s";
+   multiView();
+   cursor_wait();
+   command = "cd " + download_dir + " && ls *.scm.md5.txt > /tmp/apps_upd.lst";
+   system(command.c_str());
+   boxLeftSide->label(download_dir.c_str());
+   brwMulti->load("/tmp/apps_upd.lst");
+   brwMulti->remove(brwMulti->size());
+   btnMulti->show();
+   btnMulti->activate();
+   cursor_normal();
+      
+} else if (userdata == "quit")
+  {
+    command = "quit\\n";
+    unlink("scm.lst");
+    unlink("scm.lst.gz");
+    exit(0);
+
+  }} {}
+} 
+
+Function {brwExtensionsCB(Fl_Widget *, void *)} {open private return_type {static void}
+} {
+  code {if (brwExtensions->value())
+{
+   select_extn = brwExtensions->text(brwExtensions->value());
+   if ( mode == "scm" )
+   {
+      string select_extn_file = select_extn + (string)".info";
+      string info_line;
+      command = "scm-fetch.sh " + select_extn_file;
+      int results = system(command.c_str());
+      if (results == 0)
+      {
+         txtBuffer->loadfile(select_extn_file.c_str());
+
+         unlink(select_extn_file.c_str());
+         btnGo->activate();
+         
+         tabs->activate();
+         infoTab->activate();
+         filesTab->activate();
+         dependsTab->activate();
+         infoTab->show();
+      } 
+   }
+   if ( mode == "install" or mode == "uninstall")
+   {
+      btnGo->activate();
+   }
+   if ( mode == "boot" )
+   {
+      cursor_wait();
+      command = "echo " + select_extn + " >> " + scmbootList;
+      system(command.c_str());
+      brwResults->load(scmbootList.c_str());
+      brwResults->remove(brwResults->size());
+      
+      command = "scm -b";
+      int results = system(command.c_str());
+      if (results == 0 )
+      {   
+         brwExtensions->load("/tmp/scm.lst");
+         unlink("/tmp/scm.lst");
+         brwExtensions->remove(brwExtensions->size());
+      }
+      cursor_normal();
+   }
+   if ( mode == "mirror" )
+   {
+     mirror = select_extn;
+     window->label(mirror.c_str());
+     ofstream fout("/opt/tcemirror", ios::out|ios::out);
+     if (! fout.is_open())
+     {
+       cerr << "Can't open /opt/tcemirror for output!" << endl;
+       exit(EXIT_FAILURE);
+     }
+     fout << mirror << endl;
+     fout.close();      
+   }
+   if ( mode == "setdrive" )
+   {
+      command = "tce-setdrive -s " + select_extn;
+      int results = system(command.c_str());
+      if (results == 0)
+      {
+         download_dir = select_extn + "/tce";
+         brwExtensions->clear();
+         boxLeftSide->label("");
+         download_dir += "/optional";
+         outputStatus->color(FL_WHITE);
+         outputStatus->value((download_dir).c_str());
+         btn_tce->deactivate();         
+      }
+   }
+}} {}
+} 
+
+Function {btnMirrorCB(Fl_Widget*, void*)} {private return_type {static void}
+} {
+  code {mode = "mirror";
+remoteView();
+tabs->deactivate();
+grpSearch->deactivate();
+system("cat /opt/localmirrors /usr/local/share/mirrors > /tmp/mirrors 2>/dev/null");
+brwExtensions->load("/tmp/mirrors");
+if ( brwExtensions->size() == 1)
+  fl_message("Must load mirrors.tcz extension or have /opt/localmirrors in order to use this feature.");
+else {
+   brwExtensions->remove(brwExtensions->size());
+   boxLeftSide->label("Select Mirror");
+   boxLeftSide->activate();
+}} {}
+} 
+
+Function {brwMultiCB(Fl_Widget *, void *)} {return_type {static void}
+} {
+  code {cursor_wait();
+brwResults->clear();
+if ( mode == "updates" ) { 
+   for (int t=0; t<=brwMulti->size(); t++) {
+      if (brwMulti->selected(t) ) {
+         select_extn = brwMulti->text(t);
+         string info_file(select_extn,0,select_extn.size()-1);
+         info_file = info_file + ".info";
+         command = "scm-fetch.sh " + info_file;
+         Fl::flush();
+         int results = system(command.c_str());
+         if (results == 0) {
+            boxResults->label(select_extn.c_str());
+            brwResults->load(info_file.c_str());
+            unlink(info_file.c_str());
+         }   
+         continue;
+      }
+   }
+}   
+cursor_normal();} {}
+} 
+
+Function {btnMultiCB(Fl_Widget *, void *)} {return_type {static void}
+} {
+  code {cursor_wait();
+brwResults->clear();
+for ( int t=0; t<=brwMulti->size(); t++ )
+{
+   if ( brwMulti->selected(t) )
+   {
+      select_extn = brwMulti->text(t);
+      if ( mode == "md5s" )
+      {
+         command = "cd " + download_dir +"/ && md5sum -c " + select_extn;
+         results = system(command.c_str());
+         if ( results == 0 ) {
+            msg = " OK";
+            hilite = "";
+         } else {
+            msg = " FAILED";
+            hilite = "@B17";
+         }   
+             
+         brwResults->add((hilite + select_extn + msg).c_str());
+         Fl::flush();      
+      
+      } else {
+         boxResults->label(("Fetching " + select_extn).c_str());
+         boxResults->redraw();
+         Fl::flush();
+         
+         string md5_file(select_extn,0,select_extn.size()-1);
+         md5_file = md5_file + ".md5.txt";
+         command = "scm-update -u " + download_dir +"/" + md5_file;
+         
+         
+         
+         FILE *pipe = popen(command.c_str(),"r");
+         char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
+         if (pipe)
+         {
+            while(fgets(mbuf,PATH_MAX,pipe))
+            {
+               string line(mbuf);
+               brwResults->add(line.c_str());
+               brwResults->bottomline(brwResults->size());
+               Fl::flush();
+            }
+            pclose(pipe);
+            free(mbuf);
+         }
+      }
+   }
+}
+brwMulti->deselect();
+if (mode == "updates" )
+	boxResults->label("Updates complete.");
+cursor_normal();} {}
+} 
+
+Function {tabsGroupCB(Fl_Widget*, void*)} {private return_type {static void}
+} {
+  code {if (brwExtensions->value())
+{
+   int results;
+   select_extn = brwExtensions->text(brwExtensions->value());
+   
+   if (infoTab->visible())
+   {
+     string select_extn_file = select_extn + (string)".info";
+     command = "scm-fetch.sh " + select_extn_file;
+     results = system(command.c_str());
+     if (results == 0)
+     {
+        txtBuffer->loadfile(select_extn_file.c_str());
+        unlink(select_extn_file.c_str());
+     }
+   }
+   
+   if (filesTab->visible())
+   {
+     string select_extn_file = select_extn + (string)".list";
+     command = "scm-fetch.sh " + select_extn_file;
+     results = system(command.c_str());
+     if (results == 0)
+     {
+        txtBuffer->loadfile(select_extn_file.c_str());
+        unlink(select_extn_file.c_str());
+     }
+   }
+   
+   if (dependsTab->visible())
+   {
+     cursor_wait();
+     txtBuffer->loadfile("");
+     string select_extn_file = select_extn + (string)".dep";
+     command = "scm-fetch.sh " + select_extn_file;
+     results = system(command.c_str());
+     cursor_normal();
+     if (results == 0)
+     {
+        txtBuffer->loadfile(select_extn_file.c_str());
+        unlink(select_extn_file.c_str());
+     }
+   }
+   
+}} {}
+} 
+
+Function {brwResultsCB(Fl_Widget *, void *)} {return_type {static void}
+} {
+  code {if (brwResults->value())
+{
+   select_results = brwResults->text(brwResults->value());
+   if (report_type == "delete")
+   {
+     string target = select_results.substr(select_results.find_last_of("/")+1);
+     command = "sed -i '/" + target + "/d' /tmp/audit_marked.lst";
+     system(command.c_str());
+     brwResults->load("/tmp/audit_marked.lst");
+     brwResults->remove(brwResults->size());
+   }
+   if (mode == "boot")
+   {
+     cursor_wait();
+     command = "sed -i '/" + select_results + "/d' " + scmbootList;
+     system(command.c_str());
+  
+     brwResults->load(scmbootList.c_str());
+     brwResults->remove(brwResults->size());
+     
+     command = "scm -b";
+     int results = system(command.c_str());
+     if (results == 0 )
+     {   
+        brwExtensions->load("/tmp/scm.lst");
+        unlink("/tmp/scm.lst");
+        brwExtensions->remove(brwExtensions->size());
+       cursor_normal();
+     }
+   }  
+
+}} {}
+} 
+
+Function {btnGoCB(Fl_Widget *, void* userdata)} {private return_type {static void}
+} {
+  code {if (mode == "scm")
+{
+   outputStatus->value("");
+   outputStatus->label("Status");
+   int action = choiceInstall->value();
+   string action_type;
+   switch(action)
+   {
+      case 0 : action_type="wi";
+               break;
+      case 1 : action_type="w";
+               break;
+      default: mode="w";
+   }
+   command = "aterm -fg black -bg white +tr -g 80x5 -e scm-load -" + action_type + " " + select_extn;
+   fetch_extension();
+   if ( action_type == "wi" && results == 0 )
+   {
+      command = "echo " + select_extn.substr(0,(select_extn.length()-4)) + " >>"+scmbootList;
+      system(command.c_str());
+      cout << command << endl;
+      Fl::flush();
+   }
+} else if (mode == "install")
+{
+  command = "/usr/bin/scm-load -i " + select_extn;
+  cursor_wait();
+  results = system(command.c_str());
+  if (results == 0 )
+  {
+     msg = "Successfully installed " + select_extn;
+     brwExtensions->remove(brwExtensions->value());
+  } else
+     msg = "Failed.";
+  
+  brwResults->add(msg.c_str());  
+  cursor_normal();
+
+} else if (mode == "uninstall")
+{
+  command = "/usr/bin/scm-load -r " + select_extn;
+  cursor_wait();
+  results = system(command.c_str());
+  if (results == 0 )
+  {
+     msg = "Successfully uninstalled " + select_extn;
+     brwExtensions->remove(brwExtensions->value());
+  } else
+     msg = "Failed.";
+  
+  brwResults->add(msg.c_str());  
+  cursor_normal();
+}} {selected
+  }
+} 
+
+Function {} {open
+} {
+  code {setlocale(LC_ALL, "");
+bindtextdomain("tinycore", "/usr/local/share/locale");
+textdomain("tinycore");
+
+ifstream mirror_fin("/opt/tcemirror");
+getline(mirror_fin,mirror);
+mirror_fin.close();
+
+char buffer[1024];
+int length;
+length = readlink("/etc/sysconfig/tcedir", buffer, sizeof(buffer));
+buffer[length] = '\\0';
+tce_dir = strdup(buffer);
+
+download_dir = tce_dir + "/optional";
+scmbootList = tce_dir + "/scmboot.lst";
+chdir(download_dir.c_str()); // we go there to more easily handle errors (delete, zsync)} {}
+  Fl_Window window {
+    label Appbrowser
+    user_data {"quit"}
+    callback menuCB open
+    xywh {17 20 685 395} type Double hide resizable
+    code0 {window->label(mirror.c_str());}
+  } {
+    Fl_Menu_Bar menuBar {
+      xywh {0 0 85 20}
+    } {
+      Submenu scmapps {
+        label ScmApps
+        xywh {5 5 63 20}
+      } {
+        Submenu {} {
+          label Local
+          xywh {0 0 63 20}
+        } {
+          MenuItem {} {
+            label Install
+            user_data {"install"}
+            callback menuCB
+            xywh {0 0 30 20}
+          }
+          MenuItem {} {
+            label Uninstall
+            user_data {"uninstall"}
+            callback menuCB
+            xywh {0 0 30 20}
+          }
+          MenuItem {} {
+            label Md5Check
+            user_data {"md5s"}
+            callback menuCB
+            xywh {0 0 30 20}
+          }
+          MenuItem {} {
+            label Updates
+            user_data {"updates"}
+            callback menuCB
+            xywh {0 0 30 20}
+          }
+          MenuItem {} {
+            label {Boot List}
+            user_data {"boot"}
+            callback menuCB
+            xywh {0 0 30 20}
+          }
+        }
+        Submenu {} {
+          label Remote
+          xywh {0 0 63 20}
+        } {
+          MenuItem {} {
+            label Browse
+            user_data {"scm"}
+            callback menuCB
+            xywh {10 10 30 20}
+          }
+          MenuItem {} {
+            label {Select Mirror}
+            user_data {"mirror"}
+            callback btnMirrorCB
+            xywh {10 10 30 20}
+          }
+        }
+        MenuItem {} {
+          label Quit
+          user_data {"quit"}
+          callback menuCB
+          xywh {5 5 30 20}
+        }
+      }
+    }
+    Fl_Group grpSearch {
+      xywh {90 0 595 20} deactivate
+    } {
+      Fl_Choice choiceSearch {
+        xywh {90 0 93 20} down_box BORDER_BOX
+      } {
+        MenuItem {} {
+          label Search
+          xywh {10 10 30 20}
+        }
+        MenuItem {} {
+          label Keyword
+          xywh {10 10 30 20} deactivate
+        }
+      }
+      Fl_Input search_field {
+        user_data {"search"}
+        callback menuCB
+        xywh {185 0 500 20} labeltype NO_LABEL when 8
+      }
+    }
+    Fl_Box boxLeftSide {
+      xywh {5 23 190 19}
+    }
+    Fl_Browser brwExtensions {
+      callback brwExtensionsCB
+      xywh {0 45 200 325} type Hold textfont 4
+    }
+    Fl_Group grpUpdates {
+      xywh {0 45 205 348} hide deactivate
+    } {
+      Fl_Browser brwMulti {
+        callback brwMultiCB
+        xywh {0 45 200 325} type Multi textfont 4
+      }
+      Fl_Button btnMulti {
+        label {Process Selected Item(s)}
+        callback btnMultiCB
+        xywh {3 373 180 20}
+      }
+    }
+    Fl_Tabs tabs {
+      callback tabsGroupCB
+      xywh {205 20 475 350}
+    } {
+      Fl_Group infoTab {
+        label Info
+        xywh {205 45 475 325} when 1 deactivate
+      } {
+        Fl_Text_Display infoDisplay {
+          xywh {210 50 470 318} textfont 4
+          code0 {infoDisplay->buffer(txtBuffer);}
+        }
+      }
+      Fl_Group filesTab {
+        label Files
+        xywh {205 45 475 325} when 1 hide deactivate
+      } {
+        Fl_Text_Display filesDisplay {
+          xywh {210 50 470 318} textfont 4
+          code0 {filesDisplay->buffer(txtBuffer);}
+        }
+      }
+      Fl_Group dependsTab {
+        label Depends
+        xywh {210 50 475 325} deactivate
+      } {
+        Fl_Text_Display dependsDisplay {
+          xywh {215 55 470 318} labelfont 1 textfont 4
+          code0 {dependsDisplay->buffer(txtBuffer);}
+        }
+      }
+    }
+    Fl_Group grpResults {
+      xywh {205 18 480 352} hide deactivate
+    } {
+      Fl_Box boxResults {
+        xywh {205 18 475 27}
+      }
+      Fl_Browser brwResults {
+        callback brwResultsCB
+        xywh {210 45 475 325} type Select textfont 4
+      }
+    }
+    Fl_Group grpInstall {
+      xywh {3 373 180 20}
+    } {
+      Fl_Choice choiceInstall {
+        xywh {3 373 140 20} down_box BORDER_BOX
+      } {
+        MenuItem {} {
+          label Install
+          xywh {10 10 30 20}
+        }
+        MenuItem {} {
+          label {Download Only}
+          xywh {10 10 30 20}
+        }
+      }
+      Fl_Button btnGo {
+        label Go
+        user_data {"go"}
+        callback btnGoCB
+        xywh {145 373 30 20} deactivate
+      }
+    }
+    Fl_Output outputStatus {
+      label Status
+      xywh {225 373 420 20} color 55
+      code0 {outputStatus->value(download_dir.c_str());}
+      code1 {outputStatus->label("  TCE:");}
+    }
+    Fl_Button btn_tce {
+      label Set
+      user_data {"setdrive"}
+      callback menuCB
+      xywh {645 373 34 20} deactivate
+      code0 {if (download_dir.compare(0,8,"/tmp/tce") == 0 ){btn_tce->activate();outputStatus->color(9);};}
+    }
+  }
+} 

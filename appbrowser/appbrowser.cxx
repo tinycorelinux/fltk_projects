@@ -5,6 +5,7 @@
 // (c) Robert Shingledecker 2008-2011
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
 #include <string>
 #include <FL/fl_message.H>
 #include <FL/Fl_File_Chooser.H>
@@ -153,7 +154,7 @@ static void btn_callback(Fl_Widget *, void* userdata) {
       search_choices->activate();
       search_field->activate();                                              
     } else
-      fl_message("Connection error, check network or mirror.");
+      fl_message("Error, check network, mirror or writable extension directory.");
 } else if (userdata == "go")
 {
    status_out->value("");
@@ -341,6 +342,8 @@ Fl::add_fd(fileno(G_in), HandleInput_CB, (void*)&status_out);
 static void mirror_btn_callback(Fl_Widget*, void*) {
   mode = "mirror";
 tabs->deactivate();
+search_choices->deactivate();
+search_field->deactivate();
 system("cat /opt/localmirrors /usr/local/share/mirrors > /tmp/mirrors 2>/dev/null");
 brw_select->load("/tmp/mirrors");
 if ( brw_select->size() == 1)
@@ -500,6 +503,16 @@ if ( last_dir_file.is_open() )
 }
 
 chdir(download_dir.c_str()); // we go there to more easily handle errors (delete, zsync)
+
+// Test writable 
+string testfile = download_dir + "/test.test";
+ofstream writest(testfile.c_str());
+if (writest.fail()) {
+   fl_message("Fatal Error: TCE Directory is not writable.");
+   exit(1);
+}
+writest.close();
+unlink(testfile.c_str());   
 
 // Make fifo
 unlink("/tmp/ab2tce.fifo");

@@ -11,6 +11,8 @@ decl {\#include <iostream>} {}
 
 decl {\#include <fstream>} {} 
 
+decl {\#include <cstdlib>} {} 
+
 decl {\#include <string>} {} 
 
 decl {\#include <FL/fl_message.H>} {} 
@@ -155,7 +157,7 @@ err_extn.replace(0,9,""); // Yes, hardcoded magic value. Bad.
 errwindow->show();} {}
 } 
 
-Function {btn_callback(Fl_Widget *, void* userdata)} {open private return_type {static void}
+Function {btn_callback(Fl_Widget *, void* userdata)} {private return_type {static void}
 } {
   code {if (userdata == "tcz")
 {
@@ -179,7 +181,7 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open private return_type {
       search_choices->activate();
       search_field->activate();                                              
     } else
-      fl_message("Connection error, check network or mirror.");
+      fl_message("Error, check network, mirror or writable extension directory.");
 } else if (userdata == "go")
 {
    status_out->value("");
@@ -264,7 +266,7 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open private return_type {
   }} {}
 } 
 
-Function {brw_select_callback(Fl_Widget *, void *)} {open private return_type {static void}
+Function {brw_select_callback(Fl_Widget *, void *)} {private return_type {static void}
 } {
   code {if (brw_select->value())
 {
@@ -328,11 +330,10 @@ Function {brw_select_callback(Fl_Widget *, void *)} {open private return_type {s
          btn_tce->deactivate();         
       }
    }
-}} {selected
-  }
+}} {}
 } 
 
-Function {local_btn_callback(Fl_Widget*, void* userdata)} {open private return_type {static void}
+Function {local_btn_callback(Fl_Widget*, void* userdata)} {private return_type {static void}
 } {
   code {string title = "Install Local Extension";
 string selected;
@@ -371,6 +372,8 @@ Function {mirror_btn_callback(Fl_Widget*, void*)} {private return_type {static v
 } {
   code {mode = "mirror";
 tabs->deactivate();
+search_choices->deactivate();
+search_field->deactivate();
 system("cat /opt/localmirrors /usr/local/share/mirrors > /tmp/mirrors 2>/dev/null");
 brw_select->load("/tmp/mirrors");
 if ( brw_select->size() == 1)
@@ -382,7 +385,7 @@ else {
 }} {}
 } 
 
-Function {tabsGroupCB(Fl_Widget*, void*)} {open private return_type {static void}
+Function {tabsGroupCB(Fl_Widget*, void*)} {private return_type {static void}
 } {
   code {if (brw_select->value())
 {
@@ -482,6 +485,16 @@ if ( last_dir_file.is_open() )
 
 chdir(download_dir.c_str()); // we go there to more easily handle errors (delete, zsync)
 
+// Test writable 
+string testfile = download_dir + "/test.test";
+ofstream writest(testfile.c_str());
+if (writest.fail()) {
+   fl_message("Fatal Error: TCE Directory is not writable.");
+   exit(1);
+}
+writest.close();
+unlink(testfile.c_str());   
+
 // Make fifo
 unlink("/tmp/ab2tce.fifo");
 if ( mkfifo("/tmp/ab2tce.fifo", 0666) < 0 ) {
@@ -501,7 +514,8 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
     perror("open(/tmp/ab2tce.fifo) for write failed");
     unlink("/tmp/ab2tce.fifo");
     exit(1);
-}} {}
+}} {selected
+  }
   Fl_Window window {
     label Appbrowser
     user_data {"quit"}
@@ -527,7 +541,7 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
       callback mirror_btn_callback
       xywh {135 0 65 20}
     }
-    Fl_Choice search_choices {open
+    Fl_Choice search_choices {
       xywh {206 0 93 20} down_box BORDER_BOX deactivate
     } {
       MenuItem {} {
@@ -556,7 +570,7 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
       xywh {0 45 200 325} type Select textfont 4
     }
     Fl_Tabs tabs {
-      callback tabsGroupCB open
+      callback tabsGroupCB
       xywh {205 20 475 350}
     } {
       Fl_Group infoTab {
