@@ -3,6 +3,7 @@
 #ifndef tc_grub4dos_h
 #define tc_grub4dos_h
 #include <FL/Fl.H>
+#include <unistd.h>
 void cursor_normal();
 void cursor_wait();
 void selectFile();

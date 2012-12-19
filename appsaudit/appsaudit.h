@@ -3,6 +3,7 @@
 #ifndef appsaudit_h
 #define appsaudit_h
 #include <FL/Fl.H>
+#include <unistd.h>
 void cursor_normal();
 void cursor_wait();
 void menu_activate();

@@ -3,6 +3,7 @@
 #ifndef tc_install_h
 #define tc_install_h
 #include <FL/Fl.H>
+#include <unistd.h>
 void selectFile();
 void prepTarget();
 void cursor_normal();

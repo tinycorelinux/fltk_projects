@@ -7,6 +7,9 @@ header_name {.h}
 code_name {.cxx}
 decl {// (c) Robert Shingledecker 2011} {} 
 
+decl {\#include <unistd.h>} {public global
+} 
+
 decl {\#include <cstdlib>} {} 
 
 decl {\#include <iostream>} {} 
@@ -231,7 +234,7 @@ prepTarget();}
             label Embedded
             user_data {"embedded"}
             callback {installMode = (const char*)v;
-prepTarget();} selected
+prepTarget();}
             xywh {230 140 90 21} type Radio down_box DOWN_BOX value 1
             code0 {installMode = "embedded";}
           }
@@ -245,7 +248,7 @@ prepTarget();} selected
    iss.str(dev.substr(3,dev.length()));
    iss >> partitionNbr;
    grpButtons->activate();
-}}
+}} selected
           xywh {55 190 370 130} type Hold align 1 deactivate
         }
       }

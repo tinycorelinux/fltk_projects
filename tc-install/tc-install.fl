@@ -9,6 +9,9 @@ decl {// (c) Robert Shingledecker 2011} {}
 
 decl {// Portions (c) Brian Smith 2011} {} 
 
+decl {\#include <unistd.h>} {public global
+} 
+
 decl {\#include <cstdlib>} {} 
 
 decl {\#include <iostream>} {} 

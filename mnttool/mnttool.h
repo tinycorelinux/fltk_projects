@@ -3,6 +3,7 @@
 #ifndef mnttool_h
 #define mnttool_h
 #include <FL/Fl.H>
+#include <unistd.h>
 void getPos();
 void refresh();
 int getMountables();
