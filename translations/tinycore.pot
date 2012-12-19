@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-12 12:09+0300\n"
+"POT-Creation-Date: 2012-12-19 21:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../scmapps/scmapps.cxx:750
+#: ../scmapps/scmapps.cxx:538
 msgid "   Apps"
 msgstr ""
 
@@ -63,8 +63,7 @@ msgstr ""
 
 #: ../datetool/datetool.cxx:132 ../datetool/datetool.cxx:140
 #: ../datetool/datetool.cxx:148 ../datetool/datetool.cxx:156
-#: ../datetool/datetool.cxx:164 ../mnttool_save/mnttool.cxx:111
-#: ../mnttool_save/mnttool_save.cxx:111 ../tc-grub4dos/tc-grub4dos.cxx:349
+#: ../datetool/datetool.cxx:164 ../tc-grub4dos/tc-grub4dos.cxx:349
 #: ../tc-install/tc-install.cxx:670
 msgid "@<"
 msgstr ""
@@ -75,8 +74,7 @@ msgstr ""
 
 #: ../datetool/datetool.cxx:135 ../datetool/datetool.cxx:143
 #: ../datetool/datetool.cxx:151 ../datetool/datetool.cxx:159
-#: ../datetool/datetool.cxx:167 ../mnttool_save/mnttool.cxx:114
-#: ../mnttool_save/mnttool_save.cxx:114 ../tc-grub4dos/tc-grub4dos.cxx:352
+#: ../datetool/datetool.cxx:167 ../tc-grub4dos/tc-grub4dos.cxx:352
 #: ../tc-install/tc-install.cxx:673
 msgid "@>"
 msgstr ""
@@ -85,8 +83,20 @@ msgstr ""
 msgid "@>>"
 msgstr ""
 
-#: ../filetool/filetool.cxx:95
+#: ../filetool/filetool.cxx:306
+msgid "Action Results"
+msgstr ""
+
+#: ../filetool/filetool.cxx:295
 msgid "Action:"
+msgstr ""
+
+#: ../filetool/filetool.cxx:349
+msgid "Add"
+msgstr ""
+
+#: ../scmapps/scmapps.cxx:1071
+msgid "Add Item"
 msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:523 ../scmbrowser/scmbrowser.cxx:794
@@ -102,11 +112,11 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
-#: ../apps/apps.cxx:976
+#: ../apps/apps.cxx:1017
 msgid "Apps"
 msgstr ""
 
-#: ../apps/apps.cxx:1153
+#: ../apps/apps.cxx:1207
 msgid "Apps: Regular Applications (tcz)"
 msgstr ""
 
@@ -122,12 +132,16 @@ msgstr ""
 msgid "Background Image"
 msgstr ""
 
-#: ../exittc/exittc.cxx:106 ../filetool/filetool.cxx:78
+#: ../exittc/exittc.cxx:106 ../filetool/filetool.cxx:158
 msgid "Backup"
 msgstr ""
 
 #: ../exittc/exittc.cxx:143
 msgid "Backup Options:"
+msgstr ""
+
+#: ../filetool/filetool.cxx:290
+msgid "Backup Restore and Lists Maintenance"
 msgstr ""
 
 #: ../cpanel/cpanel.cxx:38
@@ -138,7 +152,7 @@ msgstr ""
 msgid "Boot List"
 msgstr ""
 
-#: ../scmapps/scmapps.cxx:763
+#: ../scmapps/scmapps.cxx:552
 msgid "Boot List Maintenance"
 msgstr ""
 
@@ -166,17 +180,18 @@ msgstr ""
 msgid "Broadcast"
 msgstr ""
 
-#: ../apps/apps.cxx:978 ../flrun/flrun.cxx:155 ../scmapps/scmapps.cxx:752
+#: ../apps/apps.cxx:1019 ../flrun/flrun.cxx:155 ../scmapps/scmapps.cxx:540
 #: ../scmbrowser/scmbrowser.cxx:710
 msgid "Browse"
 msgstr ""
 
-#: ../apps/apps.cxx:1003 ../appsaudit/appsaudit.cxx:663
+#: ../apps/apps.cxx:1047 ../appsaudit/appsaudit.cxx:663
 msgid "Build Reporting Database"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:138 ../apps/apps.cxx:243
-#: ../scmapps/scmapps.cxx:196 ../scmbrowser/scmbrowser.cxx:183
+#: ../appbrowser/appbrowser.cxx:138 ../apps/apps.cxx:241
+#: ../mirrorpicker/mirrorpicker.cxx:40 ../scmapps/scmapps.cxx:232
+#: ../scmbrowser/scmbrowser.cxx:183
 msgid "Cancel"
 msgstr ""
 
@@ -188,16 +203,33 @@ msgstr ""
 msgid "Check Md5sums"
 msgstr ""
 
-#: ../apps/apps.cxx:984 ../appsaudit/appsaudit.cxx:682
-#: ../scmapps/scmapps.cxx:762
+#: ../apps/apps.cxx:1029
+msgid "Check Onboot Unneeded"
+msgstr ""
+
+#: ../apps/apps.cxx:1027
+msgid "Check for Orphans"
+msgstr ""
+
+#: ../apps/apps.cxx:1026 ../appsaudit/appsaudit.cxx:682
+#: ../scmapps/scmapps.cxx:551
 msgid "Check for Updates"
 msgstr ""
 
-#: ../apps/apps.cxx:1013 ../appsaudit/appsaudit.cxx:673
+#: ../mirrorpicker/init.cxx:110
+#, c-format
+msgid "Checking %u mirrors, please wait..."
+msgstr ""
+
+#: ../filetool/filetool.cxx:343
+msgid "Clear Item"
+msgstr ""
+
+#: ../apps/apps.cxx:1057 ../appsaudit/appsaudit.cxx:673
 msgid "Clear Marked for Deletion"
 msgstr ""
 
-#: ../apps/apps.cxx:977 ../scmapps/scmapps.cxx:751
+#: ../apps/apps.cxx:1018 ../scmapps/scmapps.cxx:539
 msgid "Cloud (Remote)"
 msgstr ""
 
@@ -233,6 +265,10 @@ msgstr ""
 msgid "Core and X/GUI Desktop"
 msgstr ""
 
+#: ../mirrorpicker/init.cxx:63
+msgid "Couldn't load mirror list. Maybe network issue?"
+msgstr ""
+
 #: ../cpanel/cpanel.cxx:47
 msgid "Date/Time"
 msgstr ""
@@ -245,24 +281,28 @@ msgstr ""
 msgid "Day:"
 msgstr ""
 
-#: ../scmapps/scmapps.cxx:758
+#: ../scmapps/scmapps.cxx:547
 msgid "Delete"
 msgstr ""
 
-#: ../apps/apps.cxx:1001 ../appsaudit/appsaudit.cxx:661
+#: ../filetool/filetool.cxx:339 ../scmapps/scmapps.cxx:1075
+msgid "Delete Item"
+msgstr ""
+
+#: ../apps/apps.cxx:1045 ../appsaudit/appsaudit.cxx:661
 msgid "Dependencies"
 msgstr ""
 
-#: ../apps/apps.cxx:985
+#: ../apps/apps.cxx:1028
 msgid "Dependencies And Deletions"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:575 ../apps/apps.cxx:1207
-#: ../scmapps/scmapps.cxx:907 ../scmbrowser/scmbrowser.cxx:853
+#: ../appbrowser/appbrowser.cxx:575 ../apps/apps.cxx:1261
+#: ../scmapps/scmapps.cxx:1021 ../scmbrowser/scmbrowser.cxx:853
 msgid "Depends"
 msgstr ""
 
-#: ../filetool/filetool.cxx:91
+#: ../filetool/filetool.cxx:291
 msgid "Device:"
 msgstr ""
 
@@ -270,15 +310,19 @@ msgstr ""
 msgid "Diagonal Gradient"
 msgstr ""
 
-#: ../apps/apps.cxx:1007 ../appsaudit/appsaudit.cxx:667
+#: ../filetool/filetool.cxx:282
+msgid "Directory"
+msgstr ""
+
+#: ../apps/apps.cxx:1051 ../appsaudit/appsaudit.cxx:667
 msgid "Display All Not Depended On"
 msgstr ""
 
-#: ../apps/apps.cxx:1006 ../appsaudit/appsaudit.cxx:666
+#: ../apps/apps.cxx:1050 ../appsaudit/appsaudit.cxx:666
 msgid "Display All with No Dependencies"
 msgstr ""
 
-#: ../apps/apps.cxx:1012 ../appsaudit/appsaudit.cxx:672
+#: ../apps/apps.cxx:1056 ../appsaudit/appsaudit.cxx:672
 msgid "Display Marked for Deletion"
 msgstr ""
 
@@ -290,13 +334,17 @@ msgstr ""
 msgid "Done"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:451 ../apps/apps.cxx:1061
+#: ../appbrowser/appbrowser.cxx:451 ../apps/apps.cxx:1105
 msgid "Download + Load"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:452 ../apps/apps.cxx:1062
-#: ../scmapps/scmapps.cxx:818 ../scmbrowser/scmbrowser.cxx:766
+#: ../appbrowser/appbrowser.cxx:452 ../apps/apps.cxx:1106
+#: ../scmapps/scmapps.cxx:768 ../scmbrowser/scmbrowser.cxx:766
 msgid "Download Only"
+msgstr ""
+
+#: ../filetool/filetool.cxx:157
+msgid "Dry Run"
 msgstr ""
 
 #: ../network/network.cxx:242
@@ -311,6 +359,10 @@ msgstr ""
 msgid "Enter Spaces Separated Options From Examples Above"
 msgstr ""
 
+#: ../filetool/filetool.cxx:326
+msgid "Excluded from Backup (.xfiletool.lst)"
+msgstr ""
+
 #: ../tc-install/tc-install.cxx:517
 msgid "Existing Partition"
 msgstr ""
@@ -319,7 +371,7 @@ msgstr ""
 msgid "Exit Dependencies Mode"
 msgstr ""
 
-#: ../apps/apps.cxx:1014
+#: ../apps/apps.cxx:1058
 msgid "Exit Dependency Check"
 msgstr ""
 
@@ -355,16 +407,16 @@ msgstr ""
 msgid "FLRun"
 msgstr ""
 
-#: ../apps/apps.cxx:1005 ../appsaudit/appsaudit.cxx:665
+#: ../apps/apps.cxx:1049 ../appsaudit/appsaudit.cxx:665
 msgid "Fetch Missing Dependencies"
 msgstr ""
 
-#: ../filetool/filetool.cxx:90
-msgid "FileTool"
+#: ../filetool/filetool.cxx:281
+msgid "File"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:565 ../apps/apps.cxx:1198
-#: ../scmapps/scmapps.cxx:897 ../scmbrowser/scmbrowser.cxx:843
+#: ../appbrowser/appbrowser.cxx:565 ../apps/apps.cxx:1252
+#: ../scmapps/scmapps.cxx:1011 ../scmbrowser/scmbrowser.cxx:843
 msgid "Files"
 msgstr ""
 
@@ -396,17 +448,13 @@ msgstr ""
 msgid "Full"
 msgstr ""
 
-#: ../filetool/filetool.cxx:100
-msgid "GO"
-msgstr ""
-
 #: ../network/network.cxx:207
 msgid "Gateway"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:599 ../apps/apps.cxx:1232
-#: ../apps/apps.cxx:1262 ../apps/apps.cxx:1287 ../scmapps/scmapps.cxx:936
-#: ../scmbrowser/scmbrowser.cxx:881
+#: ../appbrowser/appbrowser.cxx:599 ../apps/apps.cxx:1286
+#: ../apps/apps.cxx:1316 ../apps/apps.cxx:1341 ../filetool/filetool.cxx:300
+#: ../scmapps/scmapps.cxx:1049 ../scmbrowser/scmbrowser.cxx:881
 msgid "Go"
 msgstr ""
 
@@ -430,12 +478,16 @@ msgstr ""
 msgid "Image Path:"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:555 ../apps/apps.cxx:1188
-#: ../scmapps/scmapps.cxx:888 ../scmbrowser/scmbrowser.cxx:834
+#: ../filetool/filetool.cxx:314
+msgid "Included for Backup (.filetool.lst)"
+msgstr ""
+
+#: ../appbrowser/appbrowser.cxx:555 ../apps/apps.cxx:1242
+#: ../scmapps/scmapps.cxx:1002 ../scmbrowser/scmbrowser.cxx:834
 msgid "Info"
 msgstr ""
 
-#: ../scmapps/scmapps.cxx:756 ../scmapps/scmapps.cxx:817
+#: ../scmapps/scmapps.cxx:545 ../scmapps/scmapps.cxx:766
 #: ../scmbrowser/scmbrowser.cxx:703 ../scmbrowser/scmbrowser.cxx:765
 msgid "Install"
 msgstr ""
@@ -460,7 +512,7 @@ msgstr ""
 msgid "Install images from /opt/backgrounds directory"
 msgstr ""
 
-#: ../apps/apps.cxx:989
+#: ../apps/apps.cxx:1033
 msgid "Installation Options"
 msgstr ""
 
@@ -504,23 +556,23 @@ msgstr ""
 msgid "Left Vertical"
 msgstr ""
 
-#: ../apps/apps.cxx:1008 ../appsaudit/appsaudit.cxx:668
+#: ../apps/apps.cxx:1052 ../appsaudit/appsaudit.cxx:668
 msgid "List Dependencies"
 msgstr ""
 
-#: ../apps/apps.cxx:1010 ../appsaudit/appsaudit.cxx:670
+#: ../apps/apps.cxx:1054 ../appsaudit/appsaudit.cxx:670
 msgid "List Missing Dependencies"
 msgstr ""
 
-#: ../apps/apps.cxx:1009 ../appsaudit/appsaudit.cxx:669
+#: ../apps/apps.cxx:1053 ../appsaudit/appsaudit.cxx:669
 msgid "List Required By"
 msgstr ""
 
-#: ../apps/apps.cxx:981
+#: ../apps/apps.cxx:1023
 msgid "Load App Locally"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:528 ../scmapps/scmapps.cxx:755
+#: ../appbrowser/appbrowser.cxx:528 ../scmapps/scmapps.cxx:544
 #: ../scmbrowser/scmbrowser.cxx:702
 msgid "Local"
 msgstr ""
@@ -529,14 +581,14 @@ msgstr ""
 msgid "Logo"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:129 ../apps/apps.cxx:234
-#: ../scmapps/scmapps.cxx:187 ../scmbrowser/scmbrowser.cxx:174
+#: ../appbrowser/appbrowser.cxx:129 ../apps/apps.cxx:232
+#: ../scmapps/scmapps.cxx:223 ../scmbrowser/scmbrowser.cxx:174
 msgid "MD5SUM error"
 msgstr ""
 
-#: ../apps/apps.cxx:982 ../appsaudit/appsaudit.cxx:691
+#: ../apps/apps.cxx:1024 ../appsaudit/appsaudit.cxx:691
 #: ../appsaudit/appsaudit.cxx:695 ../cpanel/cpanel.cxx:26
-#: ../scmapps/scmapps.cxx:760
+#: ../scmapps/scmapps.cxx:549
 msgid "Maintenance"
 msgstr ""
 
@@ -544,11 +596,11 @@ msgstr ""
 msgid "Mark Partition Active (bootable)"
 msgstr ""
 
-#: ../apps/apps.cxx:1011 ../appsaudit/appsaudit.cxx:671
+#: ../apps/apps.cxx:1055 ../appsaudit/appsaudit.cxx:671
 msgid "Mark for Deletion"
 msgstr ""
 
-#: ../apps/apps.cxx:983 ../scmapps/scmapps.cxx:761
+#: ../apps/apps.cxx:1025 ../scmapps/scmapps.cxx:550
 msgid "Md5 Checking"
 msgstr ""
 
@@ -556,8 +608,8 @@ msgstr ""
 msgid "Md5Check"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:130 ../apps/apps.cxx:235
-#: ../scmapps/scmapps.cxx:188 ../scmbrowser/scmbrowser.cxx:175
+#: ../appbrowser/appbrowser.cxx:130 ../apps/apps.cxx:233
+#: ../scmapps/scmapps.cxx:224 ../scmbrowser/scmbrowser.cxx:175
 msgid "Md5sum error on"
 msgstr ""
 
@@ -569,11 +621,15 @@ msgstr ""
 msgid "Min:"
 msgstr ""
 
+#: ../mirrorpicker/mirrorpicker.cxx:29
+msgid "Mirror picker"
+msgstr ""
+
 #: ../appbrowser/appbrowser.cxx:531
 msgid "Mirrors"
 msgstr ""
 
-#: ../apps/apps.cxx:1004 ../appsaudit/appsaudit.cxx:664
+#: ../apps/apps.cxx:1048 ../appsaudit/appsaudit.cxx:664
 msgid "Missing Dependencies Reporting"
 msgstr ""
 
@@ -630,29 +686,29 @@ msgstr ""
 msgid "Non-US keyboard layout support"
 msgstr ""
 
-#: ../exittc/exittc.cxx:105 ../filetool/filetool.cxx:77
+#: ../exittc/exittc.cxx:105 ../filetool/filetool.cxx:156
 msgid "None"
 msgstr ""
 
-#: ../flrun/flrun.cxx:149
+#: ../flrun/flrun.cxx:149 ../mirrorpicker/mirrorpicker.cxx:36
 msgid "OK"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:449 ../apps/apps.cxx:1059
+#: ../appbrowser/appbrowser.cxx:449 ../apps/apps.cxx:1103
 #: ../appsaudit/appsaudit.cxx:690
 msgid "OnBoot"
 msgstr ""
 
-#: ../apps/apps.cxx:986
+#: ../apps/apps.cxx:1030
 msgid "OnBoot Maintenance"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:450 ../apps/apps.cxx:1060
-#: ../appsaudit/appsaudit.cxx:694
+#: ../appbrowser/appbrowser.cxx:450 ../apps/apps.cxx:1104
+#: ../appsaudit/appsaudit.cxx:694 ../scmapps/scmapps.cxx:767
 msgid "OnDemand"
 msgstr ""
 
-#: ../apps/apps.cxx:987
+#: ../apps/apps.cxx:1031 ../scmapps/scmapps.cxx:553
 msgid "OnDemand Maintenance"
 msgstr ""
 
@@ -688,16 +744,16 @@ msgstr ""
 msgid "Proceed"
 msgstr ""
 
-#: ../apps/apps.cxx:1277 ../appsaudit/appsaudit.cxx:740
-#: ../scmapps/scmapps.cxx:881 ../scmbrowser/scmbrowser.cxx:827
+#: ../apps/apps.cxx:1331 ../appsaudit/appsaudit.cxx:740
+#: ../scmapps/scmapps.cxx:995 ../scmbrowser/scmbrowser.cxx:827
 msgid "Process Selected Item(s)"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:417 ../apps/apps.cxx:1027
+#: ../appbrowser/appbrowser.cxx:417 ../apps/apps.cxx:1071
 msgid "Provides"
 msgstr ""
 
-#: ../apps/apps.cxx:993 ../scmapps/scmapps.cxx:765
+#: ../apps/apps.cxx:1037 ../scmapps/scmapps.cxx:555
 #: ../scmbrowser/scmbrowser.cxx:713
 msgid "Quit"
 msgstr ""
@@ -714,16 +770,16 @@ msgstr ""
 msgid "Remote"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:132 ../apps/apps.cxx:237
-#: ../scmapps/scmapps.cxx:190 ../scmbrowser/scmbrowser.cxx:177
+#: ../appbrowser/appbrowser.cxx:132 ../apps/apps.cxx:235
+#: ../scmapps/scmapps.cxx:226 ../scmbrowser/scmbrowser.cxx:177
 msgid "Remove and try again"
 msgstr ""
 
-#: ../filetool/filetool.cxx:80
+#: ../filetool/filetool.cxx:160
 msgid "Restore"
 msgstr ""
 
-#: ../apps/apps.cxx:1268 ../appsaudit/appsaudit.cxx:724
+#: ../apps/apps.cxx:1322 ../appsaudit/appsaudit.cxx:724
 msgid "Results"
 msgstr ""
 
@@ -759,7 +815,7 @@ msgstr ""
 msgid "Right Vertical"
 msgstr ""
 
-#: ../exittc/exittc.cxx:107 ../filetool/filetool.cxx:79
+#: ../exittc/exittc.cxx:107 ../filetool/filetool.cxx:159
 msgid "Safe"
 msgstr ""
 
@@ -771,16 +827,16 @@ msgstr ""
 msgid "ScmApps"
 msgstr ""
 
-#: ../scmapps/scmapps.cxx:848
+#: ../scmapps/scmapps.cxx:962
 msgid "ScmApps: Self Contained Appllications (scm)"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:416 ../apps/apps.cxx:1026
-#: ../scmapps/scmapps.cxx:775 ../scmbrowser/scmbrowser.cxx:723
+#: ../appbrowser/appbrowser.cxx:416 ../apps/apps.cxx:1070
+#: ../scmapps/scmapps.cxx:565 ../scmbrowser/scmbrowser.cxx:723
 msgid "Search"
 msgstr ""
 
-#: ../apps/apps.cxx:1254 ../appsaudit/appsaudit.cxx:721
+#: ../apps/apps.cxx:1308 ../appsaudit/appsaudit.cxx:721
 msgid "Select"
 msgstr ""
 
@@ -792,9 +848,13 @@ msgstr ""
 msgid "Select File to be added to "
 msgstr ""
 
-#: ../apps/apps.cxx:979 ../appsaudit/appsaudit.cxx:683
-#: ../scmapps/scmapps.cxx:753 ../scmbrowser/scmbrowser.cxx:711
+#: ../apps/apps.cxx:1020 ../appsaudit/appsaudit.cxx:683
+#: ../scmapps/scmapps.cxx:541 ../scmbrowser/scmbrowser.cxx:711
 msgid "Select Mirror"
+msgstr ""
+
+#: ../flpdf/flpdf.cxx:19
+msgid "Select PDF File to view with mupdf: "
 msgstr ""
 
 #: ../tc-install/tc-install.cxx:451
@@ -805,11 +865,15 @@ msgstr ""
 msgid "Select Target Disk"
 msgstr ""
 
+#: ../apps/apps.cxx:1021 ../scmapps/scmapps.cxx:542
+msgid "Select fastest mirror"
+msgstr ""
+
 #: ../appsaudit/appsaudit.cxx:678
 msgid "Selective Copy Install"
 msgstr ""
 
-#: ../apps/apps.cxx:991
+#: ../apps/apps.cxx:1035
 msgid "Selective Copy Install to File System"
 msgstr ""
 
@@ -817,8 +881,8 @@ msgstr ""
 msgid "Services"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:608 ../apps/apps.cxx:1241
-#: ../scmapps/scmapps.cxx:947 ../scmbrowser/scmbrowser.cxx:892
+#: ../appbrowser/appbrowser.cxx:608 ../apps/apps.cxx:1295
+#: ../scmapps/scmapps.cxx:1058 ../scmbrowser/scmbrowser.cxx:892
 msgid "Set"
 msgstr ""
 
@@ -830,7 +894,7 @@ msgstr ""
 msgid "Shutdown"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:584 ../apps/apps.cxx:1217
+#: ../appbrowser/appbrowser.cxx:584 ../apps/apps.cxx:1271
 msgid "Size"
 msgstr ""
 
@@ -842,8 +906,8 @@ msgstr ""
 msgid "Solid Color or 2 Color Gradient"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:603 ../apps/apps.cxx:1236
-#: ../scmapps/scmapps.cxx:942 ../scmbrowser/scmbrowser.cxx:887
+#: ../appbrowser/appbrowser.cxx:603 ../apps/apps.cxx:1290
+#: ../scmapps/scmapps.cxx:1053 ../scmbrowser/scmbrowser.cxx:887
 msgid "Status"
 msgstr ""
 
@@ -863,17 +927,22 @@ msgstr ""
 msgid "TC Exit Options"
 msgstr ""
 
-#: ../apps/apps.cxx:1291
+#: ../apps/apps.cxx:1345
 msgid "TCE:"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:418 ../apps/apps.cxx:1028
-#: ../scmapps/scmapps.cxx:776 ../scmbrowser/scmbrowser.cxx:724
+#: ../appbrowser/appbrowser.cxx:418 ../apps/apps.cxx:1072
+#: ../scmapps/scmapps.cxx:566 ../scmbrowser/scmbrowser.cxx:724
 msgid "Tags"
 msgstr ""
 
 #: ../cpanel/cpanel.cxx:62
 msgid "Terminal Server"
+msgstr ""
+
+#: ../mirrorpicker/init.cxx:131
+#, c-format
+msgid "The fastest mirror was %.*s. Press ok to set it as your mirror."
 msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:314
@@ -900,7 +969,7 @@ msgstr ""
 msgid "Toggle Default Copy Install"
 msgstr ""
 
-#: ../apps/apps.cxx:990
+#: ../apps/apps.cxx:1034
 msgid "Toggle Default Install to File System Flag"
 msgstr ""
 
@@ -916,12 +985,12 @@ msgstr ""
 msgid "Top Right"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:135 ../apps/apps.cxx:240
-#: ../scmapps/scmapps.cxx:193 ../scmbrowser/scmbrowser.cxx:180
+#: ../appbrowser/appbrowser.cxx:135 ../apps/apps.cxx:238
+#: ../scmapps/scmapps.cxx:229 ../scmbrowser/scmbrowser.cxx:180
 msgid "Try to finish download"
 msgstr ""
 
-#: ../apps/apps.cxx:1246 ../scmapps/scmapps.cxx:952
+#: ../apps/apps.cxx:1300 ../scmapps/scmapps.cxx:1063
 msgid "URI:"
 msgstr ""
 
@@ -933,11 +1002,11 @@ msgstr ""
 msgid "USB-ZIP"
 msgstr ""
 
-#: ../scmapps/scmapps.cxx:757 ../scmbrowser/scmbrowser.cxx:704
+#: ../scmapps/scmapps.cxx:546 ../scmbrowser/scmbrowser.cxx:704
 msgid "Uninstall"
 msgstr ""
 
-#: ../apps/apps.cxx:1002 ../appsaudit/appsaudit.cxx:662
+#: ../apps/apps.cxx:1046 ../appsaudit/appsaudit.cxx:662
 msgid "Update .dep files."
 msgstr ""
 
@@ -1027,10 +1096,6 @@ msgstr ""
 
 #: ../stats/stats.cxx:153
 msgid "boot"
-msgstr ""
-
-#: ../mnttool_save/mnttool.cxx:117 ../mnttool_save/mnttool_save.cxx:117
-msgid "button"
 msgstr ""
 
 #: ../stats/stats.cxx:80
