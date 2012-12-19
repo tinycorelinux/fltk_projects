@@ -1,0 +1,122 @@
+<html>
+<title>Flit Help</title>
+<body>
+<p>Version 0.9.2, August 2009</p>
+<a href="#clock">Clock</a><br>
+<a href="#sound">Sound Control</a><br>
+<a href="#batt">Battery Monitor</a><br>
+<a href="#general">General Options</a><br>
+<a href="#config">Saving Preferences</a><br>
+
+<H2>INTRO</H2>
+<p>Flit is an applet 'tray', currently offering clock, master sound volume
+control, and battery monitor. It is written to be small and low-overhead, 
+using the FLTK user interface library, so it is especially efficient on TinyCore Linux. 
+The source code of Flit is released under the GNU license. 
+See http://www.gnu.org/licenses/ for more details.
+</p>
+<p>There is a menu of choices made available through right-clicking on Flit, or
+pressing the Esc key after setting keyboard focus to Flit.  The sound control 
+applet has several keyboard shortcuts (see <a href="#sound">below</a>).
+</p>
+<p>If you don't want to see all three applets, you can disable one or two 
+of them in the right-click menu, but not all three!</p>
+<p>
+'Hover' your mouse pointer over each applet to get more 
+detailed information.  The battery recharge time estimate is very 
+approximate in this release.  (I hope to improve the algorithm soon!) </p>
+<p>
+If you want to start Flit automatically, invoke it in the .xsession 
+(or equivalent) startup script file, using a &amp; symbol to return control 
+immediately to the script, like this:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/path/to/flit &amp;</p>
+
+
+<a name="clock"></a>
+<H2>CLOCK</H2>
+<p>
+The only option for the clock is 24-hour time format, or 12-hour format with
+AM or PM indication.  Use the right-click menu to toggle between these modes.</p>
+
+<a name="sound"></a>
+<H2>SOUND CONTROL</H2>
+<p>
+The current sound volume level is indicated by the number and size of the 
+sound "rays" next to the speaker icon.  To adjust the volume, place your mouse 
+cursor over the speaker and use the mouse scroll wheel (or equivalent) to adjust 
+the sound volume in 5% increments. You may also use the following keystrokes:
+<br>
+Louder: Menu + Alt+U, or Up arrow cursor key, or + key<br>
+Quieter: Menu + Alt+L, or Down arrow cursor key, or - key<br>
+Mute/Unmute: Menu + Alt+M, or Pause key<br>
+<br> 
+Future versions may also provide a pop-up slider control. </p>
+<p>
+The sound control requires an OSS "mixer" device '/dev/mixer' to be present. 
+There is a lot of variation in how sound devices can be controlled, but Flit 
+will try to support some common methods.  By default, Flit will try to find 
+an appropriate mixer control to adjust the overall playback volume.  You can 
+override this behavior by specifying an exact OSS mixer control name in the 
+.flit.conf file, in the "oss_control_name =" statement.  If the name is 
+"autosel", Flit will do the default auto-selection.  But if you know that 
+you get best results from a specific mixer control, such as "vol" or "pcm" 
+or something else, put it name into the .flit.conf file, such as:<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>oss_control_name = pcm</code>
+<br>
+If flit is not successful in finding a suitable control (which must be marked 
+with the MASTER_VOLUME or PCM_VOLUME in OSS), you won't see the sound control 
+applet in Flit.  You may want to try the graphical mixer application ossxmix 
+(note the X in the name) or command-line application ossmix and experiment 
+with the controls made available for your hardware to see which ones can  
+control the volume.  If OSS + your hardware don't support an adjustable output 
+volume, you may still be able to use a mute control with Flit.</p>
+
+<p>LIMITATIONS: The OSS vmix software mixer control will only work if vmix is fully 
+"attached" to your audio hardware (beyond the scope of this document). ALSA is not 
+supported (at least not yet, anyway).
+</p>
+
+<a name="batt"></a>
+<H2>BATTERY MONITOR</H2>
+<p>
+In the battery icon, charge is colored green if the level is 40% or higher, 
+yellow when 20% or higher, and red below 20%.  If the estimated charge 
+Is less than 13%, the outline of the battery icon will slowly flash red. 
+When recharging power is available, an AC power plug icon is shown over the 
+battery icon.  If the battry is discharging, the remaining charge percentage 
+number is shown above the battery icon.</p>
+<p>
+The battery monitor requires information in the /proc/acpi system information, 
+so you must boot Linux with the 'laptop' kernel option or load the appropriate 
+ACPI kernel module.</p>
+<p>
+<a name="general"></a>
+<H2>GENERAL OPTIONS</H2>
+You can choose one of appearance styles:<br>
+&nbsp;a) Normal: black on light gray, with a sunken tray effect <br>
+&nbsp;b) Inverse: light gray on black, also with a sunken tray effect <br>
+&nbsp;c) 'Transparent', which has a background color slightly lighter than the <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X11 root window where Flit plans to appear and a contrasting <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreground color, with a flat effect, which matches <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wbar nicely.  If the planned location is occupied<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by a window when Flit starts, its background color <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will be based on that.</p>
+<p>
+You may reposition Flit with your mouse (left-click + drag), or hand-edit 
+the .flit.conf configuration file (see cautions below).  The location can be 
+defined to one of the four corners (se = SouthEast, i.e. the lower-right corner, and 
+so on) or a x,y pair.  See the configuration file for an example.</p>
+<p>
+<a name="config"></a>
+<H2>SAVING PREFERENCES</H2>
+Use the 'Save configuration' command to make flit remember your preferences by 
+writing the .flit.conf file in your home directory (as defined by the $HOME 
+environment variable).  You may edit this file with a text editor, but please 
+preserve the spelling, capitalization, and spacing of content to prevent 
+parsing problems.  You can revert to default settings by deleting the 
+.flit.conf file and restarting Flit.</p>
+<p>Post bug reports and suggestions to the TinyCore Linux Forum (http://tinycorelinux.com/forum/).</p>
+<p>Michael A. Losh</p>
+</body>
+</html>

@@ -13,8 +13,6 @@ Fl_Browser *netBrowser=(Fl_Browser *)0;
 
 Fl_Browser *modulesBrowser=(Fl_Browser *)0;
 
-Fl_Browser *pciBrowser=(Fl_Browser *)0;
-
 Fl_Browser *processesBrowser=(Fl_Browser *)0;
 
 Fl_Browser *dmesgBrowser=(Fl_Browser *)0;
@@ -60,13 +58,6 @@ int main(int argc, char **argv) {
         { modulesBrowser = new Fl_Browser(0, 0, 610, 335);
           modulesBrowser->textfont(4);
         } // Fl_Browser* modulesBrowser
-        o->end();
-      } // Fl_Group* o
-      { Fl_Group* o = new Fl_Group(0, 0, 610, 335, "pci");
-        o->hide();
-        { pciBrowser = new Fl_Browser(0, 0, 610, 335);
-          pciBrowser->textfont(4);
-        } // Fl_Browser* pciBrowser
         o->end();
       } // Fl_Group* o
       { Fl_Group* o = new Fl_Group(0, 0, 610, 335, "processes");
@@ -124,8 +115,6 @@ system("cat /tmp/stats.txt >> stats.txt");
 netBrowser->load("/tmp/stats.txt");
 system("cat /proc/modules | tee /tmp/stats.txt >> stats.txt");
 modulesBrowser->load("/tmp/stats.txt");
-system("lspci | tee /tmp/stats.txt  >> stats.txt");
-pciBrowser->load("/tmp/stats.txt");
 system("ps ax | tee /tmp/stats.txt >> stats.txt");
 processesBrowser->load("/tmp/stats.txt");
 system("dmesg  | tee /tmp/stats.txt >> stats.txt");

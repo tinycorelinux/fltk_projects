@@ -3,6 +3,7 @@
 #include "wallpaper.h"
 // (c) Robert Shingledecker 2008
 #include <iostream>
+#include <fstream>
 #include <FL/Fl_Color_Chooser.H>
 #include <FL/fl_message.H>
 #include <stdio.h>
@@ -19,15 +20,13 @@ string command;
 if (userdata == "install")
 {
    string selectedImage = imageBrowser->text(imageBrowser->value());
-//   cout << selectedImage << endl;
    if (btnScale->value() == 1 )
       backgroundType = "image"; 
    else 
       backgroundType = "tile";                                                                    
-   command = "awk -f /usr/bin/set_jwm_background.awk -v type=\"" + backgroundType + "\" -v value=/opt/.backgrounds/\"" + selectedImage + "\" -v outfile=/tmp/.jwmrc.tmp .jwmrc";   
-//   cout << command << endl << endl;
+   command = "setbackground " + backgroundType + " /opt/backgrounds/" + selectedImage;   
+   cout << command << endl << endl;
    system(command.c_str());                                                                                                                                         
-   system("mv /tmp/.jwmrc.tmp .jwmrc; jwm -restart");                                                                                                       
    exit(0);
 }   
    
@@ -36,26 +35,22 @@ if (userdata == "color")
    double r,g,b; 
    r = 0.310; g =0.373; b=0.510;
    if (!fl_color_chooser("New Color",r,g,b)) return;
-//   cout << "r=" << r << " g=" << g << " b=" << b <<  endl;
    uchar ru,gu,bu;
    ru = 255*r+.5;
    gu = 255*g+.5;
    bu = 255*b+.5;
-//   cout << (int)ru << " " << (int)gu << " " << (int)bu << endl;
    char buffer[10];
    int n = sprintf(buffer,"%02X%02X%02X\n",ru,gu,bu);
    string selectedColor = buffer;
-//   cout << "Hex String: " << selectedColor << endl;
    backgroundType = "solid";                                                  
-   command = "awk -f /usr/bin/set_jwm_background.awk -v type=\"" + backgroundType + "\" -v value=\"#" + selectedColor.substr(0,6) + "\" -v outfile=/tmp/.jwmrc.tmp .jwmrc";
-//   cout << command << endl << endl;
+   command = "setbackground " + backgroundType + " \'#" + selectedColor.substr(0,6) + "\'";
+   cout << command << endl << endl;
    system(command.c_str());                                                          
-   system("mv /tmp/.jwmrc.tmp .jwmrc; jwm -restart");                        
    exit(0);                                                                   
 }
                                                                                
 if (userdata == "help")
-   fl_message("Install images from /opt/.backgrounds directory.");
+   fl_message("Install images from /opt/backgrounds directory.");
 }
 
 Fl_File_Browser *imageBrowser=(Fl_File_Browser *)0;
@@ -73,7 +68,8 @@ int main(int argc, char **argv) {
     { imageBrowser = new Fl_File_Browser(0, 0, 295, 205);
       imageBrowser->type(2);
       imageBrowser->callback((Fl_Callback*)imageBrowserCallback);
-      imageBrowser->load("/opt/.backgrounds");
+      imageBrowser->filter("*.{png,gif,jpg,jpeg}");
+      imageBrowser->load("/opt/backgrounds");
     } // Fl_File_Browser* imageBrowser
     { btnScale = new Fl_Round_Button(15, 210, 64, 15, "Scale");
       btnScale->down_box(FL_ROUND_DOWN_BOX);

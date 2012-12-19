@@ -76,8 +76,8 @@ int main(int argc, char **argv) {
     { Fl_Button* o = new Fl_Button(140, 50, 120, 30, "Backgrounds");
       o->callback((Fl_Callback*)btn_callback, (void*)("wallpaper &"));
     } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(140, 90, 120, 30, "Theme Tool");
-      o->callback((Fl_Callback*)btn_callback, (void*)("settheme &"));
+    { Fl_Button* o = new Fl_Button(140, 90, 120, 30, "Apps Audit");
+      o->callback((Fl_Callback*)btn_callback, (void*)("appsaudit &"));
     } // Fl_Button* o
     { Fl_Button* o = new Fl_Button(140, 130, 120, 30, "Mouse Tool");
       o->callback((Fl_Callback*)btn_callback, (void*)("mousetool &"));

@@ -26,12 +26,12 @@ ins >> size;
 if ( size < 1 )
    return;
    
-string command = "dd if=/dev/zero of=" + str_mount + "/tc.swap bs=1024 count=" + str_size; 
+string command = "sudo dd if=/dev/zero of=" + str_mount + "/tc.swp bs=1024 count=" + str_size; 
 if ( fl_ask(command.c_str()) )
 {
    system(command.c_str());
-   system( ("mkswap " + str_mount + "/tc.swap").c_str());
-   system( ("swapon " + str_mount + "/tc.swap").c_str());
+   system( ("sudo mkswap " + str_mount + "/tc.swp").c_str());
+   system( ("sudo swapon " + str_mount + "/tc.swp").c_str());
    exit(0);
 }
 }
@@ -46,7 +46,7 @@ int main(int argc, char **argv) {
     w = o;
     { inp_mount = new Fl_Input(130, 11, 135, 24, "Mounted Partition:");
     } // Fl_Input* inp_mount
-    { inp_size = new Fl_Input(130, 41, 55, 24, "tc.swap in k bytes:");
+    { inp_size = new Fl_Input(130, 41, 55, 24, "tc.swp in k bytes:");
     } // Fl_Input* inp_size
     { Fl_Button* o = new Fl_Button(65, 75, 64, 20, "&Cancel");
       o->callback((Fl_Callback*)btn_callback, (void*)("cancel"));

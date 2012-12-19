@@ -11,7 +11,6 @@ extern Fl_Browser *cpuBrowser;
 extern Fl_Browser *memBrowser;
 extern Fl_Browser *netBrowser;
 extern Fl_Browser *modulesBrowser;
-extern Fl_Browser *pciBrowser;
 extern Fl_Browser *processesBrowser;
 extern Fl_Browser *dmesgBrowser;
 extern Fl_Browser *mountsBrowser;

@@ -48,8 +48,7 @@ if (userdata == "tftpd"){
   }
 } else {
   system((const char*)userdata);
-}} {selected
-  }
+}} {}
 } 
 
 Function {} {open
@@ -94,9 +93,9 @@ Function {} {open
       xywh {140 50 120 30}
     }
     Fl_Button {} {
-      label {Theme Tool}
-      user_data {"settheme &"}
-      callback btn_callback
+      label {Apps Audit}
+      user_data {"appsaudit &"}
+      callback btn_callback selected
       xywh {140 90 120 30}
     }
     Fl_Button {} {

@@ -64,25 +64,25 @@ int main(int argc, char **argv) {
   { Fl_Double_Window* o = new Fl_Double_Window(185, 160, "TC Exit Options");
     w = o;
     { Fl_Group* o = new Fl_Group(25, 25, 115, 55);
-      { Fl_Round_Button* o = new Fl_Round_Button(25, 25, 115, 15, "Shutdown");
+      { Fl_Round_Button* o = new Fl_Round_Button(25, 25, 85, 15, "Shutdown");
         o->type(102);
         o->down_box(FL_ROUND_DOWN_BOX);
         o->value(1);
         o->callback((Fl_Callback*)btn_callback, (void*)("shutdown"));
       } // Fl_Round_Button* o
-      { Fl_Round_Button* o = new Fl_Round_Button(25, 45, 115, 15, "Reboot");
+      { Fl_Round_Button* o = new Fl_Round_Button(25, 45, 65, 15, "Reboot");
         o->type(102);
         o->down_box(FL_ROUND_DOWN_BOX);
         o->callback((Fl_Callback*)btn_callback, (void*)("reboot"));
       } // Fl_Round_Button* o
-      { Fl_Round_Button* o = new Fl_Round_Button(25, 65, 115, 15, "Exit to Prompt");
+      { Fl_Round_Button* o = new Fl_Round_Button(25, 65, 110, 15, "Exit to Prompt");
         o->type(102);
         o->down_box(FL_ROUND_DOWN_BOX);
         o->callback((Fl_Callback*)btn_callback, (void*)("prompt"));
       } // Fl_Round_Button* o
       o->end();
     } // Fl_Group* o
-    { btn_backup = new Fl_Check_Button(45, 95, 64, 15, "Backup");
+    { btn_backup = new Fl_Check_Button(40, 95, 70, 15, "Backup");
       btn_backup->down_box(FL_DOWN_BOX);
       btn_backup->value(1);
       btn_backup->callback((Fl_Callback*)btn_callback, (void*)("backup"));
@@ -100,26 +100,39 @@ int main(int argc, char **argv) {
 getline(backup_device_file,backup_device);                                        
 backup_device_file.close();
 
-
 string backupDefault;
-FILE *CMD_fp = NULL;
-if ((CMD_fp = popen("env | awk -F'=' /BACKUP/'{print $2}'","r"))==NULL)
-{
-   cout << "popen failed" << endl;
-   return 1;
-}
-char result[1024];
-if ( fgets(result,1023,CMD_fp)==NULL)     // If no result from above then default is to backup.
-   backupDefault = "1";
-   
+backupDefault  = getenv("BACKUP");
 
-backupDefault = result;                   // Store C-String as C++ String to use substr
-if ( backupDefault.substr(0,1) == "0" )
+if ( backupDefault == "0" )
 {
-   backup = false;
-   btn_backup->value(0);
+  backup = false;
+  btn_backup->value(0);
 } else
-   backup = true;
+  backup = true;
+   
+string cmdline;   
+ifstream proc_cmdline_file("/proc/cmdline");                                  
+getline(proc_cmdline_file,cmdline);                                        
+proc_cmdline_file.close();
+
+int loc = cmdline.find("norestore");
+if ( loc == string::npos )
+{
+  if ( backup_device.size() == 0 )
+  {
+    string tce_dir;   
+    ifstream tce_dir_file("/opt/.tce_dir");                                  
+    getline(tce_dir_file,tce_dir);                                        
+    tce_dir_file.close();
+    if ( tce_dir != "/tmp/tce/" )
+      backup_device = tce_dir;
+  }      
+  
+} else {
+  backup = false;
+  btn_backup->value(0);
+}
+cout << backup_device << endl;
   w->show(argc, argv);
   return Fl::run();
 }

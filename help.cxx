@@ -34,6 +34,8 @@
 //
 
 #include <FL/Fl_Help_Dialog.H>
+#include <iostream>
+using namespace std;
 
 
 //
@@ -54,6 +56,7 @@ main(int  argc,			// I - Number of command-line arguments
   else
     help->load(argv[1]);
 
+  help->textsize(15);
   help->show(1, argv);
 
   Fl::run();

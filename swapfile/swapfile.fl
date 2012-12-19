@@ -2,8 +2,7 @@
 version 1.0109 
 header_name {.h} 
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2008} {selected
-} 
+decl {// (c) Robert Shingledecker 2008} {} 
 
 decl {\#include <iostream>} {} 
 
@@ -34,14 +33,15 @@ ins >> size;
 if ( size < 1 )
    return;
    
-string command = "dd if=/dev/zero of=" + str_mount + "/tc.swap bs=1024 count=" + str_size; 
+string command = "sudo dd if=/dev/zero of=" + str_mount + "/tc.swp bs=1024 count=" + str_size; 
 if ( fl_ask(command.c_str()) )
 {
    system(command.c_str());
-   system( ("mkswap " + str_mount + "/tc.swap").c_str());
-   system( ("swapon " + str_mount + "/tc.swap").c_str());
+   system( ("sudo mkswap " + str_mount + "/tc.swp").c_str());
+   system( ("sudo swapon " + str_mount + "/tc.swp").c_str());
    exit(0);
-}} {}
+}} {selected
+  }
 } 
 
 Function {} {open
@@ -55,7 +55,7 @@ Function {} {open
       xywh {130 11 135 24}
     }
     Fl_Input inp_size {
-      label {tc.swap in k bytes:}
+      label {tc.swp in k bytes:}
       xywh {130 41 55 24}
     }
     Fl_Button {} {

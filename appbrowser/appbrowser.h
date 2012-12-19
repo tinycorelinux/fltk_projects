@@ -9,8 +9,8 @@ void local_btn_callback(Fl_Widget*, void* userdata);
 void tabs_callback(Fl_Widget*, void* userdata);
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Menu_Bar.H>
-extern void local_btn_callback(Fl_Menu_*, void*);
 extern void btn_callback(Fl_Menu_*, void*);
+extern void local_btn_callback(Fl_Menu_*, void*);
 #include <FL/Fl_Box.H>
 extern Fl_Box *box_extensions;
 #include <FL/Fl_Browser.H>
@@ -30,5 +30,4 @@ extern Fl_Button *btn_download;
 #include <FL/Fl_Input.H>
 extern Fl_Input *search_field;
 extern Fl_Menu_Item menu_[];
-#define menuitem_optional (menu_+2)
 #endif

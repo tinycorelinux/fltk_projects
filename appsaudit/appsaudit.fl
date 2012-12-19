@@ -1,0 +1,299 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0109 
+header_name {.h} 
+code_name {.cxx}
+decl {// (c) Robert Shingledecker 2009} {} 
+
+decl {\#include <iostream>} {} 
+
+decl {\#include <fstream>} {} 
+
+decl {\#include <string>} {} 
+
+decl {\#include <FL/fl_message.H>} {} 
+
+decl {\#include <FL/Fl_File_Chooser.H>} {} 
+
+decl {using namespace std;} {} 
+
+decl {string tcedir;} {} 
+
+decl {string last_dir;} {} 
+
+decl {string select_extn, select_results;} {} 
+
+decl {string option_type, report_type;} {} 
+
+decl {ifstream ifaberr;} {} 
+
+decl {string aberr;} {} 
+
+decl {string msg;} {} 
+
+decl {string copy2fsList, copy2fsFlag;} {} 
+
+Function {options_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
+} {
+  code {option_type = (const char*) userdata;
+string command;
+report_type = "";
+
+if (userdata == "default")
+{
+   command = "ls "+ copy2fsFlag + " >/dev/null 2>&1";
+   int results = system(command.c_str());
+   if (results == 0)
+   {
+     command = "rm -f "+ copy2fsFlag;
+     system(command.c_str());
+     box_results->label("copy2fs.flg removed.");
+   } else
+   {  
+     command = "touch " + tcedir + "/copy2fs.flg";
+     system(command.c_str());
+     box_results->label("copy2fs.flg set");
+   }
+} else if (userdata == "select") 
+{
+   box_extensions->label(tcedir.c_str());
+   command = "ls " + tcedir + "|grep -E .tcz[ml]*$ > /tmp/tce.lst";
+   system(command.c_str());
+   brw_extn->load("/tmp/tce.lst");
+   brw_results->load(copy2fsList.c_str());
+   box_results->label("Current copy2fs.lst");
+} else if (userdata == "quit")
+{
+    exit(0);
+}} {selected
+  }
+} 
+
+Function {depends_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
+} {
+  code {report_type = (const char*) userdata;
+option_type = "";
+
+if (userdata == "builddb")
+{
+   system("/usr/bin/tce-audit builddb");
+   brw_extn->load("/tmp/tce.lst");
+   brw_results->load("/tmp/audit_results.txt");
+   menu_nodepends->activate();
+   menu_auditall->activate();
+   menu_marked->activate();
+} else if (userdata == "dependson" or userdata == "requiredby" or userdata == "audit") 
+{
+   report_type = (const char*) userdata;
+   string loadit = "tce-audit " + report_type + " " + select_extn;
+   int results = system(loadit.c_str());
+   if (results == 0 )
+   {
+      brw_results->load("/tmp/audit_results.txt");
+   } else {
+      fl_message("error detected!");
+   }
+} else if (userdata == "auditall" or userdata == "nodepends")
+{
+   box_results->label("Results");
+   menu_delete->deactivate();
+   menu_dependson->deactivate();
+   menu_requiredby->deactivate();
+   menu_missing->deactivate();
+   string grabit = "tce-audit " + report_type;
+// cout << grabit << endl;
+   int results = system(grabit.c_str());
+   if (results == 0 )
+   {
+      brw_results->load("/tmp/audit_results.txt");
+   } else {
+      ifstream ifaberr("/tmp/aberr");
+      msg = "Error: ";
+      getline(ifaberr,aberr);
+      while (ifaberr) 
+      {
+         msg = msg + aberr + "\\n";
+         getline(ifaberr,aberr);
+      }
+      ifaberr.close();
+      fl_message(msg.c_str());
+   }
+} else if (userdata == "delete")
+{
+   report_type = (const char*) userdata;
+   string loadit = "tce-audit " + report_type + " " + select_extn;
+   int results = system(loadit.c_str());
+   if (results == 0 )
+   {
+      brw_results->load("/tmp/audit_results.txt");
+   } else {
+      fl_message("error detected!");
+   }
+} else if (userdata == "display_marked")
+{
+     box_results->label("Results");
+     brw_results->load("/tmp/audit_marked.lst");
+} else if (userdata == "quit")
+{
+    exit(0);
+}} {}
+} 
+
+Function {brw_extn_callback(Fl_Widget *, void *)} {open return_type {static void}
+} {
+  code {if (brw_extn->value())
+{
+   select_extn = brw_extn->text(brw_extn->value());
+   if ( report_type.length() > 0 )
+   {
+     box_results->label(select_extn.c_str());
+     menu_dependson->activate();
+     menu_requiredby->activate();
+     menu_missing->activate();
+     menu_delete->activate();
+     brw_results->load("");
+   } else
+   {
+     string command = "echo " + select_extn + " >> " + copy2fsList;
+     system(command.c_str());
+     brw_results->load(copy2fsList.c_str());
+   }
+}} {}
+} 
+
+Function {brw_results_callback(Fl_Widget *, void *)} {open return_type {static void}
+} {
+  code {if (brw_results->value())
+{
+   select_results = brw_results->text(brw_results->value());
+   if ( option_type.length() > 0 )
+   {
+     string command = "sed -i '/" + select_results + "/d' " + copy2fsList;
+     system(command.c_str());
+     brw_results->load(copy2fsList.c_str());
+   }
+}} {}
+} 
+
+Function {} {open
+} {
+  Fl_Window {} {
+    label AppsAudit
+    user_data {"quit"}
+    callback options_callback open
+    xywh {17 134 675 375} type Double hide resizable
+  } {
+    Fl_Menu_Bar {} {open
+      xywh {0 0 685 20}
+    } {
+      Submenu {} {
+        label Dependencies open
+        xywh {0 0 63 20}
+      } {
+        MenuItem {} {
+          label {Build Dependencies Database}
+          user_data {"builddb"}
+          callback depends_callback
+          xywh {0 0 30 20}
+        }
+        MenuItem menu_dependson {
+          label {List Dependencies}
+          user_data {"dependson"}
+          callback depends_callback
+          xywh {5 5 30 20} deactivate
+        }
+        MenuItem menu_requiredby {
+          label {LIst Required By}
+          user_data {"requiredby"}
+          callback depends_callback
+          xywh {15 15 30 20} deactivate
+        }
+        MenuItem menu_missing {
+          label {List Missing Dependencies}
+          user_data {"audit"}
+          callback depends_callback
+          xywh {5 5 30 20} deactivate
+        }
+        MenuItem menu_nodepends {
+          label {Display All with No Dependencies}
+          user_data {"nodepends"}
+          callback depends_callback
+          xywh {5 5 30 20} deactivate
+        }
+        MenuItem menu_auditall {
+          label {Display All with Missing Dependencies}
+          user_data {"auditall"}
+          callback depends_callback
+          xywh {5 5 30 20} deactivate
+        }
+        MenuItem menu_delete {
+          label {Mark for Deletion}
+          user_data {"delete"}
+          callback depends_callback
+          xywh {10 10 30 20} deactivate
+        }
+        MenuItem menu_marked {
+          label {Display Marked for Deletion}
+          user_data {"display_marked"}
+          callback depends_callback
+          xywh {5 5 30 20} deactivate
+        }
+        MenuItem {} {
+          label Quit
+          user_data {"quit"}
+          callback depends_callback
+          xywh {15 15 30 20}
+        }
+      }
+      Submenu {} {
+        label {Install Options} open
+        xywh {0 0 63 20}
+      } {
+        MenuItem {} {
+          label {Toggle Default Copy Install}
+          user_data {"default"}
+          callback options_callback
+          tooltip {Toggle copy2fs.flg} xywh {0 0 30 20}
+        }
+        MenuItem {} {
+          label {Selective Copy Install}
+          user_data {"select"}
+          callback options_callback
+          tooltip {Maintain copy2fs.lst} xywh {0 0 30 20}
+        }
+      }
+    }
+    Fl_Box box_extensions {
+      label Extensions
+      xywh {0 24 200 16} labelfont 1 align 20
+    }
+    Fl_Box box_results {
+      label Results
+      xywh {225 24 430 16} labelfont 1
+    }
+    Fl_Browser brw_results {
+      callback brw_results_callback
+      xywh {225 45 430 325} type Select textfont 4
+    }
+    Fl_Browser brw_extn {
+      callback brw_extn_callback
+      xywh {0 45 200 325} type Select textfont 4
+    }
+  }
+  code {ifstream tcedir_file("/opt/.tce_dir");
+getline(tcedir_file,tcedir);
+tcedir_file.close();
+copy2fsList = tcedir + "/copy2fs.lst";
+copy2fsFlag = tcedir + "/copy2fs.flg";
+
+option_type.empty();
+report_type.empty();
+
+int results = system("ls /tmp/tce.db >/dev/null 2>&1");
+if (results == 0)
+{
+  brw_extn->load("/tmp/tce.lst");
+  menu_nodepends->activate();
+  menu_auditall->activate();
+  menu_marked->activate();
+}} {}
+} 
