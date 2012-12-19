@@ -8,6 +8,7 @@ void brw_extn_callback(Fl_Widget *, void *);
 void local_btn_callback(Fl_Widget*, void* userdata);
 void tabs_callback(Fl_Widget*, void* userdata);
 #include <FL/Fl_Double_Window.H>
+extern Fl_Double_Window *window;
 #include <FL/Fl_Menu_Bar.H>
 extern void btn_callback(Fl_Menu_*, void*);
 extern void local_btn_callback(Fl_Menu_*, void*);

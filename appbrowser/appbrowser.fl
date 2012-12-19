@@ -35,7 +35,11 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open return_type {static v
   code {if (userdata == "tcz")
 {
    repository = (const char*) userdata;
+   window->cursor(FL_CURSOR_WAIT);
+   Fl::flush();
    string command = "/usr/bin/tce-fetch.sh info.lst " + repository;
+   window->cursor(FL_CURSOR_DEFAULT);
+   Fl::flush();
    int results = system(command.c_str());
    if (results == 0 )
    {
@@ -152,7 +156,7 @@ if (userdata == "File/Optional")
    target_dir = last_dir + "/optional";
    title = "Install Optional Extension";
 }   
-Fl_File_Chooser chooser(target_dir.c_str(),"*.{tce,tcel,tcem,tcelm,tceml,tcz,tczl,tczm,tczlm,tczml}",Fl_File_Chooser::SINGLE,title.c_str());
+Fl_File_Chooser chooser(target_dir.c_str(),"*.tcz",Fl_File_Chooser::SINGLE,title.c_str());
 chooser.show();                                             
 // Block until user picks something.
 //     (The other way to do this is to use a callback())                                                      
@@ -227,7 +231,7 @@ Function {tabs_callback(Fl_Widget*, void* userdata)} {open return_type {static v
 
 Function {} {open
 } {
-  Fl_Window {} {
+  Fl_Window window {
     label Appbrowser
     user_data {"quit"}
     callback btn_callback open

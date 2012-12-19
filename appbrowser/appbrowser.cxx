@@ -20,7 +20,11 @@ void btn_callback(Fl_Widget *, void* userdata) {
   if (userdata == "tcz")
 {
    repository = (const char*) userdata;
+   window->cursor(FL_CURSOR_WAIT);
+   Fl::flush();
    string command = "/usr/bin/tce-fetch.sh info.lst " + repository;
+   window->cursor(FL_CURSOR_DEFAULT);
+   Fl::flush();
    int results = system(command.c_str());
    if (results == 0 )
    {
@@ -135,7 +139,7 @@ if (userdata == "File/Optional")
    target_dir = last_dir + "/optional";
    title = "Install Optional Extension";
 }   
-Fl_File_Chooser chooser(target_dir.c_str(),"*.{tce,tcel,tcem,tcelm,tceml,tcz,tczl,tczm,tczlm,tczml}",Fl_File_Chooser::SINGLE,title.c_str());
+Fl_File_Chooser chooser(target_dir.c_str(),"*.tcz",Fl_File_Chooser::SINGLE,title.c_str());
 chooser.show();                                             
 // Block until user picks something.
 //     (The other way to do this is to use a callback())                                                      
@@ -206,6 +210,8 @@ void tabs_callback(Fl_Widget*, void* userdata) {
 }
 }
 
+Fl_Double_Window *window=(Fl_Double_Window *)0;
+
 Fl_Menu_Item menu_[] = {
  {"File", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
  {"Connect", 0,  (Fl_Callback*)btn_callback, (void*)("tcz"), 0, FL_NORMAL_LABEL, 0, 14, 0},
@@ -240,10 +246,8 @@ Fl_Button *btn_download=(Fl_Button *)0;
 Fl_Input *search_field=(Fl_Input *)0;
 
 int main(int argc, char **argv) {
-  Fl_Double_Window* w;
-  { Fl_Double_Window* o = new Fl_Double_Window(685, 405, "Appbrowser");
-    w = o;
-    o->callback((Fl_Callback*)btn_callback, (void*)("quit"));
+  { window = new Fl_Double_Window(685, 405, "Appbrowser");
+    window->callback((Fl_Callback*)btn_callback, (void*)("quit"));
     { Fl_Menu_Bar* o = new Fl_Menu_Bar(0, 0, 685, 20);
       o->menu(menu_);
     } // Fl_Menu_Bar* o
@@ -298,9 +302,9 @@ int main(int argc, char **argv) {
       search_field->when(FL_WHEN_ENTER_KEY);
       search_field->deactivate();
     } // Fl_Input* search_field
-    o->end();
-    o->resizable(o);
-  } // Fl_Double_Window* o
+    window->end();
+    window->resizable(window);
+  } // Fl_Double_Window* window
   ifstream download_dir_file("/opt/.tce_dir");
 getline(download_dir_file,download_dir);
 download_dir_file.close();
@@ -313,6 +317,6 @@ if ( last_dir_file.is_open() )
    last_dir_file.close();
 }
 // cout << last_dir << endl;
-  w->show(argc, argv);
+  window->show(argc, argv);
   return Fl::run();
 }

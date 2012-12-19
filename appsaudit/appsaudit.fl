@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {// (c) Robert Shingledecker 2009} {} 
@@ -16,13 +16,13 @@ decl {\#include <FL/Fl_File_Chooser.H>} {}
 
 decl {using namespace std;} {} 
 
-decl {string tcedir;} {} 
+decl {string tcedir, target_dir;} {} 
 
-decl {string last_dir;} {} 
+decl {string command;} {} 
 
 decl {string select_extn, select_results;} {} 
 
-decl {string option_type, report_type;} {} 
+decl {string option_type, report_type, update_type;} {} 
 
 decl {ifstream ifaberr;} {} 
 
@@ -30,43 +30,7 @@ decl {string aberr;} {}
 
 decl {string msg;} {} 
 
-decl {string copy2fsList, copy2fsFlag;} {} 
-
-Function {options_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
-} {
-  code {option_type = (const char*) userdata;
-string command;
-report_type = "";
-
-if (userdata == "default")
-{
-   command = "ls "+ copy2fsFlag + " >/dev/null 2>&1";
-   int results = system(command.c_str());
-   if (results == 0)
-   {
-     command = "rm -f "+ copy2fsFlag;
-     system(command.c_str());
-     box_results->label("copy2fs.flg removed.");
-   } else
-   {  
-     command = "touch " + tcedir + "/copy2fs.flg";
-     system(command.c_str());
-     box_results->label("copy2fs.flg set");
-   }
-} else if (userdata == "select") 
-{
-   box_extensions->label(tcedir.c_str());
-   command = "ls " + tcedir + "|grep -E .tcz[ml]*$ > /tmp/tce.lst";
-   system(command.c_str());
-   brw_extn->load("/tmp/tce.lst");
-   brw_results->load(copy2fsList.c_str());
-   box_results->label("Current copy2fs.lst");
-} else if (userdata == "quit")
-{
-    exit(0);
-}} {selected
-  }
-} 
+decl {string copy2fsList, copy2fsFlag, onbootList;} {} 
 
 Function {depends_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
 } {
@@ -75,16 +39,24 @@ option_type = "";
 
 if (userdata == "builddb")
 {
-   system("/usr/bin/tce-audit builddb");
-   brw_extn->load("/tmp/tce.lst");
+   window->cursor(FL_CURSOR_WAIT);
+   Fl::flush();
+   command = "/usr/bin/tce-audit builddb " + target_dir +"/";
+   system(command.c_str());
+   string listfile = target_dir + "/tce.lst";
+   brw_extn->load(listfile.c_str());
    brw_results->load("/tmp/audit_results.txt");
    menu_nodepends->activate();
    menu_auditall->activate();
    menu_marked->activate();
+   box_extn->label(target_dir.c_str());
+   box_results->label("Results");
+   window->cursor(FL_CURSOR_DEFAULT);
+   Fl::flush();
 } else if (userdata == "dependson" or userdata == "requiredby" or userdata == "audit") 
 {
    report_type = (const char*) userdata;
-   string loadit = "tce-audit " + report_type + " " + select_extn;
+   string loadit = "tce-audit " + report_type + " " + target_dir + "/" + select_extn;
    int results = system(loadit.c_str());
    if (results == 0 )
    {
@@ -99,9 +71,8 @@ if (userdata == "builddb")
    menu_dependson->deactivate();
    menu_requiredby->deactivate();
    menu_missing->deactivate();
-   string grabit = "tce-audit " + report_type;
-// cout << grabit << endl;
-   int results = system(grabit.c_str());
+   command = "tce-audit " + report_type + " " + target_dir + "/";
+   int results = system(command.c_str());
    if (results == 0 )
    {
       brw_results->load("/tmp/audit_results.txt");
@@ -120,8 +91,8 @@ if (userdata == "builddb")
 } else if (userdata == "delete")
 {
    report_type = (const char*) userdata;
-   string loadit = "tce-audit " + report_type + " " + select_extn;
-   int results = system(loadit.c_str());
+   command = "tce-audit " + report_type + " " + target_dir + "/" + select_extn;
+   int results = system(command.c_str());
    if (results == 0 )
    {
       brw_results->load("/tmp/audit_results.txt");
@@ -138,6 +109,101 @@ if (userdata == "builddb")
 }} {}
 } 
 
+Function {options_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
+} {
+  code {option_type = (const char*) userdata;
+report_type = "";
+
+if (userdata == "default")
+{
+   command = "ls "+ copy2fsFlag + " >/dev/null 2>&1";
+   int results = system(command.c_str());
+   if (results == 0)
+   {
+     command = "rm -f "+ copy2fsFlag;
+     system(command.c_str());
+     box_results->label("copy2fs.flg removed.");
+   } else
+   {  
+     command = "touch " + target_dir + "/copy2fs.flg";
+     system(command.c_str());
+     box_results->label("copy2fs.flg set");
+   }
+} else if (userdata == "select") 
+{
+   box_extn->label(target_dir.c_str());
+   command = "ls " + target_dir + "|grep -E .tcz$ > tce.lst";
+   system(command.c_str());
+   brw_extn->load("tce.lst");
+   brw_results->load(copy2fsList.c_str());
+   box_results->label("Current copy2fs.lst");
+} else if (userdata == "exit_copy")
+{
+    option_type = "";
+    box_results->label("Results");
+    brw_extn->clear();
+    brw_results->clear();
+}} {}
+} 
+
+Function {updates_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
+} {
+  code {update_type = (const char*) userdata;
+report_type = "";
+
+if (userdata == "update") 
+{
+   brw_extn->clear();
+   window->cursor(FL_CURSOR_WAIT);
+   Fl::flush();
+   command = "tce-update list " + target_dir + " > /tmp/apps_upd.lst";
+   system(command.c_str());
+   box_extn->label(target_dir.c_str());
+   brw_extn->load("/tmp/apps_upd.lst");
+   box_results->label("Results");
+   window->cursor(FL_CURSOR_DEFAULT);
+   Fl::flush();
+} else if (userdata == "exit_updates")
+{
+    update_type = "";
+    box_results->label("Results");
+    brw_extn->clear();
+    brw_results->clear();
+//    Fl::flush();
+}} {}
+} 
+
+Function {onboot_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
+} {
+  code {if (userdata == "onboot" )
+{
+  target_dir = tcedir + "/optional";
+  report_type = "onboot";
+  brw_extn->clear();
+  window->cursor(FL_CURSOR_WAIT);
+  Fl::flush();
+  command = "ls " + target_dir + "| egrep .tcz$ > /tmp/apps_sel.lst";
+  system(command.c_str());
+  box_extn->label(target_dir.c_str());
+  brw_extn->load("/tmp/apps_sel.lst");
+  box_results->label("On Boot Items");
+  brw_results->load(onbootList.c_str());
+  window->cursor(FL_CURSOR_DEFAULT);
+  Fl::flush();
+}
+ 
+if (userdata == "exit_onboot")
+{
+  report_type.empty();
+  box_results->label("Results");
+  brw_extn->clear();
+  brw_results->clear();
+} 
+ 
+if (userdata == "quit") 
+  exit(0);} {}
+} 
+
 Function {brw_extn_callback(Fl_Widget *, void *)} {open return_type {static void}
 } {
   code {if (brw_extn->value())
@@ -151,12 +217,29 @@ Function {brw_extn_callback(Fl_Widget *, void *)} {open return_type {static void
      menu_missing->activate();
      menu_delete->activate();
      brw_results->load("");
-   } else
+   } 
+   if ( option_type == "select" )
    {
-     string command = "echo " + select_extn + " >> " + copy2fsList;
+     command = "echo " + select_extn + " >> " + copy2fsList;
      system(command.c_str());
      brw_results->load(copy2fsList.c_str());
    }
+   if ( update_type == "update" )
+   {
+     command = "tce-update update " + select_extn + ".md5.txt >/tmp/apps_upd.lst";
+     cout << command << endl;
+     brw_results->load("");
+     system(command.c_str());
+     brw_results->load("/tmp/apps_upd.lst");
+   }
+   
+   if ( report_type == "onboot" )
+   {
+     command = "echo " + select_extn + " >> " + onbootList;
+     system(command.c_str());
+     box_results->label("On Boot Items");
+     brw_results->load(onbootList.c_str());
+   }   
 }} {}
 } 
 
@@ -167,30 +250,57 @@ Function {brw_results_callback(Fl_Widget *, void *)} {open return_type {static v
    select_results = brw_results->text(brw_results->value());
    if ( option_type.length() > 0 )
    {
-     string command = "sed -i '/" + select_results + "/d' " + copy2fsList;
+     command = "sed -i '/" + select_results + "/d' " + copy2fsList;
      system(command.c_str());
      brw_results->load(copy2fsList.c_str());
    }
+   cout << report_type << endl;
+   if (report_type == "delete" or report_type == "display_marked")
+   {
+     string target = select_results.substr(select_results.find_last_of("/")+1);
+     command = "sed -i '/" + target + "/d' /tmp/audit_marked.lst";
+     cout << command << endl;
+     system(command.c_str());
+     brw_results->load("/tmp/audit_marked.lst");
+   }
+   if (report_type == "onboot")
+   {
+     command = "sed -i '/" + select_results + "/d' " + onbootList;
+     system(command.c_str());
+     box_results->label("On Boot Items");
+     brw_results->load(onbootList.c_str());
+   }  
 }} {}
 } 
 
 Function {} {open
 } {
-  Fl_Window {} {
+  Fl_Window window {
     label AppsAudit
     user_data {"quit"}
-    callback options_callback open
+    callback onboot_callback open
     xywh {17 134 675 375} type Double hide resizable
   } {
     Fl_Menu_Bar {} {open
       xywh {0 0 685 20}
     } {
       Submenu {} {
+        label File open
+        xywh {0 0 63 20}
+      } {
+        MenuItem {} {
+          label Quit
+          user_data {"quit"}
+          callback depends_callback
+          xywh {25 25 30 20}
+        }
+      }
+      Submenu {} {
         label Dependencies open
         xywh {0 0 63 20}
       } {
         MenuItem {} {
-          label {Build Dependencies Database}
+          label {Update Dependencies}
           user_data {"builddb"}
           callback depends_callback
           xywh {0 0 30 20}
@@ -237,12 +347,6 @@ Function {} {open
           callback depends_callback
           xywh {5 5 30 20} deactivate
         }
-        MenuItem {} {
-          label Quit
-          user_data {"quit"}
-          callback depends_callback
-          xywh {15 15 30 20}
-        }
       }
       Submenu {} {
         label {Install Options} open
@@ -260,10 +364,49 @@ Function {} {open
           callback options_callback
           tooltip {Maintain copy2fs.lst} xywh {0 0 30 20}
         }
+        MenuItem {} {
+          label {Exit Install Options}
+          user_data {"exit_copy"}
+          callback options_callback
+          xywh {0 0 30 20}
+        }
+      }
+      Submenu {} {
+        label Updates open
+        xywh {0 0 63 20}
+      } {
+        MenuItem {} {
+          label {Check for Updates}
+          user_data {"update"}
+          callback updates_callback
+          xywh {0 0 30 20}
+        }
+        MenuItem {} {
+          label {Exit Update Mode}
+          user_data {"exit_updates"}
+          callback updates_callback
+          xywh {0 0 30 20}
+        }
+      }
+      Submenu {} {
+        label OnBoot open
+        xywh {0 0 63 20}
+      } {
+        MenuItem {} {
+          label Maintenance
+          user_data {"onboot"}
+          callback onboot_callback
+          xywh {0 0 30 20}
+        }
+        MenuItem {} {
+          label {Exit OnBoot}
+          user_data {"exit_onboot"}
+          callback onboot_callback
+          xywh {0 0 30 20}
+        }
       }
     }
-    Fl_Box box_extensions {
-      label Extensions
+    Fl_Box box_extn {
       xywh {0 24 200 16} labelfont 1 align 20
     }
     Fl_Box box_results {
@@ -282,18 +425,28 @@ Function {} {open
   code {ifstream tcedir_file("/opt/.tce_dir");
 getline(tcedir_file,tcedir);
 tcedir_file.close();
-copy2fsList = tcedir + "/copy2fs.lst";
-copy2fsFlag = tcedir + "/copy2fs.flg";
+target_dir = tcedir + "/optional";
+box_extn->label(target_dir.c_str());
+
+copy2fsList = target_dir + "/copy2fs.lst";
+copy2fsFlag = target_dir + "/copy2fs.flg";
+onbootList = tcedir + "/onboot.lst";
 
 option_type.empty();
 report_type.empty();
 
-int results = system("ls /tmp/tce.db >/dev/null 2>&1");
+command = "ls " + target_dir + "/tce.db >/dev/null 2>&1";
+
+int results = system(command.c_str());
 if (results == 0)
 {
-  brw_extn->load("/tmp/tce.lst");
+  report_type = "builddb";
+  string listfile = target_dir + "/tce.lst";
+  box_extn->label(target_dir.c_str());
+  brw_extn->load(listfile.c_str());
   menu_nodepends->activate();
   menu_auditall->activate();
   menu_marked->activate();
-}} {}
+}} {selected
+  }
 } 

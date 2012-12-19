@@ -32,7 +32,8 @@ if (userdata == "cancel") {
   exit(0);
 } else if (userdata == "ok") {
   if (action == 3) {
-     system("sudo pkill Xvesa || sudo pkill Xfbdev || sudo pkill Xorg");
+//     system("sudo pkill Xvesa || sudo pkill Xfbdev || sudo pkill Xorg");
+     system("sudo pkill `cat /etc/sysconfig/Xserver` &");
      exit(0);
   } else {
     if (backup) {

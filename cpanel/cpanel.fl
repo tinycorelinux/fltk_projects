@@ -1,8 +1,8 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2008} {} 
+decl {// (c) Robert Shingledecker 2008-2010} {} 
 
 decl {\#include <iostream>} {} 
 
@@ -21,14 +21,6 @@ if (userdata == "tftpd"){
     bp->box(FL_DOWN_BOX);
     string command = "sudo /sbin/udpsvd -E 0 69 tftpd " + home + " &";
     system(command.c_str());
-  }
-} else if (userdata == "ssh"){
-  if(bp->box() == FL_DOWN_BOX){
-    system("sudo /etc/init.d/dropbear stop");
-    bp->box(FL_UP_BOX);
-  } else {
-    bp->box(FL_DOWN_BOX);
-    system("sudo /etc/init.d/dropbear start");
   }
 } else if (userdata == "udhcpc") {
   if(bp->box() == FL_DOWN_BOX){
@@ -54,13 +46,13 @@ if (userdata == "tftpd"){
 Function {} {open
 } {
   Fl_Window {} {open
-    xywh {38 388 530 170} type Double hide
+    xywh {38 388 530 215} type Double hide
   } {
     Fl_Button {} {
       label {Backup/Restore}
       user_data {"filetool &"}
       callback btn_callback
-      xywh {10 10 120 30}
+      xywh {140 10 120 30}
     }
     Fl_Button {} {
       label {Date/Time}
@@ -75,16 +67,16 @@ Function {} {open
       xywh {10 90 120 30}
     }
     Fl_Button {} {
-      label Help
-      user_data {"help &"}
-      callback btn_callback
+      label OnDemand
+      user_data {"aterm +tr +sb -e /usr/bin/ondemand &"}
+      callback btn_callback selected
       xywh {10 130 120 30}
     }
     Fl_Button {} {
       label Netcardconfig
       user_data {"sudo netcardconf &"}
       callback btn_callback
-      xywh {140 10 120 30}
+      xywh {140 90 120 30}
     }
     Fl_Button {} {
       label Backgrounds
@@ -95,8 +87,8 @@ Function {} {open
     Fl_Button {} {
       label {Apps Audit}
       user_data {"appsaudit &"}
-      callback btn_callback selected
-      xywh {140 90 120 30}
+      callback btn_callback
+      xywh {10 10 120 30}
     }
     Fl_Button {} {
       label {Mouse Tool}
@@ -132,25 +124,49 @@ Function {} {open
       label {TFTP Server}
       user_data {"tftpd"}
       callback btn_callback
-      xywh {400 10 120 30} selection_color 2
-    }
-    Fl_Light_Button ssh {
-      label {SSH Server}
-      user_data {"ssh"}
-      callback btn_callback
-      xywh {400 50 120 30} color 29 selection_color 2
+      xywh {400 90 120 30} selection_color 2
     }
     Fl_Light_Button dhcpc {
       label {DHCP Client}
       user_data {"udhcpc"}
       callback btn_callback
-      xywh {400 90 120 30} selection_color 2
+      xywh {400 50 120 30} selection_color 2
     }
     Fl_Light_Button crond {
       label {Cron Daemon}
       user_data {"crond"}
       callback btn_callback
-      xywh {400 130 120 30} selection_color 2
+      xywh {400 10 120 30} selection_color 2
+    }
+    Fl_Button {} {
+      label {TCE Update}
+      user_data {"aterm +tr +sb -e /usr/bin/tce-update &"}
+      callback btn_callback
+      xywh {10 170 120 30}
+    }
+    Fl_Button {} {
+      label {USB Install}
+      user_data {"aterm +tr +sb -e sudo /usr/bin/usbinstall &"}
+      callback btn_callback
+      xywh {140 170 120 30}
+    }
+    Fl_Button {} {
+      label {Run Command}
+      user_data {"flrun &"}
+      callback btn_callback
+      xywh {270 170 120 30}
+    }
+    Fl_Button {} {
+      label {Xvesa Setup}
+      user_data {"aterm +tr +sb -e /usr/bin/xsetup.sh &"}
+      callback btn_callback
+      xywh {400 170 120 30}
+    }
+    Fl_Button {} {
+      label Xkill
+      user_data {"xkill &"}
+      callback btn_callback
+      xywh {400 130 120 30}
     }
   }
   code {FILE *CMD_fp = NULL;
@@ -171,13 +187,6 @@ if (system("pidof udpsvd > /dev/null") == 0)
    tftpd->value(true);
 } else
    tftpd->box(FL_UP_BOX); 
-
-if (system("pidof dropbear >/dev/null") == 0)
-{
-   ssh->box(FL_DOWN_BOX);
-   ssh->value(true);
-} else
-   ssh->box(FL_UP_BOX);
   
 if (system("pidof udhcpc >/dev/null") == 0)
 {
