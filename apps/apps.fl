@@ -184,7 +184,7 @@ if (pipe)
 }} {}
 } 
 
-Function {fetch_extension()} {private return_type void
+Function {fetch_extension()} {open private return_type void
 } {
   code {outputStatus->activate();
 outputStatus->color(FL_WHITE);
@@ -194,12 +194,10 @@ msg = select_extn;
 command = "aterm -fg black -bg white +tr -g 80x5 -e " + command;
 system(command.c_str());
 
-// Because using aterm results from system is 0 so look for results in /tmp/appserr/ifappserr
-ifstream ifappserr("/tmp/appserr");
-getline(ifappserr,appserr);
-ifappserr.close();
+command = "md5sum -cs " + select_extn + ".md5.txt";
+results = system(command.c_str());
 
-if (appserr == "0" )
+if (results == 0 )
 {
   outputStatus->color(175);
   msg += + " OK.";
@@ -207,7 +205,8 @@ if (appserr == "0" )
   msg += " Failed.";
   
 outputStatus->value(msg.c_str());  
-cursor_normal();} {}
+cursor_normal();} {selected
+  }
 } 
 
 Function {builddb()} {private return_type void
@@ -797,8 +796,7 @@ menu_dependson->deactivate();
 menu_requiredby->deactivate();
 menu_missing->deactivate();
 menu_delete->deactivate();
-brwExtn->deselect();} {selected
-  }
+brwExtn->deselect();} {}
 } 
 
 Function {brwExtnCB(Fl_Widget *, void *)} {return_type {static void}

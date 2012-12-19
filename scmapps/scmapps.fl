@@ -148,7 +148,7 @@ Function {cursor_wait()} {private return_type void
 Fl::flush();} {}
 } 
 
-Function {fetch_extension()} {return_type void
+Function {fetch_extension()} {open return_type void
 } {
   code {outputStatus->color(FL_WHITE);
 outputStatus->value(command.c_str());
@@ -157,20 +157,19 @@ msg = select_extn;
 command = "aterm -fg black -bg white +tr -g 80x5 -e " + command;
 system(command.c_str());
 
-// Because using aterm results from system is 0 so look for results in /tmp/appserr/ifappserr
-ifstream ifappserr("/tmp/appserr");
-getline(ifappserr,appserr);
-ifappserr.close();
+command = "md5sum -cs " + select_extn + ".md5.txt";
+results = system(command.c_str());
 
-if (appserr == "0" )
+if (results == 0 )
 {
   outputStatus->color(175);
   msg += + " OK.";
-} else
+} else 
   msg += " Failed.";
   
 outputStatus->value(msg.c_str());  
-cursor_normal();} {}
+cursor_normal();} {selected
+  }
 } 
 
 Function {errhandler(const string &str)} {private return_type void
@@ -715,7 +714,6 @@ Function {btnGoCB(Fl_Widget *, void* userdata)} {open private return_type {stati
                break;
       default: mode="w";
    }
-//   command = "aterm -fg black -bg white +tr -g 80x5 -e scm-load -" + action_type + " " + select_extn;
    command = "scm-load -" + action_type + " " + select_extn;
    fetch_extension();
    if ( action_type == "wi" && results == 0 )
@@ -768,8 +766,7 @@ Function {btnGoCB(Fl_Widget *, void* userdata)} {open private return_type {stati
     
   brwResults->add(msg.c_str());  
   cursor_normal();
-}} {selected
-  }
+}} {}
 } 
 
 Function {} {open

@@ -156,12 +156,10 @@ msg = select_extn;
 command = "aterm -fg black -bg white +tr -g 80x5 -e " + command;
 system(command.c_str());
 
-// Because using aterm results from system is 0 so look for results in /tmp/appserr/ifappserr
-ifstream ifappserr("/tmp/appserr");
-getline(ifappserr,appserr);
-ifappserr.close();
+command = "md5sum -cs " + select_extn + ".md5.txt";
+results = system(command.c_str());
 
-if (appserr == "0" )
+if (results == 0 )
 {
   outputStatus->color(175);
   msg += + " OK.";

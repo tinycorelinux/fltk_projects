@@ -79,7 +79,7 @@ if (userdata == "apply")
    string command;
    if (dhcpYesBtn->value() == 1)
    {
-      command = command + "sudo udhcpc -H " + hostname + " -b -i " + interfaceInput->value() + " -p /var/run/udhcpc." + interfaceInput->value() +".pid  &";
+      command = command + "sudo udhcpc -x hostname:" + hostname + " -b -i " + interfaceInput->value() + " -p /var/run/udhcpc." + interfaceInput->value() +".pid  &";
       system(command.c_str());
    }
    if (dhcpNoBtn->value() == 1)
@@ -114,7 +114,7 @@ if (userdata == "apply")
       fout << "\#!/bin/sh" << endl;
       fout << "pkill udhcpc" << endl;
       if ( dhcpYesBtn->value() == 1)
-         fout << "udhcpc -b -i " << interface << " -h " << hostname << " -p /var/run/udhcpc.eth0.pid" << endl;
+         fout << "udhcpc -b -i " << interface << " -x hostname:" << hostname << " -p /var/run/udhcpc.eth0.pid" << endl;
       else
       {
          fout << "ifconfig " << interface << " " << ipaddress << " netmask " << netmask << " broadcast " << broadcast << " up" << endl;

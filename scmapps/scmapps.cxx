@@ -126,18 +126,15 @@ cursor_wait();
 msg = select_extn;
 command = "aterm -fg black -bg white +tr -g 80x5 -e " + command;
 system(command.c_str());
-cout << command << endl;
 
-// Because using aterm results from system is 0 so look for results in /tmp/appserr/ifappserr
-ifstream ifappserr("/tmp/appserr");
-getline(ifappserr,appserr);
-ifappserr.close();
+command = "md5sum -cs " + select_extn + ".md5.txt";
+results = system(command.c_str());
 
-if (appserr == "0" )
+if (results == 0 )
 {
   outputStatus->color(175);
   msg += + " OK.";
-} else
+} else 
   msg += " Failed.";
   
 outputStatus->value(msg.c_str());  
@@ -296,7 +293,6 @@ static void menuCB(Fl_Widget *, void* userdata) {
    results = system(command.c_str());
    if ( results == 0 )
    {
-      cout << "OK" << endl;
       brwResults->load("/tmp/VerChk");
       brwResults->bottomline(brwResults->size());
    }
@@ -684,14 +680,12 @@ static void btnGoCB(Fl_Widget *, void* userdata) {
                break;
       default: mode="w";
    }
-//   command = "aterm -fg black -bg white +tr -g 80x5 -e scm-load -" + action_type + " " + select_extn;
    command = "scm-load -" + action_type + " " + select_extn;
    fetch_extension();
    if ( action_type == "wi" && results == 0 )
    {
       command = "echo " + select_extn.substr(0,(select_extn.length()-4)) + " >>"+scmbootList;
       system(command.c_str());
-      cout << command << endl;
       Fl::flush();
    }
 } else if (mode == "install")
@@ -726,7 +720,6 @@ static void btnGoCB(Fl_Widget *, void* userdata) {
 } else if ( mode == "delete" )
 {
   command = "rm -f " + download_dir + "/" + select_extn + ".scm*";
-  cout << command << endl;
   results = system(command.c_str());
   if (results == 0)
   {
