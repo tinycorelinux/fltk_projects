@@ -17,7 +17,7 @@
 #include <string.h>
 using namespace std;
 static int results, locales_set=0; 
-static string repository, tce_dir, download_dir, scmbootList; 
+static string repository, tcedir, download_dir, scmbootList; 
 static string select_extn, select_results, report_type, appserr; 
 static string hilite, mode, command, msg, mirror, err_extn; 
 static Fl_Text_Buffer *txtBuffer = new Fl_Text_Buffer; 
@@ -38,26 +38,27 @@ return gettext(msgid);
 }
 
 static void localView() {
-  grpUpdates->deactivate();
+  grpInstall->hide();
 grpUpdates->hide();
 txtBuffer->loadfile("");
 tabs->hide();
 grpSearch->deactivate();
+brwExtn->activate();
+brwExtn->show();
 grpResults->show();
 grpResults->activate();
 boxResults->label("Results");
 brwResults->activate();
 brwResults->clear();
-grpInstall->activate();
-grpInstall->show();
-choiceInstall->deactivate();
-btnGo->show();
-brwExtensions->activate();
-brwExtensions->show();
+grpBtns->show();
+btnBrwExtn->deactivate();
+btnBrwResults->hide();
 }
 
 static void remoteView() {
-  grpResults->hide();
+  grpBtns->hide();
+grpInstall->show();
+grpResults->hide();
 grpUpdates->deactivate();
 grpUpdates->hide();
 tabs->show();
@@ -69,17 +70,18 @@ btnGo->show();
 grpSearch->activate();
 brwResults->deactivate();
 txtBuffer->loadfile("");
-brwExtensions->activate();
-brwExtensions->show();
+brwExtn->activate();
+brwExtn->show();
 }
 
 static void multiView() {
-  brwExtensions->hide();
-brwExtensions->deactivate();
+  brwExtn->hide();
+brwExtn->deactivate();
 tabs->hide();
 grpInstall->hide();
 grpInstall->deactivate();
 grpSearch->deactivate();
+grpBtns->hide();
 grpUpdates->show();
 grpUpdates->activate();
 grpResults->show();
@@ -125,6 +127,9 @@ outputStatus->value(command.c_str());
 cursor_wait();
 msg = select_extn;
 command = "aterm -fg black -bg white +tr -g 80x5 -e " + command;
+cout << command << endl;
+cout << select_extn.length() << endl;
+cout << command.length() << endl;
 system(command.c_str());
 
 command = "busybox md5sum -cs " + select_extn + ".md5.txt";
@@ -139,6 +144,40 @@ if (results == 0 )
   
 outputStatus->value(msg.c_str());  
 cursor_normal();
+}
+
+void loadBrwExtn() {
+  brwExtn->clear();
+FILE *pipe = popen(command.c_str(),"r");
+char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
+if (pipe)
+{
+   while(fgets(mbuf,PATH_MAX,pipe))
+   {
+      string line(mbuf);
+      brwExtn->add(line.c_str());
+      Fl::flush();
+   }
+   pclose(pipe);
+   free(mbuf);
+}
+}
+
+void loadBrwResults() {
+  brwResults->clear();
+FILE *pipe = popen(command.c_str(),"r");
+char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
+if (pipe)
+{
+   while(fgets(mbuf,PATH_MAX,pipe))
+   {
+      string line(mbuf);
+      brwResults->add(line.c_str());
+      Fl::flush();
+   }
+   pclose(pipe);
+   free(mbuf);
+}
 }
 
 Fl_Double_Window *errwindow=(Fl_Double_Window *)0;
@@ -181,16 +220,16 @@ static void cb_Cancel(Fl_Button*, void*) {
 }
 
 static void errhandler(const string &str) {
-  { errwindow = new Fl_Double_Window(520, 125, gettext("MD5SUM error"));
-    { errlabel = new Fl_Box(162, 25, 195, 30, gettext("Md5sum error on"));
+  { errwindow = new Fl_Double_Window(520, 125, mygettext("MD5SUM error"));
+    { errlabel = new Fl_Box(162, 25, 195, 30, mygettext("Md5sum error on"));
     } // Fl_Box* errlabel
-    { Fl_Button* o = new Fl_Button(15, 70, 160, 35, gettext("Remove and try again"));
+    { Fl_Button* o = new Fl_Button(15, 70, 160, 35, mygettext("Remove and try again"));
       o->callback((Fl_Callback*)cb_Remove);
     } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(200, 70, 160, 35, gettext("Try to finish download"));
+    { Fl_Button* o = new Fl_Button(200, 70, 160, 35, mygettext("Try to finish download"));
       o->callback((Fl_Callback*)cb_Try);
     } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(385, 70, 115, 35, gettext("Cancel"));
+    { Fl_Button* o = new Fl_Button(385, 70, 115, 35, mygettext("Cancel"));
       o->callback((Fl_Callback*)cb_Cancel);
     } // Fl_Button* o
     errwindow->end();
@@ -217,11 +256,11 @@ static void menuCB(Fl_Widget *, void* userdata) {
    if (results == 0 )
    {
       system("gunzip -c scm.lst.gz > scm.lst");
-      brwExtensions->load("scm.lst");
-      brwExtensions->remove(brwExtensions->size());
+      brwExtn->load("scm.lst");
+      brwExtn->remove(brwExtn->size());
       btnGo->deactivate();
-      boxLeftSide->label("Select Extension");
-      boxLeftSide->activate();
+      boxExtnTitle->label("Select Extension");
+      boxExtnTitle->activate();
       grpSearch->activate();
 //      search_field->activate();                                              
     } else
@@ -233,18 +272,11 @@ static void menuCB(Fl_Widget *, void* userdata) {
    boxResults->label("Results");
    cursor_wait();
    command = "scm -i";
-   int results = system(command.c_str());
+   loadBrwExtn();
+   boxExtnTitle->label("Select scm to Install");
+   boxExtnTitle->activate();
+   btnBrwExtn->label(mode.c_str());
    cursor_normal();
-   if (results == 0 )
-   {   
-      brwExtensions->load("/tmp/scm.lst");
-      unlink("/tmp/scm.lst");
-      brwExtensions->remove(brwExtensions->size());
-      btnGo->deactivate();
-      boxLeftSide->label("Select scm to Install");
-      boxLeftSide->activate();
-    } else
-      fl_message("No local scm extensions found.");   
 } else if (userdata == "uninstall")
 {
    mode = "uninstall";
@@ -252,18 +284,11 @@ static void menuCB(Fl_Widget *, void* userdata) {
    boxResults->label("Results");
    cursor_wait();
    command = "scm -u";
-   int results = system(command.c_str());
+   loadBrwExtn();
+   boxExtnTitle->label("Select scm to Uninstall");
+   boxExtnTitle->activate();
+   btnBrwExtn->label(mode.c_str());
    cursor_normal();
-   if (results == 0 )
-   {   
-      brwExtensions->load("/tmp/scm.lst");
-      unlink("/tmp/scm.lst");
-      brwExtensions->remove(brwExtensions->size());
-      btnGo->deactivate();
-      boxLeftSide->label("Select scm to Uninstall");
-      boxLeftSide->activate();
-    } else
-      fl_message("No installed scm extensions found.");
 } else if (userdata == "delete")
 {
    mode = "delete";
@@ -271,24 +296,17 @@ static void menuCB(Fl_Widget *, void* userdata) {
    boxResults->label("Results");
    cursor_wait();
    command = "scm -i";
-   int results = system(command.c_str());
+   loadBrwExtn();
+   boxExtnTitle->label("Select scm to Delete");
+   boxExtnTitle->activate();
+   btnBrwExtn->label(mode.c_str());
    cursor_normal();
-   if (results == 0 )
-   {   
-      brwExtensions->load("/tmp/scm.lst");
-      unlink("/tmp/scm.lst");
-      brwExtensions->remove(brwExtensions->size());
-      btnGo->deactivate();
-      boxLeftSide->label("Select scm to Delete");
-      boxLeftSide->activate();
-    } else
-      fl_message("No local scm extensions found.");   
 } else if (userdata == "updates") 
 {
    string line;
    mode = "updates";
    multiView();
-   boxLeftSide->label("Select SCM to Update");
+   boxExtnTitle->label("Select SCM to Update");
    command = "version -c >/tmp/VerChk";
    results = system(command.c_str());
    if ( results == 0 )
@@ -299,7 +317,7 @@ static void menuCB(Fl_Widget *, void* userdata) {
    brwResults->add("Please Standby... Now checking your SCM extensions.");
    //   
 
-   command = "scm-update -l " + tce_dir;
+   command = "scm-update -l " + tcedir;
    FILE *pipe = popen(command.c_str(),"r");
    char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
    if (pipe)
@@ -334,72 +352,35 @@ static void menuCB(Fl_Widget *, void* userdata) {
 {
    mode = "boot";
    localView();   
+   grpInstall->hide();
+   btnBrwExtn->label("Add Item");
+   btnBrwResults->show();
+   grpBtns->show();   
    boxResults->label("Boot List");
    cursor_wait();
    command = "scm -b";
-   int results = system(command.c_str());
+   loadBrwExtn();
+   boxExtnTitle->label("Local scms:");
+   boxExtnTitle->activate();
+   brwResults->load(scmbootList.c_str());
    cursor_normal();
-   if (results == 0 )
-   {   
-      brwExtensions->load("/tmp/scm.lst");
-      unlink("/tmp/scm.lst");
-      brwExtensions->remove(brwExtensions->size());
-      btnGo->deactivate();
-      boxLeftSide->label("Local scms:");
-      boxLeftSide->activate();
-      brwResults->load(scmbootList.c_str());
-    } else
-      fl_message("No local scm extensions found.");   
-} else if (userdata == "setdrive")
+} else if (userdata == "ondemand" )
 {
+   mode = "ondemand";
+   localView();
+   grpInstall->hide();
+   btnBrwExtn->label("Add Item");
+   btnBrwResults->show();
+   grpBtns->show();
    cursor_wait();
-   command = "tce-setdrive -l";
-   int results = system(command.c_str());
+   command = "ondemand -ls";
+   loadBrwExtn();  
+  
+   boxResults->label("Current OnDemand Items");
+   command = "ondemand -cs | sort -f";
+   loadBrwResults();
    cursor_normal();
-   if (results == 0 )
-   {
-      mode = "setdrive";
-      brwExtensions->load("/tmp/tcesetdev");
-      brwExtensions->remove(brwExtensions->size());
-      boxLeftSide->label("Select for TCE dir.");
-      boxLeftSide->activate();
-      unlink("/tmp/tcesetdev");
-   } else
-     fl_message("No available drives found!");
-     
-} else if (userdata == "search")
-{
-  if (choiceSearch->text() == "Search")
-     command = "scm-search.sh";
-  else if (choiceSearch->text() == "Tags")
-     command = "scm-search.sh -t";
-  else
-     command = "provides.sh";
-  tabs->deactivate();
-  txtBuffer->loadfile("");
-  brwExtensions->load("");
-  cursor_wait();
-  command = command + " " + (string)search_field->value();
-  FILE *pipe = popen(command.c_str(),"r");
-  char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
-  if (pipe)
-  {
-     while(fgets(mbuf,PATH_MAX,pipe))
-     {
-        string line(mbuf);
-        line = line.substr(0,line.length()-1);
-        brwExtensions->add(line.c_str());
-        brwExtensions->bottomline(brwExtensions->size());
-        Fl::flush();
-     }
-     pclose(pipe);
-     free(mbuf);
-  }
-  search_field->value("");
-  cursor_normal();
-  btnGo->deactivate();
-  choiceSearch->activate();
-  search_field->activate();                                              
+                                              
 } else if (userdata == "md5s") 
 {
    mode = "md5s";
@@ -407,7 +388,7 @@ static void menuCB(Fl_Widget *, void* userdata) {
    cursor_wait();
    command = "cd " + download_dir + " && ls *.scm.md5.txt > /tmp/apps_upd.lst";
    system(command.c_str());
-   boxLeftSide->label(download_dir.c_str());
+   boxExtnTitle->label(download_dir.c_str());
    brwMulti->load("/tmp/apps_upd.lst");
    brwMulti->remove(brwMulti->size());
    btnMulti->show();
@@ -424,10 +405,10 @@ static void menuCB(Fl_Widget *, void* userdata) {
   }
 }
 
-static void brwExtensionsCB(Fl_Widget *, void *) {
-  if (brwExtensions->value())
+static void brwExtnCB(Fl_Widget *, void *) {
+  if (brwExtn->value())
 {
-   select_extn = brwExtensions->text(brwExtensions->value());
+   select_extn = brwExtn->text(brwExtn->value());
    if ( mode == "scm" )
    {
       string select_extn_file = select_extn + (string)".info";
@@ -450,25 +431,14 @@ static void brwExtensionsCB(Fl_Widget *, void *) {
    }
    if ( mode == "install" or mode == "uninstall" or mode == "delete" )
    {
-      btnGo->activate();
+      btnBrwExtn->activate();
    }
-   if ( mode == "boot" )
+   if ( mode == "boot" or mode == "ondemand" )
    {
-      cursor_wait();
-      command = "echo " + select_extn + " >> " + scmbootList;
-      system(command.c_str());
-      brwResults->load(scmbootList.c_str());
-      brwResults->remove(brwResults->size());
-      
-      command = "scm -b";
-      int results = system(command.c_str());
-      if (results == 0 )
-      {   
-         brwExtensions->load("/tmp/scm.lst");
-         unlink("/tmp/scm.lst");
-         brwExtensions->remove(brwExtensions->size());
-      }
-      cursor_normal();
+      btnBrwExtn->label("Add Item");
+      btnBrwExtn->activate();
+      btnBrwResults->deactivate();
+      brwResults->deselect();
    }
    if ( mode == "mirror" )
    {
@@ -490,8 +460,8 @@ static void brwExtensionsCB(Fl_Widget *, void *) {
       if (results == 0)
       {
          download_dir = select_extn + "/tce";
-         brwExtensions->clear();
-         boxLeftSide->label("");
+         brwExtn->clear();
+         boxExtnTitle->label("");
          download_dir += "/optional";
          outputStatus->color(FL_WHITE);
          outputStatus->value((download_dir).c_str());
@@ -507,18 +477,146 @@ remoteView();
 tabs->deactivate();
 grpSearch->deactivate();
 system("cat /opt/localmirrors /usr/local/share/mirrors > /tmp/mirrors 2>/dev/null");
-brwExtensions->load("/tmp/mirrors");
-if ( brwExtensions->size() == 1)
+brwExtn->load("/tmp/mirrors");
+if ( brwExtn->size() == 1)
   fl_message("Must load mirrors.tcz extension or have /opt/localmirrors in order to use this feature.");
 else {
-   brwExtensions->remove(brwExtensions->size());
-   boxLeftSide->label("Select Mirror");
-   boxLeftSide->activate();
+   brwExtn->remove(brwExtn->size());
+   boxExtnTitle->label("Select Mirror");
+   boxExtnTitle->activate();
 }
 }
 
-void brwMultiCB(Fl_Widget *, void *) {
-  cursor_wait();
+void brwResultsCB(Fl_Widget *, void *) {
+  if (brwResults->value())
+{
+   select_results = brwResults->text(brwResults->value());
+   if (report_type == "delete")
+   {
+     string target = select_results.substr(select_results.find_last_of("/")+1);
+     command = "sed -i '/" + target + "/d' /tmp/audit_marked.lst";
+     system(command.c_str());
+     brwResults->load("/tmp/audit_marked.lst");
+     brwResults->remove(brwResults->size());
+   }
+   if (mode == "boot")
+   {
+     cursor_wait();
+     command = "sed -i '/" + select_results + "/d' " + scmbootList;
+     system(command.c_str());
+  
+     brwResults->load(scmbootList.c_str());
+     brwResults->remove(brwResults->size());
+     
+     command = "scm -b";
+     loadBrwExtn();
+     cursor_normal();
+   }  
+
+}
+}
+
+void mirrorpicker() {
+  system("mirrorpicker");
+
+// reload mirror
+ifstream mirror_fin("/opt/tcemirror");
+getline(mirror_fin,mirror);
+mirror_fin.close();
+}
+
+Fl_Double_Window *window=(Fl_Double_Window *)0;
+
+Fl_Menu_Bar *menuBar=(Fl_Menu_Bar *)0;
+
+static void cb_Select(Fl_Menu_*, void*) {
+  mirrorpicker();
+uri->value(mirror.c_str());
+}
+
+Fl_Menu_Item menu_menuBar[] = {
+ {mygettext("   Apps"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Cloud (Remote)"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Browse"), 0,  (Fl_Callback*)menuCB, (void*)("scm"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Select Mirror"), 0,  (Fl_Callback*)btnMirrorCB, (void*)("mirror"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Select fastest mirror"), 0,  (Fl_Callback*)cb_Select, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0},
+ {mygettext("Local"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Install"), 0,  (Fl_Callback*)menuCB, (void*)("install"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Uninstall"), 0,  (Fl_Callback*)menuCB, (void*)("uninstall"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Delete"), 0,  (Fl_Callback*)menuCB, (void*)("delete"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0},
+ {mygettext("Maintenance"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Md5 Checking"), 0,  (Fl_Callback*)menuCB, (void*)("md5s"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Check for Updates"), 0,  (Fl_Callback*)menuCB, (void*)("updates"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Boot List Maintenance"), 0,  (Fl_Callback*)menuCB, (void*)("boot"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("OnDemand Maintenance"), 0,  (Fl_Callback*)menuCB, (void*)("ondemand"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0},
+ {mygettext("Quit"), 0,  (Fl_Callback*)menuCB, (void*)("quit"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+Fl_Group *grpSearch=(Fl_Group *)0;
+
+Fl_Choice *choiceSearch=(Fl_Choice *)0;
+
+Fl_Menu_Item menu_choiceSearch[] = {
+ {mygettext("Search"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Tags"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+Fl_Input *search_field=(Fl_Input *)0;
+
+static void cb_search_field(Fl_Input*, void*) {
+  tabs->deactivate();
+txtBuffer->loadfile("");
+brwExtn->load("");
+
+if (choiceSearch->text() == "Search")
+   command = "scm-search.sh";
+else if (choiceSearch->text() == "Tags")
+   command = "scm-search.sh -t";
+else
+  command = "provides.sh";
+
+cursor_wait();
+command = command + " " + (string)search_field->value();
+FILE *pipe = popen(command.c_str(),"r");
+char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
+if (pipe)
+{
+  while(fgets(mbuf,PATH_MAX,pipe))
+  {
+     string line(mbuf);
+     line = line.substr(0,line.length()-1);
+     brwExtn->add(line.c_str());
+     brwExtn->bottomline(brwExtn->size());
+     Fl::flush();
+  }
+  pclose(pipe);
+  free(mbuf);
+}
+
+search_field->value("");
+cursor_normal();
+btnGo->deactivate();
+choiceSearch->activate();
+search_field->activate();
+}
+
+Fl_Box *boxExtnTitle=(Fl_Box *)0;
+
+Fl_Browser *brwExtn=(Fl_Browser *)0;
+
+Fl_Group *grpUpdates=(Fl_Group *)0;
+
+Fl_Browser *brwMulti=(Fl_Browser *)0;
+
+static void cb_brwMulti(Fl_Browser*, void*) {
+  // Display Info file(s)
+cursor_wait();
 brwResults->clear();
 if ( mode == "updates" ) { 
    for (int t=0; t<=brwMulti->size(); t++) {
@@ -541,8 +639,11 @@ if ( mode == "updates" ) {
 cursor_normal();
 }
 
-void btnMultiCB(Fl_Widget *, void *) {
-  cursor_wait();
+Fl_Button *btnMulti=(Fl_Button *)0;
+
+static void cb_btnMulti(Fl_Button*, void*) {
+  // Process Md5 checking and Updates
+cursor_wait();
 brwResults->clear();
 for ( int t=0; t<=brwMulti->size(); t++ )
 {
@@ -598,11 +699,14 @@ if (mode == "updates" )
 cursor_normal();
 }
 
-static void tabsGroupCB(Fl_Widget*, void*) {
-  if (brwExtensions->value())
+Fl_Tabs *tabs=(Fl_Tabs *)0;
+
+static void cb_tabs(Fl_Tabs*, void*) {
+  if (brwExtn->value())
 {
+   cursor_wait();
    int results;
-   select_extn = brwExtensions->text(brwExtensions->value());
+   select_extn = brwExtn->text(brwExtn->value());
    
    if (infoTab->visible())
    {
@@ -620,184 +724,14 @@ static void tabsGroupCB(Fl_Widget*, void*) {
    
    if (dependsTab->visible())
    {
-     cursor_wait();
      txtBuffer->loadfile("");
      string select_extn_file = select_extn + (string)".dep";
      command = "scm-fetch.sh -O " + select_extn_file;
      displayTabData();
    }
-   
-}
-}
-
-void brwResultsCB(Fl_Widget *, void *) {
-  if (brwResults->value())
-{
-   select_results = brwResults->text(brwResults->value());
-   if (report_type == "delete")
-   {
-     string target = select_results.substr(select_results.find_last_of("/")+1);
-     command = "sed -i '/" + target + "/d' /tmp/audit_marked.lst";
-     system(command.c_str());
-     brwResults->load("/tmp/audit_marked.lst");
-     brwResults->remove(brwResults->size());
-   }
-   if (mode == "boot")
-   {
-     cursor_wait();
-     command = "sed -i '/" + select_results + "/d' " + scmbootList;
-     system(command.c_str());
-  
-     brwResults->load(scmbootList.c_str());
-     brwResults->remove(brwResults->size());
-     
-     command = "scm -b";
-     int results = system(command.c_str());
-     if (results == 0 )
-     {   
-        brwExtensions->load("/tmp/scm.lst");
-        unlink("/tmp/scm.lst");
-        brwExtensions->remove(brwExtensions->size());
-       cursor_normal();
-     }
-   }  
-
-}
-}
-
-static void btnGoCB(Fl_Widget *, void* userdata) {
-  if (mode == "scm")
-{
-   outputStatus->value("");
-   outputStatus->label("Status");
-   int action = choiceInstall->value();
-   string action_type;
-   switch(action)
-   {
-      case 0 : action_type="wi";
-               break;
-      case 1 : action_type="w";
-               break;
-      default: mode="w";
-   }
-   command = "scm-load -" + action_type + " " + select_extn;
-   fetch_extension();
-   if ( action_type == "wi" && results == 0 )
-   {
-      command = "echo " + select_extn.substr(0,(select_extn.length()-4)) + " >>"+scmbootList;
-      system(command.c_str());
-      Fl::flush();
-   }
-} else if (mode == "install")
-{
-  command = "/usr/bin/scm-load -i " + select_extn;
-  cursor_wait();
-  results = system(command.c_str());
-  if (results == 0 )
-  {
-     msg = "Successfully installed " + select_extn;
-     brwExtensions->remove(brwExtensions->value());
-  } else
-     msg = "Failed.";
-  
-  brwResults->add(msg.c_str());  
-  cursor_normal();
-
-} else if (mode == "uninstall")
-{
-  command = "/usr/bin/scm-load -r " + select_extn;
-  cursor_wait();
-  results = system(command.c_str());
-  if (results == 0 )
-  {
-     msg = "Successfully uninstalled " + select_extn;
-     brwExtensions->remove(brwExtensions->value());
-  } else
-     msg = "Failed.";
-  
-  brwResults->add(msg.c_str());  
-  cursor_normal();
-} else if ( mode == "delete" )
-{
-  command = "rm -f " + download_dir + "/" + select_extn + ".scm*";
-  results = system(command.c_str());
-  if (results == 0)
-  {
-    command = "sed -i '/" + select_extn + "/d' " + scmbootList;
-    system(command.c_str());
-    msg = select_extn + " deleted.";
-    brwExtensions->remove(brwExtensions->value());
-  } else
-    msg = "Failed";
-    
-  brwResults->add(msg.c_str());  
-  cursor_normal();
-}
-}
-
-void mirrorpicker() {
-  system("mirrorpicker");
-
-// reload mirror
-ifstream mirror_fin("/opt/tcemirror");
-getline(mirror_fin,mirror);
-mirror_fin.close();
-}
-
-Fl_Double_Window *window=(Fl_Double_Window *)0;
-
-Fl_Menu_Bar *menuBar=(Fl_Menu_Bar *)0;
-
-static void cb_Select(Fl_Menu_*, void*) {
-  mirrorpicker();
-uri->value(mirror.c_str());
-}
-
-Fl_Menu_Item menu_menuBar[] = {
- {gettext("   Apps"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Cloud (Remote)"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Browse"), 0,  (Fl_Callback*)menuCB, (void*)("scm"), 0, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Select Mirror"), 0,  (Fl_Callback*)btnMirrorCB, (void*)("mirror"), 0, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Select fastest mirror"), 0,  (Fl_Callback*)cb_Select, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {0,0,0,0,0,0,0,0,0},
- {gettext("Local"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Install"), 0,  (Fl_Callback*)menuCB, (void*)("install"), 0, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Uninstall"), 0,  (Fl_Callback*)menuCB, (void*)("uninstall"), 0, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Delete"), 0,  (Fl_Callback*)menuCB, (void*)("delete"), 0, FL_NORMAL_LABEL, 0, 14, 0},
- {0,0,0,0,0,0,0,0,0},
- {gettext("Maintenance"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Md5 Checking"), 0,  (Fl_Callback*)menuCB, (void*)("md5s"), 0, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Check for Updates"), 0,  (Fl_Callback*)menuCB, (void*)("updates"), 0, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Boot List Maintenance"), 0,  (Fl_Callback*)menuCB, (void*)("boot"), 0, FL_NORMAL_LABEL, 0, 14, 0},
- {0,0,0,0,0,0,0,0,0},
- {gettext("Quit"), 0,  (Fl_Callback*)menuCB, (void*)("quit"), 0, FL_NORMAL_LABEL, 0, 14, 0},
- {0,0,0,0,0,0,0,0,0},
- {0,0,0,0,0,0,0,0,0}
+   cursor_normal();
 };
-
-Fl_Group *grpSearch=(Fl_Group *)0;
-
-Fl_Choice *choiceSearch=(Fl_Choice *)0;
-
-Fl_Menu_Item menu_choiceSearch[] = {
- {gettext("Search"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Tags"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-Fl_Input *search_field=(Fl_Input *)0;
-
-Fl_Box *boxLeftSide=(Fl_Box *)0;
-
-Fl_Browser *brwExtensions=(Fl_Browser *)0;
-
-Fl_Group *grpUpdates=(Fl_Group *)0;
-
-Fl_Browser *brwMulti=(Fl_Browser *)0;
-
-Fl_Button *btnMulti=(Fl_Button *)0;
-
-Fl_Tabs *tabs=(Fl_Tabs *)0;
+}
 
 Fl_Group *infoTab=(Fl_Group *)0;
 
@@ -817,23 +751,186 @@ Fl_Box *boxResults=(Fl_Box *)0;
 
 Fl_Browser *brwResults=(Fl_Browser *)0;
 
+static void cb_brwResults(Fl_Browser*, void*) {
+  // brwResultsCB
+btnBrwExtn->deactivate();
+brwExtn->deselect();
+btnBrwResults->activate();
+}
+
 Fl_Group *grpInstall=(Fl_Group *)0;
 
 Fl_Choice *choiceInstall=(Fl_Choice *)0;
 
 Fl_Menu_Item menu_choiceInstall[] = {
- {gettext("Install"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Download Only"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Install"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("OnDemand"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Download Only"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
 Fl_Button *btnGo=(Fl_Button *)0;
 
+static void cb_btnGo(Fl_Button*, void*) {
+  cursor_wait();
+if (mode == "scm")
+{
+   outputStatus->value("");
+   outputStatus->label("Status");
+   int action = choiceInstall->value();
+   string action_type;
+   switch(action)
+   {
+      case 0 : action_type="wi";
+               break;
+      case 1 : action_type="wo";
+               break;
+      case 2 : action_type="w";
+               break;
+      default: mode="w";
+   }
+   command = "scm-load -" + action_type + " " + select_extn;
+   fetch_extension();
+   if ( action_type == "wi" && results == 0 )
+   {
+      command = "echo " + select_extn.substr(0,(select_extn.length()-4)) + " >>"+scmbootList;
+      system(command.c_str());
+      Fl::flush();
+   }
+}
+cursor_normal();
+btnGo->deactivate();
+brwExtn->deselect();
+}
+
 Fl_Output *outputStatus=(Fl_Output *)0;
 
 Fl_Button *btn_tce=(Fl_Button *)0;
 
+static void cb_btn_tce(Fl_Button*, void*) {
+  cursor_wait();
+command = "tce-setdrive -l";
+int results = system(command.c_str());
+cursor_normal();
+if (results == 0 )
+{
+   mode = "setdrive";
+   brwExtn->load("/tmp/tcesetdev");
+   brwExtn->remove(brwExtn->size());
+   boxExtnTitle->label("Select for TCE dir.");
+   boxExtnTitle->activate();
+   unlink("/tmp/tcesetdev");
+} else
+   fl_message("No available drives found!");
+   
+cursor_normal();
+}
+
 Fl_Output *uri=(Fl_Output *)0;
+
+Fl_Group *grpBtns=(Fl_Group *)0;
+
+Fl_Button *btnBrwExtn=(Fl_Button *)0;
+
+static void cb_btnBrwExtn(Fl_Button*, void*) {
+  if (brwExtn->value())
+{
+   cursor_wait();
+   select_extn = brwExtn->text(brwExtn->value());
+   select_extn = select_extn.substr(0,select_extn.length()-1);
+   if (mode == "install")
+   {
+     command = "/usr/bin/scm-load -i " + select_extn;
+     results = system(command.c_str());
+     if (results == 0 )
+     {
+        msg = "Successfully installed " + select_extn;
+        brwExtn->remove(brwExtn->value());
+     } else
+        msg = "Failed.";
+  
+     brwResults->add(msg.c_str());  
+
+   } else if (mode == "uninstall")
+   {
+     command = "/usr/bin/scm-load -r " + select_extn;
+     cursor_wait();
+     results = system(command.c_str());
+     if (results == 0 )
+     {
+        msg = "Successfully uninstalled " + select_extn;
+        brwExtn->remove(brwExtn->value());
+     } else
+        msg = "Failed.";
+  
+     brwResults->add(msg.c_str());  
+     cursor_normal();
+   } else if ( mode == "delete" )
+   {
+     command = "rm -f " + download_dir + "/" + select_extn + ".scm*";
+     results = system(command.c_str());
+     if (results == 0)
+     {
+       command = "sed -i '/" + select_extn + "/d' " + scmbootList;
+       system(command.c_str());
+       command = "ondemand -r " + select_extn;
+       system(command.c_str());       msg = select_extn + " deleted.";
+       brwExtn->remove(brwExtn->value());
+     } else
+       msg = "Failed";
+    
+     brwResults->add(msg.c_str());  
+   } else if ( mode == "boot" )
+   {
+      command = "echo " + select_extn + " >> " + scmbootList;
+      system(command.c_str());
+      brwResults->load(scmbootList.c_str());
+      brwResults->remove(brwResults->size());
+      
+      command = "scm -b";
+      loadBrwExtn();
+   } else if (mode == "ondemand")
+   {
+     command = "ondemand " + select_extn;
+     system(command.c_str());   
+     command = "ondemand -ls ";
+     loadBrwExtn();
+     command = "ondemand -cs";
+     loadBrwResults();
+   }
+   cursor_normal();
+}     
+btnBrwExtn->deactivate();
+}
+
+Fl_Button *btnBrwResults=(Fl_Button *)0;
+
+static void cb_btnBrwResults(Fl_Button*, void*) {
+  if (brwResults->value())
+{
+   select_results = brwResults->text(brwResults->value());
+   if (mode == "boot")
+   {
+     cursor_wait();
+     command = "sed -i '/" + select_results + "/d' " + scmbootList;
+     system(command.c_str());
+     brwResults->load(scmbootList.c_str());
+     brwResults->remove(brwResults->size());
+     command = "scm -b";
+     loadBrwExtn();
+     cursor_normal();
+   } else if (mode == "ondemand")
+   {
+     command = "ondemand -r " + select_results;
+     system(command.c_str());   
+     command = "ondemand -ls ";
+     loadBrwExtn();
+     command = "ondemand -cs";
+     loadBrwResults();
+   }
+}
+btnBrwResults->deactivate();
+}
 
 int main(int argc, char **argv) {
   setlocale(LC_ALL, "");
@@ -846,12 +943,14 @@ mirror_fin.close();
 
 char buffer[1024];
 int length;
-length = readlink("/etc/sysconfig/tcedir", buffer, sizeof(buffer));
+chdir("/etc/sysconfig");
+length = readlink("tcedir", buffer, sizeof(buffer));
 buffer[length] = '\0';
-tce_dir = strdup(buffer);
+chdir(buffer);
+tcedir = get_current_dir_name();
 
-download_dir = tce_dir + "/optional";
-scmbootList = tce_dir + "/scmboot.lst";
+download_dir = tcedir + "/optional";
+scmbootList = tcedir + "/scmboot.lst";
 chdir(download_dir.c_str()); // we go there to more easily handle errors (delete, zsync)
 
 // first run?
@@ -860,7 +959,7 @@ if (access("../firstrun", F_OK)) {
         if (fl_ask("First run - would you like the system to pick the fastest mirror?") == 1)
                 mirrorpicker();
 }
-  { window = new Fl_Double_Window(685, 433, gettext("ScmApps: Self Contained Appllications (scm)"));
+  { window = new Fl_Double_Window(685, 433, mygettext("ScmApps: Self Contained Appllications (scm)"));
     window->callback((Fl_Callback*)menuCB, (void*)("quit"));
     { menuBar = new Fl_Menu_Bar(0, 7, 85, 20);
       menuBar->menu(menu_menuBar);
@@ -873,34 +972,34 @@ if (access("../firstrun", F_OK)) {
       } // Fl_Choice* choiceSearch
       { search_field = new Fl_Input(185, 7, 500, 20);
         search_field->labeltype(FL_NO_LABEL);
-        search_field->callback((Fl_Callback*)menuCB, (void*)("search"));
+        search_field->callback((Fl_Callback*)cb_search_field);
         search_field->when(FL_WHEN_ENTER_KEY);
       } // Fl_Input* search_field
       grpSearch->end();
     } // Fl_Group* grpSearch
-    { boxLeftSide = new Fl_Box(5, 30, 190, 19);
-    } // Fl_Box* boxLeftSide
-    { brwExtensions = new Fl_Browser(0, 52, 200, 325);
-      brwExtensions->type(2);
-      brwExtensions->textfont(4);
-      brwExtensions->callback((Fl_Callback*)brwExtensionsCB);
-    } // Fl_Browser* brwExtensions
+    { boxExtnTitle = new Fl_Box(5, 30, 190, 19);
+    } // Fl_Box* boxExtnTitle
+    { brwExtn = new Fl_Browser(0, 52, 200, 325);
+      brwExtn->type(2);
+      brwExtn->textfont(4);
+      brwExtn->callback((Fl_Callback*)brwExtnCB);
+    } // Fl_Browser* brwExtn
     { grpUpdates = new Fl_Group(0, 52, 205, 348);
       grpUpdates->hide();
       grpUpdates->deactivate();
       { brwMulti = new Fl_Browser(0, 52, 200, 325);
         brwMulti->type(3);
         brwMulti->textfont(4);
-        brwMulti->callback((Fl_Callback*)brwMultiCB);
+        brwMulti->callback((Fl_Callback*)cb_brwMulti);
       } // Fl_Browser* brwMulti
-      { btnMulti = new Fl_Button(3, 380, 180, 20, gettext("Process Selected Item(s)"));
-        btnMulti->callback((Fl_Callback*)btnMultiCB);
+      { btnMulti = new Fl_Button(3, 380, 180, 20, mygettext("Process Selected Item(s)"));
+        btnMulti->callback((Fl_Callback*)cb_btnMulti);
       } // Fl_Button* btnMulti
       grpUpdates->end();
     } // Fl_Group* grpUpdates
     { tabs = new Fl_Tabs(205, 27, 480, 355);
-      tabs->callback((Fl_Callback*)tabsGroupCB);
-      { infoTab = new Fl_Group(205, 52, 475, 325, gettext("Info"));
+      tabs->callback((Fl_Callback*)cb_tabs);
+      { infoTab = new Fl_Group(205, 52, 475, 325, mygettext("Info"));
         infoTab->when(FL_WHEN_CHANGED);
         infoTab->deactivate();
         { infoDisplay = new Fl_Text_Display(210, 57, 470, 318);
@@ -909,7 +1008,7 @@ if (access("../firstrun", F_OK)) {
         } // Fl_Text_Display* infoDisplay
         infoTab->end();
       } // Fl_Group* infoTab
-      { filesTab = new Fl_Group(205, 52, 475, 325, gettext("Files"));
+      { filesTab = new Fl_Group(205, 52, 475, 325, mygettext("Files"));
         filesTab->when(FL_WHEN_CHANGED);
         filesTab->hide();
         filesTab->deactivate();
@@ -919,7 +1018,7 @@ if (access("../firstrun", F_OK)) {
         } // Fl_Text_Display* filesDisplay
         filesTab->end();
       } // Fl_Group* filesTab
-      { dependsTab = new Fl_Group(210, 57, 475, 325, gettext("Depends"));
+      { dependsTab = new Fl_Group(210, 57, 475, 325, mygettext("Depends"));
         dependsTab->hide();
         dependsTab->deactivate();
         { dependsDisplay = new Fl_Text_Display(215, 62, 470, 318);
@@ -933,41 +1032,52 @@ if (access("../firstrun", F_OK)) {
     } // Fl_Tabs* tabs
     { grpResults = new Fl_Group(205, 25, 480, 352);
       grpResults->hide();
-      grpResults->deactivate();
       { boxResults = new Fl_Box(205, 25, 475, 27);
       } // Fl_Box* boxResults
       { brwResults = new Fl_Browser(210, 52, 475, 325);
-        brwResults->type(1);
+        brwResults->type(2);
         brwResults->textfont(4);
-        brwResults->callback((Fl_Callback*)brwResultsCB);
+        brwResults->callback((Fl_Callback*)cb_brwResults);
       } // Fl_Browser* brwResults
       grpResults->end();
     } // Fl_Group* grpResults
-    { grpInstall = new Fl_Group(3, 380, 180, 20);
-      { choiceInstall = new Fl_Choice(3, 380, 140, 20);
+    { grpInstall = new Fl_Group(3, 383, 680, 50);
+      { choiceInstall = new Fl_Choice(8, 385, 140, 20);
         choiceInstall->down_box(FL_BORDER_BOX);
         choiceInstall->menu(menu_choiceInstall);
       } // Fl_Choice* choiceInstall
-      { btnGo = new Fl_Button(145, 380, 30, 20, gettext("Go"));
-        btnGo->callback((Fl_Callback*)btnGoCB, (void*)("go"));
+      { btnGo = new Fl_Button(150, 385, 30, 20, mygettext("Go"));
+        btnGo->callback((Fl_Callback*)cb_btnGo);
         btnGo->deactivate();
       } // Fl_Button* btnGo
+      { outputStatus = new Fl_Output(225, 385, 420, 20, mygettext("Status"));
+        outputStatus->color((Fl_Color)55);
+        outputStatus->value(download_dir.c_str());
+        outputStatus->label("  TCE:");
+      } // Fl_Output* outputStatus
+      { btn_tce = new Fl_Button(645, 385, 34, 20, mygettext("Set"));
+        btn_tce->callback((Fl_Callback*)cb_btn_tce, (void*)("setdrive"));
+        btn_tce->deactivate();
+        if (download_dir.compare(0,8,"/tmp/tce") == 0 ){btn_tce->activate();outputStatus->color(9);};
+      } // Fl_Button* btn_tce
+      { uri = new Fl_Output(40, 410, 640, 20, mygettext("URI:"));
+        uri->color((Fl_Color)29);
+        uri->value(mirror.c_str());
+      } // Fl_Output* uri
       grpInstall->end();
     } // Fl_Group* grpInstall
-    { outputStatus = new Fl_Output(225, 380, 420, 20, gettext("Status"));
-      outputStatus->color((Fl_Color)55);
-      outputStatus->value(download_dir.c_str());
-      outputStatus->label("  TCE:");
-    } // Fl_Output* outputStatus
-    { btn_tce = new Fl_Button(645, 380, 34, 20, gettext("Set"));
-      btn_tce->callback((Fl_Callback*)menuCB, (void*)("setdrive"));
-      btn_tce->deactivate();
-      if (download_dir.compare(0,8,"/tmp/tce") == 0 ){btn_tce->activate();outputStatus->color(9);};
-    } // Fl_Button* btn_tce
-    { uri = new Fl_Output(35, 405, 655, 20, gettext("URI:"));
-      uri->color((Fl_Color)29);
-      uri->value(mirror.c_str());
-    } // Fl_Output* uri
+    { grpBtns = new Fl_Group(3, 383, 680, 50);
+      grpBtns->hide();
+      { btnBrwExtn = new Fl_Button(55, 380, 64, 20, mygettext("Add Item"));
+        btnBrwExtn->callback((Fl_Callback*)cb_btnBrwExtn);
+        btnBrwExtn->deactivate();
+      } // Fl_Button* btnBrwExtn
+      { btnBrwResults = new Fl_Button(240, 380, 80, 20, mygettext("Delete Item"));
+        btnBrwResults->callback((Fl_Callback*)cb_btnBrwResults);
+        btnBrwResults->deactivate();
+      } // Fl_Button* btnBrwResults
+      grpBtns->end();
+    } // Fl_Group* grpBtns
     window->end();
     window->resizable(window);
   } // Fl_Double_Window* window

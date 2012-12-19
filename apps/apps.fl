@@ -96,8 +96,8 @@ brwResults->clear();
 boxExtn->label("Select");
 boxResults->label("Results");
 report_type.empty();
-btnSingle->label("Add");
-btnResults->label("Delete");
+btnSingle->label("Add Item");
+btnResults->label("Delete Item");
 btnSingle->deactivate();
 btnResults->deactivate();
 btnSingle->hide();
@@ -285,7 +285,7 @@ err_extn.replace(0,9,""); // Yes, hardcoded magic value. Bad.
 errwindow->show();} {}
 } 
 
-Function {menuCB(Fl_Widget *, void* userdata)} {open private return_type {static void}
+Function {menuCB(Fl_Widget *, void* userdata)} {private return_type {static void}
 } {
   code {report_type = (const char*)userdata;
 if (userdata == "tcz")
@@ -348,11 +348,11 @@ if (userdata == "tcz")
   btnSingle->show();
   btnResults->show();
   cursor_wait();
-  command = "ondemand -l";
+  command = "ondemand -lt";
   loadBrwExtnData();  
   
   boxResults->label("Current OnDemand Items");
-  command = "ls -1 "+ tcedir + "/ondemand 2>/dev/null | grep -v \\".img$\\" | sort -f";
+  command = "ondemand -ct | sort -f";
   loadBrwResultsData();
   cursor_normal();
 } else if (userdata == "md5s") 
@@ -430,6 +430,18 @@ if (userdata == "tcz")
    cursor_normal();
    Fl::flush();      
       
+} else if (userdata == "unneeded") 
+{
+   string line;
+   auditView();
+   cursor_wait();
+   brwResults->clear();
+
+   command = "chkonboot.sh";
+   loadBrwResultsData();
+   cursor_normal();
+   Fl::flush();      
+      
 } else if (userdata == "copy2fs")
 {
    auditView();
@@ -491,8 +503,7 @@ if (userdata == "tcz")
     unlink("/tmp/tags.lst");
     exit(0);
 
-  }} {selected
-  }
+  }} {}
 } 
 
 Function {btnCB(Fl_Widget *, void* userdata)} {private return_type {static void}
@@ -901,7 +912,7 @@ btnSingle->deactivate();
 brwExtn->deselect();} {}
 } 
 
-Function {brwMultiCB(Fl_Widget *, void *)} {open return_type {static void}
+Function {brwMultiCB(Fl_Widget *, void *)} {return_type {static void}
 } {
   code {btnMulti->activate();
 cursor_wait();
@@ -922,7 +933,7 @@ if ( report_type == "updates" ) {
 cursor_normal();} {}
 } 
 
-Function {btnMultiCB(Fl_Widget *, void *)} {open return_type {static void}
+Function {btnMultiCB(Fl_Widget *, void *)} {return_type {static void}
 } {
   code {btnMulti->deactivate();
 cursor_wait();
@@ -1022,7 +1033,7 @@ Function {btnResultsCB(Fl_Widget *, void *)} {return_type {static void}
      command = "ondemand -l ";
      loadBrwExtnData();
      brwResults->clear();       
-     command = "ls -1 " + tcedir + "/ondemand | grep -v .img$ | sort -f";
+     command = "ondemand -ct";
      loadBrwResultsData();
      cursor_normal();
    }  
@@ -1053,9 +1064,11 @@ mirror_fin.close();
 
 char buffer[1024];
 int length;
-length = readlink("/etc/sysconfig/tcedir", buffer, sizeof(buffer));
+chdir("/etc/sysconfig");
+length = readlink("tcedir", buffer, sizeof(buffer));
 buffer[length] = '\\0';
-tcedir = strdup(buffer);
+chdir(buffer); // we go there to more easily handle errors (delete, zsync)
+tcedir = get_current_dir_name();
 
 target_dir = tcedir + "/optional";
 last_dir = target_dir;   
@@ -1096,7 +1109,7 @@ if (access("../firstrun", F_OK)) {
 
 
 // Test writable 
-string testfile = target_dir + "/test.test";
+string testfile = "test.test";
 ofstream writest(testfile.c_str());
 if (writest.fail()) {
    fl_message("Fatal Error: TCE Directory is not writable.");
@@ -1110,11 +1123,11 @@ unlink(testfile.c_str());} {}
     callback menuCB open
     xywh {29 100 690 428} type Double hide resizable
   } {
-    Fl_Menu_Bar menuBarApps {open
+    Fl_Menu_Bar menuBarApps {
       xywh {5 7 55 20}
     } {
       Submenu menuApps {
-        label Apps open
+        label Apps
         xywh {0 0 55 20}
       } {
         Submenu {} {
@@ -1147,7 +1160,7 @@ outURI->value(mirror.c_str());}
           xywh {5 5 30 20}
         }
         Submenu {} {
-          label Maintenance open
+          label Maintenance
           xywh {5 5 63 20}
         } {
           MenuItem {} {
@@ -1173,6 +1186,12 @@ outURI->value(mirror.c_str());}
             user_data {"menuDepends"}
             callback menuCB
             xywh {5 5 30 20}
+          }
+          MenuItem {} {
+            label {Check Onboot Unneeded}
+            user_data {"unneeded"}
+            callback menuCB
+            xywh {0 0 30 20}
           }
           MenuItem {} {
             label {OnBoot Maintenance}
@@ -1427,7 +1446,7 @@ outURI->value(mirror.c_str());}
         label Select
         xywh {0 31 200 16}
       }
-      Fl_Group grpSingle {open
+      Fl_Group grpSingle {
         xywh {5 52 200 348}
       } {
         Fl_Browser brwExtn {
@@ -1444,7 +1463,7 @@ outURI->value(mirror.c_str());}
         label Results
         xywh {205 34 470 17} labelfont 1
       }
-      Fl_Group grpMulti {open
+      Fl_Group grpMulti {
         xywh {5 52 200 348}
       } {
         Fl_Browser brwMulti {
@@ -1463,8 +1482,8 @@ outURI->value(mirror.c_str());}
       }
       Fl_Button btnResults {
         label Go
-        callback btnResultsCB
-        xywh {210 380 75 20} deactivate
+        callback btnResultsCB selected
+        xywh {210 380 80 20} deactivate
       }
       Fl_Output outTCE {
         label {TCE:}

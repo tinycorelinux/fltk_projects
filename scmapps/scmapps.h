@@ -4,13 +4,13 @@
 #define scmapps_h
 #include <FL/Fl.H>
 void fetch_extension();
+void loadBrwExtn();
+void loadBrwResults();
 #include <FL/Fl_Double_Window.H>
 extern Fl_Double_Window *errwindow;
 #include <FL/Fl_Box.H>
 extern Fl_Box *errlabel;
 #include <FL/Fl_Button.H>
-void brwMultiCB(Fl_Widget *, void *);
-void btnMultiCB(Fl_Widget *, void *);
 void brwResultsCB(Fl_Widget *, void *);
 void mirrorpicker();
 extern Fl_Double_Window *window;
@@ -24,9 +24,9 @@ extern Fl_Group *grpSearch;
 extern Fl_Choice *choiceSearch;
 #include <FL/Fl_Input.H>
 extern Fl_Input *search_field;
-extern Fl_Box *boxLeftSide;
+extern Fl_Box *boxExtnTitle;
 #include <FL/Fl_Browser.H>
-extern Fl_Browser *brwExtensions;
+extern Fl_Browser *brwExtn;
 extern Fl_Group *grpUpdates;
 extern Fl_Browser *brwMulti;
 extern Fl_Button *btnMulti;
@@ -49,6 +49,9 @@ extern Fl_Button *btnGo;
 extern Fl_Output *outputStatus;
 extern Fl_Button *btn_tce;
 extern Fl_Output *uri;
+extern Fl_Group *grpBtns;
+extern Fl_Button *btnBrwExtn;
+extern Fl_Button *btnBrwResults;
 extern Fl_Menu_Item menu_menuBar[];
 #define scmapps (menu_menuBar+0)
 extern Fl_Menu_Item menu_choiceSearch[];

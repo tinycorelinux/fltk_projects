@@ -3,15 +3,31 @@
 #ifndef filetool_h
 #define filetool_h
 #include <FL/Fl.H>
-void input_callback(Fl_Widget*, void*);
-void btn_callback(Fl_Widget*, void* userdata);
+void protectChr();
+void loadBrwResults();
 #include <FL/Fl_Double_Window.H>
 extern Fl_Double_Window *window;
 #include <FL/Fl_Input.H>
 extern Fl_Input *input_device;
 #include <FL/Fl_Choice.H>
-extern Fl_Choice *filetool_choice;
+extern Fl_Choice *backupChoice;
 #include <FL/Fl_Button.H>
-extern Fl_Button *btn_go;
-extern Fl_Menu_Item menu_filetool_choice[];
+extern Fl_Button *btnGo;
+#include <FL/Fl_Tabs.H>
+extern Fl_Tabs *tabs;
+#include <FL/Fl_Group.H>
+extern Fl_Group *resultsTab;
+#include <FL/Fl_Browser.H>
+extern Fl_Browser *brwResults;
+extern Fl_Group *filesTab;
+extern Fl_Browser *brwFiles;
+extern Fl_Group *xFilesTab;
+extern Fl_Browser *brwXfiles;
+extern Fl_Button *btnDelete;
+extern Fl_Button *btnClear;
+extern Fl_Group *grpAdd;
+extern Fl_Button *btnAdd;
+extern Fl_Choice *choiceChooser;
+extern Fl_Menu_Item menu_backupChoice[];
+extern Fl_Menu_Item menu_choiceChooser[];
 #endif

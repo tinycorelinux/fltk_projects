@@ -2,56 +2,237 @@
 version 1.0110 
 i18n_type 1 
 i18n_include <libintl.h> 
-i18n_function gettext 
+i18n_function mygettext 
 header_name {.h} 
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2008-2010} {} 
-
-decl {\# include <cstdlib>} {} 
+decl {// (c) Robert Shingledecker 2012} {} 
 
 decl {\#include <iostream>} {} 
 
+decl {\#include <sstream>} {} 
+
 decl {\#include <fstream>} {} 
+
+decl {\#include <cstdlib>} {} 
 
 decl {\#include <string>} {} 
 
-decl {\#include <Fl/fl_ask.H>} {} 
-
 decl {\#include <FL/fl_message.H>} {} 
+
+decl {\#include <FL/Fl_File_Chooser.H>} {} 
+
+decl {\#include <FL/forms.h>} {} 
+
+decl {\#include <sys/types.h>} {} 
+
+decl {\#include <sys/stat.h>} {} 
+
+decl {\#include <fcntl.h>} {} 
+
+decl {\#include <signal.h>} {} 
 
 decl {\#include <locale.h>} {} 
 
+decl {\#include <unistd.h>} {} 
+
+decl {\#include <string.h>} {} 
+
 decl {using namespace std;} {} 
+
+decl {int results, lineNbr, locales_set=0;} {} 
+
+decl {string selection, item, targetFile;} {} 
 
 decl {string device_name;} {} 
 
-decl {string command = "sudo /usr/bin/filetool.sh ";} {} 
+decl {string command, msg;} {} 
 
-Function {input_callback(Fl_Widget*, void*)} {open return_type {static void}
+Function {cursor_normal()} {private return_type void
 } {
-  code {filetool_choice->activate();
-btn_go->activate();} {}
+  code {window->cursor(FL_CURSOR_DEFAULT);
+Fl::flush();} {}
 } 
 
-Function {btn_callback(Fl_Widget*, void* userdata)} {open return_type {static void}
+Function {cursor_wait()} {private return_type void
 } {
-  code {device_name = (const char*)input_device->value();
+  code {Fl::redraw();
+window->cursor(FL_CURSOR_WAIT);
+Fl::flush();} {}
+} 
+
+Function {updateDisplay()} {private return_type void
+} {
+  code {cursor_wait();
+if (filesTab->visible())
+   brwFiles->load("/opt/.filetool.lst");
+   
+if (xFilesTab->visible())
+   brwXfiles->load("/opt/.xfiletool.lst");
+cursor_normal();} {}
+} 
+
+Function {selectItem()} {private return_type void
+} {
+  code {string type, title;
+int typ;
+
+if ( choiceChooser->value() == 0 )
+{
+   type = "file";
+   typ = Fl_File_Chooser::SINGLE;
+} else
+{
+   type = "directory";
+   typ = Fl_File_Chooser::DIRECTORY;
+}
+
+title = "Select " + type + " to be added to " + targetFile;
+Fl_File_Chooser chooser(".","", typ, title.c_str());
+chooser.show();                                             
+while(chooser.shown())
+  { Fl::wait(); }
+  
+if ( chooser.value() == NULL )
+   return; 
+ 
+ofstream fout(targetFile.c_str(), ios::out | ios::app);
+if (! fout.is_open())
+{
+   cerr << "Can't open " << targetFile << " file for output." << endl;
+   exit(EXIT_FAILURE);
+}
+fout << chooser.value()+1 << endl;
+fout.close();
+updateDisplay();} {}
+} 
+
+Function {mygettext(const char *msgid)} {private return_type {char *}
+} {
+  code {if (!locales_set) {
+
+setlocale(LC_ALL, "");
+bindtextdomain("tinycore","/usr/local/share/locale");
+textdomain("tinycore");
+
+locales_set=1;
+
+}
+
+return gettext(msgid);} {}
+} 
+
+Function {protectChr()} {return_type void
+} {
+  code {int p = 0;
+int s = 0;
+do
+{
+   p = item.find("+",p+s);
+   if ( p > 0 )
+   {
+      item.replace(p,1,"\\\\+");
+      s = 2;
+   }
+} while ( p > 0 );} {}
+} 
+
+Function {tabsGroupCB(Fl_Widget*, void*)} {private return_type {static void}
+} {
+  code {cursor_wait();
+grpAdd->activate();
+btnDelete->deactivate();
+   
+if (filesTab->visible())
+   targetFile = "/opt/.filetool.lst"; 
+   
+if (xFilesTab->visible())
+   targetFile = "/opt/.xfiletool.lst"; 
+
+if (resultsTab->visible())
+   grpAdd->deactivate();
+cursor_normal();} {}
+} 
+
+Function {loadBrwResults()} {return_type void
+} {
+  code {cursor_wait();
+FILE *pipe = popen(command.c_str(),"r");
+char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
+if (pipe)
+{
+   while(fgets(mbuf,PATH_MAX,pipe))
+   {
+      string line(mbuf);
+      brwResults->add(line.c_str());
+      Fl::flush();
+   }
+   pclose(pipe);
+   free(mbuf);
+}
+cursor_normal();} {}
+} 
+
+Function {} {open
+} {
+  code {setlocale(LC_ALL, "");
+bindtextdomain("tinycore", "/usr/local/share/locale");
+textdomain("tinycore");} {}
+  Fl_Window window {
+    label {Backup Restore and Lists Maintenance} user_data_type {void*} open
+    xywh {17 82 600 420} type Double resizable visible
+  } {
+    Fl_Input input_device {
+      label {Device:}
+      callback {backupChoice->activate();
+btnGo->activate();}
+      xywh {55 5 360 25} when 1
+    }
+    Fl_Choice backupChoice {
+      label {Action:}
+      xywh {470 5 80 25} down_box BORDER_BOX deactivate
+    } {
+      MenuItem {} {
+        label None
+        xywh {5 5 30 20}
+      }
+      MenuItem {} {
+        label {Dry Run}
+        xywh {5 5 30 20}
+      }
+      MenuItem {} {
+        label Backup
+        xywh {5 5 30 20}
+      }
+      MenuItem {} {
+        label Safe
+        xywh {5 5 30 20}
+      }
+      MenuItem {} {
+        label Restore
+        xywh {5 5 30 20}
+      }
+    }
+    Fl_Button btnGo {
+      label Go
+      callback {device_name = (const char*)input_device->value();
 if (device_name.size() == 0)
    return;
    
 string action;   
-int filetool_action = filetool_choice->value();
+int filetool_action = backupChoice->value();
 switch(filetool_action)
 {
    case 0  : action = "none";
              break;
-   case 1  : action = "-b";
+   case 1  : action = "-d";
              break;
-   case 2  : action = "-bs";
+   case 2  : action = "-bv";
              break;
-   case 3  : action = "-r";
+   case 3  : action = "-bsv";
              break;
-   default : action = "-b";
+   case 4  : action = "-rv";
+             break;
+   default : action = "-bv";
 }             
    
 if (action == "none")
@@ -63,66 +244,112 @@ if (action == "none")
    }
    return;
 }
-
-
-window->cursor(FL_CURSOR_WAIT);
-Fl::flush();
-
+grpAdd->deactivate();
+brwResults->clear();
+resultsTab->set_visible();
+command = "sudo /usr/bin/filetool.sh ";
 command += action + " " + device_name;
-int results = system(command.c_str());
-
-window->cursor(FL_CURSOR_DEFAULT);            
-Fl::flush();
-
-if ( results != 0 )
-{
-   fl_message("Error.\\nMake sure you are using a valid backup/restore device. Some errors are logged in /tmp/backup_status");
-   return;
-} else
-   exit(0);} {selected
-  }
-} 
-
-Function {} {open
-} {
-  code {setlocale(LC_ALL, "");
-bindtextdomain("tinycore","/usr/local/share/locale");
-textdomain("tinycore");} {}
-  Fl_Window window {
-    label FileTool open
-    xywh {131 421 225 65} type Double hide
-  } {
-    Fl_Input input_device {
-      label {Device:}
-      callback input_callback
-      xywh {65 7 150 25} when 1
+loadBrwResults();}
+      xywh {555 5 39 25} deactivate
     }
-    Fl_Choice filetool_choice {
-      label {Action:} open
-      xywh {65 40 80 20} down_box BORDER_BOX deactivate
+    Fl_Tabs tabs {
+      callback tabsGroupCB
+      xywh {5 36 585 351}
     } {
-      MenuItem {} {
-        label None
-        xywh {0 0 30 20}
+      Fl_Group resultsTab {
+        label {Action Results}
+        xywh {10 61 580 326} when 1
+      } {
+        Fl_Browser brwResults {
+          xywh {10 68 580 316} type Hold
+          code0 {brwResults->color(229);}
+        }
       }
-      MenuItem {} {
-        label Backup
-        xywh {0 0 30 20}
+      Fl_Group filesTab {
+        label {Included for Backup (.filetool.lst)}
+        xywh {10 61 580 326} when 1 hide
+      } {
+        Fl_Browser brwFiles {
+          callback {if (brwFiles->value())
+{
+   lineNbr = brwFiles->value();
+   item = brwFiles->text(lineNbr);
+   btnDelete->activate();
+   grpAdd->deactivate();
+   btnClear->activate();
+   brwXfiles->deselect();
+}}
+          xywh {10 68 580 316} type Hold
+          code0 {brwFiles->color(159);}
+          code1 {brwFiles->load("/opt/.filetool.lst");}
+          code2 {targetFile="/opt/.filetool.lst";}
+        }
       }
-      MenuItem {} {
-        label Safe
-        xywh {0 0 30 20}
-      }
-      MenuItem {} {
-        label Restore
-        xywh {0 0 30 20}
+      Fl_Group xFilesTab {
+        label {Excluded from Backup (.xfiletool.lst)}
+        xywh {10 61 580 326} when 1 hide
+      } {
+        Fl_Browser brwXfiles {
+          callback {if (brwXfiles->value())
+{
+   lineNbr = brwXfiles->value();
+   item = brwXfiles->text(lineNbr);
+   btnDelete->activate();
+   grpAdd->deactivate();
+   btnClear->activate();
+   brwFiles->deselect();
+}}
+          xywh {10 68 580 316} type Hold
+          code0 {brwXfiles->color(175);}
+          code1 {brwXfiles->load("/opt/.xfiletool.lst");}
+        }
       }
     }
-    Fl_Button btn_go {
-      label GO
-      user_data {"go"}
-      callback btn_callback
-      xywh {150 40 64 20} deactivate
+    Fl_Button btnDelete {
+      label {Delete Item}
+      callback {string lineNbrStr;
+stringstream sout;
+sout << lineNbr;
+lineNbrStr = sout.str();
+command = "sed -i '" + lineNbrStr +"d' " + targetFile;
+cout << command << endl;
+cout << command.length() << endl;
+system(command.c_str());
+updateDisplay();
+btnDelete->deactivate();
+btnClear->deactivate();
+grpAdd->activate();}
+      xywh {10 392 85 20} deactivate
+    }
+    Fl_Button btnClear {
+      label {Clear Item}
+      callback {brwFiles->deselect();
+brwXfiles->deselect();
+btnDelete->deactivate();
+grpAdd->activate();
+btnClear->deactivate();} selected
+      xywh {100 392 80 20} deactivate
+    }
+    Fl_Group grpAdd {open
+      xywh {440 390 153 30} deactivate
+    } {
+      Fl_Button btnAdd {
+        label Add
+        callback {selectItem();}
+        xywh {450 395 34 20}
+      }
+      Fl_Choice choiceChooser {open
+        xywh {485 395 100 20} down_box BORDER_BOX
+      } {
+        MenuItem {} {
+          label File
+          xywh {5 5 30 20}
+        }
+        MenuItem {} {
+          label Directory
+          xywh {5 5 30 20}
+        }
+      }
     }
   }
   code {ifstream fin("/etc/sysconfig/backup_device");                                  
@@ -132,8 +359,8 @@ fin.close();
 if (device_name.size() != 0)
 {
     input_device->value(device_name.c_str());
-    filetool_choice->activate();
-    filetool_choice->value(1);
-    btn_go->activate();
+    backupChoice->activate();
+    backupChoice->value(1);
+    btnGo->activate();
 }} {}
 } 

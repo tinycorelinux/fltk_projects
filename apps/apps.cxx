@@ -64,8 +64,8 @@ brwResults->clear();
 boxExtn->label("Select");
 boxResults->label("Results");
 report_type.empty();
-btnSingle->label("Add");
-btnResults->label("Delete");
+btnSingle->label("Add Item");
+btnResults->label("Delete Item");
 btnSingle->deactivate();
 btnResults->deactivate();
 btnSingle->hide();
@@ -313,11 +313,11 @@ if (userdata == "tcz")
   btnSingle->show();
   btnResults->show();
   cursor_wait();
-  command = "ondemand -l";
+  command = "ondemand -lt";
   loadBrwExtnData();  
   
   boxResults->label("Current OnDemand Items");
-  command = "ls -1 "+ tcedir + "/ondemand 2>/dev/null | grep -v \".img$\" | sort -f";
+  command = "ondemand -ct | sort -f";
   loadBrwResultsData();
   cursor_normal();
 } else if (userdata == "md5s") 
@@ -392,6 +392,18 @@ if (userdata == "tcz")
    command = "tce-status -o";
    loadBrwResultsData();
    brwResults->add("Scan for orphans complete.");    
+   cursor_normal();
+   Fl::flush();      
+      
+} else if (userdata == "unneeded") 
+{
+   string line;
+   auditView();
+   cursor_wait();
+   brwResults->clear();
+
+   command = "chkonboot.sh";
+   loadBrwResultsData();
    cursor_normal();
    Fl::flush();      
       
@@ -975,7 +987,7 @@ void btnResultsCB(Fl_Widget *, void *) {
      command = "ondemand -l ";
      loadBrwExtnData();
      brwResults->clear();       
-     command = "ls -1 " + tcedir + "/ondemand | grep -v .img$ | sort -f";
+     command = "ondemand -ct";
      loadBrwResultsData();
      cursor_normal();
    }  
@@ -1014,6 +1026,7 @@ Fl_Menu_Item menu_menuBarApps[] = {
  {mygettext("Check for Updates"), 0,  (Fl_Callback*)menuCB, (void*)("updates"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Check for Orphans"), 0,  (Fl_Callback*)menuCB, (void*)("orphans"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Dependencies And Deletions"), 0,  (Fl_Callback*)menuCB, (void*)("menuDepends"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Check Onboot Unneeded"), 0,  (Fl_Callback*)menuCB, (void*)("unneeded"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("OnBoot Maintenance"), 0,  (Fl_Callback*)menuCB, (void*)("onboot"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("OnDemand Maintenance"), 0,  (Fl_Callback*)menuCB, (void*)("ondemand"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
@@ -1138,9 +1151,11 @@ mirror_fin.close();
 
 char buffer[1024];
 int length;
-length = readlink("/etc/sysconfig/tcedir", buffer, sizeof(buffer));
+chdir("/etc/sysconfig");
+length = readlink("tcedir", buffer, sizeof(buffer));
 buffer[length] = '\0';
-tcedir = strdup(buffer);
+chdir(buffer); // we go there to more easily handle errors (delete, zsync)
+tcedir = get_current_dir_name();
 
 target_dir = tcedir + "/optional";
 last_dir = target_dir;   
@@ -1181,7 +1196,7 @@ if (access("../firstrun", F_OK)) {
 
 
 // Test writable 
-string testfile = target_dir + "/test.test";
+string testfile = "test.test";
 ofstream writest(testfile.c_str());
 if (writest.fail()) {
    fl_message("Fatal Error: TCE Directory is not writable.");
@@ -1323,7 +1338,7 @@ unlink(testfile.c_str());
         brwResults->textfont(4);
         brwResults->callback((Fl_Callback*)brwResultsCB);
       } // Fl_Browser* brwResults
-      { btnResults = new Fl_Button(210, 380, 75, 20, mygettext("Go"));
+      { btnResults = new Fl_Button(210, 380, 80, 20, mygettext("Go"));
         btnResults->callback((Fl_Callback*)btnResultsCB);
         btnResults->deactivate();
       } // Fl_Button* btnResults
