@@ -1,18 +1,57 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 i18n_type 1 
 i18n_include <libintl.h> 
 i18n_function gettext 
 header_name {.h} 
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2008-2010} {selected
-} 
+decl {// (c) Robert Shingledecker 2008-2010} {} 
+
+decl {\#include <cstdlib>} {} 
 
 decl {\#include <iostream>} {} 
 
 decl {\#include <locale.h>} {} 
 
 decl {using namespace std;} {} 
+
+decl {Fl_Text_Buffer *txtBuffer = new Fl_Text_Buffer();} {} 
+
+Function {tabsGroupCB(Fl_Widget*, void*userdata)} {open return_type {static void}
+} {
+  code {tabs->value()->do_callback();} {}
+} 
+
+Function {tabCB(Fl_Widget*, void*userdata)} {open return_type {static void}
+} {
+  code {if (userdata == "cpu") 
+  system("cat /proc/cpuinfo > /tmp/stats.txt");
+if (userdata == "mem")
+  system("cat /proc/meminfo > /tmp/stats.txt");
+if (userdata == "net") 
+{
+  system("cat /etc/resolv.conf > /tmp/stats.txt");               
+  system("ifconfig >> /tmp/stats.txt"); 
+}                           
+if (userdata == "modules")
+  system("cat /proc/modules > /tmp/stats.txt");
+if (userdata == "processes")
+  system("ps ax > /tmp/stats.txt");
+if (userdata == "dmesg")
+  system("dmesg > /tmp/stats.txt");
+if (userdata == "mounts")
+  system("mount > /tmp/stats.txt");
+if (userdata == "filesystems")
+  system("df -h > /tmp/stats.txt");
+if (userdata == "boot")
+  system("sed 's/ /\\\\n/g' /proc/cmdline > /tmp/stats.txt");
+if (userdata == "installed")
+  system("ls -1 /usr/local/tce.installed | sort -f >/tmp/stats.txt");
+if (userdata=="big")
+  system("/usr/bin/bigHomeFiles.sh > /tmp/stats.txt");
+txtBuffer->loadfile("/tmp/stats.txt");} {selected
+  }
+} 
 
 Function {} {open
 } {
@@ -23,122 +62,133 @@ textdomain("tinycore");} {}
     label {Tiny Core System Stats} open
     xywh {20 136 660 385} type Double hide
   } {
-    Fl_Tabs {} {open
-      xywh {0 0 660 386} selection_color 228
+    Fl_Tabs tabs {
+      callback tabsGroupCB open
+      xywh {0 0 660 386} selection_color 228 when 1
     } {
       Fl_Group {} {
         label cpu
-        user_data {"cpu"} open
-        xywh {0 0 660 335} hide
+        user_data {"cpu"}
+        callback tabCB open
+        xywh {0 0 660 335} when 1 hide
       } {
-        Fl_Browser cpuBrowser {
+        Fl_Text_Display cpuDisplay {
           xywh {0 0 660 335} textfont 4
+          code0 {cpuDisplay->buffer(txtBuffer);}
         }
       }
       Fl_Group {} {
-        label mem open
+        label mem
+        user_data {"mem"}
+        callback tabCB open
         xywh {0 0 660 335} hide
       } {
-        Fl_Browser memBrowser {
+        Fl_Text_Display memDisplay {
           xywh {0 0 660 335} textfont 4
+          code0 {memDisplay->buffer(txtBuffer);}
         }
       }
       Fl_Group {} {
-        label net open
+        label net
+        user_data {"net"}
+        callback tabCB open
         xywh {0 0 660 336} hide
       } {
-        Fl_Browser netBrowser {
+        Fl_Text_Display netDisplay {
           xywh {0 0 660 335} textfont 4
+          code0 {netDisplay->buffer(txtBuffer);}
         }
       }
       Fl_Group {} {
-        label modules open
+        label modules
+        user_data {"modules"}
+        callback tabCB open
         xywh {0 0 660 335} hide
       } {
-        Fl_Browser modulesBrowser {
+        Fl_Text_Display modulesDisplay {
           xywh {0 0 660 335} textfont 4
+          code0 {modulesDisplay->buffer(txtBuffer);}
         }
       }
       Fl_Group {} {
-        label processes open
+        label processes
+        user_data {"processes"}
+        callback tabCB open
         xywh {0 0 660 335} hide
       } {
-        Fl_Browser processesBrowser {
+        Fl_Text_Display processesDisplay {
           xywh {0 0 660 335} textfont 4
+          code0 {processesDisplay->buffer(txtBuffer);}
         }
       }
       Fl_Group {} {
-        label dmesg open
+        label dmesg
+        user_data {"dmesg"}
+        callback tabCB open
         xywh {0 0 660 335} hide
       } {
-        Fl_Browser dmesgBrowser {
+        Fl_Text_Display dmesgDisplay {
           xywh {0 0 660 335} textfont 4
+          code0 {dmesgDisplay->buffer(txtBuffer);}
         }
       }
       Fl_Group {} {
-        label mounts open
+        label mounts
+        user_data {"mounts"}
+        callback tabCB open
         xywh {0 0 660 335} hide
       } {
-        Fl_Browser mountsBrowser {
+        Fl_Text_Display mountsDisplay {
           xywh {0 0 660 335} textfont 4
+          code0 {mountsDisplay->buffer(txtBuffer);}
         }
       }
       Fl_Group {} {
-        label filesystems open
+        label filesystems
+        user_data {"filesystems"}
+        callback tabCB open
         xywh {0 0 660 335} hide
       } {
-        Fl_Browser filesystemsBrowser {
+        Fl_Text_Display filesystemsDisplay {
           xywh {0 0 660 335} textfont 4
+          code0 {filesystemsDisplay->buffer(txtBuffer);}
         }
       }
       Fl_Group {} {
-        label boot open
+        label boot
+        user_data {"boot"}
+        callback tabCB open
         xywh {0 0 660 335} hide
       } {
-        Fl_Browser bootBrowser {
+        Fl_Text_Display bootDisplay {
           xywh {0 0 660 335} textfont 4
+          code0 {bootDisplay->buffer(txtBuffer);}
         }
       }
       Fl_Group {} {
-        label Installed open
+        label Installed
+        user_data {"installed"}
+        callback tabCB open
         xywh {0 0 660 335} hide
       } {
-        Fl_Browser extensionsBrowser {
+        Fl_Text_Display extensionsDisplay {
           xywh {0 0 660 335} textfont 4
+          code0 {extensionsDisplay->buffer(txtBuffer);}
         }
       }
       Fl_Group {} {
-        label bigHomeFiles open
-        xywh {0 5 660 350}
+        label bigHomeFiles
+        user_data {"big"}
+        callback tabCB open
+        xywh {0 5 660 350} hide
       } {
-        Fl_Browser bigHomeBrowser {
-          xywh {0 5 660 350} textfont 4
+        Fl_Text_Display bigDisplay {
+          xywh {0 0 660 335} textfont 4
+          code0 {bigDisplay->buffer(txtBuffer);}
         }
       }
     }
   }
-  code {system("cat /proc/cpuinfo|tee -a stats.txt > /tmp/stats.txt");
-cpuBrowser->load("/tmp/stats.txt");
-system("cat /proc/meminfo|tee -a stats.txt > /tmp/stats.txt");
-memBrowser->load("/tmp/stats.txt");
-system("cat /etc/resolv.conf > /tmp/stats.txt");               
-system("ifconfig >> /tmp/stats.txt");                          
-system("cat /tmp/stats.txt >> stats.txt");
-netBrowser->load("/tmp/stats.txt");
-system("cat /proc/modules | tee /tmp/stats.txt >> stats.txt");
-modulesBrowser->load("/tmp/stats.txt");
-system("ps ax | tee /tmp/stats.txt >> stats.txt");
-processesBrowser->load("/tmp/stats.txt");
-system("dmesg  | tee /tmp/stats.txt >> stats.txt");
-dmesgBrowser->load("/tmp/stats.txt");
-system("mount | tee /tmp/stats.txt  >> stats.txt");
-mountsBrowser->load("/tmp/stats.txt");
-system("df -h | tee /tmp/stats.txt >> stats.txt");
-filesystemsBrowser->load("/tmp/stats.txt");
-system("sed 's/ /\\\\n/g' /proc/cmdline | tee /tmp/stats.txt >> stats.txt");
-bootBrowser->load("/tmp/stats.txt");
-system("ls -1 /usr/local/tce.installed | sort -f | tee /tmp/stats.txt >> stats.txt");
-extensionsBrowser->load("/tmp/stats.txt");
-system("/usr/bin/bigHomeFiles.sh | tee /tmp/stats.txt >> stats.txt");
-bigHomeBrowser->load("/tmp/stats.txt");} {}
+  code {system("/usr/bin/bigHomeFiles.sh > /tmp/stats.txt");
+txtBuffer->loadfile("/tmp/stats.txt");} {}
 } 

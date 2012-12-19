@@ -7,6 +7,9 @@ header_name {.h}
 code_name {.cxx}
 decl {// (c) Robert Shingledecker 2008} {} 
 
+decl {\#include <cstdlib>} {selected
+} 
+
 decl {\#include <iostream>} {} 
 
 decl {\#include <fstream>} {} 
@@ -111,8 +114,7 @@ Function {} {open
 } {
   code {setlocale(LC_ALL, "");
 bindtextdomain("tinycore","/usr/local/share/locale");
-textdomain("tinycore");} {selected
-  }
+textdomain("tinycore");} {}
   Fl_Window {} {open
     xywh {357 547 120 20} type Double hide
   } {

@@ -3,6 +3,7 @@
 #include <libintl.h>
 #include "mnttool.h"
 // (c) Robert Shingledecker 2008
+#include <cstdlib>
 #include <iostream>
 #include <fstream>
 #include <vector>

@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: tctools\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-08-22 10:16+0300\n"
-"PO-Revision-Date: 2010-09-07 20:23+0000\n"
-"Last-Translator: Guillaume Migeon <Unknown>\n"
+"PO-Revision-Date: 2010-09-30 08:02+0000\n"
+"Last-Translator: Ptitphysik <amalpeyre@gmail.com>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-12 09:16+0000\n"
+"X-Launchpad-Export-Date: 2010-11-06 13:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../mousetool/mousetool.cxx:97 ../network/network.cxx:238
@@ -23,7 +23,7 @@ msgstr "&Appliquer"
 
 #: ../fdtool/fdtool.cxx:99
 msgid "&Apply Image"
-msgstr ""
+msgstr "&Appliquer l'image"
 
 #: ../filetool/filetool.cxx:69
 msgid "&Backup"
@@ -44,7 +44,7 @@ msgstr "&Formater"
 
 #: ../fdtool/fdtool.cxx:94
 msgid "&Make Image"
-msgstr ""
+msgstr "&Créer l'image"
 
 #: ../filetool/filetool.cxx:65
 msgid "&None"
@@ -80,7 +80,7 @@ msgstr "@<"
 #: ../datetool/datetool.cxx:149 ../datetool/datetool.cxx:157
 #: ../datetool/datetool.cxx:165 ../mnttool/mnttool.cxx:106
 msgid "@>"
-msgstr ""
+msgstr "@>"
 
 #: ../appbrowser/appbrowser.cxx:383
 msgid "Appbrowser"
@@ -92,7 +92,7 @@ msgstr "Lanceur d'applications"
 
 #: ../cpanel/cpanel.cxx:21
 msgid "Apps Audit"
-msgstr ""
+msgstr "Vérification des applications"
 
 #: ../appsaudit/appsaudit.cxx:405
 msgid "AppsAudit"
@@ -116,7 +116,7 @@ msgstr "Parcourir"
 
 #: ../appsaudit/appsaudit.cxx:362
 msgid "Build Reporting Database"
-msgstr ""
+msgstr "Créer base de données pour faire rapport"
 
 #: ../wallpaper/wallpaper.cxx:99
 msgid "Center"
@@ -128,7 +128,7 @@ msgstr "Vérifier les mises à jour."
 
 #: ../appsaudit/appsaudit.cxx:371
 msgid "Clear Marked for Deletion"
-msgstr ""
+msgstr "decrocher les fichiers marqués pour suppression"
 
 #: ../wallpaper/wallpaper.cxx:113
 msgid "Color"
@@ -140,7 +140,7 @@ msgstr "Connexion"
 
 #: ../fdtool/fdtool.cxx:95
 msgid "Copies floppy to image path entered,"
-msgstr ""
+msgstr "Copie disquette a voie spécifié"
 
 #: ../cpanel/cpanel.cxx:30
 msgid "Date/Time"
@@ -168,7 +168,7 @@ msgstr "Périphérique:"
 
 #: ../appsaudit/appsaudit.cxx:367
 msgid "Display All Not Depended On"
-msgstr ""
+msgstr "Afficher tous les fichiers n'avant pas de dépendances"
 
 #: ../appsaudit/appsaudit.cxx:368
 msgid "Display All with Missing Dependencies"
@@ -180,7 +180,7 @@ msgstr "Afficher tous les fichiers sans dépendance"
 
 #: ../appsaudit/appsaudit.cxx:370
 msgid "Display Marked for Deletion"
-msgstr ""
+msgstr "Afficher les fichiers marqués pour suppression"
 
 #: ../appbrowser/appbrowser.cxx:460
 msgid "DownLoad"
@@ -192,11 +192,11 @@ msgstr "Télécharger uniquement"
 
 #: ../appbrowser/appbrowser.cxx:456
 msgid "Downloads  and updates OnDemand menu."
-msgstr ""
+msgstr "Télécharge et mets à jour le menu SurDemande"
 
 #: ../appbrowser/appbrowser.cxx:451
 msgid "Downloads, updates menu and onboot.lst."
-msgstr ""
+msgstr "Télécharge, mets à jour le menu et onboot.Ist"
 
 #: ../network/network.cxx:241
 msgid "E&xit"
@@ -208,11 +208,11 @@ msgstr "Quitter les options d'installation"
 
 #: ../appsaudit/appsaudit.cxx:384
 msgid "Exit OnBoot"
-msgstr ""
+msgstr "Quitter OnBoot"
 
 #: ../appsaudit/appsaudit.cxx:388
 msgid "Exit OnDemand"
-msgstr ""
+msgstr "Quitter SurDemande"
 
 #: ../appsaudit/appsaudit.cxx:380
 msgid "Exit Update Mode"
@@ -220,7 +220,7 @@ msgstr "Quitter le mode mise à jour"
 
 #: ../exittc/exittc.cxx:102
 msgid "Exit to Prompt"
-msgstr ""
+msgstr "Quitter pour linge de commande"
 
 #: ../appsaudit/appsaudit.cxx:357
 msgid "File"
@@ -232,7 +232,7 @@ msgstr "Fichiers"
 
 #: ../filetool/filetool.cxx:59
 msgid "Filetool"
-msgstr ""
+msgstr "Outil Fichiers"
 
 #: ../wallpaper/wallpaper.cxx:104
 msgid "Fill"
@@ -240,15 +240,15 @@ msgstr "Remplir"
 
 #: ../fdtool/fdtool.cxx:71
 msgid "Floppy Disk Tool"
-msgstr ""
+msgstr "Outil Disquette"
 
 #: ../cpanel/cpanel.cxx:48
 msgid "Floppy Tool"
-msgstr ""
+msgstr "Outil Disquette"
 
 #: ../fdtool/fdtool.cxx:91
 msgid "Formats FAT of selected size."
-msgstr ""
+msgstr "Formatter FAT de taille sélectionné"
 
 #: ../wallpaper/wallpaper.cxx:88
 msgid "Full"
@@ -304,7 +304,7 @@ msgstr "Liste des dépendances manquantes"
 
 #: ../appsaudit/appsaudit.cxx:364
 msgid "List Required By"
-msgstr ""
+msgstr "Liste Requise Par"
 
 #: ../appbrowser/appbrowser.cxx:388
 msgid "Local"
@@ -316,7 +316,7 @@ msgstr "Maintenance"
 
 #: ../swapfile/swapfile.cxx:50
 msgid "Make tc.swap EXT2 Swapfile"
-msgstr ""
+msgstr "Créer fichier d'échange EXT2 tc.swap"
 
 #: ../appsaudit/appsaudit.cxx:369
 msgid "Mark for Deletion"
@@ -336,7 +336,7 @@ msgstr "Mois"
 
 #: ../cpanel/cpanel.cxx:27
 msgid "Mount Tool"
-msgstr ""
+msgstr "Outil de Montage"
 
 #: ../swapfile/swapfile.cxx:52
 msgid "Mounted Partition:"
@@ -369,15 +369,15 @@ msgstr "Ok"
 
 #: ../appbrowser/appbrowser.cxx:450 ../appsaudit/appsaudit.cxx:382
 msgid "OnBoot"
-msgstr ""
+msgstr "SurDemarrage"
 
 #: ../appbrowser/appbrowser.cxx:455 ../appsaudit/appsaudit.cxx:386
 msgid "OnDemand"
-msgstr ""
+msgstr "SurDemande"
 
 #: ../wbar_exclude/wbar_exclude.cxx:59
 msgid "Onboot Items"
-msgstr ""
+msgstr "articles SurDémarrage"
 
 #: ../appsaudit/appsaudit.cxx:358
 msgid "Quit"
@@ -437,7 +437,7 @@ msgstr "État"
 
 #: ../cpanel/cpanel.cxx:36
 msgid "Swapfile Tool"
-msgstr ""
+msgstr "Outil Fichier d'échange"
 
 #: ../cpanel/cpanel.cxx:54
 msgid "System Stats"
@@ -449,7 +449,7 @@ msgstr "Options d'extinction de TC"
 
 #: ../wallpaper/wallpaper.cxx:94
 msgid "Tile"
-msgstr ""
+msgstr "Mosaïquer"
 
 #: ../stats/stats.cxx:35
 msgid "Tiny Core System Stats"
@@ -489,11 +489,11 @@ msgstr "Fond d'écran"
 
 #: ../fdtool/fdtool.cxx:100
 msgid "Writes image path file to floppy."
-msgstr ""
+msgstr "Ecrit fichier de chemin d'image sur la disquette."
 
 #: ../cpanel/cpanel.cxx:45
 msgid "Xvesa Setup"
-msgstr ""
+msgstr "Configuration Xvesa"
 
 #: ../datetool/datetool.cxx:128
 msgid "Year:"
@@ -513,31 +513,31 @@ msgstr "CPU"
 
 #: ../stats/stats.cxx:75
 msgid "dmesg"
-msgstr ""
+msgstr "dmesg"
 
 #: ../wbar_exclude/wbar_exclude.cxx:58
 msgid "eXclude Wbar Icons"
-msgstr ""
+msgstr "exclure icones Wbar"
 
 #: ../wbar_exclude/wbar_exclude.cxx:65
 msgid "eXclude Wbar Items"
-msgstr ""
+msgstr "exclure articles Wbar"
 
 #: ../stats/stats.cxx:103
 msgid "extensions"
-msgstr ""
+msgstr "extensions"
 
 #: ../stats/stats.cxx:89
 msgid "filesystems"
-msgstr ""
+msgstr "systèmes des fichiers"
 
 #: ../flrun/flrun.cxx:55
 msgid "flrun"
-msgstr ""
+msgstr "flrun"
 
 #: ../stats/stats.cxx:47
 msgid "mem"
-msgstr ""
+msgstr "mem"
 
 #: ../stats/stats.cxx:61
 msgid "modules"
@@ -545,24 +545,24 @@ msgstr "modules"
 
 #: ../stats/stats.cxx:82
 msgid "mounts"
-msgstr ""
+msgstr "monter"
 
 #: ../stats/stats.cxx:54
 msgid "net"
-msgstr ""
+msgstr "net"
 
 #: ../network/network.cxx:178 ../network/network.cxx:231
 msgid "no"
-msgstr ""
+msgstr "non"
 
 #: ../stats/stats.cxx:68
 msgid "processes"
-msgstr ""
+msgstr "processus"
 
 #: ../swapfile/swapfile.cxx:54
 msgid "tc.swp in k bytes:"
-msgstr ""
+msgstr "tc.swp après k octets :"
 
 #: ../network/network.cxx:172 ../network/network.cxx:225
 msgid "yes"
-msgstr ""
+msgstr "oui"

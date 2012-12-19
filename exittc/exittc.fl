@@ -1,11 +1,14 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 i18n_type 1 
 i18n_include <libintl.h> 
 i18n_function gettext 
 header_name {.h} 
 code_name {.cxx}
 decl {// (c) Robert Shingledecker 2008-2010} {} 
+
+decl {\#include <cstdlib>} {selected
+} 
 
 decl {\#include <iostream>} {} 
 
@@ -104,8 +107,7 @@ if (userdata == "ok") {
     system( (const char *)commandStr.c_str());
     exit(0);
   }  
-}} {selected
-  }
+}} {}
 } 
 
 Function {} {open

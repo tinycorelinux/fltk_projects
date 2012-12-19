@@ -16,8 +16,32 @@ static string select_extn, select_results;
 static string option_type, report_type, update_type; 
 static ifstream ifaberr; 
 static string aberr, msg; 
-static int results; 
+static int results, locales_set=0; 
 static string copy2fsList, copy2fsFlag, onbootList; 
+
+void cursor_normal() {
+  window->cursor(FL_CURSOR_DEFAULT);
+Fl::flush();
+}
+
+void cursor_wait() {
+  window->cursor(FL_CURSOR_WAIT);
+Fl::flush();
+}
+
+static char * mygettext(const char *msgid) {
+  if (!locales_set) {
+
+setlocale(LC_ALL, "");
+bindtextdomain("tinycore","/usr/local/share/locale");
+textdomain("tinycore");
+
+locales_set=1;
+
+}
+
+return gettext(msgid);
+}
 
 void depends_callback(Fl_Widget *, void* userdata) {
   report_type = (const char*) userdata;
@@ -25,21 +49,20 @@ option_type = "";
 
 if (userdata == "updatedeps")
 {
-   window->cursor(FL_CURSOR_WAIT);
-   Fl::flush();
+   cursor_wait();
    command = "/usr/bin/tce-audit updatedeps " + target_dir +"/";
    system(command.c_str());
-   window->cursor(FL_CURSOR_DEFAULT);
-   Fl::flush();
+   cursor_normal();
 } else if (userdata == "builddb")
 {
-   window->cursor(FL_CURSOR_WAIT);
-   Fl::flush();
+   cursor_wait();
    command = "/usr/bin/tce-audit builddb " + target_dir +"/";
    system(command.c_str());
    string listfile = target_dir + "/tce.lst";
    brw_extn->load(listfile.c_str());
+   brw_extn->remove(brw_extn->size());
    brw_results->load("/tmp/audit_results.txt");
+   brw_results->remove(brw_results->size());
    menu_nodepends->activate();
    menu_notrequired->activate();
    menu_auditall->activate();
@@ -47,8 +70,7 @@ if (userdata == "updatedeps")
    menu_clearlst->activate();
    box_extn->label(target_dir.c_str());
    box_results->label("Results");
-   window->cursor(FL_CURSOR_DEFAULT);
-   Fl::flush();
+   cursor_normal();
 } else if (userdata == "dependson" or userdata == "requiredby" or userdata == "audit") 
 {
    report_type = (const char*) userdata;
@@ -57,6 +79,7 @@ if (userdata == "updatedeps")
    if (results == 0 )
    {
       brw_results->load("/tmp/audit_results.txt");
+      brw_results->remove(brw_results->size());
    } else {
       fl_message("error detected!");
    }
@@ -72,6 +95,7 @@ if (userdata == "updatedeps")
    if (results == 0 )
    {
       brw_results->load("/tmp/audit_results.txt");
+      brw_results->remove(brw_results->size());
    } else {
       ifstream ifaberr("/tmp/aberr");
       msg = "Error: ";
@@ -92,6 +116,7 @@ if (userdata == "updatedeps")
    if (results == 0 )
    {
       brw_results->load("/tmp/audit_results.txt");
+      brw_results->remove(brw_results->size());
    } else {
       fl_message("error detected!");
    }
@@ -99,6 +124,7 @@ if (userdata == "updatedeps")
 {
      box_results->label("Results");
      brw_results->load("/tmp/audit_marked.lst");
+     brw_results->remove(brw_results->size());
 } else if (userdata == "clearlst")
 {
      report_type = (const char*) userdata;
@@ -140,7 +166,9 @@ if (userdata == "default")
    command = "ls " + target_dir + "|grep -E .tcz$ > tce.lst";
    system(command.c_str());
    brw_extn->load("tce.lst");
+   brw_extn->remove(brw_extn->size());
    brw_results->load(copy2fsList.c_str());
+   brw_results->remove(brw_results->size());
    box_results->label("Current copy2fs.lst");
 } else if (userdata == "exit_copy")
 {
@@ -158,15 +186,15 @@ report_type = "";
 if (userdata == "update") 
 {
    brw_extn->clear();
-   window->cursor(FL_CURSOR_WAIT);
-   Fl::flush();
+   brw_results->clear();
+   box_results->label("Results");
+   cursor_wait();
    command = "tce-update list " + target_dir + " > /tmp/apps_upd.lst";
    system(command.c_str());
    box_extn->label(target_dir.c_str());
    brw_extn->load("/tmp/apps_upd.lst");
-   box_results->label("Results");
-   window->cursor(FL_CURSOR_DEFAULT);
-   Fl::flush();
+   brw_extn->remove(brw_extn->size());
+   cursor_normal();
 } else if (userdata == "exit_updates")
 {
     update_type = "";
@@ -183,16 +211,21 @@ void onboot_callback(Fl_Widget *, void* userdata) {
   target_dir = tcedir + "/optional/";
   report_type = "onboot";
   brw_extn->clear();
-  window->cursor(FL_CURSOR_WAIT);
-  Fl::flush();
-  command = "ls " + target_dir + "| egrep .tcz$ > /tmp/apps_sel.lst";
-  system(command.c_str());
-  box_extn->label(target_dir.c_str());
-  brw_extn->load("/tmp/apps_sel.lst");
+  cursor_wait();
+  
+  command = "ondemand -l ";
+  results = system(command.c_str());
+  if (results == 0 ) {
+     box_extn->label(target_dir.c_str());
+     brw_extn->load("/tmp/ondemand.tmp");
+     brw_extn->remove(brw_extn->size());
+  }
+  
   box_results->label("On Boot Items");
   brw_results->load(onbootList.c_str());
-  window->cursor(FL_CURSOR_DEFAULT);
-  Fl::flush();
+  brw_results->remove(brw_results->size());
+  
+  cursor_normal();
 }
  
 if (userdata == "exit_onboot")
@@ -212,21 +245,24 @@ void ondemand_callback(Fl_Widget *, void* userdata) {
 {
   report_type = "ondemand";
   brw_extn->clear();
-  window->cursor(FL_CURSOR_WAIT);
-  Fl::flush();
+  cursor_wait();
   command = "ondemand -l";
   system(command.c_str());
+  
   box_extn->label("Select for OnDemand");
   brw_extn->load("/tmp/ondemand.tmp");
+  brw_extn->remove(brw_extn->size());
+  
   brw_results->clear();
   box_results->label("Current OnDemand Items");
   command = "ls -1 "+ tcedir + "/ondemand 2>/dev/null | sort -f > /tmp/ondemand.tmp";
   results = system(command.c_str());
-  if (results == 0 )
+  if (results == 0 ) {
     brw_results->load("/tmp/ondemand.tmp");
+    brw_results->remove(brw_results->size());
+  }  
   unlink("/tmp/ondemand.tmp");
-  window->cursor(FL_CURSOR_DEFAULT);
-  Fl::flush();
+  cursor_normal();
 }
  
 if (userdata == "exit_ondemand")
@@ -266,46 +302,50 @@ void brw_extn_callback(Fl_Widget *, void *) {
      command = "echo " + select_extn + " >> " + copy2fsList;
      system(command.c_str());
      brw_results->load(copy2fsList.c_str());
+     brw_results->remove(brw_results->size());
    }
    if ( update_type == "update" )
    {
-     window->cursor(FL_CURSOR_WAIT);
-     Fl::flush();
+     cursor_wait();
      command = "tce-update update " + target_dir +"/" + select_extn + ".md5.txt >/tmp/apps_upd.lst";
      brw_results->load("");
      system(command.c_str());
      brw_results->load("/tmp/apps_upd.lst");
-     window->cursor(FL_CURSOR_DEFAULT);
-     Fl::flush();
+     brw_results->remove(brw_results->size());
+     cursor_normal();
    }
    
    if ( report_type == "onboot" && not_duplicate )
    {
      command = "echo " + select_extn + " >> " + onbootList;
      system(command.c_str());
+     brw_extn->remove(brw_extn->value());
      box_results->label("On Boot Items");
      brw_results->load(onbootList.c_str());
+     brw_results->remove(brw_results->size());
    }
       
    if ( report_type == "ondemand" )
    {
-     window->cursor(FL_CURSOR_WAIT);
-     Fl::flush();
+     cursor_wait();
      box_results->label("Current OnDemand Items");
      command = "ondemand " + select_extn;
-//     cout << command << endl;
      brw_results->load("");
      results = system(command.c_str());
      if ( results == 0 ) 
      {
        command = "ls -1 " + tcedir + "/ondemand | sort -f > /tmp/ondemand.tmp";
        results = system(command.c_str());
-       if (results == 0 )
+       if (results == 0 ) {
+         brw_extn->remove(brw_extn->value());
          brw_results->load("/tmp/ondemand.tmp");
-     } else  
+         brw_results->remove(brw_results->size());
+       }
+     } else { 
          brw_results->load("/tmp/ondemand.tmp");
-     window->cursor(FL_CURSOR_DEFAULT);
-     Fl::flush();
+         brw_results->remove(brw_results->size());
+     }    
+     cursor_normal();
    }
 }
 }
@@ -319,6 +359,7 @@ void brw_results_callback(Fl_Widget *, void *) {
      command = "sed -i '/" + select_results + "/d' " + copy2fsList;
      system(command.c_str());
      brw_results->load(copy2fsList.c_str());
+     brw_results->remove(brw_results->size());
    }
    if (report_type == "delete" or report_type == "display_marked")
    {
@@ -326,33 +367,48 @@ void brw_results_callback(Fl_Widget *, void *) {
      command = "sed -i '/" + target + "/d' /tmp/audit_marked.lst";
      system(command.c_str());
      brw_results->load("/tmp/audit_marked.lst");
+     brw_results->remove(brw_results->size());
    }
    if (report_type == "onboot")
    {
      command = "sed -i '/" + select_results + "/d' " + onbootList;
      system(command.c_str());
+     target_dir = tcedir + "/optional/";
+     report_type = "onboot";
+     brw_extn->clear();
+     cursor_wait();
+  
+     command = "ondemand -l ";
+     results = system(command.c_str());
+     if (results == 0 ) {
+        box_extn->label(target_dir.c_str());
+        brw_extn->load("/tmp/ondemand.tmp");
+        brw_extn->remove(brw_extn->size());
+     }
+  
      box_results->label("On Boot Items");
      brw_results->load(onbootList.c_str());
+     brw_results->remove(brw_results->size());
+  
+     cursor_normal();
    }  
 
    if (report_type == "ondemand")
    {
-     command = "rm -f " + tcedir + "/ondemand/" + select_results;
+     command = "ondemand -r " + select_results;
      system(command.c_str());   
-     command = "rm -f " + tcedir + "/ondemand.ico/" + select_results + ".i* 2>/dev/null";
-     system(command.c_str());   
-     command = "wbar_rm_icon " + select_results + ".img 2>/dev/null";
-     system(command.c_str());   
-     command = "wbar.sh 2>/dev/null";
-     system(command.c_str());   
-     command = "[ $(which " + desktop + "_ondemand) ] && " + desktop +"_ondemand 2>/dev/null";
-     system(command.c_str());   
-     command = "[ $(which " + desktop + "_restart) ] && " + desktop +"_restart 2>/dev/null";
-     system(command.c_str());   
-     command = "ls -1 "+ tcedir + "/ondemand > /tmp/ondemand.tmp";
+     command = "ondemand -l ";
      results = system(command.c_str());
-     if (results == 0 )
+     if (results == 0 ) {
+       brw_extn->load("/tmp/ondemand.tmp");
+       brw_extn->remove(brw_extn->size());
+     }  
+     command = "ls -1 " + tcedir + "/ondemand | sort -f > /tmp/ondemand.tmp";
+     results = system(command.c_str());
+     if (results == 0 ) {
        brw_results->load("/tmp/ondemand.tmp");
+       brw_results->remove(brw_results->size());
+     }  
      unlink("/tmp/ondemand.tmp");
    }  
 }
@@ -361,38 +417,38 @@ void brw_results_callback(Fl_Widget *, void *) {
 Fl_Double_Window *window=(Fl_Double_Window *)0;
 
 Fl_Menu_Item menu_[] = {
- {gettext("File"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Quit"), 0,  (Fl_Callback*)depends_callback, (void*)("quit"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("File"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Quit"), 0,  (Fl_Callback*)depends_callback, (void*)("quit"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
- {gettext("Dependencies"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Update .dep files."), 0,  (Fl_Callback*)depends_callback, (void*)("updatedeps"), 0, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Build Reporting Database"), 0,  (Fl_Callback*)depends_callback, (void*)("builddb"), 0, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("List Dependencies"), 0,  (Fl_Callback*)depends_callback, (void*)("dependson"), 1, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("List Required By"), 0,  (Fl_Callback*)depends_callback, (void*)("requiredby"), 1, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("List Missing Dependencies"), 0,  (Fl_Callback*)depends_callback, (void*)("audit"), 1, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Display All with No Dependencies"), 0,  (Fl_Callback*)depends_callback, (void*)("nodepends"), 1, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Display All Not Depended On"), 0,  (Fl_Callback*)depends_callback, (void*)("notrequired"), 1, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Display All with Missing Dependencies"), 0,  (Fl_Callback*)depends_callback, (void*)("auditall"), 1, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Mark for Deletion"), 0,  (Fl_Callback*)depends_callback, (void*)("delete"), 1, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Display Marked for Deletion"), 0,  (Fl_Callback*)depends_callback, (void*)("display_marked"), 1, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Clear Marked for Deletion"), 0,  (Fl_Callback*)depends_callback, (void*)("clearlst"), 1, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Dependencies"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Update .dep files."), 0,  (Fl_Callback*)depends_callback, (void*)("updatedeps"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Build Reporting Database"), 0,  (Fl_Callback*)depends_callback, (void*)("builddb"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("List Dependencies"), 0,  (Fl_Callback*)depends_callback, (void*)("dependson"), 1, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("List Required By"), 0,  (Fl_Callback*)depends_callback, (void*)("requiredby"), 1, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("List Missing Dependencies"), 0,  (Fl_Callback*)depends_callback, (void*)("audit"), 1, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Display All with No Dependencies"), 0,  (Fl_Callback*)depends_callback, (void*)("nodepends"), 1, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Display All Not Depended On"), 0,  (Fl_Callback*)depends_callback, (void*)("notrequired"), 1, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Display All with Missing Dependencies"), 0,  (Fl_Callback*)depends_callback, (void*)("auditall"), 1, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Mark for Deletion"), 0,  (Fl_Callback*)depends_callback, (void*)("delete"), 1, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Display Marked for Deletion"), 0,  (Fl_Callback*)depends_callback, (void*)("display_marked"), 1, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Clear Marked for Deletion"), 0,  (Fl_Callback*)depends_callback, (void*)("clearlst"), 1, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
- {gettext("Install Options"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Toggle Default Copy Install"), 0,  (Fl_Callback*)options_callback, (void*)("default"), 0, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Selective Copy Install"), 0,  (Fl_Callback*)options_callback, (void*)("select"), 0, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Exit Install Options"), 0,  (Fl_Callback*)options_callback, (void*)("exit_copy"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Install Options"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Toggle Default Copy Install"), 0,  (Fl_Callback*)options_callback, (void*)("default"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Selective Copy Install"), 0,  (Fl_Callback*)options_callback, (void*)("select"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Exit Install Options"), 0,  (Fl_Callback*)options_callback, (void*)("exit_copy"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
- {gettext("Updates"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Check for Updates"), 0,  (Fl_Callback*)updates_callback, (void*)("update"), 0, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Exit Update Mode"), 0,  (Fl_Callback*)updates_callback, (void*)("exit_updates"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Updates"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Check for Updates"), 0,  (Fl_Callback*)updates_callback, (void*)("update"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Exit Update Mode"), 0,  (Fl_Callback*)updates_callback, (void*)("exit_updates"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
- {gettext("OnBoot"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Maintenance"), 0,  (Fl_Callback*)onboot_callback, (void*)("onboot"), 0, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Exit OnBoot"), 0,  (Fl_Callback*)onboot_callback, (void*)("exit_onboot"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("OnBoot"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Maintenance"), 0,  (Fl_Callback*)onboot_callback, (void*)("onboot"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Exit OnBoot"), 0,  (Fl_Callback*)onboot_callback, (void*)("exit_onboot"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
- {gettext("OnDemand"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Maintenance"), 0,  (Fl_Callback*)ondemand_callback, (void*)("ondemand"), 0, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Exit OnDemand"), 0,  (Fl_Callback*)ondemand_callback, (void*)("exit_ondemand"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("OnDemand"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Maintenance"), 0,  (Fl_Callback*)ondemand_callback, (void*)("ondemand"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Exit OnDemand"), 0,  (Fl_Callback*)ondemand_callback, (void*)("exit_ondemand"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
  {0,0,0,0,0,0,0,0,0}
 };
@@ -406,10 +462,7 @@ Fl_Browser *brw_extn=(Fl_Browser *)0;
 Fl_Browser *brw_results=(Fl_Browser *)0;
 
 int main(int argc, char **argv) {
-  setlocale(LC_ALL, "");
-bindtextdomain("tinycore","/usr/local/share/locale");
-textdomain("tinycore");
-  { window = new Fl_Double_Window(675, 375, gettext("AppsAudit"));
+  { window = new Fl_Double_Window(675, 375, mygettext("AppsAudit"));
     window->callback((Fl_Callback*)onboot_callback, (void*)("quit"));
     { Fl_Menu_Bar* o = new Fl_Menu_Bar(0, 0, 685, 20);
       o->menu(menu_);
@@ -418,7 +471,7 @@ textdomain("tinycore");
       box_extn->labelfont(1);
       box_extn->align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE);
     } // Fl_Box* box_extn
-    { box_results = new Fl_Box(225, 24, 430, 16, gettext("Results"));
+    { box_results = new Fl_Box(225, 24, 430, 16, mygettext("Results"));
       box_results->labelfont(1);
     } // Fl_Box* box_results
     { brw_extn = new Fl_Browser(0, 45, 200, 325);

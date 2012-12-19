@@ -8,31 +8,31 @@ msgstr ""
 "Project-Id-Version: tctools\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-08-22 10:16+0300\n"
-"PO-Revision-Date: 2010-09-09 17:06+0000\n"
+"PO-Revision-Date: 2010-09-14 14:33+0000\n"
 "Last-Translator: Onyarian <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-12 09:16+0000\n"
+"X-Launchpad-Export-Date: 2010-11-06 13:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../mousetool/mousetool.cxx:97 ../network/network.cxx:238
 msgid "&Apply"
-msgstr "&Aplicar"
+msgstr "&Aplica"
 
 #: ../fdtool/fdtool.cxx:99
 msgid "&Apply Image"
-msgstr "&Aplica Imagen"
+msgstr "&Graba Imag."
 
 #: ../filetool/filetool.cxx:69
 msgid "&Backup"
-msgstr "Copia &seg."
+msgstr "Cp. &seg"
 
 #: ../datetool/datetool.cxx:171 ../exittc/exittc.cxx:122
 #: ../fdtool/fdtool.cxx:104 ../flrun/flrun.cxx:66 ../swapfile/swapfile.cxx:56
 msgid "&Cancel"
-msgstr "&Cancelar"
+msgstr "&Cancela"
 
 #: ../mousetool/mousetool.cxx:100
 msgid "&Exit"
@@ -52,15 +52,15 @@ msgstr "&Nada"
 
 #: ../datetool/datetool.cxx:168 ../exittc/exittc.cxx:119
 msgid "&OK"
-msgstr "&Aceptar"
+msgstr "&Acepta"
 
 #: ../swapfile/swapfile.cxx:59
 msgid "&Proceed"
-msgstr "&Proceder"
+msgstr "&Procede"
 
 #: ../filetool/filetool.cxx:73
 msgid "&Restore"
-msgstr "&Restaurar"
+msgstr "&Restaura"
 
 #: ../fdtool/fdtool.cxx:75
 msgid "1440k"
@@ -92,19 +92,19 @@ msgstr "Lanzador de aplicaciones"
 
 #: ../cpanel/cpanel.cxx:21
 msgid "Apps Audit"
-msgstr "Revisor Aplicaciones"
+msgstr "Auditor Aplic."
 
 #: ../appsaudit/appsaudit.cxx:405
 msgid "AppsAudit"
-msgstr "Revisor Aplicaciones"
+msgstr "Auditor Aplic."
 
 #: ../exittc/exittc.cxx:113
 msgid "Backup"
-msgstr "Copia de seguridad"
+msgstr "Cp seg."
 
 #: ../cpanel/cpanel.cxx:24
 msgid "Backup/Restore"
-msgstr "Guardar/Restaurar"
+msgstr "Guarda/Restaura"
 
 #: ../network/network.cxx:200
 msgid "Broadcast"
@@ -164,7 +164,7 @@ msgstr "Depende de"
 
 #: ../filetool/filetool.cxx:61
 msgid "Device:"
-msgstr "Dispositivo:"
+msgstr "Unidad:"
 
 #: ../appsaudit/appsaudit.cxx:367
 msgid "Display All Not Depended On"
@@ -172,7 +172,7 @@ msgstr "Mostrar los no dependientes"
 
 #: ../appsaudit/appsaudit.cxx:368
 msgid "Display All with Missing Dependencies"
-msgstr "Mostrar aquellos con dependencias perdidas"
+msgstr "Mostrar con dependencias perdidas"
 
 #: ../appsaudit/appsaudit.cxx:366
 msgid "Display All with No Dependencies"
@@ -180,19 +180,19 @@ msgstr "Mostrar aquellos sin dependencias"
 
 #: ../appsaudit/appsaudit.cxx:370
 msgid "Display Marked for Deletion"
-msgstr "Mostrar los marcados para eliminar"
+msgstr "Mostrar marcados para eliminar"
 
 #: ../appbrowser/appbrowser.cxx:460
 msgid "DownLoad"
-msgstr "Descargar"
+msgstr "Descarga"
 
 #: ../appbrowser/appbrowser.cxx:461
 msgid "Download Only."
-msgstr "Solo descargar"
+msgstr "Solo descarga"
 
 #: ../appbrowser/appbrowser.cxx:456
 msgid "Downloads  and updates OnDemand menu."
-msgstr "Descargar y actualizar el menu ADemanda"
+msgstr "Descarga y actualiza menu ADemanda"
 
 #: ../appbrowser/appbrowser.cxx:451
 msgid "Downloads, updates menu and onboot.lst."
@@ -204,19 +204,19 @@ msgstr "&Salir"
 
 #: ../appsaudit/appsaudit.cxx:376
 msgid "Exit Install Options"
-msgstr "Salir de Opciones instalación"
+msgstr "Salir Opciones instalación"
 
 #: ../appsaudit/appsaudit.cxx:384
 msgid "Exit OnBoot"
-msgstr "Salir de EnArranque"
+msgstr "Salir EnArranque"
 
 #: ../appsaudit/appsaudit.cxx:388
 msgid "Exit OnDemand"
-msgstr "Salir de ADemanda"
+msgstr "Salir ADemanda"
 
 #: ../appsaudit/appsaudit.cxx:380
 msgid "Exit Update Mode"
-msgstr "Salir de Modo actualización"
+msgstr "Salir Modo actualización"
 
 #: ../exittc/exittc.cxx:102
 msgid "Exit to Prompt"
@@ -232,7 +232,7 @@ msgstr "Archivos"
 
 #: ../filetool/filetool.cxx:59
 msgid "Filetool"
-msgstr "Grabar/Restauar"
+msgstr "Guarda/Restaura"
 
 #: ../wallpaper/wallpaper.cxx:104
 msgid "Fill"
@@ -272,7 +272,7 @@ msgstr "Dirección IP"
 
 #: ../fdtool/fdtool.cxx:86
 msgid "Image Path:"
-msgstr "Ruta para imagen"
+msgstr "Ruta imagen:"
 
 #: ../appbrowser/appbrowser.cxx:415
 msgid "Info"
@@ -304,7 +304,7 @@ msgstr "Listar dependencias perdidas"
 
 #: ../appsaudit/appsaudit.cxx:364
 msgid "List Required By"
-msgstr "Listar los requeridos por"
+msgstr "Listar requeridos por"
 
 #: ../appbrowser/appbrowser.cxx:388
 msgid "Local"
@@ -316,7 +316,7 @@ msgstr "Mantenimiento"
 
 #: ../swapfile/swapfile.cxx:50
 msgid "Make tc.swap EXT2 Swapfile"
-msgstr "Crea archivo intercambio EXT2 tc.swap"
+msgstr "Crea arch. tc.swap EXT2"
 
 #: ../appsaudit/appsaudit.cxx:369
 msgid "Mark for Deletion"
@@ -352,7 +352,7 @@ msgstr "Herr. Ratón"
 
 #: ../network/network.cxx:212
 msgid "NameServers"
-msgstr "DNSServidores"
+msgstr "Servidores DNS"
 
 #: ../cpanel/cpanel.cxx:42 ../network/network.cxx:157
 #: ../network/network.cxx:159
@@ -365,7 +365,7 @@ msgstr "Máscara de red"
 
 #: ../flrun/flrun.cxx:63
 msgid "OK"
-msgstr "Aceptar"
+msgstr "Acepta"
 
 #: ../appbrowser/appbrowser.cxx:450 ../appsaudit/appsaudit.cxx:382
 msgid "OnBoot"
@@ -381,7 +381,7 @@ msgstr "Items EnArranque"
 
 #: ../appsaudit/appsaudit.cxx:358
 msgid "Quit"
-msgstr "Cerrar"
+msgstr "Salir"
 
 #: ../exittc/exittc.cxx:97
 msgid "Reboot"
@@ -397,7 +397,7 @@ msgstr "Botón derecho"
 
 #: ../cpanel/cpanel.cxx:63
 msgid "Run Command"
-msgstr "Ejecutar comando"
+msgstr "Ejecuta comando"
 
 #: ../network/network.cxx:222
 msgid "Save Configuration?"

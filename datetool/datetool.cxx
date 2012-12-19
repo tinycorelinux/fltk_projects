@@ -3,8 +3,10 @@
 #include <libintl.h>
 #include "datetool.h"
 // (c) Robert Shingledecker 2008
+#include <cstdlib>
 #include <iostream>
 #include <sstream>
+#include <fstream>
 #include <string>
 #include <locale.h>
 using namespace std;

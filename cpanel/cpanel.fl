@@ -7,6 +7,8 @@ header_name {.h}
 code_name {.cxx}
 decl {// (c) Robert Shingledecker 2008-2010} {} 
 
+decl {\#include <cstdlib>} {} 
+
 decl {\#include <iostream>} {} 
 
 decl {\#include <locale.h>} {} 
@@ -23,7 +25,8 @@ Function {} {open
   code {setlocale(LC_ALL, "");
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");} {}
-  Fl_Window {} {open selected
+  Fl_Window {} {
+    label ControlPanel open selected
     xywh {38 388 405 215} type Double hide
   } {
     Fl_Button {} {

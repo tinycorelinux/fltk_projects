@@ -2,7 +2,7 @@
 version 1.0110 
 i18n_type 1 
 i18n_include <libintl.h> 
-i18n_function gettext 
+i18n_function mygettext 
 header_name {.h} 
 code_name {.cxx}
 decl {// (c) Robert Shingledecker 2009-2010} {} 
@@ -33,9 +33,36 @@ decl {ifstream ifaberr;} {}
 
 decl {string aberr, msg;} {} 
 
-decl {int results;} {} 
+decl {int results, locales_set=0;} {} 
 
 decl {string copy2fsList, copy2fsFlag, onbootList;} {} 
+
+Function {cursor_normal()} {open return_type void
+} {
+  code {window->cursor(FL_CURSOR_DEFAULT);
+Fl::flush();} {}
+} 
+
+Function {cursor_wait()} {open return_type void
+} {
+  code {window->cursor(FL_CURSOR_WAIT);
+Fl::flush();} {}
+} 
+
+Function {mygettext(const char *msgid)} {open private return_type {char *}
+} {
+  code {if (!locales_set) {
+
+setlocale(LC_ALL, "");
+bindtextdomain("tinycore","/usr/local/share/locale");
+textdomain("tinycore");
+
+locales_set=1;
+
+}
+
+return gettext(msgid);} {}
+} 
 
 Function {depends_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
 } {
@@ -44,21 +71,20 @@ option_type = "";
 
 if (userdata == "updatedeps")
 {
-   window->cursor(FL_CURSOR_WAIT);
-   Fl::flush();
+   cursor_wait();
    command = "/usr/bin/tce-audit updatedeps " + target_dir +"/";
    system(command.c_str());
-   window->cursor(FL_CURSOR_DEFAULT);
-   Fl::flush();
+   cursor_normal();
 } else if (userdata == "builddb")
 {
-   window->cursor(FL_CURSOR_WAIT);
-   Fl::flush();
+   cursor_wait();
    command = "/usr/bin/tce-audit builddb " + target_dir +"/";
    system(command.c_str());
    string listfile = target_dir + "/tce.lst";
    brw_extn->load(listfile.c_str());
+   brw_extn->remove(brw_extn->size());
    brw_results->load("/tmp/audit_results.txt");
+   brw_results->remove(brw_results->size());
    menu_nodepends->activate();
    menu_notrequired->activate();
    menu_auditall->activate();
@@ -66,8 +92,7 @@ if (userdata == "updatedeps")
    menu_clearlst->activate();
    box_extn->label(target_dir.c_str());
    box_results->label("Results");
-   window->cursor(FL_CURSOR_DEFAULT);
-   Fl::flush();
+   cursor_normal();
 } else if (userdata == "dependson" or userdata == "requiredby" or userdata == "audit") 
 {
    report_type = (const char*) userdata;
@@ -76,6 +101,7 @@ if (userdata == "updatedeps")
    if (results == 0 )
    {
       brw_results->load("/tmp/audit_results.txt");
+      brw_results->remove(brw_results->size());
    } else {
       fl_message("error detected!");
    }
@@ -91,6 +117,7 @@ if (userdata == "updatedeps")
    if (results == 0 )
    {
       brw_results->load("/tmp/audit_results.txt");
+      brw_results->remove(brw_results->size());
    } else {
       ifstream ifaberr("/tmp/aberr");
       msg = "Error: ";
@@ -111,6 +138,7 @@ if (userdata == "updatedeps")
    if (results == 0 )
    {
       brw_results->load("/tmp/audit_results.txt");
+      brw_results->remove(brw_results->size());
    } else {
       fl_message("error detected!");
    }
@@ -118,6 +146,7 @@ if (userdata == "updatedeps")
 {
      box_results->label("Results");
      brw_results->load("/tmp/audit_marked.lst");
+     brw_results->remove(brw_results->size());
 } else if (userdata == "clearlst")
 {
      report_type = (const char*) userdata;
@@ -160,7 +189,9 @@ if (userdata == "default")
    command = "ls " + target_dir + "|grep -E .tcz$ > tce.lst";
    system(command.c_str());
    brw_extn->load("tce.lst");
+   brw_extn->remove(brw_extn->size());
    brw_results->load(copy2fsList.c_str());
+   brw_results->remove(brw_results->size());
    box_results->label("Current copy2fs.lst");
 } else if (userdata == "exit_copy")
 {
@@ -179,15 +210,15 @@ report_type = "";
 if (userdata == "update") 
 {
    brw_extn->clear();
-   window->cursor(FL_CURSOR_WAIT);
-   Fl::flush();
+   brw_results->clear();
+   box_results->label("Results");
+   cursor_wait();
    command = "tce-update list " + target_dir + " > /tmp/apps_upd.lst";
    system(command.c_str());
    box_extn->label(target_dir.c_str());
    brw_extn->load("/tmp/apps_upd.lst");
-   box_results->label("Results");
-   window->cursor(FL_CURSOR_DEFAULT);
-   Fl::flush();
+   brw_extn->remove(brw_extn->size());
+   cursor_normal();
 } else if (userdata == "exit_updates")
 {
     update_type = "";
@@ -205,16 +236,21 @@ Function {onboot_callback(Fl_Widget *, void* userdata)} {open return_type {stati
   target_dir = tcedir + "/optional/";
   report_type = "onboot";
   brw_extn->clear();
-  window->cursor(FL_CURSOR_WAIT);
-  Fl::flush();
-  command = "ls " + target_dir + "| egrep .tcz$ > /tmp/apps_sel.lst";
-  system(command.c_str());
-  box_extn->label(target_dir.c_str());
-  brw_extn->load("/tmp/apps_sel.lst");
+  cursor_wait();
+  
+  command = "ondemand -l ";
+  results = system(command.c_str());
+  if (results == 0 ) {
+     box_extn->label(target_dir.c_str());
+     brw_extn->load("/tmp/ondemand.tmp");
+     brw_extn->remove(brw_extn->size());
+  }
+  
   box_results->label("On Boot Items");
   brw_results->load(onbootList.c_str());
-  window->cursor(FL_CURSOR_DEFAULT);
-  Fl::flush();
+  brw_results->remove(brw_results->size());
+  
+  cursor_normal();
 }
  
 if (userdata == "exit_onboot")
@@ -235,21 +271,24 @@ Function {ondemand_callback(Fl_Widget *, void* userdata)} {open return_type {sta
 {
   report_type = "ondemand";
   brw_extn->clear();
-  window->cursor(FL_CURSOR_WAIT);
-  Fl::flush();
+  cursor_wait();
   command = "ondemand -l";
   system(command.c_str());
+  
   box_extn->label("Select for OnDemand");
   brw_extn->load("/tmp/ondemand.tmp");
+  brw_extn->remove(brw_extn->size());
+  
   brw_results->clear();
   box_results->label("Current OnDemand Items");
   command = "ls -1 "+ tcedir + "/ondemand 2>/dev/null | sort -f > /tmp/ondemand.tmp";
   results = system(command.c_str());
-  if (results == 0 )
+  if (results == 0 ) {
     brw_results->load("/tmp/ondemand.tmp");
+    brw_results->remove(brw_results->size());
+  }  
   unlink("/tmp/ondemand.tmp");
-  window->cursor(FL_CURSOR_DEFAULT);
-  Fl::flush();
+  cursor_normal();
 }
  
 if (userdata == "exit_ondemand")
@@ -290,48 +329,53 @@ Function {brw_extn_callback(Fl_Widget *, void *)} {open return_type {static void
      command = "echo " + select_extn + " >> " + copy2fsList;
      system(command.c_str());
      brw_results->load(copy2fsList.c_str());
+     brw_results->remove(brw_results->size());
    }
    if ( update_type == "update" )
    {
-     window->cursor(FL_CURSOR_WAIT);
-     Fl::flush();
+     cursor_wait();
      command = "tce-update update " + target_dir +"/" + select_extn + ".md5.txt >/tmp/apps_upd.lst";
      brw_results->load("");
      system(command.c_str());
      brw_results->load("/tmp/apps_upd.lst");
-     window->cursor(FL_CURSOR_DEFAULT);
-     Fl::flush();
+     brw_results->remove(brw_results->size());
+     cursor_normal();
    }
    
    if ( report_type == "onboot" && not_duplicate )
    {
      command = "echo " + select_extn + " >> " + onbootList;
      system(command.c_str());
+     brw_extn->remove(brw_extn->value());
      box_results->label("On Boot Items");
      brw_results->load(onbootList.c_str());
+     brw_results->remove(brw_results->size());
    }
       
    if ( report_type == "ondemand" )
    {
-     window->cursor(FL_CURSOR_WAIT);
-     Fl::flush();
+     cursor_wait();
      box_results->label("Current OnDemand Items");
      command = "ondemand " + select_extn;
-//     cout << command << endl;
      brw_results->load("");
      results = system(command.c_str());
      if ( results == 0 ) 
      {
        command = "ls -1 " + tcedir + "/ondemand | sort -f > /tmp/ondemand.tmp";
        results = system(command.c_str());
-       if (results == 0 )
+       if (results == 0 ) {
+         brw_extn->remove(brw_extn->value());
          brw_results->load("/tmp/ondemand.tmp");
-     } else  
+         brw_results->remove(brw_results->size());
+       }
+     } else { 
          brw_results->load("/tmp/ondemand.tmp");
-     window->cursor(FL_CURSOR_DEFAULT);
-     Fl::flush();
+         brw_results->remove(brw_results->size());
+     }    
+     cursor_normal();
    }
-}} {}
+}} {selected
+  }
 } 
 
 Function {brw_results_callback(Fl_Widget *, void *)} {open return_type {static void}
@@ -344,6 +388,7 @@ Function {brw_results_callback(Fl_Widget *, void *)} {open return_type {static v
      command = "sed -i '/" + select_results + "/d' " + copy2fsList;
      system(command.c_str());
      brw_results->load(copy2fsList.c_str());
+     brw_results->remove(brw_results->size());
    }
    if (report_type == "delete" or report_type == "display_marked")
    {
@@ -351,44 +396,55 @@ Function {brw_results_callback(Fl_Widget *, void *)} {open return_type {static v
      command = "sed -i '/" + target + "/d' /tmp/audit_marked.lst";
      system(command.c_str());
      brw_results->load("/tmp/audit_marked.lst");
+     brw_results->remove(brw_results->size());
    }
    if (report_type == "onboot")
    {
      command = "sed -i '/" + select_results + "/d' " + onbootList;
      system(command.c_str());
+     target_dir = tcedir + "/optional/";
+     report_type = "onboot";
+     brw_extn->clear();
+     cursor_wait();
+  
+     command = "ondemand -l ";
+     results = system(command.c_str());
+     if (results == 0 ) {
+        box_extn->label(target_dir.c_str());
+        brw_extn->load("/tmp/ondemand.tmp");
+        brw_extn->remove(brw_extn->size());
+     }
+  
      box_results->label("On Boot Items");
      brw_results->load(onbootList.c_str());
+     brw_results->remove(brw_results->size());
+  
+     cursor_normal();
    }  
 
    if (report_type == "ondemand")
    {
-     command = "rm -f " + tcedir + "/ondemand/" + select_results;
+     command = "ondemand -r " + select_results;
      system(command.c_str());   
-     command = "rm -f " + tcedir + "/ondemand.ico/" + select_results + ".i* 2>/dev/null";
-     system(command.c_str());   
-     command = "wbar_rm_icon " + select_results + ".img 2>/dev/null";
-     system(command.c_str());   
-     command = "wbar.sh 2>/dev/null";
-     system(command.c_str());   
-     command = "[ $(which " + desktop + "_ondemand) ] && " + desktop +"_ondemand 2>/dev/null";
-     system(command.c_str());   
-     command = "[ $(which " + desktop + "_restart) ] && " + desktop +"_restart 2>/dev/null";
-     system(command.c_str());   
-     command = "ls -1 "+ tcedir + "/ondemand > /tmp/ondemand.tmp";
+     command = "ondemand -l ";
      results = system(command.c_str());
-     if (results == 0 )
+     if (results == 0 ) {
+       brw_extn->load("/tmp/ondemand.tmp");
+       brw_extn->remove(brw_extn->size());
+     }  
+     command = "ls -1 " + tcedir + "/ondemand | sort -f > /tmp/ondemand.tmp";
+     results = system(command.c_str());
+     if (results == 0 ) {
        brw_results->load("/tmp/ondemand.tmp");
+       brw_results->remove(brw_results->size());
+     }  
      unlink("/tmp/ondemand.tmp");
    }  
-}} {selected
-  }
+}} {}
 } 
 
 Function {} {open
 } {
-  code {setlocale(LC_ALL, "");
-bindtextdomain("tinycore","/usr/local/share/locale");
-textdomain("tinycore");} {}
   Fl_Window window {
     label AppsAudit
     user_data {"quit"}

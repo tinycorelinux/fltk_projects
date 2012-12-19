@@ -1,11 +1,13 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 i18n_type 1 
 i18n_include <libintl.h> 
 i18n_function gettext 
 header_name {.h} 
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2008} {} 
+decl {// (c) Robert Shingledecker 2008-2010} {} 
+
+decl {\# include <cstdlib>} {} 
 
 decl {\#include <iostream>} {} 
 
@@ -27,9 +29,8 @@ decl {string command = "sudo /usr/bin/filetool.sh ";} {}
 
 Function {input_callback(Fl_Widget*, void*)} {open return_type {static void}
 } {
-  code {btn_none->activate();
-btn_backup->activate();
-btn_restore->activate();} {}
+  code {filetool_choice->activate();
+btn_go->activate();} {}
 } 
 
 Function {btn_callback(Fl_Widget*, void* userdata)} {open return_type {static void}
@@ -37,19 +38,43 @@ Function {btn_callback(Fl_Widget*, void* userdata)} {open return_type {static vo
   code {device_name = (const char*)input_device->value();
 if (device_name.size() == 0)
    return;
-if (userdata == "none")
+   
+string action;   
+int filetool_action = filetool_choice->value();
+switch(filetool_action)
+{
+   case 0  : action = "none";
+             break;
+   case 1  : action = "-b";
+             break;
+   case 2  : action = "-bs";
+             break;
+   case 3  : action = "-r";
+             break;
+   default : action = "-b";
+}             
+   
+if (action == "none")
 {
    if (fl_ask("This will clear the selected backup device\\nand prevent the backup from occuring."))
    {
       system("> /opt/.backup_device");
       exit(0);
    }
+   return;
 }
 
-string action = (const char*)userdata;
-command += action + " " + device_name;
 
-if (system(command.c_str()) !=0)
+window->cursor(FL_CURSOR_WAIT);
+Fl::flush();
+
+command += action + " " + device_name;
+int results = system(command.c_str());
+
+window->cursor(FL_CURSOR_DEFAULT);            
+Fl::flush();
+
+if ( results != 0 )
 {
    fl_message("Error occured.\\nMake sure you are using a valid backup/restore device. Some errors are logged in /tmp/backup_status");
    return;
@@ -63,32 +88,41 @@ Function {} {open
   code {setlocale(LC_ALL, "");
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");} {}
-  Fl_Window {} {
-    label Filetool open
-    xywh {131 421 225 80} type Double hide
+  Fl_Window window {
+    label FileTool open
+    xywh {131 421 225 65} type Double hide
   } {
     Fl_Input input_device {
       label {Device:}
       callback input_callback
       xywh {65 7 150 25} when 1
     }
-    Fl_Button btn_none {
-      label {&None}
-      user_data {"none"}
-      callback btn_callback
-      xywh {10 40 64 30} deactivate
+    Fl_Choice filetool_choice {
+      label {Action:} open
+      xywh {65 40 80 20} down_box BORDER_BOX deactivate
+    } {
+      MenuItem {} {
+        label None
+        xywh {0 0 30 20}
+      }
+      MenuItem {} {
+        label Backup
+        xywh {0 0 30 20}
+      }
+      MenuItem {} {
+        label Safe
+        xywh {0 0 30 20}
+      }
+      MenuItem {} {
+        label Restore
+        xywh {0 0 30 20}
+      }
     }
-    Fl_Button btn_backup {
-      label {&Backup}
-      user_data {"-b"}
+    Fl_Button btn_go {
+      label GO
+      user_data {"go"}
       callback btn_callback
-      xywh {80 40 64 30} deactivate
-    }
-    Fl_Button btn_restore {
-      label {&Restore}
-      user_data {"-r"}
-      callback btn_callback
-      xywh {150 40 64 30} deactivate
+      xywh {150 40 64 20} deactivate
     }
   }
   code {ifstream fin("/opt/.backup_device");                                  
@@ -98,8 +132,8 @@ fin.close();
 if (device_name.size() != 0)
 {
     input_device->value(device_name.c_str());
-    btn_none->activate();
-    btn_backup->activate();
-    btn_restore->activate();
+    filetool_choice->activate();
+    filetool_choice->value(1);
+    btn_go->activate();
 }} {}
 } 

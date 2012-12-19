@@ -3,6 +3,7 @@
 #include <libintl.h>
 #include "cpanel.h"
 // (c) Robert Shingledecker 2008-2010
+#include <cstdlib>
 #include <iostream>
 #include <locale.h>
 using namespace std;
@@ -16,7 +17,7 @@ int main(int argc, char **argv) {
   setlocale(LC_ALL, "");
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");
-  { Fl_Double_Window* o = new Fl_Double_Window(405, 215);
+  { Fl_Double_Window* o = new Fl_Double_Window(405, 215, gettext("ControlPanel"));
     w = o;
     { Fl_Button* o = new Fl_Button(10, 10, 120, 30, gettext("Apps Audit"));
       o->callback((Fl_Callback*)btn_callback, (void*)("appsaudit &"));

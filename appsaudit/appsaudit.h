@@ -3,6 +3,8 @@
 #ifndef appsaudit_h
 #define appsaudit_h
 #include <FL/Fl.H>
+void cursor_normal();
+void cursor_wait();
 void depends_callback(Fl_Widget *, void* userdata);
 void options_callback(Fl_Widget *, void* userdata);
 void updates_callback(Fl_Widget *, void* userdata);

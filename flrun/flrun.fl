@@ -59,10 +59,9 @@ Function {} {open
 } {
   code {setlocale(LC_ALL, "");
 bindtextdomain("tinycore","/usr/local/share/locale");
-textdomain("tinycore");} {selected
-  }
+textdomain("tinycore");} {}
   Fl_Window {} {
-    label flrun open
+    label FLRun open selected
     xywh {30 173 260 100} type Double hide
   } {
     Fl_Box {} {

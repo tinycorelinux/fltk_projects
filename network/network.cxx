@@ -3,6 +3,7 @@
 #include <libintl.h>
 #include "network.h"
 // (c) Robert Shingledecker
+#include <cstdlib>
 #include <iostream>
 #include <fstream>
 #include <string>

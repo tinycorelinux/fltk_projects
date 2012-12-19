@@ -1,11 +1,13 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 i18n_type 1 
 i18n_include <libintl.h> 
-i18n_function gettext 
+i18n_function mygettext 
 header_name {.h} 
 code_name {.cxx}
 decl {// (c) Robert Shingledecker 2008} {} 
+
+decl {\#include <cstdlib>} {} 
 
 decl {\#include <iostream>} {} 
 
@@ -19,7 +21,24 @@ decl {\#include <locale.h>} {}
 
 decl {using namespace std;} {} 
 
-Function {btn_callback(Fl_Widget*, void* userdata)} {open selected return_type {static void}
+decl {int locales_set=0;} {} 
+
+Function {mygettext(const char *msgid)} {open return_type {char *}
+} {
+  code {if (!locales_set) {
+
+setlocale(LC_ALL, "");
+bindtextdomain("tinycore","/usr/local/share/locale");
+textdomain("tinycore");
+
+locales_set=1;
+
+}
+
+return gettext(msgid);} {}
+} 
+
+Function {btn_callback(Fl_Widget*, void* userdata)} {open return_type {static void}
 } {
   code {if (userdata == "cancel")
    exit(1);
@@ -51,7 +70,7 @@ if ( fl_ask(command.c_str()) )
 Function {} {open
 } {
   Fl_Window {} {
-    label {Make tc.swap EXT2 Swapfile} open
+    label Swapfile open selected
     xywh {487 412 275 105} type Double hide
   } {
     Fl_Input inp_mount {
@@ -75,7 +94,4 @@ Function {} {open
       xywh {140 75 64 20}
     }
   }
-  code {setlocale(LC_ALL, "");
-bindtextdomain("tinycore","/usr/local/share/locale");
-textdomain("tinycore");} {}
 } 

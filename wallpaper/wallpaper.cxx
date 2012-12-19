@@ -3,6 +3,7 @@
 #include <libintl.h>
 #include "wallpaper.h"
 // (c) Robert Shingledecker 2008- 2010
+#include <cstdlib>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -11,8 +12,23 @@
 #include <stdio.h>
 #include <locale.h>
 using namespace std;
+static int locales_set=0; 
 static string target; 
 static double r,g,b; 
+
+char * mygettext(const char *msgid) {
+  if (!locales_set) {                                                      
+                                                                          
+setlocale(LC_ALL, "");     
+bindtextdomain("tinycore","/usr/local/share/locale");
+textdomain("tinycore");                              
+                                                     
+locales_set=1;                                       
+                       
+}                      
+              
+return gettext(msgid);
+}
 
 void imageBrowserCallback(Fl_Widget*, void*) {
   installBtn->activate();
@@ -74,52 +90,7 @@ Fl_Button *installBtn=(Fl_Button *)0;
 
 int main(int argc, char **argv) {
   Fl_Double_Window* w;
-  { Fl_Double_Window* o = new Fl_Double_Window(295, 245);
-    w = o;
-    { imageBrowser = new Fl_File_Browser(0, 25, 295, 190);
-      imageBrowser->type(2);
-      imageBrowser->callback((Fl_Callback*)imageBrowserCallback);
-      imageBrowser->filter("*.{png,gif,jpg,jpeg}");
-      imageBrowser->load("/opt/backgrounds");
-    } // Fl_File_Browser* imageBrowser
-    { btnFull = new Fl_Round_Button(35, 5, 50, 15, gettext("Full"));
-      btnFull->down_box(FL_ROUND_DOWN_BOX);
-      btnFull->value(1);
-      btnFull->selection_color((Fl_Color)2);
-      btnFull->type(FL_RADIO_BUTTON);
-    } // Fl_Round_Button* btnFull
-    { btnTile = new Fl_Round_Button(85, 5, 50, 15, gettext("Tile"));
-      btnTile->down_box(FL_ROUND_DOWN_BOX);
-      btnTile->selection_color((Fl_Color)2);
-      btnTile->type(FL_RADIO_BUTTON);
-    } // Fl_Round_Button* btnTile
-    { btnCenter = new Fl_Round_Button(130, 5, 64, 15, gettext("Center"));
-      btnCenter->down_box(FL_ROUND_DOWN_BOX);
-      btnCenter->selection_color((Fl_Color)2);
-      btnCenter->type(FL_RADIO_BUTTON);
-    } // Fl_Round_Button* btnCenter
-    { btnFill = new Fl_Round_Button(195, 5, 50, 15, gettext("Fill"));
-      btnFill->down_box(FL_ROUND_DOWN_BOX);
-      btnFill->selection_color((Fl_Color)2);
-      btnFill->type(FL_RADIO_BUTTON);
-    } // Fl_Round_Button* btnFill
-    { installBtn = new Fl_Button(25, 220, 64, 20, gettext("Install"));
-      installBtn->callback((Fl_Callback*)btnCallback, (void*)("install"));
-      installBtn->deactivate();
-    } // Fl_Button* installBtn
-    { Fl_Button* o = new Fl_Button(110, 220, 64, 20, gettext("Color"));
-      o->callback((Fl_Callback*)btnCallback, (void*)("color"));
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(200, 220, 64, 20, gettext("Help"));
-      o->callback((Fl_Callback*)btnCallback, (void*)("help"));
-    } // Fl_Button* o
-    o->end();
-  } // Fl_Double_Window* o
-  setlocale(LC_ALL, "");
-bindtextdomain("tinycore","/usr/local/share/locale");
-textdomain("tinycore");
-
-int results = system("getRGB");
+  int results = system("getRGB");
 if (results == 0 )
 {
   ifstream rgb_file("/tmp/current_rgb");
@@ -133,11 +104,48 @@ if (results == 0 )
   r = 0.208;
   g = 0.384;
   b = 0.400;
-}    
-
-cout << r << endl;
-cout << g << endl;
-cout << b << endl;
+}
+  { Fl_Double_Window* o = new Fl_Double_Window(295, 245, mygettext("Wallpaper"));
+    w = o;
+    { imageBrowser = new Fl_File_Browser(0, 25, 295, 190);
+      imageBrowser->type(2);
+      imageBrowser->callback((Fl_Callback*)imageBrowserCallback);
+      imageBrowser->filter("*.{png,gif,jpg,jpeg}");
+      imageBrowser->load("/opt/backgrounds");
+    } // Fl_File_Browser* imageBrowser
+    { btnFull = new Fl_Round_Button(5, 5, 50, 15, mygettext("Full"));
+      btnFull->down_box(FL_ROUND_DOWN_BOX);
+      btnFull->value(1);
+      btnFull->selection_color((Fl_Color)2);
+      btnFull->type(FL_RADIO_BUTTON);
+    } // Fl_Round_Button* btnFull
+    { btnTile = new Fl_Round_Button(75, 5, 50, 15, mygettext("Tile"));
+      btnTile->down_box(FL_ROUND_DOWN_BOX);
+      btnTile->selection_color((Fl_Color)2);
+      btnTile->type(FL_RADIO_BUTTON);
+    } // Fl_Round_Button* btnTile
+    { btnCenter = new Fl_Round_Button(145, 5, 64, 15, mygettext("Center"));
+      btnCenter->down_box(FL_ROUND_DOWN_BOX);
+      btnCenter->selection_color((Fl_Color)2);
+      btnCenter->type(FL_RADIO_BUTTON);
+    } // Fl_Round_Button* btnCenter
+    { btnFill = new Fl_Round_Button(225, 5, 50, 15, mygettext("Fill"));
+      btnFill->down_box(FL_ROUND_DOWN_BOX);
+      btnFill->selection_color((Fl_Color)2);
+      btnFill->type(FL_RADIO_BUTTON);
+    } // Fl_Round_Button* btnFill
+    { installBtn = new Fl_Button(25, 220, 64, 20, mygettext("Install"));
+      installBtn->callback((Fl_Callback*)btnCallback, (void*)("install"));
+      installBtn->deactivate();
+    } // Fl_Button* installBtn
+    { Fl_Button* o = new Fl_Button(110, 220, 64, 20, mygettext("Color"));
+      o->callback((Fl_Callback*)btnCallback, (void*)("color"));
+    } // Fl_Button* o
+    { Fl_Button* o = new Fl_Button(200, 220, 64, 20, mygettext("Help"));
+      o->callback((Fl_Callback*)btnCallback, (void*)("help"));
+    } // Fl_Button* o
+    o->end();
+  } // Fl_Double_Window* o
   w->show(argc, argv);
   return Fl::run();
 }

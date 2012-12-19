@@ -1,29 +1,74 @@
-# German translation for tctools
+# Amharic translation for tctools
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the tctools package.
-# FIRST AUTHOR <EMAIL@ADDREss>, 2010.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tctools\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDREss>\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-08-22 10:16+0300\n"
-"PO-Revision-Date: 2010-11-04 16:26+0000\n"
-"Last-Translator: Jens Maucher <Unknown>\n"
-"Language-Team: German <de@li.org>\n"
+"PO-Revision-Date: 2010-09-14 00:59+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Amharic <am@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2010-11-06 13:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
+#: ../mousetool/mousetool.cxx:97 ../network/network.cxx:238
+msgid "&Apply"
+msgstr ""
+
+#: ../fdtool/fdtool.cxx:99
+msgid "&Apply Image"
+msgstr ""
+
+#: ../filetool/filetool.cxx:69
+msgid "&Backup"
+msgstr ""
+
+#: ../datetool/datetool.cxx:171 ../exittc/exittc.cxx:122
+#: ../fdtool/fdtool.cxx:104 ../flrun/flrun.cxx:66 ../swapfile/swapfile.cxx:56
+msgid "&Cancel"
+msgstr ""
+
+#: ../mousetool/mousetool.cxx:100
+msgid "&Exit"
+msgstr ""
+
+#: ../fdtool/fdtool.cxx:90
+msgid "&Format"
+msgstr ""
+
+#: ../fdtool/fdtool.cxx:94
+msgid "&Make Image"
+msgstr ""
+
+#: ../filetool/filetool.cxx:65
+msgid "&None"
+msgstr ""
+
+#: ../datetool/datetool.cxx:168 ../exittc/exittc.cxx:119
+msgid "&OK"
+msgstr ""
+
+#: ../swapfile/swapfile.cxx:59
+msgid "&Proceed"
+msgstr ""
+
 #: ../filetool/filetool.cxx:73
 msgid "&Restore"
-msgstr "Datenwiederhe_rstellung"
+msgstr ""
+
+#: ../fdtool/fdtool.cxx:75
+msgid "1440k"
+msgstr ""
 
 #: ../fdtool/fdtool.cxx:81
 msgid "1722k"
-msgstr "1,722MB"
+msgstr ""
 
 #: ../datetool/datetool.cxx:130 ../datetool/datetool.cxx:138
 #: ../datetool/datetool.cxx:146 ../datetool/datetool.cxx:154
@@ -31,341 +76,296 @@ msgstr "1,722MB"
 msgid "@<"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:383
-msgid "Appbrowser"
-msgstr "Appbrowser (Anwendungen installieren)"
-
-#: ../mousetool/mousetool.cxx:97 ../network/network.cxx:238
-msgid "&Apply"
-msgstr "An&wenden"
-
-#: ../fdtool/fdtool.cxx:99
-msgid "&Apply Image"
-msgstr "&Nimm Image"
-
-#: ../filetool/filetool.cxx:69
-msgid "&Backup"
-msgstr "Datensi_cherung"
-
-#: ../datetool/datetool.cxx:171 ../exittc/exittc.cxx:122
-#: ../fdtool/fdtool.cxx:104 ../flrun/flrun.cxx:66 ../swapfile/swapfile.cxx:56
-msgid "&Cancel"
-msgstr "&Abbruch"
-
-#: ../mousetool/mousetool.cxx:100
-msgid "&Exit"
-msgstr "Be&enden"
-
-#: ../fdtool/fdtool.cxx:90
-msgid "&Format"
-msgstr "&Formatieren"
-
-#: ../fdtool/fdtool.cxx:94
-msgid "&Make Image"
-msgstr "&Mache Image"
-
-#: ../filetool/filetool.cxx:65
-msgid "&None"
-msgstr "&Keines"
-
-#: ../datetool/datetool.cxx:168 ../exittc/exittc.cxx:119
-msgid "&OK"
-msgstr "&OK"
-
-#: ../swapfile/swapfile.cxx:59
-msgid "&Proceed"
-msgstr "&Weiter"
-
-#: ../fdtool/fdtool.cxx:75
-msgid "1440k"
-msgstr "1,44MB"
-
 #: ../datetool/datetool.cxx:133 ../datetool/datetool.cxx:141
 #: ../datetool/datetool.cxx:149 ../datetool/datetool.cxx:157
 #: ../datetool/datetool.cxx:165 ../mnttool/mnttool.cxx:106
 msgid "@>"
 msgstr ""
 
+#: ../appbrowser/appbrowser.cxx:383
+msgid "Appbrowser"
+msgstr ""
+
 #: ../flrun/flrun.cxx:57
 msgid "Application Launcher"
-msgstr "Starte Anwendung"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:21
 msgid "Apps Audit"
-msgstr "Audit Anwendg."
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:405
 msgid "AppsAudit"
-msgstr "Audit Anwendungen"
+msgstr ""
 
 #: ../exittc/exittc.cxx:113
 msgid "Backup"
-msgstr "Datensicherung"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:24
 msgid "Backup/Restore"
-msgstr "Backup / Restore"
+msgstr ""
 
 #: ../network/network.cxx:200
 msgid "Broadcast"
-msgstr "Broadcast"
+msgstr ""
 
 #: ../flrun/flrun.cxx:69
 msgid "Browse"
-msgstr "&Browse"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:362
 msgid "Build Reporting Database"
-msgstr "Report-Datenbank bauen"
+msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:99
 msgid "Center"
-msgstr "Mittig"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:379
 msgid "Check for Updates"
-msgstr "Auf Aktualisierungen prüfen"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:371
 msgid "Clear Marked for Deletion"
-msgstr "Entferne Markierung zum Löschen"
+msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:113
 msgid "Color"
-msgstr "Farbe"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:385
 msgid "Connect"
-msgstr "Verbinden"
+msgstr ""
 
 #: ../fdtool/fdtool.cxx:95
 msgid "Copies floppy to image path entered,"
-msgstr "Kopiert floppy zum angegebenen Image Pfad"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:30
 msgid "Date/Time"
-msgstr "Datum/Uhrzeit"
+msgstr ""
 
 #: ../datetool/datetool.cxx:126
 msgid "Datetool"
-msgstr "Datum / Uhrzeit"
+msgstr ""
 
 #: ../datetool/datetool.cxx:144
 msgid "Day:"
-msgstr "Tag:"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:360
 msgid "Dependencies"
-msgstr "Abhängigkeiten"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:433
 msgid "Depends"
-msgstr "Benötigt"
+msgstr ""
 
 #: ../filetool/filetool.cxx:61
 msgid "Device:"
-msgstr "Laufwerk:"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:367
 msgid "Display All Not Depended On"
-msgstr "Zeige alle nicht abhängigen"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:368
 msgid "Display All with Missing Dependencies"
-msgstr "Alle anzeigen mit fehlenden Abhängigkeiten"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:366
 msgid "Display All with No Dependencies"
-msgstr "Alle anzeigen, die keine Abhängigkeiten haben"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:370
 msgid "Display Marked for Deletion"
-msgstr "Zeige zum Löschen markierte"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:460
 msgid "DownLoad"
-msgstr "Herunterladen"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:461
 msgid "Download Only."
-msgstr "Nur herunterladen"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:456
 msgid "Downloads  and updates OnDemand menu."
-msgstr "lädt herunter und aktualisiert das OnDemand Menü"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:451
 msgid "Downloads, updates menu and onboot.lst."
-msgstr "lädt herunter, aktualisiert Menü und onboot.lst"
+msgstr ""
 
 #: ../network/network.cxx:241
 msgid "E&xit"
-msgstr "B&eenden"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:376
 msgid "Exit Install Options"
-msgstr "Beende Installationsoptionen"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:384
 msgid "Exit OnBoot"
-msgstr "Beende OnBoot"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:388
 msgid "Exit OnDemand"
-msgstr "Beende OnDemand"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:380
 msgid "Exit Update Mode"
-msgstr "Beende Update Modus"
+msgstr ""
 
 #: ../exittc/exittc.cxx:102
 msgid "Exit to Prompt"
-msgstr "X Window beenden"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:357
 msgid "File"
-msgstr "Datei"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:424
 msgid "Files"
-msgstr "Dateien"
+msgstr ""
 
 #: ../filetool/filetool.cxx:59
 msgid "Filetool"
-msgstr "Datei-Tool"
+msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:104
 msgid "Fill"
-msgstr "Füllen"
+msgstr ""
 
 #: ../fdtool/fdtool.cxx:71
 msgid "Floppy Disk Tool"
-msgstr "Floppy-Disk-Tool"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:48
 msgid "Floppy Tool"
-msgstr "Floppy-Tool"
+msgstr ""
 
 #: ../fdtool/fdtool.cxx:91
 msgid "Formats FAT of selected size."
-msgstr "Formatiert FAT der gewählten Größe"
+msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:88
 msgid "Full"
-msgstr "Voll"
+msgstr ""
 
 #: ../network/network.cxx:206
 msgid "Gateway"
-msgstr "Gateway"
+msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:116
 msgid "Help"
-msgstr "Hilfe"
+msgstr ""
 
 #: ../datetool/datetool.cxx:152
 msgid "Hour:"
-msgstr "Stunde:"
+msgstr ""
 
 #: ../network/network.cxx:187
 msgid "IP Address"
-msgstr "IP-Adresse"
+msgstr ""
 
 #: ../fdtool/fdtool.cxx:86
 msgid "Image Path:"
-msgstr "Image Pfad"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:415
 msgid "Info"
-msgstr "Info"
+msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:109
 msgid "Install"
-msgstr "Installieren"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:373
 msgid "Install Options"
-msgstr "Installationsoptionen"
+msgstr ""
 
 #: ../network/network.cxx:163
 msgid "Interface"
-msgstr "Schnittstelle"
+msgstr ""
 
 #: ../mousetool/mousetool.cxx:92
 msgid "Left Button"
-msgstr "linke Taste"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:363
 msgid "List Dependencies"
-msgstr "Liste Abhängigkeiten"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:365
 msgid "List Missing Dependencies"
-msgstr "Liste fehlende Abhängigkeiten"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:364
 msgid "List Required By"
-msgstr "Liste \"Erfordert von\""
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:388
 msgid "Local"
-msgstr "Lokal"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:383 ../appsaudit/appsaudit.cxx:387
 msgid "Maintenance"
-msgstr "Wartung"
+msgstr ""
 
 #: ../swapfile/swapfile.cxx:50
 msgid "Make tc.swap EXT2 Swapfile"
-msgstr "Erzeuge tc.swap EXT2 Datei"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:369
 msgid "Mark for Deletion"
-msgstr "Markiere zum Löschen"
+msgstr ""
 
 #: ../datetool/datetool.cxx:160
 msgid "Min:"
-msgstr "Minute"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:391
 msgid "Mirrors"
-msgstr "Spiegelserver"
+msgstr ""
 
 #: ../datetool/datetool.cxx:136
 msgid "Month:"
-msgstr "Monat:"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:27
 msgid "Mount Tool"
-msgstr "Mount-Tool"
+msgstr ""
 
 #: ../swapfile/swapfile.cxx:52
 msgid "Mounted Partition:"
-msgstr "eingehängte Partition:"
+msgstr ""
 
 #: ../mousetool/mousetool.cxx:75
 msgid "Mouse Speed"
-msgstr "Maus Geschwindigk."
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:51 ../mousetool/mousetool.cxx:73
 msgid "Mouse Tool"
-msgstr "Maus-Tool"
+msgstr ""
 
 #: ../network/network.cxx:212
 msgid "NameServers"
-msgstr "NameServer"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:42 ../network/network.cxx:157
 #: ../network/network.cxx:159
 msgid "Network"
-msgstr "Netzwerk"
+msgstr ""
 
 #: ../network/network.cxx:194
 msgid "Network Mask"
-msgstr "Netzmaske"
+msgstr ""
 
 #: ../flrun/flrun.cxx:63
 msgid "OK"
-msgstr "&OK"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:450 ../appsaudit/appsaudit.cxx:382
 msgid "OnBoot"
@@ -381,115 +381,115 @@ msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:358
 msgid "Quit"
-msgstr "Beenden"
+msgstr ""
 
 #: ../exittc/exittc.cxx:97
 msgid "Reboot"
-msgstr "Neustarten"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:414
 msgid "Results"
-msgstr "Ergebnisse"
+msgstr ""
 
 #: ../mousetool/mousetool.cxx:86
 msgid "Right Button"
-msgstr "rechte Taste"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:63
 msgid "Run Command"
-msgstr "Kommandozeile"
+msgstr ""
 
 #: ../network/network.cxx:222
 msgid "Save Configuration?"
-msgstr "Konfiguration speichern?"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:394
 msgid "Search"
-msgstr "Suche"
+msgstr ""
 
 #: ../add2file/add2file.cxx:22
 msgid "Select File to be added to "
-msgstr "Wähle Datei zu der hinzugefügt werden soll "
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:375
 msgid "Selective Copy Install"
-msgstr "Selektives Kopieren-Installieren"
+msgstr ""
 
 #: ../services/services.cxx:129
 msgid "Services"
-msgstr "Services"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:39
 msgid "Set TCE Drive"
-msgstr "TCE Laufwerk"
+msgstr ""
 
 #: ../exittc/exittc.cxx:91
 msgid "Shutdown"
-msgstr "Herunterfahren"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:440
 msgid "Size"
-msgstr "Größe"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:465
 msgid "Status"
-msgstr "Status"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:36
 msgid "Swapfile Tool"
-msgstr "Swap-Speicher-Werkzeug"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:54
 msgid "System Stats"
-msgstr "System-Statistiken"
+msgstr ""
 
 #: ../exittc/exittc.cxx:88
 msgid "TC Exit Options"
-msgstr "TC beenden"
+msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:94
 msgid "Tile"
-msgstr "Kacheln"
+msgstr ""
 
 #: ../stats/stats.cxx:35
 msgid "Tiny Core System Stats"
-msgstr "Tiny Core System-Statistiken"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:374
 msgid "Toggle Default Copy Install"
-msgstr "Standardverhalten Kopieren-Installieren umschalten"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:395
 msgid "Toggle Search / Provides"
-msgstr "Umschalten von Suche / Enthält"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:60
 msgid "USB Install"
-msgstr "USB Installation"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:361
 msgid "Update .dep files."
-msgstr "Update .dep Dateien"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:57
 msgid "Update Apps"
-msgstr "Update Anwendg."
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:378
 msgid "Updates"
-msgstr "Aktualisierungen"
+msgstr ""
 
 #: ../network/network.cxx:169
 msgid "Use DHCP Broadcast?"
-msgstr "DHCP Broadcast nutzen?"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:33
 msgid "Wallpaper"
-msgstr "Hintergrundbild"
+msgstr ""
 
 #: ../fdtool/fdtool.cxx:100
 msgid "Writes image path file to floppy."
-msgstr "Schreibt Image Pfaddatei auf floppy"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:45
 msgid "Xvesa Setup"
@@ -497,7 +497,7 @@ msgstr ""
 
 #: ../datetool/datetool.cxx:128
 msgid "Year:"
-msgstr "Jahr:"
+msgstr ""
 
 #: ../stats/stats.cxx:96
 msgid "boot"
@@ -505,11 +505,11 @@ msgstr ""
 
 #: ../mnttool/mnttool.cxx:109
 msgid "button"
-msgstr "Button"
+msgstr ""
 
 #: ../stats/stats.cxx:39
 msgid "cpu"
-msgstr "CPU"
+msgstr ""
 
 #: ../stats/stats.cxx:75
 msgid "dmesg"
@@ -529,7 +529,7 @@ msgstr ""
 
 #: ../stats/stats.cxx:89
 msgid "filesystems"
-msgstr "Dateisyst."
+msgstr ""
 
 #: ../flrun/flrun.cxx:55
 msgid "flrun"
@@ -537,32 +537,32 @@ msgstr ""
 
 #: ../stats/stats.cxx:47
 msgid "mem"
-msgstr "Mem"
+msgstr ""
 
 #: ../stats/stats.cxx:61
 msgid "modules"
-msgstr "Module"
+msgstr ""
 
 #: ../stats/stats.cxx:82
 msgid "mounts"
-msgstr "Mounts"
+msgstr ""
 
 #: ../stats/stats.cxx:54
 msgid "net"
-msgstr "Netz"
+msgstr ""
 
 #: ../network/network.cxx:178 ../network/network.cxx:231
 msgid "no"
-msgstr "nein"
+msgstr ""
 
 #: ../stats/stats.cxx:68
 msgid "processes"
-msgstr "Prozesse"
+msgstr ""
 
 #: ../swapfile/swapfile.cxx:54
 msgid "tc.swp in k bytes:"
-msgstr "tc.swp in k Bytes"
+msgstr ""
 
 #: ../network/network.cxx:172 ../network/network.cxx:225
 msgid "yes"
-msgstr "ja"
+msgstr ""

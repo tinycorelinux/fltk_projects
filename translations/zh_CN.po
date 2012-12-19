@@ -1,568 +1,568 @@
-# German translation for tctools
+# Chinese (Simplified) translation for tctools
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the tctools package.
-# FIRST AUTHOR <EMAIL@ADDREss>, 2010.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tctools\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDREss>\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-08-22 10:16+0300\n"
-"PO-Revision-Date: 2010-11-04 16:26+0000\n"
-"Last-Translator: Jens Maucher <Unknown>\n"
-"Language-Team: German <de@li.org>\n"
+"PO-Revision-Date: 2010-09-15 15:42+0000\n"
+"Last-Translator: jyf <Unknown>\n"
+"Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2010-11-06 13:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
+#: ../mousetool/mousetool.cxx:97 ../network/network.cxx:238
+msgid "&Apply"
+msgstr "应用(&A)"
+
+#: ../fdtool/fdtool.cxx:99
+msgid "&Apply Image"
+msgstr "应用图片(&A)"
+
+#: ../filetool/filetool.cxx:69
+msgid "&Backup"
+msgstr "备份(&B)"
+
+#: ../datetool/datetool.cxx:171 ../exittc/exittc.cxx:122
+#: ../fdtool/fdtool.cxx:104 ../flrun/flrun.cxx:66 ../swapfile/swapfile.cxx:56
+msgid "&Cancel"
+msgstr "取消"
+
+#: ../mousetool/mousetool.cxx:100
+msgid "&Exit"
+msgstr "退出(&E)"
+
+#: ../fdtool/fdtool.cxx:90
+msgid "&Format"
+msgstr "格式化(&F)"
+
+#: ../fdtool/fdtool.cxx:94
+msgid "&Make Image"
+msgstr "创建图像"
+
+#: ../filetool/filetool.cxx:65
+msgid "&None"
+msgstr "无(&N)"
+
+#: ../datetool/datetool.cxx:168 ../exittc/exittc.cxx:119
+msgid "&OK"
+msgstr "接受"
+
+#: ../swapfile/swapfile.cxx:59
+msgid "&Proceed"
+msgstr "继续(&P)"
+
 #: ../filetool/filetool.cxx:73
 msgid "&Restore"
-msgstr "Datenwiederhe_rstellung"
+msgstr "恢复(&R)"
+
+#: ../fdtool/fdtool.cxx:75
+msgid "1440k"
+msgstr "1440k"
 
 #: ../fdtool/fdtool.cxx:81
 msgid "1722k"
-msgstr "1,722MB"
+msgstr "1722k"
 
 #: ../datetool/datetool.cxx:130 ../datetool/datetool.cxx:138
 #: ../datetool/datetool.cxx:146 ../datetool/datetool.cxx:154
 #: ../datetool/datetool.cxx:162 ../mnttool/mnttool.cxx:103
 msgid "@<"
-msgstr ""
-
-#: ../appbrowser/appbrowser.cxx:383
-msgid "Appbrowser"
-msgstr "Appbrowser (Anwendungen installieren)"
-
-#: ../mousetool/mousetool.cxx:97 ../network/network.cxx:238
-msgid "&Apply"
-msgstr "An&wenden"
-
-#: ../fdtool/fdtool.cxx:99
-msgid "&Apply Image"
-msgstr "&Nimm Image"
-
-#: ../filetool/filetool.cxx:69
-msgid "&Backup"
-msgstr "Datensi_cherung"
-
-#: ../datetool/datetool.cxx:171 ../exittc/exittc.cxx:122
-#: ../fdtool/fdtool.cxx:104 ../flrun/flrun.cxx:66 ../swapfile/swapfile.cxx:56
-msgid "&Cancel"
-msgstr "&Abbruch"
-
-#: ../mousetool/mousetool.cxx:100
-msgid "&Exit"
-msgstr "Be&enden"
-
-#: ../fdtool/fdtool.cxx:90
-msgid "&Format"
-msgstr "&Formatieren"
-
-#: ../fdtool/fdtool.cxx:94
-msgid "&Make Image"
-msgstr "&Mache Image"
-
-#: ../filetool/filetool.cxx:65
-msgid "&None"
-msgstr "&Keines"
-
-#: ../datetool/datetool.cxx:168 ../exittc/exittc.cxx:119
-msgid "&OK"
-msgstr "&OK"
-
-#: ../swapfile/swapfile.cxx:59
-msgid "&Proceed"
-msgstr "&Weiter"
-
-#: ../fdtool/fdtool.cxx:75
-msgid "1440k"
-msgstr "1,44MB"
+msgstr "@<"
 
 #: ../datetool/datetool.cxx:133 ../datetool/datetool.cxx:141
 #: ../datetool/datetool.cxx:149 ../datetool/datetool.cxx:157
 #: ../datetool/datetool.cxx:165 ../mnttool/mnttool.cxx:106
 msgid "@>"
-msgstr ""
+msgstr "@>"
+
+#: ../appbrowser/appbrowser.cxx:383
+msgid "Appbrowser"
+msgstr "应用浏览器"
 
 #: ../flrun/flrun.cxx:57
 msgid "Application Launcher"
-msgstr "Starte Anwendung"
+msgstr "程序启动器"
 
 #: ../cpanel/cpanel.cxx:21
 msgid "Apps Audit"
-msgstr "Audit Anwendg."
+msgstr "应用审计"
 
 #: ../appsaudit/appsaudit.cxx:405
 msgid "AppsAudit"
-msgstr "Audit Anwendungen"
+msgstr "应用审计"
 
 #: ../exittc/exittc.cxx:113
 msgid "Backup"
-msgstr "Datensicherung"
+msgstr "备份"
 
 #: ../cpanel/cpanel.cxx:24
 msgid "Backup/Restore"
-msgstr "Backup / Restore"
+msgstr "备份/还原"
 
 #: ../network/network.cxx:200
 msgid "Broadcast"
-msgstr "Broadcast"
+msgstr "广播"
 
 #: ../flrun/flrun.cxx:69
 msgid "Browse"
-msgstr "&Browse"
+msgstr "浏览"
 
 #: ../appsaudit/appsaudit.cxx:362
 msgid "Build Reporting Database"
-msgstr "Report-Datenbank bauen"
+msgstr "创建报告数据库"
 
 #: ../wallpaper/wallpaper.cxx:99
 msgid "Center"
-msgstr "Mittig"
+msgstr "居中"
 
 #: ../appsaudit/appsaudit.cxx:379
 msgid "Check for Updates"
-msgstr "Auf Aktualisierungen prüfen"
+msgstr "检查更新"
 
 #: ../appsaudit/appsaudit.cxx:371
 msgid "Clear Marked for Deletion"
-msgstr "Entferne Markierung zum Löschen"
+msgstr "清理删除标记"
 
 #: ../wallpaper/wallpaper.cxx:113
 msgid "Color"
-msgstr "Farbe"
+msgstr "颜色"
 
 #: ../appbrowser/appbrowser.cxx:385
 msgid "Connect"
-msgstr "Verbinden"
+msgstr "连接"
 
 #: ../fdtool/fdtool.cxx:95
 msgid "Copies floppy to image path entered,"
-msgstr "Kopiert floppy zum angegebenen Image Pfad"
+msgstr "复制软盘镜像至指定目录"
 
 #: ../cpanel/cpanel.cxx:30
 msgid "Date/Time"
-msgstr "Datum/Uhrzeit"
+msgstr "日期/时间"
 
 #: ../datetool/datetool.cxx:126
 msgid "Datetool"
-msgstr "Datum / Uhrzeit"
+msgstr "日期工具"
 
 #: ../datetool/datetool.cxx:144
 msgid "Day:"
-msgstr "Tag:"
+msgstr "日:"
 
 #: ../appsaudit/appsaudit.cxx:360
 msgid "Dependencies"
-msgstr "Abhängigkeiten"
+msgstr "依赖"
 
 #: ../appbrowser/appbrowser.cxx:433
 msgid "Depends"
-msgstr "Benötigt"
+msgstr "依赖"
 
 #: ../filetool/filetool.cxx:61
 msgid "Device:"
-msgstr "Laufwerk:"
+msgstr "设备"
 
 #: ../appsaudit/appsaudit.cxx:367
 msgid "Display All Not Depended On"
-msgstr "Zeige alle nicht abhängigen"
+msgstr "显示所有非依赖关系"
 
 #: ../appsaudit/appsaudit.cxx:368
 msgid "Display All with Missing Dependencies"
-msgstr "Alle anzeigen mit fehlenden Abhängigkeiten"
+msgstr "显示所有(包括未补全的依赖)"
 
 #: ../appsaudit/appsaudit.cxx:366
 msgid "Display All with No Dependencies"
-msgstr "Alle anzeigen, die keine Abhängigkeiten haben"
+msgstr "显示所有(不包括依赖)"
 
 #: ../appsaudit/appsaudit.cxx:370
 msgid "Display Marked for Deletion"
-msgstr "Zeige zum Löschen markierte"
+msgstr "显示所有表明为删除的"
 
 #: ../appbrowser/appbrowser.cxx:460
 msgid "DownLoad"
-msgstr "Herunterladen"
+msgstr "下载"
 
 #: ../appbrowser/appbrowser.cxx:461
 msgid "Download Only."
-msgstr "Nur herunterladen"
+msgstr "只下载"
 
 #: ../appbrowser/appbrowser.cxx:456
 msgid "Downloads  and updates OnDemand menu."
-msgstr "lädt herunter und aktualisiert das OnDemand Menü"
+msgstr "下载并更新即时菜单"
 
 #: ../appbrowser/appbrowser.cxx:451
 msgid "Downloads, updates menu and onboot.lst."
-msgstr "lädt herunter, aktualisiert Menü und onboot.lst"
+msgstr "下载,更新菜单与onboot.lst"
 
 #: ../network/network.cxx:241
 msgid "E&xit"
-msgstr "B&eenden"
+msgstr "退出(&x)"
 
 #: ../appsaudit/appsaudit.cxx:376
 msgid "Exit Install Options"
-msgstr "Beende Installationsoptionen"
+msgstr "退出安装选项"
 
 #: ../appsaudit/appsaudit.cxx:384
 msgid "Exit OnBoot"
-msgstr "Beende OnBoot"
+msgstr "退出启动"
 
 #: ../appsaudit/appsaudit.cxx:388
 msgid "Exit OnDemand"
-msgstr "Beende OnDemand"
+msgstr "退出即时响应"
 
 #: ../appsaudit/appsaudit.cxx:380
 msgid "Exit Update Mode"
-msgstr "Beende Update Modus"
+msgstr "退出更新模式"
 
 #: ../exittc/exittc.cxx:102
 msgid "Exit to Prompt"
-msgstr "X Window beenden"
+msgstr "退出至命令行"
 
 #: ../appsaudit/appsaudit.cxx:357
 msgid "File"
-msgstr "Datei"
+msgstr "文件"
 
 #: ../appbrowser/appbrowser.cxx:424
 msgid "Files"
-msgstr "Dateien"
+msgstr "文件"
 
 #: ../filetool/filetool.cxx:59
 msgid "Filetool"
-msgstr "Datei-Tool"
+msgstr "文件工具"
 
 #: ../wallpaper/wallpaper.cxx:104
 msgid "Fill"
-msgstr "Füllen"
+msgstr "填充"
 
 #: ../fdtool/fdtool.cxx:71
 msgid "Floppy Disk Tool"
-msgstr "Floppy-Disk-Tool"
+msgstr "软盘工具"
 
 #: ../cpanel/cpanel.cxx:48
 msgid "Floppy Tool"
-msgstr "Floppy-Tool"
+msgstr "软盘工具"
 
 #: ../fdtool/fdtool.cxx:91
 msgid "Formats FAT of selected size."
-msgstr "Formatiert FAT der gewählten Größe"
+msgstr "讲所选分区格式化为FAT"
 
 #: ../wallpaper/wallpaper.cxx:88
 msgid "Full"
-msgstr "Voll"
+msgstr "全屏"
 
 #: ../network/network.cxx:206
 msgid "Gateway"
-msgstr "Gateway"
+msgstr "网关"
 
 #: ../wallpaper/wallpaper.cxx:116
 msgid "Help"
-msgstr "Hilfe"
+msgstr "帮助"
 
 #: ../datetool/datetool.cxx:152
 msgid "Hour:"
-msgstr "Stunde:"
+msgstr "时"
 
 #: ../network/network.cxx:187
 msgid "IP Address"
-msgstr "IP-Adresse"
+msgstr "IP地址"
 
 #: ../fdtool/fdtool.cxx:86
 msgid "Image Path:"
-msgstr "Image Pfad"
+msgstr "镜像目录"
 
 #: ../appbrowser/appbrowser.cxx:415
 msgid "Info"
-msgstr "Info"
+msgstr "备注"
 
 #: ../wallpaper/wallpaper.cxx:109
 msgid "Install"
-msgstr "Installieren"
+msgstr "安装"
 
 #: ../appsaudit/appsaudit.cxx:373
 msgid "Install Options"
-msgstr "Installationsoptionen"
+msgstr "选项安装"
 
 #: ../network/network.cxx:163
 msgid "Interface"
-msgstr "Schnittstelle"
+msgstr "网络接口"
 
 #: ../mousetool/mousetool.cxx:92
 msgid "Left Button"
-msgstr "linke Taste"
+msgstr "左键"
 
 #: ../appsaudit/appsaudit.cxx:363
 msgid "List Dependencies"
-msgstr "Liste Abhängigkeiten"
+msgstr "列出所有依赖"
 
 #: ../appsaudit/appsaudit.cxx:365
 msgid "List Missing Dependencies"
-msgstr "Liste fehlende Abhängigkeiten"
+msgstr "列出缺失的依赖"
 
 #: ../appsaudit/appsaudit.cxx:364
 msgid "List Required By"
-msgstr "Liste \"Erfordert von\""
+msgstr "列出所有被依赖的"
 
 #: ../appbrowser/appbrowser.cxx:388
 msgid "Local"
-msgstr "Lokal"
+msgstr "本地"
 
 #: ../appsaudit/appsaudit.cxx:383 ../appsaudit/appsaudit.cxx:387
 msgid "Maintenance"
-msgstr "Wartung"
+msgstr "维护"
 
 #: ../swapfile/swapfile.cxx:50
 msgid "Make tc.swap EXT2 Swapfile"
-msgstr "Erzeuge tc.swap EXT2 Datei"
+msgstr "创建 tc.swap为 EXT2 交换文件"
 
 #: ../appsaudit/appsaudit.cxx:369
 msgid "Mark for Deletion"
-msgstr "Markiere zum Löschen"
+msgstr "标记为删除"
 
 #: ../datetool/datetool.cxx:160
 msgid "Min:"
-msgstr "Minute"
+msgstr "最小:"
 
 #: ../appbrowser/appbrowser.cxx:391
 msgid "Mirrors"
-msgstr "Spiegelserver"
+msgstr "镜像"
 
 #: ../datetool/datetool.cxx:136
 msgid "Month:"
-msgstr "Monat:"
+msgstr "月："
 
 #: ../cpanel/cpanel.cxx:27
 msgid "Mount Tool"
-msgstr "Mount-Tool"
+msgstr "挂载工具"
 
 #: ../swapfile/swapfile.cxx:52
 msgid "Mounted Partition:"
-msgstr "eingehängte Partition:"
+msgstr "已挂载分区"
 
 #: ../mousetool/mousetool.cxx:75
 msgid "Mouse Speed"
-msgstr "Maus Geschwindigk."
+msgstr "鼠标速率"
 
 #: ../cpanel/cpanel.cxx:51 ../mousetool/mousetool.cxx:73
 msgid "Mouse Tool"
-msgstr "Maus-Tool"
+msgstr "鼠标工具"
 
 #: ../network/network.cxx:212
 msgid "NameServers"
-msgstr "NameServer"
+msgstr "域名服务器"
 
 #: ../cpanel/cpanel.cxx:42 ../network/network.cxx:157
 #: ../network/network.cxx:159
 msgid "Network"
-msgstr "Netzwerk"
+msgstr "网络"
 
 #: ../network/network.cxx:194
 msgid "Network Mask"
-msgstr "Netzmaske"
+msgstr "子网掩码"
 
 #: ../flrun/flrun.cxx:63
 msgid "OK"
-msgstr "&OK"
+msgstr "确定"
 
 #: ../appbrowser/appbrowser.cxx:450 ../appsaudit/appsaudit.cxx:382
 msgid "OnBoot"
-msgstr ""
+msgstr "OnBoot"
 
 #: ../appbrowser/appbrowser.cxx:455 ../appsaudit/appsaudit.cxx:386
 msgid "OnDemand"
-msgstr ""
+msgstr "即时响应"
 
 #: ../wbar_exclude/wbar_exclude.cxx:59
 msgid "Onboot Items"
-msgstr ""
+msgstr "Onboot Items"
 
 #: ../appsaudit/appsaudit.cxx:358
 msgid "Quit"
-msgstr "Beenden"
+msgstr "退出"
 
 #: ../exittc/exittc.cxx:97
 msgid "Reboot"
-msgstr "Neustarten"
+msgstr "重启"
 
 #: ../appsaudit/appsaudit.cxx:414
 msgid "Results"
-msgstr "Ergebnisse"
+msgstr "结果"
 
 #: ../mousetool/mousetool.cxx:86
 msgid "Right Button"
-msgstr "rechte Taste"
+msgstr "右键"
 
 #: ../cpanel/cpanel.cxx:63
 msgid "Run Command"
-msgstr "Kommandozeile"
+msgstr "运行命令"
 
 #: ../network/network.cxx:222
 msgid "Save Configuration?"
-msgstr "Konfiguration speichern?"
+msgstr "保存配置"
 
 #: ../appbrowser/appbrowser.cxx:394
 msgid "Search"
-msgstr "Suche"
+msgstr "搜索"
 
 #: ../add2file/add2file.cxx:22
 msgid "Select File to be added to "
-msgstr "Wähle Datei zu der hinzugefügt werden soll "
+msgstr "选择待添加文件 "
 
 #: ../appsaudit/appsaudit.cxx:375
 msgid "Selective Copy Install"
-msgstr "Selektives Kopieren-Installieren"
+msgstr "可选的复制安装"
 
 #: ../services/services.cxx:129
 msgid "Services"
-msgstr "Services"
+msgstr "服务"
 
 #: ../cpanel/cpanel.cxx:39
 msgid "Set TCE Drive"
-msgstr "TCE Laufwerk"
+msgstr "设置TCE驱动"
 
 #: ../exittc/exittc.cxx:91
 msgid "Shutdown"
-msgstr "Herunterfahren"
+msgstr "关机"
 
 #: ../appbrowser/appbrowser.cxx:440
 msgid "Size"
-msgstr "Größe"
+msgstr "大小"
 
 #: ../appbrowser/appbrowser.cxx:465
 msgid "Status"
-msgstr "Status"
+msgstr "状态"
 
 #: ../cpanel/cpanel.cxx:36
 msgid "Swapfile Tool"
-msgstr "Swap-Speicher-Werkzeug"
+msgstr "交换文件工具"
 
 #: ../cpanel/cpanel.cxx:54
 msgid "System Stats"
-msgstr "System-Statistiken"
+msgstr "系统状态"
 
 #: ../exittc/exittc.cxx:88
 msgid "TC Exit Options"
-msgstr "TC beenden"
+msgstr "TC退出选项"
 
 #: ../wallpaper/wallpaper.cxx:94
 msgid "Tile"
-msgstr "Kacheln"
+msgstr "平铺"
 
 #: ../stats/stats.cxx:35
 msgid "Tiny Core System Stats"
-msgstr "Tiny Core System-Statistiken"
+msgstr "Tiny Core 系统状态"
 
 #: ../appsaudit/appsaudit.cxx:374
 msgid "Toggle Default Copy Install"
-msgstr "Standardverhalten Kopieren-Installieren umschalten"
+msgstr "切换默认复制安装"
 
 #: ../appbrowser/appbrowser.cxx:395
 msgid "Toggle Search / Provides"
-msgstr "Umschalten von Suche / Enthält"
+msgstr "切换搜索/提供"
 
 #: ../cpanel/cpanel.cxx:60
 msgid "USB Install"
-msgstr "USB Installation"
+msgstr "u盘安装"
 
 #: ../appsaudit/appsaudit.cxx:361
 msgid "Update .dep files."
-msgstr "Update .dep Dateien"
+msgstr "更新依赖文件"
 
 #: ../cpanel/cpanel.cxx:57
 msgid "Update Apps"
-msgstr "Update Anwendg."
+msgstr "更新应用程序"
 
 #: ../appsaudit/appsaudit.cxx:378
 msgid "Updates"
-msgstr "Aktualisierungen"
+msgstr "更新"
 
 #: ../network/network.cxx:169
 msgid "Use DHCP Broadcast?"
-msgstr "DHCP Broadcast nutzen?"
+msgstr "使用DHCP广播?"
 
 #: ../cpanel/cpanel.cxx:33
 msgid "Wallpaper"
-msgstr "Hintergrundbild"
+msgstr "壁纸"
 
 #: ../fdtool/fdtool.cxx:100
 msgid "Writes image path file to floppy."
-msgstr "Schreibt Image Pfaddatei auf floppy"
+msgstr "将镜像文件写至软盘"
 
 #: ../cpanel/cpanel.cxx:45
 msgid "Xvesa Setup"
-msgstr ""
+msgstr "Xvesa设置"
 
 #: ../datetool/datetool.cxx:128
 msgid "Year:"
-msgstr "Jahr:"
+msgstr "年"
 
 #: ../stats/stats.cxx:96
 msgid "boot"
-msgstr ""
+msgstr "启动"
 
 #: ../mnttool/mnttool.cxx:109
 msgid "button"
-msgstr "Button"
+msgstr "按钮"
 
 #: ../stats/stats.cxx:39
 msgid "cpu"
-msgstr "CPU"
+msgstr "cpu"
 
 #: ../stats/stats.cxx:75
 msgid "dmesg"
-msgstr ""
+msgstr "Onboot Items"
 
 #: ../wbar_exclude/wbar_exclude.cxx:58
 msgid "eXclude Wbar Icons"
-msgstr ""
+msgstr "不包含Wbar图标"
 
 #: ../wbar_exclude/wbar_exclude.cxx:65
 msgid "eXclude Wbar Items"
-msgstr ""
+msgstr "不包含Wbar元素"
 
 #: ../stats/stats.cxx:103
 msgid "extensions"
-msgstr ""
+msgstr "扩展"
 
 #: ../stats/stats.cxx:89
 msgid "filesystems"
-msgstr "Dateisyst."
+msgstr "文件系统"
 
 #: ../flrun/flrun.cxx:55
 msgid "flrun"
-msgstr ""
+msgstr "flrun"
 
 #: ../stats/stats.cxx:47
 msgid "mem"
-msgstr "Mem"
+msgstr "内存"
 
 #: ../stats/stats.cxx:61
 msgid "modules"
-msgstr "Module"
+msgstr "模块"
 
 #: ../stats/stats.cxx:82
 msgid "mounts"
-msgstr "Mounts"
+msgstr "已挂载"
 
 #: ../stats/stats.cxx:54
 msgid "net"
-msgstr "Netz"
+msgstr "网络"
 
 #: ../network/network.cxx:178 ../network/network.cxx:231
 msgid "no"
-msgstr "nein"
+msgstr "否"
 
 #: ../stats/stats.cxx:68
 msgid "processes"
-msgstr "Prozesse"
+msgstr "进程"
 
 #: ../swapfile/swapfile.cxx:54
 msgid "tc.swp in k bytes:"
-msgstr "tc.swp in k Bytes"
+msgstr "tc.swp 以 kb 计数"
 
 #: ../network/network.cxx:172 ../network/network.cxx:225
 msgid "yes"
-msgstr "ja"
+msgstr "是"

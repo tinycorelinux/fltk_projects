@@ -3,6 +3,7 @@
 #ifndef wallpaper_h
 #define wallpaper_h
 #include <FL/Fl.H>
+char * mygettext(const char *msgid);
 void imageBrowserCallback(Fl_Widget*, void*);
 void btnCallback(Fl_Widget*, void* userdata);
 #include <FL/Fl_Double_Window.H>

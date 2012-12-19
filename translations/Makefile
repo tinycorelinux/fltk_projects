@@ -22,7 +22,7 @@ clean:
 	rm -f *.mo *~
 
 tinycore.pot: Makefile
-	xgettext -C -s -o tinycore.pot ../*/*.cxx ../*/*.h
+	xgettext -C -s -o tinycore.pot -kmygettext ../*/*.cxx ../*/*.h
 
 # hack to automate installation dynamicaly, without previous knowledge of 
 # the po/mo file list (we fool make by pretending the need for .inst files).

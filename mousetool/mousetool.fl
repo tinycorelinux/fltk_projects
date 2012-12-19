@@ -9,6 +9,8 @@ decl {// (c) Robert Shingledecker 2008} {}
 
 decl {\#include <stdio.h>} {} 
 
+decl {\#include <cstdlib>} {} 
+
 decl {\#include <iostream>} {} 
 
 decl {\#include <sstream>} {} 
@@ -75,10 +77,9 @@ Function {} {open
 } {
   code {setlocale(LC_ALL, "");
 bindtextdomain("tinycore","/usr/local/share/locale");
-textdomain("tinycore");} {selected
-  }
+textdomain("tinycore");} {}
   Fl_Window {} {
-    label {Mouse Tool} open
+    label MouseTool open selected
     xywh {529 64 145 200} type Double hide
   } {
     Fl_Dial dial_speed {

@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: tctools\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-08-22 10:16+0300\n"
-"PO-Revision-Date: 2010-09-06 00:11+0000\n"
-"Last-Translator: Akira Ouchi <Unknown>\n"
+"PO-Revision-Date: 2010-09-25 00:25+0000\n"
+"Last-Translator: hatochan <hatori@hatochan.dyndns.org>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-12 09:16+0000\n"
+"X-Launchpad-Export-Date: 2010-11-06 13:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../mousetool/mousetool.cxx:97 ../network/network.cxx:238
@@ -369,11 +369,11 @@ msgstr "はい"
 
 #: ../appbrowser/appbrowser.cxx:450 ../appsaudit/appsaudit.cxx:382
 msgid "OnBoot"
-msgstr ""
+msgstr "OnBoot"
 
 #: ../appbrowser/appbrowser.cxx:455 ../appsaudit/appsaudit.cxx:386
 msgid "OnDemand"
-msgstr ""
+msgstr "OnDemand"
 
 #: ../wbar_exclude/wbar_exclude.cxx:59
 msgid "Onboot Items"
@@ -409,11 +409,11 @@ msgstr "検索"
 
 #: ../add2file/add2file.cxx:22
 msgid "Select File to be added to "
-msgstr "に選択したファイルを追加 "
+msgstr "追加ファイルの選択 "
 
 #: ../appsaudit/appsaudit.cxx:375
 msgid "Selective Copy Install"
-msgstr ""
+msgstr "選択コピーのインストール"
 
 #: ../services/services.cxx:129
 msgid "Services"
@@ -457,11 +457,11 @@ msgstr "Tiny Core システム情報"
 
 #: ../appsaudit/appsaudit.cxx:374
 msgid "Toggle Default Copy Install"
-msgstr ""
+msgstr "デフォルト・コピーのインストールの切替え"
 
 #: ../appbrowser/appbrowser.cxx:395
 msgid "Toggle Search / Provides"
-msgstr "トグル 検索/提供"
+msgstr "検索/配布の切替え"
 
 #: ../cpanel/cpanel.cxx:60
 msgid "USB Install"
@@ -533,7 +533,7 @@ msgstr "ファイルシステム"
 
 #: ../flrun/flrun.cxx:55
 msgid "flrun"
-msgstr ""
+msgstr "flrun"
 
 #: ../stats/stats.cxx:47
 msgid "mem"

@@ -4,6 +4,7 @@
 #include "mousetool.h"
 // (c) Robert Shingledecker 2008
 #include <stdio.h>
+#include <cstdlib>
 #include <iostream>
 #include <sstream>
 #include <fstream>
@@ -70,7 +71,7 @@ int main(int argc, char **argv) {
   setlocale(LC_ALL, "");
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");
-  { Fl_Double_Window* o = new Fl_Double_Window(145, 200, gettext("Mouse Tool"));
+  { Fl_Double_Window* o = new Fl_Double_Window(145, 200, gettext("MouseTool"));
     w = o;
     { dial_speed = new Fl_Dial(45, 20, 50, 50, gettext("Mouse Speed"));
       dial_speed->minimum(1);

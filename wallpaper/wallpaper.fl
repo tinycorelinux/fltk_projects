@@ -2,10 +2,12 @@
 version 1.0110 
 i18n_type 1 
 i18n_include <libintl.h> 
-i18n_function gettext 
+i18n_function mygettext 
 header_name {.h} 
 code_name {.cxx}
 decl {// (c) Robert Shingledecker 2008- 2010} {} 
+
+decl {\#include <cstdlib>} {} 
 
 decl {\#include <iostream>} {} 
 
@@ -23,9 +25,26 @@ decl {\#include <locale.h>} {}
 
 decl {using namespace std;} {} 
 
+decl {int locales_set=0;} {} 
+
 decl {string target;} {} 
 
 decl {double r,g,b;} {} 
+
+Function {mygettext(const char *msgid)} {open return_type {char *}
+} {
+  code {if (!locales_set) {                                                      
+                                                                          
+setlocale(LC_ALL, "");     
+bindtextdomain("tinycore","/usr/local/share/locale");
+textdomain("tinycore");                              
+                                                     
+locales_set=1;                                       
+                       
+}                      
+              
+return gettext(msgid);} {}
+} 
 
 Function {imageBrowserCallback(Fl_Widget*, void*)} {open return_type {static void}
 } {
@@ -75,9 +94,25 @@ if (userdata == "help")
    fl_message("Install images from /opt/backgrounds directory.");} {}
 } 
 
-Function {} {open selected
+Function {} {open
 } {
-  Fl_Window {} {open
+  code {int results = system("getRGB");
+if (results == 0 )
+{
+  ifstream rgb_file("/tmp/current_rgb");
+  istringstream stm;
+  string rgb_info;
+
+  getline(rgb_file, rgb_info);
+  stm.str(rgb_info);
+  stm >> r >> g >> b;
+} else {
+  r = 0.208;
+  g = 0.384;
+  b = 0.400;
+}} {}
+  Fl_Window {} {
+    label Wallpaper open selected
     xywh {131 426 295 245} type Double hide
   } {
     Fl_File_Browser imageBrowser {
@@ -88,22 +123,22 @@ Function {} {open selected
     }
     Fl_Round_Button btnFull {
       label Full
-      xywh {35 5 50 15} down_box ROUND_DOWN_BOX value 1 selection_color 2
+      xywh {5 5 50 15} down_box ROUND_DOWN_BOX value 1 selection_color 2
       code0 {btnFull->type(FL_RADIO_BUTTON);}
     }
     Fl_Round_Button btnTile {
       label Tile
-      xywh {85 5 50 15} down_box ROUND_DOWN_BOX selection_color 2
+      xywh {75 5 50 15} down_box ROUND_DOWN_BOX selection_color 2
       code0 {btnTile->type(FL_RADIO_BUTTON);}
     }
     Fl_Round_Button btnCenter {
       label Center
-      xywh {130 5 64 15} down_box ROUND_DOWN_BOX selection_color 2
+      xywh {145 5 64 15} down_box ROUND_DOWN_BOX selection_color 2
       code0 {btnCenter->type(FL_RADIO_BUTTON);}
     }
     Fl_Round_Button btnFill {
       label Fill
-      xywh {195 5 50 15} down_box ROUND_DOWN_BOX selection_color 2
+      xywh {225 5 50 15} down_box ROUND_DOWN_BOX selection_color 2
       code0 {btnFill->type(FL_RADIO_BUTTON);}
     }
     Fl_Button installBtn {
@@ -125,27 +160,4 @@ Function {} {open selected
       xywh {200 220 64 20}
     }
   }
-  code {setlocale(LC_ALL, "");
-bindtextdomain("tinycore","/usr/local/share/locale");
-textdomain("tinycore");
-
-int results = system("getRGB");
-if (results == 0 )
-{
-  ifstream rgb_file("/tmp/current_rgb");
-  istringstream stm;
-  string rgb_info;
-
-  getline(rgb_file, rgb_info);
-  stm.str(rgb_info);
-  stm >> r >> g >> b;
-} else {
-  r = 0.208;
-  g = 0.384;
-  b = 0.400;
-}    
-
-cout << r << endl;
-cout << g << endl;
-cout << b << endl;} {}
 } 

@@ -3,6 +3,7 @@
 #include <libintl.h>
 #include "fdtool.h"
 // (c) Robert Shingledecker
+#include <cstdlib>
 #include <iostream>
 #include <locale.h>
 using namespace std;
@@ -66,7 +67,7 @@ int main(int argc, char **argv) {
   setlocale(LC_ALL, "");
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");
-  { Fl_Double_Window* o = new Fl_Double_Window(490, 155);
+  { Fl_Double_Window* o = new Fl_Double_Window(490, 155, gettext("FloppyTool"));
     w = o;
     { Fl_Box* o = new Fl_Box(10, 29, 470, 116, gettext("Floppy Disk Tool"));
       o->box(FL_EMBOSSED_FRAME);

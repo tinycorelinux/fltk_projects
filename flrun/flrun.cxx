@@ -52,7 +52,7 @@ int main(int argc, char **argv) {
   setlocale(LC_ALL, "");
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");
-  { Fl_Double_Window* o = new Fl_Double_Window(260, 100, gettext("flrun"));
+  { Fl_Double_Window* o = new Fl_Double_Window(260, 100, gettext("FLRun"));
     w = o;
     { Fl_Box* o = new Fl_Box(15, 25, 215, 0, gettext("Application Launcher"));
       o->align(FL_ALIGN_TOP);

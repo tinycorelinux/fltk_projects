@@ -17,14 +17,15 @@ extern Fl_Browser *brw_select;
 #include <FL/Fl_Tabs.H>
 extern Fl_Tabs *tabs;
 #include <FL/Fl_Group.H>
-extern Fl_Group *tab_info;
-extern Fl_Browser *brw_info;
-extern Fl_Group *tab_files;
-extern Fl_Browser *brw_list;
-extern Fl_Group *tab_depends;
-extern Fl_Browser *brw_dep;
-extern Fl_Group *tab_size;
-extern Fl_Browser *brw_size;
+extern Fl_Group *infoTab;
+#include <FL/Fl_Text_Display.H>
+extern Fl_Text_Display *infoDisplay;
+extern Fl_Group *filesTab;
+extern Fl_Text_Display *filesDisplay;
+extern Fl_Group *dependsTab;
+extern Fl_Text_Display *dependsDisplay;
+extern Fl_Group *sizeTab;
+extern Fl_Text_Display *sizeDisplay;
 extern Fl_Choice *install_choices;
 extern Fl_Button *btn_go;
 #include <FL/Fl_Output.H>

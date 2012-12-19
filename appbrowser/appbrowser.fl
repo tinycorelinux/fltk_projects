@@ -43,7 +43,9 @@ decl {ifstream ifaberr;} {}
 
 decl {string aberr;} {} 
 
-decl {string mode, command, msg, url;} {} 
+decl {string mode, command, msg, mirror;} {} 
+
+decl {Fl_Text_Buffer *txtBuffer = new Fl_Text_Buffer;} {} 
 
 Function {cursor_normal()} {open private return_type void
 } {
@@ -104,6 +106,7 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open private return_type {
    {
       system("gunzip info.lst.gz");
       brw_select->load("info.lst");
+      brw_select->remove(brw_select->size());
       btn_go->deactivate();
       box_select->label("Select Extension");
       box_select->activate();
@@ -146,6 +149,7 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open private return_type {
   if (results == 0 )
   {
     brw_select->load("info.lst");
+    brw_select->remove(brw_select->size());
     btn_go->deactivate();
     search_choices->activate();
     search_field->activate();                                              
@@ -164,8 +168,7 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open private return_type {
     unlink("ab2tce.fifo");
     exit(0);
 
-  }} {selected
-  }
+  }} {}
 } 
 
 Function {brw_select_callback(Fl_Widget *, void *)} {open private return_type {static void}
@@ -176,40 +179,35 @@ Function {brw_select_callback(Fl_Widget *, void *)} {open private return_type {s
    if ( mode == "tcz" )
    {
       string select_extn_file = select_extn + (string)".info";
+      string info_line;
       command = "/usr/bin/tce-fetch.sh " + select_extn_file;
       int results = system(command.c_str());
       if (results == 0)
       {
-         brw_info->load(select_extn_file.c_str());
+         txtBuffer->loadfile(select_extn_file.c_str());
+
          unlink(select_extn_file.c_str());
          btn_go->activate();
-/*         
-         btn_install->activate();
-         btn_download->activate();
-         btn_ondemand->activate();
-*/         
+         
          tabs->activate();
-         tab_info->activate();
-         tab_files->activate();
-         brw_list->load("");
-         tab_depends->activate();
-         tab_size->activate();
-         brw_dep->load("");
-         brw_size->load("");
-         tab_info->show();
+         infoTab->activate();
+         filesTab->activate();
+         dependsTab->activate();
+         sizeTab->activate();
+         infoTab->show();
       } 
    }
    if ( mode == "mirror" )
    {
       status_out->value(select_extn.c_str());
-      url = status_out->value();
+      mirror = status_out->value();
      ofstream fout("/opt/tcemirror", ios::out|ios::out);
      if (! fout.is_open())
      {
        cerr << "Can't open /opt/tcemirror for output!" << endl;
        exit(EXIT_FAILURE);
      }
-     fout << url << endl;
+     fout << mirror << endl;
      fout.close();      
    }
 }} {}
@@ -260,12 +258,11 @@ Function {mirror_btn_callback(Fl_Widget*, void* userdata)} {open private return_
 mode = "mirror";
 cursor_wait();
 ifstream fin("/opt/tcemirror");
-getline(fin,url);
+getline(fin,mirror);
 fin.close();
-brw_info->clear();
 tabs->deactivate();
 status_out->label("  URL:");
-status_out->value(url.c_str());
+status_out->value(mirror.c_str());
 status_out->activate();
 command = "/usr/bin/tce-fetch.sh mirrors.lst";
 int results = system(command.c_str());
@@ -273,6 +270,7 @@ cursor_normal();
 if ( results == 0)
 {
    brw_select->load("mirrors.lst");
+   brw_select->remove(brw_select->size());
    box_select->label("Select Mirror");
    box_select->activate();
    unlink("mirrors.lst");
@@ -280,25 +278,38 @@ if ( results == 0)
    fl_message("Connection error, check network or ibiblio");} {}
 } 
 
-Function {tabs_callback(Fl_Widget*, void* userdata)} {open private return_type {static void}
+Function {tabsGroupCB(Fl_Widget*, void* userdata)} {open private return_type {static void}
 } {
   code {if (brw_select->value())
 {
    int results;
    select_extn = brw_select->text(brw_select->value());
-   if (tab_files->visible())
+   
+   if (infoTab->visible())
+   {
+     string select_extn_file = select_extn + (string)".info";
+     command = "/usr/bin/tce-fetch.sh " + select_extn_file;
+     results = system(command.c_str());
+     if (results == 0)
+     {
+        txtBuffer->loadfile(select_extn_file.c_str());
+        unlink(select_extn_file.c_str());
+     }
+   }
+   
+   if (filesTab->visible())
    {
      string select_extn_file = select_extn + (string)".list";
      command = "/usr/bin/tce-fetch.sh " + select_extn_file;
      results = system(command.c_str());
      if (results == 0)
      {
-        brw_list->load(select_extn_file.c_str());
+        txtBuffer->loadfile(select_extn_file.c_str());
         unlink(select_extn_file.c_str());
      }
    }
    
-   if (tab_depends->visible())
+   if (dependsTab->visible())
    {
      cursor_wait();
      string select_extn_file = select_extn + (string)".tree";
@@ -307,11 +318,11 @@ Function {tabs_callback(Fl_Widget*, void* userdata)} {open private return_type {
      cursor_normal();
      if (results == 0)
      {
-        brw_dep->load(select_extn_file.c_str());
+        txtBuffer->loadfile(select_extn_file.c_str());
         unlink(select_extn_file.c_str());
      }
    }
-   if (tab_size->visible())
+   if (sizeTab->visible())
    {
      cursor_wait();
 
@@ -320,21 +331,19 @@ Function {tabs_callback(Fl_Widget*, void* userdata)} {open private return_type {
      char *mbuf = (char *) calloc(PATH_MAX,sizeof(char));
 
      if (pipe) {
-     	brw_size->clear();
+     	txtBuffer->loadfile("");
 	while (fgets(mbuf,PATH_MAX,pipe)) {
-	        string line(mbuf);
-        	if (line.substr(0,1) == "+") { line = "@B17" + line; }
-        	brw_size->add(line.c_str());
-        	Fl::flush();
+	   string line(mbuf);
+           txtBuffer->append(line.c_str());
 	}
-
 	pclose(pipe);
 	free(mbuf);
      }
 
      cursor_normal();
    }
-}} {}
+}} {selected
+  }
 } 
 
 Function {} {open
@@ -424,39 +433,43 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
       xywh {0 45 200 325} type Select textfont 4
     }
     Fl_Tabs tabs {
-      callback tabs_callback open
+      callback tabsGroupCB open
       xywh {205 20 475 350}
     } {
-      Fl_Group tab_info {
+      Fl_Group infoTab {
         label Info open
         xywh {205 45 475 325} when 1 hide deactivate
       } {
-        Fl_Browser brw_info {
+        Fl_Text_Display infoDisplay {
           xywh {210 50 470 318} textfont 4
+          code0 {infoDisplay->buffer(txtBuffer);}
         }
       }
-      Fl_Group tab_files {
+      Fl_Group filesTab {
         label Files open
         xywh {205 45 475 325} when 1 hide deactivate
       } {
-        Fl_Browser brw_list {
+        Fl_Text_Display filesDisplay {
           xywh {210 50 470 318} textfont 4
+          code0 {filesDisplay->buffer(txtBuffer);}
         }
       }
-      Fl_Group tab_depends {
+      Fl_Group dependsTab {
         label Depends open
         xywh {205 45 475 325} deactivate
       } {
-        Fl_Browser brw_dep {
+        Fl_Text_Display dependsDisplay {
           xywh {210 50 470 318} textfont 4
+          code0 {dependsDisplay->buffer(txtBuffer);}
         }
       }
-      Fl_Group tab_size {
+      Fl_Group sizeTab {
         label Size open
         xywh {205 45 475 325} hide deactivate
       } {
-        Fl_Browser brw_size {
+        Fl_Text_Display sizeDisplay {
           xywh {210 50 470 318} textfont 4
+          code0 {sizeDisplay->buffer(txtBuffer);}
         }
       }
     }
