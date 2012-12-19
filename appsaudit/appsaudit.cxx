@@ -258,6 +258,7 @@ if (report_type == "select_mirror")
    }
 } else if (report_type == "update") 
 {
+   string line;
    menu_deactivate();
    menuUpdates->activate();
    brw_extn->hide();
@@ -269,12 +270,24 @@ if (report_type == "select_mirror")
    cursor_wait();
 
    box_extn->label(target_dir.c_str());
+   //
+   brw_results->clear();
+   command = "version -c >/tmp/VerChk";
+   results = system(command.c_str());
+   if ( results == 0 )
+   {
+      cout << "OK" << endl;
+      brw_results->load("/tmp/VerChk");
+      brw_results->bottomline(brw_results->size());
+   }
+   brw_results->add("Please Standby... Now checking your extensions.");
+   //   
+
    command = "tce-update list " + target_dir;
    FILE *pipe = popen(command.c_str(),"r");
    char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
    if (pipe)
    {
-      brw_results->clear();
       while(fgets(mbuf,PATH_MAX,pipe))
       {
          string line(mbuf);
@@ -295,7 +308,7 @@ if (report_type == "select_mirror")
       btn_multi->activate();
    else {
       if ( brw_results->size() == 1 )
-         brw_results->add("System is Current. No updates required.");
+         brw_results->add("Extensions are current. No updates required.");
    }
    cursor_normal();
    Fl::flush();

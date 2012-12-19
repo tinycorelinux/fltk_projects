@@ -4,6 +4,9 @@ header_name {.h}
 code_name {.cxx}
 decl {// (c) Robert Shingledecker 2008} {} 
 
+decl {\#include <cstdlib>} {selected
+} 
+
 decl {\#include <iostream>} {} 
 
 decl {\#include <fstream>} {} 
@@ -82,6 +85,5 @@ if ( results == 0)
    mirrorBrw->load("mirrors.lst");
    system("rm mirrors.lst");
 } else
-   fl_message("Connection error, check network or ibiblio");} {selected
-  }
+   fl_message("Connection error, check network or ibiblio");} {}
 } 

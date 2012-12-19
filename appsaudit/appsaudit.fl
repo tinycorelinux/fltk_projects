@@ -222,8 +222,7 @@ if (userdata == "updatedeps")
     brw_extn->clear();
     brw_results->clear();
     box_results->label("Results");
-}} {selected
-  }
+}} {}
 } 
 
 Function {options_callback(Fl_Widget *, void* userdata)} {return_type {static void}
@@ -269,7 +268,7 @@ if (userdata == "default")
 }} {}
 } 
 
-Function {updates_callback(Fl_Widget *, void* userdata)} {return_type {static void}
+Function {updates_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
 } {
   code {report_type = (const char*) userdata;
 
@@ -285,6 +284,7 @@ if (report_type == "select_mirror")
    }
 } else if (report_type == "update") 
 {
+   string line;
    menu_deactivate();
    menuUpdates->activate();
    brw_extn->hide();
@@ -296,12 +296,24 @@ if (report_type == "select_mirror")
    cursor_wait();
 
    box_extn->label(target_dir.c_str());
+   //
+   brw_results->clear();
+   command = "version -c >/tmp/VerChk";
+   results = system(command.c_str());
+   if ( results == 0 )
+   {
+      cout << "OK" << endl;
+      brw_results->load("/tmp/VerChk");
+      brw_results->bottomline(brw_results->size());
+   }
+   brw_results->add("Please Standby... Now checking your extensions.");
+   //   
+
    command = "tce-update list " + target_dir;
    FILE *pipe = popen(command.c_str(),"r");
    char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
    if (pipe)
    {
-      brw_results->clear();
       while(fgets(mbuf,PATH_MAX,pipe))
       {
          string line(mbuf);
@@ -322,7 +334,7 @@ if (report_type == "select_mirror")
       btn_multi->activate();
    else {
       if ( brw_results->size() == 1 )
-         brw_results->add("System is Current. No updates required.");
+         brw_results->add("Extensions are current. No updates required.");
    }
    cursor_normal();
    Fl::flush();
@@ -335,10 +347,11 @@ if (report_type == "select_mirror")
     box_results->label("Results");
     brw_extn->clear();
     brw_results->clear();
-}} {}
+}} {selected
+  }
 } 
 
-Function {md5s_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
+Function {md5s_callback(Fl_Widget *, void* userdata)} {return_type {static void}
 } {
   code {report_type = (const char*) userdata;
 
@@ -677,11 +690,11 @@ Function {} {open
 exit(0);} open
     xywh {17 134 675 375} type Double hide resizable
   } {
-    Fl_Menu_Bar menuBar {open
+    Fl_Menu_Bar menuBar {
       xywh {0 0 685 20}
     } {
       Submenu menuDepends {
-        label Dependencies open
+        label Dependencies
         xywh {0 0 63 20}
       } {
         MenuItem {} {

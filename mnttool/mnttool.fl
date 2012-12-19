@@ -42,8 +42,7 @@ decl {vector<string> mountLabels;} {global
 Function {getPos()} {open return_type {static void}
 } {
   code {xPos = w->x();
-yPos = w->y();} {selected
-  }
+yPos = w->y();} {}
 } 
 
 Function {refresh()} {open
@@ -150,9 +149,11 @@ refresh();} {}
 
 Function {} {open
 } {
-  code {setlocale(LC_ALL, "");
+  code {Fl::args(argc, argv);
+setlocale(LC_ALL, "");
 bindtextdomain("tinycore","/usr/local/share/locale");
-textdomain("tinycore");} {}
+textdomain("tinycore");} {selected
+  }
   Fl_Window w {open
     xywh {267 20 85 745} type Double hide
   } {

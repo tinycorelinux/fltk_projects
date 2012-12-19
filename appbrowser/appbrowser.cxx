@@ -132,6 +132,8 @@ static void btn_callback(Fl_Widget *, void* userdata) {
   if (userdata == "tcz")
 {
    mode = "tcz";
+   tabs->deactivate();
+   txtBuffer->loadfile("");
    repository = (const char*) userdata;
    cursor_wait();
    unlink("info.lst");
@@ -197,7 +199,8 @@ static void btn_callback(Fl_Widget *, void* userdata) {
      command = "/usr/bin/keyword.sh";
   else
      command = "/usr/bin/provides.sh";
-   
+  tabs->deactivate();
+  txtBuffer->loadfile(""); 
   cursor_wait();
   command = command + " " + (string)search_field->value();
   int results = system(command.c_str());
@@ -377,6 +380,7 @@ static void tabsGroupCB(Fl_Widget*, void*) {
    if (dependsTab->visible())
    {
      cursor_wait();
+     txtBuffer->loadfile("");
      string select_extn_file = select_extn + (string)".tree";
      command = "/usr/bin/tce-fetch.sh " + select_extn_file;
      results = system(command.c_str());

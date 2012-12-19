@@ -11,7 +11,7 @@
 #include <FL/fl_message.H>
 #include <locale.h>
 using namespace std;
-static string backup_device, command; 
+static string backup_device="", command; 
 static int action=1; 
 static bool backup=true; 
 static string commandStr = "exitcheck.sh "; 
@@ -79,7 +79,7 @@ if (userdata == "ok") {
          exit(1);
       }
     } else {
-      system(">/opt/.backup_device");
+      system(">/etc/system/backup_device");
     }
     if (action == 1) {
        actionStr = "shutdown ";
@@ -149,12 +149,17 @@ textdomain("tinycore");
     } // Fl_Button* o
     window->end();
   } // Fl_Double_Window* window
-  ifstream backup_device_file("/opt/.backup_device");                                  
-getline(backup_device_file,backup_device);                                        
-backup_device_file.close();
+  ifstream backup_device_file("/etc/sysconfig/backup_device");
+if ( backup_device_file.is_open())
+{
+	getline(backup_device_file,backup_device);                                        
+	backup_device_file.close();
+}
 
-string backupDefault;
-backupDefault  = getenv("BACKUP");
+
+string backupDefault="1";
+if ( getenv("BACKUP"))
+	backupDefault  = getenv("BACKUP");
 
 if ( backupDefault == "0" )
 {

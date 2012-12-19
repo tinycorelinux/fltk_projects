@@ -156,6 +156,8 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open private return_type {
   code {if (userdata == "tcz")
 {
    mode = "tcz";
+   tabs->deactivate();
+   txtBuffer->loadfile("");
    repository = (const char*) userdata;
    cursor_wait();
    unlink("info.lst");
@@ -221,7 +223,8 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open private return_type {
      command = "/usr/bin/keyword.sh";
   else
      command = "/usr/bin/provides.sh";
-   
+  tabs->deactivate();
+  txtBuffer->loadfile(""); 
   cursor_wait();
   command = command + " " + (string)search_field->value();
   int results = system(command.c_str());
@@ -371,7 +374,7 @@ else {
 }} {}
 } 
 
-Function {tabsGroupCB(Fl_Widget*, void*)} {private return_type {static void}
+Function {tabsGroupCB(Fl_Widget*, void*)} {open private return_type {static void}
 } {
   code {if (brw_select->value())
 {
@@ -405,6 +408,7 @@ Function {tabsGroupCB(Fl_Widget*, void*)} {private return_type {static void}
    if (dependsTab->visible())
    {
      cursor_wait();
+     txtBuffer->loadfile("");
      string select_extn_file = select_extn + (string)".tree";
      command = "/usr/bin/tce-fetch.sh " + select_extn_file;
      results = system(command.c_str());
@@ -482,7 +486,8 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
     perror("open(/tmp/ab2tce.fifo) for write failed");
     unlink("/tmp/ab2tce.fifo");
     exit(1);
-}} {}
+}} {selected
+  }
   Fl_Window window {
     label Appbrowser
     user_data {"quit"}
@@ -520,7 +525,7 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
         xywh {0 0 30 20}
       }
       MenuItem {} {
-        label Keyword selected
+        label Keyword
         xywh {0 0 30 20}
       }
     }
@@ -537,7 +542,7 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
       xywh {0 45 200 325} type Select textfont 4
     }
     Fl_Tabs tabs {
-      callback tabsGroupCB
+      callback tabsGroupCB open
       xywh {205 20 475 350}
     } {
       Fl_Group infoTab {
@@ -559,7 +564,7 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
         }
       }
       Fl_Group dependsTab {
-        label Depends open
+        label Depends
         xywh {205 45 475 325} deactivate
       } {
         Fl_Text_Display dependsDisplay {

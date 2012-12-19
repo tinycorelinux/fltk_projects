@@ -2,6 +2,7 @@
 
 #include "tcemirror.h"
 // (c) Robert Shingledecker 2008
+#include <cstdlib>
 #include <iostream>
 #include <fstream>
 #include <FL/fl_message.H>

@@ -127,7 +127,8 @@ Fl_Double_Window *w=(Fl_Double_Window *)0;
 Fl_Pack *pack=(Fl_Pack *)0;
 
 int main(int argc, char **argv) {
-  setlocale(LC_ALL, "");
+  Fl::args(argc, argv);
+setlocale(LC_ALL, "");
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");
   { w = new Fl_Double_Window(85, 745);

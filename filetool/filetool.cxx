@@ -43,7 +43,7 @@ if (action == "none")
 {
    if (fl_ask("This will clear the selected backup device\nand prevent the backup from occuring."))
    {
-      system("> /opt/.backup_device");
+      system("> /etc/sysconfig/backup_device");
       exit(0);
    }
    return;
@@ -103,7 +103,7 @@ textdomain("tinycore");
     } // Fl_Button* btn_go
     window->end();
   } // Fl_Double_Window* window
-  ifstream fin("/opt/.backup_device");                                  
+  ifstream fin("/etc/sysconfig/backup_device");                                  
 getline(fin,device_name);                                        
 fin.close();
 

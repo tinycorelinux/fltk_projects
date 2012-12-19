@@ -58,7 +58,7 @@ if (action == "none")
 {
    if (fl_ask("This will clear the selected backup device\\nand prevent the backup from occuring."))
    {
-      system("> /opt/.backup_device");
+      system("> /etc/sysconfig/backup_device");
       exit(0);
    }
    return;
@@ -125,7 +125,7 @@ textdomain("tinycore");} {}
       xywh {150 40 64 20} deactivate
     }
   }
-  code {ifstream fin("/opt/.backup_device");                                  
+  code {ifstream fin("/etc/sysconfig/backup_device");                                  
 getline(fin,device_name);                                        
 fin.close();
 

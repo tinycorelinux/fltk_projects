@@ -23,7 +23,7 @@ decl {\#include <locale.h>} {}
 
 decl {using namespace std;} {} 
 
-decl {string backup_device, command;} {} 
+decl {string backup_device="", command;} {} 
 
 decl {int action=1;} {} 
 
@@ -96,7 +96,7 @@ if (userdata == "ok") {
          exit(1);
       }
     } else {
-      system(">/opt/.backup_device");
+      system(">/etc/system/backup_device");
     }
     if (action == 1) {
        actionStr = "shutdown ";
@@ -107,8 +107,7 @@ if (userdata == "ok") {
     system( (const char *)commandStr.c_str());
     exit(0);
   }  
-}} {selected
-  }
+}} {}
 } 
 
 Function {} {open
@@ -175,12 +174,17 @@ textdomain("tinycore");} {}
       xywh {100 150 70 20}
     }
   }
-  code {ifstream backup_device_file("/opt/.backup_device");                                  
-getline(backup_device_file,backup_device);                                        
-backup_device_file.close();
+  code {ifstream backup_device_file("/etc/sysconfig/backup_device");
+if ( backup_device_file.is_open())
+{
+	getline(backup_device_file,backup_device);                                        
+	backup_device_file.close();
+}
 
-string backupDefault;
-backupDefault  = getenv("BACKUP");
+
+string backupDefault="1";
+if ( getenv("BACKUP"))
+	backupDefault  = getenv("BACKUP");
 
 if ( backupDefault == "0" )
 {
@@ -231,5 +235,6 @@ if ( option != string::npos )
  
 
 if (backup)
-   device_output->value(backup_device.c_str());} {}
+   device_output->value(backup_device.c_str());} {selected
+  }
 } 
