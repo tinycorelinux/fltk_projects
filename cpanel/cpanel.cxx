@@ -38,78 +38,78 @@ if (userdata == "tftpd"){
 }
 }
 
-Fl_Light_Button *tftpd=(Fl_Light_Button *)0;
+Fl_Light_Button *crond=(Fl_Light_Button *)0;
 
 Fl_Light_Button *dhcpc=(Fl_Light_Button *)0;
 
-Fl_Light_Button *crond=(Fl_Light_Button *)0;
+Fl_Light_Button *tftpd=(Fl_Light_Button *)0;
 
 int main(int argc, char **argv) {
   Fl_Double_Window* w;
   { Fl_Double_Window* o = new Fl_Double_Window(530, 215);
     w = o;
-    { Fl_Button* o = new Fl_Button(140, 10, 120, 30, "Backup/Restore");
-      o->callback((Fl_Callback*)btn_callback, (void*)("filetool &"));
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(10, 50, 120, 30, "Date/Time");
-      o->callback((Fl_Callback*)btn_callback, (void*)("datetool &"));
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(10, 90, 120, 30, "Floppy Tool");
-      o->callback((Fl_Callback*)btn_callback, (void*)("fdtool&"));
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(10, 130, 120, 30, "OnDemand");
-      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -e /usr/bin/ondemand &"));
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(140, 90, 120, 30, "Netcardconfig");
-      o->callback((Fl_Callback*)btn_callback, (void*)("sudo netcardconf &"));
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(140, 50, 120, 30, "Backgrounds");
-      o->callback((Fl_Callback*)btn_callback, (void*)("wallpaper &"));
-    } // Fl_Button* o
     { Fl_Button* o = new Fl_Button(10, 10, 120, 30, "Apps Audit");
       o->callback((Fl_Callback*)btn_callback, (void*)("appsaudit &"));
     } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(140, 130, 120, 30, "Mouse Tool");
-      o->callback((Fl_Callback*)btn_callback, (void*)("mousetool &"));
+    { Fl_Button* o = new Fl_Button(140, 10, 120, 30, "Backup/Restore");
+      o->callback((Fl_Callback*)btn_callback, (void*)("filetool &"));
     } // Fl_Button* o
     { Fl_Button* o = new Fl_Button(270, 10, 120, 30, "Mount Tool");
       o->callback((Fl_Callback*)btn_callback, (void*)("mnttool &"));
     } // Fl_Button* o
+    { crond = new Fl_Light_Button(400, 10, 120, 30, "Cron Daemon");
+      crond->selection_color((Fl_Color)2);
+      crond->callback((Fl_Callback*)btn_callback, (void*)("crond"));
+    } // Fl_Light_Button* crond
+    { Fl_Button* o = new Fl_Button(10, 50, 120, 30, "Date/Time");
+      o->callback((Fl_Callback*)btn_callback, (void*)("datetool &"));
+    } // Fl_Button* o
+    { Fl_Button* o = new Fl_Button(140, 50, 120, 30, "Backgrounds");
+      o->callback((Fl_Callback*)btn_callback, (void*)("wallpaper &"));
+    } // Fl_Button* o
     { Fl_Button* o = new Fl_Button(270, 50, 120, 30, "Swapfile Tool");
       o->callback((Fl_Callback*)btn_callback, (void*)("swapfile &"));
     } // Fl_Button* o
+    { dhcpc = new Fl_Light_Button(400, 50, 120, 30, "DHCP Client");
+      dhcpc->selection_color((Fl_Color)2);
+      dhcpc->callback((Fl_Callback*)btn_callback, (void*)("udhcpc"));
+    } // Fl_Light_Button* dhcpc
+    { Fl_Button* o = new Fl_Button(10, 90, 120, 30, "Floppy Tool");
+      o->callback((Fl_Callback*)btn_callback, (void*)("fdtool&"));
+    } // Fl_Button* o
+    { Fl_Button* o = new Fl_Button(140, 90, 120, 30, "Netcardconfig");
+      o->callback((Fl_Callback*)btn_callback, (void*)("sudo netcardconf &"));
+    } // Fl_Button* o
     { Fl_Button* o = new Fl_Button(270, 90, 120, 30, "Select Mirror");
       o->callback((Fl_Callback*)btn_callback, (void*)("tcemirror &"));
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(270, 130, 120, 30, "System Stats");
-      o->callback((Fl_Callback*)btn_callback, (void*)("stats &"));
     } // Fl_Button* o
     { tftpd = new Fl_Light_Button(400, 90, 120, 30, "TFTP Server");
       tftpd->selection_color((Fl_Color)2);
       tftpd->callback((Fl_Callback*)btn_callback, (void*)("tftpd"));
     } // Fl_Light_Button* tftpd
-    { dhcpc = new Fl_Light_Button(400, 50, 120, 30, "DHCP Client");
-      dhcpc->selection_color((Fl_Color)2);
-      dhcpc->callback((Fl_Callback*)btn_callback, (void*)("udhcpc"));
-    } // Fl_Light_Button* dhcpc
-    { crond = new Fl_Light_Button(400, 10, 120, 30, "Cron Daemon");
-      crond->selection_color((Fl_Color)2);
-      crond->callback((Fl_Callback*)btn_callback, (void*)("crond"));
-    } // Fl_Light_Button* crond
+    { Fl_Button* o = new Fl_Button(10, 130, 120, 30, "OnDemand");
+      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -e ondemand &"));
+    } // Fl_Button* o
+    { Fl_Button* o = new Fl_Button(140, 130, 120, 30, "Mouse Tool");
+      o->callback((Fl_Callback*)btn_callback, (void*)("mousetool &"));
+    } // Fl_Button* o
+    { Fl_Button* o = new Fl_Button(270, 130, 120, 30, "System Stats");
+      o->callback((Fl_Callback*)btn_callback, (void*)("stats &"));
+    } // Fl_Button* o
+    { Fl_Button* o = new Fl_Button(400, 130, 120, 30, "Set TCE Drive");
+      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -e tce-setdrive &"));
+    } // Fl_Button* o
     { Fl_Button* o = new Fl_Button(10, 170, 120, 30, "Update Apps");
-      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -e /usr/bin/tce-update &"));
+      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -e tce-update &"));
     } // Fl_Button* o
     { Fl_Button* o = new Fl_Button(140, 170, 120, 30, "USB Install");
-      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -e sudo /usr/bin/usbinstall &"));
+      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -e sudo usbinstall &"));
     } // Fl_Button* o
     { Fl_Button* o = new Fl_Button(270, 170, 120, 30, "Run Command");
       o->callback((Fl_Callback*)btn_callback, (void*)("flrun &"));
     } // Fl_Button* o
     { Fl_Button* o = new Fl_Button(400, 170, 120, 30, "Xvesa Setup");
-      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -e /usr/bin/xsetup.sh &"));
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(400, 130, 120, 30, "Set TCE Drive");
-      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -e /usr/bin/tce-setdrive &"));
+      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -e xsetup.sh &"));
     } // Fl_Button* o
     o->end();
   } // Fl_Double_Window* o

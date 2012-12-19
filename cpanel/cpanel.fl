@@ -49,88 +49,22 @@ Function {} {open
     xywh {38 388 530 215} type Double hide
   } {
     Fl_Button {} {
-      label {Backup/Restore}
-      user_data {"filetool &"}
-      callback btn_callback
-      xywh {140 10 120 30}
-    }
-    Fl_Button {} {
-      label {Date/Time}
-      user_data {"datetool &"}
-      callback btn_callback
-      xywh {10 50 120 30}
-    }
-    Fl_Button {} {
-      label {Floppy Tool}
-      user_data {"fdtool&"}
-      callback btn_callback
-      xywh {10 90 120 30}
-    }
-    Fl_Button {} {
-      label OnDemand
-      user_data {"aterm +tr +sb -e /usr/bin/ondemand &"}
-      callback btn_callback
-      xywh {10 130 120 30}
-    }
-    Fl_Button {} {
-      label Netcardconfig
-      user_data {"sudo netcardconf &"}
-      callback btn_callback
-      xywh {140 90 120 30}
-    }
-    Fl_Button {} {
-      label Backgrounds
-      user_data {"wallpaper &"}
-      callback btn_callback
-      xywh {140 50 120 30}
-    }
-    Fl_Button {} {
       label {Apps Audit}
       user_data {"appsaudit &"}
       callback btn_callback
       xywh {10 10 120 30}
     }
     Fl_Button {} {
-      label {Mouse Tool}
-      user_data {"mousetool &"}
+      label {Backup/Restore}
+      user_data {"filetool &"}
       callback btn_callback
-      xywh {140 130 120 30}
+      xywh {140 10 120 30}
     }
     Fl_Button {} {
       label {Mount Tool}
       user_data {"mnttool &"}
       callback btn_callback
       xywh {270 10 120 30}
-    }
-    Fl_Button {} {
-      label {Swapfile Tool}
-      user_data {"swapfile &"}
-      callback btn_callback
-      xywh {270 50 120 30}
-    }
-    Fl_Button {} {
-      label {Select Mirror}
-      user_data {"tcemirror &"}
-      callback btn_callback
-      xywh {270 90 120 30}
-    }
-    Fl_Button {} {
-      label {System Stats}
-      user_data {"stats &"}
-      callback btn_callback
-      xywh {270 130 120 30}
-    }
-    Fl_Light_Button tftpd {
-      label {TFTP Server}
-      user_data {"tftpd"}
-      callback btn_callback
-      xywh {400 90 120 30} selection_color 2
-    }
-    Fl_Light_Button dhcpc {
-      label {DHCP Client}
-      user_data {"udhcpc"}
-      callback btn_callback
-      xywh {400 50 120 30} selection_color 2
     }
     Fl_Light_Button crond {
       label {Cron Daemon}
@@ -139,14 +73,86 @@ Function {} {open
       xywh {400 10 120 30} selection_color 2
     }
     Fl_Button {} {
-      label {Update Apps}
-      user_data {"aterm +tr +sb -e /usr/bin/tce-update &"}
+      label {Date/Time}
+      user_data {"datetool &"}
+      callback btn_callback
+      xywh {10 50 120 30}
+    }
+    Fl_Button {} {
+      label Backgrounds
+      user_data {"wallpaper &"}
+      callback btn_callback
+      xywh {140 50 120 30}
+    }
+    Fl_Button {} {
+      label {Swapfile Tool}
+      user_data {"swapfile &"}
+      callback btn_callback
+      xywh {270 50 120 30}
+    }
+    Fl_Light_Button dhcpc {
+      label {DHCP Client}
+      user_data {"udhcpc"}
+      callback btn_callback
+      xywh {400 50 120 30} selection_color 2
+    }
+    Fl_Button {} {
+      label {Floppy Tool}
+      user_data {"fdtool&"}
+      callback btn_callback
+      xywh {10 90 120 30}
+    }
+    Fl_Button {} {
+      label Netcardconfig
+      user_data {"sudo netcardconf &"}
+      callback btn_callback
+      xywh {140 90 120 30}
+    }
+    Fl_Button {} {
+      label {Select Mirror}
+      user_data {"tcemirror &"}
+      callback btn_callback
+      xywh {270 90 120 30}
+    }
+    Fl_Light_Button tftpd {
+      label {TFTP Server}
+      user_data {"tftpd"}
+      callback btn_callback
+      xywh {400 90 120 30} selection_color 2
+    }
+    Fl_Button {} {
+      label OnDemand
+      user_data {"aterm +tr +sb -e ondemand &"}
+      callback btn_callback
+      xywh {10 130 120 30}
+    }
+    Fl_Button {} {
+      label {Mouse Tool}
+      user_data {"mousetool &"}
+      callback btn_callback
+      xywh {140 130 120 30}
+    }
+    Fl_Button {} {
+      label {System Stats}
+      user_data {"stats &"}
+      callback btn_callback
+      xywh {270 130 120 30}
+    }
+    Fl_Button {} {
+      label {Set TCE Drive}
+      user_data {"aterm +tr +sb -e tce-setdrive &"}
       callback btn_callback selected
+      xywh {400 130 120 30}
+    }
+    Fl_Button {} {
+      label {Update Apps}
+      user_data {"aterm +tr +sb -e tce-update &"}
+      callback btn_callback
       xywh {10 170 120 30}
     }
     Fl_Button {} {
       label {USB Install}
-      user_data {"aterm +tr +sb -e sudo /usr/bin/usbinstall &"}
+      user_data {"aterm +tr +sb -e sudo usbinstall &"}
       callback btn_callback
       xywh {140 170 120 30}
     }
@@ -158,15 +164,9 @@ Function {} {open
     }
     Fl_Button {} {
       label {Xvesa Setup}
-      user_data {"aterm +tr +sb -e /usr/bin/xsetup.sh &"}
+      user_data {"aterm +tr +sb -e xsetup.sh &"}
       callback btn_callback
       xywh {400 170 120 30}
-    }
-    Fl_Button {} {
-      label {Set TCE Drive}
-      user_data {"aterm +tr +sb -e /usr/bin/tce-setdrive &"}
-      callback btn_callback
-      xywh {400 130 120 30}
     }
   }
   code {FILE *CMD_fp = NULL;

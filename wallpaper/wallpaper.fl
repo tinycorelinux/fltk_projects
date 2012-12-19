@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {// (c) Robert Shingledecker 2008} {} 
@@ -34,7 +34,6 @@ if (userdata == "install")
    else 
       backgroundType = "tile";                                                                    
    command = "setbackground " + backgroundType + " /opt/backgrounds/" + selectedImage;   
-   cout << command << endl << endl;
    system(command.c_str());                                                                                                                                         
    exit(0);
 }   
@@ -42,7 +41,7 @@ if (userdata == "install")
 if (userdata == "color")
 {
    double r,g,b; 
-   r = 0.310; g =0.373; b=0.510;
+   r = 0.067; g =0.161; b=0.286;
    if (!fl_color_chooser("New Color",r,g,b)) return;
    uchar ru,gu,bu;
    ru = 255*r+.5;
@@ -53,7 +52,6 @@ if (userdata == "color")
    string selectedColor = buffer;
    backgroundType = "solid";                                                  
    command = "setbackground " + backgroundType + " \\'\#" + selectedColor.substr(0,6) + "\\'";
-   cout << command << endl << endl;
    system(command.c_str());                                                          
    exit(0);                                                                   
 }

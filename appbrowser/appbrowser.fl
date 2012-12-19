@@ -2,7 +2,7 @@
 version 1.0110 
 header_name {.h} 
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2008, 2009} {} 
+decl {// (c) Robert Shingledecker 2008-2010} {} 
 
 decl {\#include <iostream>} {} 
 
@@ -14,7 +14,19 @@ decl {\#include <FL/fl_message.H>} {}
 
 decl {\#include <FL/Fl_File_Chooser.H>} {} 
 
+decl {\#include <sys/types.h>} {} 
+
+decl {\#include <sys/stat.h>} {} 
+
+decl {\#include <fcntl.h>} {} 
+
+decl {\#include <signal.h>} {} 
+
 decl {using namespace std;} {} 
+
+decl {FILE *G_in = NULL;         // how we read the child} {} 
+
+decl {int   G_out = 0;                // how we write to the child} {} 
 
 decl {string download_dir, last_dir;} {} 
 
@@ -27,6 +39,26 @@ decl {ifstream ifaberr;} {}
 decl {string aberr;} {} 
 
 decl {string command, msg;} {} 
+
+Function {HandleInput_CB(int, void *data)} {open return_type {static void}
+} {
+  code {static int x = 0;
+static char s[1024];
+char c = fgetc(G_in);            // read one char at a time
+if ( c == '\\n' || x == (sizeof(s)-1) )
+{
+  s[x] = 0;
+  status_out->value(s);
+  string result = s;
+  int loc = result.find((select_extn + ": OK"));
+  if (loc != string::npos)
+  {
+    status_out->color(175);
+  }
+  x = 0;
+} else
+  { s[x++] = c; }} {}
+} 
 
 Function {btn_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
 } {
@@ -53,39 +85,26 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open return_type {static v
       fl_message("Connection error, check network or mirror.");  
 } else if (userdata == "install")
 {
-   string loadit = "tce-load -w -i ";
-   loadit = loadit + select_extn;
-   int results = system(loadit.c_str());
-   ifstream ifaberr("/tmp/aberr");
-   msg = "";
-   getline(ifaberr,aberr);
-   while (ifaberr)     
-   {
-     msg = msg + aberr + "\\n";
-     getline(ifaberr,aberr);
-   }
-   ifaberr.close();
-     fl_message(msg.c_str());  
-   if (results == 0 ) system("/usr/bin/wbar.sh");
+   status_out->activate();
+   command = "tce-load -w -i " + select_extn;
+   status_out->color(FL_WHITE);
+   status_out->value(command.c_str());
+   command = command + "\\n";
+   write(G_out, command.c_str(), command.length());
+   Fl::add_fd(fileno(G_in), HandleInput_CB, (void*)&status_out);
+
 } else if (userdata == "download")
 {
-   string grabit = "tce-load -w " + select_extn;
-// cout << grabit << endl;
-   int results = system(grabit.c_str());
-   ifstream ifaberr("/tmp/aberr");
-   msg = " ";
-   getline(ifaberr,aberr);
-   while (ifaberr) 
-   {
-     msg = msg + aberr + "\\n";
-     getline(ifaberr,aberr);
-   }
-   ifaberr.close();
-   fl_message(msg.c_str());  
-   if (results == 0 ) system("/usr/bin/wbar.sh");
+   status_out->activate();
+   command = "tce-load -w " + select_extn;
+   status_out->color(FL_WHITE);
+   status_out->value(command.c_str());
+   command = command + "\\n";
+   write(G_out, command.c_str(), command.length());
+   Fl::add_fd(fileno(G_in), HandleInput_CB, (void*)&status_out);
+   
 } else if (userdata == "toggle")
 {
-   brw_extn->clear();
    search_field->value("");
    if (btn_search->label() == "Search")
       btn_search->label("Provides");
@@ -115,16 +134,18 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open return_type {static v
   } 
 } else if (userdata == "quit")
   {
-    system("/usr/bin/wbar.sh");
     ofstream last_dir_fout("/opt/.appbrowser",ios::out|ios::out);
     if ( last_dir_fout.is_open())
     {
        last_dir_fout << last_dir << endl;
        last_dir_fout.close();
     }
+    command = "quit\\n";
+    write(G_out, command.c_str(), command.length());
+    unlink("ab2tce.fifo");
     exit(0);
-  }} {selected
-  }
+
+  }} {}
 } 
 
 Function {brw_extn_callback(Fl_Widget *, void *)} {open return_type {static void}
@@ -182,17 +203,13 @@ last_dir = chooser.directory();
 
 command = "tce-load" + flags + (string)chooser.value();
 // cout << command << endl;
-int results = system(command.c_str());
-ifstream ifaberr("/tmp/aberr");
-msg = "";
-getline(ifaberr,aberr);
-while (ifaberr) 
-{
-   msg = msg + aberr + "\\n";
-   getline(ifaberr,aberr);
-}
-ifaberr.close();
-fl_message(msg.c_str());} {}
+
+status_out->activate();
+status_out->color(FL_WHITE);
+status_out->value(command.c_str());
+command = command + "\\n";
+write(G_out, command.c_str(), command.length());
+Fl::add_fd(fileno(G_in), HandleInput_CB, (void*)&status_out);} {}
 } 
 
 Function {tabs_callback(Fl_Widget*, void* userdata)} {open return_type {static void}
@@ -235,40 +252,30 @@ Function {} {open
     label Appbrowser
     user_data {"quit"}
     callback btn_callback open
-    xywh {17 134 685 405} type Double hide resizable
+    xywh {2 158 685 400} type Double hide resizable
   } {
-    Fl_Menu_Bar {} {open
-      xywh {0 0 685 20}
-    } {
-      Submenu {} {
-        label File open
-        xywh {0 0 63 20}
-      } {
-        MenuItem {} {
-          label {Connect to Repository}
-          user_data {"tcz"}
-          callback btn_callback
-          xywh {20 20 30 20}
-        }
-        MenuItem {} {
-          label {Install Local Extension}
-          user_data {"File/Local"}
-          callback local_btn_callback
-          xywh {0 0 30 20}
-        }
-        MenuItem {} {
-          label {Toggle Search/Provides}
-          user_data {"toggle"}
-          callback btn_callback
-          xywh {0 0 30 20}
-        }
-        MenuItem {} {
-          label Quit
-          user_data {"quit"}
-          callback btn_callback
-          xywh {0 0 30 20}
-        }
-      }
+    Fl_Button {} {
+      label Connect
+      user_data {"tcz"}
+      callback btn_callback
+      xywh {5 0 90 20}
+    }
+    Fl_Button {} {
+      label Local
+      user_data {"File/Local"}
+      callback local_btn_callback
+      xywh {100 0 90 20}
+    }
+    Fl_Button btn_search {
+      label Search
+      user_data {"toggle"}
+      callback btn_callback selected
+      tooltip {Toggle Search / Provides} xywh {205 0 77 20} deactivate
+    }
+    Fl_Input search_field {
+      user_data {"search"}
+      callback btn_callback
+      xywh {282 0 400 20} labeltype NO_LABEL when 8 deactivate
     }
     Fl_Box box_extensions {
       label Extensions
@@ -311,24 +318,17 @@ Function {} {open
       label {Install }
       user_data {"install"}
       callback btn_callback
-      xywh {10 374 50 25} deactivate
+      xywh {5 375 90 20} deactivate
     }
     Fl_Button btn_download {
       label OnDemand
       user_data {"download"}
       callback btn_callback
-      tooltip {Downloads to optional directory.} xywh {65 374 90 25} deactivate
+      tooltip {Downloads to optional directory.} xywh {100 375 90 20} deactivate
     }
-    Fl_Button btn_search {
-      label Search
-      user_data {"toggle"}
-      callback btn_callback
-      xywh {210 375 70 25} deactivate
-    }
-    Fl_Input search_field {
-      user_data {"search"}
-      callback btn_callback
-      xywh {285 375 392 25} labeltype NO_LABEL when 8 deactivate
+    Fl_Output status_out {
+      label Status
+      xywh {250 375 430 20} deactivate
     }
   }
   code {ifstream download_dir_file("/opt/.tce_dir");
@@ -341,5 +341,29 @@ if ( last_dir_file.is_open() )
 {
    getline(last_dir_file,last_dir);
    last_dir_file.close();
+}
+
+// Process group leader (for killpg())
+// setsid();
+
+// Make fifo
+unlink("ab2tce.fifo");
+if ( mkfifo("ab2tce.fifo", 0666) < 0 ) {
+    perror("mkfifo(ab2tce.fifo)");
+    exit(1);
+}
+
+// Popen child for reading, set child to read fifo
+if ( ( G_in = popen("ab2tce.sh < ab2tce.fifo", "r") ) == NULL ) {
+    perror("popen failed");
+    exit(1);
+}
+setbuf(G_in, NULL);                         // disable buffering
+
+// Now open fifo
+if ( ( G_out = open("ab2tce.fifo", O_WRONLY) ) < 0 ) {
+    perror("open(ab2tce.fifo) for write failed");
+    unlink("ab2tce.fifo");
+    exit(1);
 }} {}
 } 

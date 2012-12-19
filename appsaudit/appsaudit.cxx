@@ -159,7 +159,7 @@ if (userdata == "update")
 void onboot_callback(Fl_Widget *, void* userdata) {
   if (userdata == "onboot" )
 {
-  target_dir = tcedir + "/optional";
+  target_dir = tcedir + "/optional/";
   report_type = "onboot";
   brw_extn->clear();
   window->cursor(FL_CURSOR_WAIT);
@@ -207,11 +207,15 @@ void brw_extn_callback(Fl_Widget *, void *) {
    }
    if ( update_type == "update" )
    {
+     window->cursor(FL_CURSOR_WAIT);
+     Fl::flush();
      command = "tce-update update " + select_extn + ".md5.txt >/tmp/apps_upd.lst";
-     cout << command << endl;
+//   cout << command << endl;
      brw_results->load("");
      system(command.c_str());
      brw_results->load("/tmp/apps_upd.lst");
+     window->cursor(FL_CURSOR_DEFAULT);
+     Fl::flush();
    }
    
    if ( report_type == "onboot" )
@@ -234,12 +238,12 @@ void brw_results_callback(Fl_Widget *, void *) {
      system(command.c_str());
      brw_results->load(copy2fsList.c_str());
    }
-   cout << report_type << endl;
+// cout << report_type << endl;
    if (report_type == "delete" or report_type == "display_marked")
    {
      string target = select_results.substr(select_results.find_last_of("/")+1);
      command = "sed -i '/" + target + "/d' /tmp/audit_marked.lst";
-     cout << command << endl;
+//   cout << command << endl;
      system(command.c_str());
      brw_results->load("/tmp/audit_marked.lst");
    }

@@ -3,15 +3,17 @@
 #ifndef appbrowser_h
 #define appbrowser_h
 #include <FL/Fl.H>
+void HandleInput_CB(int, void *data);
 void btn_callback(Fl_Widget *, void* userdata);
 void brw_extn_callback(Fl_Widget *, void *);
 void local_btn_callback(Fl_Widget*, void* userdata);
 void tabs_callback(Fl_Widget*, void* userdata);
 #include <FL/Fl_Double_Window.H>
 extern Fl_Double_Window *window;
-#include <FL/Fl_Menu_Bar.H>
-extern void btn_callback(Fl_Menu_*, void*);
-extern void local_btn_callback(Fl_Menu_*, void*);
+#include <FL/Fl_Button.H>
+extern Fl_Button *btn_search;
+#include <FL/Fl_Input.H>
+extern Fl_Input *search_field;
 #include <FL/Fl_Box.H>
 extern Fl_Box *box_extensions;
 #include <FL/Fl_Browser.H>
@@ -25,11 +27,8 @@ extern Fl_Group *tab_files;
 extern Fl_Browser *brw_list;
 extern Fl_Group *tab_depends;
 extern Fl_Browser *brw_dep;
-#include <FL/Fl_Button.H>
 extern Fl_Button *btn_install;
 extern Fl_Button *btn_download;
-extern Fl_Button *btn_search;
-#include <FL/Fl_Input.H>
-extern Fl_Input *search_field;
-extern Fl_Menu_Item menu_[];
+#include <FL/Fl_Output.H>
+extern Fl_Output *status_out;
 #endif
