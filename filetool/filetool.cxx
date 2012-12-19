@@ -61,7 +61,7 @@ Fl::flush();
 
 if ( results != 0 )
 {
-   fl_message("Error occured.\nMake sure you are using a valid backup/restore device. Some errors are logged in /tmp/backup_status");
+   fl_message("Error.\nMake sure you are using a valid backup/restore device. Some errors are logged in /tmp/backup_status");
    return;
 } else
    exit(0);

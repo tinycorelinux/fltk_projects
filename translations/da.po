@@ -1,62 +1,62 @@
-# Greek translation for tctools
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# Danish translation for tctools
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
 # This file is distributed under the same license as the tctools package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tctools\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-01-02 22:44+0200\n"
-"PO-Revision-Date: 2011-01-02 00:27+0000\n"
-"Last-Translator: Vasilis Doukas <Unknown>\n"
-"Language-Team: Greek <el@li.org>\n"
+"PO-Revision-Date: 2011-05-27 21:39+0000\n"
+"Last-Translator: Jonas Christoffersen <Unknown>\n"
+"Language-Team: Danish <da@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-29 10:08+0000\n"
+"X-Launchpad-Export-Date: 2012-03-29 10:09+0000\n"
 "X-Generator: Launchpad (build 15032)\n"
 
 #: ../mousetool/mousetool.cxx:98 ../network/network.cxx:239
 msgid "&Apply"
-msgstr "&Εφαρμογή"
+msgstr "&Anvend"
 
 #: ../fdtool/fdtool.cxx:100
 msgid "&Apply Image"
-msgstr "Εφαρμογή Ε&ικόνας"
+msgstr ""
 
 #: ../datetool/datetool.cxx:173 ../exittc/exittc.cxx:153
 #: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:152 ../swapfile/swapfile.cxx:69
 msgid "&Cancel"
-msgstr "&Ακύρωση"
+msgstr "&Annuller"
 
 #: ../mousetool/mousetool.cxx:101
 msgid "&Exit"
-msgstr "Έ&ξοδος"
+msgstr "&Afslut"
 
 #: ../fdtool/fdtool.cxx:91
 msgid "&Format"
-msgstr "Διαμόρ&φωση"
+msgstr "&Formatér"
 
 #: ../fdtool/fdtool.cxx:95
 msgid "&Make Image"
-msgstr "&Δημιουργία Εικόνας"
+msgstr ""
 
 #: ../datetool/datetool.cxx:170 ../exittc/exittc.cxx:149
 msgid "&OK"
-msgstr "Ε&ντάξει"
+msgstr "&OK"
 
 #: ../swapfile/swapfile.cxx:72
 msgid "&Proceed"
-msgstr "&Συνέχεια"
+msgstr "&Fortsæt"
 
 #: ../fdtool/fdtool.cxx:76
 msgid "1440k"
-msgstr "1440k"
+msgstr "1440K"
 
 #: ../fdtool/fdtool.cxx:82
 msgid "1722k"
-msgstr "1722k"
+msgstr "1722K"
 
 #: ../datetool/datetool.cxx:132 ../datetool/datetool.cxx:140
 #: ../datetool/datetool.cxx:148 ../datetool/datetool.cxx:156
@@ -82,11 +82,11 @@ msgstr ""
 
 #: ../filetool/filetool.cxx:95
 msgid "Action:"
-msgstr "Ενέργεια:"
+msgstr "Handling:"
 
 #: ../appbrowser/appbrowser.cxx:524
 msgid "Appbrowser"
-msgstr "Πλοηγός εφαρμογών"
+msgstr "Appbrowser"
 
 #: ../flrun/flrun.cxx:158
 msgid "Application launcher"
@@ -94,11 +94,11 @@ msgstr ""
 
 #: ../wbarconf/wbarconf.cxx:165
 msgid "Apply"
-msgstr "Εφαρμογή"
+msgstr "Anvend"
 
 #: ../appsaudit/appsaudit.cxx:716
 msgid "AppsAudit"
-msgstr "Επιθεωρητής Εφαρμογών"
+msgstr "AppsAudit"
 
 #: ../wallpaper/wallpaper.cxx:331
 msgid "Background Image"
@@ -106,15 +106,15 @@ msgstr ""
 
 #: ../exittc/exittc.cxx:107 ../filetool/filetool.cxx:78
 msgid "Backup"
-msgstr "Εφεδρικό αντίγραφο"
+msgstr "Backup"
 
 #: ../exittc/exittc.cxx:144
 msgid "Backup Options:"
-msgstr "Επιλογές εφεδρικού αντιγράφου"
+msgstr "Backup Indstillinger:"
 
 #: ../cpanel/cpanel.cxx:41
 msgid "Backup/Restore"
-msgstr "Εφεδρικό αντίγραφο/Επαναφορά"
+msgstr "Backup/Gendan"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:322 ../tc-install/tc-install.cxx:520
 msgid "Boot Options"
@@ -126,47 +126,47 @@ msgstr ""
 
 #: ../wbarconf/wbarconf.cxx:123
 msgid "Bottom"
-msgstr "Κάτω"
+msgstr ""
 
 #: ../wbarconf/wbarconf.cxx:128
 msgid "Bottom Left"
-msgstr ""
+msgstr "Nederst til venstre"
 
 #: ../wbarconf/wbarconf.cxx:129
 msgid "Bottom Right"
-msgstr ""
+msgstr "Nederst til højre"
 
 #: ../network/network.cxx:201
 msgid "Broadcast"
-msgstr "Μετάδοση"
+msgstr "Broadcast"
 
 #: ../flrun/flrun.cxx:155
 msgid "Browse"
-msgstr "Πλοήγηση"
+msgstr "Gennemse"
 
 #: ../appsaudit/appsaudit.cxx:663
 msgid "Build Reporting Database"
-msgstr "Δημιουργία Έκθεσης Βάσης Δεδομένων"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:120
 msgid "Cancel"
-msgstr "Ακύρωση"
+msgstr "Annulér"
 
 #: ../wallpaper/wallpaper.cxx:319
 msgid "Center"
-msgstr "Κέντρο"
+msgstr "Center"
 
 #: ../appsaudit/appsaudit.cxx:687
 msgid "Check Md5sums"
-msgstr "Έλεγχος md5sums"
+msgstr "Tjek MD5sums"
 
 #: ../appsaudit/appsaudit.cxx:682
 msgid "Check for Updates"
-msgstr "'Ελεγχος για Ενημερώσεις"
+msgstr "Tjek efter opdateringer"
 
 #: ../appsaudit/appsaudit.cxx:673
 msgid "Clear Marked for Deletion"
-msgstr "Εκκαθάριση της Σήμανσης για Διαγραφή"
+msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:233
 msgid "Color #1"
@@ -178,15 +178,15 @@ msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:526
 msgid "Connect"
-msgstr "Σύνδεση"
+msgstr "Tilslut"
 
 #: ../cpanel/cpanel.cxx:24
 msgid "ControlPanel"
-msgstr "Πίνακας Ελέγχου"
+msgstr "KontrolPanel"
 
 #: ../fdtool/fdtool.cxx:96
 msgid "Copies floppy to image path entered,"
-msgstr "Αντιγράφει τη δισκέτα στην ορισμένη εικόνα,"
+msgstr ""
 
 #: ../tc-install/tc-install.cxx:540
 msgid "Core Only (Text Based Interface)"
@@ -202,43 +202,43 @@ msgstr ""
 
 #: ../cpanel/cpanel.cxx:50
 msgid "Date/Time"
-msgstr "Ημερομηνία/Ώρα"
+msgstr "Dato/Klokkeslet"
 
 #: ../datetool/datetool.cxx:128
 msgid "Datetool"
-msgstr "Εργαλείο Ημερομηνίας"
+msgstr "DateTool"
 
 #: ../datetool/datetool.cxx:146
 msgid "Day:"
-msgstr "Ημέρα:"
+msgstr "Dag:"
 
 #: ../appsaudit/appsaudit.cxx:661
 msgid "Dependencies"
-msgstr "Εξαρτήσεις"
+msgstr "Afhængigheder"
 
 #: ../appbrowser/appbrowser.cxx:576
 msgid "Depends"
-msgstr "Εξαρτάται"
+msgstr ""
 
 #: ../filetool/filetool.cxx:91
 msgid "Device:"
-msgstr "Συσκευή:"
+msgstr "Enhed:"
 
 #: ../wallpaper/wallpaper.cxx:277
 msgid "Diagonal Gradient"
-msgstr "Διαγώνια Διαβάθμιση"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:667
 msgid "Display All Not Depended On"
-msgstr "Παρουσίαση Όλων των Μη Εξαρτώμενων"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:666
 msgid "Display All with No Dependencies"
-msgstr "Παρουσίαση Όλων Χωρίς Εξαρτήσεις"
+msgstr "Vis alle med \"Ingen afhængigheder\""
 
 #: ../appsaudit/appsaudit.cxx:672
 msgid "Display Marked for Deletion"
-msgstr "Παρουσίαση των Σημειωμένων για Διαγραφή"
+msgstr ""
 
 #: ../tc-install/tc-install.cxx:571
 msgid "Don't install Extensions (Core Only, Text Based Install)"
@@ -246,19 +246,19 @@ msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:228
 msgid "Done"
-msgstr "Ολοκληρώθηκε"
+msgstr "Udført"
 
 #: ../appbrowser/appbrowser.cxx:462
 msgid "Download + Load"
-msgstr "Λήψη + Φόρτωση"
+msgstr "Hent og Installer"
 
 #: ../appbrowser/appbrowser.cxx:463
 msgid "Download Only"
-msgstr "Λήψη Μόνο"
+msgstr "Kun Installer"
 
 #: ../network/network.cxx:242
 msgid "E&xit"
-msgstr "Έ&ξοδος"
+msgstr "Af&slut"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:271
 msgid "Embedded"
@@ -274,31 +274,31 @@ msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:674
 msgid "Exit Dependencies Mode"
-msgstr "Έξοδος από Λειτουργία Εξαρτήσεων"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:679
 msgid "Exit Install Options"
-msgstr "Έξοδος απο Επιλογές Εγκατάστασης"
+msgstr "Afslut \"Installations-indstillinger\""
 
 #: ../appsaudit/appsaudit.cxx:688
 msgid "Exit Md5 Check Mode"
-msgstr "Έξοδος απο Λειτουργία Ελέγχου Md5"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:692
 msgid "Exit OnBoot"
-msgstr "Έξοδος από «Κατά την Εκκίνηση»"
+msgstr "Afslut \"OnBoot\""
 
 #: ../appsaudit/appsaudit.cxx:696
 msgid "Exit OnDemand"
-msgstr "Έξοδος απο «Kατόπιν Ζήτησης»"
+msgstr "Afslut \"OnDemand\""
 
 #: ../appsaudit/appsaudit.cxx:684
 msgid "Exit Update Mode"
-msgstr "Έξοδος από Λειτουργία Ενημέρωσης"
+msgstr ""
 
 #: ../exittc/exittc.cxx:133
 msgid "Exit to Prompt"
-msgstr "Έξοδος στη Γραμμή Εντολών"
+msgstr ""
 
 #: ../tc-install/tc-install.cxx:564
 msgid "Extension Installation"
@@ -314,27 +314,27 @@ msgstr ""
 
 #: ../filetool/filetool.cxx:90
 msgid "FileTool"
-msgstr ""
+msgstr "FileTool"
 
 #: ../appbrowser/appbrowser.cxx:566
 msgid "Files"
-msgstr "Αρχεία"
+msgstr "Filer"
 
 #: ../wallpaper/wallpaper.cxx:324
 msgid "Fill"
-msgstr "Γέμισμα"
+msgstr "Udfyld"
 
 #: ../fdtool/fdtool.cxx:72
 msgid "Floppy Disk Tool"
-msgstr "Εργαλείο Δισκέτας"
+msgstr "Floppy Disk Værktøj"
 
 #: ../fdtool/fdtool.cxx:70
 msgid "FloppyTool"
-msgstr "Εργαλείο Δισκέτας"
+msgstr "FloppyTool"
 
 #: ../fdtool/fdtool.cxx:92
 msgid "Formats FAT of selected size."
-msgstr "Μορφοποιεί FAT επιλεγμένου μεγέθους."
+msgstr "Formater FAT på den valgte enhed"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:290 ../tc-install/tc-install.cxx:488
 msgid "Formatting Options"
@@ -346,39 +346,39 @@ msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:309
 msgid "Full"
-msgstr "Πλήρες"
+msgstr "Fuld"
 
 #: ../filetool/filetool.cxx:100
 msgid "GO"
-msgstr "Μετάβαση"
+msgstr "Kør"
 
 #: ../network/network.cxx:207
 msgid "Gateway"
-msgstr "Πύλη (gateway)"
+msgstr "Gateway"
 
 #: ../appbrowser/appbrowser.cxx:600
 msgid "Go"
-msgstr ""
+msgstr "Kør"
 
 #: ../wallpaper/wallpaper.cxx:271
 msgid "Horizontal Gradient"
-msgstr "Οριζόντια Διαβάθμιση"
+msgstr ""
 
 #: ../datetool/datetool.cxx:154
 msgid "Hour:"
-msgstr "Ώρα:"
+msgstr "Time:"
 
 #: ../network/network.cxx:188
 msgid "IP Address"
-msgstr "Διεύθυνση IP"
+msgstr "IP-Adresse"
 
 #: ../fdtool/fdtool.cxx:87
 msgid "Image Path:"
-msgstr "Τοποθεσία Εικόνας"
+msgstr "Image-sti:"
 
 #: ../appbrowser/appbrowser.cxx:556
 msgid "Info"
-msgstr "Πληροφορίες"
+msgstr "Info"
 
 #: ../tc-install/tc-install.cxx:565
 msgid "Install Extensions from this TCE/CDE Directory:"
@@ -386,7 +386,7 @@ msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:676
 msgid "Install Options"
-msgstr "Επιλογές Εγκατάστασης"
+msgstr "Installations-indstillinger"
 
 #: ../tc-install/tc-install.cxx:534
 msgid "Install Type"
@@ -394,11 +394,11 @@ msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:301
 msgid "Install images from /opt/backgrounds directory"
-msgstr "Εγκατάσταση εικόνων απο τον φάκελο /opt/backgrounds"
+msgstr ""
 
 #: ../stats/stats.cxx:162
 msgid "Installed"
-msgstr "Εγκατεστημένα"
+msgstr ""
 
 #: ../tc-install/tc-install.cxx:550
 msgid "Installer Application"
@@ -406,7 +406,7 @@ msgstr ""
 
 #: ../network/network.cxx:164
 msgid "Interface"
-msgstr "Προσαρμογέας"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:429
 msgid "Keyword"
@@ -414,7 +414,7 @@ msgstr ""
 
 #: ../wbarconf/wbarconf.cxx:124
 msgid "Left"
-msgstr "Αριστερά"
+msgstr ""
 
 #: ../wbarconf/wbarconf.cxx:131
 msgid "Left Bottom"
@@ -422,7 +422,7 @@ msgstr ""
 
 #: ../mousetool/mousetool.cxx:93
 msgid "Left Button"
-msgstr "Αριστερό κουμπί"
+msgstr ""
 
 #: ../wbarconf/wbarconf.cxx:130
 msgid "Left Top"
@@ -430,19 +430,19 @@ msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:668
 msgid "List Dependencies"
-msgstr "Καταλογοποίηση Εξαρτήσεων"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:670
 msgid "List Missing Dependencies"
-msgstr "Καταλογοποίηση Ελλειπών Εξαρτήσεων"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:669
 msgid "List Required By"
-msgstr "Καταλογοποίηση των «Χρειάζεται από»"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:529
 msgid "Local"
-msgstr "Τοπικά"
+msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:293
 msgid "Logo"
@@ -455,7 +455,7 @@ msgstr ""
 #: ../appsaudit/appsaudit.cxx:691 ../appsaudit/appsaudit.cxx:695
 #: ../cpanel/cpanel.cxx:26
 msgid "Maintenance"
-msgstr "Συντήρηση"
+msgstr ""
 
 #: ../tc-install/tc-install.cxx:477
 msgid "Mark Partition Active (bootable)"
@@ -463,11 +463,11 @@ msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:671
 msgid "Mark for Deletion"
-msgstr "Σήμανση για διαγραφή"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:686
 msgid "Md5Check"
-msgstr "Md5Check"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:112
 msgid "Md5sum error on"
@@ -479,11 +479,11 @@ msgstr ""
 
 #: ../datetool/datetool.cxx:162
 msgid "Min:"
-msgstr "Ελάχιστο:"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:532
 msgid "Mirrors"
-msgstr "Εναλλακτικές τοποθεσίες"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:664
 msgid "Missing Dependencies Reporting"
@@ -491,27 +491,27 @@ msgstr ""
 
 #: ../datetool/datetool.cxx:138
 msgid "Month:"
-msgstr "Μήνας:"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:44
 msgid "Mount Tool"
-msgstr "Εργαλείο Ανάρτησης"
+msgstr ""
 
 #: ../swapfile/swapfile.cxx:65
 msgid "Mounted Partition:"
-msgstr "Αναρτημένo Διαμέρισμα"
+msgstr ""
 
 #: ../mousetool/mousetool.cxx:76
 msgid "Mouse Speed"
-msgstr "Ταχύτητα Ποντικιού"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:53
 msgid "Mouse Tool"
-msgstr "Εργαλείο Ποντικιού"
+msgstr ""
 
 #: ../mousetool/mousetool.cxx:74
 msgid "MouseTool"
-msgstr "Εργαλείο Ποντικιού"
+msgstr ""
 
 #: ../network/network.cxx:213
 msgid "NameServers"
@@ -524,11 +524,11 @@ msgstr ""
 #: ../cpanel/cpanel.cxx:59 ../network/network.cxx:158
 #: ../network/network.cxx:160
 msgid "Network"
-msgstr "Δίκτυο"
+msgstr ""
 
 #: ../network/network.cxx:195
 msgid "Network Mask"
-msgstr "Μάσκα δικτύου"
+msgstr ""
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:291 ../tc-install/tc-install.cxx:489
 msgid "No formatting, use existing."
@@ -540,23 +540,23 @@ msgstr ""
 
 #: ../exittc/exittc.cxx:106 ../filetool/filetool.cxx:77
 msgid "None"
-msgstr "Κανένα"
+msgstr ""
 
 #: ../flrun/flrun.cxx:149
 msgid "OK"
-msgstr "Εντάξει"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:460 ../appsaudit/appsaudit.cxx:690
 msgid "OnBoot"
-msgstr "Κατά την Εκκινηση"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:461 ../appsaudit/appsaudit.cxx:694
 msgid "OnDemand"
-msgstr "Κατοπιν Ζήτησης"
+msgstr ""
 
 #: ../wbar_exclude/wbar_exclude.cxx:59
 msgid "Onboot Items"
-msgstr "Στοίχεια «Κατά την Εκκίνηση»"
+msgstr ""
 
 #: ../tc-install/tc-install.cxx:482
 msgid "Path to core.gz:"
@@ -572,7 +572,7 @@ msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:225
 msgid "Preview"
-msgstr "Προεπισκόπηση"
+msgstr ""
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:339 ../tc-install/tc-install.cxx:588
 msgid "Proceed"
@@ -580,15 +580,15 @@ msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:740
 msgid "Process Selected Item(s)"
-msgstr "Επεξεργασία Επιλεγμένων Στοιχείων"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:428
 msgid "Provides"
-msgstr "Παρέχει"
+msgstr ""
 
 #: ../exittc/exittc.cxx:128
 msgid "Reboot"
-msgstr "Επανεκκίνηση"
+msgstr ""
 
 #: ../tc-install/tc-install.cxx:553
 msgid "Remaster Tool"
@@ -600,11 +600,11 @@ msgstr ""
 
 #: ../filetool/filetool.cxx:80
 msgid "Restore"
-msgstr "Επαναφορά"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:724
 msgid "Results"
-msgstr "Αποτελέσματα"
+msgstr ""
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:336 ../tc-install/tc-install.cxx:585
 msgid "Review"
@@ -612,7 +612,7 @@ msgstr ""
 
 #: ../wbarconf/wbarconf.cxx:125
 msgid "Right"
-msgstr "Δεξιά"
+msgstr ""
 
 #: ../wbarconf/wbarconf.cxx:133
 msgid "Right Bottom"
@@ -620,7 +620,7 @@ msgstr ""
 
 #: ../mousetool/mousetool.cxx:87
 msgid "Right Button"
-msgstr "Δεξί κουμπί"
+msgstr ""
 
 #: ../wbarconf/wbarconf.cxx:132
 msgid "Right Top"
@@ -628,19 +628,19 @@ msgstr ""
 
 #: ../exittc/exittc.cxx:108 ../filetool/filetool.cxx:79
 msgid "Safe"
-msgstr "Ασφαλής"
+msgstr ""
 
 #: ../network/network.cxx:223
 msgid "Save Configuration?"
-msgstr "Αποθήκευση Σύνθεσης"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:427
 msgid "Search"
-msgstr "Αναζήτηση"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:721
 msgid "Select"
-msgstr "Επιλογή"
+msgstr ""
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:33 ../tc-install/tc-install.cxx:24
 msgid "Select File for "
@@ -648,7 +648,7 @@ msgstr ""
 
 #: ../add2file/add2file.cxx:22
 msgid "Select File to be added to "
-msgstr "Επιλογή Αρχείου που θα προστεθεί στο "
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:683
 msgid "Select Mirror"
@@ -664,27 +664,27 @@ msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:678
 msgid "Selective Copy Install"
-msgstr "Εγκατάσταση με Επιλεκτική Αντιγραφή"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:47
 msgid "Services"
-msgstr "Υπηρεσίες"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:609
 msgid "Set"
-msgstr "Ορισμός"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:36
 msgid "Setup"
-msgstr "Εγκατάσταση"
+msgstr ""
 
 #: ../exittc/exittc.cxx:122
 msgid "Shutdown"
-msgstr "Τερματισμός"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:585
 msgid "Size"
-msgstr "Μέγεθος"
+msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:259
 msgid "Solid Color"
@@ -696,31 +696,31 @@ msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:604
 msgid "Status"
-msgstr "Κατάσταση"
+msgstr ""
 
 #: ../swapfile/swapfile.cxx:63
 msgid "Swapfile"
-msgstr "Swapfile"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:56
 msgid "Swapfile Tool"
-msgstr "Εργαλείο Swapfile"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:62
 msgid "System Stats"
-msgstr "Στατιστικά Συστήματος"
+msgstr ""
 
 #: ../exittc/exittc.cxx:118
 msgid "TC Exit Options"
-msgstr "Επιλογές Εξόδου TC"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:65
 msgid "Terminal Server"
-msgstr "Εξυπηρετητής Τερματικού"
+msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:314
 msgid "Tile"
-msgstr "Παράθεση"
+msgstr ""
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:255
 msgid "Tiny Core"
@@ -736,15 +736,15 @@ msgstr ""
 
 #: ../stats/stats.cxx:74
 msgid "Tiny Core System Stats"
-msgstr "Στατιστικά Συστήματος Tiny Core"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:677
 msgid "Toggle Default Copy Install"
-msgstr "Ενεργοποίηση Εγκατάστασης με Προεπιλεγμένη Αντιγραφή"
+msgstr ""
 
 #: ../wbarconf/wbarconf.cxx:122
 msgid "Top"
-msgstr "Πάνω"
+msgstr ""
 
 #: ../wbarconf/wbarconf.cxx:126
 msgid "Top Left"
@@ -768,27 +768,27 @@ msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:662
 msgid "Update .dep files."
-msgstr "Ενημέρωση αρχείων .dep."
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:681
 msgid "Updates"
-msgstr "Ενημερώσεις"
+msgstr ""
 
 #: ../network/network.cxx:170
 msgid "Use DHCP Broadcast?"
-msgstr "Χρήση Μετάδοσης DHCP?"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:31
 msgid "Utilities"
-msgstr "Εργαλεία"
+msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:265
 msgid "Vertical Gradient"
-msgstr "Κατακόρυφη Διαβάθμιση"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:72 ../wallpaper/wallpaper.cxx:224
 msgid "Wallpaper"
-msgstr "Φόντο"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:68
 msgid "Wbar Conf"
@@ -796,19 +796,19 @@ msgstr ""
 
 #: ../wbarconf/wbarconf.cxx:176
 msgid "Wbar Icon Size"
-msgstr "Μέγεθος Εικόνων Wbar"
+msgstr ""
 
 #: ../wbarconf/wbarconf.cxx:148
 msgid "Wbar Icons"
-msgstr "Εικόνες Wbar"
+msgstr ""
 
 #: ../wbarconf/wbarconf.cxx:184
 msgid "Wbar Text Labels"
-msgstr "Ετικέτες Κειμένου Wbar"
+msgstr ""
 
 #: ../wbarconf/wbarconf.cxx:168
 msgid "Wbar Zoom"
-msgstr "Μεγέθυνση Wbar"
+msgstr ""
 
 #: ../tc-install/tc-install.cxx:458
 msgid "Whole Disk"
@@ -820,15 +820,15 @@ msgstr ""
 
 #: ../fdtool/fdtool.cxx:101
 msgid "Writes image path file to floppy."
-msgstr "Γράφει την προκαθορισμένη εικόνα στη δισκέτα"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:75
 msgid "Xvesa"
-msgstr "Xvesa"
+msgstr ""
 
 #: ../datetool/datetool.cxx:130
 msgid "Year:"
-msgstr "Έτος:"
+msgstr ""
 
 #: ../stats/stats.cxx:171
 msgid "bigHomeFiles"
@@ -836,31 +836,31 @@ msgstr ""
 
 #: ../stats/stats.cxx:153
 msgid "boot"
-msgstr "Εκκίνηση"
+msgstr ""
 
 #: ../mnttool_save/mnttool.cxx:117
 msgid "button"
-msgstr "κουμπί"
+msgstr ""
 
 #: ../stats/stats.cxx:80
 msgid "cpu"
-msgstr "cpu"
+msgstr ""
 
 #: ../stats/stats.cxx:126
 msgid "dmesg"
-msgstr "dmesg"
+msgstr ""
 
 #: ../wbarconf/wbarconf.cxx:147 ../wbar_exclude/wbar_exclude.cxx:58
 msgid "eXclude Wbar Icons"
-msgstr "Αποκλεισμένα Εικονίδια του Wbar"
+msgstr ""
 
 #: ../wbar_exclude/wbar_exclude.cxx:65
 msgid "eXclude Wbar Items"
-msgstr "Αποκλεισμένα Στοιχεία του Wbar"
+msgstr ""
 
 #: ../wbarconf/wbarconf.cxx:154
 msgid "eXcluded Items"
-msgstr "Αποκλεισμένα Στοιχεία"
+msgstr ""
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:298 ../tc-install/tc-install.cxx:496
 msgid "ext2"
@@ -884,11 +884,11 @@ msgstr ""
 
 #: ../stats/stats.cxx:108
 msgid "modules"
-msgstr "δομοστοιχεία"
+msgstr ""
 
 #: ../stats/stats.cxx:135
 msgid "mounts"
-msgstr "αναρτήσεις"
+msgstr ""
 
 #: ../stats/stats.cxx:99
 msgid "net"
@@ -896,15 +896,15 @@ msgstr ""
 
 #: ../network/network.cxx:179 ../network/network.cxx:232
 msgid "no"
-msgstr "όχι"
+msgstr ""
 
 #: ../stats/stats.cxx:117
 msgid "processes"
-msgstr "διεργασίες"
+msgstr ""
 
 #: ../swapfile/swapfile.cxx:67
 msgid "tc.swp in k bytes:"
-msgstr "tc.swp σε k bytes:"
+msgstr ""
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:313 ../tc-install/tc-install.cxx:511
 msgid "vfat"
@@ -912,4 +912,4 @@ msgstr ""
 
 #: ../network/network.cxx:173 ../network/network.cxx:226
 msgid "yes"
-msgstr "ναι"
+msgstr ""

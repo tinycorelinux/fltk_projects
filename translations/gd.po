@@ -1,16 +1,16 @@
-# Greek translation for tctools
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# Gaelic; Scottish translation for tctools
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
 # This file is distributed under the same license as the tctools package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tctools\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-01-02 22:44+0200\n"
-"PO-Revision-Date: 2011-01-02 00:27+0000\n"
-"Last-Translator: Vasilis Doukas <Unknown>\n"
-"Language-Team: Greek <el@li.org>\n"
+"PO-Revision-Date: 2012-03-05 23:44+0000\n"
+"Last-Translator: alasdair caimbeul <Unknown>\n"
+"Language-Team: Gaelic; Scottish <gd@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,36 +19,36 @@ msgstr ""
 
 #: ../mousetool/mousetool.cxx:98 ../network/network.cxx:239
 msgid "&Apply"
-msgstr "&Εφαρμογή"
+msgstr "&Cuir an gnìomh"
 
 #: ../fdtool/fdtool.cxx:100
 msgid "&Apply Image"
-msgstr "Εφαρμογή Ε&ικόνας"
+msgstr "&Cuir an gnìomh Ìomhaigh"
 
 #: ../datetool/datetool.cxx:173 ../exittc/exittc.cxx:153
 #: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:152 ../swapfile/swapfile.cxx:69
 msgid "&Cancel"
-msgstr "&Ακύρωση"
+msgstr "%Cuir dheth"
 
 #: ../mousetool/mousetool.cxx:101
 msgid "&Exit"
-msgstr "Έ&ξοδος"
+msgstr "&Fàg"
 
 #: ../fdtool/fdtool.cxx:91
 msgid "&Format"
-msgstr "Διαμόρ&φωση"
+msgstr "&Fòrmat"
 
 #: ../fdtool/fdtool.cxx:95
 msgid "&Make Image"
-msgstr "&Δημιουργία Εικόνας"
+msgstr "&Dèan Ìomhaigh"
 
 #: ../datetool/datetool.cxx:170 ../exittc/exittc.cxx:149
 msgid "&OK"
-msgstr "Ε&ντάξει"
+msgstr "&Ceart"
 
 #: ../swapfile/swapfile.cxx:72
 msgid "&Proceed"
-msgstr "&Συνέχεια"
+msgstr "&Rach"
 
 #: ../fdtool/fdtool.cxx:76
 msgid "1440k"
@@ -67,7 +67,7 @@ msgstr "@<"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:355
 msgid "@<<"
-msgstr ""
+msgstr "@<<"
 
 #: ../datetool/datetool.cxx:135 ../datetool/datetool.cxx:143
 #: ../datetool/datetool.cxx:151 ../datetool/datetool.cxx:159
@@ -78,749 +78,750 @@ msgstr "@>"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:358
 msgid "@>>"
-msgstr ""
+msgstr "@>>"
 
 #: ../filetool/filetool.cxx:95
 msgid "Action:"
-msgstr "Ενέργεια:"
+msgstr "Gnìomh:"
 
 #: ../appbrowser/appbrowser.cxx:524
 msgid "Appbrowser"
-msgstr "Πλοηγός εφαρμογών"
+msgstr "Appbrabhsair"
 
 #: ../flrun/flrun.cxx:158
 msgid "Application launcher"
-msgstr ""
+msgstr "Lòinsear prògraman"
 
 #: ../wbarconf/wbarconf.cxx:165
 msgid "Apply"
-msgstr "Εφαρμογή"
+msgstr "Cuir ri"
 
 #: ../appsaudit/appsaudit.cxx:716
 msgid "AppsAudit"
-msgstr "Επιθεωρητής Εφαρμογών"
+msgstr "AppsSgrùdadh"
 
 #: ../wallpaper/wallpaper.cxx:331
 msgid "Background Image"
-msgstr ""
+msgstr "Ìomhaigh a' chùl-raon"
 
 #: ../exittc/exittc.cxx:107 ../filetool/filetool.cxx:78
 msgid "Backup"
-msgstr "Εφεδρικό αντίγραφο"
+msgstr "Cùl-ghlèidheadh"
 
 #: ../exittc/exittc.cxx:144
 msgid "Backup Options:"
-msgstr "Επιλογές εφεδρικού αντιγράφου"
+msgstr "Roghainnean Cùl-ghlèidheadh"
 
 #: ../cpanel/cpanel.cxx:41
 msgid "Backup/Restore"
-msgstr "Εφεδρικό αντίγραφο/Επαναφορά"
+msgstr "Cùl-ghlèidheadh/Aisig"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:322 ../tc-install/tc-install.cxx:520
 msgid "Boot Options"
-msgstr ""
+msgstr "Roghainnean Bùtaich"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:324 ../tc-install/tc-install.cxx:522
 msgid "Boot Options Reference List"
-msgstr ""
+msgstr "Liosta Teisteanas Roghainnean Bùtaich"
 
 #: ../wbarconf/wbarconf.cxx:123
 msgid "Bottom"
-msgstr "Κάτω"
+msgstr "Bonn"
 
 #: ../wbarconf/wbarconf.cxx:128
 msgid "Bottom Left"
-msgstr ""
+msgstr "Bonn Clì"
 
 #: ../wbarconf/wbarconf.cxx:129
 msgid "Bottom Right"
-msgstr ""
+msgstr "Bonn Ceart"
 
 #: ../network/network.cxx:201
 msgid "Broadcast"
-msgstr "Μετάδοση"
+msgstr "Craoladh"
 
 #: ../flrun/flrun.cxx:155
 msgid "Browse"
-msgstr "Πλοήγηση"
+msgstr "Brabhsaich"
 
 #: ../appsaudit/appsaudit.cxx:663
 msgid "Build Reporting Database"
-msgstr "Δημιουργία Έκθεσης Βάσης Δεδομένων"
+msgstr "Tog Aithisgean Stòr-dàta"
 
 #: ../appbrowser/appbrowser.cxx:120
 msgid "Cancel"
-msgstr "Ακύρωση"
+msgstr "Cuir dheth"
 
 #: ../wallpaper/wallpaper.cxx:319
 msgid "Center"
-msgstr "Κέντρο"
+msgstr "Meadhanaich"
 
 #: ../appsaudit/appsaudit.cxx:687
 msgid "Check Md5sums"
-msgstr "Έλεγχος md5sums"
+msgstr "Sgrùd son Md5sums"
 
 #: ../appsaudit/appsaudit.cxx:682
 msgid "Check for Updates"
-msgstr "'Ελεγχος για Ενημερώσεις"
+msgstr "Sgrùd son Ùrachaidhean"
 
 #: ../appsaudit/appsaudit.cxx:673
 msgid "Clear Marked for Deletion"
-msgstr "Εκκαθάριση της Σήμανσης για Διαγραφή"
+msgstr "Glan Comharraichte son Dubhadh Às"
 
 #: ../wallpaper/wallpaper.cxx:233
 msgid "Color #1"
-msgstr ""
+msgstr "Dath #1"
 
 #: ../wallpaper/wallpaper.cxx:246
 msgid "Color #2"
-msgstr ""
+msgstr "Dath #2"
 
 #: ../appbrowser/appbrowser.cxx:526
 msgid "Connect"
-msgstr "Σύνδεση"
+msgstr "Ceangal"
 
 #: ../cpanel/cpanel.cxx:24
 msgid "ControlPanel"
-msgstr "Πίνακας Ελέγχου"
+msgstr "PanailSmachd"
 
 #: ../fdtool/fdtool.cxx:96
 msgid "Copies floppy to image path entered,"
-msgstr "Αντιγράφει τη δισκέτα στην ορισμένη εικόνα,"
+msgstr "Copaigeadh clàr sùbailte gu a' slighe ìomhaigh air chuir a-steach,"
 
 #: ../tc-install/tc-install.cxx:540
 msgid "Core Only (Text Based Interface)"
-msgstr ""
+msgstr "Core A-mhàin (Eadar-aghaidh Bunait Teacsa)"
 
 #: ../tc-install/tc-install.cxx:546
 msgid "Core Plus Extensions Catagories to Install"
-msgstr ""
+msgstr "Seòrsachan Core Leudachain A bharrachd a Stàladh"
 
 #: ../tc-install/tc-install.cxx:535
 msgid "Core and X/GUI Desktop"
-msgstr ""
+msgstr "Core agus X/GUI Bàrr-deasc"
 
 #: ../cpanel/cpanel.cxx:50
 msgid "Date/Time"
-msgstr "Ημερομηνία/Ώρα"
+msgstr "Deat/Àm"
 
 #: ../datetool/datetool.cxx:128
 msgid "Datetool"
-msgstr "Εργαλείο Ημερομηνίας"
+msgstr "InnealDeat"
 
 #: ../datetool/datetool.cxx:146
 msgid "Day:"
-msgstr "Ημέρα:"
+msgstr "Là:"
 
 #: ../appsaudit/appsaudit.cxx:661
 msgid "Dependencies"
-msgstr "Εξαρτήσεις"
+msgstr "Eisimeileachdan"
 
 #: ../appbrowser/appbrowser.cxx:576
 msgid "Depends"
-msgstr "Εξαρτάται"
+msgstr "An urra ri"
 
 #: ../filetool/filetool.cxx:91
 msgid "Device:"
-msgstr "Συσκευή:"
+msgstr "Innleachd:"
 
 #: ../wallpaper/wallpaper.cxx:277
 msgid "Diagonal Gradient"
-msgstr "Διαγώνια Διαβάθμιση"
+msgstr "Caisead Trasda"
 
 #: ../appsaudit/appsaudit.cxx:667
 msgid "Display All Not Depended On"
-msgstr "Παρουσίαση Όλων των Μη Εξαρτώμενων"
+msgstr "Foillsich h-uile nach eile eisimeil air"
 
 #: ../appsaudit/appsaudit.cxx:666
 msgid "Display All with No Dependencies"
-msgstr "Παρουσίαση Όλων Χωρίς Εξαρτήσεις"
+msgstr "Foillsich h-uile às aonais Eisimeileachdan"
 
 #: ../appsaudit/appsaudit.cxx:672
 msgid "Display Marked for Deletion"
-msgstr "Παρουσίαση των Σημειωμένων για Διαγραφή"
+msgstr "Foillsich Comharraichte son Dudhadh Às"
 
 #: ../tc-install/tc-install.cxx:571
 msgid "Don't install Extensions (Core Only, Text Based Install)"
-msgstr ""
+msgstr "Na Stàlaich Leudachain (Core A-mhàin, Stàladh Bunait Teacsa)"
 
 #: ../wallpaper/wallpaper.cxx:228
 msgid "Done"
-msgstr "Ολοκληρώθηκε"
+msgstr "Dèante"
 
 #: ../appbrowser/appbrowser.cxx:462
 msgid "Download + Load"
-msgstr "Λήψη + Φόρτωση"
+msgstr "Luchdadh a-nuas + Luchdaich"
 
 #: ../appbrowser/appbrowser.cxx:463
 msgid "Download Only"
-msgstr "Λήψη Μόνο"
+msgstr "Luchdadh a-nuas a-mhàin"
 
 #: ../network/network.cxx:242
 msgid "E&xit"
-msgstr "Έ&ξοδος"
+msgstr "F&àg"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:271
 msgid "Embedded"
-msgstr ""
+msgstr "Amalaichte"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:328 ../tc-install/tc-install.cxx:526
 msgid "Enter Spaces Separated Options From Examples Above"
 msgstr ""
+"Cuir a-steach Roghainnean Spàsan-Sgaradh Bhon Nan Eisimpleirean Gu h-Àrd"
 
 #: ../tc-install/tc-install.cxx:463
 msgid "Existing Partition"
-msgstr ""
+msgstr "Pàirteachadh Maireannach"
 
 #: ../appsaudit/appsaudit.cxx:674
 msgid "Exit Dependencies Mode"
-msgstr "Έξοδος από Λειτουργία Εξαρτήσεων"
+msgstr "Fàg Modh Eisimeileachdan"
 
 #: ../appsaudit/appsaudit.cxx:679
 msgid "Exit Install Options"
-msgstr "Έξοδος απο Επιλογές Εγκατάστασης"
+msgstr "Fàg Roghainnean Stàladh"
 
 #: ../appsaudit/appsaudit.cxx:688
 msgid "Exit Md5 Check Mode"
-msgstr "Έξοδος απο Λειτουργία Ελέγχου Md5"
+msgstr "Fàg Md5 Modh Sgrùd"
 
 #: ../appsaudit/appsaudit.cxx:692
 msgid "Exit OnBoot"
-msgstr "Έξοδος από «Κατά την Εκκίνηση»"
+msgstr "Fàg AirBùtaich"
 
 #: ../appsaudit/appsaudit.cxx:696
 msgid "Exit OnDemand"
-msgstr "Έξοδος απο «Kατόπιν Ζήτησης»"
+msgstr "Fàg AirIarrtas"
 
 #: ../appsaudit/appsaudit.cxx:684
 msgid "Exit Update Mode"
-msgstr "Έξοδος από Λειτουργία Ενημέρωσης"
+msgstr "Fàg modh Ùrachadh"
 
 #: ../exittc/exittc.cxx:133
 msgid "Exit to Prompt"
-msgstr "Έξοδος στη Γραμμή Εντολών"
+msgstr "Fàg gu Brodadh"
 
 #: ../tc-install/tc-install.cxx:564
 msgid "Extension Installation"
-msgstr ""
+msgstr "Stàlachadh Leudachan"
 
 #: ../flrun/flrun.cxx:147
 msgid "FLRun"
-msgstr "FLRun"
+msgstr "FLRuith"
 
 #: ../appsaudit/appsaudit.cxx:665
 msgid "Fetch Missing Dependencies"
-msgstr ""
+msgstr "Faigh Eisimeilean A Dhith"
 
 #: ../filetool/filetool.cxx:90
 msgid "FileTool"
-msgstr ""
+msgstr "InnealFaidhle"
 
 #: ../appbrowser/appbrowser.cxx:566
 msgid "Files"
-msgstr "Αρχεία"
+msgstr "Faidhlichean"
 
 #: ../wallpaper/wallpaper.cxx:324
 msgid "Fill"
-msgstr "Γέμισμα"
+msgstr "Lìon"
 
 #: ../fdtool/fdtool.cxx:72
 msgid "Floppy Disk Tool"
-msgstr "Εργαλείο Δισκέτας"
+msgstr "Inneal Clàr Sùbailte"
 
 #: ../fdtool/fdtool.cxx:70
 msgid "FloppyTool"
-msgstr "Εργαλείο Δισκέτας"
+msgstr "InnealSùbailte"
 
 #: ../fdtool/fdtool.cxx:92
 msgid "Formats FAT of selected size."
-msgstr "Μορφοποιεί FAT επιλεγμένου μεγέθους."
+msgstr "Fòrmataich FAT de meud taghte."
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:290 ../tc-install/tc-install.cxx:488
 msgid "Formatting Options"
-msgstr ""
+msgstr "Roghainnean Fòrmatadh"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:265 ../tc-install/tc-install.cxx:437
 msgid "Frugal"
-msgstr ""
+msgstr "Glèidhteach"
 
 #: ../wallpaper/wallpaper.cxx:309
 msgid "Full"
-msgstr "Πλήρες"
+msgstr "Làn"
 
 #: ../filetool/filetool.cxx:100
 msgid "GO"
-msgstr "Μετάβαση"
+msgstr "RACH"
 
 #: ../network/network.cxx:207
 msgid "Gateway"
-msgstr "Πύλη (gateway)"
+msgstr "Cabharnach"
 
 #: ../appbrowser/appbrowser.cxx:600
 msgid "Go"
-msgstr ""
+msgstr "Rach"
 
 #: ../wallpaper/wallpaper.cxx:271
 msgid "Horizontal Gradient"
-msgstr "Οριζόντια Διαβάθμιση"
+msgstr "Caisead Còmhnard"
 
 #: ../datetool/datetool.cxx:154
 msgid "Hour:"
-msgstr "Ώρα:"
+msgstr "Uair:"
 
 #: ../network/network.cxx:188
 msgid "IP Address"
-msgstr "Διεύθυνση IP"
+msgstr "Seoladh IP"
 
 #: ../fdtool/fdtool.cxx:87
 msgid "Image Path:"
-msgstr "Τοποθεσία Εικόνας"
+msgstr "Slighe Iomhaigh:"
 
 #: ../appbrowser/appbrowser.cxx:556
 msgid "Info"
-msgstr "Πληροφορίες"
+msgstr "Fios"
 
 #: ../tc-install/tc-install.cxx:565
 msgid "Install Extensions from this TCE/CDE Directory:"
-msgstr ""
+msgstr "Leudachain Stàladh bhon Eòlaire TCE/CDE seo:"
 
 #: ../appsaudit/appsaudit.cxx:676
 msgid "Install Options"
-msgstr "Επιλογές Εγκατάστασης"
+msgstr "Roghainnean Stàladh"
 
 #: ../tc-install/tc-install.cxx:534
 msgid "Install Type"
-msgstr ""
+msgstr "Seòrsa Stàladh"
 
 #: ../wallpaper/wallpaper.cxx:301
 msgid "Install images from /opt/backgrounds directory"
-msgstr "Εγκατάσταση εικόνων απο τον φάκελο /opt/backgrounds"
+msgstr "Stàladh iomhaighean do /opt/backgrounds directory"
 
 #: ../stats/stats.cxx:162
 msgid "Installed"
-msgstr "Εγκατεστημένα"
+msgstr "Air na Stàladh"
 
 #: ../tc-install/tc-install.cxx:550
 msgid "Installer Application"
-msgstr ""
+msgstr "Pròram Stàlaichear"
 
 #: ../network/network.cxx:164
 msgid "Interface"
-msgstr "Προσαρμογέας"
+msgstr "Eadar-aghaidh"
 
 #: ../appbrowser/appbrowser.cxx:429
 msgid "Keyword"
-msgstr ""
+msgstr "Facal-luirg"
 
 #: ../wbarconf/wbarconf.cxx:124
 msgid "Left"
-msgstr "Αριστερά"
+msgstr "Clì"
 
 #: ../wbarconf/wbarconf.cxx:131
 msgid "Left Bottom"
-msgstr ""
+msgstr "Clì bonn"
 
 #: ../mousetool/mousetool.cxx:93
 msgid "Left Button"
-msgstr "Αριστερό κουμπί"
+msgstr "Clì Putan"
 
 #: ../wbarconf/wbarconf.cxx:130
 msgid "Left Top"
-msgstr ""
+msgstr "Clì bàrr"
 
 #: ../appsaudit/appsaudit.cxx:668
 msgid "List Dependencies"
-msgstr "Καταλογοποίηση Εξαρτήσεων"
+msgstr "Liosta Eisimeileachdan"
 
 #: ../appsaudit/appsaudit.cxx:670
 msgid "List Missing Dependencies"
-msgstr "Καταλογοποίηση Ελλειπών Εξαρτήσεων"
+msgstr "Liosta Eisimeileachdan a Dhith"
 
 #: ../appsaudit/appsaudit.cxx:669
 msgid "List Required By"
-msgstr "Καταλογοποίηση των «Χρειάζεται από»"
+msgstr "Liosta Air Iarraidh Le"
 
 #: ../appbrowser/appbrowser.cxx:529
 msgid "Local"
-msgstr "Τοπικά"
+msgstr "Ionadail"
 
 #: ../wallpaper/wallpaper.cxx:293
 msgid "Logo"
-msgstr ""
+msgstr "Logo"
 
 #: ../appbrowser/appbrowser.cxx:111
 msgid "MD5SUM error"
-msgstr ""
+msgstr "MD5SUM mearachd"
 
 #: ../appsaudit/appsaudit.cxx:691 ../appsaudit/appsaudit.cxx:695
 #: ../cpanel/cpanel.cxx:26
 msgid "Maintenance"
-msgstr "Συντήρηση"
+msgstr "Gleidheadh"
 
 #: ../tc-install/tc-install.cxx:477
 msgid "Mark Partition Active (bootable)"
-msgstr ""
+msgstr "Comharraich Pàirteachadh Gnìomhach (comas bùtaich)"
 
 #: ../appsaudit/appsaudit.cxx:671
 msgid "Mark for Deletion"
-msgstr "Σήμανση για διαγραφή"
+msgstr "Comharraichte son Dubhadh Às"
 
 #: ../appsaudit/appsaudit.cxx:686
 msgid "Md5Check"
-msgstr "Md5Check"
+msgstr "Md5Sgrùd"
 
 #: ../appbrowser/appbrowser.cxx:112
 msgid "Md5sum error on"
-msgstr ""
+msgstr "Md5sum mearachd air"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:250
 msgid "Micro Core"
-msgstr ""
+msgstr "Meanbh Meadhan"
 
 #: ../datetool/datetool.cxx:162
 msgid "Min:"
-msgstr "Ελάχιστο:"
+msgstr "Mion:"
 
 #: ../appbrowser/appbrowser.cxx:532
 msgid "Mirrors"
-msgstr "Εναλλακτικές τοποθεσίες"
+msgstr "Sgàthanan"
 
 #: ../appsaudit/appsaudit.cxx:664
 msgid "Missing Dependencies Reporting"
-msgstr ""
+msgstr "Aithris Air Eisimeilean A Dhith"
 
 #: ../datetool/datetool.cxx:138
 msgid "Month:"
-msgstr "Μήνας:"
+msgstr "Mios:"
 
 #: ../cpanel/cpanel.cxx:44
 msgid "Mount Tool"
-msgstr "Εργαλείο Ανάρτησης"
+msgstr "Inneal Cuir-an-àirde"
 
 #: ../swapfile/swapfile.cxx:65
 msgid "Mounted Partition:"
-msgstr "Αναρτημένo Διαμέρισμα"
+msgstr "Pàirteachadh Air Chuir-an-Àirde"
 
 #: ../mousetool/mousetool.cxx:76
 msgid "Mouse Speed"
-msgstr "Ταχύτητα Ποντικιού"
+msgstr "Astar luchag"
 
 #: ../cpanel/cpanel.cxx:53
 msgid "Mouse Tool"
-msgstr "Εργαλείο Ποντικιού"
+msgstr "Inneal Luchag"
 
 #: ../mousetool/mousetool.cxx:74
 msgid "MouseTool"
-msgstr "Εργαλείο Ποντικιού"
+msgstr "InnealLuchag"
 
 #: ../network/network.cxx:213
 msgid "NameServers"
-msgstr ""
+msgstr "AinmFrithealaiche"
 
 #: ../loadpack/loadpack.cxx:20
 msgid "Navigate to and Select Starter Pack to load."
-msgstr ""
+msgstr "Seòl gu agus Tagh Paca Tòiseachadh a luchdachadh."
 
 #: ../cpanel/cpanel.cxx:59 ../network/network.cxx:158
 #: ../network/network.cxx:160
 msgid "Network"
-msgstr "Δίκτυο"
+msgstr "Lìonra"
 
 #: ../network/network.cxx:195
 msgid "Network Mask"
-msgstr "Μάσκα δικτύου"
+msgstr "Lìonra Masg"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:291 ../tc-install/tc-install.cxx:489
 msgid "No formatting, use existing."
-msgstr ""
+msgstr "Gun fòrmatadh, cleachd  a' mhaireannach."
 
 #: ../tc-install/tc-install.cxx:556
 msgid "Non-US keyboard layout support"
-msgstr ""
+msgstr "Taic co-dhealbhachd meur-clàr Neo-US"
 
 #: ../exittc/exittc.cxx:106 ../filetool/filetool.cxx:77
 msgid "None"
-msgstr "Κανένα"
+msgstr "Neoni"
 
 #: ../flrun/flrun.cxx:149
 msgid "OK"
-msgstr "Εντάξει"
+msgstr "Ceart"
 
 #: ../appbrowser/appbrowser.cxx:460 ../appsaudit/appsaudit.cxx:690
 msgid "OnBoot"
-msgstr "Κατά την Εκκινηση"
+msgstr "AirBùtaich"
 
 #: ../appbrowser/appbrowser.cxx:461 ../appsaudit/appsaudit.cxx:694
 msgid "OnDemand"
-msgstr "Κατοπιν Ζήτησης"
+msgstr "AirIarrtas"
 
 #: ../wbar_exclude/wbar_exclude.cxx:59
 msgid "Onboot Items"
-msgstr "Στοίχεια «Κατά την Εκκίνηση»"
+msgstr "Nithean AirBùtaich"
 
 #: ../tc-install/tc-install.cxx:482
 msgid "Path to core.gz:"
-msgstr ""
+msgstr "Slighe gu core.gz:"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:248
 msgid "Please Select Version to Install"
-msgstr ""
+msgstr "Tagh Sibh an Tionndaidh a Stàladh"
 
 #: ../wbarconf/wbarconf.cxx:160
 msgid "Position"
-msgstr ""
+msgstr "Suidheachadh"
 
 #: ../wallpaper/wallpaper.cxx:225
 msgid "Preview"
-msgstr "Προεπισκόπηση"
+msgstr "Ro-shealladh"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:339 ../tc-install/tc-install.cxx:588
 msgid "Proceed"
-msgstr ""
+msgstr "Rach"
 
 #: ../appsaudit/appsaudit.cxx:740
 msgid "Process Selected Item(s)"
-msgstr "Επεξεργασία Επιλεγμένων Στοιχείων"
+msgstr "Pròiseas Ni(thean) Taghte"
 
 #: ../appbrowser/appbrowser.cxx:428
 msgid "Provides"
-msgstr "Παρέχει"
+msgstr "A' solaraich"
 
 #: ../exittc/exittc.cxx:128
 msgid "Reboot"
-msgstr "Επανεκκίνηση"
+msgstr "Bùtaich a-rithist"
 
 #: ../tc-install/tc-install.cxx:553
 msgid "Remaster Tool"
-msgstr ""
+msgstr "Inneal Ath-mhaighstir"
 
 #: ../appbrowser/appbrowser.cxx:114
 msgid "Remove and try again"
-msgstr ""
+msgstr "Dubh às agus feuch a-rithist"
 
 #: ../filetool/filetool.cxx:80
 msgid "Restore"
-msgstr "Επαναφορά"
+msgstr "Aisig"
 
 #: ../appsaudit/appsaudit.cxx:724
 msgid "Results"
-msgstr "Αποτελέσματα"
+msgstr "Toraidhean"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:336 ../tc-install/tc-install.cxx:585
 msgid "Review"
-msgstr ""
+msgstr "Rannsaich"
 
 #: ../wbarconf/wbarconf.cxx:125
 msgid "Right"
-msgstr "Δεξιά"
+msgstr "Deas"
 
 #: ../wbarconf/wbarconf.cxx:133
 msgid "Right Bottom"
-msgstr ""
+msgstr "Putan Bonn"
 
 #: ../mousetool/mousetool.cxx:87
 msgid "Right Button"
-msgstr "Δεξί κουμπί"
+msgstr "Putan Ceart"
 
 #: ../wbarconf/wbarconf.cxx:132
 msgid "Right Top"
-msgstr ""
+msgstr "Ceart Barr"
 
 #: ../exittc/exittc.cxx:108 ../filetool/filetool.cxx:79
 msgid "Safe"
-msgstr "Ασφαλής"
+msgstr "Sàbhailte"
 
 #: ../network/network.cxx:223
 msgid "Save Configuration?"
-msgstr "Αποθήκευση Σύνθεσης"
+msgstr "Sàbhail Rian?"
 
 #: ../appbrowser/appbrowser.cxx:427
 msgid "Search"
-msgstr "Αναζήτηση"
+msgstr "Sireadh"
 
 #: ../appsaudit/appsaudit.cxx:721
 msgid "Select"
-msgstr "Επιλογή"
+msgstr "Tagh"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:33 ../tc-install/tc-install.cxx:24
 msgid "Select File for "
-msgstr ""
+msgstr "Tagh Faidhle Son "
 
 #: ../add2file/add2file.cxx:22
 msgid "Select File to be added to "
-msgstr "Επιλογή Αρχείου που θα προστεθεί στο "
+msgstr "Tagh Faidhle ri cuir ris "
 
 #: ../appsaudit/appsaudit.cxx:683
 msgid "Select Mirror"
-msgstr ""
+msgstr "Tagh Sgàthan"
 
 #: ../tc-install/tc-install.cxx:401
 msgid "Select TCE/CDE Directory"
-msgstr ""
+msgstr "Tagh Eòlaire TCE/CDE"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:280 ../tc-install/tc-install.cxx:471
 msgid "Select Target Disk"
-msgstr ""
+msgstr "Tagh Diosg Targaid"
 
 #: ../appsaudit/appsaudit.cxx:678
 msgid "Selective Copy Install"
-msgstr "Εγκατάσταση με Επιλεκτική Αντιγραφή"
+msgstr "Stàladh Copaidh Taghta"
 
 #: ../cpanel/cpanel.cxx:47
 msgid "Services"
-msgstr "Υπηρεσίες"
+msgstr "Seirbheisean"
 
 #: ../appbrowser/appbrowser.cxx:609
 msgid "Set"
-msgstr "Ορισμός"
+msgstr "Stèidhich"
 
 #: ../cpanel/cpanel.cxx:36
 msgid "Setup"
-msgstr "Εγκατάσταση"
+msgstr "Cuir air bhonn"
 
 #: ../exittc/exittc.cxx:122
 msgid "Shutdown"
-msgstr "Τερματισμός"
+msgstr "Dùin Sios"
 
 #: ../appbrowser/appbrowser.cxx:585
 msgid "Size"
-msgstr "Μέγεθος"
+msgstr "Meud"
 
 #: ../wallpaper/wallpaper.cxx:259
 msgid "Solid Color"
-msgstr ""
+msgstr "Dath Cruaidh"
 
 #: ../wallpaper/wallpaper.cxx:336
 msgid "Solid Color or 2 Color Gradient"
-msgstr ""
+msgstr "Dath Cruaidh no Caisead 2 Dhath"
 
 #: ../appbrowser/appbrowser.cxx:604
 msgid "Status"
-msgstr "Κατάσταση"
+msgstr "Inbhe"
 
 #: ../swapfile/swapfile.cxx:63
 msgid "Swapfile"
-msgstr "Swapfile"
+msgstr "Suaipfaidhle"
 
 #: ../cpanel/cpanel.cxx:56
 msgid "Swapfile Tool"
-msgstr "Εργαλείο Swapfile"
+msgstr "Inneal Suaipfaidhle"
 
 #: ../cpanel/cpanel.cxx:62
 msgid "System Stats"
-msgstr "Στατιστικά Συστήματος"
+msgstr "Staitisteil Siostam"
 
 #: ../exittc/exittc.cxx:118
 msgid "TC Exit Options"
-msgstr "Επιλογές Εξόδου TC"
+msgstr "TC Fàg Roghainnean"
 
 #: ../cpanel/cpanel.cxx:65
 msgid "Terminal Server"
-msgstr "Εξυπηρετητής Τερματικού"
+msgstr "Tèirmineal Frithealaiche"
 
 #: ../wallpaper/wallpaper.cxx:314
 msgid "Tile"
-msgstr "Παράθεση"
+msgstr "Leacag"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:255
 msgid "Tiny Core"
-msgstr ""
+msgstr "Tiny Core"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:243 ../tc-grub4dos/tc-grub4dos.cxx:245
 msgid "Tiny Core Grub4dos Installation"
-msgstr ""
+msgstr "Tiny Core Grub4dos Stàlachadh"
 
 #: ../tc-install/tc-install.cxx:427 ../tc-install/tc-install.cxx:429
 msgid "Tiny Core Installation"
-msgstr ""
+msgstr "Tiny Core Stàlachadh"
 
 #: ../stats/stats.cxx:74
 msgid "Tiny Core System Stats"
-msgstr "Στατιστικά Συστήματος Tiny Core"
+msgstr "Tiny  Core Siostam Staitisteil"
 
 #: ../appsaudit/appsaudit.cxx:677
 msgid "Toggle Default Copy Install"
-msgstr "Ενεργοποίηση Εγκατάστασης με Προεπιλεγμένη Αντιγραφή"
+msgstr "Toglaich gnàthach stàladh copaidh"
 
 #: ../wbarconf/wbarconf.cxx:122
 msgid "Top"
-msgstr "Πάνω"
+msgstr "Barr"
 
 #: ../wbarconf/wbarconf.cxx:126
 msgid "Top Left"
-msgstr ""
+msgstr "Barr Clì"
 
 #: ../wbarconf/wbarconf.cxx:127
 msgid "Top Right"
-msgstr ""
+msgstr "Barr Ceart"
 
 #: ../appbrowser/appbrowser.cxx:117
 msgid "Try to finish download"
-msgstr ""
+msgstr "Feuch criothnaich luchdachadh a-nuas"
 
 #: ../tc-install/tc-install.cxx:444
 msgid "USB-HDD"
-msgstr ""
+msgstr "USB-DDC"
 
 #: ../tc-install/tc-install.cxx:449
 msgid "USB-ZIP"
-msgstr ""
+msgstr "USB-ZIP"
 
 #: ../appsaudit/appsaudit.cxx:662
 msgid "Update .dep files."
-msgstr "Ενημέρωση αρχείων .dep."
+msgstr "Ùrachaidhean faidhlichen  .deb."
 
 #: ../appsaudit/appsaudit.cxx:681
 msgid "Updates"
-msgstr "Ενημερώσεις"
+msgstr "Ùrachaidhean"
 
 #: ../network/network.cxx:170
 msgid "Use DHCP Broadcast?"
-msgstr "Χρήση Μετάδοσης DHCP?"
+msgstr "Cleachd Craoladh DHCP?"
 
 #: ../cpanel/cpanel.cxx:31
 msgid "Utilities"
-msgstr "Εργαλεία"
+msgstr "Ùisealachdan"
 
 #: ../wallpaper/wallpaper.cxx:265
 msgid "Vertical Gradient"
-msgstr "Κατακόρυφη Διαβάθμιση"
+msgstr "Caisead Direach"
 
 #: ../cpanel/cpanel.cxx:72 ../wallpaper/wallpaper.cxx:224
 msgid "Wallpaper"
-msgstr "Φόντο"
+msgstr "Pàipear-balla"
 
 #: ../cpanel/cpanel.cxx:68
 msgid "Wbar Conf"
-msgstr ""
+msgstr "Wbar Rèit"
 
 #: ../wbarconf/wbarconf.cxx:176
 msgid "Wbar Icon Size"
-msgstr "Μέγεθος Εικόνων Wbar"
+msgstr "Wbar Meud Ìomhaigheag"
 
 #: ../wbarconf/wbarconf.cxx:148
 msgid "Wbar Icons"
-msgstr "Εικόνες Wbar"
+msgstr "Wbar ìomhaigheagan"
 
 #: ../wbarconf/wbarconf.cxx:184
 msgid "Wbar Text Labels"
-msgstr "Ετικέτες Κειμένου Wbar"
+msgstr "Wbar Ainmichean Teacsa"
 
 #: ../wbarconf/wbarconf.cxx:168
 msgid "Wbar Zoom"
-msgstr "Μεγέθυνση Wbar"
+msgstr "Wbar Claon-ruathar"
 
 #: ../tc-install/tc-install.cxx:458
 msgid "Whole Disk"
-msgstr ""
+msgstr "Diosg Slàn"
 
 #: ../tc-install/tc-install.cxx:547
 msgid "Wireless Networking Support"
-msgstr ""
+msgstr "Taic Lìonrachadh Uèirleas"
 
 #: ../fdtool/fdtool.cxx:101
 msgid "Writes image path file to floppy."
-msgstr "Γράφει την προκαθορισμένη εικόνα στη δισκέτα"
+msgstr "Sgìobhadh ionmgiagh faidhle bréid gu clàr sùbailte"
 
 #: ../cpanel/cpanel.cxx:75
 msgid "Xvesa"
@@ -828,23 +829,23 @@ msgstr "Xvesa"
 
 #: ../datetool/datetool.cxx:130
 msgid "Year:"
-msgstr "Έτος:"
+msgstr "Bliadhna:"
 
 #: ../stats/stats.cxx:171
 msgid "bigHomeFiles"
-msgstr ""
+msgstr "mòrFaidhlicheanDachaigh"
 
 #: ../stats/stats.cxx:153
 msgid "boot"
-msgstr "Εκκίνηση"
+msgstr "bùtaich"
 
 #: ../mnttool_save/mnttool.cxx:117
 msgid "button"
-msgstr "κουμπί"
+msgstr "putan"
 
 #: ../stats/stats.cxx:80
 msgid "cpu"
-msgstr "cpu"
+msgstr "ipm(cpu)"
 
 #: ../stats/stats.cxx:126
 msgid "dmesg"
@@ -852,64 +853,64 @@ msgstr "dmesg"
 
 #: ../wbarconf/wbarconf.cxx:147 ../wbar_exclude/wbar_exclude.cxx:58
 msgid "eXclude Wbar Icons"
-msgstr "Αποκλεισμένα Εικονίδια του Wbar"
+msgstr "tOirmisg ìomhaigheagan Wbar"
 
 #: ../wbar_exclude/wbar_exclude.cxx:65
 msgid "eXclude Wbar Items"
-msgstr "Αποκλεισμένα Στοιχεία του Wbar"
+msgstr "tOirmisg nithean Wbar"
 
 #: ../wbarconf/wbarconf.cxx:154
 msgid "eXcluded Items"
-msgstr "Αποκλεισμένα Στοιχεία"
+msgstr "tOirmisg nithean"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:298 ../tc-install/tc-install.cxx:496
 msgid "ext2"
-msgstr ""
+msgstr "ext2"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:303 ../tc-install/tc-install.cxx:501
 msgid "ext3"
-msgstr ""
+msgstr "ext3"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:308 ../tc-install/tc-install.cxx:506
 msgid "ext4"
-msgstr ""
+msgstr "ext4"
 
 #: ../stats/stats.cxx:144
 msgid "filesystems"
-msgstr ""
+msgstr "Siostamanfaidhle"
 
 #: ../stats/stats.cxx:90
 msgid "mem"
-msgstr ""
+msgstr "mem"
 
 #: ../stats/stats.cxx:108
 msgid "modules"
-msgstr "δομοστοιχεία"
+msgstr "modalan"
 
 #: ../stats/stats.cxx:135
 msgid "mounts"
-msgstr "αναρτήσεις"
+msgstr "Cuir-an-àirdean"
 
 #: ../stats/stats.cxx:99
 msgid "net"
-msgstr ""
+msgstr "lìon"
 
 #: ../network/network.cxx:179 ../network/network.cxx:232
 msgid "no"
-msgstr "όχι"
+msgstr "Chan eil"
 
 #: ../stats/stats.cxx:117
 msgid "processes"
-msgstr "διεργασίες"
+msgstr "pròiseasan"
 
 #: ../swapfile/swapfile.cxx:67
 msgid "tc.swp in k bytes:"
-msgstr "tc.swp σε k bytes:"
+msgstr "tc.swp ann k bytes:"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:313 ../tc-install/tc-install.cxx:511
 msgid "vfat"
-msgstr ""
+msgstr "vfat"
 
 #: ../network/network.cxx:173 ../network/network.cxx:226
 msgid "yes"
-msgstr "ναι"
+msgstr "seadh!"

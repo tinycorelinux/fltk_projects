@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 i18n_type 1 
 i18n_include <libintl.h> 
 i18n_function mygettext 
@@ -37,7 +37,7 @@ decl {string image,type,installMode, target,dev,format,path,coreplus,boot,flag, 
 
 decl {string warn="Mark active if Tiny Core is the only operation system,\\nor Windows and Tiny Core are on the same disk.\\nOtherwise use Grub extension after installation.";} {} 
 
-Function {selectFile()} {open return_type void
+Function {selectFile()} {return_type void
 } {
   code {brwTarget->deactivate();
 string target = "*" + image + "*";
@@ -57,7 +57,7 @@ path = chooser.value();
 Fl::flush();} {}
 } 
 
-Function {prepTarget()} {open return_type void
+Function {prepTarget()} {return_type void
 } {
   code {if (path.empty()) return;
 
@@ -287,6 +287,7 @@ if (btnBootloader->value() == 1) { bootLoader = "yes"; }
 
 string tcedir = outputTCEDir->value();
 if (tcedir.empty()) { tcedir = "none"; }
+if (btnNoExtensions->value() == 1) { tcedir = "none"; }
 
 command="sudo tc-install.sh "+path+" "+installMode+" "+dev+" "+markActive+" "+format+" "+bootLoader+" "+coreplus+" "+coreplusinstalltype+" "+installgroups+" "+tcedir+" "+boot;
 FILE *pipe = popen(command.c_str(),"r");
@@ -313,14 +314,14 @@ Function {} {open
   Fl_Window window {
     label {Tiny Core Installation}
     user_data {"quit"} open
-    xywh {421 249 480 400} type Double resizable visible
+    xywh {421 249 480 400} type Double hide resizable
   } {
     Fl_Wizard wWizard {
       label {Tiny Core Installation} open
       xywh {25 30 435 325} labeltype ENGRAVED_LABEL
       code0 {wWizard->value(wWizard->child(0));}
     } {
-      Fl_Group grpType {open
+      Fl_Group grpType {
         xywh {25 30 435 325}
       } {
         Fl_Output fullpathOutput {
@@ -331,7 +332,7 @@ fullpathOutput->value(path.c_str());
 prepTarget();}
           xywh {55 63 375 27}
         }
-        Fl_Group {} {open
+        Fl_Group {} {
           xywh {55 104 375 51}
         } {
           Fl_Check_Button {} {
@@ -357,7 +358,7 @@ prepTarget();}
             tooltip {Use for pendrives.   Drive will be formatted into two FAT partitions} xywh {315 105 80 22} type Radio down_box DOWN_BOX
           }
         }
-        Fl_Group {} {open
+        Fl_Group {} {
           xywh {55 131 375 33} box ENGRAVED_FRAME
         } {
           Fl_Check_Button btnWhole {
@@ -418,11 +419,11 @@ prepTarget();
           xywh {55 38 105 25}
         }
       }
-      Fl_Group grpFormat {open
+      Fl_Group grpFormat {
         xywh {25 30 435 325} hide
       } {
         Fl_Group FormatType {
-          label {Formatting Options} open
+          label {Formatting Options}
           xywh {100 95 270 230}
         } {
           Fl_Round_Button btnNoFormat {
@@ -471,11 +472,11 @@ prepTarget();
           xywh {35 325 415 20} labeltype EMBOSSED_LABEL align 1
         }
       }
-      Fl_Group grpExtensionsCorePlus {open
+      Fl_Group grpExtensionsCorePlus {
         xywh {50 55 370 285} hide
       } {
         Fl_Group installType {
-          label {Install Type} open
+          label {Install Type}
           xywh {85 70 310 75}
         } {
           Fl_Round_Button installCoreX11 {
@@ -489,7 +490,7 @@ prepTarget();
           }
         }
         Fl_Group corePlusExtensions {
-          label {Core Plus Extensions Catagories to Install} open
+          label {Core Plus Extensions Catagories to Install}
           xywh {83 155 315 180}
         } {
           Fl_Box {} {
@@ -526,11 +527,11 @@ prepTarget();
           }
         }
       }
-      Fl_Group grpExtensionsStandAlone {open
+      Fl_Group grpExtensionsStandAlone {
         xywh {36 61 405 255} hide
       } {
         Fl_Group {} {
-          label {Extension Installation} open
+          label {Extension Installation}
           xywh {52 111 389 205}
         } {
           Fl_Round_Button btnInstallExtensions {
@@ -568,7 +569,7 @@ outputTCEDir->value(tcepath.c_str());}
           }
         }
       }
-      Fl_Group grpReview {open
+      Fl_Group grpReview {
         xywh {25 30 435 325} hide
       } {
         Fl_Browser brwReview {
@@ -582,7 +583,7 @@ outputTCEDir->value(tcepath.c_str());}
         }
       }
     }
-    Fl_Group grpButtons {open
+    Fl_Group grpButtons {
       xywh {25 365 440 40} deactivate
     } {
       Fl_Button {} {

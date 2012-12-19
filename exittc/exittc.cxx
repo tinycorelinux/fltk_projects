@@ -9,7 +9,6 @@
 #include <string>
 #include <fstream>
 #include <FL/fl_message.H>
-#include <FL/forms.H>
 #include <locale.h>
 #include <unistd.h>
 #include <string.h>
@@ -78,7 +77,7 @@ if (userdata == "ok") {
       Fl::flush();
       if ( results != 0 )
       {
-         fl_message("Errors occured during backup!\nSee: /tmp/backup_status.");
+         fl_message("Errors occurred during backup!\nSee: /tmp/backup_status.");
          exit(1);
       }
     } else {

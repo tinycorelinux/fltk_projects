@@ -96,7 +96,7 @@ if (userdata == "ok") {
       Fl::flush();
       if ( results != 0 )
       {
-         fl_message("Errors occured during backup!\\nSee: /tmp/backup_status.");
+         fl_message("Errors occurred during backup!\\nSee: /tmp/backup_status.");
          exit(1);
       }
     } else {
@@ -111,7 +111,8 @@ if (userdata == "ok") {
     system( (const char *)commandStr.c_str());
     exit(0);
   }  
-}} {}
+}} {selected
+  }
 } 
 
 Function {} {open
@@ -244,6 +245,5 @@ if ( option != string::npos )
  
 
 if (backup)
-   device_output->value(backup_device.c_str());} {selected
-  }
+   device_output->value(backup_device.c_str());} {}
 } 

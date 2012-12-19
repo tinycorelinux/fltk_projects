@@ -3,6 +3,7 @@
 #ifndef appbrowser_h
 #define appbrowser_h
 #include <FL/Fl.H>
+void displayTabData();
 #include <FL/Fl_Double_Window.H>
 extern Fl_Double_Window *errwindow;
 #include <FL/Fl_Box.H>
@@ -15,7 +16,7 @@ extern Fl_Choice *search_choices;
 extern Fl_Input *search_field;
 extern Fl_Box *box_select;
 #include <FL/Fl_Browser.H>
-extern Fl_Browser *brw_select;
+extern Fl_Browser *brwSelect;
 #include <FL/Fl_Tabs.H>
 extern Fl_Tabs *tabs;
 #include <FL/Fl_Group.H>

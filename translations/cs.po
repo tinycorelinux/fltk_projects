@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tctools\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-03-10 13:13+0200\n"
+"POT-Creation-Date: 2012-01-02 22:44+0200\n"
 "PO-Revision-Date: 2011-03-03 13:02+0000\n"
 "Last-Translator: wladyslaw motyka <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-04-02 06:20+0000\n"
-"X-Generator: Launchpad (build 12710)\n"
+"X-Launchpad-Export-Date: 2012-03-29 10:09+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 
 #: ../mousetool/mousetool.cxx:98 ../network/network.cxx:239
 msgid "&Apply"
@@ -25,8 +25,8 @@ msgstr "&Použít"
 msgid "&Apply Image"
 msgstr "&Použít obrázek"
 
-#: ../datetool/datetool.cxx:173 ../exittc/exittc.cxx:147
-#: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:66 ../swapfile/swapfile.cxx:69
+#: ../datetool/datetool.cxx:173 ../exittc/exittc.cxx:153
+#: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:152 ../swapfile/swapfile.cxx:69
 msgid "&Cancel"
 msgstr "&Zrušit"
 
@@ -42,7 +42,7 @@ msgstr "&Formátovat"
 msgid "&Make Image"
 msgstr "&Udělej obraz"
 
-#: ../datetool/datetool.cxx:170 ../exittc/exittc.cxx:144
+#: ../datetool/datetool.cxx:170 ../exittc/exittc.cxx:149
 msgid "&OK"
 msgstr "&OK"
 
@@ -61,56 +61,78 @@ msgstr "1722k"
 #: ../datetool/datetool.cxx:132 ../datetool/datetool.cxx:140
 #: ../datetool/datetool.cxx:148 ../datetool/datetool.cxx:156
 #: ../datetool/datetool.cxx:164 ../mnttool_save/mnttool.cxx:111
+#: ../tc-grub4dos/tc-grub4dos.cxx:349 ../tc-install/tc-install.cxx:598
 msgid "@<"
 msgstr "@<"
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:355
+msgid "@<<"
+msgstr ""
 
 #: ../datetool/datetool.cxx:135 ../datetool/datetool.cxx:143
 #: ../datetool/datetool.cxx:151 ../datetool/datetool.cxx:159
 #: ../datetool/datetool.cxx:167 ../mnttool_save/mnttool.cxx:114
+#: ../tc-grub4dos/tc-grub4dos.cxx:352 ../tc-install/tc-install.cxx:601
 msgid "@>"
 msgstr "@>"
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:358
+msgid "@>>"
+msgstr ""
 
 #: ../filetool/filetool.cxx:95
 msgid "Action:"
 msgstr "Akce:"
 
-#: ../appbrowser/appbrowser.cxx:439
+#: ../appbrowser/appbrowser.cxx:524
 msgid "Appbrowser"
 msgstr "Appbrowser"
 
-#: ../flrun/flrun.cxx:57
-msgid "Application Launcher"
-msgstr "Spouštěč aplikací"
+#: ../flrun/flrun.cxx:158
+msgid "Application launcher"
+msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:163
+#: ../wbarconf/wbarconf.cxx:165
 msgid "Apply"
 msgstr "Použít"
 
-#: ../appsaudit/appsaudit.cxx:600 ../cpanel/cpanel.cxx:39
+#: ../appsaudit/appsaudit.cxx:716
 msgid "AppsAudit"
 msgstr "AppsAudit"
 
-#: ../exittc/exittc.cxx:104 ../filetool/filetool.cxx:78
+#: ../wallpaper/wallpaper.cxx:331
+msgid "Background Image"
+msgstr ""
+
+#: ../exittc/exittc.cxx:107 ../filetool/filetool.cxx:78
 msgid "Backup"
 msgstr "Zálohovat"
 
-#: ../exittc/exittc.cxx:139
+#: ../exittc/exittc.cxx:144
 msgid "Backup Options:"
 msgstr "Možnosti zálohováni"
 
-#: ../cpanel/cpanel.cxx:48
+#: ../cpanel/cpanel.cxx:41
 msgid "Backup/Restore"
 msgstr "Zálohovat/Obnovit"
 
-#: ../wbarconf/wbarconf.cxx:121
+#: ../tc-grub4dos/tc-grub4dos.cxx:322 ../tc-install/tc-install.cxx:520
+msgid "Boot Options"
+msgstr ""
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:324 ../tc-install/tc-install.cxx:522
+msgid "Boot Options Reference List"
+msgstr ""
+
+#: ../wbarconf/wbarconf.cxx:123
 msgid "Bottom"
 msgstr "Dole"
 
-#: ../wbarconf/wbarconf.cxx:126
+#: ../wbarconf/wbarconf.cxx:128
 msgid "Bottom Left"
 msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:127
+#: ../wbarconf/wbarconf.cxx:129
 msgid "Bottom Right"
 msgstr ""
 
@@ -118,43 +140,47 @@ msgstr ""
 msgid "Broadcast"
 msgstr "Broadcast"
 
-#: ../flrun/flrun.cxx:69
+#: ../flrun/flrun.cxx:155
 msgid "Browse"
 msgstr "Procházet"
 
-#: ../appsaudit/appsaudit.cxx:549
+#: ../appsaudit/appsaudit.cxx:663
 msgid "Build Reporting Database"
 msgstr "Vytvořit Databázi Reportů"
 
-#: ../wallpaper/wallpaper.cxx:275 ../wallpaper/wallpaper.cxx:300
+#: ../appbrowser/appbrowser.cxx:120
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: ../wallpaper/wallpaper.cxx:332
+#: ../wallpaper/wallpaper.cxx:319
 msgid "Center"
 msgstr "Na střed"
 
-#: ../appsaudit/appsaudit.cxx:571
+#: ../appsaudit/appsaudit.cxx:687
 msgid "Check Md5sums"
 msgstr "Zkontroluj Md5"
 
-#: ../appsaudit/appsaudit.cxx:567
+#: ../appsaudit/appsaudit.cxx:682
 msgid "Check for Updates"
 msgstr "Kontrola aktualizací"
 
-#: ../appsaudit/appsaudit.cxx:558
+#: ../appsaudit/appsaudit.cxx:673
 msgid "Clear Marked for Deletion"
 msgstr "Smaž Označené pro smazáni"
 
-#: ../wallpaper/wallpaper.cxx:350
-msgid "Color"
-msgstr "Barva"
+#: ../wallpaper/wallpaper.cxx:233
+msgid "Color #1"
+msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:441
+#: ../wallpaper/wallpaper.cxx:246
+msgid "Color #2"
+msgstr ""
+
+#: ../appbrowser/appbrowser.cxx:526
 msgid "Connect"
 msgstr "Připojit se"
 
-#: ../cpanel/cpanel.cxx:22
+#: ../cpanel/cpanel.cxx:24
 msgid "ControlPanel"
 msgstr "OvládacíPanel"
 
@@ -162,7 +188,19 @@ msgstr "OvládacíPanel"
 msgid "Copies floppy to image path entered,"
 msgstr "Kopírovat disketu do zadane cesty obrazu"
 
-#: ../cpanel/cpanel.cxx:57
+#: ../tc-install/tc-install.cxx:540
+msgid "Core Only (Text Based Interface)"
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:546
+msgid "Core Plus Extensions Catagories to Install"
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:535
+msgid "Core and X/GUI Desktop"
+msgstr ""
+
+#: ../cpanel/cpanel.cxx:50
 msgid "Date/Time"
 msgstr "Datum/Čas"
 
@@ -174,11 +212,11 @@ msgstr "Datetool"
 msgid "Day:"
 msgstr "Den:"
 
-#: ../appsaudit/appsaudit.cxx:547
+#: ../appsaudit/appsaudit.cxx:661
 msgid "Dependencies"
 msgstr "Závislosti"
 
-#: ../appbrowser/appbrowser.cxx:491
+#: ../appbrowser/appbrowser.cxx:576
 msgid "Depends"
 msgstr "Závisí na"
 
@@ -186,36 +224,35 @@ msgstr "Závisí na"
 msgid "Device:"
 msgstr "Zařízení:"
 
-#: ../wallpaper/wallpaper.cxx:255
+#: ../wallpaper/wallpaper.cxx:277
 msgid "Diagonal Gradient"
 msgstr "Diagonální přechod"
 
-#: ../appsaudit/appsaudit.cxx:554
+#: ../appsaudit/appsaudit.cxx:667
 msgid "Display All Not Depended On"
 msgstr "Zobraz všechny nezávislé na"
 
-#: ../appsaudit/appsaudit.cxx:555
-msgid "Display All with Missing Dependencies"
-msgstr "Zobraz všechny z chybějícimi závislostmi"
-
-#: ../appsaudit/appsaudit.cxx:553
+#: ../appsaudit/appsaudit.cxx:666
 msgid "Display All with No Dependencies"
 msgstr "Zobraz všechny bez závislosti"
 
-#: ../appsaudit/appsaudit.cxx:557
+#: ../appsaudit/appsaudit.cxx:672
 msgid "Display Marked for Deletion"
 msgstr "Zobraz Označené ke smazání"
 
-#: ../wallpaper/wallpaper.cxx:272 ../wallpaper/wallpaper.cxx:297
-#: ../wallpaper/wallpaper.cxx:346
+#: ../tc-install/tc-install.cxx:571
+msgid "Don't install Extensions (Core Only, Text Based Install)"
+msgstr ""
+
+#: ../wallpaper/wallpaper.cxx:228
 msgid "Done"
 msgstr "Hotovo"
 
-#: ../appbrowser/appbrowser.cxx:386
+#: ../appbrowser/appbrowser.cxx:462
 msgid "Download + Load"
 msgstr "Stáhnout + Nahrát"
 
-#: ../appbrowser/appbrowser.cxx:387
+#: ../appbrowser/appbrowser.cxx:463
 msgid "Download Only"
 msgstr "Pouze stáhnout"
 
@@ -223,57 +260,73 @@ msgstr "Pouze stáhnout"
 msgid "E&xit"
 msgstr "U&končit"
 
-#: ../appsaudit/appsaudit.cxx:559
+#: ../tc-grub4dos/tc-grub4dos.cxx:271
+msgid "Embedded"
+msgstr ""
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:328 ../tc-install/tc-install.cxx:526
+msgid "Enter Spaces Separated Options From Examples Above"
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:463
+msgid "Existing Partition"
+msgstr ""
+
+#: ../appsaudit/appsaudit.cxx:674
 msgid "Exit Dependencies Mode"
 msgstr "Ukončit režim závislosti"
 
-#: ../appsaudit/appsaudit.cxx:564
+#: ../appsaudit/appsaudit.cxx:679
 msgid "Exit Install Options"
 msgstr "Ukončit možnosti instalace"
 
-#: ../appsaudit/appsaudit.cxx:572
+#: ../appsaudit/appsaudit.cxx:688
 msgid "Exit Md5 Check Mode"
 msgstr "Ukončit režim Md5 kontroly"
 
-#: ../appsaudit/appsaudit.cxx:576
+#: ../appsaudit/appsaudit.cxx:692
 msgid "Exit OnBoot"
 msgstr "Exit OnBoot"
 
-#: ../appsaudit/appsaudit.cxx:580
+#: ../appsaudit/appsaudit.cxx:696
 msgid "Exit OnDemand"
 msgstr "Exit OnDemand"
 
-#: ../appsaudit/appsaudit.cxx:568
+#: ../appsaudit/appsaudit.cxx:684
 msgid "Exit Update Mode"
 msgstr "Ukončit režim aktualizací"
 
-#: ../exittc/exittc.cxx:128
+#: ../exittc/exittc.cxx:133
 msgid "Exit to Prompt"
 msgstr "Exit to Prompt"
 
-#: ../flrun/flrun.cxx:55
+#: ../tc-install/tc-install.cxx:564
+msgid "Extension Installation"
+msgstr ""
+
+#: ../flrun/flrun.cxx:147
 msgid "FLRun"
 msgstr "FLRun"
+
+#: ../appsaudit/appsaudit.cxx:665
+msgid "Fetch Missing Dependencies"
+msgstr ""
 
 #: ../filetool/filetool.cxx:90
 msgid "FileTool"
 msgstr "FileTool"
 
-#: ../appbrowser/appbrowser.cxx:481
+#: ../appbrowser/appbrowser.cxx:566
 msgid "Files"
 msgstr "Soubory"
 
-#: ../wallpaper/wallpaper.cxx:337
+#: ../wallpaper/wallpaper.cxx:324
 msgid "Fill"
 msgstr "Výplň"
 
 #: ../fdtool/fdtool.cxx:72
 msgid "Floppy Disk Tool"
 msgstr "Nástroj Disketa"
-
-#: ../cpanel/cpanel.cxx:42
-msgid "Floppy Tool"
-msgstr "Disketa"
 
 #: ../fdtool/fdtool.cxx:70
 msgid "FloppyTool"
@@ -283,7 +336,15 @@ msgstr "FloppyTool"
 msgid "Formats FAT of selected size."
 msgstr "Zformatovat FAT zvolené velikosti"
 
-#: ../wallpaper/wallpaper.cxx:321
+#: ../tc-grub4dos/tc-grub4dos.cxx:290 ../tc-install/tc-install.cxx:488
+msgid "Formatting Options"
+msgstr ""
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:265 ../tc-install/tc-install.cxx:437
+msgid "Frugal"
+msgstr ""
+
+#: ../wallpaper/wallpaper.cxx:309
 msgid "Full"
 msgstr "Plně (plný)"
 
@@ -295,37 +356,17 @@ msgstr "Proveď"
 msgid "Gateway"
 msgstr "Brána"
 
-#: ../appbrowser/appbrowser.cxx:515
+#: ../appbrowser/appbrowser.cxx:600
 msgid "Go"
 msgstr "Přejít"
 
-#: ../wallpaper/wallpaper.cxx:219 ../wallpaper/wallpaper.cxx:353
-msgid "Gradient"
-msgstr "Přechod"
-
-#: ../wallpaper/wallpaper.cxx:220
-msgid "Gradient Color #1"
-msgstr "Přechod č.1"
-
-#: ../wallpaper/wallpaper.cxx:233
-msgid "Gradient Color #2"
-msgstr "Přechod č.2"
-
-#: ../cpanel/cpanel.cxx:45
-msgid "HD/USB Install"
-msgstr "HD/USB Install"
-
-#: ../wallpaper/wallpaper.cxx:251
+#: ../wallpaper/wallpaper.cxx:271
 msgid "Horizontal Gradient"
 msgstr "Horizontální přechod"
 
 #: ../datetool/datetool.cxx:154
 msgid "Hour:"
 msgstr "Hodina:"
-
-#: ../cpanel/cpanel.cxx:54
-msgid "Hybrid Mode"
-msgstr "Hybrid Mode"
 
 #: ../network/network.cxx:188
 msgid "IP Address"
@@ -335,15 +376,23 @@ msgstr "IP adresa"
 msgid "Image Path:"
 msgstr "Cesta k obrazu"
 
-#: ../appbrowser/appbrowser.cxx:471
+#: ../appbrowser/appbrowser.cxx:556
 msgid "Info"
 msgstr "Info"
 
-#: ../appsaudit/appsaudit.cxx:561
+#: ../tc-install/tc-install.cxx:565
+msgid "Install Extensions from this TCE/CDE Directory:"
+msgstr ""
+
+#: ../appsaudit/appsaudit.cxx:676
 msgid "Install Options"
 msgstr "Možnosti instalace"
 
-#: ../wallpaper/wallpaper.cxx:312
+#: ../tc-install/tc-install.cxx:534
+msgid "Install Type"
+msgstr ""
+
+#: ../wallpaper/wallpaper.cxx:301
 msgid "Install images from /opt/backgrounds directory"
 msgstr "Instaluj obrazy ze složky /opt/backgrounds"
 
@@ -351,15 +400,23 @@ msgstr "Instaluj obrazy ze složky /opt/backgrounds"
 msgid "Installed"
 msgstr "Nainstalováno"
 
+#: ../tc-install/tc-install.cxx:550
+msgid "Installer Application"
+msgstr ""
+
 #: ../network/network.cxx:164
 msgid "Interface"
 msgstr "Rozhraní"
 
-#: ../wbarconf/wbarconf.cxx:122
+#: ../appbrowser/appbrowser.cxx:429
+msgid "Keyword"
+msgstr ""
+
+#: ../wbarconf/wbarconf.cxx:124
 msgid "Left"
 msgstr "Vlevo"
 
-#: ../wbarconf/wbarconf.cxx:129
+#: ../wbarconf/wbarconf.cxx:131
 msgid "Left Bottom"
 msgstr ""
 
@@ -367,52 +424,76 @@ msgstr ""
 msgid "Left Button"
 msgstr "Levé tlačítko"
 
-#: ../wbarconf/wbarconf.cxx:128
+#: ../wbarconf/wbarconf.cxx:130
 msgid "Left Top"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:550
+#: ../appsaudit/appsaudit.cxx:668
 msgid "List Dependencies"
 msgstr "Zobraz závislosti"
 
-#: ../appsaudit/appsaudit.cxx:552
+#: ../appsaudit/appsaudit.cxx:670
 msgid "List Missing Dependencies"
 msgstr "Zobraz chybějící závislosti"
 
-#: ../appsaudit/appsaudit.cxx:551
+#: ../appsaudit/appsaudit.cxx:669
 msgid "List Required By"
 msgstr "Vypiš 'Požadovano'"
 
-#: ../appbrowser/appbrowser.cxx:444
+#: ../appbrowser/appbrowser.cxx:529
 msgid "Local"
 msgstr "Místní"
 
-#: ../appsaudit/appsaudit.cxx:575 ../appsaudit/appsaudit.cxx:579
-#: ../cpanel/cpanel.cxx:24
+#: ../wallpaper/wallpaper.cxx:293
+msgid "Logo"
+msgstr ""
+
+#: ../appbrowser/appbrowser.cxx:111
+msgid "MD5SUM error"
+msgstr ""
+
+#: ../appsaudit/appsaudit.cxx:691 ../appsaudit/appsaudit.cxx:695
+#: ../cpanel/cpanel.cxx:26
 msgid "Maintenance"
 msgstr "Správa"
 
-#: ../appsaudit/appsaudit.cxx:556
+#: ../tc-install/tc-install.cxx:477
+msgid "Mark Partition Active (bootable)"
+msgstr ""
+
+#: ../appsaudit/appsaudit.cxx:671
 msgid "Mark for Deletion"
 msgstr "Označit ke smazání"
 
-#: ../appsaudit/appsaudit.cxx:570
+#: ../appsaudit/appsaudit.cxx:686
 msgid "Md5Check"
 msgstr "Md5Check"
+
+#: ../appbrowser/appbrowser.cxx:112
+msgid "Md5sum error on"
+msgstr ""
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:250
+msgid "Micro Core"
+msgstr ""
 
 #: ../datetool/datetool.cxx:162
 msgid "Min:"
 msgstr "Min:"
 
-#: ../appbrowser/appbrowser.cxx:447
+#: ../appbrowser/appbrowser.cxx:532
 msgid "Mirrors"
 msgstr "Mirrory"
+
+#: ../appsaudit/appsaudit.cxx:664
+msgid "Missing Dependencies Reporting"
+msgstr ""
 
 #: ../datetool/datetool.cxx:138
 msgid "Month:"
 msgstr "Měsíc:"
 
-#: ../cpanel/cpanel.cxx:51
+#: ../cpanel/cpanel.cxx:44
 msgid "Mount Tool"
 msgstr "Připojit disk"
 
@@ -424,7 +505,7 @@ msgstr "Připojené partice"
 msgid "Mouse Speed"
 msgstr "Rychlost myši"
 
-#: ../cpanel/cpanel.cxx:60
+#: ../cpanel/cpanel.cxx:53
 msgid "Mouse Tool"
 msgstr "Nástroj myš"
 
@@ -436,7 +517,11 @@ msgstr "MouseTool"
 msgid "NameServers"
 msgstr "NameServers"
 
-#: ../cpanel/cpanel.cxx:66 ../network/network.cxx:158
+#: ../loadpack/loadpack.cxx:20
+msgid "Navigate to and Select Starter Pack to load."
+msgstr ""
+
+#: ../cpanel/cpanel.cxx:59 ../network/network.cxx:158
 #: ../network/network.cxx:160
 msgid "Network"
 msgstr "Síť"
@@ -445,19 +530,27 @@ msgstr "Síť"
 msgid "Network Mask"
 msgstr "Síťová maska"
 
-#: ../exittc/exittc.cxx:103 ../filetool/filetool.cxx:77
+#: ../tc-grub4dos/tc-grub4dos.cxx:291 ../tc-install/tc-install.cxx:489
+msgid "No formatting, use existing."
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:556
+msgid "Non-US keyboard layout support"
+msgstr ""
+
+#: ../exittc/exittc.cxx:106 ../filetool/filetool.cxx:77
 msgid "None"
 msgstr "None"
 
-#: ../flrun/flrun.cxx:63
+#: ../flrun/flrun.cxx:149
 msgid "OK"
 msgstr "OK"
 
-#: ../appbrowser/appbrowser.cxx:384 ../appsaudit/appsaudit.cxx:574
+#: ../appbrowser/appbrowser.cxx:460 ../appsaudit/appsaudit.cxx:690
 msgid "OnBoot"
 msgstr "OnBoot"
 
-#: ../appbrowser/appbrowser.cxx:385 ../appsaudit/appsaudit.cxx:578
+#: ../appbrowser/appbrowser.cxx:461 ../appsaudit/appsaudit.cxx:694
 msgid "OnDemand"
 msgstr "OnDemand"
 
@@ -465,43 +558,63 @@ msgstr "OnDemand"
 msgid "Onboot Items"
 msgstr "Položky Onboot"
 
-#: ../wallpaper/wallpaper.cxx:280 ../wallpaper/wallpaper.cxx:281
-msgid "Pick Color"
-msgstr "Vybrat barvu"
+#: ../tc-install/tc-install.cxx:482
+msgid "Path to core.gz:"
+msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:158
+#: ../tc-grub4dos/tc-grub4dos.cxx:248
+msgid "Please Select Version to Install"
+msgstr ""
+
+#: ../wbarconf/wbarconf.cxx:160
 msgid "Position"
 msgstr ""
 
-#: ../wallpaper/wallpaper.cxx:303
+#: ../wallpaper/wallpaper.cxx:225
 msgid "Preview"
 msgstr "Náhled"
 
-#: ../appsaudit/appsaudit.cxx:623
+#: ../tc-grub4dos/tc-grub4dos.cxx:339 ../tc-install/tc-install.cxx:588
+msgid "Proceed"
+msgstr ""
+
+#: ../appsaudit/appsaudit.cxx:740
 msgid "Process Selected Item(s)"
 msgstr "Zpracuj označené"
 
-#: ../appbrowser/appbrowser.cxx:353
+#: ../appbrowser/appbrowser.cxx:428
 msgid "Provides"
 msgstr "Poskytuje"
 
-#: ../exittc/exittc.cxx:123
+#: ../exittc/exittc.cxx:128
 msgid "Reboot"
 msgstr "Restartovat"
+
+#: ../tc-install/tc-install.cxx:553
+msgid "Remaster Tool"
+msgstr ""
+
+#: ../appbrowser/appbrowser.cxx:114
+msgid "Remove and try again"
+msgstr ""
 
 #: ../filetool/filetool.cxx:80
 msgid "Restore"
 msgstr "Vrátit"
 
-#: ../appsaudit/appsaudit.cxx:608
+#: ../appsaudit/appsaudit.cxx:724
 msgid "Results"
 msgstr "Výsledek"
 
-#: ../wbarconf/wbarconf.cxx:123
+#: ../tc-grub4dos/tc-grub4dos.cxx:336 ../tc-install/tc-install.cxx:585
+msgid "Review"
+msgstr ""
+
+#: ../wbarconf/wbarconf.cxx:125
 msgid "Right"
 msgstr "Vpravo"
 
-#: ../wbarconf/wbarconf.cxx:131
+#: ../wbarconf/wbarconf.cxx:133
 msgid "Right Bottom"
 msgstr ""
 
@@ -509,11 +622,11 @@ msgstr ""
 msgid "Right Button"
 msgstr "Pravé tlačítko"
 
-#: ../wbarconf/wbarconf.cxx:130
+#: ../wbarconf/wbarconf.cxx:132
 msgid "Right Top"
 msgstr ""
 
-#: ../exittc/exittc.cxx:105 ../filetool/filetool.cxx:79
+#: ../exittc/exittc.cxx:108 ../filetool/filetool.cxx:79
 msgid "Safe"
 msgstr "Bezpečně"
 
@@ -521,40 +634,67 @@ msgstr "Bezpečně"
 msgid "Save Configuration?"
 msgstr "Uložit nastavení?"
 
-#: ../appbrowser/appbrowser.cxx:352
+#: ../appbrowser/appbrowser.cxx:427
 msgid "Search"
 msgstr "Hledat"
 
-#: ../appsaudit/appsaudit.cxx:605
+#: ../appsaudit/appsaudit.cxx:721
 msgid "Select"
 msgstr "Vybrat"
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:33 ../tc-install/tc-install.cxx:24
+msgid "Select File for "
+msgstr ""
 
 #: ../add2file/add2file.cxx:22
 msgid "Select File to be added to "
 msgstr "Vyber soubor k přidání k "
 
-#: ../appsaudit/appsaudit.cxx:563
+#: ../appsaudit/appsaudit.cxx:683
+msgid "Select Mirror"
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:401
+msgid "Select TCE/CDE Directory"
+msgstr ""
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:280 ../tc-install/tc-install.cxx:471
+msgid "Select Target Disk"
+msgstr ""
+
+#: ../appsaudit/appsaudit.cxx:678
 msgid "Selective Copy Install"
 msgstr "Instaluj jednotlivě"
 
-#: ../appbrowser/appbrowser.cxx:523 ../wallpaper/wallpaper.cxx:269
-#: ../wallpaper/wallpaper.cxx:294 ../wallpaper/wallpaper.cxx:342
+#: ../cpanel/cpanel.cxx:47
+msgid "Services"
+msgstr "Služby"
+
+#: ../appbrowser/appbrowser.cxx:609
 msgid "Set"
 msgstr "Nastavit"
 
-#: ../cpanel/cpanel.cxx:34
+#: ../cpanel/cpanel.cxx:36
 msgid "Setup"
 msgstr "Nastavení"
 
-#: ../exittc/exittc.cxx:117
+#: ../exittc/exittc.cxx:122
 msgid "Shutdown"
 msgstr "Vypnout"
 
-#: ../appbrowser/appbrowser.cxx:500
+#: ../appbrowser/appbrowser.cxx:585
 msgid "Size"
 msgstr "Velikost"
 
-#: ../appbrowser/appbrowser.cxx:519
+#: ../wallpaper/wallpaper.cxx:259
+msgid "Solid Color"
+msgstr ""
+
+#: ../wallpaper/wallpaper.cxx:336
+msgid "Solid Color or 2 Color Gradient"
+msgstr ""
+
+#: ../appbrowser/appbrowser.cxx:604
 msgid "Status"
 msgstr "Stav"
 
@@ -562,51 +702,75 @@ msgstr "Stav"
 msgid "Swapfile"
 msgstr "Swapfile"
 
-#: ../cpanel/cpanel.cxx:72
+#: ../cpanel/cpanel.cxx:56
 msgid "Swapfile Tool"
 msgstr "Swapfile Tool"
 
-#: ../cpanel/cpanel.cxx:69
+#: ../cpanel/cpanel.cxx:62
 msgid "System Stats"
 msgstr "System Stats"
 
-#: ../exittc/exittc.cxx:113
+#: ../exittc/exittc.cxx:118
 msgid "TC Exit Options"
 msgstr "Možnosti ukončení TC"
 
-#: ../cpanel/cpanel.cxx:63
+#: ../cpanel/cpanel.cxx:65
 msgid "Terminal Server"
 msgstr "Server terminálů"
 
-#: ../wallpaper/wallpaper.cxx:327
+#: ../wallpaper/wallpaper.cxx:314
 msgid "Tile"
 msgstr "Dlaždice"
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:255
+msgid "Tiny Core"
+msgstr ""
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:243 ../tc-grub4dos/tc-grub4dos.cxx:245
+msgid "Tiny Core Grub4dos Installation"
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:427 ../tc-install/tc-install.cxx:429
+msgid "Tiny Core Installation"
+msgstr ""
 
 #: ../stats/stats.cxx:74
 msgid "Tiny Core System Stats"
 msgstr "Tiny Core System Stats"
 
-#: ../appsaudit/appsaudit.cxx:562
+#: ../appsaudit/appsaudit.cxx:677
 msgid "Toggle Default Copy Install"
 msgstr "Přepni na výchozí instalaci"
 
-#: ../wbarconf/wbarconf.cxx:120
+#: ../wbarconf/wbarconf.cxx:122
 msgid "Top"
 msgstr "Nahoru"
 
-#: ../wbarconf/wbarconf.cxx:124
+#: ../wbarconf/wbarconf.cxx:126
 msgid "Top Left"
 msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:125
+#: ../wbarconf/wbarconf.cxx:127
 msgid "Top Right"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:548
+#: ../appbrowser/appbrowser.cxx:117
+msgid "Try to finish download"
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:444
+msgid "USB-HDD"
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:449
+msgid "USB-ZIP"
+msgstr ""
+
+#: ../appsaudit/appsaudit.cxx:662
 msgid "Update .dep files."
 msgstr "Aktualizovat .dep soubory"
 
-#: ../appsaudit/appsaudit.cxx:566
+#: ../appsaudit/appsaudit.cxx:681
 msgid "Updates"
 msgstr "Aktualizace"
 
@@ -614,43 +778,51 @@ msgstr "Aktualizace"
 msgid "Use DHCP Broadcast?"
 msgstr "Použít DHCP Broadcast?"
 
-#: ../cpanel/cpanel.cxx:29
+#: ../cpanel/cpanel.cxx:31
 msgid "Utilities"
 msgstr "Pomůcky"
 
-#: ../wallpaper/wallpaper.cxx:246
+#: ../wallpaper/wallpaper.cxx:265
 msgid "Vertical Gradient"
 msgstr "Vertikální přechod"
 
-#: ../cpanel/cpanel.cxx:79 ../wallpaper/wallpaper.cxx:311
+#: ../cpanel/cpanel.cxx:72 ../wallpaper/wallpaper.cxx:224
 msgid "Wallpaper"
 msgstr "Pozadí plochy"
 
-#: ../cpanel/cpanel.cxx:75
+#: ../cpanel/cpanel.cxx:68
 msgid "Wbar Conf"
 msgstr "Wbar Conf"
 
-#: ../wbarconf/wbarconf.cxx:174
+#: ../wbarconf/wbarconf.cxx:176
 msgid "Wbar Icon Size"
 msgstr "Velikost Wbar Ikony"
 
-#: ../wbarconf/wbarconf.cxx:146
+#: ../wbarconf/wbarconf.cxx:148
 msgid "Wbar Icons"
 msgstr "Ikony Wbar"
 
-#: ../wbarconf/wbarconf.cxx:182
+#: ../wbarconf/wbarconf.cxx:184
 msgid "Wbar Text Labels"
 msgstr "Textové nadpisky Wbar"
 
-#: ../wbarconf/wbarconf.cxx:166
+#: ../wbarconf/wbarconf.cxx:168
 msgid "Wbar Zoom"
 msgstr "Wbar Zoom"
+
+#: ../tc-install/tc-install.cxx:458
+msgid "Whole Disk"
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:547
+msgid "Wireless Networking Support"
+msgstr ""
 
 #: ../fdtool/fdtool.cxx:101
 msgid "Writes image path file to floppy."
 msgstr "Zapsat obraz na disketu."
 
-#: ../cpanel/cpanel.cxx:82
+#: ../cpanel/cpanel.cxx:75
 msgid "Xvesa"
 msgstr "Xvesa"
 
@@ -678,7 +850,7 @@ msgstr "cpu"
 msgid "dmesg"
 msgstr "dmesg"
 
-#: ../wbarconf/wbarconf.cxx:145 ../wbar_exclude/wbar_exclude.cxx:58
+#: ../wbarconf/wbarconf.cxx:147 ../wbar_exclude/wbar_exclude.cxx:58
 msgid "eXclude Wbar Icons"
 msgstr "eXclude Wbar Icons"
 
@@ -686,9 +858,21 @@ msgstr "eXclude Wbar Icons"
 msgid "eXclude Wbar Items"
 msgstr "eXclude Wbar Items"
 
-#: ../wbarconf/wbarconf.cxx:152
+#: ../wbarconf/wbarconf.cxx:154
 msgid "eXcluded Items"
 msgstr "vyloučené položky"
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:298 ../tc-install/tc-install.cxx:496
+msgid "ext2"
+msgstr ""
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:303 ../tc-install/tc-install.cxx:501
+msgid "ext3"
+msgstr ""
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:308 ../tc-install/tc-install.cxx:506
+msgid "ext4"
+msgstr ""
 
 #: ../stats/stats.cxx:144
 msgid "filesystems"
@@ -722,18 +906,10 @@ msgstr "procesy"
 msgid "tc.swp in k bytes:"
 msgstr "tc.swp v bytech:"
 
+#: ../tc-grub4dos/tc-grub4dos.cxx:313 ../tc-install/tc-install.cxx:511
+msgid "vfat"
+msgstr ""
+
 #: ../network/network.cxx:173 ../network/network.cxx:226
 msgid "yes"
 msgstr "ano"
-
-#~ msgid "File"
-#~ msgstr "Soubor"
-
-#~ msgid "Quit"
-#~ msgstr "Ukončit"
-
-#~ msgid "Services"
-#~ msgstr "Služby"
-
-#~ msgid "Wbar Position"
-#~ msgstr "Pozice Wbar"

@@ -3,6 +3,7 @@
 #include <libintl.h>
 #include "tc-install.h"
 // (c) Robert Shingledecker 2011
+// Portions (c) Brian Smith 2011
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
@@ -15,7 +16,7 @@ using namespace std;
 static istringstream iss; 
 static string command,msg,heading; 
 static int results, locales_set=0, test4syslinux, test4mkdosfs, test4perl; 
-static string image,type,installMode, target,dev,format,path,coreplus,boot,flag, markActive; 
+static string image,type,installMode, target,dev,format,path,coreplus,boot,flag, markActive,tcepath; 
 static string warn="Mark active if Tiny Core is the only operation system,\nor Windows and Tiny Core are on the same disk.\nOtherwise use Grub extension after installation."; 
 
 void selectFile() {
@@ -38,7 +39,10 @@ Fl::flush();
 }
 
 void prepTarget() {
-  btnActive->deactivate();
+  if (path.empty()) return;
+
+btnActive->deactivate();
+btnBootloader->deactivate();
 if ( installMode =="hdd" || installMode == "zip") 
 {
    test4mkdosfs = system("which mkdosfs >/dev/null");
@@ -135,6 +139,19 @@ if ( userdata == "next" )
 	  wWizard->next();
 	  if ( grpFormat->visible() && installMode == "zip") 
 	     wWizard->next();
+	     
+	  if ( btnWhole->value() == 1 ){
+	     btnNoFormat->deactivate();
+	     btnNoFormat->value(0);
+	  }else{
+	     btnNoFormat->activate();
+	  }
+	  	  
+	  if (btnNoFormat->value() == 0 && btnExt2Format->value() == 0 && btnExt3Format->value() == 0 && btnExt4Format->value() == 0 && btnVfatFormat->value() == 0){
+             btnExt4Format->value(1);
+             format = "ext4";
+          }
+	  
   }
 }
 
@@ -168,8 +185,8 @@ if (grpType->visible())
    
 if (grpBoot->visible())
 {
-   if ( installMode =="hdd" || installMode == "zip") 
-      options->value("waitusb=5");
+   /*if ( installMode =="hdd" || installMode == "zip") 
+      options->value("waitusb=5");*/
       
    brwBootRef->load("/usr/share/doc/tc/bootOptions.txt");
 }
@@ -194,14 +211,15 @@ if (grpReview->visible())
    if (coreplus == "yes"){
    	if (installCoreX11->value() == 1) {brwReview->add("Install X GUI");}
  	if (installCoreOnly->value() == 1) {brwReview->add("Install Core Only (text mode)");}
- 	if (btnNetworking->value() == 1) {brwReview->add("Install Wireless Networking Support");}
+ 	if (btnWifi->value() == 1) {brwReview->add("Install Wifi Support");}
+ 	if (btnNdiswrapper->value() == 1) {brwReview->add("Install ndiswrapper");}
+ 	if (btnWifiFirmware->value() == 1) {brwReview->add("Install Wireless Firmware");}
  	if (btnInstaller->value() == 1) {brwReview->add("Install Installer Application");}
  	if (btnRemaster->value() == 1) {brwReview->add("Install Remaster Tool");}
  	if (btnKmaps->value() == 1) {brwReview->add("Install Support for Non-US keyboard maps");} 	
+   }else{
+   	if (! tcepath.empty()) {brwReview->add(("Install TCE/CDE Dircetory: "+tcepath).c_str());}
    }
-   
-   
-   
 }
 }
 
@@ -218,8 +236,14 @@ if (installCoreX11->value() == 1) {
 }
 
 string installgroups = "";
-if (btnNetworking->value() == 1){
+if (btnWifi->value() == 1){
     installgroups = installgroups + ",wifi";
+}
+if (btnNdiswrapper->value() == 1){
+    installgroups = installgroups + ",ndiswrapper";
+}
+if (btnWifiFirmware->value() == 1){
+    installgroups = installgroups + ",wififirmware";
 }
 if (btnInstaller->value() == 1){
     installgroups = installgroups + ",installer";
@@ -232,10 +256,14 @@ if (btnKmaps->value() == 1){
 }
 if (installgroups.empty()) {installgroups = "none";}
 
-string tcedir = outputTCEDir->value();
-if (tcedir.empty()) {tcedir = "none";}
+string bootLoader = "no";
+if (btnBootloader->value() == 1) { bootLoader = "yes"; }
 
-command="sudo tc-install.sh "+path+" "+installMode+" "+dev+" "+markActive+" "+format+" "+coreplus+" "+coreplusinstalltype+" "+installgroups+" "+tcedir+" "+boot;
+string tcedir = outputTCEDir->value();
+if (tcedir.empty()) { tcedir = "none"; }
+if (btnNoExtensions->value() == 1) { tcedir = "none"; }
+
+command="sudo tc-install.sh "+path+" "+installMode+" "+dev+" "+markActive+" "+format+" "+bootLoader+" "+coreplus+" "+coreplusinstalltype+" "+installgroups+" "+tcedir+" "+boot;
 FILE *pipe = popen(command.c_str(),"r");
 char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
 if (pipe)
@@ -267,6 +295,7 @@ static void cb_fullpathOutput(Fl_Output*, void* v) {
   image = (const char*)v;
 selectFile();
 fullpathOutput->value(path.c_str());
+prepTarget();
 }
 
 static void cb_Frugal(Fl_Check_Button*, void* v) {
@@ -316,6 +345,10 @@ static void cb_brwTarget(Fl_Browser*, void*) {
    grpButtons->activate();
    if (btnPartition->value() == 1  && partitionNbr < 5)
       btnActive->activate();
+   if (installMode == "frugal")
+   	btnBootloader->activate();
+   else
+   	btnBootloader->value(1);
 };
 }
 
@@ -328,29 +361,41 @@ static void cb_btnActive(Fl_Check_Button*, void*) {
 };
 }
 
+Fl_Check_Button *btnBootloader=(Fl_Check_Button *)0;
+
 Fl_Box *lblPathCore=(Fl_Box *)0;
 
 Fl_Group *grpFormat=(Fl_Group *)0;
 
 Fl_Group *FormatType=(Fl_Group *)0;
 
-static void cb_No(Fl_Round_Button*, void* v) {
+Fl_Round_Button *btnNoFormat=(Fl_Round_Button *)0;
+
+static void cb_btnNoFormat(Fl_Round_Button*, void* v) {
   format = (const char*)v;
 }
 
-static void cb_ext2(Fl_Round_Button*, void* v) {
+Fl_Round_Button *btnExt2Format=(Fl_Round_Button *)0;
+
+static void cb_btnExt2Format(Fl_Round_Button*, void* v) {
   format = (const char*)v;
 }
 
-static void cb_ext3(Fl_Round_Button*, void* v) {
+Fl_Round_Button *btnExt3Format=(Fl_Round_Button *)0;
+
+static void cb_btnExt3Format(Fl_Round_Button*, void* v) {
   format = (const char*)v;
 }
 
-static void cb_ext4(Fl_Round_Button*, void* v) {
+Fl_Round_Button *btnExt4Format=(Fl_Round_Button *)0;
+
+static void cb_btnExt4Format(Fl_Round_Button*, void* v) {
   format = (const char*)v;
 }
 
-static void cb_vfat(Fl_Round_Button*, void* v) {
+Fl_Round_Button *btnVfatFormat=(Fl_Round_Button *)0;
+
+static void cb_btnVfatFormat(Fl_Round_Button*, void* v) {
   format = (const char*)v;
 }
 
@@ -370,7 +415,11 @@ Fl_Round_Button *installCoreOnly=(Fl_Round_Button *)0;
 
 Fl_Group *corePlusExtensions=(Fl_Group *)0;
 
-Fl_Check_Button *btnNetworking=(Fl_Check_Button *)0;
+Fl_Check_Button *btnWifi=(Fl_Check_Button *)0;
+
+Fl_Check_Button *btnNdiswrapper=(Fl_Check_Button *)0;
+
+Fl_Check_Button *btnWifiFirmware=(Fl_Check_Button *)0;
 
 Fl_Check_Button *btnInstaller=(Fl_Check_Button *)0;
 
@@ -409,7 +458,7 @@ if ( chooserTCE.value() == NULL )
    return;
 }
       
-string tcepath = chooserTCE.value();
+tcepath = chooserTCE.value();
 Fl::flush();
 
 outputTCEDir->value(tcepath.c_str());
@@ -429,38 +478,40 @@ int main(int argc, char **argv) {
     { wWizard = new Fl_Wizard(25, 30, 435, 325, mygettext("Tiny Core Installation"));
       wWizard->labeltype(FL_ENGRAVED_LABEL);
       { grpType = new Fl_Group(25, 30, 435, 325);
-        grpType->hide();
-        { fullpathOutput = new Fl_Output(55, 89, 375, 27);
+        { fullpathOutput = new Fl_Output(55, 63, 375, 27);
           fullpathOutput->callback((Fl_Callback*)cb_fullpathOutput, (void*)("core"));
         } // Fl_Output* fullpathOutput
-        { Fl_Group* o = new Fl_Group(55, 128, 375, 27);
-          { Fl_Check_Button* o = new Fl_Check_Button(80, 131, 70, 22, mygettext("Frugal"));
+        { Fl_Group* o = new Fl_Group(55, 104, 375, 51);
+          { Fl_Check_Button* o = new Fl_Check_Button(80, 105, 70, 22, mygettext("Frugal"));
+            o->tooltip(mygettext("Use for frugal hard drive installations"));
             o->type(102);
             o->down_box(FL_DOWN_BOX);
             o->value(1);
             o->callback((Fl_Callback*)cb_Frugal, (void*)("frugal"));
             installMode = "frugal";
           } // Fl_Check_Button* o
-          { Fl_Check_Button* o = new Fl_Check_Button(195, 131, 90, 22, mygettext("USB-HDD"));
+          { Fl_Check_Button* o = new Fl_Check_Button(195, 105, 90, 22, mygettext("USB-HDD"));
+            o->tooltip(mygettext("Use for pendrives.   Your BIOS must support USB-HDD booting"));
             o->type(102);
             o->down_box(FL_DOWN_BOX);
             o->callback((Fl_Callback*)cb_USB, (void*)("hdd"));
           } // Fl_Check_Button* o
-          { Fl_Check_Button* o = new Fl_Check_Button(315, 131, 80, 22, mygettext("USB-ZIP"));
+          { Fl_Check_Button* o = new Fl_Check_Button(315, 105, 80, 22, mygettext("USB-ZIP"));
+            o->tooltip(mygettext("Use for pendrives.   Drive will be formatted into two FAT partitions"));
             o->type(102);
             o->down_box(FL_DOWN_BOX);
             o->callback((Fl_Callback*)cb_USB1, (void*)("zip"));
           } // Fl_Check_Button* o
           o->end();
         } // Fl_Group* o
-        { Fl_Group* o = new Fl_Group(55, 157, 375, 33);
+        { Fl_Group* o = new Fl_Group(55, 131, 375, 33);
           o->box(FL_ENGRAVED_FRAME);
-          { btnWhole = new Fl_Check_Button(80, 162, 125, 25, mygettext("Whole Disk"));
+          { btnWhole = new Fl_Check_Button(80, 136, 125, 25, mygettext("Whole Disk"));
             btnWhole->type(102);
             btnWhole->down_box(FL_DOWN_BOX);
             btnWhole->callback((Fl_Callback*)cb_btnWhole, (void*)("disk"));
           } // Fl_Check_Button* btnWhole
-          { btnPartition = new Fl_Check_Button(265, 162, 130, 25, mygettext("Existing Partition"));
+          { btnPartition = new Fl_Check_Button(265, 136, 130, 25, mygettext("Existing Partition"));
             btnPartition->type(102);
             btnPartition->down_box(FL_DOWN_BOX);
             btnPartition->callback((Fl_Callback*)cb_btnPartition, (void*)("partition"));
@@ -468,51 +519,56 @@ int main(int argc, char **argv) {
           } // Fl_Check_Button* btnPartition
           o->end();
         } // Fl_Group* o
-        { brwTarget = new Fl_Browser(55, 215, 375, 100, mygettext("Select Target Disk"));
+        { brwTarget = new Fl_Browser(55, 189, 375, 100, mygettext("Select Target Disk"));
           brwTarget->type(2);
           brwTarget->callback((Fl_Callback*)cb_brwTarget);
           brwTarget->align(FL_ALIGN_TOP);
           brwTarget->deactivate();
         } // Fl_Browser* brwTarget
-        { btnActive = new Fl_Check_Button(125, 317, 230, 24, mygettext("Mark Partition Active (bootable)"));
+        { btnActive = new Fl_Check_Button(130, 293, 230, 24, mygettext("Mark Partition Active (bootable)"));
           btnActive->down_box(FL_DOWN_BOX);
           btnActive->callback((Fl_Callback*)cb_btnActive);
           btnActive->deactivate();
         } // Fl_Check_Button* btnActive
-        { lblPathCore = new Fl_Box(55, 64, 105, 25, mygettext("Path to core.gz:"));
+        { btnBootloader = new Fl_Check_Button(130, 318, 230, 24, mygettext("Install boot loader"));
+          btnBootloader->down_box(FL_DOWN_BOX);
+          btnBootloader->deactivate();
+          btnBootloader->value(1);
+        } // Fl_Check_Button* btnBootloader
+        { lblPathCore = new Fl_Box(55, 38, 105, 25, mygettext("Path to core.gz:"));
         } // Fl_Box* lblPathCore
         grpType->end();
       } // Fl_Group* grpType
       { grpFormat = new Fl_Group(25, 30, 435, 325);
         grpFormat->hide();
         { FormatType = new Fl_Group(100, 95, 270, 230, mygettext("Formatting Options"));
-          { Fl_Round_Button* o = new Fl_Round_Button(140, 105, 195, 20, mygettext("No formatting, use existing."));
-            o->type(102);
-            o->down_box(FL_ROUND_DOWN_BOX);
-            o->value(1);
-            o->callback((Fl_Callback*)cb_No, (void*)("none"));
+          { btnNoFormat = new Fl_Round_Button(140, 105, 195, 20, mygettext("No formatting, use existing."));
+            btnNoFormat->type(102);
+            btnNoFormat->down_box(FL_ROUND_DOWN_BOX);
+            btnNoFormat->value(1);
+            btnNoFormat->callback((Fl_Callback*)cb_btnNoFormat, (void*)("none"));
             format = "none";
-          } // Fl_Round_Button* o
-          { Fl_Round_Button* o = new Fl_Round_Button(140, 125, 195, 20, mygettext("ext2"));
-            o->type(102);
-            o->down_box(FL_ROUND_DOWN_BOX);
-            o->callback((Fl_Callback*)cb_ext2, (void*)("ext2"));
-          } // Fl_Round_Button* o
-          { Fl_Round_Button* o = new Fl_Round_Button(140, 145, 195, 20, mygettext("ext3"));
-            o->type(102);
-            o->down_box(FL_ROUND_DOWN_BOX);
-            o->callback((Fl_Callback*)cb_ext3, (void*)("ext3"));
-          } // Fl_Round_Button* o
-          { Fl_Round_Button* o = new Fl_Round_Button(140, 165, 195, 20, mygettext("ext4"));
-            o->type(102);
-            o->down_box(FL_ROUND_DOWN_BOX);
-            o->callback((Fl_Callback*)cb_ext4, (void*)("ext4"));
-          } // Fl_Round_Button* o
-          { Fl_Round_Button* o = new Fl_Round_Button(140, 185, 195, 20, mygettext("vfat"));
-            o->type(102);
-            o->down_box(FL_ROUND_DOWN_BOX);
-            o->callback((Fl_Callback*)cb_vfat, (void*)("vfat"));
-          } // Fl_Round_Button* o
+          } // Fl_Round_Button* btnNoFormat
+          { btnExt2Format = new Fl_Round_Button(140, 125, 195, 20, mygettext("ext2"));
+            btnExt2Format->type(102);
+            btnExt2Format->down_box(FL_ROUND_DOWN_BOX);
+            btnExt2Format->callback((Fl_Callback*)cb_btnExt2Format, (void*)("ext2"));
+          } // Fl_Round_Button* btnExt2Format
+          { btnExt3Format = new Fl_Round_Button(140, 145, 195, 20, mygettext("ext3"));
+            btnExt3Format->type(102);
+            btnExt3Format->down_box(FL_ROUND_DOWN_BOX);
+            btnExt3Format->callback((Fl_Callback*)cb_btnExt3Format, (void*)("ext3"));
+          } // Fl_Round_Button* btnExt3Format
+          { btnExt4Format = new Fl_Round_Button(140, 165, 195, 20, mygettext("ext4"));
+            btnExt4Format->type(102);
+            btnExt4Format->down_box(FL_ROUND_DOWN_BOX);
+            btnExt4Format->callback((Fl_Callback*)cb_btnExt4Format, (void*)("ext4"));
+          } // Fl_Round_Button* btnExt4Format
+          { btnVfatFormat = new Fl_Round_Button(140, 185, 195, 20, mygettext("vfat"));
+            btnVfatFormat->type(102);
+            btnVfatFormat->down_box(FL_ROUND_DOWN_BOX);
+            btnVfatFormat->callback((Fl_Callback*)cb_btnVfatFormat, (void*)("vfat"));
+          } // Fl_Round_Button* btnVfatFormat
           FormatType->end();
         } // Fl_Group* FormatType
         grpFormat->end();
@@ -529,31 +585,45 @@ int main(int argc, char **argv) {
         } // Fl_Input* options
         grpBoot->end();
       } // Fl_Group* grpBoot
-      { grpExtensionsCorePlus = new Fl_Group(50, 55, 370, 280);
+      { grpExtensionsCorePlus = new Fl_Group(50, 55, 370, 285);
         grpExtensionsCorePlus->hide();
-        { installType = new Fl_Group(85, 85, 310, 75, mygettext("Install Type"));
-          { installCoreX11 = new Fl_Round_Button(138, 90, 238, 20, mygettext("Core and X/GUI Desktop"));
+        { installType = new Fl_Group(85, 70, 310, 75, mygettext("Install Type"));
+          { installCoreX11 = new Fl_Round_Button(138, 75, 238, 20, mygettext("Core and X/GUI Desktop"));
             installCoreX11->type(102);
             installCoreX11->down_box(FL_ROUND_DOWN_BOX);
             installCoreX11->value(1);
           } // Fl_Round_Button* installCoreX11
-          { installCoreOnly = new Fl_Round_Button(138, 110, 238, 20, mygettext("Core Only (Text Based Interface)"));
+          { installCoreOnly = new Fl_Round_Button(138, 95, 238, 20, mygettext("Core Only (Text Based Interface)"));
             installCoreOnly->type(102);
             installCoreOnly->down_box(FL_ROUND_DOWN_BOX);
           } // Fl_Round_Button* installCoreOnly
           installType->end();
         } // Fl_Group* installType
-        { corePlusExtensions = new Fl_Group(85, 175, 315, 160, mygettext("Core Plus Extensions Catagories to Install"));
-          { btnNetworking = new Fl_Check_Button(138, 179, 238, 25, mygettext("Wireless Networking Support"));
-            btnNetworking->down_box(FL_DOWN_BOX);
-          } // Fl_Check_Button* btnNetworking
-          { btnInstaller = new Fl_Check_Button(138, 199, 238, 25, mygettext("Installer Application"));
+        { corePlusExtensions = new Fl_Group(83, 155, 315, 180, mygettext("Core Plus Extensions Catagories to Install"));
+          { Fl_Box* o = new Fl_Box(101, 160, 290, 80, mygettext("Wireless "));
+            o->box(FL_DOWN_BOX);
+            o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+          } // Fl_Box* o
+          { btnWifi = new Fl_Check_Button(151, 174, 238, 25, mygettext("Wifi Support"));
+            btnWifi->down_box(FL_DOWN_BOX);
+          } // Fl_Check_Button* btnWifi
+          { btnNdiswrapper = new Fl_Check_Button(151, 194, 238, 25, mygettext("ndiswrapper"));
+            btnNdiswrapper->down_box(FL_DOWN_BOX);
+          } // Fl_Check_Button* btnNdiswrapper
+          { btnWifiFirmware = new Fl_Check_Button(151, 214, 238, 25, mygettext("Wireless Firmware"));
+            btnWifiFirmware->down_box(FL_DOWN_BOX);
+          } // Fl_Check_Button* btnWifiFirmware
+          { Fl_Box* o = new Fl_Box(101, 245, 290, 80, mygettext("Other"));
+            o->box(FL_DOWN_FRAME);
+            o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+          } // Fl_Box* o
+          { btnInstaller = new Fl_Check_Button(151, 258, 238, 25, mygettext("Installer Application"));
             btnInstaller->down_box(FL_DOWN_BOX);
           } // Fl_Check_Button* btnInstaller
-          { btnRemaster = new Fl_Check_Button(138, 219, 238, 25, mygettext("Remaster Tool"));
+          { btnRemaster = new Fl_Check_Button(151, 278, 238, 25, mygettext("Remaster Tool"));
             btnRemaster->down_box(FL_DOWN_BOX);
           } // Fl_Check_Button* btnRemaster
-          { btnKmaps = new Fl_Check_Button(138, 239, 238, 25, mygettext("Non-US keyboard layout support"));
+          { btnKmaps = new Fl_Check_Button(151, 298, 238, 25, mygettext("Non-US keyboard layout support"));
             btnKmaps->down_box(FL_DOWN_BOX);
           } // Fl_Check_Button* btnKmaps
           corePlusExtensions->end();
@@ -561,6 +631,7 @@ int main(int argc, char **argv) {
         grpExtensionsCorePlus->end();
       } // Fl_Group* grpExtensionsCorePlus
       { grpExtensionsStandAlone = new Fl_Group(36, 61, 405, 255);
+        grpExtensionsStandAlone->hide();
         { Fl_Group* o = new Fl_Group(52, 111, 389, 205, mygettext("Extension Installation"));
           { btnInstallExtensions = new Fl_Round_Button(54, 136, 382, 25, mygettext("Install Extensions from this TCE/CDE Directory:"));
             btnInstallExtensions->type(102);
@@ -628,6 +699,7 @@ command = "ls -ald /mnt/sr0/cde >/dev/null 2>&1";
 results = system(command.c_str());
 if (results == 0){ 
 	outputTCEDir->value("/mnt/sr0/cde"); 
+	tcepath = "/mnt/sr0/cde";
 }
 
 brwTarget->deactivate();

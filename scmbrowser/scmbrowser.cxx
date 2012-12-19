@@ -92,6 +92,23 @@ brwResults->show();
 brwResults->clear();
 }
 
+static void displayTabData() {
+  FILE *pipe = popen(command.c_str(),"r");
+char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
+if (pipe)
+{
+   txtBuffer->loadfile("");
+   while(fgets(mbuf,PATH_MAX,pipe))
+   {
+      string line(mbuf);
+      txtBuffer->append(line.c_str());
+      Fl::flush();
+   }
+   pclose(pipe);
+   free(mbuf);
+}
+}
+
 static void cursor_normal() {
   window->cursor(FL_CURSOR_DEFAULT);
 Fl::flush();
@@ -326,26 +343,35 @@ static void menuCB(Fl_Widget *, void* userdata) {
 {
   if (choiceSearch->text() == "Search")
      command = "scm-search.sh";
-  else if (choiceSearch->text() == "Keyword")
-     command = "keyword.sh";
+  else if (choiceSearch->text() == "Tags")
+     command = "scm-search.sh -t";
   else
      command = "provides.sh";
   tabs->deactivate();
-  txtBuffer->loadfile(""); 
+  txtBuffer->loadfile("");
+  brwExtensions->load("");
   cursor_wait();
   command = command + " " + (string)search_field->value();
-  int results = system(command.c_str());
+  FILE *pipe = popen(command.c_str(),"r");
+  char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
+  if (pipe)
+  {
+     while(fgets(mbuf,PATH_MAX,pipe))
+     {
+        string line(mbuf);
+        line = line.substr(0,line.length()-1);
+        brwExtensions->add(line.c_str());
+        brwExtensions->bottomline(brwExtensions->size());
+        Fl::flush();
+     }
+     pclose(pipe);
+     free(mbuf);
+  }
   search_field->value("");
   cursor_normal();
-  if (results == 0 )
-  {
-    brwExtensions->load("scm.lst");
-    brwExtensions->remove(brwExtensions->size());
-    btnGo->deactivate();
-    choiceSearch->activate();
-    search_field->activate();                                              
-  }
-  
+  btnGo->deactivate();
+  choiceSearch->activate();
+  search_field->activate();                                              
 } else if (userdata == "md5s") 
 {
    mode = "md5s";
@@ -553,25 +579,15 @@ static void tabsGroupCB(Fl_Widget*, void*) {
    if (infoTab->visible())
    {
      string select_extn_file = select_extn + (string)".info";
-     command = "scm-fetch.sh " + select_extn_file;
-     results = system(command.c_str());
-     if (results == 0)
-     {
-        txtBuffer->loadfile(select_extn_file.c_str());
-        unlink(select_extn_file.c_str());
-     }
+     command = "scm-fetch.sh -O " + select_extn_file;
+     displayTabData();
    }
    
    if (filesTab->visible())
    {
      string select_extn_file = select_extn + (string)".list";
-     command = "scm-fetch.sh " + select_extn_file;
-     results = system(command.c_str());
-     if (results == 0)
-     {
-        txtBuffer->loadfile(select_extn_file.c_str());
-        unlink(select_extn_file.c_str());
-     }
+     command = "scm-fetch.sh -O " + select_extn_file;
+     displayTabData();
    }
    
    if (dependsTab->visible())
@@ -579,14 +595,8 @@ static void tabsGroupCB(Fl_Widget*, void*) {
      cursor_wait();
      txtBuffer->loadfile("");
      string select_extn_file = select_extn + (string)".dep";
-     command = "scm-fetch.sh " + select_extn_file;
-     results = system(command.c_str());
-     cursor_normal();
-     if (results == 0)
-     {
-        txtBuffer->loadfile(select_extn_file.c_str());
-        unlink(select_extn_file.c_str());
-     }
+     command = "scm-fetch.sh -O " + select_extn_file;
+     displayTabData();
    }
    
 }
@@ -711,7 +721,7 @@ Fl_Choice *choiceSearch=(Fl_Choice *)0;
 
 Fl_Menu_Item menu_choiceSearch[] = {
  {gettext("Search"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {gettext("Keyword"), 0,  0, 0, 1, FL_NORMAL_LABEL, 0, 14, 0},
+ {gettext("Tags"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 

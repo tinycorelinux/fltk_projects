@@ -7,678 +7,850 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tctools\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-03-10 13:13+0200\n"
-"PO-Revision-Date: 2010-09-14 00:59+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2012-01-02 22:44+0200\n"
+"PO-Revision-Date: 2011-10-11 17:27+0000\n"
+"Last-Translator: samson <Unknown>\n"
 "Language-Team: Amharic <am@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-04-02 06:20+0000\n"
-"X-Generator: Launchpad (build 12710)\n"
+"X-Launchpad-Export-Date: 2012-03-29 10:09+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 
 #: ../mousetool/mousetool.cxx:98 ../network/network.cxx:239
 msgid "&Apply"
-msgstr ""
+msgstr "&መተግበሪያ"
 
 #: ../fdtool/fdtool.cxx:100
 msgid "&Apply Image"
-msgstr ""
+msgstr "&ምስል መተግበሪያ"
 
-#: ../datetool/datetool.cxx:173 ../exittc/exittc.cxx:147
-#: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:66 ../swapfile/swapfile.cxx:69
+#: ../datetool/datetool.cxx:173 ../exittc/exittc.cxx:153
+#: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:152 ../swapfile/swapfile.cxx:69
 msgid "&Cancel"
-msgstr ""
+msgstr "&መሰረዣ"
 
 #: ../mousetool/mousetool.cxx:101
 msgid "&Exit"
-msgstr ""
+msgstr "&መውጫ"
 
 #: ../fdtool/fdtool.cxx:91
 msgid "&Format"
-msgstr ""
+msgstr "&ፎርማት"
 
 #: ../fdtool/fdtool.cxx:95
 msgid "&Make Image"
-msgstr ""
+msgstr "&ምስል መስሪያ"
 
-#: ../datetool/datetool.cxx:170 ../exittc/exittc.cxx:144
+#: ../datetool/datetool.cxx:170 ../exittc/exittc.cxx:149
 msgid "&OK"
-msgstr ""
+msgstr "&እሺ"
 
 #: ../swapfile/swapfile.cxx:72
 msgid "&Proceed"
-msgstr ""
+msgstr "&መቀጠል"
 
 #: ../fdtool/fdtool.cxx:76
 msgid "1440k"
-msgstr ""
+msgstr "1440ኬ"
 
 #: ../fdtool/fdtool.cxx:82
 msgid "1722k"
-msgstr ""
+msgstr "1722ኬ"
 
 #: ../datetool/datetool.cxx:132 ../datetool/datetool.cxx:140
 #: ../datetool/datetool.cxx:148 ../datetool/datetool.cxx:156
 #: ../datetool/datetool.cxx:164 ../mnttool_save/mnttool.cxx:111
+#: ../tc-grub4dos/tc-grub4dos.cxx:349 ../tc-install/tc-install.cxx:598
 msgid "@<"
-msgstr ""
+msgstr "@<"
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:355
+msgid "@<<"
+msgstr "@<<"
 
 #: ../datetool/datetool.cxx:135 ../datetool/datetool.cxx:143
 #: ../datetool/datetool.cxx:151 ../datetool/datetool.cxx:159
 #: ../datetool/datetool.cxx:167 ../mnttool_save/mnttool.cxx:114
+#: ../tc-grub4dos/tc-grub4dos.cxx:352 ../tc-install/tc-install.cxx:601
 msgid "@>"
-msgstr ""
+msgstr "@>"
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:358
+msgid "@>>"
+msgstr "@>>"
 
 #: ../filetool/filetool.cxx:95
 msgid "Action:"
-msgstr ""
+msgstr "ተግባር:"
 
-#: ../appbrowser/appbrowser.cxx:439
+#: ../appbrowser/appbrowser.cxx:524
 msgid "Appbrowser"
-msgstr ""
+msgstr "መተግበሪያዎች መቃኛ"
 
-#: ../flrun/flrun.cxx:57
-msgid "Application Launcher"
-msgstr ""
+#: ../flrun/flrun.cxx:158
+msgid "Application launcher"
+msgstr "መተግበሪያ አስነሺ"
 
-#: ../wbarconf/wbarconf.cxx:163
+#: ../wbarconf/wbarconf.cxx:165
 msgid "Apply"
-msgstr ""
+msgstr "መተግበር"
 
-#: ../appsaudit/appsaudit.cxx:600 ../cpanel/cpanel.cxx:39
+#: ../appsaudit/appsaudit.cxx:716
 msgid "AppsAudit"
-msgstr ""
+msgstr "መተግበሪያ መቆጣጠሪያ"
 
-#: ../exittc/exittc.cxx:104 ../filetool/filetool.cxx:78
+#: ../wallpaper/wallpaper.cxx:331
+msgid "Background Image"
+msgstr "የመደቡ ምስል"
+
+#: ../exittc/exittc.cxx:107 ../filetool/filetool.cxx:78
 msgid "Backup"
-msgstr ""
+msgstr "ተተኪ"
 
-#: ../exittc/exittc.cxx:139
+#: ../exittc/exittc.cxx:144
 msgid "Backup Options:"
-msgstr ""
+msgstr "የተተኪ ምርጫዎች:"
 
-#: ../cpanel/cpanel.cxx:48
+#: ../cpanel/cpanel.cxx:41
 msgid "Backup/Restore"
-msgstr ""
+msgstr "ተተኪ / እንደ ነበር መመለሻ"
 
-#: ../wbarconf/wbarconf.cxx:121
+#: ../tc-grub4dos/tc-grub4dos.cxx:322 ../tc-install/tc-install.cxx:520
+msgid "Boot Options"
+msgstr "የአነሳሰ ምርጫዎች"
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:324 ../tc-install/tc-install.cxx:522
+msgid "Boot Options Reference List"
+msgstr "የአነሳሰ ምርጫዎች ማመሳከሪያ ዝርዝር"
+
+#: ../wbarconf/wbarconf.cxx:123
 msgid "Bottom"
-msgstr ""
+msgstr "ታች"
 
-#: ../wbarconf/wbarconf.cxx:126
+#: ../wbarconf/wbarconf.cxx:128
 msgid "Bottom Left"
-msgstr ""
+msgstr "ታች በግራ በኩል"
 
-#: ../wbarconf/wbarconf.cxx:127
+#: ../wbarconf/wbarconf.cxx:129
 msgid "Bottom Right"
-msgstr ""
+msgstr "ታች በቀኝ በኩል"
 
 #: ../network/network.cxx:201
 msgid "Broadcast"
-msgstr ""
+msgstr "ማሰራጫ"
 
-#: ../flrun/flrun.cxx:69
+#: ../flrun/flrun.cxx:155
 msgid "Browse"
-msgstr ""
+msgstr "መቃኛ"
 
-#: ../appsaudit/appsaudit.cxx:549
+#: ../appsaudit/appsaudit.cxx:663
 msgid "Build Reporting Database"
-msgstr ""
+msgstr "የመግለጫ ዳታቤዝ ይገንቡ"
 
-#: ../wallpaper/wallpaper.cxx:275 ../wallpaper/wallpaper.cxx:300
+#: ../appbrowser/appbrowser.cxx:120
 msgid "Cancel"
-msgstr ""
+msgstr "መሰረዣ"
 
-#: ../wallpaper/wallpaper.cxx:332
+#: ../wallpaper/wallpaper.cxx:319
 msgid "Center"
-msgstr ""
+msgstr "መሀከል"
 
-#: ../appsaudit/appsaudit.cxx:571
+#: ../appsaudit/appsaudit.cxx:687
 msgid "Check Md5sums"
-msgstr ""
+msgstr "ኤምዲ5 ድምር መመርመሪያ"
 
-#: ../appsaudit/appsaudit.cxx:567
+#: ../appsaudit/appsaudit.cxx:682
 msgid "Check for Updates"
-msgstr ""
+msgstr "ማሻሻያዎች በመፈለግ ላይ"
 
-#: ../appsaudit/appsaudit.cxx:558
+#: ../appsaudit/appsaudit.cxx:673
 msgid "Clear Marked for Deletion"
-msgstr ""
+msgstr "ለማጥፋት ምልክት የተደርገውን ማጽጃ"
 
-#: ../wallpaper/wallpaper.cxx:350
-msgid "Color"
-msgstr ""
+#: ../wallpaper/wallpaper.cxx:233
+msgid "Color #1"
+msgstr "ቀለም #1"
 
-#: ../appbrowser/appbrowser.cxx:441
+#: ../wallpaper/wallpaper.cxx:246
+msgid "Color #2"
+msgstr "ቀለም #2"
+
+#: ../appbrowser/appbrowser.cxx:526
 msgid "Connect"
-msgstr ""
+msgstr "መገናኘት"
 
-#: ../cpanel/cpanel.cxx:22
+#: ../cpanel/cpanel.cxx:24
 msgid "ControlPanel"
-msgstr ""
+msgstr "መቆጣጠሪያ ማእከል"
 
 #: ../fdtool/fdtool.cxx:96
 msgid "Copies floppy to image path entered,"
+msgstr "ከፍሎፒ ወደ ምስል ኮፒ ማድረጊያ መንገድ ተመርጧል"
+
+#: ../tc-install/tc-install.cxx:540
+msgid "Core Only (Text Based Interface)"
 msgstr ""
 
-#: ../cpanel/cpanel.cxx:57
-msgid "Date/Time"
+#: ../tc-install/tc-install.cxx:546
+msgid "Core Plus Extensions Catagories to Install"
 msgstr ""
+
+#: ../tc-install/tc-install.cxx:535
+msgid "Core and X/GUI Desktop"
+msgstr ""
+
+#: ../cpanel/cpanel.cxx:50
+msgid "Date/Time"
+msgstr "ቀን/ሰአት"
 
 #: ../datetool/datetool.cxx:128
 msgid "Datetool"
-msgstr ""
+msgstr "የቀን መሳሪያ"
 
 #: ../datetool/datetool.cxx:146
 msgid "Day:"
-msgstr ""
+msgstr "ቀን:"
 
-#: ../appsaudit/appsaudit.cxx:547
+#: ../appsaudit/appsaudit.cxx:661
 msgid "Dependencies"
-msgstr ""
+msgstr "ጥገኝነት"
 
-#: ../appbrowser/appbrowser.cxx:491
+#: ../appbrowser/appbrowser.cxx:576
 msgid "Depends"
-msgstr ""
+msgstr "እንደ ሁኔታው"
 
 #: ../filetool/filetool.cxx:91
 msgid "Device:"
-msgstr ""
+msgstr "አካል :"
 
-#: ../wallpaper/wallpaper.cxx:255
+#: ../wallpaper/wallpaper.cxx:277
 msgid "Diagonal Gradient"
-msgstr ""
+msgstr "የአግድም ከፍታ"
 
-#: ../appsaudit/appsaudit.cxx:554
+#: ../appsaudit/appsaudit.cxx:667
 msgid "Display All Not Depended On"
-msgstr ""
+msgstr "ጥገኛ ያልሆኑትን በሙሉ ማሳያ"
 
-#: ../appsaudit/appsaudit.cxx:555
-msgid "Display All with Missing Dependencies"
-msgstr ""
-
-#: ../appsaudit/appsaudit.cxx:553
+#: ../appsaudit/appsaudit.cxx:666
 msgid "Display All with No Dependencies"
-msgstr ""
+msgstr "ሁሉንም ጥገኞች ያልሆኑትን ማሳያ"
 
-#: ../appsaudit/appsaudit.cxx:557
+#: ../appsaudit/appsaudit.cxx:672
 msgid "Display Marked for Deletion"
+msgstr "ለማጥፋት የተመረጡትን ማሳያ"
+
+#: ../tc-install/tc-install.cxx:571
+msgid "Don't install Extensions (Core Only, Text Based Install)"
 msgstr ""
 
-#: ../wallpaper/wallpaper.cxx:272 ../wallpaper/wallpaper.cxx:297
-#: ../wallpaper/wallpaper.cxx:346
+#: ../wallpaper/wallpaper.cxx:228
 msgid "Done"
-msgstr ""
+msgstr "ተጠናቋል"
 
-#: ../appbrowser/appbrowser.cxx:386
+#: ../appbrowser/appbrowser.cxx:462
 msgid "Download + Load"
-msgstr ""
+msgstr "የወረደ + ጭነት"
 
-#: ../appbrowser/appbrowser.cxx:387
+#: ../appbrowser/appbrowser.cxx:463
 msgid "Download Only"
-msgstr ""
+msgstr "የወረደ ብቻ"
 
 #: ../network/network.cxx:242
 msgid "E&xit"
+msgstr "መ&ውጫ"
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:271
+msgid "Embedded"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:559
+#: ../tc-grub4dos/tc-grub4dos.cxx:328 ../tc-install/tc-install.cxx:526
+msgid "Enter Spaces Separated Options From Examples Above"
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:463
+msgid "Existing Partition"
+msgstr "ከመከፋፈያው በመውጣት ላይ"
+
+#: ../appsaudit/appsaudit.cxx:674
 msgid "Exit Dependencies Mode"
-msgstr ""
+msgstr "ከጥገኝነት ዘዴ መውጫ"
 
-#: ../appsaudit/appsaudit.cxx:564
+#: ../appsaudit/appsaudit.cxx:679
 msgid "Exit Install Options"
-msgstr ""
+msgstr "ከመግጠሚያ ምርጫዎች መውጫ"
 
-#: ../appsaudit/appsaudit.cxx:572
+#: ../appsaudit/appsaudit.cxx:688
 msgid "Exit Md5 Check Mode"
-msgstr ""
+msgstr "ከኤምዲ5 ድምር መመርመሪያ ዘዴ መውጫ"
 
-#: ../appsaudit/appsaudit.cxx:576
+#: ../appsaudit/appsaudit.cxx:692
 msgid "Exit OnBoot"
-msgstr ""
+msgstr "ሲነሳ መውጫ"
 
-#: ../appsaudit/appsaudit.cxx:580
+#: ../appsaudit/appsaudit.cxx:696
 msgid "Exit OnDemand"
-msgstr ""
+msgstr "ሲጠየቅ መውጫ"
 
-#: ../appsaudit/appsaudit.cxx:568
+#: ../appsaudit/appsaudit.cxx:684
 msgid "Exit Update Mode"
-msgstr ""
+msgstr "ከማሻሻያ ዘዴ መውጫ"
 
-#: ../exittc/exittc.cxx:128
+#: ../exittc/exittc.cxx:133
 msgid "Exit to Prompt"
+msgstr "በአስቸኳይ መውጫ"
+
+#: ../tc-install/tc-install.cxx:564
+msgid "Extension Installation"
 msgstr ""
 
-#: ../flrun/flrun.cxx:55
+#: ../flrun/flrun.cxx:147
 msgid "FLRun"
-msgstr ""
+msgstr "FLRun"
+
+#: ../appsaudit/appsaudit.cxx:665
+msgid "Fetch Missing Dependencies"
+msgstr "የጎደሉ ጥገኞችን ፈልጎ ማግኛ"
 
 #: ../filetool/filetool.cxx:90
 msgid "FileTool"
-msgstr ""
+msgstr "የፋይል መሳሪያዎች"
 
-#: ../appbrowser/appbrowser.cxx:481
+#: ../appbrowser/appbrowser.cxx:566
 msgid "Files"
-msgstr ""
+msgstr "ፋይሎች"
 
-#: ../wallpaper/wallpaper.cxx:337
+#: ../wallpaper/wallpaper.cxx:324
 msgid "Fill"
-msgstr ""
+msgstr "መሙያ"
 
 #: ../fdtool/fdtool.cxx:72
 msgid "Floppy Disk Tool"
-msgstr ""
-
-#: ../cpanel/cpanel.cxx:42
-msgid "Floppy Tool"
-msgstr ""
+msgstr "የፍሎፒ ዲስክ መሳሪያዎች"
 
 #: ../fdtool/fdtool.cxx:70
 msgid "FloppyTool"
-msgstr ""
+msgstr "የፍሎፒ መሳሪያዎች"
 
 #: ../fdtool/fdtool.cxx:92
 msgid "Formats FAT of selected size."
+msgstr "የተመረጠውን መጠን በፋት ፎርማት ማድረጊያ"
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:290 ../tc-install/tc-install.cxx:488
+msgid "Formatting Options"
 msgstr ""
 
-#: ../wallpaper/wallpaper.cxx:321
-msgid "Full"
+#: ../tc-grub4dos/tc-grub4dos.cxx:265 ../tc-install/tc-install.cxx:437
+msgid "Frugal"
 msgstr ""
+
+#: ../wallpaper/wallpaper.cxx:309
+msgid "Full"
+msgstr "ሙሉ"
 
 #: ../filetool/filetool.cxx:100
 msgid "GO"
-msgstr ""
+msgstr "መሄጃ"
 
 #: ../network/network.cxx:207
 msgid "Gateway"
-msgstr ""
+msgstr "መግቢያ"
 
-#: ../appbrowser/appbrowser.cxx:515
+#: ../appbrowser/appbrowser.cxx:600
 msgid "Go"
-msgstr ""
+msgstr "መሄጃ"
 
-#: ../wallpaper/wallpaper.cxx:219 ../wallpaper/wallpaper.cxx:353
-msgid "Gradient"
-msgstr ""
-
-#: ../wallpaper/wallpaper.cxx:220
-msgid "Gradient Color #1"
-msgstr ""
-
-#: ../wallpaper/wallpaper.cxx:233
-msgid "Gradient Color #2"
-msgstr ""
-
-#: ../cpanel/cpanel.cxx:45
-msgid "HD/USB Install"
-msgstr ""
-
-#: ../wallpaper/wallpaper.cxx:251
+#: ../wallpaper/wallpaper.cxx:271
 msgid "Horizontal Gradient"
-msgstr ""
+msgstr "የአግድም ከፍታ"
 
 #: ../datetool/datetool.cxx:154
 msgid "Hour:"
-msgstr ""
-
-#: ../cpanel/cpanel.cxx:54
-msgid "Hybrid Mode"
-msgstr ""
+msgstr "ሰአት:"
 
 #: ../network/network.cxx:188
 msgid "IP Address"
-msgstr ""
+msgstr "አይፒ አድራሻዎች"
 
 #: ../fdtool/fdtool.cxx:87
 msgid "Image Path:"
-msgstr ""
+msgstr "የምስል መንገድ:"
 
-#: ../appbrowser/appbrowser.cxx:471
+#: ../appbrowser/appbrowser.cxx:556
 msgid "Info"
+msgstr "መረጃ"
+
+#: ../tc-install/tc-install.cxx:565
+msgid "Install Extensions from this TCE/CDE Directory:"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:561
+#: ../appsaudit/appsaudit.cxx:676
 msgid "Install Options"
+msgstr "የአገጣጠም ምርጫዎች"
+
+#: ../tc-install/tc-install.cxx:534
+msgid "Install Type"
 msgstr ""
 
-#: ../wallpaper/wallpaper.cxx:312
+#: ../wallpaper/wallpaper.cxx:301
 msgid "Install images from /opt/backgrounds directory"
-msgstr ""
+msgstr "ምስሎችን መግጠሚያ ከ/ተለያዩ/የመደብ ዳይሬክቶሪ"
 
 #: ../stats/stats.cxx:162
 msgid "Installed"
+msgstr "ተገጥሟል"
+
+#: ../tc-install/tc-install.cxx:550
+msgid "Installer Application"
 msgstr ""
 
 #: ../network/network.cxx:164
 msgid "Interface"
-msgstr ""
+msgstr "ግንኙነት"
 
-#: ../wbarconf/wbarconf.cxx:122
+#: ../appbrowser/appbrowser.cxx:429
+msgid "Keyword"
+msgstr "ቁልፍ ቃል"
+
+#: ../wbarconf/wbarconf.cxx:124
 msgid "Left"
-msgstr ""
+msgstr "ግራ"
 
-#: ../wbarconf/wbarconf.cxx:129
+#: ../wbarconf/wbarconf.cxx:131
 msgid "Left Bottom"
-msgstr ""
+msgstr "ታች በግራ በኩል"
 
 #: ../mousetool/mousetool.cxx:93
 msgid "Left Button"
-msgstr ""
+msgstr "የግራ ቁልፍ"
 
-#: ../wbarconf/wbarconf.cxx:128
+#: ../wbarconf/wbarconf.cxx:130
 msgid "Left Top"
-msgstr ""
+msgstr "ላይ በግራ በኩል"
 
-#: ../appsaudit/appsaudit.cxx:550
+#: ../appsaudit/appsaudit.cxx:668
 msgid "List Dependencies"
-msgstr ""
+msgstr "የጥገኞች ዝርዝር"
 
-#: ../appsaudit/appsaudit.cxx:552
+#: ../appsaudit/appsaudit.cxx:670
 msgid "List Missing Dependencies"
-msgstr ""
+msgstr "ያልተገኙ የጥገኞች ዝርዝር"
 
-#: ../appsaudit/appsaudit.cxx:551
+#: ../appsaudit/appsaudit.cxx:669
 msgid "List Required By"
-msgstr ""
+msgstr "የሚፈለጉት ዝርዝሮች በ"
 
-#: ../appbrowser/appbrowser.cxx:444
+#: ../appbrowser/appbrowser.cxx:529
 msgid "Local"
-msgstr ""
+msgstr "አካባቢ"
 
-#: ../appsaudit/appsaudit.cxx:575 ../appsaudit/appsaudit.cxx:579
-#: ../cpanel/cpanel.cxx:24
+#: ../wallpaper/wallpaper.cxx:293
+msgid "Logo"
+msgstr "አርማ"
+
+#: ../appbrowser/appbrowser.cxx:111
+msgid "MD5SUM error"
+msgstr "የጠቅላላ ድምር ስህተት"
+
+#: ../appsaudit/appsaudit.cxx:691 ../appsaudit/appsaudit.cxx:695
+#: ../cpanel/cpanel.cxx:26
 msgid "Maintenance"
+msgstr "ጥገና"
+
+#: ../tc-install/tc-install.cxx:477
+msgid "Mark Partition Active (bootable)"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:556
+#: ../appsaudit/appsaudit.cxx:671
 msgid "Mark for Deletion"
-msgstr ""
+msgstr "ለማጥፋት ምልክት ማድረግ"
 
-#: ../appsaudit/appsaudit.cxx:570
+#: ../appsaudit/appsaudit.cxx:686
 msgid "Md5Check"
+msgstr "ኤምዲ5 ድምር መመርመሪያ"
+
+#: ../appbrowser/appbrowser.cxx:112
+msgid "Md5sum error on"
+msgstr "የጠቅላላ ድምር ስህተት በ"
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:250
+msgid "Micro Core"
 msgstr ""
 
 #: ../datetool/datetool.cxx:162
 msgid "Min:"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:447
+#: ../appbrowser/appbrowser.cxx:532
 msgid "Mirrors"
+msgstr "አንጸባራቂዎች"
+
+#: ../appsaudit/appsaudit.cxx:664
+msgid "Missing Dependencies Reporting"
 msgstr ""
 
 #: ../datetool/datetool.cxx:138
 msgid "Month:"
-msgstr ""
+msgstr "ወር:"
 
-#: ../cpanel/cpanel.cxx:51
+#: ../cpanel/cpanel.cxx:44
 msgid "Mount Tool"
-msgstr ""
+msgstr "የመጫኛ መሳሪያዎች"
 
 #: ../swapfile/swapfile.cxx:65
 msgid "Mounted Partition:"
-msgstr ""
+msgstr "የተጫኑ ክፍልፋዮች:"
 
 #: ../mousetool/mousetool.cxx:76
 msgid "Mouse Speed"
-msgstr ""
+msgstr "የአይጥ ፍጥነት"
 
-#: ../cpanel/cpanel.cxx:60
+#: ../cpanel/cpanel.cxx:53
 msgid "Mouse Tool"
-msgstr ""
+msgstr "የአይጥ መሳሪያዎች"
 
 #: ../mousetool/mousetool.cxx:74
 msgid "MouseTool"
-msgstr ""
+msgstr "የአይጥ መሳሪያዎች"
 
 #: ../network/network.cxx:213
 msgid "NameServers"
+msgstr "የሰርቨሮች ስም"
+
+#: ../loadpack/loadpack.cxx:20
+msgid "Navigate to and Select Starter Pack to load."
 msgstr ""
 
-#: ../cpanel/cpanel.cxx:66 ../network/network.cxx:158
+#: ../cpanel/cpanel.cxx:59 ../network/network.cxx:158
 #: ../network/network.cxx:160
 msgid "Network"
-msgstr ""
+msgstr "ኔትዎርክ"
 
 #: ../network/network.cxx:195
 msgid "Network Mask"
+msgstr "የኔትዎርክ መሸፈኛ"
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:291 ../tc-install/tc-install.cxx:489
+msgid "No formatting, use existing."
 msgstr ""
 
-#: ../exittc/exittc.cxx:103 ../filetool/filetool.cxx:77
+#: ../tc-install/tc-install.cxx:556
+msgid "Non-US keyboard layout support"
+msgstr ""
+
+#: ../exittc/exittc.cxx:106 ../filetool/filetool.cxx:77
 msgid "None"
-msgstr ""
+msgstr "ምንም"
 
-#: ../flrun/flrun.cxx:63
+#: ../flrun/flrun.cxx:149
 msgid "OK"
-msgstr ""
+msgstr "እሺ"
 
-#: ../appbrowser/appbrowser.cxx:384 ../appsaudit/appsaudit.cxx:574
+#: ../appbrowser/appbrowser.cxx:460 ../appsaudit/appsaudit.cxx:690
 msgid "OnBoot"
-msgstr ""
+msgstr "ሲነሳ"
 
-#: ../appbrowser/appbrowser.cxx:385 ../appsaudit/appsaudit.cxx:578
+#: ../appbrowser/appbrowser.cxx:461 ../appsaudit/appsaudit.cxx:694
 msgid "OnDemand"
-msgstr ""
+msgstr "ሲጠየቅ"
 
 #: ../wbar_exclude/wbar_exclude.cxx:59
 msgid "Onboot Items"
+msgstr "ማስነሻ አካሎች"
+
+#: ../tc-install/tc-install.cxx:482
+msgid "Path to core.gz:"
 msgstr ""
 
-#: ../wallpaper/wallpaper.cxx:280 ../wallpaper/wallpaper.cxx:281
-msgid "Pick Color"
-msgstr ""
+#: ../tc-grub4dos/tc-grub4dos.cxx:248
+msgid "Please Select Version to Install"
+msgstr "እባክዎን ለመግጠም እትሙን ይምረጡ"
 
-#: ../wbarconf/wbarconf.cxx:158
+#: ../wbarconf/wbarconf.cxx:160
 msgid "Position"
-msgstr ""
+msgstr "አካባቢ"
 
-#: ../wallpaper/wallpaper.cxx:303
+#: ../wallpaper/wallpaper.cxx:225
 msgid "Preview"
-msgstr ""
+msgstr "ቅድመ እይታ"
 
-#: ../appsaudit/appsaudit.cxx:623
+#: ../tc-grub4dos/tc-grub4dos.cxx:339 ../tc-install/tc-install.cxx:588
+msgid "Proceed"
+msgstr "መቀጠል"
+
+#: ../appsaudit/appsaudit.cxx:740
 msgid "Process Selected Item(s)"
-msgstr ""
+msgstr "የተመረጡት እቃዎች ሂደት"
 
-#: ../appbrowser/appbrowser.cxx:353
+#: ../appbrowser/appbrowser.cxx:428
 msgid "Provides"
+msgstr "መስጠት"
+
+#: ../exittc/exittc.cxx:128
+msgid "Reboot"
+msgstr "እንደገና ማስነሻ"
+
+#: ../tc-install/tc-install.cxx:553
+msgid "Remaster Tool"
 msgstr ""
 
-#: ../exittc/exittc.cxx:123
-msgid "Reboot"
-msgstr ""
+#: ../appbrowser/appbrowser.cxx:114
+msgid "Remove and try again"
+msgstr "ማስወገጃ እና እንደገና መሞከሪያ"
 
 #: ../filetool/filetool.cxx:80
 msgid "Restore"
-msgstr ""
+msgstr "እንደነበር መመለሻ"
 
-#: ../appsaudit/appsaudit.cxx:608
+#: ../appsaudit/appsaudit.cxx:724
 msgid "Results"
-msgstr ""
+msgstr "ውጤቶች"
 
-#: ../wbarconf/wbarconf.cxx:123
+#: ../tc-grub4dos/tc-grub4dos.cxx:336 ../tc-install/tc-install.cxx:585
+msgid "Review"
+msgstr "ግምገማ"
+
+#: ../wbarconf/wbarconf.cxx:125
 msgid "Right"
-msgstr ""
+msgstr "ቀኝ"
 
-#: ../wbarconf/wbarconf.cxx:131
+#: ../wbarconf/wbarconf.cxx:133
 msgid "Right Bottom"
-msgstr ""
+msgstr "ታች  በቀኝ በኩል"
 
 #: ../mousetool/mousetool.cxx:87
 msgid "Right Button"
-msgstr ""
+msgstr "የቀኝ ቁልፍ"
 
-#: ../wbarconf/wbarconf.cxx:130
+#: ../wbarconf/wbarconf.cxx:132
 msgid "Right Top"
-msgstr ""
+msgstr "ላይ በቀኝ በኩል"
 
-#: ../exittc/exittc.cxx:105 ../filetool/filetool.cxx:79
+#: ../exittc/exittc.cxx:108 ../filetool/filetool.cxx:79
 msgid "Safe"
-msgstr ""
+msgstr "አስተማማኝ"
 
 #: ../network/network.cxx:223
 msgid "Save Configuration?"
-msgstr ""
+msgstr "የተዋቀረውን ላስቀምጥ?"
 
-#: ../appbrowser/appbrowser.cxx:352
+#: ../appbrowser/appbrowser.cxx:427
 msgid "Search"
-msgstr ""
+msgstr "መፈለጊያ"
 
-#: ../appsaudit/appsaudit.cxx:605
+#: ../appsaudit/appsaudit.cxx:721
 msgid "Select"
-msgstr ""
+msgstr "መምረጫ"
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:33 ../tc-install/tc-install.cxx:24
+msgid "Select File for "
+msgstr "ፋይል መምረጫ ለ "
 
 #: ../add2file/add2file.cxx:22
 msgid "Select File to be added to "
+msgstr "የሚጨመረውን ፋይል ይምረጡ ወደ "
+
+#: ../appsaudit/appsaudit.cxx:683
+msgid "Select Mirror"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:563
+#: ../tc-install/tc-install.cxx:401
+msgid "Select TCE/CDE Directory"
+msgstr ""
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:280 ../tc-install/tc-install.cxx:471
+msgid "Select Target Disk"
+msgstr ""
+
+#: ../appsaudit/appsaudit.cxx:678
 msgid "Selective Copy Install"
-msgstr ""
+msgstr "ኮፒ መግጠሚያ መራጭ"
 
-#: ../appbrowser/appbrowser.cxx:523 ../wallpaper/wallpaper.cxx:269
-#: ../wallpaper/wallpaper.cxx:294 ../wallpaper/wallpaper.cxx:342
+#: ../cpanel/cpanel.cxx:47
+msgid "Services"
+msgstr "ግልጋሎቶች"
+
+#: ../appbrowser/appbrowser.cxx:609
 msgid "Set"
-msgstr ""
+msgstr "ማሰናጃ"
 
-#: ../cpanel/cpanel.cxx:34
+#: ../cpanel/cpanel.cxx:36
 msgid "Setup"
-msgstr ""
+msgstr "ማሰናጃ"
 
-#: ../exittc/exittc.cxx:117
+#: ../exittc/exittc.cxx:122
 msgid "Shutdown"
-msgstr ""
+msgstr "ማጥፊያ"
 
-#: ../appbrowser/appbrowser.cxx:500
+#: ../appbrowser/appbrowser.cxx:585
 msgid "Size"
+msgstr "መጠን"
+
+#: ../wallpaper/wallpaper.cxx:259
+msgid "Solid Color"
+msgstr "ሙሉ ቀለም"
+
+#: ../wallpaper/wallpaper.cxx:336
+msgid "Solid Color or 2 Color Gradient"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:519
+#: ../appbrowser/appbrowser.cxx:604
 msgid "Status"
-msgstr ""
+msgstr "ሁኔታ"
 
 #: ../swapfile/swapfile.cxx:63
 msgid "Swapfile"
-msgstr ""
+msgstr "ስዋፕፋይል"
 
-#: ../cpanel/cpanel.cxx:72
+#: ../cpanel/cpanel.cxx:56
 msgid "Swapfile Tool"
-msgstr ""
+msgstr "የስዋፕፋይል መሳሪያዎች"
 
-#: ../cpanel/cpanel.cxx:69
+#: ../cpanel/cpanel.cxx:62
 msgid "System Stats"
-msgstr ""
+msgstr "የስርአቱ ሁኔታ"
 
-#: ../exittc/exittc.cxx:113
+#: ../exittc/exittc.cxx:118
 msgid "TC Exit Options"
-msgstr ""
+msgstr "TC የመውጫ ምርጫዎች"
 
-#: ../cpanel/cpanel.cxx:63
+#: ../cpanel/cpanel.cxx:65
 msgid "Terminal Server"
+msgstr "ተርሚናል ሰርቨር"
+
+#: ../wallpaper/wallpaper.cxx:314
+msgid "Tile"
+msgstr "ማዘጋጃ"
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:255
+msgid "Tiny Core"
+msgstr "ትይኒ ኮር"
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:243 ../tc-grub4dos/tc-grub4dos.cxx:245
+msgid "Tiny Core Grub4dos Installation"
 msgstr ""
 
-#: ../wallpaper/wallpaper.cxx:327
-msgid "Tile"
-msgstr ""
+#: ../tc-install/tc-install.cxx:427 ../tc-install/tc-install.cxx:429
+msgid "Tiny Core Installation"
+msgstr "የታይኒ ኮር መግጠሚያ"
 
 #: ../stats/stats.cxx:74
 msgid "Tiny Core System Stats"
-msgstr ""
+msgstr "የታይኒ ኮር ስርአት ሁኔታ"
 
-#: ../appsaudit/appsaudit.cxx:562
+#: ../appsaudit/appsaudit.cxx:677
 msgid "Toggle Default Copy Install"
-msgstr ""
+msgstr "መቀያየሪያ ነባር ኮፒ መግጠሚያዎችን"
 
-#: ../wbarconf/wbarconf.cxx:120
+#: ../wbarconf/wbarconf.cxx:122
 msgid "Top"
-msgstr ""
+msgstr "ላይ"
 
-#: ../wbarconf/wbarconf.cxx:124
+#: ../wbarconf/wbarconf.cxx:126
 msgid "Top Left"
-msgstr ""
+msgstr "በግራ በኩል ላይ"
 
-#: ../wbarconf/wbarconf.cxx:125
+#: ../wbarconf/wbarconf.cxx:127
 msgid "Top Right"
+msgstr "በቀኝ በኩል ላይ"
+
+#: ../appbrowser/appbrowser.cxx:117
+msgid "Try to finish download"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:548
+#: ../tc-install/tc-install.cxx:444
+msgid "USB-HDD"
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:449
+msgid "USB-ZIP"
+msgstr ""
+
+#: ../appsaudit/appsaudit.cxx:662
 msgid "Update .dep files."
-msgstr ""
+msgstr "ማሻሻያ .ጥገኛ ፋይሎችን"
 
-#: ../appsaudit/appsaudit.cxx:566
+#: ../appsaudit/appsaudit.cxx:681
 msgid "Updates"
-msgstr ""
+msgstr "ማሻሻያዎች"
 
 #: ../network/network.cxx:170
 msgid "Use DHCP Broadcast?"
 msgstr ""
 
-#: ../cpanel/cpanel.cxx:29
+#: ../cpanel/cpanel.cxx:31
 msgid "Utilities"
-msgstr ""
+msgstr "መገልገያዎች"
 
-#: ../wallpaper/wallpaper.cxx:246
+#: ../wallpaper/wallpaper.cxx:265
 msgid "Vertical Gradient"
-msgstr ""
+msgstr "የቁመት ከፍታ"
 
-#: ../cpanel/cpanel.cxx:79 ../wallpaper/wallpaper.cxx:311
+#: ../cpanel/cpanel.cxx:72 ../wallpaper/wallpaper.cxx:224
 msgid "Wallpaper"
-msgstr ""
+msgstr "የግድግዳ ወረቀት"
 
-#: ../cpanel/cpanel.cxx:75
+#: ../cpanel/cpanel.cxx:68
 msgid "Wbar Conf"
-msgstr ""
+msgstr "Wbar ማዋቀሪያ"
 
-#: ../wbarconf/wbarconf.cxx:174
+#: ../wbarconf/wbarconf.cxx:176
 msgid "Wbar Icon Size"
-msgstr ""
+msgstr "Wbar ምልክት መጠን"
 
-#: ../wbarconf/wbarconf.cxx:146
+#: ../wbarconf/wbarconf.cxx:148
 msgid "Wbar Icons"
-msgstr ""
+msgstr "Wbar ምልክቶች"
 
-#: ../wbarconf/wbarconf.cxx:182
+#: ../wbarconf/wbarconf.cxx:184
 msgid "Wbar Text Labels"
 msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:166
+#: ../wbarconf/wbarconf.cxx:168
 msgid "Wbar Zoom"
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:458
+msgid "Whole Disk"
+msgstr "በሙሉ ዲስክ"
+
+#: ../tc-install/tc-install.cxx:547
+msgid "Wireless Networking Support"
 msgstr ""
 
 #: ../fdtool/fdtool.cxx:101
 msgid "Writes image path file to floppy."
-msgstr ""
+msgstr "የምስል መንገድ ፋይል ወደ ፍሎፒ መጻፊያ"
 
-#: ../cpanel/cpanel.cxx:82
+#: ../cpanel/cpanel.cxx:75
 msgid "Xvesa"
-msgstr ""
+msgstr "Xvesa"
 
 #: ../datetool/datetool.cxx:130
 msgid "Year:"
-msgstr ""
+msgstr "አመት:"
 
 #: ../stats/stats.cxx:171
 msgid "bigHomeFiles"
-msgstr ""
+msgstr "ትልቅ የቤት ፋይሎች"
 
 #: ../stats/stats.cxx:153
 msgid "boot"
-msgstr ""
+msgstr "ማስነሻ"
 
 #: ../mnttool_save/mnttool.cxx:117
 msgid "button"
-msgstr ""
+msgstr "ቁልፍ"
 
 #: ../stats/stats.cxx:80
 msgid "cpu"
-msgstr ""
+msgstr "ሲፒዩ"
 
 #: ../stats/stats.cxx:126
 msgid "dmesg"
-msgstr ""
+msgstr "መልእክት ማሳያ"
 
-#: ../wbarconf/wbarconf.cxx:145 ../wbar_exclude/wbar_exclude.cxx:58
+#: ../wbarconf/wbarconf.cxx:147 ../wbar_exclude/wbar_exclude.cxx:58
 msgid "eXclude Wbar Icons"
 msgstr ""
 
@@ -686,42 +858,58 @@ msgstr ""
 msgid "eXclude Wbar Items"
 msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:152
+#: ../wbarconf/wbarconf.cxx:154
 msgid "eXcluded Items"
-msgstr ""
+msgstr "የተከለከሉ እቃዎች"
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:298 ../tc-install/tc-install.cxx:496
+msgid "ext2"
+msgstr "Ext2"
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:303 ../tc-install/tc-install.cxx:501
+msgid "ext3"
+msgstr "ext3"
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:308 ../tc-install/tc-install.cxx:506
+msgid "ext4"
+msgstr "ext4"
 
 #: ../stats/stats.cxx:144
 msgid "filesystems"
-msgstr ""
+msgstr "የስርአቱ ፋይል"
 
 #: ../stats/stats.cxx:90
 msgid "mem"
-msgstr ""
+msgstr "mem"
 
 #: ../stats/stats.cxx:108
 msgid "modules"
-msgstr ""
+msgstr "ክፍሎች"
 
 #: ../stats/stats.cxx:135
 msgid "mounts"
-msgstr ""
+msgstr "መጫኛ"
 
 #: ../stats/stats.cxx:99
 msgid "net"
-msgstr ""
+msgstr "ኔት"
 
 #: ../network/network.cxx:179 ../network/network.cxx:232
 msgid "no"
-msgstr ""
+msgstr "አይ"
 
 #: ../stats/stats.cxx:117
 msgid "processes"
-msgstr ""
+msgstr "ሂደቶች"
 
 #: ../swapfile/swapfile.cxx:67
 msgid "tc.swp in k bytes:"
-msgstr ""
+msgstr "tc.swp በ ኪ ባይትስ :"
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:313 ../tc-install/tc-install.cxx:511
+msgid "vfat"
+msgstr "vfat"
 
 #: ../network/network.cxx:173 ../network/network.cxx:226
 msgid "yes"
-msgstr ""
+msgstr "አዎ"

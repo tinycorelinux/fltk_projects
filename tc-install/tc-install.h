@@ -23,11 +23,17 @@ extern Fl_Check_Button *btnPartition;
 #include <FL/Fl_Browser.H>
 extern Fl_Browser *brwTarget;
 extern Fl_Check_Button *btnActive;
+extern Fl_Check_Button *btnBootloader;
 #include <FL/Fl_Box.H>
 extern Fl_Box *lblPathCore;
 extern Fl_Group *grpFormat;
 extern Fl_Group *FormatType;
 #include <FL/Fl_Round_Button.H>
+extern Fl_Round_Button *btnNoFormat;
+extern Fl_Round_Button *btnExt2Format;
+extern Fl_Round_Button *btnExt3Format;
+extern Fl_Round_Button *btnExt4Format;
+extern Fl_Round_Button *btnVfatFormat;
 extern Fl_Group *grpBoot;
 extern Fl_Browser *brwBootRef;
 #include <FL/Fl_Input.H>
@@ -37,7 +43,9 @@ extern Fl_Group *installType;
 extern Fl_Round_Button *installCoreX11;
 extern Fl_Round_Button *installCoreOnly;
 extern Fl_Group *corePlusExtensions;
-extern Fl_Check_Button *btnNetworking;
+extern Fl_Check_Button *btnWifi;
+extern Fl_Check_Button *btnNdiswrapper;
+extern Fl_Check_Button *btnWifiFirmware;
 extern Fl_Check_Button *btnInstaller;
 extern Fl_Check_Button *btnRemaster;
 extern Fl_Check_Button *btnKmaps;

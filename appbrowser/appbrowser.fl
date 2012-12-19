@@ -5,7 +5,7 @@ i18n_include <libintl.h>
 i18n_function gettext 
 header_name {.h} 
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2008-2011} {} 
+decl {// (c) Robert Shingledecker 2008-2012} {} 
 
 decl {\#include <iostream>} {} 
 
@@ -54,6 +54,24 @@ decl {string mode, command, msg, mirror, err_extn;} {}
 decl {Fl_Text_Buffer *txtBuffer = new Fl_Text_Buffer;} {} 
 
 decl {void errhandler(const string &str);} {} 
+
+Function {displayTabData()} {return_type void
+} {
+  code {FILE *pipe = popen(command.c_str(),"r");
+char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
+if (pipe)
+{
+   txtBuffer->loadfile("");
+   while(fgets(mbuf,PATH_MAX,pipe))
+   {
+      string line(mbuf);
+      txtBuffer->append(line.c_str());
+      Fl::flush();
+   }
+   pclose(pipe);
+   free(mbuf);
+}} {}
+} 
 
 Function {cursor_normal()} {private return_type void
 } {
@@ -157,7 +175,7 @@ err_extn.replace(0,9,""); // Yes, hardcoded magic value. Bad.
 errwindow->show();} {}
 } 
 
-Function {btn_callback(Fl_Widget *, void* userdata)} {private return_type {static void}
+Function {btnCallback(Fl_Widget *, void* userdata)} {open private return_type {static void}
 } {
   code {if (userdata == "tcz")
 {
@@ -173,8 +191,8 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {private return_type {stati
    if (results == 0 )
    {
       system("gunzip -c info.lst.gz > info.lst");
-      brw_select->load("info.lst");
-      brw_select->remove(brw_select->size());
+      brwSelect->load("info.lst");
+      brwSelect->remove(brwSelect->size());
       btn_go->deactivate();
       box_select->label("Select Extension");
       box_select->activate();
@@ -213,8 +231,8 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {private return_type {stati
    if (results == 0 )
    {
       mode = "setdrive";
-      brw_select->load("/tmp/tcesetdev");
-      brw_select->remove(brw_select->size());
+      brwSelect->load("/tmp/tcesetdev");
+      brwSelect->remove(brwSelect->size());
       box_select->label("Select for TCE dir.");
       box_select->activate();
       unlink("/tmp/tcesetdev");
@@ -225,25 +243,35 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {private return_type {stati
 {
   if (search_choices->text() == "Search")
      command = "search.sh";
-  else if (search_choices->text() == "Keyword")
-     command = "keyword.sh";
+  else if (search_choices->text() == "Tags")
+     command = "search.sh -t";
   else
      command = "provides.sh";
   tabs->deactivate();
-  txtBuffer->loadfile(""); 
+  txtBuffer->loadfile("");
+  brwSelect->load(""); 
   cursor_wait();
   command = command + " " + (string)search_field->value();
-  int results = system(command.c_str());
+  FILE *pipe = popen(command.c_str(),"r");
+  char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
+  if (pipe)
+  {
+     while(fgets(mbuf,PATH_MAX,pipe))
+     {
+        string line(mbuf);
+        line = line.substr(0,line.length()-1);
+        brwSelect->add(line.c_str());
+        brwSelect->bottomline(brwSelect->size());
+        Fl::flush();
+     }
+     pclose(pipe);
+     free(mbuf);
+  }
   search_field->value("");
   cursor_normal();
-  if (results == 0 )
-  {
-    brw_select->load("info.lst");
-    brw_select->remove(brw_select->size());
-    btn_go->deactivate();
-    search_choices->activate();
-    search_field->activate();                                              
-  }
+  btn_go->deactivate();
+  search_choices->activate();
+  search_field->activate();                                              
       
 } else if (userdata == "quit")
   {
@@ -258,23 +286,23 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {private return_type {stati
     }  
     command = "quit\\n";
     write(G_out, command.c_str(), command.length());
-    unlink("ab2tce.fifo");
     unlink("info.lst");
     unlink("info.lst.gz");
+    unlink("/tmp/tags.lst");
+    unlink("/tmp/ab2tce.fifo");
     exit(0);
 
   }} {}
 } 
 
-Function {brw_select_callback(Fl_Widget *, void *)} {private return_type {static void}
+Function {brwSelect_callback(Fl_Widget *, void *)} {open private return_type {static void}
 } {
-  code {if (brw_select->value())
+  code {if (brwSelect->value())
 {
-   select_extn = brw_select->text(brw_select->value());
+   select_extn = brwSelect->text(brwSelect->value());
    if ( mode == "tcz" )
    {
       string select_extn_file = select_extn + (string)".info";
-      string info_line;
       command = "tce-fetch.sh " + select_extn_file;
       int results = system(command.c_str());
       if (results == 0)
@@ -312,17 +340,7 @@ Function {brw_select_callback(Fl_Widget *, void *)} {private return_type {static
       if (results == 0)
       {
          download_dir = select_extn + "/tce";
-/*         
-         ofstream fout("/etc/sysconfig/tcedir", ios::out|ios::out);
-         if (! fout.is_open())
-         {
-            cerr << "Can't open /etc/sysconfig/tcedir for output!" << endl;
-            exit(EXIT_FAILURE);
-         }
-         fout << download_dir << endl;
-         fout.close();
-*/               
-         brw_select->clear();
+         brwSelect->clear();
          box_select->label("");
          download_dir += "/optional";
          status_out->color(FL_WHITE);
@@ -333,7 +351,7 @@ Function {brw_select_callback(Fl_Widget *, void *)} {private return_type {static
 }} {}
 } 
 
-Function {local_btn_callback(Fl_Widget*, void* userdata)} {private return_type {static void}
+Function {local_btnCallback(Fl_Widget*, void* userdata)} {private return_type {static void}
 } {
   code {string title = "Install Local Extension";
 string selected;
@@ -368,18 +386,18 @@ write(G_out, command.c_str(), command.length());
 Fl::add_fd(fileno(G_in), HandleInput_CB, (void*)&status_out);} {}
 } 
 
-Function {mirror_btn_callback(Fl_Widget*, void*)} {private return_type {static void}
+Function {mirror_btnCallback(Fl_Widget*, void*)} {private return_type {static void}
 } {
   code {mode = "mirror";
 tabs->deactivate();
 search_choices->deactivate();
 search_field->deactivate();
 system("cat /opt/localmirrors /usr/local/share/mirrors > /tmp/mirrors 2>/dev/null");
-brw_select->load("/tmp/mirrors");
-if ( brw_select->size() == 1)
+brwSelect->load("/tmp/mirrors");
+if ( brwSelect->size() == 1)
   fl_message("Must load mirrors.tcz extension or have /opt/localmirrors in order to use this feature.");
 else {
-   brw_select->remove(brw_select->size());
+   brwSelect->remove(brwSelect->size());
    box_select->label("Select Mirror");
    box_select->activate();
 }} {}
@@ -387,69 +405,38 @@ else {
 
 Function {tabsGroupCB(Fl_Widget*, void*)} {private return_type {static void}
 } {
-  code {if (brw_select->value())
+  code {if (brwSelect->value())
 {
+   cursor_wait();
    int results;
-   select_extn = brw_select->text(brw_select->value());
+   select_extn = brwSelect->text(brwSelect->value());
    
    if (infoTab->visible())
    {
      string select_extn_file = select_extn + (string)".info";
-     command = "tce-fetch.sh " + select_extn_file;
-     results = system(command.c_str());
-     if (results == 0)
-     {
-        txtBuffer->loadfile(select_extn_file.c_str());
-        unlink(select_extn_file.c_str());
-     }
+     command = "tce-fetch.sh -O " + select_extn_file;
+     displayTabData();
    }
    
    if (filesTab->visible())
    {
      string select_extn_file = select_extn + (string)".list";
-     command = "tce-fetch.sh " + select_extn_file;
-     results = system(command.c_str());
-     if (results == 0)
-     {
-        txtBuffer->loadfile(select_extn_file.c_str());
-        unlink(select_extn_file.c_str());
-     }
+     command = "tce-fetch.sh -O " + select_extn_file;
+     displayTabData();
    }
    
    if (dependsTab->visible())
    {
-     cursor_wait();
-     txtBuffer->loadfile("");
      string select_extn_file = select_extn + (string)".tree";
-     command = "tce-fetch.sh " + select_extn_file;
-     results = system(command.c_str());
-     cursor_normal();
-     if (results == 0)
-     {
-        txtBuffer->loadfile(select_extn_file.c_str());
-        unlink(select_extn_file.c_str());
-     }
+     command = "tce-fetch.sh -O " + select_extn_file;
+     displayTabData();
    }
    if (sizeTab->visible())
    {
-     cursor_wait();
-
      command = "tce-size " + select_extn;
-     FILE *pipe = popen(command.c_str(),"r");
-     char *mbuf = (char *) calloc(PATH_MAX,sizeof(char));
-
-     if (pipe) {
-     	txtBuffer->loadfile("");
-	while (fgets(mbuf,PATH_MAX,pipe)) {
-	   string line(mbuf);
-           txtBuffer->append(line.c_str());
-	}
-	pclose(pipe);
-	free(mbuf);
-     }
-
-     cursor_normal();
+     displayTabData();
    }
+   cursor_normal();
 }} {}
 } 
 
@@ -514,34 +501,33 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
     perror("open(/tmp/ab2tce.fifo) for write failed");
     unlink("/tmp/ab2tce.fifo");
     exit(1);
-}} {selected
-  }
+}} {}
   Fl_Window window {
     label Appbrowser
     user_data {"quit"}
-    callback btn_callback open
+    callback btnCallback open selected
     xywh {17 20 685 395} type Double hide resizable
     code0 {window->label(mirror.c_str());}
   } {
     Fl_Button {} {
       label Connect
       user_data {"tcz"}
-      callback btn_callback
+      callback btnCallback
       xywh {0 0 68 20}
     }
     Fl_Button {} {
       label Local
       user_data {"File/Local"}
-      callback local_btn_callback
+      callback local_btnCallback
       xywh {69 0 65 20}
     }
     Fl_Button {} {
       label Mirrors
       user_data {"mirror"}
-      callback mirror_btn_callback
+      callback mirror_btnCallback
       xywh {135 0 65 20}
     }
-    Fl_Choice search_choices {
+    Fl_Choice search_choices {open
       xywh {206 0 93 20} down_box BORDER_BOX deactivate
     } {
       MenuItem {} {
@@ -553,21 +539,21 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
         xywh {0 0 30 20}
       }
       MenuItem {} {
-        label Keyword
+        label Tags
         xywh {0 0 30 20}
       }
     }
     Fl_Input search_field {
       user_data {"search"}
-      callback btn_callback
+      callback btnCallback
       xywh {300 0 385 20} labeltype NO_LABEL when 8 deactivate
     }
     Fl_Box box_select {
       xywh {40 24 120 16} deactivate
     }
-    Fl_Browser brw_select {
-      callback brw_select_callback
-      xywh {0 45 200 325} type Select textfont 4
+    Fl_Browser brwSelect {
+      callback brwSelect_callback
+      xywh {0 45 200 325} type Hold textfont 4
     }
     Fl_Tabs tabs {
       callback tabsGroupCB
@@ -633,7 +619,7 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
     Fl_Button btn_go {
       label Go
       user_data {"go"}
-      callback btn_callback
+      callback btnCallback
       xywh {145 373 30 20} deactivate
     }
     Fl_Output status_out {
@@ -645,7 +631,7 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
     Fl_Button btn_tce {
       label Set
       user_data {"setdrive"}
-      callback btn_callback
+      callback btnCallback
       xywh {645 373 34 20} deactivate
       code0 {if (download_dir.compare(0,8,"/tmp/tce") == 0 ){btn_tce->activate();status_out->color(9);};}
     }

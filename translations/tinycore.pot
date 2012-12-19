@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-02 10:29+0300\n"
+"POT-Creation-Date: 2012-03-29 12:59+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "&Apply Image"
 msgstr ""
 
-#: ../datetool/datetool.cxx:173 ../exittc/exittc.cxx:147
+#: ../datetool/datetool.cxx:173 ../exittc/exittc.cxx:152
 #: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:152 ../swapfile/swapfile.cxx:69
 msgid "&Cancel"
 msgstr ""
@@ -41,7 +41,7 @@ msgstr ""
 msgid "&Make Image"
 msgstr ""
 
-#: ../datetool/datetool.cxx:170 ../exittc/exittc.cxx:144
+#: ../datetool/datetool.cxx:170 ../exittc/exittc.cxx:148
 msgid "&OK"
 msgstr ""
 
@@ -60,22 +60,24 @@ msgstr ""
 #: ../datetool/datetool.cxx:132 ../datetool/datetool.cxx:140
 #: ../datetool/datetool.cxx:148 ../datetool/datetool.cxx:156
 #: ../datetool/datetool.cxx:164 ../mnttool_save/mnttool.cxx:111
-#: ../tc-grub4dos/tc-grub4dos.cxx:349 ../tc-install/tc-install.cxx:450
+#: ../mnttool_save/mnttool_save.cxx:111 ../tc-grub4dos/tc-grub4dos.cxx:349
+#: ../tc-install/tc-install.cxx:669
 msgid "@<"
 msgstr ""
 
-#: ../tc-grub4dos/tc-grub4dos.cxx:355 ../tc-install/tc-install.cxx:456
+#: ../tc-grub4dos/tc-grub4dos.cxx:355
 msgid "@<<"
 msgstr ""
 
 #: ../datetool/datetool.cxx:135 ../datetool/datetool.cxx:143
 #: ../datetool/datetool.cxx:151 ../datetool/datetool.cxx:159
 #: ../datetool/datetool.cxx:167 ../mnttool_save/mnttool.cxx:114
-#: ../tc-grub4dos/tc-grub4dos.cxx:352 ../tc-install/tc-install.cxx:453
+#: ../mnttool_save/mnttool_save.cxx:114 ../tc-grub4dos/tc-grub4dos.cxx:352
+#: ../tc-install/tc-install.cxx:672
 msgid "@>"
 msgstr ""
 
-#: ../tc-grub4dos/tc-grub4dos.cxx:358 ../tc-install/tc-install.cxx:459
+#: ../tc-grub4dos/tc-grub4dos.cxx:358
 msgid "@>>"
 msgstr ""
 
@@ -83,7 +85,7 @@ msgstr ""
 msgid "Action:"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:508
+#: ../appbrowser/appbrowser.cxx:523 ../scmbrowser/scmbrowser.cxx:794
 msgid "Appbrowser"
 msgstr ""
 
@@ -91,11 +93,11 @@ msgstr ""
 msgid "Application launcher"
 msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:163
+#: ../wbarconf/wbarconf.cxx:165
 msgid "Apply"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:703
+#: ../appsaudit/appsaudit.cxx:716
 msgid "AppsAudit"
 msgstr ""
 
@@ -103,35 +105,39 @@ msgstr ""
 msgid "Background Image"
 msgstr ""
 
-#: ../exittc/exittc.cxx:104 ../filetool/filetool.cxx:78
+#: ../exittc/exittc.cxx:106 ../filetool/filetool.cxx:78
 msgid "Backup"
 msgstr ""
 
-#: ../exittc/exittc.cxx:139
+#: ../exittc/exittc.cxx:143
 msgid "Backup Options:"
 msgstr ""
 
-#: ../cpanel/cpanel.cxx:39
+#: ../cpanel/cpanel.cxx:41
 msgid "Backup/Restore"
 msgstr ""
 
-#: ../tc-grub4dos/tc-grub4dos.cxx:322 ../tc-install/tc-install.cxx:423
+#: ../scmbrowser/scmbrowser.cxx:707
+msgid "Boot List"
+msgstr ""
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:322 ../tc-install/tc-install.cxx:576
 msgid "Boot Options"
 msgstr ""
 
-#: ../tc-grub4dos/tc-grub4dos.cxx:324 ../tc-install/tc-install.cxx:425
+#: ../tc-grub4dos/tc-grub4dos.cxx:324 ../tc-install/tc-install.cxx:578
 msgid "Boot Options Reference List"
 msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:121
+#: ../wbarconf/wbarconf.cxx:123
 msgid "Bottom"
 msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:126
+#: ../wbarconf/wbarconf.cxx:128
 msgid "Bottom Left"
 msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:127
+#: ../wbarconf/wbarconf.cxx:129
 msgid "Bottom Right"
 msgstr ""
 
@@ -139,15 +145,15 @@ msgstr ""
 msgid "Broadcast"
 msgstr ""
 
-#: ../flrun/flrun.cxx:155
+#: ../flrun/flrun.cxx:155 ../scmbrowser/scmbrowser.cxx:710
 msgid "Browse"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:650
+#: ../appsaudit/appsaudit.cxx:663
 msgid "Build Reporting Database"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:118
+#: ../appbrowser/appbrowser.cxx:138 ../scmbrowser/scmbrowser.cxx:183
 msgid "Cancel"
 msgstr ""
 
@@ -155,15 +161,15 @@ msgstr ""
 msgid "Center"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:674
+#: ../appsaudit/appsaudit.cxx:687
 msgid "Check Md5sums"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:669
+#: ../appsaudit/appsaudit.cxx:682
 msgid "Check for Updates"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:660
+#: ../appsaudit/appsaudit.cxx:673
 msgid "Clear Marked for Deletion"
 msgstr ""
 
@@ -175,11 +181,11 @@ msgstr ""
 msgid "Color #2"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:510
+#: ../appbrowser/appbrowser.cxx:525
 msgid "Connect"
 msgstr ""
 
-#: ../cpanel/cpanel.cxx:22
+#: ../cpanel/cpanel.cxx:24
 msgid "ControlPanel"
 msgstr ""
 
@@ -187,7 +193,19 @@ msgstr ""
 msgid "Copies floppy to image path entered,"
 msgstr ""
 
-#: ../cpanel/cpanel.cxx:48
+#: ../tc-install/tc-install.cxx:596
+msgid "Core Only (Text Based Interface)"
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:602
+msgid "Core Plus Extensions Catagories to Install"
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:591
+msgid "Core and X/GUI Desktop"
+msgstr ""
+
+#: ../cpanel/cpanel.cxx:50
 msgid "Date/Time"
 msgstr ""
 
@@ -199,11 +217,11 @@ msgstr ""
 msgid "Day:"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:648
+#: ../appsaudit/appsaudit.cxx:661
 msgid "Dependencies"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:560
+#: ../appbrowser/appbrowser.cxx:575 ../scmbrowser/scmbrowser.cxx:853
 msgid "Depends"
 msgstr ""
 
@@ -215,27 +233,31 @@ msgstr ""
 msgid "Diagonal Gradient"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:654
+#: ../appsaudit/appsaudit.cxx:667
 msgid "Display All Not Depended On"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:653
+#: ../appsaudit/appsaudit.cxx:666
 msgid "Display All with No Dependencies"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:659
+#: ../appsaudit/appsaudit.cxx:672
 msgid "Display Marked for Deletion"
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:642
+msgid "Don't install Extensions (Core Only, Text Based Install)"
 msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:228
 msgid "Done"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:453
+#: ../appbrowser/appbrowser.cxx:451
 msgid "Download + Load"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:454
+#: ../appbrowser/appbrowser.cxx:452 ../scmbrowser/scmbrowser.cxx:766
 msgid "Download Only"
 msgstr ""
 
@@ -247,47 +269,51 @@ msgstr ""
 msgid "Embedded"
 msgstr ""
 
-#: ../tc-grub4dos/tc-grub4dos.cxx:328 ../tc-install/tc-install.cxx:429
+#: ../tc-grub4dos/tc-grub4dos.cxx:328 ../tc-install/tc-install.cxx:582
 msgid "Enter Spaces Separated Options From Examples Above"
 msgstr ""
 
-#: ../tc-install/tc-install.cxx:368
+#: ../tc-install/tc-install.cxx:514
 msgid "Existing Partition"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:661
+#: ../appsaudit/appsaudit.cxx:674
 msgid "Exit Dependencies Mode"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:666
+#: ../appsaudit/appsaudit.cxx:679
 msgid "Exit Install Options"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:675
+#: ../appsaudit/appsaudit.cxx:688
 msgid "Exit Md5 Check Mode"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:679
+#: ../appsaudit/appsaudit.cxx:692
 msgid "Exit OnBoot"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:683
+#: ../appsaudit/appsaudit.cxx:696
 msgid "Exit OnDemand"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:671
+#: ../appsaudit/appsaudit.cxx:684
 msgid "Exit Update Mode"
 msgstr ""
 
-#: ../exittc/exittc.cxx:128
+#: ../exittc/exittc.cxx:132
 msgid "Exit to Prompt"
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:635
+msgid "Extension Installation"
 msgstr ""
 
 #: ../flrun/flrun.cxx:147
 msgid "FLRun"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:652
+#: ../appsaudit/appsaudit.cxx:665
 msgid "Fetch Missing Dependencies"
 msgstr ""
 
@@ -295,7 +321,7 @@ msgstr ""
 msgid "FileTool"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:550
+#: ../appbrowser/appbrowser.cxx:565 ../scmbrowser/scmbrowser.cxx:843
 msgid "Files"
 msgstr ""
 
@@ -315,11 +341,11 @@ msgstr ""
 msgid "Formats FAT of selected size."
 msgstr ""
 
-#: ../tc-grub4dos/tc-grub4dos.cxx:290 ../tc-install/tc-install.cxx:391
+#: ../tc-grub4dos/tc-grub4dos.cxx:290 ../tc-install/tc-install.cxx:544
 msgid "Formatting Options"
 msgstr ""
 
-#: ../tc-grub4dos/tc-grub4dos.cxx:265 ../tc-install/tc-install.cxx:342
+#: ../tc-grub4dos/tc-grub4dos.cxx:265 ../tc-install/tc-install.cxx:485
 msgid "Frugal"
 msgstr ""
 
@@ -335,7 +361,7 @@ msgstr ""
 msgid "Gateway"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:584
+#: ../appbrowser/appbrowser.cxx:599 ../scmbrowser/scmbrowser.cxx:881
 msgid "Go"
 msgstr ""
 
@@ -355,12 +381,28 @@ msgstr ""
 msgid "Image Path:"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:540
+#: ../appbrowser/appbrowser.cxx:555 ../scmbrowser/scmbrowser.cxx:834
 msgid "Info"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:663
+#: ../scmbrowser/scmbrowser.cxx:703 ../scmbrowser/scmbrowser.cxx:765
+msgid "Install"
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:636
+msgid "Install Extensions from this TCE/CDE Directory:"
+msgstr ""
+
+#: ../appsaudit/appsaudit.cxx:676
 msgid "Install Options"
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:590
+msgid "Install Type"
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:533
+msgid "Install boot loader"
 msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:301
@@ -371,19 +413,19 @@ msgstr ""
 msgid "Installed"
 msgstr ""
 
+#: ../tc-install/tc-install.cxx:620
+msgid "Installer Application"
+msgstr ""
+
 #: ../network/network.cxx:164
 msgid "Interface"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:420
-msgid "Keyword"
-msgstr ""
-
-#: ../wbarconf/wbarconf.cxx:122
+#: ../wbarconf/wbarconf.cxx:124
 msgid "Left"
 msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:129
+#: ../wbarconf/wbarconf.cxx:131
 msgid "Left Bottom"
 msgstr ""
 
@@ -391,23 +433,23 @@ msgstr ""
 msgid "Left Button"
 msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:128
+#: ../wbarconf/wbarconf.cxx:130
 msgid "Left Top"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:655
+#: ../appsaudit/appsaudit.cxx:668
 msgid "List Dependencies"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:657
+#: ../appsaudit/appsaudit.cxx:670
 msgid "List Missing Dependencies"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:656
+#: ../appsaudit/appsaudit.cxx:669
 msgid "List Required By"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:513
+#: ../appbrowser/appbrowser.cxx:528 ../scmbrowser/scmbrowser.cxx:702
 msgid "Local"
 msgstr ""
 
@@ -415,32 +457,32 @@ msgstr ""
 msgid "Logo"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:109
+#: ../appbrowser/appbrowser.cxx:129 ../scmbrowser/scmbrowser.cxx:174
 msgid "MD5SUM error"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:678 ../appsaudit/appsaudit.cxx:682
-#: ../cpanel/cpanel.cxx:24
+#: ../appsaudit/appsaudit.cxx:691 ../appsaudit/appsaudit.cxx:695
+#: ../cpanel/cpanel.cxx:26
 msgid "Maintenance"
 msgstr ""
 
-#: ../tc-install/tc-install.cxx:382
+#: ../tc-install/tc-install.cxx:528
 msgid "Mark Partition Active (bootable)"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:658
+#: ../appsaudit/appsaudit.cxx:671
 msgid "Mark for Deletion"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:673
+#: ../appsaudit/appsaudit.cxx:686 ../scmbrowser/scmbrowser.cxx:705
 msgid "Md5Check"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:110
+#: ../appbrowser/appbrowser.cxx:130 ../scmbrowser/scmbrowser.cxx:175
 msgid "Md5sum error on"
 msgstr ""
 
-#: ../tc-grub4dos/tc-grub4dos.cxx:250 ../tc-install/tc-install.cxx:327
+#: ../tc-grub4dos/tc-grub4dos.cxx:250
 msgid "Micro Core"
 msgstr ""
 
@@ -448,11 +490,11 @@ msgstr ""
 msgid "Min:"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:516
+#: ../appbrowser/appbrowser.cxx:531
 msgid "Mirrors"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:651
+#: ../appsaudit/appsaudit.cxx:664
 msgid "Missing Dependencies Reporting"
 msgstr ""
 
@@ -460,7 +502,7 @@ msgstr ""
 msgid "Month:"
 msgstr ""
 
-#: ../cpanel/cpanel.cxx:42
+#: ../cpanel/cpanel.cxx:44
 msgid "Mount Tool"
 msgstr ""
 
@@ -472,7 +514,7 @@ msgstr ""
 msgid "Mouse Speed"
 msgstr ""
 
-#: ../cpanel/cpanel.cxx:51
+#: ../cpanel/cpanel.cxx:53
 msgid "Mouse Tool"
 msgstr ""
 
@@ -488,7 +530,7 @@ msgstr ""
 msgid "Navigate to and Select Starter Pack to load."
 msgstr ""
 
-#: ../cpanel/cpanel.cxx:57 ../network/network.cxx:158
+#: ../cpanel/cpanel.cxx:59 ../network/network.cxx:158
 #: ../network/network.cxx:160
 msgid "Network"
 msgstr ""
@@ -497,11 +539,15 @@ msgstr ""
 msgid "Network Mask"
 msgstr ""
 
-#: ../tc-grub4dos/tc-grub4dos.cxx:291 ../tc-install/tc-install.cxx:392
+#: ../tc-grub4dos/tc-grub4dos.cxx:291 ../tc-install/tc-install.cxx:545
 msgid "No formatting, use existing."
 msgstr ""
 
-#: ../exittc/exittc.cxx:103 ../filetool/filetool.cxx:77
+#: ../tc-install/tc-install.cxx:626
+msgid "Non-US keyboard layout support"
+msgstr ""
+
+#: ../exittc/exittc.cxx:105 ../filetool/filetool.cxx:77
 msgid "None"
 msgstr ""
 
@@ -509,11 +555,11 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:451 ../appsaudit/appsaudit.cxx:677
+#: ../appbrowser/appbrowser.cxx:449 ../appsaudit/appsaudit.cxx:690
 msgid "OnBoot"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:452 ../appsaudit/appsaudit.cxx:681
+#: ../appbrowser/appbrowser.cxx:450 ../appsaudit/appsaudit.cxx:694
 msgid "OnDemand"
 msgstr ""
 
@@ -521,11 +567,19 @@ msgstr ""
 msgid "Onboot Items"
 msgstr ""
 
-#: ../tc-grub4dos/tc-grub4dos.cxx:248 ../tc-install/tc-install.cxx:325
+#: ../tc-install/tc-install.cxx:616
+msgid "Other"
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:538
+msgid "Path to core.gz:"
+msgstr ""
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:248
 msgid "Please Select Version to Install"
 msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:158
+#: ../wbarconf/wbarconf.cxx:160
 msgid "Position"
 msgstr ""
 
@@ -533,23 +587,35 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
-#: ../tc-grub4dos/tc-grub4dos.cxx:339 ../tc-install/tc-install.cxx:440
+#: ../tc-grub4dos/tc-grub4dos.cxx:339 ../tc-install/tc-install.cxx:659
 msgid "Proceed"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:727
+#: ../appsaudit/appsaudit.cxx:740 ../scmbrowser/scmbrowser.cxx:827
 msgid "Process Selected Item(s)"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:419
+#: ../appbrowser/appbrowser.cxx:417
 msgid "Provides"
 msgstr ""
 
-#: ../exittc/exittc.cxx:123
+#: ../scmbrowser/scmbrowser.cxx:713
+msgid "Quit"
+msgstr ""
+
+#: ../exittc/exittc.cxx:127
 msgid "Reboot"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:112
+#: ../tc-install/tc-install.cxx:623
+msgid "Remaster Tool"
+msgstr ""
+
+#: ../scmbrowser/scmbrowser.cxx:709
+msgid "Remote"
+msgstr ""
+
+#: ../appbrowser/appbrowser.cxx:132 ../scmbrowser/scmbrowser.cxx:177
 msgid "Remove and try again"
 msgstr ""
 
@@ -557,19 +623,19 @@ msgstr ""
 msgid "Restore"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:711
+#: ../appsaudit/appsaudit.cxx:724
 msgid "Results"
 msgstr ""
 
-#: ../tc-grub4dos/tc-grub4dos.cxx:336 ../tc-install/tc-install.cxx:437
+#: ../tc-grub4dos/tc-grub4dos.cxx:336 ../tc-install/tc-install.cxx:656
 msgid "Review"
 msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:123
+#: ../wbarconf/wbarconf.cxx:125
 msgid "Right"
 msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:131
+#: ../wbarconf/wbarconf.cxx:133
 msgid "Right Bottom"
 msgstr ""
 
@@ -577,11 +643,11 @@ msgstr ""
 msgid "Right Button"
 msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:130
+#: ../wbarconf/wbarconf.cxx:132
 msgid "Right Top"
 msgstr ""
 
-#: ../exittc/exittc.cxx:105 ../filetool/filetool.cxx:79
+#: ../exittc/exittc.cxx:107 ../filetool/filetool.cxx:79
 msgid "Safe"
 msgstr ""
 
@@ -589,15 +655,19 @@ msgstr ""
 msgid "Save Configuration?"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:418
+#: ../scmbrowser/scmbrowser.cxx:701
+msgid "ScmApps"
+msgstr ""
+
+#: ../appbrowser/appbrowser.cxx:416 ../scmbrowser/scmbrowser.cxx:723
 msgid "Search"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:708
+#: ../appsaudit/appsaudit.cxx:721
 msgid "Select"
 msgstr ""
 
-#: ../tc-grub4dos/tc-grub4dos.cxx:33 ../tc-install/tc-install.cxx:24
+#: ../tc-grub4dos/tc-grub4dos.cxx:33 ../tc-install/tc-install.cxx:25
 msgid "Select File for "
 msgstr ""
 
@@ -605,35 +675,43 @@ msgstr ""
 msgid "Select File to be added to "
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:670
+#: ../appsaudit/appsaudit.cxx:683 ../scmbrowser/scmbrowser.cxx:711
 msgid "Select Mirror"
 msgstr ""
 
-#: ../tc-grub4dos/tc-grub4dos.cxx:280 ../tc-install/tc-install.cxx:376
+#: ../flpdf/flpdf.cxx:19
+msgid "Select PDF File to view with mupdf: "
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:450
+msgid "Select TCE/CDE Directory"
+msgstr ""
+
+#: ../tc-grub4dos/tc-grub4dos.cxx:280 ../tc-install/tc-install.cxx:522
 msgid "Select Target Disk"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:665
+#: ../appsaudit/appsaudit.cxx:678
 msgid "Selective Copy Install"
 msgstr ""
 
-#: ../cpanel/cpanel.cxx:45
+#: ../cpanel/cpanel.cxx:47
 msgid "Services"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:593
+#: ../appbrowser/appbrowser.cxx:608 ../scmbrowser/scmbrowser.cxx:892
 msgid "Set"
 msgstr ""
 
-#: ../cpanel/cpanel.cxx:34
+#: ../cpanel/cpanel.cxx:36
 msgid "Setup"
 msgstr ""
 
-#: ../exittc/exittc.cxx:117
+#: ../exittc/exittc.cxx:121
 msgid "Shutdown"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:569
+#: ../appbrowser/appbrowser.cxx:584
 msgid "Size"
 msgstr ""
 
@@ -645,7 +723,7 @@ msgstr ""
 msgid "Solid Color or 2 Color Gradient"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:588
+#: ../appbrowser/appbrowser.cxx:603 ../scmbrowser/scmbrowser.cxx:887
 msgid "Status"
 msgstr ""
 
@@ -653,19 +731,23 @@ msgstr ""
 msgid "Swapfile"
 msgstr ""
 
-#: ../cpanel/cpanel.cxx:54
+#: ../cpanel/cpanel.cxx:56
 msgid "Swapfile Tool"
 msgstr ""
 
-#: ../cpanel/cpanel.cxx:60
+#: ../cpanel/cpanel.cxx:62
 msgid "System Stats"
 msgstr ""
 
-#: ../exittc/exittc.cxx:113
+#: ../exittc/exittc.cxx:117
 msgid "TC Exit Options"
 msgstr ""
 
-#: ../cpanel/cpanel.cxx:63
+#: ../appbrowser/appbrowser.cxx:418 ../scmbrowser/scmbrowser.cxx:724
+msgid "Tags"
+msgstr ""
+
+#: ../cpanel/cpanel.cxx:65
 msgid "Terminal Server"
 msgstr ""
 
@@ -673,7 +755,7 @@ msgstr ""
 msgid "Tile"
 msgstr ""
 
-#: ../tc-grub4dos/tc-grub4dos.cxx:255 ../tc-install/tc-install.cxx:332
+#: ../tc-grub4dos/tc-grub4dos.cxx:255
 msgid "Tiny Core"
 msgstr ""
 
@@ -681,7 +763,7 @@ msgstr ""
 msgid "Tiny Core Grub4dos Installation"
 msgstr ""
 
-#: ../tc-install/tc-install.cxx:320 ../tc-install/tc-install.cxx:322
+#: ../tc-install/tc-install.cxx:476 ../tc-install/tc-install.cxx:478
 msgid "Tiny Core Installation"
 msgstr ""
 
@@ -689,39 +771,43 @@ msgstr ""
 msgid "Tiny Core System Stats"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:664
+#: ../appsaudit/appsaudit.cxx:677
 msgid "Toggle Default Copy Install"
 msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:120
+#: ../wbarconf/wbarconf.cxx:122
 msgid "Top"
 msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:124
+#: ../wbarconf/wbarconf.cxx:126
 msgid "Top Left"
 msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:125
+#: ../wbarconf/wbarconf.cxx:127
 msgid "Top Right"
 msgstr ""
 
-#: ../appbrowser/appbrowser.cxx:115
+#: ../appbrowser/appbrowser.cxx:135 ../scmbrowser/scmbrowser.cxx:180
 msgid "Try to finish download"
 msgstr ""
 
-#: ../tc-install/tc-install.cxx:349
+#: ../tc-install/tc-install.cxx:493
 msgid "USB-HDD"
 msgstr ""
 
-#: ../tc-install/tc-install.cxx:354
+#: ../tc-install/tc-install.cxx:499
 msgid "USB-ZIP"
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:649
+#: ../scmbrowser/scmbrowser.cxx:704
+msgid "Uninstall"
+msgstr ""
+
+#: ../appsaudit/appsaudit.cxx:662
 msgid "Update .dep files."
 msgstr ""
 
-#: ../appsaudit/appsaudit.cxx:668
+#: ../appsaudit/appsaudit.cxx:681 ../scmbrowser/scmbrowser.cxx:706
 msgid "Updates"
 msgstr ""
 
@@ -729,7 +815,19 @@ msgstr ""
 msgid "Use DHCP Broadcast?"
 msgstr ""
 
-#: ../cpanel/cpanel.cxx:29
+#: ../tc-install/tc-install.cxx:486
+msgid "Use for frugal hard drive installations"
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:500
+msgid "Use for pendrives.   Drive will be formatted into two FAT partitions"
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:494
+msgid "Use for pendrives.   Your BIOS must support USB-HDD booting"
+msgstr ""
+
+#: ../cpanel/cpanel.cxx:31
 msgid "Utilities"
 msgstr ""
 
@@ -737,39 +835,51 @@ msgstr ""
 msgid "Vertical Gradient"
 msgstr ""
 
-#: ../cpanel/cpanel.cxx:70 ../wallpaper/wallpaper.cxx:224
+#: ../cpanel/cpanel.cxx:72 ../wallpaper/wallpaper.cxx:224
 msgid "Wallpaper"
 msgstr ""
 
-#: ../cpanel/cpanel.cxx:66
+#: ../cpanel/cpanel.cxx:68
 msgid "Wbar Conf"
 msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:174
+#: ../wbarconf/wbarconf.cxx:176
 msgid "Wbar Icon Size"
 msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:146
+#: ../wbarconf/wbarconf.cxx:148
 msgid "Wbar Icons"
 msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:182
+#: ../wbarconf/wbarconf.cxx:184
 msgid "Wbar Text Labels"
 msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:166
+#: ../wbarconf/wbarconf.cxx:168
 msgid "Wbar Zoom"
 msgstr ""
 
-#: ../tc-install/tc-install.cxx:363
+#: ../tc-install/tc-install.cxx:509
 msgid "Whole Disk"
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:607
+msgid "Wifi Support"
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:603
+msgid "Wireless "
+msgstr ""
+
+#: ../tc-install/tc-install.cxx:613
+msgid "Wireless Firmware"
 msgstr ""
 
 #: ../fdtool/fdtool.cxx:101
 msgid "Writes image path file to floppy."
 msgstr ""
 
-#: ../cpanel/cpanel.cxx:73
+#: ../cpanel/cpanel.cxx:75
 msgid "Xvesa"
 msgstr ""
 
@@ -785,7 +895,7 @@ msgstr ""
 msgid "boot"
 msgstr ""
 
-#: ../mnttool_save/mnttool.cxx:117
+#: ../mnttool_save/mnttool.cxx:117 ../mnttool_save/mnttool_save.cxx:117
 msgid "button"
 msgstr ""
 
@@ -797,7 +907,7 @@ msgstr ""
 msgid "dmesg"
 msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:145 ../wbar_exclude/wbar_exclude.cxx:58
+#: ../wbarconf/wbarconf.cxx:147 ../wbar_exclude/wbar_exclude.cxx:58
 msgid "eXclude Wbar Icons"
 msgstr ""
 
@@ -805,19 +915,19 @@ msgstr ""
 msgid "eXclude Wbar Items"
 msgstr ""
 
-#: ../wbarconf/wbarconf.cxx:152
+#: ../wbarconf/wbarconf.cxx:154
 msgid "eXcluded Items"
 msgstr ""
 
-#: ../tc-grub4dos/tc-grub4dos.cxx:298 ../tc-install/tc-install.cxx:399
+#: ../tc-grub4dos/tc-grub4dos.cxx:298 ../tc-install/tc-install.cxx:552
 msgid "ext2"
 msgstr ""
 
-#: ../tc-grub4dos/tc-grub4dos.cxx:303 ../tc-install/tc-install.cxx:404
+#: ../tc-grub4dos/tc-grub4dos.cxx:303 ../tc-install/tc-install.cxx:557
 msgid "ext3"
 msgstr ""
 
-#: ../tc-grub4dos/tc-grub4dos.cxx:308 ../tc-install/tc-install.cxx:409
+#: ../tc-grub4dos/tc-grub4dos.cxx:308 ../tc-install/tc-install.cxx:562
 msgid "ext4"
 msgstr ""
 
@@ -837,6 +947,10 @@ msgstr ""
 msgid "mounts"
 msgstr ""
 
+#: ../tc-install/tc-install.cxx:610
+msgid "ndiswrapper"
+msgstr ""
+
 #: ../stats/stats.cxx:99
 msgid "net"
 msgstr ""
@@ -853,7 +967,7 @@ msgstr ""
 msgid "tc.swp in k bytes:"
 msgstr ""
 
-#: ../tc-grub4dos/tc-grub4dos.cxx:313 ../tc-install/tc-install.cxx:414
+#: ../tc-grub4dos/tc-grub4dos.cxx:313 ../tc-install/tc-install.cxx:567
 msgid "vfat"
 msgstr ""
 
