@@ -68,7 +68,7 @@ if (userdata == "apply")
    string command;
    if (dhcpYesBtn->value() == 1)
    {
-      command = command + "sudo udhcpc -H " + hostname + " -b -i " + interfaceInput->value() + " &";
+      command = command + "sudo udhcpc -H " + hostname + " -b -i " + interfaceInput->value() + " -p /var/run/udhcpc." + interfaceInput->value() +".pid  &";
       system(command.c_str());
    }
    if (dhcpNoBtn->value() == 1)

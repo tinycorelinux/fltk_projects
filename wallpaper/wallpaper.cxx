@@ -384,7 +384,7 @@ if (results == 0){
 	btnColor->value(1);
 }
 
-results = system("cat $HOME/.setbackground 2>/dev/null | grep '/usr/share/pixmaps/logo.png' >/dev/null");
+results = system("cat $HOME/.setbackground 2>/dev/null | grep '/usr/local/share/pixmaps/logo.png' >/dev/null");
 if (results == 0){
 	logoBtn->value(1);
 	btnColor->value(1);

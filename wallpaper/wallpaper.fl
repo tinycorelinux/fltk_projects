@@ -191,8 +191,8 @@ if (results == 0 )
 }} {}
   Fl_Window window {
     label Wallpaper open
-    xywh {76 202 515 475} type Double
-    code0 {\#include <FL/Fl_Color_Chooser.H>} visible
+    xywh {78 204 515 475} type Double hide
+    code0 {\#include <FL/Fl_Color_Chooser.H>}
   } {
     Fl_Button installBtn {
       label Preview
@@ -352,7 +352,7 @@ if (results == 0){
 	btnColor->value(1);
 }
 
-results = system("cat $HOME/.setbackground 2>/dev/null | grep '/usr/share/pixmaps/logo.png' >/dev/null");
+results = system("cat $HOME/.setbackground 2>/dev/null | grep '/usr/local/share/pixmaps/logo.png' >/dev/null");
 if (results == 0){
 	logoBtn->value(1);
 	btnColor->value(1);

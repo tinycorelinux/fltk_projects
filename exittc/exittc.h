@@ -13,6 +13,7 @@ extern Fl_Output *device_output;
 #include <FL/Fl_Choice.H>
 extern Fl_Choice *choices;
 #include <FL/Fl_Return_Button.H>
+extern Fl_Return_Button *btnOK;
 #include <FL/Fl_Button.H>
 extern Fl_Menu_Item menu_choices[];
 #endif

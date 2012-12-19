@@ -21,6 +21,10 @@ decl {\#include <FL/fl_message.H>} {}
 
 decl {\#include <locale.h>} {} 
 
+decl {\#include <unistd.h>} {} 
+
+decl {\#include <string.h>} {} 
+
 decl {using namespace std;} {} 
 
 decl {string backup_device="", command;} {} 
@@ -116,7 +120,7 @@ Function {} {open
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");} {}
   Fl_Window window {
-    label {TC Exit Options}
+    label {TC Exit Options} open
     xywh {268 17 180 180} type Double box BORDER_BOX align 4 hide
   } {
     Fl_Group {} {
@@ -161,11 +165,12 @@ textdomain("tinycore");} {}
         xywh {0 0 30 20}
       }
     }
-    Fl_Return_Button {} {
+    Fl_Return_Button btnOK {
       label {&OK}
       user_data {"ok"}
       callback btn_callback
       xywh {15 150 70 20}
+      code0 {btnOK->take_focus();}
     }
     Fl_Button {} {
       label {&Cancel}
@@ -206,10 +211,14 @@ if ( loc == string::npos )
 {
   if ( backup_device.size() == 0 )
   {
-    string tce_dir;   
-    ifstream tce_dir_file("/opt/.tce_dir");                                  
-    getline(tce_dir_file,tce_dir);                                        
-    tce_dir_file.close();
+       
+    string tce_dir;
+    char buffer[1024];
+    int length;
+    length = readlink("/etc/sysconfig/tcedir", buffer, sizeof(buffer));
+    buffer[length]='\\0';
+    tce_dir = strdup(buffer);
+    
     if ( tce_dir == "/tmp/tce" )
     {
       backup = false;

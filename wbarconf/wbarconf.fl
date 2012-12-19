@@ -23,6 +23,11 @@ decl {\#include <FL/Fl_File_Chooser.H>} {}
 
 decl {\#include <locale.h>} {} 
 
+decl {\#include <unistd.h>} {} 
+
+decl {\#include <string.h>} {selected
+} 
+
 decl {using namespace std;} {} 
 
 decl {string home, tcedir, command, selected;} {} 
@@ -124,8 +129,7 @@ fout << options << endl;
 fout.close();
 
 command = "wbar.sh";
-system(command.c_str());} {selected
-  }
+system(command.c_str());} {}
 } 
 
 Function {} {open
@@ -239,9 +243,18 @@ int rc = system("cat ~/.wbar 2>/dev/null | grep nofont >/dev/null 2>&1");
 if (rc == 0){ textChoice->value(0);} else {textChoice->value(1);}
 
 home = getenv("HOME");
-ifstream tcedir_file("/opt/.tce_dir");
+
+/*
+ifstream tcedir_file("/etc/sysconfig/tcedir");
 getline(tcedir_file,tcedir);
 tcedir_file.close();
+*/
+char buffer[1024];
+int length;
+length = readlink("/etc/sysconfig/tcedir", buffer, sizeof(buffer));
+buffer[length]='\\0';
+tcedir = strdup(buffer);
+
 wbarXlist = tcedir + "/xwbar.lst";
 
 command = "awk '/t: /{if (NR>4)print $2}' < " + wbarIcons;

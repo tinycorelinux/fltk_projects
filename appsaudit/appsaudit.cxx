@@ -72,13 +72,13 @@ menuDepends->activate();
 if (userdata == "updatedeps")
 {
    cursor_wait();
-   command = "/usr/bin/tce-audit updatedeps " + target_dir +"/";
+   command = "tce-audit updatedeps " + target_dir +"/";
    system(command.c_str());
    cursor_normal();
 } else if (userdata == "builddb")
 {
    cursor_wait();
-   command = "/usr/bin/tce-audit builddb " + target_dir +"/";
+   command = "tce-audit builddb " + target_dir +"/";
    system(command.c_str());
    string listfile = target_dir + "/tce.lst";
    brw_extn->load(listfile.c_str());
@@ -755,9 +755,11 @@ int main(int argc, char **argv) {
 getline(desktop_file,desktop);
 desktop_file.close();
 
-ifstream tcedir_file("/opt/.tce_dir");
-getline(tcedir_file,tcedir);
-tcedir_file.close();
+char buffer[1024];
+int length;
+length = readlink("/etc/sysconfig/tcedir", buffer, sizeof(buffer));
+buffer[length]='\0';
+tcedir = strdup(buffer);
 
 target_dir = tcedir + "/optional";
 window->label(target_dir.c_str());

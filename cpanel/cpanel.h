@@ -8,4 +8,5 @@ void btn_callback(Fl_Widget* w, void* userdata);
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Button.H>
 extern Fl_Button *btnWbarConf;
+extern Fl_Button *btnXvesa;
 #endif

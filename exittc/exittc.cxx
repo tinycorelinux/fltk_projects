@@ -9,7 +9,10 @@
 #include <string>
 #include <fstream>
 #include <FL/fl_message.H>
+#include <FL/forms.H>
 #include <locale.h>
+#include <unistd.h>
+#include <string.h>
 using namespace std;
 static string backup_device="", command; 
 static int action=1; 
@@ -106,6 +109,8 @@ Fl_Menu_Item menu_choices[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
+Fl_Return_Button *btnOK=(Fl_Return_Button *)0;
+
 int main(int argc, char **argv) {
   setlocale(LC_ALL, "");
 bindtextdomain("tinycore","/usr/local/share/locale");
@@ -141,9 +146,10 @@ textdomain("tinycore");
       choices->align(FL_ALIGN_TOP_LEFT);
       choices->menu(menu_choices);
     } // Fl_Choice* choices
-    { Fl_Return_Button* o = new Fl_Return_Button(15, 150, 70, 20, gettext("&OK"));
-      o->callback((Fl_Callback*)btn_callback, (void*)("ok"));
-    } // Fl_Return_Button* o
+    { btnOK = new Fl_Return_Button(15, 150, 70, 20, gettext("&OK"));
+      btnOK->callback((Fl_Callback*)btn_callback, (void*)("ok"));
+      btnOK->take_focus();
+    } // Fl_Return_Button* btnOK
     { Fl_Button* o = new Fl_Button(100, 150, 70, 20, gettext("&Cancel"));
       o->callback((Fl_Callback*)btn_callback, (void*)("cancel"));
     } // Fl_Button* o
@@ -181,10 +187,14 @@ if ( loc == string::npos )
 {
   if ( backup_device.size() == 0 )
   {
-    string tce_dir;   
-    ifstream tce_dir_file("/opt/.tce_dir");                                  
-    getline(tce_dir_file,tce_dir);                                        
-    tce_dir_file.close();
+       
+    string tce_dir;
+    char buffer[1024];
+    int length;
+    length = readlink("/etc/sysconfig/tcedir", buffer, sizeof(buffer));
+    buffer[length]='\0';
+    tce_dir = strdup(buffer);
+    
     if ( tce_dir == "/tmp/tce" )
     {
       backup = false;

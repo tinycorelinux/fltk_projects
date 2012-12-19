@@ -66,7 +66,7 @@ int getMountables() {
   mountList.clear();
 mountState.clear();
 
- system("/usr/bin/mountables.sh");
+ system("mountables.sh");
 
 ifstream fin("/tmp/mountables");
 string line;

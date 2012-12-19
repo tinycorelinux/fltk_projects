@@ -89,7 +89,7 @@ Function {getMountables()} {open return_type int
   code {mountList.clear();
 mountState.clear();
 
- system("/usr/bin/mountables.sh");
+ system("mountables.sh");
 
 ifstream fin("/tmp/mountables");
 string line;

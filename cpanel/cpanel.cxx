@@ -14,6 +14,8 @@ void btn_callback(Fl_Widget* w, void* userdata) {
 
 Fl_Button *btnWbarConf=(Fl_Button *)0;
 
+Fl_Button *btnXvesa=(Fl_Button *)0;
+
 int main(int argc, char **argv) {
   Fl_Double_Window* w;
   setlocale(LC_ALL, "");
@@ -70,13 +72,17 @@ textdomain("tinycore");
     { Fl_Button* o = new Fl_Button(160, 135, 120, 30, gettext("Wallpaper"));
       o->callback((Fl_Callback*)btn_callback, (void*)("wallpaper &"));
     } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(305, 135, 120, 30, gettext("Xvesa"));
-      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -T \"Xvesa Setup\" -e xsetup.sh &"));
-    } // Fl_Button* o
+    { btnXvesa = new Fl_Button(305, 135, 120, 30, gettext("Xvesa"));
+      btnXvesa->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -T \"Xvesa Setup\" -e xsetup.sh &"));
+      btnXvesa->deactivate();
+    } // Fl_Button* btnXvesa
     o->end();
   } // Fl_Double_Window* o
   int results = system("which wbarconf >/dev/null 2>&1");
 if ( results == 0 ) btnWbarConf->activate();
+
+results = system("which Xvesa >/dev/null 2>&1");
+if ( results == 0 ) btnXvesa->activate();
   w->show(argc, argv);
   return Fl::run();
 }

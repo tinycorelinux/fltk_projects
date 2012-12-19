@@ -11,6 +11,8 @@
 #include <FL/fl_message.H>
 #include <FL/Fl_File_Chooser.H>
 #include <locale.h>
+#include <unistd.h>
+#include <string.h>
 using namespace std;
 static string home, tcedir, command, selected; 
 static int chosen,results; 
@@ -206,9 +208,18 @@ int rc = system("cat ~/.wbar 2>/dev/null | grep nofont >/dev/null 2>&1");
 if (rc == 0){ textChoice->value(0);} else {textChoice->value(1);}
 
 home = getenv("HOME");
-ifstream tcedir_file("/opt/.tce_dir");
+
+/*
+ifstream tcedir_file("/etc/sysconfig/tcedir");
 getline(tcedir_file,tcedir);
 tcedir_file.close();
+*/
+char buffer[1024];
+int length;
+length = readlink("/etc/sysconfig/tcedir", buffer, sizeof(buffer));
+buffer[length]='\0';
+tcedir = strdup(buffer);
+
 wbarXlist = tcedir + "/xwbar.lst";
 
 command = "awk '/t: /{if (NR>4)print $2}' < " + wbarIcons;

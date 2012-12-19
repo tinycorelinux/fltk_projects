@@ -38,7 +38,7 @@ if (userdata == "boot")
 if (userdata == "installed")
   system("ls -1 /usr/local/tce.installed | sort -f >/tmp/stats.txt");
 if (userdata=="big")
-  system("/usr/bin/bigHomeFiles.sh > /tmp/stats.txt");
+  system("bigHomeFiles.sh > /tmp/stats.txt");
 txtBuffer->loadfile("/tmp/stats.txt");
 }
 
@@ -181,7 +181,7 @@ textdomain("tinycore");
     } // Fl_Tabs* tabs
     o->end();
   } // Fl_Double_Window* o
-  system("/usr/bin/bigHomeFiles.sh > /tmp/stats.txt");
+  system("bigHomeFiles.sh > /tmp/stats.txt");
 txtBuffer->loadfile("/tmp/stats.txt");
   w->show(argc, argv);
   return Fl::run();

@@ -13,6 +13,8 @@
 #include <fcntl.h>
 #include <signal.h>
 #include <locale.h>
+#include <unistd.h>
+#include <string.h>
 using namespace std;
 static FILE *G_in = NULL; // how we read the child
 static int   G_out = 0; // how we write to the child
@@ -137,7 +139,7 @@ static void btn_callback(Fl_Widget *, void* userdata) {
    repository = (const char*) userdata;
    cursor_wait();
    unlink("info.lst");
-   command = "/usr/bin/tce-fetch.sh info.lst.gz";
+   command = "tce-fetch.sh info.lst.gz";
    int results = system(command.c_str());
    cursor_normal();
    if (results == 0 )
@@ -194,11 +196,11 @@ static void btn_callback(Fl_Widget *, void* userdata) {
 } else if (userdata == "search")
 {
   if (search_choices->text() == "Search")
-     command = "/usr/bin/search.sh";
+     command = "search.sh";
   else if (search_choices->text() == "Keyword")
-     command = "/usr/bin/keyword.sh";
+     command = "keyword.sh";
   else
-     command = "/usr/bin/provides.sh";
+     command = "provides.sh";
   tabs->deactivate();
   txtBuffer->loadfile(""); 
   cursor_wait();
@@ -244,7 +246,7 @@ static void brw_select_callback(Fl_Widget *, void *) {
    {
       string select_extn_file = select_extn + (string)".info";
       string info_line;
-      command = "/usr/bin/tce-fetch.sh " + select_extn_file;
+      command = "tce-fetch.sh " + select_extn_file;
       int results = system(command.c_str());
       if (results == 0)
       {
@@ -276,22 +278,25 @@ static void brw_select_callback(Fl_Widget *, void *) {
    }
    if ( mode == "setdrive" )
    {
-      command = "/usr/bin/tce-setdrive -s " + select_extn;
+      command = "tce-setdrive -s " + select_extn;
       int results = system(command.c_str());
       if (results == 0)
       {
          download_dir = select_extn + "/tce";
-         ofstream fout("/opt/.tce_dir", ios::out|ios::out);
+/*         
+         ofstream fout("/etc/sysconfig/tcedir", ios::out|ios::out);
          if (! fout.is_open())
          {
-            cerr << "Can't open /opt/.tce_dir for output!" << endl;
+            cerr << "Can't open /etc/sysconfig/tcedir for output!" << endl;
             exit(EXIT_FAILURE);
          }
          fout << download_dir << endl;
-         fout.close();      
+         fout.close();
+*/               
          brw_select->clear();
          box_select->label("");
          download_dir += "/optional";
+         status_out->color(FL_WHITE);
          status_out->value((download_dir).c_str());
          btn_tce->deactivate();         
       }
@@ -356,7 +361,7 @@ static void tabsGroupCB(Fl_Widget*, void*) {
    if (infoTab->visible())
    {
      string select_extn_file = select_extn + (string)".info";
-     command = "/usr/bin/tce-fetch.sh " + select_extn_file;
+     command = "tce-fetch.sh " + select_extn_file;
      results = system(command.c_str());
      if (results == 0)
      {
@@ -368,7 +373,7 @@ static void tabsGroupCB(Fl_Widget*, void*) {
    if (filesTab->visible())
    {
      string select_extn_file = select_extn + (string)".list";
-     command = "/usr/bin/tce-fetch.sh " + select_extn_file;
+     command = "tce-fetch.sh " + select_extn_file;
      results = system(command.c_str());
      if (results == 0)
      {
@@ -382,7 +387,7 @@ static void tabsGroupCB(Fl_Widget*, void*) {
      cursor_wait();
      txtBuffer->loadfile("");
      string select_extn_file = select_extn + (string)".tree";
-     command = "/usr/bin/tce-fetch.sh " + select_extn_file;
+     command = "tce-fetch.sh " + select_extn_file;
      results = system(command.c_str());
      cursor_normal();
      if (results == 0)
@@ -395,7 +400,7 @@ static void tabsGroupCB(Fl_Widget*, void*) {
    {
      cursor_wait();
 
-     command = "/usr/bin/tce-size " + select_extn;
+     command = "tce-size " + select_extn;
      FILE *pipe = popen(command.c_str(),"r");
      char *mbuf = (char *) calloc(PATH_MAX,sizeof(char));
 
@@ -474,9 +479,16 @@ ifstream mirror_fin("/opt/tcemirror");
 getline(mirror_fin,mirror);
 mirror_fin.close();
 
-ifstream dd_fin("/opt/.tce_dir");
+char buffer[1024];
+int length;
+length = readlink("/etc/sysconfig/tcedir", buffer, sizeof(buffer));
+buffer[length] = '\0';
+download_dir = strdup(buffer);
+/*
+ifstream dd_fin("/etc/sysconfig/tcedir");
 getline(dd_fin,download_dir);
 dd_fin.close();
+*/
 
 download_dir += "/optional";
 last_dir = download_dir;   

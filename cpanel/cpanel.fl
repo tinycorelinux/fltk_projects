@@ -26,8 +26,8 @@ Function {} {open
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");} {}
   Fl_Window {} {
-    label ControlPanel open selected
-    xywh {38 333 445 180} type Double visible
+    label ControlPanel open
+    xywh {40 335 445 180} type Double hide
   } {
     Fl_Box {} {
       label Maintenance
@@ -98,7 +98,7 @@ textdomain("tinycore");} {}
     Fl_Button btnWbarConf {
       label {Wbar Conf}
       user_data {"wbarconf &"}
-      callback btn_callback
+      callback btn_callback selected
       xywh {15 135 120 30} deactivate
     }
     Fl_Button {} {
@@ -107,13 +107,16 @@ textdomain("tinycore");} {}
       callback btn_callback
       xywh {160 135 120 30}
     }
-    Fl_Button {} {
+    Fl_Button btnXvesa {
       label Xvesa
       user_data {"aterm +tr +sb -T \\"Xvesa Setup\\" -e xsetup.sh &"}
       callback btn_callback
-      xywh {305 135 120 30}
+      xywh {305 135 120 30} deactivate
     }
   }
   code {int results = system("which wbarconf >/dev/null 2>&1");
-if ( results == 0 ) btnWbarConf->activate();} {}
+if ( results == 0 ) btnWbarConf->activate();
+
+results = system("which Xvesa >/dev/null 2>&1");
+if ( results == 0 ) btnXvesa->activate();} {}
 } 
