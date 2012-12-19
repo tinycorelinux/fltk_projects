@@ -3,6 +3,7 @@
 #ifndef mnttool_h
 #define mnttool_h
 #include <FL/Fl.H>
+void getPos();
 void refresh();
 int getMountables();
 void btnCallback(Fl_Widget*, void* userdata);

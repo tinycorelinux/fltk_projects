@@ -5,12 +5,13 @@ i18n_include <libintl.h>
 i18n_function gettext 
 header_name {.h} 
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2008-2011} {selected
-} 
+decl {// (c) Robert Shingledecker 2008-2011} {} 
 
 decl {\#include <cstdlib>} {} 
 
 decl {\#include <iostream>} {} 
+
+decl {\#include <sstream>} {} 
 
 decl {\#include <fstream>} {} 
 
@@ -22,9 +23,11 @@ decl {\#include <FL/Fl_Button.H>} {}
 
 decl {using namespace std;} {} 
 
-decl {int size, selected;} {} 
+decl {int size, selected, xPos, yPos;} {} 
 
-decl {string filemgr;} {} 
+decl {string filemgr, winPos;} {} 
+
+decl {istringstream ins;} {} 
 
 decl {vector<string> mountList;} {global
 } 
@@ -36,6 +39,13 @@ decl {vector<Fl_Button*> btn;} {}
 decl {vector<string> mountLabels;} {global
 } 
 
+Function {getPos()} {open return_type {static void}
+} {
+  code {xPos = w->x();
+yPos = w->y();} {selected
+  }
+} 
+
 Function {refresh()} {open
 } {
   code {getMountables();
@@ -43,11 +53,12 @@ if ( size == 0 )
   exit(1);
 
 pack->clear();
+
 for (int i=0; i < size; i++)
 {  
    Fl_Button* btn[i];
    
-   btn[i] = new Fl_Button(0,0,80,30);
+   btn[i] = new Fl_Button(0,0,80,25);
    btn[i]->label(mountList[i].c_str());
    btn[i]->tooltip(mountLabels[i].c_str());
    btn[i]->callback((Fl_Callback*)btnCallback,(void*)i);
@@ -62,14 +73,15 @@ for (int i=0; i < size; i++)
 }
 
 Fl_Button* btnRefresh;
-btnRefresh = new Fl_Button(0,0,80,30);
+btnRefresh = new Fl_Button(0,0,80,25);
 btnRefresh->label("Refresh");
 btnRefresh->callback((Fl_Callback*)btnRefreshCallback);
 pack->add(btnRefresh);
 
 selected = 0;
 pack->redraw();
-w->resize(0,0,85,(30*(size+1)));
+w->resize(0,0,80,(25*(size+1)));
+w->position(xPos,yPos);
 w->redraw();} {}
 } 
 
@@ -102,7 +114,8 @@ size = mountList.size();} {}
 
 Function {btnCallback(Fl_Widget*, void* userdata)} {open return_type {static void}
 } {
-  code {int results;
+  code {getPos();
+int results;
 selected = (long)userdata;
 if (mountState.at(selected) == 0)   // mounted
 {
@@ -131,7 +144,8 @@ else
 
 Function {btnRefreshCallback(Fl_Widget*, void* userdata)} {open return_type {static void}
 } {
-  code {refresh();} {}
+  code {getPos();
+refresh();} {}
 } 
 
 Function {} {open
@@ -149,5 +163,14 @@ textdomain("tinycore");} {}
   code {if (getenv("FILEMGR"))
    filemgr = getenv("FILEMGR");
 
+xPos=80;
+yPos=60;   
+
+if (getenv("MNTTOOL")) { 
+   winPos = getenv("MNTTOOL");
+   ins.str(winPos);
+   ins >> xPos >> yPos;
+}   
+   
 refresh();} {}
 } 

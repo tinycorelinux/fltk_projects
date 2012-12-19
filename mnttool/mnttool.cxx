@@ -5,17 +5,24 @@
 // (c) Robert Shingledecker 2008-2011
 #include <cstdlib>
 #include <iostream>
+#include <sstream>
 #include <fstream>
 #include <vector>
 #include <locale.h>
 #include <FL/Fl_Button.H>
 using namespace std;
-static int size, selected; 
-static string filemgr; 
+static int size, selected, xPos, yPos; 
+static string filemgr, winPos; 
+static istringstream ins; 
 vector<string> mountList; 
 static vector<int> mountState; 
 static vector<Fl_Button*> btn; 
 vector<string> mountLabels; 
+
+void getPos() {
+  xPos = w->x();
+yPos = w->y();
+}
 
 void refresh() {
   getMountables();
@@ -23,11 +30,12 @@ if ( size == 0 )
   exit(1);
 
 pack->clear();
+
 for (int i=0; i < size; i++)
 {  
    Fl_Button* btn[i];
    
-   btn[i] = new Fl_Button(0,0,80,30);
+   btn[i] = new Fl_Button(0,0,80,25);
    btn[i]->label(mountList[i].c_str());
    btn[i]->tooltip(mountLabels[i].c_str());
    btn[i]->callback((Fl_Callback*)btnCallback,(void*)i);
@@ -42,14 +50,15 @@ for (int i=0; i < size; i++)
 }
 
 Fl_Button* btnRefresh;
-btnRefresh = new Fl_Button(0,0,80,30);
+btnRefresh = new Fl_Button(0,0,80,25);
 btnRefresh->label("Refresh");
 btnRefresh->callback((Fl_Callback*)btnRefreshCallback);
 pack->add(btnRefresh);
 
 selected = 0;
 pack->redraw();
-w->resize(0,0,85,(30*(size+1)));
+w->resize(0,0,80,(25*(size+1)));
+w->position(xPos,yPos);
 w->redraw();
 }
 
@@ -80,7 +89,8 @@ size = mountList.size();
 }
 
 void btnCallback(Fl_Widget*, void* userdata) {
-  int results;
+  getPos();
+int results;
 selected = (long)userdata;
 if (mountState.at(selected) == 0)   // mounted
 {
@@ -108,7 +118,8 @@ else
 }
 
 void btnRefreshCallback(Fl_Widget*, void* userdata) {
-  refresh();
+  getPos();
+refresh();
 }
 
 Fl_Double_Window *w=(Fl_Double_Window *)0;
@@ -128,6 +139,15 @@ textdomain("tinycore");
   if (getenv("FILEMGR"))
    filemgr = getenv("FILEMGR");
 
+xPos=80;
+yPos=60;   
+
+if (getenv("MNTTOOL")) { 
+   winPos = getenv("MNTTOOL");
+   ins.str(winPos);
+   ins >> xPos >> yPos;
+}   
+   
 refresh();
   w->show(argc, argv);
   return Fl::run();
