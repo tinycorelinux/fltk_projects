@@ -2,7 +2,7 @@
 
 #include <libintl.h>
 #include "mnttool.h"
-// (c) Robert Shingledecker 2008-2010
+// (c) Robert Shingledecker 2008-2011
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
@@ -16,6 +16,42 @@ vector<string> mountList;
 static vector<int> mountState; 
 static vector<Fl_Button*> btn; 
 vector<string> mountLabels; 
+
+void refresh() {
+  getMountables();
+if ( size == 0 ) 
+  exit(1);
+
+pack->clear();
+for (int i=0; i < size; i++)
+{  
+   Fl_Button* btn[i];
+   
+   btn[i] = new Fl_Button(0,0,80,30);
+   btn[i]->label(mountList[i].c_str());
+   btn[i]->tooltip(mountLabels[i].c_str());
+   btn[i]->callback((Fl_Callback*)btnCallback,(void*)i);
+
+   if ( mountState[i] == 0)
+      btn[i]->color((Fl_Color)2);
+   else
+      btn[i]->color((Fl_Color)1);
+      
+   pack->add(btn[i]);
+      
+}
+
+Fl_Button* btnRefresh;
+btnRefresh = new Fl_Button(0,0,80,30);
+btnRefresh->label("Refresh");
+btnRefresh->callback((Fl_Callback*)btnRefreshCallback);
+pack->add(btnRefresh);
+
+selected = 0;
+pack->redraw();
+w->resize(0,0,85,(30*(size+1)));
+w->redraw();
+}
 
 int getMountables() {
   mountList.clear();
@@ -71,6 +107,10 @@ else
 }
 }
 
+void btnRefreshCallback(Fl_Widget*, void* userdata) {
+  refresh();
+}
+
 Fl_Double_Window *w=(Fl_Double_Window *)0;
 
 Fl_Pack *pack=(Fl_Pack *)0;
@@ -88,32 +128,7 @@ textdomain("tinycore");
   if (getenv("FILEMGR"))
    filemgr = getenv("FILEMGR");
 
-getMountables();
-if ( size == 0 ) 
-  exit(1);
-
-for (int i=0; i < size; i++)
-{  
-   Fl_Button* btn[i];
-   
-   btn[i] = new Fl_Button(0,0,80,30);
-   btn[i]->label(mountList[i].c_str());
-   btn[i]->tooltip(mountLabels[i].c_str());
-   btn[i]->callback((Fl_Callback*)btnCallback,(void*)i);
-
-   if ( mountState[i] == 0)
-      btn[i]->color((Fl_Color)2);
-   else
-      btn[i]->color((Fl_Color)1);
-      
-   pack->add(btn[i]);
-      
-}
-
-selected = 0;
-pack->redraw();
-w->resize(0,0,85,(30*size));
-w->redraw();
+refresh();
   w->show(argc, argv);
   return Fl::run();
 }

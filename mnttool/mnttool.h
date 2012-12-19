@@ -3,8 +3,10 @@
 #ifndef mnttool_h
 #define mnttool_h
 #include <FL/Fl.H>
+void refresh();
 int getMountables();
 void btnCallback(Fl_Widget*, void* userdata);
+void btnRefreshCallback(Fl_Widget*, void* userdata);
 #include <FL/Fl_Double_Window.H>
 extern Fl_Double_Window *w;
 #include <FL/Fl_Pack.H>

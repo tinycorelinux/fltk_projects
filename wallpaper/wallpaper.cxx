@@ -11,6 +11,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <locale.h>
+#include <FL/fl_message.h>
 using namespace std;
 static int locales_set=0; 
 static string target, logo; 
@@ -30,15 +31,6 @@ locales_set=1;
 return gettext(msgid);
 }
 
-void imageBrowserCallback(Fl_Widget*, void*) {
-  if (imageBrowser->value()) { 
-  installBtn->activate(); 
-  doneBtn->activate();
-  logoBtn->value(0);
-  logoBtn->deactivate();
-}
-}
-
 void btnCallback(Fl_Widget*, void* userdata) {
   string backgroundType;
 string command;
@@ -48,7 +40,7 @@ if (logoBtn->value() == 1 )
 else
     logo = "n";
     
-if (userdata == "image_set" || userdata == "image_done")
+if (btnBackground->value() == 1)
 {
    if (imageBrowser->value()){
       string selectedImage = imageBrowser->text(imageBrowser->value());
@@ -64,81 +56,103 @@ if (userdata == "image_set" || userdata == "image_done")
                                                                             
      command = "setbackground " + logo + " " + backgroundType + " /opt/backgrounds/" + selectedImage;
      system(command.c_str());                                                                                                                                         
-     if (userdata == "image_done") { exit(0); }
+     if (userdata == "done") { exit(0); }
+   }else{
+   	fl_message("You must select a filename first");
    }
 }   
 
-if (userdata == "color_show"){
-   colorChooserWindow->show();
-   logoBtn->activate();
-   logoBtn->value(1);
-   installBtn->deactivate();
-   doneBtn->deactivate();
-}
    
-if (userdata == "color_set" || userdata == "color_done")
+if (btnColor->value() == 1)
 {
-   uchar ru,gu,bu;
-   ru = 255*colorChooser->r()+.5;
-   gu = 255*colorChooser->g()+.5;
-   bu = 255*colorChooser->b()+.5;
-   char buffer[10];
-   int n = sprintf(buffer,"%02X%02X%02X\n",ru,gu,bu);
-   string selectedColor = buffer;
-   backgroundType = "solid";                                                  
-   command = "setbackground " + logo + " " + backgroundType + " \'#" + selectedColor.substr(0,6) + "\'";
-   system(command.c_str());                                                          
-   if (userdata == "color_done") { exit(0); }
-}
-              
-if (userdata == "gradient_show")
-{
-   GradientWindow->show();
-   logoBtn->activate();
-   logoBtn->value(1);
-   installBtn->deactivate();
-   doneBtn->deactivate();
-}              
-                  
-if (userdata == "gradient_set" || userdata == "gradient_done")
-{
-   uchar ru_g1,gu_g1,bu_g1;
-   uchar ru_g2,gu_g2,bu_g2;
-   char buffer[10];
-   ru_g1 = 255* colorChooserGradient2->r();
-   gu_g1 = 255* colorChooserGradient2->g();
-   bu_g1 = 255* colorChooserGradient2->b();
-   ru_g2 = 255* colorChooserGradient1->r();
-   gu_g2 = 255* colorChooserGradient1->g();
-   bu_g2 = 255* colorChooserGradient1->b();
-   sprintf(buffer,"%02X%02X%02X\n",ru_g1,gu_g1,bu_g1);
-   string gradientColor1 = buffer;
-   sprintf(buffer,"%02X%02X%02X\n",ru_g2,gu_g2,bu_g2);
-   string gradientColor2 = buffer;
+   if (btnSolid->value() == 1){
+	   uchar ru,gu,bu;
+	   ru = 255*colorChooserGradient1->r()+.5;
+	   gu = 255*colorChooserGradient1->g()+.5;
+	   bu = 255*colorChooserGradient1->b()+.5;
+	   char buffer[10];
+	   int n = sprintf(buffer,"%02X%02X%02X\n",ru,gu,bu);
+	   string selectedColor = buffer;
+	   backgroundType = "solid";                                                  
+	   command = "setbackground " + logo + " " + backgroundType + " \'#" + selectedColor.substr(0,6) + "\'";
+	   system(command.c_str());                                                          
+	   if (userdata == "done") { exit(0); }
+    }else{
+	   uchar ru_g1,gu_g1,bu_g1;
+	   uchar ru_g2,gu_g2,bu_g2;
+	   char buffer[10];
+	   ru_g1 = 255* colorChooserGradient2->r();
+	   gu_g1 = 255* colorChooserGradient2->g();
+	   bu_g1 = 255* colorChooserGradient2->b();
+	   ru_g2 = 255* colorChooserGradient1->r();
+	   gu_g2 = 255* colorChooserGradient1->g();
+	   bu_g2 = 255* colorChooserGradient1->b();
+	   sprintf(buffer,"%02X%02X%02X\n",ru_g1,gu_g1,bu_g1);
+	   string gradientColor1 = buffer;
+	   sprintf(buffer,"%02X%02X%02X\n",ru_g2,gu_g2,bu_g2);
+	   string gradientColor2 = buffer;
    
-   string gradientAngle;
-   if ( btnVertical->value() == 1 )
-      gradientAngle = "0"; 
-   else if ( btnHorizontal->value() == 1 ) 
-      gradientAngle = "90";
-   else if ( btnDiagonal->value() == 1 ) 
-      gradientAngle = "135";
-   else
-      gradientAngle = "0";    
+	   string gradientAngle;
+	   if ( btnVertical->value() == 1 )
+	      gradientAngle = "0"; 
+	   else if ( btnHorizontal->value() == 1 ) 
+	      gradientAngle = "90";
+	   else if ( btnDiagonal->value() == 1 ) 
+	      gradientAngle = "135";
+	   else
+	      gradientAngle = "0";    
+	   
+	   backgroundType = "gradient";
+	   command = "setbackground " + logo + " " + backgroundType + " " + gradientAngle +" \'#" + gradientColor2.substr(0,6) + "\'" + " \'#" + gradientColor1.substr(0,6) + "\'";
+	   system(command.c_str()); 
    
-   backgroundType = "gradient";
-   if (gradientAngle == "0"){
-   	command = "setbackground " + logo + " " + backgroundType + " " + gradientAngle +" \'#" + gradientColor2.substr(0,6) + "\'" + " \'#" + gradientColor1.substr(0,6) + "\'";
-   }else{
-	command = "setbackground " + logo + " " + backgroundType + " " + gradientAngle +" \'#" + gradientColor1.substr(0,6) + "\'" + " \'#" + gradientColor2.substr(0,6) + "\'";  
-   }
-   system(command.c_str()); 
-   
-   if (userdata == "gradient_done") { exit(0); }
+	   if (userdata == "done") { exit(0); }
+	}
 }
 }
 
-Fl_Double_Window *GradientWindow=(Fl_Double_Window *)0;
+void radioCallback() {
+  if (btnSolid->value() == 1)
+{
+	boxColor2->hide();
+	colorChooserGradient2->deactivate();
+}else{
+	boxColor2->show();
+	colorChooserGradient2->activate();
+}
+}
+
+void modeCallback() {
+  if (btnBackground->value() == 1){
+	imageBrowser->activate();
+	colorChooserGradient1->deactivate();
+	colorChooserGradient2->deactivate();
+	btnSolid->deactivate();
+	btnVertical->deactivate();
+	btnHorizontal->deactivate();
+	btnDiagonal->deactivate();
+	logoBtn->deactivate();
+
+}
+
+if (btnColor->value()==1){
+	imageBrowser->deactivate();
+	colorChooserGradient1->activate();
+	colorChooserGradient2->activate();
+	btnSolid->activate();
+	btnVertical->activate();
+	btnHorizontal->activate();
+	btnDiagonal->activate();
+	logoBtn->activate();
+}
+radioCallback();
+}
+
+Fl_Double_Window *window=(Fl_Double_Window *)0;
+
+Fl_Button *installBtn=(Fl_Button *)0;
+
+Fl_Button *doneBtn=(Fl_Button *)0;
 
 Fl_Color_Chooser *colorChooserGradient1=(Fl_Color_Chooser *)0;
 
@@ -160,6 +174,8 @@ Fl::flush();
 Fl::redraw();
 }
 
+Fl_Round_Button *btnSolid=(Fl_Round_Button *)0;
+
 Fl_Round_Button *btnVertical=(Fl_Round_Button *)0;
 
 Fl_Round_Button *btnHorizontal=(Fl_Round_Button *)0;
@@ -170,29 +186,7 @@ Fl_Box *boxColor1=(Fl_Box *)0;
 
 Fl_Box *boxColor2=(Fl_Box *)0;
 
-static void cb_Cancel(Fl_Button*, void*) {
-  GradientWindow->hide();
-}
-
-Fl_Double_Window *colorChooserWindow=(Fl_Double_Window *)0;
-
-Fl_Color_Chooser *colorChooser=(Fl_Color_Chooser *)0;
-
-static void cb_colorChooser(Fl_Color_Chooser*, void*) {
-  Fl_Color solidColor = fl_rgb_color(colorChooser->r() * 255,colorChooser->g() * 255,colorChooser->b() * 255);
-boxColor->color(solidColor);
-Fl::wait(0);
-Fl::flush();
-Fl::redraw();
-}
-
-static void cb_Cancel1(Fl_Button*, void*) {
-  colorChooserWindow->hide();
-}
-
-Fl_Box *boxColor=(Fl_Box *)0;
-
-Fl_Double_Window *Wallpaper=(Fl_Double_Window *)0;
+Fl_Check_Button *logoBtn=(Fl_Check_Button *)0;
 
 Fl_File_Browser *imageBrowser=(Fl_File_Browser *)0;
 
@@ -204,15 +198,9 @@ Fl_Round_Button *btnCenter=(Fl_Round_Button *)0;
 
 Fl_Round_Button *btnFill=(Fl_Round_Button *)0;
 
-Fl_Button *colorBtn=(Fl_Button *)0;
+Fl_Round_Button *btnBackground=(Fl_Round_Button *)0;
 
-Fl_Button *gradientBtn=(Fl_Button *)0;
-
-Fl_Check_Button *logoBtn=(Fl_Check_Button *)0;
-
-Fl_Button *installBtn=(Fl_Button *)0;
-
-Fl_Button *doneBtn=(Fl_Button *)0;
+Fl_Round_Button *btnColor=(Fl_Round_Button *)0;
 
 int main(int argc, char **argv) {
   int results = system("getRGB");
@@ -233,150 +221,187 @@ if (results == 0 )
   g2 = 0;
   b2 = 0;
 }
-  { GradientWindow = new Fl_Double_Window(505, 205, mygettext("Gradient"));
-    { colorChooserGradient1 = new Fl_Color_Chooser(11, 25, 200, 95, mygettext("Gradient Color #1"));
-      colorChooserGradient1->box(FL_DOWN_BOX);
-      colorChooserGradient1->color((Fl_Color)FL_BACKGROUND_COLOR);
-      colorChooserGradient1->selection_color((Fl_Color)FL_BACKGROUND_COLOR);
-      colorChooserGradient1->labeltype(FL_NORMAL_LABEL);
-      colorChooserGradient1->labelfont(0);
-      colorChooserGradient1->labelsize(14);
-      colorChooserGradient1->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-      colorChooserGradient1->callback((Fl_Callback*)cb_colorChooserGradient1);
-      colorChooserGradient1->align(FL_ALIGN_TOP);
-      colorChooserGradient1->when(FL_WHEN_CHANGED);
-      colorChooserGradient1->rgb(r1,g1,b1);
-    } // Fl_Color_Chooser* colorChooserGradient1
-    { colorChooserGradient2 = new Fl_Color_Chooser(293, 25, 200, 95, mygettext("Gradient Color #2"));
-      colorChooserGradient2->box(FL_DOWN_BOX);
-      colorChooserGradient2->color((Fl_Color)FL_BACKGROUND_COLOR);
-      colorChooserGradient2->selection_color((Fl_Color)FL_BACKGROUND_COLOR);
-      colorChooserGradient2->labeltype(FL_NORMAL_LABEL);
-      colorChooserGradient2->labelfont(0);
-      colorChooserGradient2->labelsize(14);
-      colorChooserGradient2->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-      colorChooserGradient2->callback((Fl_Callback*)cb_colorChooserGradient2);
-      colorChooserGradient2->align(FL_ALIGN_TOP);
-      colorChooserGradient2->when(FL_WHEN_CHANGED);
-      colorChooserGradient2->rgb(r2,g2,b2);
-    } // Fl_Color_Chooser* colorChooserGradient2
-    { btnVertical = new Fl_Round_Button(15, 130, 150, 25, mygettext("Vertical Gradient"));
-      btnVertical->type(102);
-      btnVertical->down_box(FL_ROUND_DOWN_BOX);
-      btnVertical->value(1);
-    } // Fl_Round_Button* btnVertical
-    { btnHorizontal = new Fl_Round_Button(160, 130, 150, 25, mygettext("Horizontal Gradient"));
-      btnHorizontal->type(102);
-      btnHorizontal->down_box(FL_ROUND_DOWN_BOX);
-    } // Fl_Round_Button* btnHorizontal
-    { btnDiagonal = new Fl_Round_Button(320, 130, 150, 25, mygettext("Diagonal Gradient"));
-      btnDiagonal->type(102);
-      btnDiagonal->down_box(FL_ROUND_DOWN_BOX);
-    } // Fl_Round_Button* btnDiagonal
-    { boxColor1 = new Fl_Box(223, 55, 50, 35);
-      boxColor1->box(FL_UP_BOX);
-      Fl_Color g1Color = fl_rgb_color(colorChooserGradient1->r() * 255,colorChooserGradient1->g() * 255,colorChooserGradient1->b() * 255);
-      boxColor1->color(g1Color);
-    } // Fl_Box* boxColor1
-    { boxColor2 = new Fl_Box(233, 65, 50, 35);
-      boxColor2->box(FL_UP_BOX);
-      Fl_Color g2Color = fl_rgb_color(colorChooserGradient2->r() * 255,colorChooserGradient2->g() * 255,colorChooserGradient2->b() * 255);
-      boxColor2->color(g2Color);
-    } // Fl_Box* boxColor2
-    { Fl_Button* o = new Fl_Button(96, 165, 85, 30, mygettext("Set"));
-      o->callback((Fl_Callback*)btnCallback, (void*)("gradient_set"));
-    } // Fl_Button* o
-    { Fl_Return_Button* o = new Fl_Return_Button(211, 165, 85, 30, mygettext("Done"));
-      o->callback((Fl_Callback*)btnCallback, (void*)("gradient_done"));
-    } // Fl_Return_Button* o
-    { Fl_Button* o = new Fl_Button(326, 165, 85, 30, mygettext("Cancel"));
-      o->callback((Fl_Callback*)cb_Cancel);
-    } // Fl_Button* o
-    GradientWindow->end();
-  } // Fl_Double_Window* GradientWindow
-  { colorChooserWindow = new Fl_Double_Window(335, 175, mygettext("Pick Color"));
-    { colorChooser = new Fl_Color_Chooser(11, 25, 200, 95, mygettext("Pick Color"));
-      colorChooser->box(FL_DOWN_BOX);
-      colorChooser->color((Fl_Color)FL_BACKGROUND_COLOR);
-      colorChooser->selection_color((Fl_Color)FL_BACKGROUND_COLOR);
-      colorChooser->labeltype(FL_NORMAL_LABEL);
-      colorChooser->labelfont(0);
-      colorChooser->labelsize(14);
-      colorChooser->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-      colorChooser->callback((Fl_Callback*)cb_colorChooser, (void*)("colorChooserGradient1"));
-      colorChooser->align(FL_ALIGN_TOP);
-      colorChooser->when(FL_WHEN_CHANGED);
-      colorChooser->rgb(r1,g1,b1);
-    } // Fl_Color_Chooser* colorChooser
-    { Fl_Button* o = new Fl_Button(11, 135, 85, 30, mygettext("Set"));
-      o->callback((Fl_Callback*)btnCallback, (void*)("color_set"));
-    } // Fl_Button* o
-    { Fl_Return_Button* o = new Fl_Return_Button(125, 135, 85, 30, mygettext("Done"));
-      o->callback((Fl_Callback*)btnCallback, (void*)("color_done"));
-    } // Fl_Return_Button* o
-    { Fl_Button* o = new Fl_Button(235, 135, 85, 30, mygettext("Cancel"));
-      o->callback((Fl_Callback*)cb_Cancel1);
-    } // Fl_Button* o
-    { boxColor = new Fl_Box(235, 25, 85, 95, mygettext("Preview"));
-      boxColor->box(FL_DOWN_BOX);
-      boxColor->align(FL_ALIGN_TOP);
-      Fl_Color solidColor = fl_rgb_color(colorChooser->r() * 255,colorChooser->g() * 255,colorChooser->b() * 255);
-      boxColor->color(solidColor);
-    } // Fl_Box* boxColor
-    colorChooserWindow->end();
-  } // Fl_Double_Window* colorChooserWindow
-  { Wallpaper = new Fl_Double_Window(300, 262, mygettext("Wallpaper"));
-    { imageBrowser = new Fl_File_Browser(0, 38, 295, 190, mygettext("Install images from /opt/backgrounds directory"));
-      imageBrowser->type(2);
-      imageBrowser->labelsize(12);
-      imageBrowser->callback((Fl_Callback*)imageBrowserCallback);
-      imageBrowser->align(FL_ALIGN_TOP);
-      imageBrowser->filter("*.{png,gif,jpg,jpeg}");
-      imageBrowser->load("/opt/backgrounds");
-      for (int x=1; x <= imageBrowser->size(); x++) { if (strcmp(imageBrowser->text(x), "../") == 0) { imageBrowser->remove(x); } }
-    } // Fl_File_Browser* imageBrowser
-    { btnFull = new Fl_Round_Button(5, 5, 50, 15, mygettext("Full"));
-      btnFull->down_box(FL_ROUND_DOWN_BOX);
-      btnFull->value(1);
-      btnFull->selection_color((Fl_Color)2);
-      btnFull->type(FL_RADIO_BUTTON);
-    } // Fl_Round_Button* btnFull
-    { btnTile = new Fl_Round_Button(75, 5, 50, 15, mygettext("Tile"));
-      btnTile->down_box(FL_ROUND_DOWN_BOX);
-      btnTile->selection_color((Fl_Color)2);
-      btnTile->type(FL_RADIO_BUTTON);
-    } // Fl_Round_Button* btnTile
-    { btnCenter = new Fl_Round_Button(145, 5, 64, 15, mygettext("Center"));
-      btnCenter->down_box(FL_ROUND_DOWN_BOX);
-      btnCenter->selection_color((Fl_Color)2);
-      btnCenter->type(FL_RADIO_BUTTON);
-    } // Fl_Round_Button* btnCenter
-    { btnFill = new Fl_Round_Button(225, 5, 50, 15, mygettext("Fill"));
-      btnFill->down_box(FL_ROUND_DOWN_BOX);
-      btnFill->selection_color((Fl_Color)2);
-      btnFill->type(FL_RADIO_BUTTON);
-    } // Fl_Round_Button* btnFill
-    { colorBtn = new Fl_Button(5, 235, 50, 20, mygettext("Color"));
-      colorBtn->callback((Fl_Callback*)btnCallback, (void*)("color_show"));
-    } // Fl_Button* colorBtn
-    { gradientBtn = new Fl_Button(60, 235, 64, 20, mygettext("Gradient"));
-      gradientBtn->callback((Fl_Callback*)btnCallback, (void*)("gradient_show"));
-    } // Fl_Button* gradientBtn
-    { logoBtn = new Fl_Check_Button(130, 235, 55, 20, mygettext("Logo"));
-      logoBtn->down_box(FL_DOWN_BOX);
-      logoBtn->value(1);
-      logoBtn->value(1);
-    } // Fl_Check_Button* logoBtn
-    { installBtn = new Fl_Button(190, 235, 45, 20, mygettext("Set"));
-      installBtn->callback((Fl_Callback*)btnCallback, (void*)("image_set"));
-      installBtn->deactivate();
+  { window = new Fl_Double_Window(515, 475, mygettext("Wallpaper"));
+    { installBtn = new Fl_Button(179, 437, 65, 30, mygettext("Preview"));
+      installBtn->callback((Fl_Callback*)btnCallback, (void*)("preview"));
     } // Fl_Button* installBtn
-    { doneBtn = new Fl_Button(240, 235, 50, 20, mygettext("Done"));
-      doneBtn->callback((Fl_Callback*)btnCallback, (void*)("image_done"));
-      doneBtn->deactivate();
+    { doneBtn = new Fl_Button(271, 437, 65, 30, mygettext("Done"));
+      doneBtn->callback((Fl_Callback*)btnCallback, (void*)("done"));
     } // Fl_Button* doneBtn
-    Wallpaper->end();
-  } // Fl_Double_Window* Wallpaper
-  Wallpaper->show(argc, argv);
+    { Fl_Group* o = new Fl_Group(6, 223, 500, 207);
+      o->box(FL_UP_BOX);
+      { colorChooserGradient1 = new Fl_Color_Chooser(15, 270, 200, 95, mygettext("Color #1"));
+        colorChooserGradient1->box(FL_DOWN_BOX);
+        colorChooserGradient1->color((Fl_Color)FL_BACKGROUND_COLOR);
+        colorChooserGradient1->selection_color((Fl_Color)FL_BACKGROUND_COLOR);
+        colorChooserGradient1->labeltype(FL_NORMAL_LABEL);
+        colorChooserGradient1->labelfont(0);
+        colorChooserGradient1->labelsize(14);
+        colorChooserGradient1->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
+        colorChooserGradient1->callback((Fl_Callback*)cb_colorChooserGradient1);
+        colorChooserGradient1->align(FL_ALIGN_TOP);
+        colorChooserGradient1->when(FL_WHEN_CHANGED);
+        colorChooserGradient1->rgb(r1,g1,b1);
+      } // Fl_Color_Chooser* colorChooserGradient1
+      { colorChooserGradient2 = new Fl_Color_Chooser(297, 270, 200, 95, mygettext("Color #2"));
+        colorChooserGradient2->box(FL_DOWN_BOX);
+        colorChooserGradient2->color((Fl_Color)FL_BACKGROUND_COLOR);
+        colorChooserGradient2->selection_color((Fl_Color)FL_BACKGROUND_COLOR);
+        colorChooserGradient2->labeltype(FL_NORMAL_LABEL);
+        colorChooserGradient2->labelfont(0);
+        colorChooserGradient2->labelsize(14);
+        colorChooserGradient2->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
+        colorChooserGradient2->callback((Fl_Callback*)cb_colorChooserGradient2);
+        colorChooserGradient2->align(FL_ALIGN_TOP);
+        colorChooserGradient2->when(FL_WHEN_CHANGED);
+        colorChooserGradient2->rgb(r2,g2,b2);
+      } // Fl_Color_Chooser* colorChooserGradient2
+      { btnSolid = new Fl_Round_Button(10, 375, 95, 25, mygettext("Solid Color"));
+        btnSolid->type(102);
+        btnSolid->down_box(FL_ROUND_DOWN_BOX);
+        btnSolid->labelsize(12);
+        btnSolid->callback((Fl_Callback*)radioCallback);
+      } // Fl_Round_Button* btnSolid
+      { btnVertical = new Fl_Round_Button(114, 375, 125, 25, mygettext("Vertical Gradient"));
+        btnVertical->type(102);
+        btnVertical->down_box(FL_ROUND_DOWN_BOX);
+        btnVertical->labelsize(12);
+        btnVertical->callback((Fl_Callback*)radioCallback);
+      } // Fl_Round_Button* btnVertical
+      { btnHorizontal = new Fl_Round_Button(246, 375, 125, 25, mygettext("Horizontal Gradient"));
+        btnHorizontal->type(102);
+        btnHorizontal->down_box(FL_ROUND_DOWN_BOX);
+        btnHorizontal->labelsize(12);
+        btnHorizontal->callback((Fl_Callback*)radioCallback);
+      } // Fl_Round_Button* btnHorizontal
+      { btnDiagonal = new Fl_Round_Button(378, 375, 122, 25, mygettext("Diagonal Gradient"));
+        btnDiagonal->type(102);
+        btnDiagonal->down_box(FL_ROUND_DOWN_BOX);
+        btnDiagonal->labelsize(12);
+        btnDiagonal->callback((Fl_Callback*)radioCallback);
+      } // Fl_Round_Button* btnDiagonal
+      { boxColor1 = new Fl_Box(231, 278, 50, 35);
+        boxColor1->box(FL_UP_BOX);
+        Fl_Color g1Color = fl_rgb_color(colorChooserGradient1->r() * 255,colorChooserGradient1->g() * 255,colorChooserGradient1->b() * 255);
+        boxColor1->color(g1Color);
+      } // Fl_Box* boxColor1
+      { boxColor2 = new Fl_Box(231, 324, 50, 35);
+        boxColor2->box(FL_UP_BOX);
+        Fl_Color g2Color = fl_rgb_color(colorChooserGradient2->r() * 255,colorChooserGradient2->g() * 255,colorChooserGradient2->b() * 255);
+        boxColor2->color(g2Color);
+      } // Fl_Box* boxColor2
+      { logoBtn = new Fl_Check_Button(229, 398, 55, 23, mygettext("Logo"));
+        logoBtn->down_box(FL_DOWN_BOX);
+      } // Fl_Check_Button* logoBtn
+      o->end();
+    } // Fl_Group* o
+    { Fl_Group* o = new Fl_Group(6, 6, 500, 206);
+      o->box(FL_UP_BOX);
+      o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      { imageBrowser = new Fl_File_Browser(46, 53, 295, 139, mygettext("Install images from /opt/backgrounds directory"));
+        imageBrowser->type(2);
+        imageBrowser->labelsize(12);
+        imageBrowser->align(FL_ALIGN_TOP);
+        imageBrowser->filter("*.{png,gif,jpg,jpeg}");
+        imageBrowser->load("/opt/backgrounds");
+        for (int x=1; x <= imageBrowser->size(); x++) { if (strcmp(imageBrowser->text(x), "../") == 0) { imageBrowser->remove(x); } }
+      } // Fl_File_Browser* imageBrowser
+      { btnFull = new Fl_Round_Button(360, 74, 50, 15, mygettext("Full"));
+        btnFull->down_box(FL_ROUND_DOWN_BOX);
+        btnFull->selection_color((Fl_Color)2);
+        btnFull->type(FL_RADIO_BUTTON);
+      } // Fl_Round_Button* btnFull
+      { btnTile = new Fl_Round_Button(360, 99, 50, 15, mygettext("Tile"));
+        btnTile->down_box(FL_ROUND_DOWN_BOX);
+        btnTile->selection_color((Fl_Color)2);
+        btnTile->type(FL_RADIO_BUTTON);
+      } // Fl_Round_Button* btnTile
+      { btnCenter = new Fl_Round_Button(360, 124, 64, 15, mygettext("Center"));
+        btnCenter->down_box(FL_ROUND_DOWN_BOX);
+        btnCenter->selection_color((Fl_Color)2);
+        btnCenter->type(FL_RADIO_BUTTON);
+      } // Fl_Round_Button* btnCenter
+      { btnFill = new Fl_Round_Button(360, 149, 50, 15, mygettext("Fill"));
+        btnFill->down_box(FL_ROUND_DOWN_BOX);
+        btnFill->selection_color((Fl_Color)2);
+        btnFill->type(FL_RADIO_BUTTON);
+      } // Fl_Round_Button* btnFill
+      o->end();
+    } // Fl_Group* o
+    { btnBackground = new Fl_Round_Button(6, 7, 500, 26, mygettext("Background Image"));
+      btnBackground->type(102);
+      btnBackground->down_box(FL_ROUND_DOWN_BOX);
+      btnBackground->callback((Fl_Callback*)modeCallback);
+    } // Fl_Round_Button* btnBackground
+    { btnColor = new Fl_Round_Button(6, 224, 500, 26, mygettext("Solid Color or 2 Color Gradient"));
+      btnColor->type(102);
+      btnColor->down_box(FL_ROUND_DOWN_BOX);
+      btnColor->callback((Fl_Callback*)modeCallback);
+    } // Fl_Round_Button* btnColor
+    window->end();
+  } // Fl_Double_Window* window
+  results = system("cat $HOME/.setbackground 2>/dev/null | grep ' -center ' >/dev/null");
+if (results == 0){
+	btnCenter->value(1);
+}
+
+results = system("cat $HOME/.setbackground 2>/dev/null | grep ' -full ' >/dev/null");
+if (results == 0){
+	btnFull->value(1);
+}
+
+results = system("cat $HOME/.setbackground 2>/dev/null | grep ' -tile ' >/dev/null");
+if (results == 0){
+	btnTile->value(1);
+}
+
+results = system("cat $HOME/.setbackground 2>/dev/null | grep ' -fill ' >/dev/null");
+if (results == 0){
+	btnFill->value(1);
+}
+
+results = system("cat $HOME/.setbackground 2>/dev/null | grep 'gradient 0' >/dev/null");
+if (results == 0){
+	btnVertical->value(1);
+	btnColor->value(1);
+}
+
+results = system("cat $HOME/.setbackground 2>/dev/null | grep 'gradient 90' >/dev/null");
+if (results == 0){
+	btnHorizontal->value(1);
+	btnColor->value(1);
+}
+
+results = system("cat $HOME/.setbackground 2>/dev/null | grep 'gradient 135' >/dev/null");
+if (results == 0){
+	btnDiagonal->value(1);
+	btnColor->value(1);
+}
+
+results = system("cat $HOME/.setbackground 2>/dev/null | grep ' -solid ' >/dev/null");
+if (results == 0){
+	btnSolid->value(1);
+	btnColor->value(1);
+}
+
+results = system("cat $HOME/.setbackground 2>/dev/null | grep '/usr/share/pixmaps/logo.png' >/dev/null");
+if (results == 0){
+	logoBtn->value(1);
+	btnColor->value(1);
+}
+
+if (btnColor->value() == 0) {btnBackground->value(1);}
+
+if (btnVertical->value() == 0 && btnHorizontal->value() == 0 && btnDiagonal->value() == 0 && btnSolid->value() == 0){
+	btnSolid->value(1);
+}
+
+if (btnCenter->value() == 0 && btnFull->value() == 0 && btnTile->value() == 0 && btnFill->value() == 0){
+	btnFull->value(1);
+}
+
+modeCallback();
+radioCallback();
+  window->show(argc, argv);
   return Fl::run();
 }

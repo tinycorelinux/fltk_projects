@@ -5,7 +5,8 @@ i18n_include <libintl.h>
 i18n_function gettext 
 header_name {.h} 
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2008-2010} {} 
+decl {// (c) Robert Shingledecker 2008-2011} {selected
+} 
 
 decl {\#include <cstdlib>} {} 
 
@@ -33,6 +34,43 @@ decl {vector<int> mountState;} {}
 decl {vector<Fl_Button*> btn;} {} 
 
 decl {vector<string> mountLabels;} {global
+} 
+
+Function {refresh()} {open
+} {
+  code {getMountables();
+if ( size == 0 ) 
+  exit(1);
+
+pack->clear();
+for (int i=0; i < size; i++)
+{  
+   Fl_Button* btn[i];
+   
+   btn[i] = new Fl_Button(0,0,80,30);
+   btn[i]->label(mountList[i].c_str());
+   btn[i]->tooltip(mountLabels[i].c_str());
+   btn[i]->callback((Fl_Callback*)btnCallback,(void*)i);
+
+   if ( mountState[i] == 0)
+      btn[i]->color((Fl_Color)2);
+   else
+      btn[i]->color((Fl_Color)1);
+      
+   pack->add(btn[i]);
+      
+}
+
+Fl_Button* btnRefresh;
+btnRefresh = new Fl_Button(0,0,80,30);
+btnRefresh->label("Refresh");
+btnRefresh->callback((Fl_Callback*)btnRefreshCallback);
+pack->add(btnRefresh);
+
+selected = 0;
+pack->redraw();
+w->resize(0,0,85,(30*(size+1)));
+w->redraw();} {}
 } 
 
 Function {getMountables()} {open return_type int
@@ -88,8 +126,12 @@ else
          exit(0);
       }
    }
-}} {selected
-  }
+}} {}
+} 
+
+Function {btnRefreshCallback(Fl_Widget*, void* userdata)} {open return_type {static void}
+} {
+  code {refresh();} {}
 } 
 
 Function {} {open
@@ -107,30 +149,5 @@ textdomain("tinycore");} {}
   code {if (getenv("FILEMGR"))
    filemgr = getenv("FILEMGR");
 
-getMountables();
-if ( size == 0 ) 
-  exit(1);
-
-for (int i=0; i < size; i++)
-{  
-   Fl_Button* btn[i];
-   
-   btn[i] = new Fl_Button(0,0,80,30);
-   btn[i]->label(mountList[i].c_str());
-   btn[i]->tooltip(mountLabels[i].c_str());
-   btn[i]->callback((Fl_Callback*)btnCallback,(void*)i);
-
-   if ( mountState[i] == 0)
-      btn[i]->color((Fl_Color)2);
-   else
-      btn[i]->color((Fl_Color)1);
-      
-   pack->add(btn[i]);
-      
-}
-
-selected = 0;
-pack->redraw();
-w->resize(0,0,85,(30*size));
-w->redraw();} {}
+refresh();} {}
 } 

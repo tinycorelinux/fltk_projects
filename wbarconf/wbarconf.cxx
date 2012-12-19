@@ -186,7 +186,7 @@ textdomain("tinycore");
     window->end();
     window->resizable(window);
   } // Fl_Double_Window* window
-  FILE* run = popen("zoomf=`cat ~/.wbar` && zoomf=${zoomf##*zoomf} && echo $zoomf | awk '{print $1}'", "r");
+  FILE* run = popen("zoomf=`cat ~/.wbar 2>/dev/null` && zoomf=${zoomf##*zoomf} && echo $zoomf | awk '{print $1}'", "r");
 char b[10];
 fscanf(run, "%s", b);
 pclose(run);
@@ -194,7 +194,7 @@ double zoomf = atof(b);
 if (zoomf == 0) { zoomf = 2.0; }
 zoomChoice->value(zoomf);
 
-run = popen("isize=`cat ~/.wbar` && isize=${isize##*isize} && echo $isize | awk '{print $1}'", "r");
+run = popen("isize=`cat ~/.wbar 2>/dev/null` && isize=${isize##*isize} && echo $isize | awk '{print $1}'", "r");
 char b2[10];
 fscanf(run, "%s", b2);
 pclose(run);
@@ -202,7 +202,7 @@ double isize = atof(b2);
 if (isize == 0) { isize = 32.0; }
 isizeChoice->value(isize);
 
-int rc = system("cat ~/.wbar | grep nofont >/dev/null 2>&1");
+int rc = system("cat ~/.wbar 2>/dev/null | grep nofont >/dev/null 2>&1");
 if (rc == 0){ textChoice->value(0);} else {textChoice->value(1);}
 
 home = getenv("HOME");

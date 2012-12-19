@@ -84,7 +84,7 @@ if ( c == '\\n' || x == (sizeof(s)-1) )
   { s[x++] = c; }} {}
 } 
 
-Function {fetch_extension()} {open private return_type void
+Function {fetch_extension()} {private return_type void
 } {
   code {status_out->activate();
 status_out->color(FL_WHITE);
@@ -94,10 +94,10 @@ write(G_out, command2.c_str(), command2.length());
 Fl::add_fd(fileno(G_in), HandleInput_CB, (void*)&status_out);} {}
 } 
 
-Function {errhandler(const string &str)} {open private return_type void
+Function {errhandler(const string &str)} {private return_type void
 } {
   Fl_Window errwindow {
-    label {MD5SUM error} open
+    label {MD5SUM error}
     xywh {386 540 520 125} type Double hide
   } {
     Fl_Box errlabel {
@@ -223,6 +223,7 @@ Function {btn_callback(Fl_Widget *, void* userdata)} {open private return_type {
   cursor_wait();
   command = command + " " + (string)search_field->value();
   int results = system(command.c_str());
+  search_field->value("");
   cursor_normal();
   if (results == 0 )
   {
@@ -338,22 +339,19 @@ while(chooser.shown())
 if ( chooser.value() == NULL )
    return; 
    
-   
-// cout << chooser.value() << endl;
 selected = (string)chooser.value();
 
 last_dir = chooser.directory();
-// cout << last_dir << endl;
 
 command = "tce-load" + flags + (string)chooser.value();
-// cout << command << endl;
 
 status_out->activate();
 status_out->color(FL_WHITE);
 status_out->value(command.c_str());
 command = command + "\\n";
 write(G_out, command.c_str(), command.length());
-Fl::add_fd(fileno(G_in), HandleInput_CB, (void*)&status_out);} {}
+Fl::add_fd(fileno(G_in), HandleInput_CB, (void*)&status_out);} {selected
+  }
 } 
 
 Function {mirror_btn_callback(Fl_Widget*, void*)} {private return_type {static void}
@@ -608,7 +606,7 @@ if ( ( G_out = open("/tmp/ab2tce.fifo", O_WRONLY) ) < 0 ) {
     Fl_Button btn_tce {
       label Set
       user_data {"setdrive"}
-      callback btn_callback selected
+      callback btn_callback
       xywh {645 373 34 20} deactivate
       code0 {if (download_dir.compare(0,8,"/tmp/tce") == 0 ){btn_tce->activate();status_out->color(9);};}
     }

@@ -88,6 +88,7 @@ if (userdata == "updatedeps")
    menu_nodepends->activate();
    menu_notrequired->activate();
    menu_auditall->activate();
+   menu_fetchmissing->activate();
    menu_marked->activate();
    menu_clearlst->activate();
 // box_extn->label("Select");
@@ -130,6 +131,40 @@ if (userdata == "updatedeps")
       ifaberr.close();
       fl_message(msg.c_str());
    }
+} else if (userdata == "fetchmissing")
+{
+   brw_results->clear();
+   Fl::flush();
+   cursor_wait();
+
+   box_extn->label(target_dir.c_str());
+   command = "tce-audit fetchmissing";
+   FILE *pipe = popen(command.c_str(),"r");
+   char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
+   if (pipe)
+   {
+      brw_results->clear();
+      while(fgets(mbuf,PATH_MAX,pipe))
+      {
+         string line(mbuf);
+         if (line.find("Error ") == string::npos )
+            hilite = "";
+         else
+            hilite = "@B17";
+         brw_results->add((hilite + line).c_str());
+         brw_results->bottomline(brw_results->size());
+         Fl::flush();
+      }
+      pclose(pipe);
+      free(mbuf);
+   }
+   if ( brw_results->size() == 0 )
+      brw_results->add("Dependency check complete. No missing dependencies found.");
+   else
+      brw_results->add("Missing dependencies fetch completed.");    
+
+   cursor_normal();
+   Fl::flush();
 } else if (userdata == "delete")
 {
    report_type = (const char*) userdata;
@@ -232,16 +267,38 @@ if (report_type == "select_mirror")
    brw_results->clear();
    Fl::flush();
    cursor_wait();
-   command = "tce-update list " + target_dir + " > /tmp/apps_upd.lst";
-   system(command.c_str());
+
    box_extn->label(target_dir.c_str());
-   brw_multi->load("/tmp/apps_upd.lst");
-   brw_multi->remove(brw_multi->size());
+   command = "tce-update list " + target_dir;
+   FILE *pipe = popen(command.c_str(),"r");
+   char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
+   if (pipe)
+   {
+      brw_results->clear();
+      while(fgets(mbuf,PATH_MAX,pipe))
+      {
+         string line(mbuf);
+         if (line.find("Error ") == string::npos ) {
+            brw_multi->add(line.c_str());
+            brw_multi->bottomline(brw_multi->size());
+         } else { 
+            brw_results->add(line.c_str());
+            brw_results->bottomline(brw_results->size());
+         }
+         Fl::flush();
+      }
+      pclose(pipe);
+      free(mbuf);
+   }
+   brw_results->add("Scan for updates completed.");    
    if ( brw_multi->size() >= 1 )
       btn_multi->activate();
-    else
-       brw_results->add("System is Current. No updates required.");
+   else {
+      if ( brw_results->size() == 1 )
+         brw_results->add("System is Current. No updates required.");
+   }
    cursor_normal();
+   Fl::flush();
 } else if (report_type == "exit_updates")
 {
     menu_activate();
@@ -331,6 +388,7 @@ void ondemand_callback(Fl_Widget *, void* userdata) {
   menuOnDemand->activate();
   report_type = "ondemand";
   brw_extn->clear();
+  unlink("/tmp/ondemand.tmp");
   cursor_wait();
   command = "ondemand -l";
   system(command.c_str());
@@ -444,17 +502,20 @@ void brw_extn_callback(Fl_Widget *, void *) {
 void brw_multi_callback(Fl_Widget *, void *) {
   cursor_wait();
 brw_results->clear();
-for (int t=0; t<=brw_multi->size(); t++) {
-   if (brw_multi->selected(t) ) {
-      select_extn = brw_multi->text(t);
-      string select_extn_file = select_extn + ".info";
-      command = "tce-fetch.sh " + select_extn_file;
-      int results = system(command.c_str());
-      if (results == 0) {
-         brw_results->load(select_extn_file.c_str());
-         unlink(select_extn_file.c_str());
-      }   
-      continue;
+if ( report_type == "update" ) { 
+   for (int t=0; t<=brw_multi->size(); t++) {
+      if (brw_multi->selected(t) ) {
+         select_extn = brw_multi->text(t);
+         string info_file(select_extn,0,select_extn.size()-1);
+         info_file = info_file + ".info";
+         command = "tce-fetch.sh " + info_file;
+         int results = system(command.c_str());
+         if (results == 0) {
+            brw_results->load(info_file.c_str());
+            unlink(info_file.c_str());
+         }   
+         continue;
+      }
    }
 }   
 cursor_normal();
@@ -487,8 +548,10 @@ for ( int t=0; t<=brw_multi->size(); t++ )
          box_results->label(("Fetching " + select_extn).c_str());
          box_results->redraw();
          Fl::flush();
-
-         command = "tce-update update " + target_dir +"/" + select_extn + ".md5.txt >/tmp/apps_upd.lst";
+         
+         string md5_file(select_extn,0,select_extn.size()-1);
+         md5_file = md5_file + ".md5.txt";
+         command = "tce-update update " + target_dir +"/" + md5_file + " >/tmp/apps_upd.lst";
          cout << command << endl;
          results = system(command.c_str());
          if ( results == 0 ) 
@@ -496,7 +559,7 @@ for ( int t=0; t<=brw_multi->size(); t++ )
          else
             msg = " FAILED";
 
-         brw_results->add((select_extn + msg).c_str());
+         brw_results->add((md5_file + msg).c_str());
          Fl::flush();      
          
       }
@@ -584,16 +647,17 @@ Fl_Menu_Bar *menuBar=(Fl_Menu_Bar *)0;
 Fl_Menu_Item menu_menuBar[] = {
  {mygettext("Dependencies"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Update .dep files."), 0,  (Fl_Callback*)depends_callback, (void*)("updatedeps"), 0, FL_NORMAL_LABEL, 0, 14, 0},
- {mygettext("Build Reporting Database"), 0,  (Fl_Callback*)depends_callback, (void*)("builddb"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Build Reporting Database"), 0,  (Fl_Callback*)depends_callback, (void*)("builddb"), 128, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Missing Dependencies Reporting"), 0,  (Fl_Callback*)depends_callback, (void*)("auditall"), 1, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Fetch Missing Dependencies"), 0,  (Fl_Callback*)depends_callback, (void*)("fetchmissing"), 129, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Display All with No Dependencies"), 0,  (Fl_Callback*)depends_callback, (void*)("nodepends"), 1, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Display All Not Depended On"), 0,  (Fl_Callback*)depends_callback, (void*)("notrequired"), 129, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("List Dependencies"), 0,  (Fl_Callback*)depends_callback, (void*)("dependson"), 1, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("List Required By"), 0,  (Fl_Callback*)depends_callback, (void*)("requiredby"), 1, FL_NORMAL_LABEL, 0, 14, 0},
- {mygettext("List Missing Dependencies"), 0,  (Fl_Callback*)depends_callback, (void*)("audit"), 1, FL_NORMAL_LABEL, 0, 14, 0},
- {mygettext("Display All with No Dependencies"), 0,  (Fl_Callback*)depends_callback, (void*)("nodepends"), 1, FL_NORMAL_LABEL, 0, 14, 0},
- {mygettext("Display All Not Depended On"), 0,  (Fl_Callback*)depends_callback, (void*)("notrequired"), 1, FL_NORMAL_LABEL, 0, 14, 0},
- {mygettext("Find Missing Dependencies"), 0,  (Fl_Callback*)depends_callback, (void*)("auditall"), 1, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("List Missing Dependencies"), 0,  (Fl_Callback*)depends_callback, (void*)("audit"), 129, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Mark for Deletion"), 0,  (Fl_Callback*)depends_callback, (void*)("delete"), 1, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Display Marked for Deletion"), 0,  (Fl_Callback*)depends_callback, (void*)("display_marked"), 1, FL_NORMAL_LABEL, 0, 14, 0},
- {mygettext("Clear Marked for Deletion"), 0,  (Fl_Callback*)depends_callback, (void*)("clearlst"), 1, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Clear Marked for Deletion"), 0,  (Fl_Callback*)depends_callback, (void*)("clearlst"), 129, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Exit Dependencies Mode"), 0,  (Fl_Callback*)depends_callback, (void*)("exit_depends"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
  {mygettext("Install Options"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},

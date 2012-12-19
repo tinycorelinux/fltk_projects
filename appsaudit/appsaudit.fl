@@ -86,7 +86,7 @@ locales_set=1;
 return gettext(msgid);} {}
 } 
 
-Function {depends_callback(Fl_Widget *, void* userdata)} {return_type {static void}
+Function {depends_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
 } {
   code {report_type = (const char*) userdata;
 option_type = "";
@@ -112,6 +112,7 @@ if (userdata == "updatedeps")
    menu_nodepends->activate();
    menu_notrequired->activate();
    menu_auditall->activate();
+   menu_fetchmissing->activate();
    menu_marked->activate();
    menu_clearlst->activate();
 // box_extn->label("Select");
@@ -154,6 +155,40 @@ if (userdata == "updatedeps")
       ifaberr.close();
       fl_message(msg.c_str());
    }
+} else if (userdata == "fetchmissing")
+{
+   brw_results->clear();
+   Fl::flush();
+   cursor_wait();
+
+   box_extn->label(target_dir.c_str());
+   command = "tce-audit fetchmissing";
+   FILE *pipe = popen(command.c_str(),"r");
+   char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
+   if (pipe)
+   {
+      brw_results->clear();
+      while(fgets(mbuf,PATH_MAX,pipe))
+      {
+         string line(mbuf);
+         if (line.find("Error ") == string::npos )
+            hilite = "";
+         else
+            hilite = "@B17";
+         brw_results->add((hilite + line).c_str());
+         brw_results->bottomline(brw_results->size());
+         Fl::flush();
+      }
+      pclose(pipe);
+      free(mbuf);
+   }
+   if ( brw_results->size() == 0 )
+      brw_results->add("Dependency check complete. No missing dependencies found.");
+   else
+      brw_results->add("Missing dependencies fetch completed.");    
+
+   cursor_normal();
+   Fl::flush();
 } else if (userdata == "delete")
 {
    report_type = (const char*) userdata;
@@ -187,7 +222,8 @@ if (userdata == "updatedeps")
     brw_extn->clear();
     brw_results->clear();
     box_results->label("Results");
-}} {}
+}} {selected
+  }
 } 
 
 Function {options_callback(Fl_Widget *, void* userdata)} {return_type {static void}
@@ -258,16 +294,38 @@ if (report_type == "select_mirror")
    brw_results->clear();
    Fl::flush();
    cursor_wait();
-   command = "tce-update list " + target_dir + " > /tmp/apps_upd.lst";
-   system(command.c_str());
+
    box_extn->label(target_dir.c_str());
-   brw_multi->load("/tmp/apps_upd.lst");
-   brw_multi->remove(brw_multi->size());
+   command = "tce-update list " + target_dir;
+   FILE *pipe = popen(command.c_str(),"r");
+   char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
+   if (pipe)
+   {
+      brw_results->clear();
+      while(fgets(mbuf,PATH_MAX,pipe))
+      {
+         string line(mbuf);
+         if (line.find("Error ") == string::npos ) {
+            brw_multi->add(line.c_str());
+            brw_multi->bottomline(brw_multi->size());
+         } else { 
+            brw_results->add(line.c_str());
+            brw_results->bottomline(brw_results->size());
+         }
+         Fl::flush();
+      }
+      pclose(pipe);
+      free(mbuf);
+   }
+   brw_results->add("Scan for updates completed.");    
    if ( brw_multi->size() >= 1 )
       btn_multi->activate();
-    else
-       brw_results->add("System is Current. No updates required.");
+   else {
+      if ( brw_results->size() == 1 )
+         brw_results->add("System is Current. No updates required.");
+   }
    cursor_normal();
+   Fl::flush();
 } else if (report_type == "exit_updates")
 {
     menu_activate();
@@ -280,7 +338,7 @@ if (report_type == "select_mirror")
 }} {}
 } 
 
-Function {md5s_callback(Fl_Widget *, void* userdata)} {return_type {static void}
+Function {md5s_callback(Fl_Widget *, void* userdata)} {open return_type {static void}
 } {
   code {report_type = (const char*) userdata;
 
@@ -360,6 +418,7 @@ Function {ondemand_callback(Fl_Widget *, void* userdata)} {return_type {static v
   menuOnDemand->activate();
   report_type = "ondemand";
   brw_extn->clear();
+  unlink("/tmp/ondemand.tmp");
   cursor_wait();
   command = "ondemand -l";
   system(command.c_str());
@@ -471,27 +530,30 @@ Function {brw_extn_callback(Fl_Widget *, void *)} {return_type {static void}
 }} {}
 } 
 
-Function {brw_multi_callback(Fl_Widget *, void *)} {return_type {static void}
+Function {brw_multi_callback(Fl_Widget *, void *)} {open return_type {static void}
 } {
   code {cursor_wait();
 brw_results->clear();
-for (int t=0; t<=brw_multi->size(); t++) {
-   if (brw_multi->selected(t) ) {
-      select_extn = brw_multi->text(t);
-      string select_extn_file = select_extn + ".info";
-      command = "tce-fetch.sh " + select_extn_file;
-      int results = system(command.c_str());
-      if (results == 0) {
-         brw_results->load(select_extn_file.c_str());
-         unlink(select_extn_file.c_str());
-      }   
-      continue;
+if ( report_type == "update" ) { 
+   for (int t=0; t<=brw_multi->size(); t++) {
+      if (brw_multi->selected(t) ) {
+         select_extn = brw_multi->text(t);
+         string info_file(select_extn,0,select_extn.size()-1);
+         info_file = info_file + ".info";
+         command = "tce-fetch.sh " + info_file;
+         int results = system(command.c_str());
+         if (results == 0) {
+            brw_results->load(info_file.c_str());
+            unlink(info_file.c_str());
+         }   
+         continue;
+      }
    }
 }   
 cursor_normal();} {}
 } 
 
-Function {btn_multi_callback(Fl_Widget *, void *)} {return_type {static void}
+Function {btn_multi_callback(Fl_Widget *, void *)} {open return_type {static void}
 } {
   code {cursor_wait();
 brw_results->clear();
@@ -519,8 +581,10 @@ for ( int t=0; t<=brw_multi->size(); t++ )
          box_results->label(("Fetching " + select_extn).c_str());
          box_results->redraw();
          Fl::flush();
-
-         command = "tce-update update " + target_dir +"/" + select_extn + ".md5.txt >/tmp/apps_upd.lst";
+         
+         string md5_file(select_extn,0,select_extn.size()-1);
+         md5_file = md5_file + ".md5.txt";
+         command = "tce-update update " + target_dir +"/" + md5_file + " >/tmp/apps_upd.lst";
          cout << command << endl;
          results = system(command.c_str());
          if ( results == 0 ) 
@@ -528,7 +592,7 @@ for ( int t=0; t<=brw_multi->size(); t++ )
          else
             msg = " FAILED";
 
-         brw_results->add((select_extn + msg).c_str());
+         brw_results->add((md5_file + msg).c_str());
          Fl::flush();      
          
       }
@@ -613,11 +677,11 @@ Function {} {open
 exit(0);} open
     xywh {17 134 675 375} type Double hide resizable
   } {
-    Fl_Menu_Bar menuBar {
+    Fl_Menu_Bar menuBar {open
       xywh {0 0 685 20}
     } {
       Submenu menuDepends {
-        label Dependencies
+        label Dependencies open
         xywh {0 0 63 20}
       } {
         MenuItem {} {
@@ -630,7 +694,31 @@ exit(0);} open
           label {Build Reporting Database}
           user_data {"builddb"}
           callback depends_callback
-          xywh {10 10 30 20}
+          xywh {10 10 30 20} divider
+        }
+        MenuItem menu_auditall {
+          label {Missing Dependencies Reporting}
+          user_data {"auditall"}
+          callback depends_callback
+          xywh {5 5 30 20} deactivate
+        }
+        MenuItem menu_fetchmissing {
+          label {Fetch Missing Dependencies}
+          user_data {"fetchmissing"}
+          callback depends_callback
+          xywh {15 15 30 20} deactivate divider
+        }
+        MenuItem menu_nodepends {
+          label {Display All with No Dependencies}
+          user_data {"nodepends"}
+          callback depends_callback
+          xywh {5 5 30 20} deactivate
+        }
+        MenuItem menu_notrequired {
+          label {Display All Not Depended On}
+          user_data {"notrequired"}
+          callback depends_callback
+          xywh {15 15 30 20} deactivate divider
         }
         MenuItem menu_dependson {
           label {List Dependencies}
@@ -648,25 +736,7 @@ exit(0);} open
           label {List Missing Dependencies}
           user_data {"audit"}
           callback depends_callback
-          xywh {5 5 30 20} deactivate
-        }
-        MenuItem menu_nodepends {
-          label {Display All with No Dependencies}
-          user_data {"nodepends"}
-          callback depends_callback
-          xywh {5 5 30 20} deactivate
-        }
-        MenuItem menu_notrequired {
-          label {Display All Not Depended On}
-          user_data {"notrequired"}
-          callback depends_callback
-          xywh {15 15 30 20} deactivate
-        }
-        MenuItem menu_auditall {
-          label {Find Missing Dependencies}
-          user_data {"auditall"}
-          callback depends_callback
-          xywh {5 5 30 20} deactivate
+          xywh {5 5 30 20} deactivate divider
         }
         MenuItem menu_delete {
           label {Mark for Deletion}
@@ -684,7 +754,7 @@ exit(0);} open
           label {Clear Marked for Deletion}
           user_data {"clearlst"}
           callback depends_callback
-          xywh {15 15 30 20} deactivate
+          xywh {15 15 30 20} deactivate divider
         }
         MenuItem {} {
           label {Exit Dependencies Mode}
@@ -723,7 +793,7 @@ exit(0);} open
         MenuItem {} {
           label {Check for Updates}
           user_data {"update"}
-          callback updates_callback selected
+          callback updates_callback
           xywh {0 0 30 20}
         }
         MenuItem {} {

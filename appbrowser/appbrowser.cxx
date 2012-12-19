@@ -199,6 +199,7 @@ static void btn_callback(Fl_Widget *, void* userdata) {
   cursor_wait();
   command = command + " " + (string)search_field->value();
   int results = system(command.c_str());
+  search_field->value("");
   cursor_normal();
   if (results == 0 )
   {
@@ -312,15 +313,11 @@ while(chooser.shown())
 if ( chooser.value() == NULL )
    return; 
    
-   
-// cout << chooser.value() << endl;
 selected = (string)chooser.value();
 
 last_dir = chooser.directory();
-// cout << last_dir << endl;
 
 command = "tce-load" + flags + (string)chooser.value();
-// cout << command << endl;
 
 status_out->activate();
 status_out->color(FL_WHITE);
