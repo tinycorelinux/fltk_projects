@@ -42,6 +42,7 @@ if (userdata == "updatedeps")
    menu_notrequired->activate();
    menu_auditall->activate();
    menu_marked->activate();
+   menu_clearlst->activate();
    box_extn->label(target_dir.c_str());
    box_results->label("Results");
    window->cursor(FL_CURSOR_DEFAULT);
@@ -96,6 +97,16 @@ if (userdata == "updatedeps")
 {
      box_results->label("Results");
      brw_results->load("/tmp/audit_marked.lst");
+} else if (userdata == "clearlst")
+{
+     report_type = (const char*) userdata;
+     command = "tce-audit " + report_type + " " + target_dir + "/" + select_extn;
+     int results = system(command.c_str());
+     if (results == 0 )
+     { 
+        brw_results->clear();
+        box_results->label("Marked for deletion cleared");
+     }
 } else if (userdata == "quit")
 {
     exit(0);
@@ -349,6 +360,7 @@ Fl_Menu_Item menu_[] = {
  {"Display All with Missing Dependencies", 0,  (Fl_Callback*)depends_callback, (void*)("auditall"), 1, FL_NORMAL_LABEL, 0, 14, 0},
  {"Mark for Deletion", 0,  (Fl_Callback*)depends_callback, (void*)("delete"), 1, FL_NORMAL_LABEL, 0, 14, 0},
  {"Display Marked for Deletion", 0,  (Fl_Callback*)depends_callback, (void*)("display_marked"), 1, FL_NORMAL_LABEL, 0, 14, 0},
+ {"Clear Marked for Deletion", 0,  (Fl_Callback*)depends_callback, (void*)("clearlst"), 1, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
  {"Install Options", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
  {"Toggle Default Copy Install", 0,  (Fl_Callback*)options_callback, (void*)("default"), 0, FL_NORMAL_LABEL, 0, 14, 0},

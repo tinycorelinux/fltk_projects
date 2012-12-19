@@ -33,4 +33,5 @@ extern Fl_Menu_Item menu_[];
 #define menu_auditall (menu_+11)
 #define menu_delete (menu_+12)
 #define menu_marked (menu_+13)
+#define menu_clearlst (menu_+14)
 #endif
