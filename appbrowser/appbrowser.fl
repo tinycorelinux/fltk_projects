@@ -255,7 +255,7 @@ tabs->deactivate();
 status_out->label("  URL:");
 status_out->value(url.c_str());
 status_out->activate();
-command = "busybox wget -cq ftp://distro.ibiblio.org/pub/linux/distributions/tinycorelinux/2.x/tcz/mirrors.lst";
+command = "/usr/bin/tce-fetch.sh mirrors.lst";
 int results = system(command.c_str());
 window->cursor(FL_CURSOR_DEFAULT);
 Fl::flush();
@@ -266,7 +266,8 @@ if ( results == 0)
    box_select->activate();
    system("rm mirrors.lst");
 } else
-   fl_message("Connection error, check network or ibiblio");} {}
+   fl_message("Connection error, check network or ibiblio");} {selected
+  }
 } 
 
 Function {tabs_callback(Fl_Widget*, void* userdata)} {open return_type {static void}
@@ -355,7 +356,7 @@ Function {} {open
         label Info open
         xywh {205 45 475 325} when 1 hide deactivate
       } {
-        Fl_Browser brw_info {selected
+        Fl_Browser brw_info {
           xywh {210 50 470 318} textfont 4
         }
       }

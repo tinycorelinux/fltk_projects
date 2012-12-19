@@ -141,15 +141,21 @@ Function {} {open
 getline(backup_device_file,backup_device);                                        
 backup_device_file.close();
 
-string backupDefault;
-backupDefault  = getenv("BACKUP");
+string backupDefault = "1";
+
+int results = system("env | grep BACKUP > /dev/null" );
+
+if (results == 0)
+  backupDefault = getenv("BACKUP");
 
 if ( backupDefault == "0" )
 {
   backup = false;
   btn_backup->value(0);
-} else
+} else {
   backup = true;
+  btn_backup->value(1);
+}
    
 string cmdline;   
 ifstream proc_cmdline_file("/proc/cmdline");                                  

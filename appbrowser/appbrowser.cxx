@@ -230,7 +230,7 @@ tabs->deactivate();
 status_out->label("  URL:");
 status_out->value(url.c_str());
 status_out->activate();
-command = "busybox wget -cq ftp://distro.ibiblio.org/pub/linux/distributions/tinycorelinux/2.x/tcz/mirrors.lst";
+command = "/usr/bin/tce-fetch.sh mirrors.lst";
 int results = system(command.c_str());
 window->cursor(FL_CURSOR_DEFAULT);
 Fl::flush();

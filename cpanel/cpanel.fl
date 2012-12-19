@@ -8,8 +8,6 @@ decl {\#include <iostream>} {}
 
 decl {using namespace std;} {} 
 
-decl {string home;} {} 
-
 Function {btn_callback(Fl_Widget* w, void* userdata)} {open return_type {static void}
 } {
   code {system((const char*)userdata);} {}
@@ -65,7 +63,7 @@ Function {} {open
     Fl_Button {} {
       label Network
       user_data {"sudo network &"}
-      callback btn_callback selected
+      callback btn_callback
       xywh {140 90 120 30}
     }
     Fl_Button {} {
@@ -111,15 +109,4 @@ Function {} {open
       xywh {270 170 120 30}
     }
   }
-  code {FILE *CMD_fp = NULL;
-if ((CMD_fp = popen("env | awk -F'=' /HOME/'{printf \\"%s\\",$2}'","r"))==NULL)
-{
-   cout << "popen failed" << endl;
-   return 1;
-}
-char result[1024];
-if ( fgets(result,1023,CMD_fp)==NULL)     // If no result from above then default is to backup.
-   home = "/home/tc";
-else    
-   home = result;} {}
 } 

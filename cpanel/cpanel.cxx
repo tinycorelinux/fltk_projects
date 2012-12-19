@@ -4,7 +4,6 @@
 // (c) Robert Shingledecker 2008-2010
 #include <iostream>
 using namespace std;
-static string home; 
 
 void btn_callback(Fl_Widget* w, void* userdata) {
   system((const char*)userdata);
@@ -61,17 +60,6 @@ int main(int argc, char **argv) {
     } // Fl_Button* o
     o->end();
   } // Fl_Double_Window* o
-  FILE *CMD_fp = NULL;
-if ((CMD_fp = popen("env | awk -F'=' /HOME/'{printf \"%s\",$2}'","r"))==NULL)
-{
-   cout << "popen failed" << endl;
-   return 1;
-}
-char result[1024];
-if ( fgets(result,1023,CMD_fp)==NULL)     // If no result from above then default is to backup.
-   home = "/home/tc";
-else    
-   home = result;
   w->show(argc, argv);
   return Fl::run();
 }

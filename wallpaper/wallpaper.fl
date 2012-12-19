@@ -131,9 +131,9 @@ if (results == 0 )
   stm.str(rgb_info);
   stm >> r >> g >> b;
 } else {
-  r = 0.067;
-  g = 0.161;
-  b = 0.286;
+  r = 0.208;
+  g = 0.384;
+  b = 0.400;
 }    
 
 cout << r << endl;
