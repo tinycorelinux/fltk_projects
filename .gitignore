@@ -2,3 +2,4 @@
 *.[oa]
 *.mo
 mnttool_save
+*-save
