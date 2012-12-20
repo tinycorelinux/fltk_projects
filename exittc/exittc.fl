@@ -35,7 +35,7 @@ decl {bool backup=true;} {}
 
 decl {string commandStr = "exitcheck.sh ";} {} 
 
-decl {string actionStr, backup_options, backup_command;} {} 
+decl {string cmdline, actionStr, backup_options, backup_command;} {} 
 
 Function {btn_callback(Fl_Widget*, void*userdata)} {open return_type {static void}
 } {
@@ -111,8 +111,7 @@ if (userdata == "ok") {
     system( (const char *)commandStr.c_str());
     exit(0);
   }  
-}} {selected
-  }
+}} {}
 } 
 
 Function {} {open
@@ -122,9 +121,9 @@ bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");} {}
   Fl_Window window {
     label {TC Exit Options} open
-    xywh {268 17 180 180} type Double box BORDER_BOX align 4 hide
+    xywh {268 20 180 180} type Double box BORDER_BOX align 4 hide
   } {
-    Fl_Group {} {
+    Fl_Group {} {open
       xywh {25 10 115 70}
     } {
       Fl_Round_Button {} {
@@ -139,7 +138,7 @@ textdomain("tinycore");} {}
         callback btn_callback
         xywh {25 30 65 15} type Radio down_box ROUND_DOWN_BOX
       }
-      Fl_Round_Button {} {
+      Fl_Round_Button btnExitPrompt {
         label {Exit to Prompt}
         user_data {"prompt"}
         callback btn_callback
@@ -150,7 +149,7 @@ textdomain("tinycore");} {}
       xywh {15 120 155 25} color 29 labeltype NO_LABEL
     }
     Fl_Choice choices {
-      label {Backup Options:}
+      label {Backup Options:} open
       xywh {42 87 110 25} down_box BORDER_BOX align 5
     } {
       MenuItem {} {
@@ -202,7 +201,6 @@ if ( backupDefault == "0" )
 }
   
    
-string cmdline;   
 ifstream proc_cmdline_file("/proc/cmdline");                                  
 getline(proc_cmdline_file,cmdline);                                        
 proc_cmdline_file.close();
@@ -245,5 +243,8 @@ if ( option != string::npos )
  
 
 if (backup)
-   device_output->value(backup_device.c_str());} {}
+   device_output->value(backup_device.c_str());
+   
+if (cmdline.find("xonly") != string::npos) btnExitPrompt->hide();} {selected
+  }
 } 
