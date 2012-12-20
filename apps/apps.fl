@@ -85,7 +85,7 @@ locales_set=1;
 return gettext(msgid);} {}
 } 
 
-Function {auditView()} {private return_type void
+Function {auditView()} {open private return_type void
 } {
   code {grpBrowse->hide();
 grpMulti->hide();
@@ -285,7 +285,7 @@ err_extn.replace(0,9,""); // Yes, hardcoded magic value. Bad.
 errwindow->show();} {}
 } 
 
-Function {menuCB(Fl_Widget *, void* userdata)} {private return_type {static void}
+Function {menuCB(Fl_Widget *, void* userdata)} {open private return_type {static void}
 } {
   code {report_type = (const char*)userdata;
 if (userdata == "tcz")
@@ -461,6 +461,8 @@ if (userdata == "tcz")
 } else if (userdata == "SelectiveCopy") 
 {
    auditView();
+   btnSingle->show();
+   btnResults->show();
    boxExtn->label("Select to Copy");
    command = "ls " + target_dir + "|grep -E .tcz$ ";
    loadBrwExtnData();
@@ -503,7 +505,8 @@ if (userdata == "tcz")
     unlink("/tmp/tags.lst");
     exit(0);
 
-  }} {}
+  }} {selected
+  }
 } 
 
 Function {btnCB(Fl_Widget *, void* userdata)} {private return_type {static void}
@@ -976,7 +979,7 @@ if (report_type == "updates" )
 cursor_normal();} {}
 } 
 
-Function {brwResultsCB(Fl_Widget *, void *)} {return_type {static void}
+Function {brwResultsCB(Fl_Widget *, void *)} {open return_type {static void}
 } {
   code {if (brwResults->value())
 {
@@ -991,7 +994,7 @@ Function {brwResultsCB(Fl_Widget *, void *)} {return_type {static void}
 }} {}
 } 
 
-Function {btnResultsCB(Fl_Widget *, void *)} {return_type {static void}
+Function {btnResultsCB(Fl_Widget *, void *)} {open return_type {static void}
 } {
   code {if (brwResults->value())
 {
@@ -1482,7 +1485,7 @@ outURI->value(mirror.c_str());}
       }
       Fl_Button btnResults {
         label Go
-        callback btnResultsCB selected
+        callback btnResultsCB
         xywh {210 380 80 20} deactivate
       }
       Fl_Output outTCE {
