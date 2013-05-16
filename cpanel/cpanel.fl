@@ -91,7 +91,7 @@ textdomain("tinycore");} {}
     }
     Fl_Button {} {
       label {Terminal Server}
-      user_data {"aterm +tr +sb -T \\"Terminal Server Setup\\" -e sudo /usr/bin/tc-terminal-server &"}
+      user_data {"xterm -bg black +tr +sb -T \\"Terminal Server Setup\\" -e sudo /usr/bin/tc-terminal-server &"}
       callback btn_callback
       xywh {305 100 120 30}
     }

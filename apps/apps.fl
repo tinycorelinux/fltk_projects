@@ -191,7 +191,7 @@ outputStatus->color(FL_WHITE);
 outputStatus->value(command.c_str());
 cursor_wait();
 msg = select_extn;
-command = "aterm -fg black -bg white +tr -g 80x5 -e " + command;
+command = "xterm -fg black -bg white +tr -g 80x5 -e " + command;
 system(command.c_str());
 
 command = "busybox md5sum -cs " + select_extn + ".md5.txt";
