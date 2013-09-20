@@ -7,8 +7,7 @@ header_name {.h}
 code_name {.cxx}
 decl {// (c) Robert Shingledecker 2008} {} 
 
-decl {// Command input search by Curaga 2011} {selected
-} 
+decl {// Command input search by Curaga 2011} {} 
 
 decl {\#include <iostream>} {} 
 
@@ -158,25 +157,25 @@ Function {} {open
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");} {}
   Fl_Window {} {
-    label FLRun open
-    xywh {426 555 260 100} type Double hide
+    label FLRun open selected
+    xywh {700 475 265 110} type Double hide
   } {
     Fl_Return_Button {} {
       label OK
       user_data {"ok"}
       callback btn_callback
-      xywh {25 65 66 20}
+      xywh {25 75 66 20}
     }
     Fl_Button {} {
       label {&Cancel}
       user_data {"cancel"}
       callback btn_callback
-      xywh {100 65 64 20}
+      xywh {100 75 64 20}
     }
     Fl_Button {} {
       label Browse
       callback choose_cb
-      xywh {175 65 64 20}
+      xywh {175 75 64 20}
     }
     Fl_Input_Choice in_command {
       label {Application launcher}
@@ -184,5 +183,9 @@ textdomain("tinycore");} {}
       xywh {25 25 215 24} align 1 when 1
       code0 {in_command->take_focus();}
     } {}
+    Fl_Check_Button {} {
+      label sudo
+      xywh {25 55 64 15} type Normal down_box DOWN_BOX
+    }
   }
 } 
