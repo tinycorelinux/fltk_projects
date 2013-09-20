@@ -9,4 +9,5 @@
 #include <FL/Fl_Input_Choice.H>
 extern Fl_Input_Choice *in_command;
 #include <FL/Fl_Check_Button.H>
+extern Fl_Check_Button *sudobox;
 #endif

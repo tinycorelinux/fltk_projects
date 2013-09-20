@@ -91,7 +91,10 @@ Function {btn_callback(Fl_Widget*, void* userdata)} {open private return_type {s
 } {
   code {if (userdata == "ok")
 {
-  string commandStr1 = in_command->value();
+  string sudo = "";
+  if (sudobox->value()) sudo = "sudo ";
+
+  string commandStr1 = sudo + in_command->value();
   string commandStr2 = " 2>/dev/null &";
   string command = commandStr1 + commandStr2;
   system(command.c_str());
@@ -158,7 +161,7 @@ bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");} {}
   Fl_Window {} {
     label FLRun open
-    xywh {700 475 265 125} type Double visible
+    xywh {700 475 265 125} type Double hide
   } {
     Fl_Return_Button {} {
       label OK
@@ -183,9 +186,9 @@ textdomain("tinycore");} {}
       xywh {25 25 215 24} align 1 when 1
       code0 {in_command->take_focus();}
     } {}
-    Fl_Check_Button {} {
-      label sudo
-      xywh {25 60 64 15} type Normal down_box DOWN_BOX
+    Fl_Check_Button sudobox {
+      label {Run with sudo}
+      xywh {25 60 215 15} down_box DOWN_BOX
     }
   }
 } 

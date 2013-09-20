@@ -80,7 +80,10 @@ static int matches(const char *param, char ***res, unsigned int *out) {
 static void btn_callback(Fl_Widget*, void* userdata) {
   if (userdata == "ok")
 {
-  string commandStr1 = in_command->value();
+  string sudo = "";
+  if (sudobox->value()) sudo = "sudo ";
+
+  string commandStr1 = sudo + in_command->value();
   string commandStr2 = " 2>/dev/null &";
   string command = commandStr1 + commandStr2;
   system(command.c_str());
@@ -139,6 +142,8 @@ free(results);
 
 Fl_Input_Choice *in_command=(Fl_Input_Choice *)0;
 
+Fl_Check_Button *sudobox=(Fl_Check_Button *)0;
+
 int main(int argc, char **argv) {
   Fl_Double_Window* w;
   setlocale(LC_ALL, "");
@@ -161,10 +166,9 @@ textdomain("tinycore");
       in_command->when(FL_WHEN_CHANGED);
       in_command->take_focus();
     } // Fl_Input_Choice* in_command
-    { Fl_Check_Button* o = new Fl_Check_Button(25, 60, 64, 15, gettext("sudo"));
-      o->type(0);
-      o->down_box(FL_DOWN_BOX);
-    } // Fl_Check_Button* o
+    { sudobox = new Fl_Check_Button(25, 60, 215, 15, gettext("Run with sudo"));
+      sudobox->down_box(FL_DOWN_BOX);
+    } // Fl_Check_Button* sudobox
     o->end();
   } // Fl_Double_Window* o
   w->show(argc, argv);
