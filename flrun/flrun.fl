@@ -157,25 +157,25 @@ Function {} {open
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");} {}
   Fl_Window {} {
-    label FLRun open selected
-    xywh {700 475 265 110} type Double hide
+    label FLRun open
+    xywh {700 475 265 125} type Double visible
   } {
     Fl_Return_Button {} {
       label OK
       user_data {"ok"}
       callback btn_callback
-      xywh {25 75 66 20}
+      xywh {25 85 66 20}
     }
     Fl_Button {} {
       label {&Cancel}
       user_data {"cancel"}
       callback btn_callback
-      xywh {100 75 64 20}
+      xywh {100 85 64 20}
     }
     Fl_Button {} {
       label Browse
       callback choose_cb
-      xywh {175 75 64 20}
+      xywh {175 85 64 20}
     }
     Fl_Input_Choice in_command {
       label {Application launcher}
@@ -185,7 +185,7 @@ textdomain("tinycore");} {}
     } {}
     Fl_Check_Button {} {
       label sudo
-      xywh {25 55 64 15} type Normal down_box DOWN_BOX
+      xywh {25 60 64 15} type Normal down_box DOWN_BOX
     }
   }
 } 

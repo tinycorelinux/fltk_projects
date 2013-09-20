@@ -144,15 +144,15 @@ int main(int argc, char **argv) {
   setlocale(LC_ALL, "");
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");
-  { Fl_Double_Window* o = new Fl_Double_Window(265, 110, gettext("FLRun"));
+  { Fl_Double_Window* o = new Fl_Double_Window(265, 125, gettext("FLRun"));
     w = o;
-    { Fl_Return_Button* o = new Fl_Return_Button(25, 75, 66, 20, gettext("OK"));
+    { Fl_Return_Button* o = new Fl_Return_Button(25, 85, 66, 20, gettext("OK"));
       o->callback((Fl_Callback*)btn_callback, (void*)("ok"));
     } // Fl_Return_Button* o
-    { Fl_Button* o = new Fl_Button(100, 75, 64, 20, gettext("&Cancel"));
+    { Fl_Button* o = new Fl_Button(100, 85, 64, 20, gettext("&Cancel"));
       o->callback((Fl_Callback*)btn_callback, (void*)("cancel"));
     } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(175, 75, 64, 20, gettext("Browse"));
+    { Fl_Button* o = new Fl_Button(175, 85, 64, 20, gettext("Browse"));
       o->callback((Fl_Callback*)choose_cb);
     } // Fl_Button* o
     { in_command = new Fl_Input_Choice(25, 25, 215, 24, gettext("Application launcher"));
@@ -161,7 +161,7 @@ textdomain("tinycore");
       in_command->when(FL_WHEN_CHANGED);
       in_command->take_focus();
     } // Fl_Input_Choice* in_command
-    { Fl_Check_Button* o = new Fl_Check_Button(25, 55, 64, 15, gettext("sudo"));
+    { Fl_Check_Button* o = new Fl_Check_Button(25, 60, 64, 15, gettext("sudo"));
       o->type(0);
       o->down_box(FL_DOWN_BOX);
     } // Fl_Check_Button* o
