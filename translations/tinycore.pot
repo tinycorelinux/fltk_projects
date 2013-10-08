@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-19 21:49+0200\n"
+"POT-Creation-Date: 2013-10-08 17:37+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgid "&Apply Image"
 msgstr ""
 
 #: ../datetool/datetool.cxx:173 ../exittc/exittc.cxx:152
-#: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:152 ../swapfile/swapfile.cxx:69
+#: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:157 ../swapfile/swapfile.cxx:69
 msgid "&Cancel"
 msgstr ""
 
@@ -103,7 +103,7 @@ msgstr ""
 msgid "Appbrowser"
 msgstr ""
 
-#: ../flrun/flrun.cxx:158
+#: ../flrun/flrun.cxx:163
 msgid "Application launcher"
 msgstr ""
 
@@ -180,7 +180,7 @@ msgstr ""
 msgid "Broadcast"
 msgstr ""
 
-#: ../apps/apps.cxx:1019 ../flrun/flrun.cxx:155 ../scmapps/scmapps.cxx:540
+#: ../apps/apps.cxx:1019 ../flrun/flrun.cxx:160 ../scmapps/scmapps.cxx:540
 #: ../scmbrowser/scmbrowser.cxx:710
 msgid "Browse"
 msgstr ""
@@ -403,7 +403,7 @@ msgstr ""
 msgid "Extension Installation"
 msgstr ""
 
-#: ../flrun/flrun.cxx:147
+#: ../flrun/flrun.cxx:152
 msgid "FLRun"
 msgstr ""
 
@@ -690,7 +690,7 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: ../flrun/flrun.cxx:149 ../mirrorpicker/mirrorpicker.cxx:36
+#: ../flrun/flrun.cxx:154 ../mirrorpicker/mirrorpicker.cxx:36
 msgid "OK"
 msgstr ""
 
@@ -813,6 +813,10 @@ msgstr ""
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:128
 msgid "Right Vertical"
+msgstr ""
+
+#: ../flrun/flrun.cxx:169
+msgid "Run with sudo"
 msgstr ""
 
 #: ../exittc/exittc.cxx:107 ../filetool/filetool.cxx:159
