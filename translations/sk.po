@@ -1,46 +1,46 @@
-# Chinese (Traditional) translation for tctools
-# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# Slovak translation for tctools
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the tctools package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tctools\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-12-19 21:49+0200\n"
-"PO-Revision-Date: 2012-10-29 15:57+0000\n"
-"Last-Translator: Player <anonymousplayer@yahoo.com.tw>\n"
-"Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
+"PO-Revision-Date: 2013-04-25 11:18+0000\n"
+"Last-Translator: Jan Hnila <jan.hnila@gmail.com>\n"
+"Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-08 14:41+0000\n"
+"X-Launchpad-Export-Date: 2013-10-08 14:40+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 
 #: ../scmapps/scmapps.cxx:538
 msgid "   Apps"
-msgstr ""
+msgstr "   Programy"
 
 #: ../mousetool/mousetool.cxx:98 ../network/network.cxx:239
 msgid "&Apply"
-msgstr "套用"
+msgstr "&Použiť"
 
 #: ../fdtool/fdtool.cxx:100
 msgid "&Apply Image"
-msgstr "應用映像檔"
+msgstr ""
 
 #: ../datetool/datetool.cxx:173 ../exittc/exittc.cxx:152
 #: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:152 ../swapfile/swapfile.cxx:69
 msgid "&Cancel"
-msgstr "取消"
+msgstr "&Zrušiť"
 
 #: ../mousetool/mousetool.cxx:101
 msgid "&Exit"
-msgstr "退出"
+msgstr "&Ukončiť"
 
 #: ../fdtool/fdtool.cxx:91
 msgid "&Format"
-msgstr "格式化"
+msgstr ""
 
 #: ../fdtool/fdtool.cxx:95
 msgid "&Make Image"
@@ -48,7 +48,7 @@ msgstr ""
 
 #: ../datetool/datetool.cxx:170 ../exittc/exittc.cxx:148
 msgid "&OK"
-msgstr "OK"
+msgstr "&OK"
 
 #: ../swapfile/swapfile.cxx:72
 msgid "&Proceed"
@@ -56,18 +56,18 @@ msgstr ""
 
 #: ../fdtool/fdtool.cxx:76
 msgid "1440k"
-msgstr "1440k"
+msgstr ""
 
 #: ../fdtool/fdtool.cxx:82
 msgid "1722k"
-msgstr "1722k"
+msgstr ""
 
 #: ../datetool/datetool.cxx:132 ../datetool/datetool.cxx:140
 #: ../datetool/datetool.cxx:148 ../datetool/datetool.cxx:156
 #: ../datetool/datetool.cxx:164 ../tc-grub4dos/tc-grub4dos.cxx:349
 #: ../tc-install/tc-install.cxx:670
 msgid "@<"
-msgstr "@<"
+msgstr ""
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:355
 msgid "@<<"
@@ -78,7 +78,7 @@ msgstr ""
 #: ../datetool/datetool.cxx:167 ../tc-grub4dos/tc-grub4dos.cxx:352
 #: ../tc-install/tc-install.cxx:673
 msgid "@>"
-msgstr "@>"
+msgstr ""
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:358
 msgid "@>>"
@@ -106,16 +106,16 @@ msgstr ""
 
 #: ../flrun/flrun.cxx:158
 msgid "Application launcher"
-msgstr "應用程式啟動器"
+msgstr ""
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:206 ../tc-wbarconf/tc-wbarconf.cxx:224
 #: ../wbarconf/wbarconf.cxx:165
 msgid "Apply"
-msgstr "套用"
+msgstr ""
 
 #: ../apps/apps.cxx:1017
 msgid "Apps"
-msgstr "程式"
+msgstr "Programy"
 
 #: ../apps/apps.cxx:1207
 msgid "Apps: Regular Applications (tcz)"
@@ -127,19 +127,19 @@ msgstr ""
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:221
 msgid "Back"
-msgstr "上一步"
+msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:331
 msgid "Background Image"
-msgstr "背景圖片"
+msgstr "Obrázok v pozadí plochy"
 
 #: ../exittc/exittc.cxx:106 ../filetool/filetool.cxx:158
 msgid "Backup"
-msgstr "備份"
+msgstr "Zálohovať"
 
 #: ../exittc/exittc.cxx:143
 msgid "Backup Options:"
-msgstr "備份選項"
+msgstr "Možnosti zálohovania:"
 
 #: ../filetool/filetool.cxx:290
 msgid "Backup Restore and Lists Maintenance"
@@ -147,7 +147,7 @@ msgstr ""
 
 #: ../cpanel/cpanel.cxx:38
 msgid "Backup/Restore"
-msgstr "備份/還原"
+msgstr "Zálohovať/Obnoviť"
 
 #: ../scmbrowser/scmbrowser.cxx:707
 msgid "Boot List"
@@ -159,7 +159,7 @@ msgstr ""
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:322 ../tc-install/tc-install.cxx:577
 msgid "Boot Options"
-msgstr "開機選項"
+msgstr ""
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:324 ../tc-install/tc-install.cxx:579
 msgid "Boot Options Reference List"
@@ -167,24 +167,24 @@ msgstr ""
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:126 ../wbarconf/wbarconf.cxx:123
 msgid "Bottom"
-msgstr "底部"
+msgstr ""
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:131 ../wbarconf/wbarconf.cxx:128
 msgid "Bottom Left"
-msgstr "左下方"
+msgstr ""
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:132 ../wbarconf/wbarconf.cxx:129
 msgid "Bottom Right"
-msgstr "右下方"
+msgstr ""
 
 #: ../network/network.cxx:201
 msgid "Broadcast"
-msgstr "廣播"
+msgstr "Broadcastová adresa"
 
 #: ../apps/apps.cxx:1019 ../flrun/flrun.cxx:155 ../scmapps/scmapps.cxx:540
 #: ../scmbrowser/scmbrowser.cxx:710
 msgid "Browse"
-msgstr "瀏覽檔案"
+msgstr ""
 
 #: ../apps/apps.cxx:1047 ../appsaudit/appsaudit.cxx:663
 msgid "Build Reporting Database"
@@ -194,15 +194,15 @@ msgstr ""
 #: ../mirrorpicker/mirrorpicker.cxx:40 ../scmapps/scmapps.cxx:232
 #: ../scmbrowser/scmbrowser.cxx:183
 msgid "Cancel"
-msgstr "取消"
+msgstr "Zrušiť"
 
 #: ../wallpaper/wallpaper.cxx:319
 msgid "Center"
-msgstr "置中"
+msgstr "Do stredu"
 
 #: ../appsaudit/appsaudit.cxx:687
 msgid "Check Md5sums"
-msgstr "檢查Md5sums"
+msgstr ""
 
 #: ../apps/apps.cxx:1029
 msgid "Check Onboot Unneeded"
@@ -215,7 +215,7 @@ msgstr ""
 #: ../apps/apps.cxx:1026 ../appsaudit/appsaudit.cxx:682
 #: ../scmapps/scmapps.cxx:551
 msgid "Check for Updates"
-msgstr "檢查是否有更新"
+msgstr ""
 
 #: ../mirrorpicker/init.cxx:110
 #, c-format
@@ -228,7 +228,7 @@ msgstr ""
 
 #: ../apps/apps.cxx:1057 ../appsaudit/appsaudit.cxx:673
 msgid "Clear Marked for Deletion"
-msgstr "移除已標記為刪除的標記"
+msgstr ""
 
 #: ../apps/apps.cxx:1018 ../scmapps/scmapps.cxx:539
 msgid "Cloud (Remote)"
@@ -244,11 +244,11 @@ msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:525
 msgid "Connect"
-msgstr "連線"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:24
 msgid "ControlPanel"
-msgstr "控制台"
+msgstr "Ovládací panel"
 
 #: ../fdtool/fdtool.cxx:96
 msgid "Copies floppy to image path entered,"
@@ -272,15 +272,15 @@ msgstr ""
 
 #: ../cpanel/cpanel.cxx:47
 msgid "Date/Time"
-msgstr "日期/時間"
+msgstr "Dátum/Čas"
 
 #: ../datetool/datetool.cxx:128
 msgid "Datetool"
-msgstr "日期工具"
+msgstr ""
 
 #: ../datetool/datetool.cxx:146
 msgid "Day:"
-msgstr "日："
+msgstr "Deň:"
 
 #: ../scmapps/scmapps.cxx:547
 msgid "Delete"
@@ -292,7 +292,7 @@ msgstr ""
 
 #: ../apps/apps.cxx:1045 ../appsaudit/appsaudit.cxx:661
 msgid "Dependencies"
-msgstr "相依性"
+msgstr ""
 
 #: ../apps/apps.cxx:1028
 msgid "Dependencies And Deletions"
@@ -301,15 +301,15 @@ msgstr ""
 #: ../appbrowser/appbrowser.cxx:575 ../apps/apps.cxx:1261
 #: ../scmapps/scmapps.cxx:1021 ../scmbrowser/scmbrowser.cxx:853
 msgid "Depends"
-msgstr "依賴"
+msgstr ""
 
 #: ../filetool/filetool.cxx:291
 msgid "Device:"
-msgstr "裝置："
+msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:277
 msgid "Diagonal Gradient"
-msgstr "對角線漸層"
+msgstr "Diagonálny gradient"
 
 #: ../filetool/filetool.cxx:282
 msgid "Directory"
@@ -325,7 +325,7 @@ msgstr ""
 
 #: ../apps/apps.cxx:1056 ../appsaudit/appsaudit.cxx:672
 msgid "Display Marked for Deletion"
-msgstr "顯示標記為刪除的程式"
+msgstr ""
 
 #: ../tc-install/tc-install.cxx:643
 msgid "Don't install Extensions (Core Only, Text Based Install)"
@@ -333,16 +333,16 @@ msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:228
 msgid "Done"
-msgstr "完成"
+msgstr "Hotovo"
 
 #: ../appbrowser/appbrowser.cxx:451 ../apps/apps.cxx:1105
 msgid "Download + Load"
-msgstr "下載+載入"
+msgstr "Stiahnuť + použiť"
 
 #: ../appbrowser/appbrowser.cxx:452 ../apps/apps.cxx:1106
 #: ../scmapps/scmapps.cxx:768 ../scmbrowser/scmbrowser.cxx:766
 msgid "Download Only"
-msgstr "只下載"
+msgstr "Len stiahnuť"
 
 #: ../filetool/filetool.cxx:157
 msgid "Dry Run"
@@ -350,7 +350,7 @@ msgstr ""
 
 #: ../network/network.cxx:242
 msgid "E&xit"
-msgstr "退出"
+msgstr ""
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:271
 msgid "Embedded"
@@ -358,7 +358,7 @@ msgstr ""
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:328 ../tc-install/tc-install.cxx:583
 msgid "Enter Spaces Separated Options From Examples Above"
-msgstr "按照以上範例輸入開機選項，並以空格分隔"
+msgstr ""
 
 #: ../filetool/filetool.cxx:326
 msgid "Excluded from Backup (.xfiletool.lst)"
@@ -366,7 +366,7 @@ msgstr ""
 
 #: ../tc-install/tc-install.cxx:517
 msgid "Existing Partition"
-msgstr "現存的分割區"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:674
 msgid "Exit Dependencies Mode"
@@ -378,27 +378,27 @@ msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:679
 msgid "Exit Install Options"
-msgstr "離開安裝選項"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:688
 msgid "Exit Md5 Check Mode"
-msgstr "離開Md5檢查模式"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:692
 msgid "Exit OnBoot"
-msgstr "退出開機時掛載"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:696
 msgid "Exit OnDemand"
-msgstr "退出需要時掛載"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:684
 msgid "Exit Update Mode"
-msgstr "離開更新模式"
+msgstr ""
 
 #: ../exittc/exittc.cxx:132
 msgid "Exit to Prompt"
-msgstr "離開桌面到命令提示字元"
+msgstr "Skončiť a ísť do konzoly"
 
 #: ../tc-install/tc-install.cxx:636
 msgid "Extension Installation"
@@ -406,7 +406,7 @@ msgstr ""
 
 #: ../flrun/flrun.cxx:147
 msgid "FLRun"
-msgstr "FLRun"
+msgstr ""
 
 #: ../apps/apps.cxx:1049 ../appsaudit/appsaudit.cxx:665
 msgid "Fetch Missing Dependencies"
@@ -419,19 +419,19 @@ msgstr ""
 #: ../appbrowser/appbrowser.cxx:565 ../apps/apps.cxx:1252
 #: ../scmapps/scmapps.cxx:1011 ../scmbrowser/scmbrowser.cxx:843
 msgid "Files"
-msgstr "檔案"
+msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:324
 msgid "Fill"
-msgstr "填滿"
+msgstr "Vyplňiť"
 
 #: ../fdtool/fdtool.cxx:72
 msgid "Floppy Disk Tool"
-msgstr "軟磁碟機工具"
+msgstr ""
 
 #: ../fdtool/fdtool.cxx:70
 msgid "FloppyTool"
-msgstr "軟磁碟工具"
+msgstr ""
 
 #: ../fdtool/fdtool.cxx:92
 msgid "Formats FAT of selected size."
@@ -447,11 +447,11 @@ msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:309
 msgid "Full"
-msgstr "全螢幕"
+msgstr "Celý"
 
 #: ../network/network.cxx:207
 msgid "Gateway"
-msgstr "閘道"
+msgstr "Adresa sieťovej brány"
 
 #: ../appbrowser/appbrowser.cxx:599 ../apps/apps.cxx:1286
 #: ../apps/apps.cxx:1316 ../apps/apps.cxx:1341 ../filetool/filetool.cxx:300
@@ -461,15 +461,15 @@ msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:271
 msgid "Horizontal Gradient"
-msgstr ""
+msgstr "Vodorovný gradient"
 
 #: ../datetool/datetool.cxx:154
 msgid "Hour:"
-msgstr "時："
+msgstr "Hodina:"
 
 #: ../network/network.cxx:188
 msgid "IP Address"
-msgstr "IP 位址"
+msgstr "IP Adresa"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:187
 msgid "Icon Size"
@@ -477,7 +477,7 @@ msgstr ""
 
 #: ../fdtool/fdtool.cxx:87
 msgid "Image Path:"
-msgstr "映像檔路徑"
+msgstr ""
 
 #: ../filetool/filetool.cxx:314
 msgid "Included for Backup (.filetool.lst)"
@@ -486,7 +486,7 @@ msgstr ""
 #: ../appbrowser/appbrowser.cxx:555 ../apps/apps.cxx:1242
 #: ../scmapps/scmapps.cxx:1002 ../scmbrowser/scmbrowser.cxx:834
 msgid "Info"
-msgstr "關於"
+msgstr ""
 
 #: ../scmapps/scmapps.cxx:545 ../scmapps/scmapps.cxx:766
 #: ../scmbrowser/scmbrowser.cxx:703 ../scmbrowser/scmbrowser.cxx:765
@@ -499,7 +499,7 @@ msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:676
 msgid "Install Options"
-msgstr "安裝選項"
+msgstr ""
 
 #: ../tc-install/tc-install.cxx:591
 msgid "Install Type"
@@ -511,7 +511,7 @@ msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:301
 msgid "Install images from /opt/backgrounds directory"
-msgstr "從/opt/backgrounds目錄下安裝圖案"
+msgstr "Použi obrázky z adresára  /opt/backgrounds"
 
 #: ../apps/apps.cxx:1033
 msgid "Installation Options"
@@ -519,7 +519,7 @@ msgstr ""
 
 #: ../stats/stats.cxx:162
 msgid "Installed"
-msgstr "已安裝"
+msgstr ""
 
 #: ../tc-install/tc-install.cxx:621
 msgid "Installer Application"
@@ -527,15 +527,15 @@ msgstr ""
 
 #: ../network/network.cxx:164
 msgid "Interface"
-msgstr "介面"
+msgstr "Rozhranie"
 
 #: ../wbarconf/wbarconf.cxx:124
 msgid "Left"
-msgstr "左邊"
+msgstr ""
 
 #: ../wbarconf/wbarconf.cxx:131
 msgid "Left Bottom"
-msgstr "左下"
+msgstr ""
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:134
 msgid "Left Bottom Vertical"
@@ -543,11 +543,11 @@ msgstr ""
 
 #: ../mousetool/mousetool.cxx:93
 msgid "Left Button"
-msgstr "滑鼠左鍵"
+msgstr "Ľavé tlačidlo"
 
 #: ../wbarconf/wbarconf.cxx:130
 msgid "Left Top"
-msgstr "左上"
+msgstr ""
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:133
 msgid "Left Top Vertical"
@@ -559,11 +559,11 @@ msgstr ""
 
 #: ../apps/apps.cxx:1052 ../appsaudit/appsaudit.cxx:668
 msgid "List Dependencies"
-msgstr "列出相依關係"
+msgstr ""
 
 #: ../apps/apps.cxx:1054 ../appsaudit/appsaudit.cxx:670
 msgid "List Missing Dependencies"
-msgstr "列出遺失的相依關係"
+msgstr ""
 
 #: ../apps/apps.cxx:1053 ../appsaudit/appsaudit.cxx:669
 msgid "List Required By"
@@ -576,11 +576,11 @@ msgstr ""
 #: ../appbrowser/appbrowser.cxx:528 ../scmapps/scmapps.cxx:544
 #: ../scmbrowser/scmbrowser.cxx:702
 msgid "Local"
-msgstr "本地端"
+msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:293
 msgid "Logo"
-msgstr ""
+msgstr "Logo"
 
 #: ../appbrowser/appbrowser.cxx:129 ../apps/apps.cxx:232
 #: ../scmapps/scmapps.cxx:223 ../scmbrowser/scmbrowser.cxx:174
@@ -591,7 +591,7 @@ msgstr ""
 #: ../appsaudit/appsaudit.cxx:695 ../cpanel/cpanel.cxx:26
 #: ../scmapps/scmapps.cxx:549
 msgid "Maintenance"
-msgstr "維護"
+msgstr "Údržba"
 
 #: ../tc-install/tc-install.cxx:531
 msgid "Mark Partition Active (bootable)"
@@ -599,7 +599,7 @@ msgstr ""
 
 #: ../apps/apps.cxx:1055 ../appsaudit/appsaudit.cxx:671
 msgid "Mark for Deletion"
-msgstr "標記刪除"
+msgstr ""
 
 #: ../apps/apps.cxx:1025 ../scmapps/scmapps.cxx:550
 msgid "Md5 Checking"
@@ -607,7 +607,7 @@ msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:686 ../scmbrowser/scmbrowser.cxx:705
 msgid "Md5Check"
-msgstr "Md5檢查"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:130 ../apps/apps.cxx:233
 #: ../scmapps/scmapps.cxx:224 ../scmbrowser/scmbrowser.cxx:175
@@ -620,7 +620,7 @@ msgstr ""
 
 #: ../datetool/datetool.cxx:162
 msgid "Min:"
-msgstr "分："
+msgstr "Minúty:"
 
 #: ../mirrorpicker/mirrorpicker.cxx:29
 msgid "Mirror picker"
@@ -628,7 +628,7 @@ msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:531
 msgid "Mirrors"
-msgstr "映射"
+msgstr ""
 
 #: ../apps/apps.cxx:1048 ../appsaudit/appsaudit.cxx:664
 msgid "Missing Dependencies Reporting"
@@ -636,7 +636,7 @@ msgstr ""
 
 #: ../datetool/datetool.cxx:138
 msgid "Month:"
-msgstr "月："
+msgstr "Mesiac:"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:203
 msgid "More"
@@ -644,27 +644,27 @@ msgstr ""
 
 #: ../cpanel/cpanel.cxx:41
 msgid "Mount Tool"
-msgstr "掛載工具"
+msgstr "Pripájanie diskov"
 
 #: ../swapfile/swapfile.cxx:65
 msgid "Mounted Partition:"
-msgstr "已掛載的磁碟分割槽"
+msgstr ""
 
 #: ../mousetool/mousetool.cxx:76
 msgid "Mouse Speed"
-msgstr "滑鼠速度"
+msgstr "Rýchlosť myši"
 
 #: ../cpanel/cpanel.cxx:50
 msgid "Mouse Tool"
-msgstr "滑鼠工具"
+msgstr "Nastavenia myši"
 
 #: ../mousetool/mousetool.cxx:74
 msgid "MouseTool"
-msgstr "滑鼠工具"
+msgstr ""
 
 #: ../network/network.cxx:213
 msgid "NameServers"
-msgstr "網域名稱伺服器"
+msgstr "DNS Servery"
 
 #: ../loadpack/loadpack.cxx:20
 msgid "Navigate to and Select Starter Pack to load."
@@ -673,11 +673,11 @@ msgstr ""
 #: ../cpanel/cpanel.cxx:56 ../network/network.cxx:158
 #: ../network/network.cxx:160
 msgid "Network"
-msgstr "網際網路"
+msgstr "Sieť"
 
 #: ../network/network.cxx:195
 msgid "Network Mask"
-msgstr "網路遮罩"
+msgstr "Sieťová maska"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:291 ../tc-install/tc-install.cxx:546
 msgid "No formatting, use existing."
@@ -689,16 +689,16 @@ msgstr ""
 
 #: ../exittc/exittc.cxx:105 ../filetool/filetool.cxx:156
 msgid "None"
-msgstr "無"
+msgstr "Žiadne"
 
 #: ../flrun/flrun.cxx:149 ../mirrorpicker/mirrorpicker.cxx:36
 msgid "OK"
-msgstr "確認"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:449 ../apps/apps.cxx:1103
 #: ../appsaudit/appsaudit.cxx:690
 msgid "OnBoot"
-msgstr "開機時掛載"
+msgstr "Pri Štarte"
 
 #: ../apps/apps.cxx:1030
 msgid "OnBoot Maintenance"
@@ -707,15 +707,15 @@ msgstr ""
 #: ../appbrowser/appbrowser.cxx:450 ../apps/apps.cxx:1104
 #: ../appsaudit/appsaudit.cxx:694 ../scmapps/scmapps.cxx:767
 msgid "OnDemand"
-msgstr "需要時掛載"
+msgstr "Keď treba"
 
 #: ../apps/apps.cxx:1031 ../scmapps/scmapps.cxx:553
 msgid "OnDemand Maintenance"
-msgstr ""
+msgstr "Údržba na požiadanie"
 
 #: ../wbar_exclude/wbar_exclude.cxx:59
 msgid "Onboot Items"
-msgstr "開機掛載的物件"
+msgstr ""
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:216
 msgid "Optionally Enter Additional Unique Options from above:"
@@ -731,15 +731,15 @@ msgstr ""
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:248
 msgid "Please Select Version to Install"
-msgstr "請選擇要安裝的版本"
+msgstr ""
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:182 ../wbarconf/wbarconf.cxx:160
 msgid "Position"
-msgstr "位置"
+msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:225
 msgid "Preview"
-msgstr "預覽"
+msgstr "Náhľad"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:339 ../tc-install/tc-install.cxx:660
 msgid "Proceed"
@@ -748,20 +748,20 @@ msgstr ""
 #: ../apps/apps.cxx:1331 ../appsaudit/appsaudit.cxx:740
 #: ../scmapps/scmapps.cxx:995 ../scmbrowser/scmbrowser.cxx:827
 msgid "Process Selected Item(s)"
-msgstr "處理已選擇的物件"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:417 ../apps/apps.cxx:1071
 msgid "Provides"
-msgstr "提供"
+msgstr ""
 
 #: ../apps/apps.cxx:1037 ../scmapps/scmapps.cxx:555
 #: ../scmbrowser/scmbrowser.cxx:713
 msgid "Quit"
-msgstr ""
+msgstr "Skončiť"
 
 #: ../exittc/exittc.cxx:127
 msgid "Reboot"
-msgstr "重新啟動"
+msgstr "Reštartovať"
 
 #: ../tc-install/tc-install.cxx:624
 msgid "Remaster Tool"
@@ -778,11 +778,11 @@ msgstr ""
 
 #: ../filetool/filetool.cxx:160
 msgid "Restore"
-msgstr "還原"
+msgstr ""
 
 #: ../apps/apps.cxx:1322 ../appsaudit/appsaudit.cxx:724
 msgid "Results"
-msgstr "結果"
+msgstr ""
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:336 ../tc-install/tc-install.cxx:657
 msgid "Review"
@@ -790,11 +790,11 @@ msgstr ""
 
 #: ../wbarconf/wbarconf.cxx:125
 msgid "Right"
-msgstr "右邊"
+msgstr ""
 
 #: ../wbarconf/wbarconf.cxx:133
 msgid "Right Bottom"
-msgstr "右下方"
+msgstr ""
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:136
 msgid "Right Bottom Vertical"
@@ -802,11 +802,11 @@ msgstr ""
 
 #: ../mousetool/mousetool.cxx:87
 msgid "Right Button"
-msgstr "滑鼠右鍵"
+msgstr "Pravé tlačidlo"
 
 #: ../wbarconf/wbarconf.cxx:132
 msgid "Right Top"
-msgstr "右上方"
+msgstr ""
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:135
 msgid "Right Top Vertical"
@@ -818,11 +818,11 @@ msgstr ""
 
 #: ../exittc/exittc.cxx:107 ../filetool/filetool.cxx:159
 msgid "Safe"
-msgstr "安全"
+msgstr "Bezpečne"
 
 #: ../network/network.cxx:223
 msgid "Save Configuration?"
-msgstr "儲存設定？"
+msgstr "Uložiť nastavenia?"
 
 #: ../scmbrowser/scmbrowser.cxx:701
 msgid "ScmApps"
@@ -835,11 +835,11 @@ msgstr ""
 #: ../appbrowser/appbrowser.cxx:416 ../apps/apps.cxx:1070
 #: ../scmapps/scmapps.cxx:565 ../scmbrowser/scmbrowser.cxx:723
 msgid "Search"
-msgstr "搜尋"
+msgstr "Hľadaj"
 
 #: ../apps/apps.cxx:1308 ../appsaudit/appsaudit.cxx:721
 msgid "Select"
-msgstr "選擇"
+msgstr ""
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:33 ../tc-install/tc-install.cxx:25
 msgid "Select File for "
@@ -847,7 +847,7 @@ msgstr ""
 
 #: ../add2file/add2file.cxx:22
 msgid "Select File to be added to "
-msgstr "選擇一個檔案加入 "
+msgstr ""
 
 #: ../apps/apps.cxx:1020 ../appsaudit/appsaudit.cxx:683
 #: ../scmapps/scmapps.cxx:541 ../scmbrowser/scmbrowser.cxx:711
@@ -880,7 +880,7 @@ msgstr ""
 
 #: ../cpanel/cpanel.cxx:44
 msgid "Services"
-msgstr ""
+msgstr "Služby"
 
 #: ../appbrowser/appbrowser.cxx:608 ../apps/apps.cxx:1295
 #: ../scmapps/scmapps.cxx:1058 ../scmbrowser/scmbrowser.cxx:892
@@ -889,44 +889,44 @@ msgstr ""
 
 #: ../cpanel/cpanel.cxx:34
 msgid "Setup"
-msgstr "設定"
+msgstr "Nastavenia"
 
 #: ../exittc/exittc.cxx:121
 msgid "Shutdown"
-msgstr "關機"
+msgstr "Vypnúť"
 
 #: ../appbrowser/appbrowser.cxx:584 ../apps/apps.cxx:1271
 msgid "Size"
-msgstr "檔案大小"
+msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:259
 msgid "Solid Color"
-msgstr ""
+msgstr "Výplň jednou farbou"
 
 #: ../wallpaper/wallpaper.cxx:336
 msgid "Solid Color or 2 Color Gradient"
-msgstr ""
+msgstr "Výplň 1-nou farbou alebo 2-farebný gradient"
 
 #: ../appbrowser/appbrowser.cxx:603 ../apps/apps.cxx:1290
 #: ../scmapps/scmapps.cxx:1053 ../scmbrowser/scmbrowser.cxx:887
 msgid "Status"
-msgstr "狀況"
+msgstr ""
 
 #: ../swapfile/swapfile.cxx:63
 msgid "Swapfile"
-msgstr "置換檔"
+msgstr "Súbor virtuálnej pamäťe"
 
 #: ../cpanel/cpanel.cxx:53
 msgid "Swapfile Tool"
-msgstr "置換檔工具"
+msgstr "Virtuálna pamäť - súbor"
 
 #: ../cpanel/cpanel.cxx:59
 msgid "System Stats"
-msgstr "系統狀況"
+msgstr "Systémové info"
 
 #: ../exittc/exittc.cxx:117
 msgid "TC Exit Options"
-msgstr "TC 離開選項"
+msgstr "TC Možnosti vypnutia"
 
 #: ../apps/apps.cxx:1345
 msgid "TCE:"
@@ -939,7 +939,7 @@ msgstr ""
 
 #: ../cpanel/cpanel.cxx:62
 msgid "Terminal Server"
-msgstr "終端伺服器"
+msgstr "Terminálový server"
 
 #: ../mirrorpicker/init.cxx:131
 #, c-format
@@ -948,7 +948,7 @@ msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:314
 msgid "Tile"
-msgstr "並排"
+msgstr "Dlaždica"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:255
 msgid "Tiny Core"
@@ -964,7 +964,7 @@ msgstr ""
 
 #: ../stats/stats.cxx:74
 msgid "Tiny Core System Stats"
-msgstr "Tiny Core 系統狀況"
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:677
 msgid "Toggle Default Copy Install"
@@ -976,15 +976,15 @@ msgstr ""
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:125 ../wbarconf/wbarconf.cxx:122
 msgid "Top"
-msgstr "頂端"
+msgstr ""
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:129 ../wbarconf/wbarconf.cxx:126
 msgid "Top Left"
-msgstr "左上方"
+msgstr ""
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:130 ../wbarconf/wbarconf.cxx:127
 msgid "Top Right"
-msgstr "右上方"
+msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:135 ../apps/apps.cxx:238
 #: ../scmapps/scmapps.cxx:229 ../scmbrowser/scmbrowser.cxx:180
@@ -1009,15 +1009,15 @@ msgstr ""
 
 #: ../apps/apps.cxx:1046 ../appsaudit/appsaudit.cxx:662
 msgid "Update .dep files."
-msgstr "更新 Update .dep 檔案."
+msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:681 ../scmbrowser/scmbrowser.cxx:706
 msgid "Updates"
-msgstr "更新"
+msgstr ""
 
 #: ../network/network.cxx:170
 msgid "Use DHCP Broadcast?"
-msgstr "使用DHCP廣播？"
+msgstr "Nastaviť adresu cez DHCP (automaticky)?"
 
 #: ../tc-install/tc-install.cxx:489
 msgid "Use for frugal hard drive installations"
@@ -1033,27 +1033,27 @@ msgstr ""
 
 #: ../cpanel/cpanel.cxx:30
 msgid "Utilities"
-msgstr "工具組"
+msgstr "Nástroje"
 
 #: ../wallpaper/wallpaper.cxx:265
 msgid "Vertical Gradient"
-msgstr ""
+msgstr "Vertikálny gradient"
 
 #: ../cpanel/cpanel.cxx:69 ../wallpaper/wallpaper.cxx:224
 msgid "Wallpaper"
-msgstr "桌布"
+msgstr "Tapeta"
 
 #: ../wbarconf/wbarconf.cxx:176
 msgid "Wbar Icon Size"
-msgstr "Wbar圖像大小"
+msgstr ""
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:170 ../wbarconf/wbarconf.cxx:148
 msgid "Wbar Icons"
-msgstr "Wbar圖像"
+msgstr ""
 
 #: ../wbarconf/wbarconf.cxx:184
 msgid "Wbar Text Labels"
-msgstr "Wbar文字標籤"
+msgstr ""
 
 #: ../wbarconf/wbarconf.cxx:168
 msgid "Wbar Zoom"
@@ -1081,15 +1081,15 @@ msgstr ""
 
 #: ../cpanel/cpanel.cxx:72
 msgid "Xvesa"
-msgstr "Xvesa"
+msgstr ""
 
 #: ../datetool/datetool.cxx:130
 msgid "Year:"
-msgstr "年"
+msgstr "Rok:"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:195
 msgid "Zoom"
-msgstr "縮放畫面"
+msgstr ""
 
 #: ../stats/stats.cxx:171
 msgid "bigHomeFiles"
@@ -1097,15 +1097,15 @@ msgstr ""
 
 #: ../stats/stats.cxx:153
 msgid "boot"
-msgstr "開機"
+msgstr ""
 
 #: ../stats/stats.cxx:80
 msgid "cpu"
-msgstr "cpu"
+msgstr ""
 
 #: ../stats/stats.cxx:126
 msgid "dmesg"
-msgstr "dmesg"
+msgstr ""
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:176
 msgid "eXclude Icons"
@@ -1125,31 +1125,31 @@ msgstr ""
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:298 ../tc-install/tc-install.cxx:553
 msgid "ext2"
-msgstr "ext2fs格式"
+msgstr ""
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:303 ../tc-install/tc-install.cxx:558
 msgid "ext3"
-msgstr "ext3格式"
+msgstr ""
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:308 ../tc-install/tc-install.cxx:563
 msgid "ext4"
-msgstr "ext4格式"
+msgstr ""
 
 #: ../stats/stats.cxx:144
 msgid "filesystems"
-msgstr "檔案系統"
+msgstr ""
 
 #: ../stats/stats.cxx:90
 msgid "mem"
-msgstr "記憶體"
+msgstr ""
 
 #: ../stats/stats.cxx:108
 msgid "modules"
-msgstr "模組"
+msgstr ""
 
 #: ../stats/stats.cxx:135
 msgid "mounts"
-msgstr "掛載"
+msgstr ""
 
 #: ../tc-install/tc-install.cxx:611
 msgid "ndiswrapper"
@@ -1157,15 +1157,15 @@ msgstr ""
 
 #: ../stats/stats.cxx:99
 msgid "net"
-msgstr "網路資訊"
+msgstr ""
 
 #: ../network/network.cxx:179 ../network/network.cxx:232
 msgid "no"
-msgstr "否"
+msgstr "nie"
 
 #: ../stats/stats.cxx:117
 msgid "processes"
-msgstr "程序"
+msgstr ""
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:168
 msgid "tc-wbarconf"
@@ -1173,7 +1173,7 @@ msgstr ""
 
 #: ../swapfile/swapfile.cxx:67
 msgid "tc.swp in k bytes:"
-msgstr "tc.swp in k bytes:"
+msgstr ""
 
 #: ../cpanel/cpanel.cxx:65
 msgid "tcWbarConf"
@@ -1185,4 +1185,4 @@ msgstr ""
 
 #: ../network/network.cxx:173 ../network/network.cxx:226
 msgid "yes"
-msgstr "是"
+msgstr "áno"
