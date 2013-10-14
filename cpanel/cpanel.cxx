@@ -60,7 +60,7 @@ textdomain("tinycore");
       o->callback((Fl_Callback*)btn_callback, (void*)("stats &"));
     } // Fl_Button* o
     { Fl_Button* o = new Fl_Button(305, 100, 120, 30, gettext("Terminal Server"));
-      o->callback((Fl_Callback*)btn_callback, (void*)("aterm +tr +sb -T \"Terminal Server Setup\" -e sudo /usr/bin/tc-terminal-server &"));
+      o->callback((Fl_Callback*)btn_callback, (void*)("xterm -bg black +tr +sb -T \"Terminal Server Setup\" -e sudo /usr/bin/tc-terminal-server &"));
     } // Fl_Button* o
     { btnWbarConf = new Fl_Button(15, 135, 120, 30, gettext("tcWbarConf"));
       btnWbarConf->callback((Fl_Callback*)btn_callback, (void*)("tc-wbarconf &"));

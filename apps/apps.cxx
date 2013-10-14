@@ -153,7 +153,7 @@ outputStatus->color(FL_WHITE);
 outputStatus->value(command.c_str());
 cursor_wait();
 msg = select_extn;
-command = "aterm -fg black -bg white +tr -g 80x5 -e " + command;
+command = "xterm -fg black -bg white +tr -g 80x5 -e " + command;
 system(command.c_str());
 
 command = "busybox md5sum -cs " + select_extn + ".md5.txt";
@@ -426,6 +426,8 @@ if (userdata == "tcz")
 } else if (userdata == "SelectiveCopy") 
 {
    auditView();
+   btnSingle->show();
+   btnResults->show();
    boxExtn->label("Select to Copy");
    command = "ls " + target_dir + "|grep -E .tcz$ ";
    loadBrwExtnData();
