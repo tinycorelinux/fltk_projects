@@ -2,7 +2,7 @@
 
 #include <libintl.h>
 #include "apps.h"
-// (c) Robert Shingledecker 2008-2012
+// (c) Robert Shingledecker 2008-2013
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
