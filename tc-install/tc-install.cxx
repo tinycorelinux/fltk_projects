@@ -576,11 +576,12 @@ int main(int argc, char **argv) {
       } // Fl_Group* grpFormat
       { grpBoot = new Fl_Group(25, 30, 435, 325, mygettext("Boot Options"));
         grpBoot->hide();
-        { brwBootRef = new Fl_Browser(35, 55, 415, 250, mygettext("Boot Options Reference List"));
+        { brwBootRef = new Fl_Browser(35, 55, 415, 235, mygettext("Boot Options Reference List"));
           brwBootRef->textfont(4);
           brwBootRef->align(FL_ALIGN_TOP);
         } // Fl_Browser* brwBootRef
-        { options = new Fl_Input(35, 325, 415, 20, mygettext("Enter Spaces Separated Options From Examples Above"));
+        { options = new Fl_Input(35, 325, 415, 20, mygettext("Enter Spaces Separated Options From Examples Above.\nThese can be edited late\
+r on via your bootloader config."));
           options->labeltype(FL_EMBOSSED_LABEL);
           options->align(FL_ALIGN_TOP);
         } // Fl_Input* options

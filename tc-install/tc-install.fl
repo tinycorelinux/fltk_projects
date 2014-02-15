@@ -474,10 +474,11 @@ prepTarget();
       } {
         Fl_Browser brwBootRef {
           label {Boot Options Reference List}
-          xywh {35 55 415 250} align 1 textfont 4
+          xywh {35 55 415 235} align 1 textfont 4
         }
         Fl_Input options {
-          label {Enter Spaces Separated Options From Examples Above}
+          label {Enter Spaces Separated Options From Examples Above.
+These can be edited later on via your bootloader config.}
           xywh {35 325 415 20} labeltype EMBOSSED_LABEL align 1
         }
       }
