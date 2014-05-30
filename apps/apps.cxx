@@ -2,7 +2,7 @@
 
 #include <libintl.h>
 #include "apps.h"
-// (c) Robert Shingledecker 2008-2013
+// (c) Robert Shingledecker 2008-2012
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
@@ -65,7 +65,7 @@ boxExtn->label("Select");
 boxResults->label("Results");
 report_type.empty();
 btnSingle->label("Add Item");
-btnResults->label("Delete Item");
+btnResults->label("Delete Item from list");
 btnSingle->deactivate();
 btnResults->deactivate();
 btnSingle->hide();
@@ -1340,7 +1340,7 @@ unlink(testfile.c_str());
         brwResults->textfont(4);
         brwResults->callback((Fl_Callback*)brwResultsCB);
       } // Fl_Browser* brwResults
-      { btnResults = new Fl_Button(210, 380, 80, 20, mygettext("Go"));
+      { btnResults = new Fl_Button(210, 380, 145, 20, mygettext("Go"));
         btnResults->callback((Fl_Callback*)btnResultsCB);
         btnResults->deactivate();
       } // Fl_Button* btnResults

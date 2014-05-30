@@ -97,7 +97,7 @@ boxExtn->label("Select");
 boxResults->label("Results");
 report_type.empty();
 btnSingle->label("Add Item");
-btnResults->label("Delete Item");
+btnResults->label("Delete Item from list");
 btnSingle->deactivate();
 btnResults->deactivate();
 btnSingle->hide();
@@ -1486,7 +1486,7 @@ outURI->value(mirror.c_str());}
       Fl_Button btnResults {
         label Go
         callback btnResultsCB
-        xywh {210 380 80 20} deactivate
+        xywh {210 380 145 20} deactivate
       }
       Fl_Output outTCE {
         label {TCE:}
