@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tctools\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-12-19 21:49+0200\n"
-"PO-Revision-Date: 2013-05-24 14:38+0000\n"
-"Last-Translator: jls legalize <unsenepopiu@tin.it>\n"
+"POT-Creation-Date: 2013-10-08 17:37+0300\n"
+"PO-Revision-Date: 2013-10-12 13:21+0000\n"
+"Last-Translator: jls legalize <jlslegalize@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-08 14:41+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2014-08-14 16:48+0000\n"
+"X-Generator: Launchpad (build 17156)\n"
 
 #: ../scmapps/scmapps.cxx:538
 msgid "   Apps"
-msgstr "   Applicazioni"
+msgstr "   Applic"
 
 #: ../mousetool/mousetool.cxx:98 ../network/network.cxx:239
 msgid "&Apply"
@@ -30,7 +30,7 @@ msgid "&Apply Image"
 msgstr "A&pplica Imm."
 
 #: ../datetool/datetool.cxx:173 ../exittc/exittc.cxx:152
-#: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:152 ../swapfile/swapfile.cxx:69
+#: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:157 ../swapfile/swapfile.cxx:69
 msgid "&Cancel"
 msgstr "&Annulla"
 
@@ -104,7 +104,7 @@ msgstr "Aggiungi elemento"
 msgid "Appbrowser"
 msgstr "BrowserApplicazioni"
 
-#: ../flrun/flrun.cxx:158
+#: ../flrun/flrun.cxx:163
 msgid "Application launcher"
 msgstr "Esecutore di applicazioni"
 
@@ -181,7 +181,7 @@ msgstr "In Basso a Destra"
 msgid "Broadcast"
 msgstr "Trasmetti"
 
-#: ../apps/apps.cxx:1019 ../flrun/flrun.cxx:155 ../scmapps/scmapps.cxx:540
+#: ../apps/apps.cxx:1019 ../flrun/flrun.cxx:160 ../scmapps/scmapps.cxx:540
 #: ../scmbrowser/scmbrowser.cxx:710
 msgid "Browse"
 msgstr "&Sfoglia"
@@ -206,21 +206,21 @@ msgstr "&Controlla Md5sums"
 
 #: ../apps/apps.cxx:1029
 msgid "Check Onboot Unneeded"
-msgstr "Controllo non necessari in avvio"
+msgstr "Controllo &Ridondanze in Avvio"
 
 #: ../apps/apps.cxx:1027
 msgid "Check for Orphans"
-msgstr "Controllo orfani"
+msgstr "Controllo &Orfani"
 
 #: ../apps/apps.cxx:1026 ../appsaudit/appsaudit.cxx:682
 #: ../scmapps/scmapps.cxx:551
 msgid "Check for Updates"
-msgstr "&Controllo Aggiornamenti"
+msgstr "Controllo &Aggiornamenti"
 
 #: ../mirrorpicker/init.cxx:110
 #, c-format
 msgid "Checking %u mirrors, please wait..."
-msgstr "Controllo %u mirrors, attendere per favore..."
+msgstr "&Test %u mirrors, attendere..."
 
 #: ../filetool/filetool.cxx:343
 msgid "Clear Item"
@@ -405,7 +405,7 @@ msgstr "&Esci da X"
 msgid "Extension Installation"
 msgstr "Installazione Estensione"
 
-#: ../flrun/flrun.cxx:147
+#: ../flrun/flrun.cxx:152
 msgid "FLRun"
 msgstr "Esegui"
 
@@ -572,7 +572,7 @@ msgstr "&Richiesta da"
 
 #: ../apps/apps.cxx:1023
 msgid "Load App Locally"
-msgstr "&Carica Applicazioni Locali"
+msgstr "C&arica Applicazioni Locali"
 
 #: ../appbrowser/appbrowser.cxx:528 ../scmapps/scmapps.cxx:544
 #: ../scmbrowser/scmbrowser.cxx:702
@@ -592,7 +592,7 @@ msgstr "Errore MD5SUM"
 #: ../appsaudit/appsaudit.cxx:695 ../cpanel/cpanel.cxx:26
 #: ../scmapps/scmapps.cxx:549
 msgid "Maintenance"
-msgstr "Manutenzione"
+msgstr "&Manutenzione"
 
 #: ../tc-install/tc-install.cxx:531
 msgid "Mark Partition Active (bootable)"
@@ -604,7 +604,7 @@ msgstr "&Marca x la Cancellazione"
 
 #: ../apps/apps.cxx:1025 ../scmapps/scmapps.cxx:550
 msgid "Md5 Checking"
-msgstr "&Controllo md5"
+msgstr "Controllo &md5"
 
 #: ../appsaudit/appsaudit.cxx:686 ../scmbrowser/scmbrowser.cxx:705
 msgid "Md5Check"
@@ -692,14 +692,14 @@ msgstr "Supporto a layout di tastiera non-US"
 msgid "None"
 msgstr "Nessuno"
 
-#: ../flrun/flrun.cxx:149 ../mirrorpicker/mirrorpicker.cxx:36
+#: ../flrun/flrun.cxx:154 ../mirrorpicker/mirrorpicker.cxx:36
 msgid "OK"
 msgstr "Ok"
 
 #: ../appbrowser/appbrowser.cxx:449 ../apps/apps.cxx:1103
 #: ../appsaudit/appsaudit.cxx:690
 msgid "OnBoot"
-msgstr "&InAvvio"
+msgstr "&In Avvio"
 
 #: ../apps/apps.cxx:1030
 msgid "OnBoot Maintenance"
@@ -817,6 +817,10 @@ msgstr "In Verticale in Alto a Destra"
 msgid "Right Vertical"
 msgstr "In verticale a destra"
 
+#: ../flrun/flrun.cxx:169
+msgid "Run with sudo"
+msgstr "&Esegui con sudo"
+
 #: ../exittc/exittc.cxx:107 ../filetool/filetool.cxx:159
 msgid "Safe"
 msgstr "Sicuro"
@@ -853,7 +857,7 @@ msgstr "Seleziona il FIle che Deve Essere Aggiunto a "
 #: ../apps/apps.cxx:1020 ../appsaudit/appsaudit.cxx:683
 #: ../scmapps/scmapps.cxx:541 ../scmbrowser/scmbrowser.cxx:711
 msgid "Select Mirror"
-msgstr "Selezione Mirror"
+msgstr "Selezione &Mirror"
 
 #: ../flpdf/flpdf.cxx:19
 msgid "Select PDF File to view with mupdf: "
@@ -869,7 +873,7 @@ msgstr "Seleziona Disco di Destinazione"
 
 #: ../apps/apps.cxx:1021 ../scmapps/scmapps.cxx:542
 msgid "Select fastest mirror"
-msgstr "Seleziona il miror + veloce"
+msgstr "Seleziona il Miror + &Veloce"
 
 #: ../appsaudit/appsaudit.cxx:678
 msgid "Selective Copy Install"
@@ -974,7 +978,7 @@ msgstr "Scambia &Default Copia/Installa"
 
 #: ../apps/apps.cxx:1034
 msgid "Toggle Default Install to File System Flag"
-msgstr "&SCambia Flag Installa nel FIle System"
+msgstr "&Scambia Flag Installa nel FIle System"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:125 ../wbarconf/wbarconf.cxx:122
 msgid "Top"
@@ -995,7 +999,7 @@ msgstr "Prova a terminare il download"
 
 #: ../apps/apps.cxx:1300 ../scmapps/scmapps.cxx:1063
 msgid "URI:"
-msgstr "&URI:"
+msgstr "URI:"
 
 #: ../tc-install/tc-install.cxx:496
 msgid "USB-HDD"

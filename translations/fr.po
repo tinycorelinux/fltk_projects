@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tctools\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-12-19 21:49+0200\n"
-"PO-Revision-Date: 2013-01-27 03:52+0000\n"
-"Last-Translator: londumas <helion331990@gmail.com>\n"
+"POT-Creation-Date: 2013-10-08 17:37+0300\n"
+"PO-Revision-Date: 2014-08-14 10:48+0000\n"
+"Last-Translator: jls legalize <jlslegalize@gmail.com>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-08 14:40+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2014-08-14 16:48+0000\n"
+"X-Generator: Launchpad (build 17156)\n"
 
 #: ../scmapps/scmapps.cxx:538
 msgid "   Apps"
@@ -30,7 +30,7 @@ msgid "&Apply Image"
 msgstr "&Appliquer l'image"
 
 #: ../datetool/datetool.cxx:173 ../exittc/exittc.cxx:152
-#: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:152 ../swapfile/swapfile.cxx:69
+#: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:157 ../swapfile/swapfile.cxx:69
 msgid "&Cancel"
 msgstr "&Annuler"
 
@@ -86,7 +86,7 @@ msgstr "@>>"
 
 #: ../filetool/filetool.cxx:306
 msgid "Action Results"
-msgstr ""
+msgstr "Résultats d'action"
 
 #: ../filetool/filetool.cxx:295
 msgid "Action:"
@@ -94,17 +94,17 @@ msgstr "Action:"
 
 #: ../filetool/filetool.cxx:349
 msgid "Add"
-msgstr ""
+msgstr "Ajouter"
 
 #: ../scmapps/scmapps.cxx:1071
 msgid "Add Item"
-msgstr ""
+msgstr "Ajouter un élément"
 
 #: ../appbrowser/appbrowser.cxx:523 ../scmbrowser/scmbrowser.cxx:794
 msgid "Appbrowser"
 msgstr "Navigateur d'applications"
 
-#: ../flrun/flrun.cxx:158
+#: ../flrun/flrun.cxx:163
 msgid "Application launcher"
 msgstr "Lanceur d'application"
 
@@ -143,7 +143,7 @@ msgstr "Options de sauvegarde :"
 
 #: ../filetool/filetool.cxx:290
 msgid "Backup Restore and Lists Maintenance"
-msgstr ""
+msgstr "Restauration de la sauvegarde et de maintenance des listes"
 
 #: ../cpanel/cpanel.cxx:38
 msgid "Backup/Restore"
@@ -181,7 +181,7 @@ msgstr "En bas à droite"
 msgid "Broadcast"
 msgstr "Diffuser"
 
-#: ../apps/apps.cxx:1019 ../flrun/flrun.cxx:155 ../scmapps/scmapps.cxx:540
+#: ../apps/apps.cxx:1019 ../flrun/flrun.cxx:160 ../scmapps/scmapps.cxx:540
 #: ../scmbrowser/scmbrowser.cxx:710
 msgid "Browse"
 msgstr "Parcourir"
@@ -206,11 +206,11 @@ msgstr "Vérifier md5sums"
 
 #: ../apps/apps.cxx:1029
 msgid "Check Onboot Unneeded"
-msgstr ""
+msgstr "Vérifiez Au démarrage Inutiles"
 
 #: ../apps/apps.cxx:1027
 msgid "Check for Orphans"
-msgstr ""
+msgstr "Vérifiez pour les orphelins"
 
 #: ../apps/apps.cxx:1026 ../appsaudit/appsaudit.cxx:682
 #: ../scmapps/scmapps.cxx:551
@@ -220,11 +220,11 @@ msgstr "Vérifier si des mises à jour sont disponibles"
 #: ../mirrorpicker/init.cxx:110
 #, c-format
 msgid "Checking %u mirrors, please wait..."
-msgstr ""
+msgstr "Vérification miroirs de %u, s'il vous plaît patienter ..."
 
 #: ../filetool/filetool.cxx:343
 msgid "Clear Item"
-msgstr ""
+msgstr "Effacer élément"
 
 #: ../apps/apps.cxx:1057 ../appsaudit/appsaudit.cxx:673
 msgid "Clear Marked for Deletion"
@@ -269,6 +269,7 @@ msgstr "Core et  Bureau X/GUI"
 #: ../mirrorpicker/init.cxx:63
 msgid "Couldn't load mirror list. Maybe network issue?"
 msgstr ""
+"Impossible de charger la liste des miroirs. Peut-être en réseau question?"
 
 #: ../cpanel/cpanel.cxx:47
 msgid "Date/Time"
@@ -288,7 +289,7 @@ msgstr "Effacer"
 
 #: ../filetool/filetool.cxx:339 ../scmapps/scmapps.cxx:1075
 msgid "Delete Item"
-msgstr ""
+msgstr "Supprimer l'élément"
 
 #: ../apps/apps.cxx:1045 ../appsaudit/appsaudit.cxx:661
 msgid "Dependencies"
@@ -313,7 +314,7 @@ msgstr "Dégradé Diagonale"
 
 #: ../filetool/filetool.cxx:282
 msgid "Directory"
-msgstr ""
+msgstr "Répertoire"
 
 #: ../apps/apps.cxx:1051 ../appsaudit/appsaudit.cxx:667
 msgid "Display All Not Depended On"
@@ -347,7 +348,7 @@ msgstr "Télécharger seulement"
 
 #: ../filetool/filetool.cxx:157
 msgid "Dry Run"
-msgstr ""
+msgstr "Essais à vide"
 
 #: ../network/network.cxx:242
 msgid "E&xit"
@@ -364,7 +365,7 @@ msgstr ""
 
 #: ../filetool/filetool.cxx:326
 msgid "Excluded from Backup (.xfiletool.lst)"
-msgstr ""
+msgstr "Exclus de la sauvegarde (.xfiletool.lst)"
 
 #: ../tc-install/tc-install.cxx:517
 msgid "Existing Partition"
@@ -406,7 +407,7 @@ msgstr "Quitter vers la ligne de commande"
 msgid "Extension Installation"
 msgstr "Installation d'Extensions"
 
-#: ../flrun/flrun.cxx:147
+#: ../flrun/flrun.cxx:152
 msgid "FLRun"
 msgstr "FLRun"
 
@@ -416,7 +417,7 @@ msgstr "Chercher Dépendances Manquantes"
 
 #: ../filetool/filetool.cxx:281
 msgid "File"
-msgstr ""
+msgstr "Fichier"
 
 #: ../appbrowser/appbrowser.cxx:565 ../apps/apps.cxx:1252
 #: ../scmapps/scmapps.cxx:1011 ../scmbrowser/scmbrowser.cxx:843
@@ -483,7 +484,7 @@ msgstr "Chemin de l'image"
 
 #: ../filetool/filetool.cxx:314
 msgid "Included for Backup (.filetool.lst)"
-msgstr ""
+msgstr "Inclus pour la sauvegarde"
 
 #: ../appbrowser/appbrowser.cxx:555 ../apps/apps.cxx:1242
 #: ../scmapps/scmapps.cxx:1002 ../scmbrowser/scmbrowser.cxx:834
@@ -626,7 +627,7 @@ msgstr "Min. :"
 
 #: ../mirrorpicker/mirrorpicker.cxx:29
 msgid "Mirror picker"
-msgstr ""
+msgstr "miroir sélecteur"
 
 #: ../appbrowser/appbrowser.cxx:531
 msgid "Mirrors"
@@ -693,7 +694,7 @@ msgstr "Support des claviers hors US"
 msgid "None"
 msgstr "Aucun"
 
-#: ../flrun/flrun.cxx:149 ../mirrorpicker/mirrorpicker.cxx:36
+#: ../flrun/flrun.cxx:154 ../mirrorpicker/mirrorpicker.cxx:36
 msgid "OK"
 msgstr "Ok"
 
@@ -818,6 +819,10 @@ msgstr "Haut Droite Verticale"
 msgid "Right Vertical"
 msgstr "Droite Verticale"
 
+#: ../flrun/flrun.cxx:169
+msgid "Run with sudo"
+msgstr "Exécuter avec sudo"
+
 #: ../exittc/exittc.cxx:107 ../filetool/filetool.cxx:159
 msgid "Safe"
 msgstr "Sûr"
@@ -858,7 +863,7 @@ msgstr "Sélectionner le  Miroir"
 
 #: ../flpdf/flpdf.cxx:19
 msgid "Select PDF File to view with mupdf: "
-msgstr ""
+msgstr "Sélectionnez Fichier PDF à voir avec mupdf "
 
 #: ../tc-install/tc-install.cxx:451
 msgid "Select TCE/CDE Directory"
@@ -870,7 +875,7 @@ msgstr "Sélectionner le Disque Cible"
 
 #: ../apps/apps.cxx:1021 ../scmapps/scmapps.cxx:542
 msgid "Select fastest mirror"
-msgstr ""
+msgstr "Sélectionnez miroir le plus rapide"
 
 #: ../appsaudit/appsaudit.cxx:678
 msgid "Selective Copy Install"
@@ -947,6 +952,8 @@ msgstr "Serveur de terminaux"
 #, c-format
 msgid "The fastest mirror was %.*s. Press ok to set it as your mirror."
 msgstr ""
+"Le miroir le plus rapide était  %.*s. Appuyez sur OK pour la définir comme "
+"votre miroir."
 
 #: ../wallpaper/wallpaper.cxx:314
 msgid "Tile"

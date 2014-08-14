@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tctools\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-12-19 21:49+0200\n"
-"PO-Revision-Date: 2013-05-21 22:42+0000\n"
-"Last-Translator: Yukimasa Sugizaki <i.can.speak.c.and.basic@gmail.com>\n"
+"POT-Creation-Date: 2013-10-08 17:37+0300\n"
+"PO-Revision-Date: 2014-06-12 07:05+0000\n"
+"Last-Translator: BALLOON a.k.a. Fu-sen. <balloon@shigakeiichi.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-08 14:41+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2014-08-14 16:48+0000\n"
+"X-Generator: Launchpad (build 17156)\n"
 
 #: ../scmapps/scmapps.cxx:538
 msgid "   Apps"
-msgstr ""
+msgstr "   Apps"
 
 #: ../mousetool/mousetool.cxx:98 ../network/network.cxx:239
 msgid "&Apply"
@@ -30,7 +30,7 @@ msgid "&Apply Image"
 msgstr "イメージを適用(&A)"
 
 #: ../datetool/datetool.cxx:173 ../exittc/exittc.cxx:152
-#: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:152 ../swapfile/swapfile.cxx:69
+#: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:157 ../swapfile/swapfile.cxx:69
 msgid "&Cancel"
 msgstr "キャンセル(&C)"
 
@@ -71,7 +71,7 @@ msgstr "@<"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:355
 msgid "@<<"
-msgstr ""
+msgstr "@<<"
 
 #: ../datetool/datetool.cxx:135 ../datetool/datetool.cxx:143
 #: ../datetool/datetool.cxx:151 ../datetool/datetool.cxx:159
@@ -82,7 +82,7 @@ msgstr "@>"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:358
 msgid "@>>"
-msgstr ""
+msgstr "@>>"
 
 #: ../filetool/filetool.cxx:306
 msgid "Action Results"
@@ -90,36 +90,36 @@ msgstr "実行結果"
 
 #: ../filetool/filetool.cxx:295
 msgid "Action:"
-msgstr ""
+msgstr "操作:"
 
 #: ../filetool/filetool.cxx:349
 msgid "Add"
-msgstr ""
+msgstr "追加"
 
 #: ../scmapps/scmapps.cxx:1071
 msgid "Add Item"
-msgstr ""
+msgstr "アイテムの追加"
 
 #: ../appbrowser/appbrowser.cxx:523 ../scmbrowser/scmbrowser.cxx:794
 msgid "Appbrowser"
-msgstr "Appbrowser"
+msgstr "アプリブラウザ"
 
-#: ../flrun/flrun.cxx:158
+#: ../flrun/flrun.cxx:163
 msgid "Application launcher"
-msgstr ""
+msgstr "アプリケーションランチャ"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:206 ../tc-wbarconf/tc-wbarconf.cxx:224
 #: ../wbarconf/wbarconf.cxx:165
 msgid "Apply"
-msgstr ""
+msgstr "適用"
 
 #: ../apps/apps.cxx:1017
 msgid "Apps"
-msgstr ""
+msgstr "アプリ"
 
 #: ../apps/apps.cxx:1207
 msgid "Apps: Regular Applications (tcz)"
-msgstr ""
+msgstr "アプリ: 通常アプリケーション (tcz)"
 
 #: ../appsaudit/appsaudit.cxx:716
 msgid "AppsAudit"
@@ -127,11 +127,11 @@ msgstr "AppsAudit"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:221
 msgid "Back"
-msgstr ""
+msgstr "戻る"
 
 #: ../wallpaper/wallpaper.cxx:331
 msgid "Background Image"
-msgstr ""
+msgstr "背景の画像"
 
 #: ../exittc/exittc.cxx:106 ../filetool/filetool.cxx:158
 msgid "Backup"
@@ -139,52 +139,52 @@ msgstr "バックアップ"
 
 #: ../exittc/exittc.cxx:143
 msgid "Backup Options:"
-msgstr ""
+msgstr "バックアップオプション"
 
 #: ../filetool/filetool.cxx:290
 msgid "Backup Restore and Lists Maintenance"
-msgstr ""
+msgstr "バックアップの復旧・一覧メンテナンス"
 
 #: ../cpanel/cpanel.cxx:38
 msgid "Backup/Restore"
-msgstr "バックアップ/リストア"
+msgstr "バックアップ・復元"
 
 #: ../scmbrowser/scmbrowser.cxx:707
 msgid "Boot List"
-msgstr ""
+msgstr "起動一覧"
 
 #: ../scmapps/scmapps.cxx:552
 msgid "Boot List Maintenance"
-msgstr ""
+msgstr "起動一覧の管理"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:322 ../tc-install/tc-install.cxx:577
 msgid "Boot Options"
-msgstr ""
+msgstr "起動オプション"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:324 ../tc-install/tc-install.cxx:579
 msgid "Boot Options Reference List"
-msgstr ""
+msgstr "起動オプション参照リスト"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:126 ../wbarconf/wbarconf.cxx:123
 msgid "Bottom"
-msgstr ""
+msgstr "下"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:131 ../wbarconf/wbarconf.cxx:128
 msgid "Bottom Left"
-msgstr ""
+msgstr "左下"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:132 ../wbarconf/wbarconf.cxx:129
 msgid "Bottom Right"
-msgstr ""
+msgstr "右下"
 
 #: ../network/network.cxx:201
 msgid "Broadcast"
 msgstr "ブロードキャスト"
 
-#: ../apps/apps.cxx:1019 ../flrun/flrun.cxx:155 ../scmapps/scmapps.cxx:540
+#: ../apps/apps.cxx:1019 ../flrun/flrun.cxx:160 ../scmapps/scmapps.cxx:540
 #: ../scmbrowser/scmbrowser.cxx:710
 msgid "Browse"
-msgstr "閲覧"
+msgstr "参照"
 
 #: ../apps/apps.cxx:1047 ../appsaudit/appsaudit.cxx:663
 msgid "Build Reporting Database"
@@ -194,7 +194,7 @@ msgstr "依存関係データベースの作成"
 #: ../mirrorpicker/mirrorpicker.cxx:40 ../scmapps/scmapps.cxx:232
 #: ../scmbrowser/scmbrowser.cxx:183
 msgid "Cancel"
-msgstr ""
+msgstr "キャンセル"
 
 #: ../wallpaper/wallpaper.cxx:319
 msgid "Center"
@@ -202,29 +202,29 @@ msgstr "中央"
 
 #: ../appsaudit/appsaudit.cxx:687
 msgid "Check Md5sums"
-msgstr ""
+msgstr "MD5 チェックサム確認"
 
 #: ../apps/apps.cxx:1029
 msgid "Check Onboot Unneeded"
-msgstr ""
+msgstr "不要な onboot の確認"
 
 #: ../apps/apps.cxx:1027
 msgid "Check for Orphans"
-msgstr ""
+msgstr "Orphans の確認"
 
 #: ../apps/apps.cxx:1026 ../appsaudit/appsaudit.cxx:682
 #: ../scmapps/scmapps.cxx:551
 msgid "Check for Updates"
-msgstr "アップデートを確認"
+msgstr "アップデートの確認"
 
 #: ../mirrorpicker/init.cxx:110
 #, c-format
 msgid "Checking %u mirrors, please wait..."
-msgstr ""
+msgstr "ミラー %u を確認中。お待ち下さい..."
 
 #: ../filetool/filetool.cxx:343
 msgid "Clear Item"
-msgstr ""
+msgstr "項目クリア"
 
 #: ../apps/apps.cxx:1057 ../appsaudit/appsaudit.cxx:673
 msgid "Clear Marked for Deletion"
@@ -232,15 +232,15 @@ msgstr "削除マークの消去"
 
 #: ../apps/apps.cxx:1018 ../scmapps/scmapps.cxx:539
 msgid "Cloud (Remote)"
-msgstr ""
+msgstr "クラウド (リモート)"
 
 #: ../wallpaper/wallpaper.cxx:233
 msgid "Color #1"
-msgstr ""
+msgstr "色 #1"
 
 #: ../wallpaper/wallpaper.cxx:246
 msgid "Color #2"
-msgstr ""
+msgstr "色 #2"
 
 #: ../appbrowser/appbrowser.cxx:525
 msgid "Connect"
@@ -248,7 +248,7 @@ msgstr "接続"
 
 #: ../cpanel/cpanel.cxx:24
 msgid "ControlPanel"
-msgstr ""
+msgstr "コントロールパネル"
 
 #: ../fdtool/fdtool.cxx:96
 msgid "Copies floppy to image path entered,"
@@ -256,23 +256,23 @@ msgstr "入力パスにフロッピーのイメージをコピー"
 
 #: ../tc-install/tc-install.cxx:597
 msgid "Core Only (Text Based Interface)"
-msgstr ""
+msgstr "コアのみ (テキストベースインターフェイス)"
 
 #: ../tc-install/tc-install.cxx:603
 msgid "Core Plus Extensions Catagories to Install"
-msgstr ""
+msgstr "Core Plus 拡張カテゴリをインストール"
 
 #: ../tc-install/tc-install.cxx:592
 msgid "Core and X/GUI Desktop"
-msgstr ""
+msgstr "コア および X/GUI デスクトップ"
 
 #: ../mirrorpicker/init.cxx:63
 msgid "Couldn't load mirror list. Maybe network issue?"
-msgstr ""
+msgstr "ミラー一覧を読み込めません。ネットワークを確認して下さい。"
 
 #: ../cpanel/cpanel.cxx:47
 msgid "Date/Time"
-msgstr "日付/時刻"
+msgstr "日付・時間"
 
 #: ../datetool/datetool.cxx:128
 msgid "Datetool"
@@ -284,11 +284,11 @@ msgstr "日:"
 
 #: ../scmapps/scmapps.cxx:547
 msgid "Delete"
-msgstr ""
+msgstr "削除"
 
 #: ../filetool/filetool.cxx:339 ../scmapps/scmapps.cxx:1075
 msgid "Delete Item"
-msgstr ""
+msgstr "項目の削除"
 
 #: ../apps/apps.cxx:1045 ../appsaudit/appsaudit.cxx:661
 msgid "Dependencies"
@@ -296,7 +296,7 @@ msgstr "依存情報"
 
 #: ../apps/apps.cxx:1028
 msgid "Dependencies And Deletions"
-msgstr ""
+msgstr "依存情報・削除"
 
 #: ../appbrowser/appbrowser.cxx:575 ../apps/apps.cxx:1261
 #: ../scmapps/scmapps.cxx:1021 ../scmbrowser/scmbrowser.cxx:853
@@ -313,7 +313,7 @@ msgstr ""
 
 #: ../filetool/filetool.cxx:282
 msgid "Directory"
-msgstr ""
+msgstr "フォルダ"
 
 #: ../apps/apps.cxx:1051 ../appsaudit/appsaudit.cxx:667
 msgid "Display All Not Depended On"
@@ -329,20 +329,20 @@ msgstr "削除マークをつけた拡張を表示"
 
 #: ../tc-install/tc-install.cxx:643
 msgid "Don't install Extensions (Core Only, Text Based Install)"
-msgstr ""
+msgstr "拡張をインストールしない (コアのみ、テキストベースインストール)"
 
 #: ../wallpaper/wallpaper.cxx:228
 msgid "Done"
-msgstr ""
+msgstr "完了"
 
 #: ../appbrowser/appbrowser.cxx:451 ../apps/apps.cxx:1105
 msgid "Download + Load"
-msgstr ""
+msgstr "ダウンロード・読込"
 
 #: ../appbrowser/appbrowser.cxx:452 ../apps/apps.cxx:1106
 #: ../scmapps/scmapps.cxx:768 ../scmbrowser/scmbrowser.cxx:766
 msgid "Download Only"
-msgstr ""
+msgstr "ダウンロードのみ"
 
 #: ../filetool/filetool.cxx:157
 msgid "Dry Run"
@@ -354,7 +354,7 @@ msgstr "終了(&X)"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:271
 msgid "Embedded"
-msgstr ""
+msgstr "埋め込み"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:328 ../tc-install/tc-install.cxx:583
 msgid "Enter Spaces Separated Options From Examples Above"
@@ -362,7 +362,7 @@ msgstr ""
 
 #: ../filetool/filetool.cxx:326
 msgid "Excluded from Backup (.xfiletool.lst)"
-msgstr ""
+msgstr "バックアップの対象外 (.xfiletool.lst)"
 
 #: ../tc-install/tc-install.cxx:517
 msgid "Existing Partition"
@@ -382,15 +382,15 @@ msgstr "インストールオプションを終了"
 
 #: ../appsaudit/appsaudit.cxx:688
 msgid "Exit Md5 Check Mode"
-msgstr ""
+msgstr "MD5 確認モードを終了"
 
 #: ../appsaudit/appsaudit.cxx:692
 msgid "Exit OnBoot"
-msgstr "OnBootを終了"
+msgstr "OnBoot を終了"
 
 #: ../appsaudit/appsaudit.cxx:696
 msgid "Exit OnDemand"
-msgstr "OnDemandを終了"
+msgstr "OnDemand を終了"
 
 #: ../appsaudit/appsaudit.cxx:684
 msgid "Exit Update Mode"
@@ -398,15 +398,15 @@ msgstr "アップデートモードを終了"
 
 #: ../exittc/exittc.cxx:132
 msgid "Exit to Prompt"
-msgstr "Xを終了してコンソール"
+msgstr "X を終了してコンソール"
 
 #: ../tc-install/tc-install.cxx:636
 msgid "Extension Installation"
-msgstr ""
+msgstr "拡張機能のインストール"
 
-#: ../flrun/flrun.cxx:147
+#: ../flrun/flrun.cxx:152
 msgid "FLRun"
-msgstr ""
+msgstr "FLRun"
 
 #: ../apps/apps.cxx:1049 ../appsaudit/appsaudit.cxx:665
 msgid "Fetch Missing Dependencies"
@@ -414,7 +414,7 @@ msgstr ""
 
 #: ../filetool/filetool.cxx:281
 msgid "File"
-msgstr ""
+msgstr "ファイル"
 
 #: ../appbrowser/appbrowser.cxx:565 ../apps/apps.cxx:1252
 #: ../scmapps/scmapps.cxx:1011 ../scmbrowser/scmbrowser.cxx:843
@@ -431,23 +431,23 @@ msgstr "フロッピーディスクツール"
 
 #: ../fdtool/fdtool.cxx:70
 msgid "FloppyTool"
-msgstr ""
+msgstr "フロッピーツール"
 
 #: ../fdtool/fdtool.cxx:92
 msgid "Formats FAT of selected size."
-msgstr "選択したサイズのFATでフォーマット"
+msgstr "選択サイズの FAT でフォーマット"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:290 ../tc-install/tc-install.cxx:545
 msgid "Formatting Options"
-msgstr ""
+msgstr "フォーマットオプション"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:265 ../tc-install/tc-install.cxx:488
 msgid "Frugal"
-msgstr ""
+msgstr "Frugal"
 
 #: ../wallpaper/wallpaper.cxx:309
 msgid "Full"
-msgstr "縦横比を維持して伸縮"
+msgstr "Full"
 
 #: ../network/network.cxx:207
 msgid "Gateway"
@@ -457,11 +457,11 @@ msgstr "ゲートウェイ"
 #: ../apps/apps.cxx:1316 ../apps/apps.cxx:1341 ../filetool/filetool.cxx:300
 #: ../scmapps/scmapps.cxx:1049 ../scmbrowser/scmbrowser.cxx:881
 msgid "Go"
-msgstr ""
+msgstr "進む"
 
 #: ../wallpaper/wallpaper.cxx:271
 msgid "Horizontal Gradient"
-msgstr ""
+msgstr "横方向のグラデーション"
 
 #: ../datetool/datetool.cxx:154
 msgid "Hour:"
@@ -473,7 +473,7 @@ msgstr "IP アドレス"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:187
 msgid "Icon Size"
-msgstr ""
+msgstr "アイコンサイズ"
 
 #: ../fdtool/fdtool.cxx:87
 msgid "Image Path:"
@@ -481,7 +481,7 @@ msgstr "イメージパス:"
 
 #: ../filetool/filetool.cxx:314
 msgid "Included for Backup (.filetool.lst)"
-msgstr ""
+msgstr "バックアップの対象 (.filetool.lst)"
 
 #: ../appbrowser/appbrowser.cxx:555 ../apps/apps.cxx:1242
 #: ../scmapps/scmapps.cxx:1002 ../scmbrowser/scmbrowser.cxx:834
@@ -491,11 +491,11 @@ msgstr "情報"
 #: ../scmapps/scmapps.cxx:545 ../scmapps/scmapps.cxx:766
 #: ../scmbrowser/scmbrowser.cxx:703 ../scmbrowser/scmbrowser.cxx:765
 msgid "Install"
-msgstr ""
+msgstr "インストール"
 
 #: ../tc-install/tc-install.cxx:637
 msgid "Install Extensions from this TCE/CDE Directory:"
-msgstr ""
+msgstr "Extensions を入れる TCE・CDE フォルダ:"
 
 #: ../appsaudit/appsaudit.cxx:676
 msgid "Install Options"
@@ -503,27 +503,27 @@ msgstr "インストールオプション"
 
 #: ../tc-install/tc-install.cxx:591
 msgid "Install Type"
-msgstr ""
+msgstr "インストールタイプ"
 
 #: ../tc-install/tc-install.cxx:536
 msgid "Install boot loader"
-msgstr ""
+msgstr "ブートローダーをインストール"
 
 #: ../wallpaper/wallpaper.cxx:301
 msgid "Install images from /opt/backgrounds directory"
-msgstr ""
+msgstr "/opt/backgrounds フォルダへ画像を入れて下さい"
 
 #: ../apps/apps.cxx:1033
 msgid "Installation Options"
-msgstr ""
+msgstr "インストールオプション"
 
 #: ../stats/stats.cxx:162
 msgid "Installed"
-msgstr ""
+msgstr "インストール済"
 
 #: ../tc-install/tc-install.cxx:621
 msgid "Installer Application"
-msgstr ""
+msgstr "インストーラアプリケーション"
 
 #: ../network/network.cxx:164
 msgid "Interface"
@@ -531,15 +531,15 @@ msgstr "インターフェース"
 
 #: ../wbarconf/wbarconf.cxx:124
 msgid "Left"
-msgstr ""
+msgstr "左"
 
 #: ../wbarconf/wbarconf.cxx:131
 msgid "Left Bottom"
-msgstr ""
+msgstr "左下"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:134
 msgid "Left Bottom Vertical"
-msgstr ""
+msgstr "左下縦"
 
 #: ../mousetool/mousetool.cxx:93
 msgid "Left Button"
@@ -547,15 +547,15 @@ msgstr "左ボタン"
 
 #: ../wbarconf/wbarconf.cxx:130
 msgid "Left Top"
-msgstr ""
+msgstr "左上"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:133
 msgid "Left Top Vertical"
-msgstr ""
+msgstr "左上縦"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:127
 msgid "Left Vertical"
-msgstr ""
+msgstr "左縦"
 
 #: ../apps/apps.cxx:1052 ../appsaudit/appsaudit.cxx:668
 msgid "List Dependencies"
@@ -580,12 +580,12 @@ msgstr "ローカル"
 
 #: ../wallpaper/wallpaper.cxx:293
 msgid "Logo"
-msgstr ""
+msgstr "ロゴ"
 
 #: ../appbrowser/appbrowser.cxx:129 ../apps/apps.cxx:232
 #: ../scmapps/scmapps.cxx:223 ../scmbrowser/scmbrowser.cxx:174
 msgid "MD5SUM error"
-msgstr ""
+msgstr "MD5SUM エラー"
 
 #: ../apps/apps.cxx:1024 ../appsaudit/appsaudit.cxx:691
 #: ../appsaudit/appsaudit.cxx:695 ../cpanel/cpanel.cxx:26
@@ -603,20 +603,20 @@ msgstr "削除マークを付ける"
 
 #: ../apps/apps.cxx:1025 ../scmapps/scmapps.cxx:550
 msgid "Md5 Checking"
-msgstr ""
+msgstr "MD5 確認中"
 
 #: ../appsaudit/appsaudit.cxx:686 ../scmbrowser/scmbrowser.cxx:705
 msgid "Md5Check"
-msgstr ""
+msgstr "Md5 確認"
 
 #: ../appbrowser/appbrowser.cxx:130 ../apps/apps.cxx:233
 #: ../scmapps/scmapps.cxx:224 ../scmbrowser/scmbrowser.cxx:175
 msgid "Md5sum error on"
-msgstr ""
+msgstr "MD5SUM エラー -"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:250
 msgid "Micro Core"
-msgstr ""
+msgstr "Micro Core"
 
 #: ../datetool/datetool.cxx:162
 msgid "Min:"
@@ -640,7 +640,7 @@ msgstr "月:"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:203
 msgid "More"
-msgstr ""
+msgstr "その他"
 
 #: ../cpanel/cpanel.cxx:41
 msgid "Mount Tool"
@@ -660,7 +660,7 @@ msgstr "マウスツール"
 
 #: ../mousetool/mousetool.cxx:74
 msgid "MouseTool"
-msgstr ""
+msgstr "マウスツール"
 
 #: ../network/network.cxx:213
 msgid "NameServers"
@@ -685,15 +685,15 @@ msgstr ""
 
 #: ../tc-install/tc-install.cxx:627
 msgid "Non-US keyboard layout support"
-msgstr ""
+msgstr "US 以外のキーボードレイアウト"
 
 #: ../exittc/exittc.cxx:105 ../filetool/filetool.cxx:156
 msgid "None"
-msgstr ""
+msgstr "なし"
 
-#: ../flrun/flrun.cxx:149 ../mirrorpicker/mirrorpicker.cxx:36
+#: ../flrun/flrun.cxx:154 ../mirrorpicker/mirrorpicker.cxx:36
 msgid "OK"
-msgstr "はい"
+msgstr "OK"
 
 #: ../appbrowser/appbrowser.cxx:449 ../apps/apps.cxx:1103
 #: ../appsaudit/appsaudit.cxx:690
@@ -702,7 +702,7 @@ msgstr "OnBoot"
 
 #: ../apps/apps.cxx:1030
 msgid "OnBoot Maintenance"
-msgstr ""
+msgstr "OnBoot 管理"
 
 #: ../appbrowser/appbrowser.cxx:450 ../apps/apps.cxx:1104
 #: ../appsaudit/appsaudit.cxx:694 ../scmapps/scmapps.cxx:767
@@ -711,11 +711,11 @@ msgstr "OnDemand"
 
 #: ../apps/apps.cxx:1031 ../scmapps/scmapps.cxx:553
 msgid "OnDemand Maintenance"
-msgstr ""
+msgstr "OnDemand 管理"
 
 #: ../wbar_exclude/wbar_exclude.cxx:59
 msgid "Onboot Items"
-msgstr "OnBootアイテム"
+msgstr "Onboot 項目"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:216
 msgid "Optionally Enter Additional Unique Options from above:"
@@ -723,32 +723,32 @@ msgstr ""
 
 #: ../tc-install/tc-install.cxx:617
 msgid "Other"
-msgstr ""
+msgstr "その他"
 
 #: ../tc-install/tc-install.cxx:482
 msgid "Path to core.gz:"
-msgstr ""
+msgstr "core.gz のパス:"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:248
 msgid "Please Select Version to Install"
-msgstr ""
+msgstr "インストールするバージョンの選択"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:182 ../wbarconf/wbarconf.cxx:160
 msgid "Position"
-msgstr ""
+msgstr "場所"
 
 #: ../wallpaper/wallpaper.cxx:225
 msgid "Preview"
-msgstr ""
+msgstr "プレビュー"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:339 ../tc-install/tc-install.cxx:660
 msgid "Proceed"
-msgstr ""
+msgstr "実行"
 
 #: ../apps/apps.cxx:1331 ../appsaudit/appsaudit.cxx:740
 #: ../scmapps/scmapps.cxx:995 ../scmbrowser/scmbrowser.cxx:827
 msgid "Process Selected Item(s)"
-msgstr ""
+msgstr "選択した処理項目"
 
 #: ../appbrowser/appbrowser.cxx:417 ../apps/apps.cxx:1071
 msgid "Provides"
@@ -757,7 +757,7 @@ msgstr ""
 #: ../apps/apps.cxx:1037 ../scmapps/scmapps.cxx:555
 #: ../scmbrowser/scmbrowser.cxx:713
 msgid "Quit"
-msgstr ""
+msgstr "終了"
 
 #: ../exittc/exittc.cxx:127
 msgid "Reboot"
@@ -765,20 +765,20 @@ msgstr "再起動"
 
 #: ../tc-install/tc-install.cxx:624
 msgid "Remaster Tool"
-msgstr ""
+msgstr "リマスターツール"
 
 #: ../scmbrowser/scmbrowser.cxx:709
 msgid "Remote"
-msgstr ""
+msgstr "リモート"
 
 #: ../appbrowser/appbrowser.cxx:132 ../apps/apps.cxx:235
 #: ../scmapps/scmapps.cxx:226 ../scmbrowser/scmbrowser.cxx:177
 msgid "Remove and try again"
-msgstr ""
+msgstr "削除・再施行"
 
 #: ../filetool/filetool.cxx:160
 msgid "Restore"
-msgstr ""
+msgstr "復元"
 
 #: ../apps/apps.cxx:1322 ../appsaudit/appsaudit.cxx:724
 msgid "Results"
@@ -786,19 +786,19 @@ msgstr "結果"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:336 ../tc-install/tc-install.cxx:657
 msgid "Review"
-msgstr ""
+msgstr "確認"
 
 #: ../wbarconf/wbarconf.cxx:125
 msgid "Right"
-msgstr ""
+msgstr "右"
 
 #: ../wbarconf/wbarconf.cxx:133
 msgid "Right Bottom"
-msgstr ""
+msgstr "右下"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:136
 msgid "Right Bottom Vertical"
-msgstr ""
+msgstr "右下縦"
 
 #: ../mousetool/mousetool.cxx:87
 msgid "Right Button"
@@ -806,19 +806,23 @@ msgstr "右ボタン"
 
 #: ../wbarconf/wbarconf.cxx:132
 msgid "Right Top"
-msgstr ""
+msgstr "右上"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:135
 msgid "Right Top Vertical"
-msgstr ""
+msgstr "右上縦"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:128
 msgid "Right Vertical"
-msgstr ""
+msgstr "右縦"
+
+#: ../flrun/flrun.cxx:169
+msgid "Run with sudo"
+msgstr "sudo 実行"
 
 #: ../exittc/exittc.cxx:107 ../filetool/filetool.cxx:159
 msgid "Safe"
-msgstr ""
+msgstr "セーフ"
 
 #: ../network/network.cxx:223
 msgid "Save Configuration?"
@@ -826,11 +830,11 @@ msgstr "設定を保存しますか？"
 
 #: ../scmbrowser/scmbrowser.cxx:701
 msgid "ScmApps"
-msgstr ""
+msgstr "SCM アプリ"
 
 #: ../scmapps/scmapps.cxx:962
 msgid "ScmApps: Self Contained Appllications (scm)"
-msgstr ""
+msgstr "SCM アプリ: Self Contained Appllications (scm)"
 
 #: ../appbrowser/appbrowser.cxx:416 ../apps/apps.cxx:1070
 #: ../scmapps/scmapps.cxx:565 ../scmbrowser/scmbrowser.cxx:723
@@ -839,11 +843,11 @@ msgstr "検索"
 
 #: ../apps/apps.cxx:1308 ../appsaudit/appsaudit.cxx:721
 msgid "Select"
-msgstr ""
+msgstr "選択"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:33 ../tc-install/tc-install.cxx:25
 msgid "Select File for "
-msgstr ""
+msgstr "ファイル選択 "
 
 #: ../add2file/add2file.cxx:22
 msgid "Select File to be added to "
@@ -852,7 +856,7 @@ msgstr "追加ファイルの選択 "
 #: ../apps/apps.cxx:1020 ../appsaudit/appsaudit.cxx:683
 #: ../scmapps/scmapps.cxx:541 ../scmbrowser/scmbrowser.cxx:711
 msgid "Select Mirror"
-msgstr ""
+msgstr "ミラーの選択"
 
 #: ../flpdf/flpdf.cxx:19
 msgid "Select PDF File to view with mupdf: "
@@ -860,7 +864,7 @@ msgstr ""
 
 #: ../tc-install/tc-install.cxx:451
 msgid "Select TCE/CDE Directory"
-msgstr ""
+msgstr "TCE・CDE フォルダの選択"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:280 ../tc-install/tc-install.cxx:525
 msgid "Select Target Disk"
@@ -868,7 +872,7 @@ msgstr ""
 
 #: ../apps/apps.cxx:1021 ../scmapps/scmapps.cxx:542
 msgid "Select fastest mirror"
-msgstr ""
+msgstr "最も速いミラーの選択"
 
 #: ../appsaudit/appsaudit.cxx:678
 msgid "Selective Copy Install"
@@ -885,11 +889,11 @@ msgstr "サービス"
 #: ../appbrowser/appbrowser.cxx:608 ../apps/apps.cxx:1295
 #: ../scmapps/scmapps.cxx:1058 ../scmbrowser/scmbrowser.cxx:892
 msgid "Set"
-msgstr ""
+msgstr "設定"
 
 #: ../cpanel/cpanel.cxx:34
 msgid "Setup"
-msgstr ""
+msgstr "設定"
 
 #: ../exittc/exittc.cxx:121
 msgid "Shutdown"
@@ -901,24 +905,24 @@ msgstr "サイズ"
 
 #: ../wallpaper/wallpaper.cxx:259
 msgid "Solid Color"
-msgstr ""
+msgstr "単色"
 
 #: ../wallpaper/wallpaper.cxx:336
 msgid "Solid Color or 2 Color Gradient"
-msgstr ""
+msgstr "単色・2 色グラデーション"
 
 #: ../appbrowser/appbrowser.cxx:603 ../apps/apps.cxx:1290
 #: ../scmapps/scmapps.cxx:1053 ../scmbrowser/scmbrowser.cxx:887
 msgid "Status"
-msgstr "ステータス"
+msgstr "状態"
 
 #: ../swapfile/swapfile.cxx:63
 msgid "Swapfile"
-msgstr ""
+msgstr "SWAP ファイル"
 
 #: ../cpanel/cpanel.cxx:53
 msgid "Swapfile Tool"
-msgstr "スワップファイルツール"
+msgstr "SWAP ファイルツール"
 
 #: ../cpanel/cpanel.cxx:59
 msgid "System Stats"
@@ -930,16 +934,16 @@ msgstr "TC 終了オプション"
 
 #: ../apps/apps.cxx:1345
 msgid "TCE:"
-msgstr ""
+msgstr "TCE:"
 
 #: ../appbrowser/appbrowser.cxx:418 ../apps/apps.cxx:1072
 #: ../scmapps/scmapps.cxx:566 ../scmbrowser/scmbrowser.cxx:724
 msgid "Tags"
-msgstr ""
+msgstr "タグ"
 
 #: ../cpanel/cpanel.cxx:62
 msgid "Terminal Server"
-msgstr ""
+msgstr "ターミナルサーバ"
 
 #: ../mirrorpicker/init.cxx:131
 #, c-format
@@ -952,15 +956,15 @@ msgstr "タイル"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:255
 msgid "Tiny Core"
-msgstr ""
+msgstr "Tiny Core"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:243 ../tc-grub4dos/tc-grub4dos.cxx:245
 msgid "Tiny Core Grub4dos Installation"
-msgstr ""
+msgstr "Tiny Core GRUB4DOS インストール"
 
 #: ../tc-install/tc-install.cxx:477 ../tc-install/tc-install.cxx:479
 msgid "Tiny Core Installation"
-msgstr ""
+msgstr "Tiny Core インストール"
 
 #: ../stats/stats.cxx:74
 msgid "Tiny Core System Stats"
@@ -976,15 +980,15 @@ msgstr ""
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:125 ../wbarconf/wbarconf.cxx:122
 msgid "Top"
-msgstr ""
+msgstr "上"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:129 ../wbarconf/wbarconf.cxx:126
 msgid "Top Left"
-msgstr ""
+msgstr "左上"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:130 ../wbarconf/wbarconf.cxx:127
 msgid "Top Right"
-msgstr ""
+msgstr "右上"
 
 #: ../appbrowser/appbrowser.cxx:135 ../apps/apps.cxx:238
 #: ../scmapps/scmapps.cxx:229 ../scmbrowser/scmbrowser.cxx:180
@@ -993,19 +997,19 @@ msgstr ""
 
 #: ../apps/apps.cxx:1300 ../scmapps/scmapps.cxx:1063
 msgid "URI:"
-msgstr ""
+msgstr "URI:"
 
 #: ../tc-install/tc-install.cxx:496
 msgid "USB-HDD"
-msgstr ""
+msgstr "USB-HDD"
 
 #: ../tc-install/tc-install.cxx:502
 msgid "USB-ZIP"
-msgstr ""
+msgstr "USB-ZIP"
 
 #: ../scmapps/scmapps.cxx:546 ../scmbrowser/scmbrowser.cxx:704
 msgid "Uninstall"
-msgstr ""
+msgstr "アンインストール"
 
 #: ../apps/apps.cxx:1046 ../appsaudit/appsaudit.cxx:662
 msgid "Update .dep files."
@@ -1021,7 +1025,7 @@ msgstr "DHCPブロードキャストを使う"
 
 #: ../tc-install/tc-install.cxx:489
 msgid "Use for frugal hard drive installations"
-msgstr ""
+msgstr "Frugal ハードドライブインストールを使う"
 
 #: ../tc-install/tc-install.cxx:503
 msgid "Use for pendrives.   Drive will be formatted into two FAT partitions"
@@ -1033,11 +1037,11 @@ msgstr ""
 
 #: ../cpanel/cpanel.cxx:30
 msgid "Utilities"
-msgstr ""
+msgstr "ユーティリティ"
 
 #: ../wallpaper/wallpaper.cxx:265
 msgid "Vertical Gradient"
-msgstr ""
+msgstr "縦方向のグラデーション"
 
 #: ../cpanel/cpanel.cxx:69 ../wallpaper/wallpaper.cxx:224
 msgid "Wallpaper"
@@ -1045,19 +1049,19 @@ msgstr "壁紙"
 
 #: ../wbarconf/wbarconf.cxx:176
 msgid "Wbar Icon Size"
-msgstr ""
+msgstr "Wbar アイコンサイズ"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:170 ../wbarconf/wbarconf.cxx:148
 msgid "Wbar Icons"
-msgstr ""
+msgstr "Wbar アイコン"
 
 #: ../wbarconf/wbarconf.cxx:184
 msgid "Wbar Text Labels"
-msgstr ""
+msgstr "Wbar テキストラベル"
 
 #: ../wbarconf/wbarconf.cxx:168
 msgid "Wbar Zoom"
-msgstr ""
+msgstr "Wbar ズーム"
 
 #: ../tc-install/tc-install.cxx:512
 msgid "Whole Disk"
@@ -1065,15 +1069,15 @@ msgstr ""
 
 #: ../tc-install/tc-install.cxx:608
 msgid "Wifi Support"
-msgstr ""
+msgstr "無線サポート"
 
 #: ../tc-install/tc-install.cxx:604
 msgid "Wireless "
-msgstr ""
+msgstr "無線 "
 
 #: ../tc-install/tc-install.cxx:614
 msgid "Wireless Firmware"
-msgstr ""
+msgstr "無線ファームウェア"
 
 #: ../fdtool/fdtool.cxx:101
 msgid "Writes image path file to floppy."
@@ -1081,7 +1085,7 @@ msgstr "イメージファイルをフロッピーに書き込む"
 
 #: ../cpanel/cpanel.cxx:72
 msgid "Xvesa"
-msgstr ""
+msgstr "Xvesa"
 
 #: ../datetool/datetool.cxx:130
 msgid "Year:"
@@ -1089,11 +1093,11 @@ msgstr "年:"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:195
 msgid "Zoom"
-msgstr ""
+msgstr "ズーム"
 
 #: ../stats/stats.cxx:171
 msgid "bigHomeFiles"
-msgstr ""
+msgstr "bigHomeFiles"
 
 #: ../stats/stats.cxx:153
 msgid "boot"
@@ -1109,31 +1113,31 @@ msgstr "dmesg"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:176
 msgid "eXclude Icons"
-msgstr ""
+msgstr "除外アイコン"
 
 #: ../wbarconf/wbarconf.cxx:147 ../wbar_exclude/wbar_exclude.cxx:58
 msgid "eXclude Wbar Icons"
-msgstr "Wbarアイコンを除外"
+msgstr "除外する Wbar アイコン"
 
 #: ../wbar_exclude/wbar_exclude.cxx:65
 msgid "eXclude Wbar Items"
-msgstr "Wbarアイテムを除外"
+msgstr "除外する Wbar の項目"
 
 #: ../wbarconf/wbarconf.cxx:154
 msgid "eXcluded Items"
-msgstr ""
+msgstr "除外する項目"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:298 ../tc-install/tc-install.cxx:553
 msgid "ext2"
-msgstr ""
+msgstr "ext2"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:303 ../tc-install/tc-install.cxx:558
 msgid "ext3"
-msgstr ""
+msgstr "ext3"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:308 ../tc-install/tc-install.cxx:563
 msgid "ext4"
-msgstr ""
+msgstr "ext4"
 
 #: ../stats/stats.cxx:144
 msgid "filesystems"
@@ -1153,7 +1157,7 @@ msgstr "マウント"
 
 #: ../tc-install/tc-install.cxx:611
 msgid "ndiswrapper"
-msgstr ""
+msgstr "ndiswrapper"
 
 #: ../stats/stats.cxx:99
 msgid "net"
@@ -1169,7 +1173,7 @@ msgstr "プロセス"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:168
 msgid "tc-wbarconf"
-msgstr ""
+msgstr "tc-wbarconf"
 
 #: ../swapfile/swapfile.cxx:67
 msgid "tc.swp in k bytes:"
@@ -1177,11 +1181,11 @@ msgstr "tc.swp (キロバイト):"
 
 #: ../cpanel/cpanel.cxx:65
 msgid "tcWbarConf"
-msgstr ""
+msgstr "tcWbarConf"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:313 ../tc-install/tc-install.cxx:568
 msgid "vfat"
-msgstr ""
+msgstr "vfat"
 
 #: ../network/network.cxx:173 ../network/network.cxx:226
 msgid "yes"

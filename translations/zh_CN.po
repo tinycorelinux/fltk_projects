@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tctools\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-12-19 21:49+0200\n"
+"POT-Creation-Date: 2013-10-08 17:37+0300\n"
 "PO-Revision-Date: 2013-07-24 11:52+0000\n"
 "Last-Translator: aswjh <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-08 14:41+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2014-08-14 16:48+0000\n"
+"X-Generator: Launchpad (build 17156)\n"
 
 #: ../scmapps/scmapps.cxx:538
 msgid "   Apps"
@@ -30,7 +30,7 @@ msgid "&Apply Image"
 msgstr "应用图片(&A)"
 
 #: ../datetool/datetool.cxx:173 ../exittc/exittc.cxx:152
-#: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:152 ../swapfile/swapfile.cxx:69
+#: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:157 ../swapfile/swapfile.cxx:69
 msgid "&Cancel"
 msgstr "取消(&C)"
 
@@ -104,7 +104,7 @@ msgstr "增加项目"
 msgid "Appbrowser"
 msgstr "应用浏览器"
 
-#: ../flrun/flrun.cxx:158
+#: ../flrun/flrun.cxx:163
 msgid "Application launcher"
 msgstr "应用程序启动器"
 
@@ -181,7 +181,7 @@ msgstr "右下角"
 msgid "Broadcast"
 msgstr "广播"
 
-#: ../apps/apps.cxx:1019 ../flrun/flrun.cxx:155 ../scmapps/scmapps.cxx:540
+#: ../apps/apps.cxx:1019 ../flrun/flrun.cxx:160 ../scmapps/scmapps.cxx:540
 #: ../scmbrowser/scmbrowser.cxx:710
 msgid "Browse"
 msgstr "浏览"
@@ -404,7 +404,7 @@ msgstr "退出至命令行"
 msgid "Extension Installation"
 msgstr "安装扩展"
 
-#: ../flrun/flrun.cxx:147
+#: ../flrun/flrun.cxx:152
 msgid "FLRun"
 msgstr "FLRun"
 
@@ -691,7 +691,7 @@ msgstr "非美国类通用键盘"
 msgid "None"
 msgstr "无"
 
-#: ../flrun/flrun.cxx:149 ../mirrorpicker/mirrorpicker.cxx:36
+#: ../flrun/flrun.cxx:154 ../mirrorpicker/mirrorpicker.cxx:36
 msgid "OK"
 msgstr "确定"
 
@@ -815,6 +815,10 @@ msgstr "右上垂直"
 #: ../tc-wbarconf/tc-wbarconf.cxx:128
 msgid "Right Vertical"
 msgstr "右侧垂直"
+
+#: ../flrun/flrun.cxx:169
+msgid "Run with sudo"
+msgstr ""
 
 #: ../exittc/exittc.cxx:107 ../filetool/filetool.cxx:159
 msgid "Safe"

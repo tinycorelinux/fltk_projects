@@ -1,16 +1,16 @@
-# Finnish translation for tctools
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# Korean translation for tctools
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the tctools package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tctools\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-10-08 17:37+0300\n"
-"PO-Revision-Date: 2010-09-04 07:25+0000\n"
-"Last-Translator: Curaga <Unknown>\n"
-"Language-Team: Finnish <fi@li.org>\n"
+"PO-Revision-Date: 2013-12-17 12:06+0000\n"
+"Last-Translator: Litty <Unknown>\n"
+"Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,11 +19,11 @@ msgstr ""
 
 #: ../scmapps/scmapps.cxx:538
 msgid "   Apps"
-msgstr ""
+msgstr "   앱"
 
 #: ../mousetool/mousetool.cxx:98 ../network/network.cxx:239
 msgid "&Apply"
-msgstr "&Käytä"
+msgstr ""
 
 #: ../fdtool/fdtool.cxx:100
 msgid "&Apply Image"
@@ -32,7 +32,7 @@ msgstr ""
 #: ../datetool/datetool.cxx:173 ../exittc/exittc.cxx:152
 #: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:157 ../swapfile/swapfile.cxx:69
 msgid "&Cancel"
-msgstr "&Peruuta"
+msgstr ""
 
 #: ../mousetool/mousetool.cxx:101
 msgid "&Exit"
@@ -56,11 +56,11 @@ msgstr ""
 
 #: ../fdtool/fdtool.cxx:76
 msgid "1440k"
-msgstr ""
+msgstr "1440k"
 
 #: ../fdtool/fdtool.cxx:82
 msgid "1722k"
-msgstr ""
+msgstr "1722k"
 
 #: ../datetool/datetool.cxx:132 ../datetool/datetool.cxx:140
 #: ../datetool/datetool.cxx:148 ../datetool/datetool.cxx:156
@@ -94,11 +94,11 @@ msgstr ""
 
 #: ../filetool/filetool.cxx:349
 msgid "Add"
-msgstr ""
+msgstr "추가"
 
 #: ../scmapps/scmapps.cxx:1071
 msgid "Add Item"
-msgstr ""
+msgstr "항목 추가"
 
 #: ../appbrowser/appbrowser.cxx:523 ../scmbrowser/scmbrowser.cxx:794
 msgid "Appbrowser"
@@ -139,7 +139,7 @@ msgstr ""
 
 #: ../exittc/exittc.cxx:143
 msgid "Backup Options:"
-msgstr ""
+msgstr "백업 옵션:"
 
 #: ../filetool/filetool.cxx:290
 msgid "Backup Restore and Lists Maintenance"
@@ -220,7 +220,7 @@ msgstr ""
 #: ../mirrorpicker/init.cxx:110
 #, c-format
 msgid "Checking %u mirrors, please wait..."
-msgstr ""
+msgstr "%u 미러 검사 중입니다, 잠시만 기다려주십시오..."
 
 #: ../filetool/filetool.cxx:343
 msgid "Clear Item"
@@ -236,11 +236,11 @@ msgstr ""
 
 #: ../wallpaper/wallpaper.cxx:233
 msgid "Color #1"
-msgstr ""
+msgstr "색상 #1"
 
 #: ../wallpaper/wallpaper.cxx:246
 msgid "Color #2"
-msgstr ""
+msgstr "색상 #2"
 
 #: ../appbrowser/appbrowser.cxx:525
 msgid "Connect"
@@ -248,7 +248,7 @@ msgstr ""
 
 #: ../cpanel/cpanel.cxx:24
 msgid "ControlPanel"
-msgstr ""
+msgstr "제어판"
 
 #: ../fdtool/fdtool.cxx:96
 msgid "Copies floppy to image path entered,"

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tctools\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-12-19 21:49+0200\n"
-"PO-Revision-Date: 2013-03-30 11:53+0000\n"
-"Last-Translator: Ingemar Karlsson <ingemar@ingk.se>\n"
+"POT-Creation-Date: 2013-10-08 17:37+0300\n"
+"PO-Revision-Date: 2014-05-29 13:39+0000\n"
+"Last-Translator: Ingemar Karlsson <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-08 14:41+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2014-08-14 16:48+0000\n"
+"X-Generator: Launchpad (build 17156)\n"
 
 #: ../scmapps/scmapps.cxx:538
 msgid "   Apps"
@@ -30,7 +30,7 @@ msgid "&Apply Image"
 msgstr "&Verkställ bild"
 
 #: ../datetool/datetool.cxx:173 ../exittc/exittc.cxx:152
-#: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:152 ../swapfile/swapfile.cxx:69
+#: ../fdtool/fdtool.cxx:105 ../flrun/flrun.cxx:157 ../swapfile/swapfile.cxx:69
 msgid "&Cancel"
 msgstr "&Avbryt"
 
@@ -86,27 +86,27 @@ msgstr "@>>"
 
 #: ../filetool/filetool.cxx:306
 msgid "Action Results"
-msgstr ""
+msgstr "Åtgärdsresultat"
 
 #: ../filetool/filetool.cxx:295
 msgid "Action:"
-msgstr ""
+msgstr "Åtgärd"
 
 #: ../filetool/filetool.cxx:349
 msgid "Add"
-msgstr ""
+msgstr "Lägg till"
 
 #: ../scmapps/scmapps.cxx:1071
 msgid "Add Item"
-msgstr ""
+msgstr "Lägg till objekt"
 
 #: ../appbrowser/appbrowser.cxx:523 ../scmbrowser/scmbrowser.cxx:794
 msgid "Appbrowser"
-msgstr ""
+msgstr "Programbläddrare"
 
-#: ../flrun/flrun.cxx:158
+#: ../flrun/flrun.cxx:163
 msgid "Application launcher"
-msgstr ""
+msgstr "Programstartare"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:206 ../tc-wbarconf/tc-wbarconf.cxx:224
 #: ../wbarconf/wbarconf.cxx:165
@@ -115,7 +115,7 @@ msgstr "Verkställ"
 
 #: ../apps/apps.cxx:1017
 msgid "Apps"
-msgstr ""
+msgstr "Program"
 
 #: ../apps/apps.cxx:1207
 msgid "Apps: Regular Applications (tcz)"
@@ -139,7 +139,7 @@ msgstr "Säkerhetskopiera"
 
 #: ../exittc/exittc.cxx:143
 msgid "Backup Options:"
-msgstr ""
+msgstr "Backupp alternativ:"
 
 #: ../filetool/filetool.cxx:290
 msgid "Backup Restore and Lists Maintenance"
@@ -159,7 +159,7 @@ msgstr ""
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:322 ../tc-install/tc-install.cxx:577
 msgid "Boot Options"
-msgstr ""
+msgstr "Startalternativ"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:324 ../tc-install/tc-install.cxx:579
 msgid "Boot Options Reference List"
@@ -181,7 +181,7 @@ msgstr "Nederst till höger"
 msgid "Broadcast"
 msgstr "Broadcast"
 
-#: ../apps/apps.cxx:1019 ../flrun/flrun.cxx:155 ../scmapps/scmapps.cxx:540
+#: ../apps/apps.cxx:1019 ../flrun/flrun.cxx:160 ../scmapps/scmapps.cxx:540
 #: ../scmbrowser/scmbrowser.cxx:710
 msgid "Browse"
 msgstr "Bläddra"
@@ -210,7 +210,7 @@ msgstr ""
 
 #: ../apps/apps.cxx:1027
 msgid "Check for Orphans"
-msgstr ""
+msgstr "Kontrollera efter föräldralösa"
 
 #: ../apps/apps.cxx:1026 ../appsaudit/appsaudit.cxx:682
 #: ../scmapps/scmapps.cxx:551
@@ -220,7 +220,7 @@ msgstr "Sök efter uppdateringar"
 #: ../mirrorpicker/init.cxx:110
 #, c-format
 msgid "Checking %u mirrors, please wait..."
-msgstr ""
+msgstr "Kontrollerar %u speglar, vänta..."
 
 #: ../filetool/filetool.cxx:343
 msgid "Clear Item"
@@ -292,7 +292,7 @@ msgstr ""
 
 #: ../apps/apps.cxx:1045 ../appsaudit/appsaudit.cxx:661
 msgid "Dependencies"
-msgstr ""
+msgstr "Beroenden"
 
 #: ../apps/apps.cxx:1028
 msgid "Dependencies And Deletions"
@@ -301,7 +301,7 @@ msgstr ""
 #: ../appbrowser/appbrowser.cxx:575 ../apps/apps.cxx:1261
 #: ../scmapps/scmapps.cxx:1021 ../scmbrowser/scmbrowser.cxx:853
 msgid "Depends"
-msgstr ""
+msgstr "Beroende"
 
 #: ../filetool/filetool.cxx:291
 msgid "Device:"
@@ -313,7 +313,7 @@ msgstr ""
 
 #: ../filetool/filetool.cxx:282
 msgid "Directory"
-msgstr ""
+msgstr "Katalog"
 
 #: ../apps/apps.cxx:1051 ../appsaudit/appsaudit.cxx:667
 msgid "Display All Not Depended On"
@@ -325,7 +325,7 @@ msgstr ""
 
 #: ../apps/apps.cxx:1056 ../appsaudit/appsaudit.cxx:672
 msgid "Display Marked for Deletion"
-msgstr ""
+msgstr "Visa markerade för borttagning"
 
 #: ../tc-install/tc-install.cxx:643
 msgid "Don't install Extensions (Core Only, Text Based Install)"
@@ -337,7 +337,7 @@ msgstr "Klar"
 
 #: ../appbrowser/appbrowser.cxx:451 ../apps/apps.cxx:1105
 msgid "Download + Load"
-msgstr ""
+msgstr "Ladda ner + ladda"
 
 #: ../appbrowser/appbrowser.cxx:452 ../apps/apps.cxx:1106
 #: ../scmapps/scmapps.cxx:768 ../scmbrowser/scmbrowser.cxx:766
@@ -354,7 +354,7 @@ msgstr "&Avsluta"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:271
 msgid "Embedded"
-msgstr ""
+msgstr "Inbäddad"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:328 ../tc-install/tc-install.cxx:583
 msgid "Enter Spaces Separated Options From Examples Above"
@@ -362,11 +362,11 @@ msgstr ""
 
 #: ../filetool/filetool.cxx:326
 msgid "Excluded from Backup (.xfiletool.lst)"
-msgstr ""
+msgstr "Exluderade från backupp (.xfiletool.lst)"
 
 #: ../tc-install/tc-install.cxx:517
 msgid "Existing Partition"
-msgstr ""
+msgstr "Befintlig partition"
 
 #: ../appsaudit/appsaudit.cxx:674
 msgid "Exit Dependencies Mode"
@@ -378,11 +378,11 @@ msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:679
 msgid "Exit Install Options"
-msgstr ""
+msgstr "Avsluta installationsalternativ"
 
 #: ../appsaudit/appsaudit.cxx:688
 msgid "Exit Md5 Check Mode"
-msgstr ""
+msgstr "Avsluta Md5 kontrollläge"
 
 #: ../appsaudit/appsaudit.cxx:692
 msgid "Exit OnBoot"
@@ -398,13 +398,13 @@ msgstr ""
 
 #: ../exittc/exittc.cxx:132
 msgid "Exit to Prompt"
-msgstr ""
+msgstr "Avsluta till kommadorad"
 
 #: ../tc-install/tc-install.cxx:636
 msgid "Extension Installation"
 msgstr ""
 
-#: ../flrun/flrun.cxx:147
+#: ../flrun/flrun.cxx:152
 msgid "FLRun"
 msgstr ""
 
@@ -414,7 +414,7 @@ msgstr ""
 
 #: ../filetool/filetool.cxx:281
 msgid "File"
-msgstr ""
+msgstr "Fil"
 
 #: ../appbrowser/appbrowser.cxx:565 ../apps/apps.cxx:1252
 #: ../scmapps/scmapps.cxx:1011 ../scmbrowser/scmbrowser.cxx:843
@@ -439,7 +439,7 @@ msgstr ""
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:290 ../tc-install/tc-install.cxx:545
 msgid "Formatting Options"
-msgstr ""
+msgstr "Formateringsalternativ"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:265 ../tc-install/tc-install.cxx:488
 msgid "Frugal"
@@ -481,7 +481,7 @@ msgstr "Bild sökväg:"
 
 #: ../filetool/filetool.cxx:314
 msgid "Included for Backup (.filetool.lst)"
-msgstr ""
+msgstr "Inkluderad för backupp (.filetool.lst)"
 
 #: ../appbrowser/appbrowser.cxx:555 ../apps/apps.cxx:1242
 #: ../scmapps/scmapps.cxx:1002 ../scmbrowser/scmbrowser.cxx:834
@@ -499,23 +499,23 @@ msgstr ""
 
 #: ../appsaudit/appsaudit.cxx:676
 msgid "Install Options"
-msgstr ""
+msgstr "IOnstallationsalternativ"
 
 #: ../tc-install/tc-install.cxx:591
 msgid "Install Type"
-msgstr ""
+msgstr "Installationstyp"
 
 #: ../tc-install/tc-install.cxx:536
 msgid "Install boot loader"
-msgstr ""
+msgstr "Installera starhanterare"
 
 #: ../wallpaper/wallpaper.cxx:301
 msgid "Install images from /opt/backgrounds directory"
-msgstr ""
+msgstr "Installera bild från /opt/backgrounds katalog"
 
 #: ../apps/apps.cxx:1033
 msgid "Installation Options"
-msgstr ""
+msgstr "Installationsalternativ"
 
 #: ../stats/stats.cxx:162
 msgid "Installed"
@@ -527,7 +527,7 @@ msgstr ""
 
 #: ../network/network.cxx:164
 msgid "Interface"
-msgstr ""
+msgstr "Gränsnitt"
 
 #: ../wbarconf/wbarconf.cxx:124
 msgid "Left"
@@ -543,7 +543,7 @@ msgstr ""
 
 #: ../mousetool/mousetool.cxx:93
 msgid "Left Button"
-msgstr ""
+msgstr "Vänsterknapp"
 
 #: ../wbarconf/wbarconf.cxx:130
 msgid "Left Top"
@@ -559,15 +559,15 @@ msgstr ""
 
 #: ../apps/apps.cxx:1052 ../appsaudit/appsaudit.cxx:668
 msgid "List Dependencies"
-msgstr ""
+msgstr "Lista beroenden"
 
 #: ../apps/apps.cxx:1054 ../appsaudit/appsaudit.cxx:670
 msgid "List Missing Dependencies"
-msgstr ""
+msgstr "Lista saknade beroenden"
 
 #: ../apps/apps.cxx:1053 ../appsaudit/appsaudit.cxx:669
 msgid "List Required By"
-msgstr ""
+msgstr "Lista beroende av"
 
 #: ../apps/apps.cxx:1023
 msgid "Load App Locally"
@@ -595,24 +595,24 @@ msgstr "Underhåll"
 
 #: ../tc-install/tc-install.cxx:531
 msgid "Mark Partition Active (bootable)"
-msgstr ""
+msgstr "Markera partition som aktiv (bootbar)"
 
 #: ../apps/apps.cxx:1055 ../appsaudit/appsaudit.cxx:671
 msgid "Mark for Deletion"
-msgstr ""
+msgstr "Markera för borttagning"
 
 #: ../apps/apps.cxx:1025 ../scmapps/scmapps.cxx:550
 msgid "Md5 Checking"
-msgstr ""
+msgstr "Md5 kontroll"
 
 #: ../appsaudit/appsaudit.cxx:686 ../scmbrowser/scmbrowser.cxx:705
 msgid "Md5Check"
-msgstr ""
+msgstr "Md5kontroll"
 
 #: ../appbrowser/appbrowser.cxx:130 ../apps/apps.cxx:233
 #: ../scmapps/scmapps.cxx:224 ../scmbrowser/scmbrowser.cxx:175
 msgid "Md5sum error on"
-msgstr ""
+msgstr "Md5sum fel på"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:250
 msgid "Micro Core"
@@ -624,11 +624,11 @@ msgstr "Min:"
 
 #: ../mirrorpicker/mirrorpicker.cxx:29
 msgid "Mirror picker"
-msgstr ""
+msgstr "Spegelväljare"
 
 #: ../appbrowser/appbrowser.cxx:531
 msgid "Mirrors"
-msgstr ""
+msgstr "Speglar"
 
 #: ../apps/apps.cxx:1048 ../appsaudit/appsaudit.cxx:664
 msgid "Missing Dependencies Reporting"
@@ -681,24 +681,24 @@ msgstr "Nätverksmask"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:291 ../tc-install/tc-install.cxx:546
 msgid "No formatting, use existing."
-msgstr ""
+msgstr "Ingen formatering, använd befintlig."
 
 #: ../tc-install/tc-install.cxx:627
 msgid "Non-US keyboard layout support"
-msgstr ""
+msgstr "Ingen-US tangentbords stöd"
 
 #: ../exittc/exittc.cxx:105 ../filetool/filetool.cxx:156
 msgid "None"
 msgstr "Ingen"
 
-#: ../flrun/flrun.cxx:149 ../mirrorpicker/mirrorpicker.cxx:36
+#: ../flrun/flrun.cxx:154 ../mirrorpicker/mirrorpicker.cxx:36
 msgid "OK"
 msgstr "OK"
 
 #: ../appbrowser/appbrowser.cxx:449 ../apps/apps.cxx:1103
 #: ../appsaudit/appsaudit.cxx:690
 msgid "OnBoot"
-msgstr ""
+msgstr "Vid uppstart"
 
 #: ../apps/apps.cxx:1030
 msgid "OnBoot Maintenance"
@@ -727,11 +727,11 @@ msgstr "Andra"
 
 #: ../tc-install/tc-install.cxx:482
 msgid "Path to core.gz:"
-msgstr ""
+msgstr "Sökväg till core.gz:"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:248
 msgid "Please Select Version to Install"
-msgstr ""
+msgstr "Var vänlig välj version att installera"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:182 ../wbarconf/wbarconf.cxx:160
 msgid "Position"
@@ -752,7 +752,7 @@ msgstr ""
 
 #: ../appbrowser/appbrowser.cxx:417 ../apps/apps.cxx:1071
 msgid "Provides"
-msgstr ""
+msgstr "Tillhandahåller"
 
 #: ../apps/apps.cxx:1037 ../scmapps/scmapps.cxx:555
 #: ../scmbrowser/scmbrowser.cxx:713
@@ -765,16 +765,16 @@ msgstr "Starta om"
 
 #: ../tc-install/tc-install.cxx:624
 msgid "Remaster Tool"
-msgstr ""
+msgstr "Remaster verktyg"
 
 #: ../scmbrowser/scmbrowser.cxx:709
 msgid "Remote"
-msgstr ""
+msgstr "Fjärr"
 
 #: ../appbrowser/appbrowser.cxx:132 ../apps/apps.cxx:235
 #: ../scmapps/scmapps.cxx:226 ../scmbrowser/scmbrowser.cxx:177
 msgid "Remove and try again"
-msgstr ""
+msgstr "Ta bort och försök igen"
 
 #: ../filetool/filetool.cxx:160
 msgid "Restore"
@@ -786,7 +786,7 @@ msgstr "Resultat"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:336 ../tc-install/tc-install.cxx:657
 msgid "Review"
-msgstr ""
+msgstr "Granska"
 
 #: ../wbarconf/wbarconf.cxx:125
 msgid "Right"
@@ -802,7 +802,7 @@ msgstr ""
 
 #: ../mousetool/mousetool.cxx:87
 msgid "Right Button"
-msgstr ""
+msgstr "Högerknapp"
 
 #: ../wbarconf/wbarconf.cxx:132
 msgid "Right Top"
@@ -815,6 +815,10 @@ msgstr ""
 #: ../tc-wbarconf/tc-wbarconf.cxx:128
 msgid "Right Vertical"
 msgstr ""
+
+#: ../flrun/flrun.cxx:169
+msgid "Run with sudo"
+msgstr "Kör med sudo"
 
 #: ../exittc/exittc.cxx:107 ../filetool/filetool.cxx:159
 msgid "Safe"
@@ -847,28 +851,28 @@ msgstr "Välj fil för "
 
 #: ../add2file/add2file.cxx:22
 msgid "Select File to be added to "
-msgstr ""
+msgstr "Välj fil att lägga till "
 
 #: ../apps/apps.cxx:1020 ../appsaudit/appsaudit.cxx:683
 #: ../scmapps/scmapps.cxx:541 ../scmbrowser/scmbrowser.cxx:711
 msgid "Select Mirror"
-msgstr ""
+msgstr "Välj spegel"
 
 #: ../flpdf/flpdf.cxx:19
 msgid "Select PDF File to view with mupdf: "
-msgstr ""
+msgstr "Välj PDF fil att visa i mupdf: "
 
 #: ../tc-install/tc-install.cxx:451
 msgid "Select TCE/CDE Directory"
-msgstr ""
+msgstr "Välj TCE/CDE katalog"
 
 #: ../tc-grub4dos/tc-grub4dos.cxx:280 ../tc-install/tc-install.cxx:525
 msgid "Select Target Disk"
-msgstr ""
+msgstr "Välj måldisk"
 
 #: ../apps/apps.cxx:1021 ../scmapps/scmapps.cxx:542
 msgid "Select fastest mirror"
-msgstr ""
+msgstr "Välj snabbaste spegel"
 
 #: ../appsaudit/appsaudit.cxx:678
 msgid "Selective Copy Install"
@@ -901,7 +905,7 @@ msgstr "Storlek"
 
 #: ../wallpaper/wallpaper.cxx:259
 msgid "Solid Color"
-msgstr ""
+msgstr "Enfärgad"
 
 #: ../wallpaper/wallpaper.cxx:336
 msgid "Solid Color or 2 Color Gradient"
@@ -930,7 +934,7 @@ msgstr ""
 
 #: ../apps/apps.cxx:1345
 msgid "TCE:"
-msgstr ""
+msgstr "TCE:"
 
 #: ../appbrowser/appbrowser.cxx:418 ../apps/apps.cxx:1072
 #: ../scmapps/scmapps.cxx:566 ../scmbrowser/scmbrowser.cxx:724
@@ -945,6 +949,7 @@ msgstr "Terminal Server"
 #, c-format
 msgid "The fastest mirror was %.*s. Press ok to set it as your mirror."
 msgstr ""
+"Den snabbaste spegeln var %.*s. Tryck ok för att använda den som din spegel."
 
 #: ../wallpaper/wallpaper.cxx:314
 msgid "Tile"
@@ -993,15 +998,15 @@ msgstr ""
 
 #: ../apps/apps.cxx:1300 ../scmapps/scmapps.cxx:1063
 msgid "URI:"
-msgstr ""
+msgstr "URI:"
 
 #: ../tc-install/tc-install.cxx:496
 msgid "USB-HDD"
-msgstr ""
+msgstr "USB-HDD"
 
 #: ../tc-install/tc-install.cxx:502
 msgid "USB-ZIP"
-msgstr ""
+msgstr "USB-ZIP"
 
 #: ../scmapps/scmapps.cxx:546 ../scmbrowser/scmbrowser.cxx:704
 msgid "Uninstall"
@@ -1009,11 +1014,11 @@ msgstr "Avinstallera"
 
 #: ../apps/apps.cxx:1046 ../appsaudit/appsaudit.cxx:662
 msgid "Update .dep files."
-msgstr ""
+msgstr "Uppdatera .dep filer."
 
 #: ../appsaudit/appsaudit.cxx:681 ../scmbrowser/scmbrowser.cxx:706
 msgid "Updates"
-msgstr ""
+msgstr "Uppdateringar"
 
 #: ../network/network.cxx:170
 msgid "Use DHCP Broadcast?"
@@ -1033,7 +1038,7 @@ msgstr ""
 
 #: ../cpanel/cpanel.cxx:30
 msgid "Utilities"
-msgstr ""
+msgstr "Verktyg"
 
 #: ../wallpaper/wallpaper.cxx:265
 msgid "Vertical Gradient"
@@ -1045,27 +1050,27 @@ msgstr "Backgrundsbild"
 
 #: ../wbarconf/wbarconf.cxx:176
 msgid "Wbar Icon Size"
-msgstr ""
+msgstr "Wbar ikonstorlek"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:170 ../wbarconf/wbarconf.cxx:148
 msgid "Wbar Icons"
-msgstr ""
+msgstr "Wbar ikoner"
 
 #: ../wbarconf/wbarconf.cxx:184
 msgid "Wbar Text Labels"
-msgstr ""
+msgstr "Wbar textetikett"
 
 #: ../wbarconf/wbarconf.cxx:168
 msgid "Wbar Zoom"
-msgstr ""
+msgstr "Wbar zoom"
 
 #: ../tc-install/tc-install.cxx:512
 msgid "Whole Disk"
-msgstr ""
+msgstr "Hela disken"
 
 #: ../tc-install/tc-install.cxx:608
 msgid "Wifi Support"
-msgstr ""
+msgstr "Wifistöd"
 
 #: ../tc-install/tc-install.cxx:604
 msgid "Wireless "
@@ -1073,7 +1078,7 @@ msgstr "Trådlöst "
 
 #: ../tc-install/tc-install.cxx:614
 msgid "Wireless Firmware"
-msgstr ""
+msgstr "Trådlös firmware"
 
 #: ../fdtool/fdtool.cxx:101
 msgid "Writes image path file to floppy."
@@ -1097,7 +1102,7 @@ msgstr ""
 
 #: ../stats/stats.cxx:153
 msgid "boot"
-msgstr ""
+msgstr "start"
 
 #: ../stats/stats.cxx:80
 msgid "cpu"
@@ -1109,7 +1114,7 @@ msgstr "dmesg"
 
 #: ../tc-wbarconf/tc-wbarconf.cxx:176
 msgid "eXclude Icons"
-msgstr ""
+msgstr "eXludera ikon"
 
 #: ../wbarconf/wbarconf.cxx:147 ../wbar_exclude/wbar_exclude.cxx:58
 msgid "eXclude Wbar Icons"
