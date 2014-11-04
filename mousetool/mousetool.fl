@@ -37,7 +37,9 @@ box_speed->label(selectedSpeed.c_str());} {}
 
 Function {btn_callback(Fl_Widget*, void* userdata)} {open return_type {static void}
 } {
-  code {if (userdata == "exit")
+  code {const string userdatastr = userdata ? (char *) userdata : "";
+
+if (userdatastr == "exit")
    exit(0);
 
 string pointerOrder;

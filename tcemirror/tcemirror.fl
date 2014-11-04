@@ -19,9 +19,11 @@ decl {string url, command;} {}
 
 Function {btnCallback(Fl_Widget*, void* userdata)} {open return_type {static void}
 } {
-  code {if (userdata == "cancel" )
+  code {const string userdatastr = userdata ? (char *) userdata : "";
+
+if (userdatastr == "cancel" )
    exit(1);
-if (userdata == "ok")
+if (userdatastr == "ok")
 {
     url = urlInput->value();
     ofstream fout("/opt/tcemirror", ios::out|ios::out);
@@ -38,7 +40,9 @@ if (userdata == "ok")
 
 Function {mirrorBrwCallback(Fl_Widget*, void* userdata)} {open return_type {static void}
 } {
-  code {if (userdata == "select")
+  code {const string userdatastr = userdata ? (char *) userdata : "";
+
+if (userdatastr == "select")
 {
    string selected = mirrorBrw->text(mirrorBrw->value());
    urlInput->value(selected.c_str());    

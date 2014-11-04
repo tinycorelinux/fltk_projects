@@ -22,7 +22,9 @@ box_speed->label(selectedSpeed.c_str());
 }
 
 void btn_callback(Fl_Widget*, void* userdata) {
-  if (userdata == "exit")
+  const string userdatastr = userdata ? (char *) userdata : "";
+
+if (userdatastr == "exit")
    exit(0);
 
 string pointerOrder;

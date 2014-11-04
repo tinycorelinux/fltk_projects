@@ -116,12 +116,14 @@ return gettext(msgid);
 }
 
 void btnCB(Fl_Widget*, void*userdata) {
-  /*if ( userdata == "begin" )
+  const string userdatastr = userdata ? (char *) userdata : "";
+
+/*if ( userdatastr == "begin" )
 {
   wWizard->value(wWizard->child(0));
 } */ 
 
-if ( userdata == "next" )
+if ( userdatastr == "next" )
 {
   if ( grpBoot->visible() ){
    	string command = "grep 'Core Plus' `dirname " + path + "`/isolinux/isolinux.cfg >/dev/null 2>&1";   
@@ -155,7 +157,7 @@ if ( userdata == "next" )
   }
 }
 
-if ( userdata == "prev" )
+if ( userdatastr == "prev" )
 {
   if (grpExtensionsStandAlone->visible() ) {
   	wWizard->value(grpBoot);
@@ -174,7 +176,7 @@ if ( userdata == "prev" )
   }
 }
 
-/*if ( userdata == "last" )
+/*if ( userdatastr == "last" )
 {
   int last = wWizard->children()-1;
   wWizard->value(wWizard->child(last));

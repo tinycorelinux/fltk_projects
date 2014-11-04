@@ -8,6 +8,7 @@ void btn_callback(Fl_Widget*, void*userdata);
 extern Fl_Double_Window *window;
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Round_Button.H>
+extern Fl_Round_Button *btnExitPrompt;
 #include <FL/Fl_Output.H>
 extern Fl_Output *device_output;
 #include <FL/Fl_Choice.H>

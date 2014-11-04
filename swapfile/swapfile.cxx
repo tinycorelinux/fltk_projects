@@ -27,7 +27,9 @@ return gettext(msgid);
 }
 
 void btn_callback(Fl_Widget*, void* userdata) {
-  if (userdata == "cancel")
+  const string userdatastr = userdata ? (char *) userdata : "";
+
+if (userdatastr == "cancel")
    exit(1);
 string str_mount = inp_mount->value();
 if ( str_mount == "" )

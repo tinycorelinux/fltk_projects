@@ -41,60 +41,62 @@ return oss.str();
 }
 
 static void btnCallback(Fl_Widget*, void* userdata) {
-  if (userdata == "cancel" )
+  const string userdatastr = userdata ? (char *) userdata : "";
+
+if (userdatastr == "cancel" )
    exit(1);
 string target;
-if (userdata == "yearDown")
+if (userdatastr == "yearDown")
 {
    target = fmtoutput(yearInput->value(),'-',0,0,0);
    yearInput->value(target.c_str());
 }
-if (userdata == "yearUp")
+if (userdatastr == "yearUp")
 {
    target = fmtoutput(yearInput->value(),'+',0,0,0);
    yearInput->value(target.c_str());
 }
-if (userdata == "monthDown")
+if (userdatastr == "monthDown")
 {
    target = fmtoutput(monthInput->value(),'-',1,12,2);
    monthInput->value(target.c_str());
 }
-if (userdata == "monthUp")
+if (userdatastr == "monthUp")
 {
    target = fmtoutput(monthInput->value(),'+',1,12,2);
    monthInput->value(target.c_str());
 }
-if (userdata == "dayDown")
+if (userdatastr == "dayDown")
 {
    target = fmtoutput(dayInput->value(),'-',1,31,2);
    dayInput->value(target.c_str());
 }
-if (userdata == "dayUp")
+if (userdatastr == "dayUp")
 {
    target = fmtoutput(dayInput->value(),'+',1,31,2);
    dayInput->value(target.c_str());
 }
-if (userdata == "hourDown")
+if (userdatastr == "hourDown")
 {
    target = fmtoutput(hourInput->value(),'-',0,23,2);
    hourInput->value(target.c_str());
 }
-if (userdata == "hourUp")
+if (userdatastr == "hourUp")
 {
    target = fmtoutput(hourInput->value(),'+',0,23,2);
    hourInput->value(target.c_str());
 }
-if (userdata == "minDown")
+if (userdatastr == "minDown")
 {
    target = fmtoutput(minInput->value(),'-',0,59,2);
    minInput->value(target.c_str());
 }
-if (userdata == "minUp")
+if (userdatastr == "minUp")
 {
    target = fmtoutput(minInput->value(),'+',0,59,2);
    minInput->value(target.c_str());
 }
-if (userdata == "ok")
+if (userdatastr == "ok")
 {
    string command;
    string month = monthInput->value();

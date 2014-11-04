@@ -34,6 +34,7 @@ return gettext(msgid);
 void btnCallback(Fl_Widget*, void* userdata) {
   string backgroundType;
 string command;
+const string userdatastr = userdata ? (char *) userdata : "";
 
 if (logoBtn->value() == 1 )
     logo = "y";
@@ -56,7 +57,7 @@ if (btnBackground->value() == 1)
                                                                             
      command = "setbackground " + logo + " " + backgroundType + " /opt/backgrounds/" + selectedImage;
      system(command.c_str());                                                                                                                                         
-     if (userdata == "done") { exit(0); }
+     if (userdatastr == "done") { exit(0); }
    }else{
    	fl_message("You must select a filename first");
    }
@@ -76,7 +77,7 @@ if (btnColor->value() == 1)
 	   backgroundType = "solid";                                                  
 	   command = "setbackground " + logo + " " + backgroundType + " \'#" + selectedColor.substr(0,6) + "\'";
 	   system(command.c_str());                                                          
-	   if (userdata == "done") { exit(0); }
+	   if (userdatastr == "done") { exit(0); }
     }else{
 	   uchar ru_g1,gu_g1,bu_g1;
 	   uchar ru_g2,gu_g2,bu_g2;
@@ -106,7 +107,7 @@ if (btnColor->value() == 1)
 	   command = "setbackground " + logo + " " + backgroundType + " " + gradientAngle +" \'#" + gradientColor2.substr(0,6) + "\'" + " \'#" + gradientColor1.substr(0,6) + "\'";
 	   system(command.c_str()); 
    
-	   if (userdata == "done") { exit(0); }
+	   if (userdatastr == "done") { exit(0); }
 	}
 }
 }

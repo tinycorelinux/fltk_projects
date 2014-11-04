@@ -17,19 +17,21 @@ static string backup_device="", command;
 static int action=1; 
 static bool backup=true; 
 static string commandStr = "exitcheck.sh "; 
-static string actionStr, backup_options, backup_command; 
+static string cmdline, actionStr, backup_options, backup_command; 
 
 void btn_callback(Fl_Widget*, void*userdata) {
-  if (userdata == "cancel")
+  const string userdatastr = userdata ? (char *) userdata : "";
+
+if (userdatastr == "cancel")
    exit(0);
 
-if (userdata == "prompt") {
+if (userdatastr == "prompt") {
   choices->hide();
   action = 3;
-} else if (userdata == "shutdown") {
+} else if (userdatastr == "shutdown") {
   choices->show();
   action = 1;
-} else if (userdata == "reboot") {
+} else if (userdatastr == "reboot") {
   choices->show();
   action = 2;
 }
@@ -61,7 +63,7 @@ if (backup) {
    }
 }
          
-if (userdata == "ok") {
+if (userdatastr == "ok") {
   if (action == 3) {
      command = "sudo kill $( cat /tmp/.X${DISPLAY:1:1}-lock ) &";
      system(command.c_str());
@@ -97,6 +99,8 @@ if (userdata == "ok") {
 
 Fl_Double_Window *window=(Fl_Double_Window *)0;
 
+Fl_Round_Button *btnExitPrompt=(Fl_Round_Button *)0;
+
 Fl_Output *device_output=(Fl_Output *)0;
 
 Fl_Choice *choices=(Fl_Choice *)0;
@@ -129,11 +133,11 @@ textdomain("tinycore");
         o->down_box(FL_ROUND_DOWN_BOX);
         o->callback((Fl_Callback*)btn_callback, (void*)("reboot"));
       } // Fl_Round_Button* o
-      { Fl_Round_Button* o = new Fl_Round_Button(25, 50, 110, 15, gettext("Exit to Prompt"));
-        o->type(102);
-        o->down_box(FL_ROUND_DOWN_BOX);
-        o->callback((Fl_Callback*)btn_callback, (void*)("prompt"));
-      } // Fl_Round_Button* o
+      { btnExitPrompt = new Fl_Round_Button(25, 50, 110, 15, gettext("Exit to Prompt"));
+        btnExitPrompt->type(102);
+        btnExitPrompt->down_box(FL_ROUND_DOWN_BOX);
+        btnExitPrompt->callback((Fl_Callback*)btn_callback, (void*)("prompt"));
+      } // Fl_Round_Button* btnExitPrompt
       o->end();
     } // Fl_Group* o
     { device_output = new Fl_Output(15, 120, 155, 25);
@@ -176,7 +180,6 @@ if ( backupDefault == "0" )
 }
   
    
-string cmdline;   
 ifstream proc_cmdline_file("/proc/cmdline");                                  
 getline(proc_cmdline_file,cmdline);                                        
 proc_cmdline_file.close();
@@ -220,6 +223,8 @@ if ( option != string::npos )
 
 if (backup)
    device_output->value(backup_device.c_str());
+   
+if (cmdline.find("xonly") != string::npos) btnExitPrompt->hide();
   window->show(argc, argv);
   return Fl::run();
 }

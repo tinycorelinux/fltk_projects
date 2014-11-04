@@ -78,7 +78,9 @@ static int matches(const char *param, char ***res, unsigned int *out) {
 }
 
 static void btn_callback(Fl_Widget*, void* userdata) {
-  if (userdata == "ok")
+  const string userdatastr = userdata ? (char *) userdata : "";
+
+if (userdatastr == "ok")
 {
   string sudo = "";
   if (sudobox->value()) sudo = "sudo ";

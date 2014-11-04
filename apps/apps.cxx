@@ -252,8 +252,10 @@ errwindow->show();
 }
 
 static void menuCB(Fl_Widget *, void* userdata) {
-  report_type = (const char*)userdata;
-if (userdata == "tcz")
+  const string userdatastr = userdata ? (char *) userdata : "";
+
+report_type = (const char*)userdata;
+if (userdatastr == "tcz")
 {
    browseView();
    mode = "tcz";
@@ -278,7 +280,7 @@ if (userdata == "tcz")
     } else
       fl_message("Error, check network, mirror or writable extension directory.");
       
-} else if (userdata == "LoadLocal" )
+} else if (userdatastr == "LoadLocal" )
 {
   auditView();
   btnSingle->label("Load");
@@ -290,7 +292,7 @@ if (userdata == "tcz")
   loadBrwExtnData();
   cursor_normal();
   
-} else if (userdata == "onboot" )
+} else if (userdatastr == "onboot" )
 {
   auditView();
   btnSingle->show();
@@ -307,7 +309,7 @@ if (userdata == "tcz")
   brwResults->remove(brwResults->size());
   
   cursor_normal();
-} else if (userdata == "ondemand" )
+} else if (userdatastr == "ondemand" )
 {
   auditView();
   btnSingle->show();
@@ -320,7 +322,7 @@ if (userdata == "tcz")
   command = "ondemand -ct | sort -f";
   loadBrwResultsData();
   cursor_normal();
-} else if (userdata == "md5s") 
+} else if (userdatastr == "md5s") 
 {
    auditView();
    grpSingle->hide();
@@ -335,7 +337,7 @@ if (userdata == "tcz")
    brwMulti->remove(brwMulti->size());
    cursor_normal();
 
-} else if (userdata == "updates") 
+} else if (userdatastr == "updates") 
 {
    string line;
    auditView();
@@ -382,7 +384,7 @@ if (userdata == "tcz")
    Fl::flush(); 
    
    
-} else if (userdata == "orphans") 
+} else if (userdatastr == "orphans") 
 {
    string line;
    auditView();
@@ -395,7 +397,7 @@ if (userdata == "tcz")
    cursor_normal();
    Fl::flush();      
       
-} else if (userdata == "unneeded") 
+} else if (userdatastr == "unneeded") 
 {
    string line;
    auditView();
@@ -407,7 +409,7 @@ if (userdata == "tcz")
    cursor_normal();
    Fl::flush();      
       
-} else if (userdata == "copy2fs")
+} else if (userdatastr == "copy2fs")
 {
    auditView();
    command = "ls "+ copy2fsFlag + " >/dev/null 2>&1";
@@ -423,7 +425,7 @@ if (userdata == "tcz")
      system(command.c_str());
      boxResults->label("copy2fs.flg set");
    }
-} else if (userdata == "SelectiveCopy") 
+} else if (userdatastr == "SelectiveCopy") 
 {
    auditView();
    btnSingle->show();
@@ -437,7 +439,7 @@ if (userdata == "tcz")
    boxResults->label("Current copy2fs.lst");
    option_type = (const char*) userdata;
    
-} else if (userdata == "menuDepends")
+} else if (userdatastr == "menuDepends")
   {
     auditView();
     mode = "depends";
@@ -453,7 +455,7 @@ if (userdata == "tcz")
     menu_delete->deactivate();
     menuBarDepends->show();
     
-} else if (userdata == "quit")
+} else if (userdatastr == "quit")
   {
     if ( last_dir.compare(0,8,"/tmp/tce") != 0 )
     {
@@ -474,7 +476,9 @@ if (userdata == "tcz")
 }
 
 static void btnCB(Fl_Widget *, void* userdata) {
-  if (userdata == "go")
+  const string userdatastr = userdata ? (char *) userdata : "";
+
+if (userdatastr == "go")
 {
    outputStatus->value("");
    outputStatus->label("Status");
@@ -494,7 +498,7 @@ static void btnCB(Fl_Widget *, void* userdata) {
    }
    command = "tce-load -" + action_type + " " + select_extn;
    fetch_extension();
-} else if (userdata == "setdrive")
+} else if (userdatastr == "setdrive")
 {
    cursor_wait();
    command = "tce-setdrive -l";
@@ -511,11 +515,11 @@ static void btnCB(Fl_Widget *, void* userdata) {
    } else
      fl_message("No available drives found!");
      
-} else if (userdata == "search")
+} else if (userdatastr == "search")
 {
-  if (search_choices->text() == "Search")
+  if (search_choices->text() == string("Search"))
      command = "search.sh";
-  else if (search_choices->text() == "Tags")
+  else if (search_choices->text() == string("Tags"))
      command = "search.sh -t";
   else
      command = "provides.sh";
@@ -656,22 +660,24 @@ static void tabsGroupCB(Fl_Widget*, void*) {
 }
 
 void dependsCB(Fl_Widget *, void* userdata) {
-  option_type = "";
+  const string userdatastr = userdata ? (char *) userdata : "";
+
+option_type = "";
 report_type = (const char*) userdata;
 btnResults->hide();
 
-if (userdata == "updatedeps")
+if (userdatastr == "updatedeps")
 {
    cursor_wait();
    command = "tce-audit updatedeps " + target_dir +"/";
    system(command.c_str());
    cursor_normal();
-} else if (userdata == "builddb")
+} else if (userdatastr == "builddb")
 {
    cursor_wait();
    builddb();
    cursor_normal();
-} else if (userdata == "dependson" or userdata == "requiredby" or userdata == "audit") 
+} else if (userdatastr == "dependson" or userdatastr == "requiredby" or userdatastr == "audit") 
 {
    string loadit = "tce-audit " + report_type + " " + target_dir + "/" + select_extn;
    int results = system(loadit.c_str());
@@ -682,7 +688,7 @@ if (userdata == "updatedeps")
    } else {
       fl_message("error detected!");
    }
-} else if (userdata == "auditall" or userdata == "nodepends" or userdata == "notrequired")
+} else if (userdatastr == "auditall" or userdatastr == "nodepends" or userdatastr == "notrequired")
 {
    cursor_wait();
    boxResults->label("Results");
@@ -709,7 +715,7 @@ if (userdata == "updatedeps")
       fl_message(msg.c_str());
    }
    cursor_normal();
-} else if (userdata == "fetchmissing")
+} else if (userdatastr == "fetchmissing")
 {
    cursor_wait();
    brwResults->clear();
@@ -739,7 +745,7 @@ if (userdata == "updatedeps")
       brwResults->add("Missing dependencies fetch completed.");    
 
    cursor_normal();
-} else if (userdata == "delete")
+} else if (userdatastr == "delete")
 {
    protectChr();
    command = "tce-audit " + report_type + " " + target_dir + "/" + "\""+ select_extn + "\"";
@@ -751,12 +757,12 @@ if (userdata == "updatedeps")
    } else {
       fl_message("error detected!");
    }
-} else if (userdata == "display_marked")
+} else if (userdatastr == "display_marked")
 {
      boxResults->label("Results");
      brwResults->load("/tmp/audit_marked.lst");
      brwResults->remove(brwResults->size());
-} else if (userdata == "clearlst")
+} else if (userdatastr == "clearlst")
 {
      command = "tce-audit " + report_type + " " + target_dir + "/" + select_extn;
      int results = system(command.c_str());
@@ -765,7 +771,7 @@ if (userdata == "updatedeps")
         brwResults->clear();
         boxResults->label("Marked for deletion cleared");
      }
-} else if (userdata == "exit_depends")
+} else if (userdatastr == "exit_depends")
 {
 
     menuBarDepends->hide();

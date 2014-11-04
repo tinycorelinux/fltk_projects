@@ -80,12 +80,14 @@ return gettext(msgid);
 }
 
 void btnCB(Fl_Widget*, void*userdata) {
-  if ( userdata == "begin" )
+  const string userdatastr = userdata ? (char *) userdata : "";
+
+if ( userdatastr == "begin" )
 {
   wWizard->value(wWizard->child(0));
 }  
 
-if ( userdata == "next" )
+if ( userdatastr == "next" )
 {
   wWizard->next();
   if ( grpFormat->visible() && installMode == "embedded") 
@@ -93,7 +95,7 @@ if ( userdata == "next" )
   
 }
 
-if ( userdata == "prev" )
+if ( userdatastr == "prev" )
 {
   wWizard->prev();
   if ( grpFormat->visible() && installMode == "embedded") 
@@ -101,7 +103,7 @@ if ( userdata == "prev" )
 
 }
 
-if ( userdata == "last" )
+if ( userdatastr == "last" )
 {
   int last = wWizard->children()-1;
   wWizard->value(wWizard->child(last));

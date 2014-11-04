@@ -10,9 +10,11 @@ using namespace std;
 static string url, command; 
 
 void btnCallback(Fl_Widget*, void* userdata) {
-  if (userdata == "cancel" )
+  const string userdatastr = userdata ? (char *) userdata : "";
+
+if (userdatastr == "cancel" )
    exit(1);
-if (userdata == "ok")
+if (userdatastr == "ok")
 {
     url = urlInput->value();
     ofstream fout("/opt/tcemirror", ios::out|ios::out);
@@ -28,7 +30,9 @@ if (userdata == "ok")
 }
 
 void mirrorBrwCallback(Fl_Widget*, void* userdata) {
-  if (userdata == "select")
+  const string userdatastr = userdata ? (char *) userdata : "";
+
+if (userdatastr == "select")
 {
    string selected = mirrorBrw->text(mirrorBrw->value());
    urlInput->value(selected.c_str());    

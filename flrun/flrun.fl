@@ -89,7 +89,9 @@ Function {matches(const char *param, char ***res, unsigned int *out)} {open priv
 
 Function {btn_callback(Fl_Widget*, void* userdata)} {open private return_type {static void}
 } {
-  code {if (userdata == "ok")
+  code {const string userdatastr = userdata ? (char *) userdata : "";
+
+if (userdatastr == "ok")
 {
   string sudo = "";
   if (sudobox->value()) sudo = "sudo ";

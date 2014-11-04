@@ -9,13 +9,15 @@
 using namespace std;
 
 void btnCallback(Fl_Widget*, void* userdata) {
-  if (userdata == "cancel")
+  const string userdatastr = userdata ? (char *) userdata : "";
+
+if (userdatastr == "cancel")
    exit(1);
 
 string command;   
 string commandA = "aterm +tr -bg white -fg black -geometry 80x4 -T ";
 string commandB = " -e floppytool.sh ";  
-if (userdata == "format")
+if (userdatastr == "format")
 {
    command = commandA + "\"Resizing and Formatting Floppy\" " + commandB;
    if (btn1440 -> value() == 1)
@@ -26,7 +28,7 @@ if (userdata == "format")
 {
    string strImagePath = inpImagePath -> value();     
 
-   if (userdata == "mkimage" )
+   if (userdatastr == "mkimage" )
    {
       command = commandA + "\"Creating Floppy Image\"" + commandB;
       if (btn1440 -> value() == 1)
@@ -35,7 +37,7 @@ if (userdata == "format")
          command += "makeimage 1722 " + strImagePath;
    }
 
-   if (userdata == "apimage")
+   if (userdatastr == "apimage")
    {
       command = commandA + "\"Creating Floppy from Image File\"" + commandB;
       if (btn1440 -> value() == 1)

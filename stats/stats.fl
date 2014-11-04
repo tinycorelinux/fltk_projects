@@ -24,30 +24,32 @@ Function {tabsGroupCB(Fl_Widget*, void*userdata)} {open return_type {static void
 
 Function {tabCB(Fl_Widget*, void*userdata)} {open return_type {static void}
 } {
-  code {if (userdata == "cpu") 
+  code {const string userdatastr = userdata ? (char *) userdata : "";
+
+if (userdatastr == "cpu") 
   system("cat /proc/cpuinfo > /tmp/stats.txt");
-if (userdata == "mem")
+if (userdatastr == "mem")
   system("cat /proc/meminfo > /tmp/stats.txt");
-if (userdata == "net") 
+if (userdatastr == "net") 
 {
   system("cat /etc/resolv.conf > /tmp/stats.txt");               
   system("ifconfig >> /tmp/stats.txt"); 
 }                           
-if (userdata == "modules")
+if (userdatastr == "modules")
   system("cat /proc/modules > /tmp/stats.txt");
-if (userdata == "processes")
+if (userdatastr == "processes")
   system("ps ax > /tmp/stats.txt");
-if (userdata == "dmesg")
+if (userdatastr == "dmesg")
   system("dmesg > /tmp/stats.txt");
-if (userdata == "mounts")
+if (userdatastr == "mounts")
   system("mount > /tmp/stats.txt");
-if (userdata == "filesystems")
+if (userdatastr == "filesystems")
   system("df -h > /tmp/stats.txt");
-if (userdata == "boot")
+if (userdatastr == "boot")
   system("sed 's/ /\\\\n/g' /proc/cmdline > /tmp/stats.txt");
-if (userdata == "installed")
+if (userdatastr == "installed")
   system("ls -1 /usr/local/tce.installed | sort -f >/tmp/stats.txt");
-if (userdata=="big")
+if (userdatastr == "big")
   system("bigHomeFiles.sh > /tmp/stats.txt");
 txtBuffer->loadfile("/tmp/stats.txt");} {}
 } 

@@ -12,7 +12,9 @@ using namespace std;
 static string hostname; 
 
 void btnCallback(Fl_Widget*, void* userdata) {
-  if (userdata == "dhcpYes" )
+  const string userdatastr = userdata ? (char *) userdata : "";
+
+if (userdatastr == "dhcpYes" )
 {
    ipAddressInput->deactivate();
    netMaskInput->deactivate();
@@ -21,7 +23,7 @@ void btnCallback(Fl_Widget*, void* userdata) {
    nameserv1Input->deactivate();
    nameserv2Input->deactivate();
 }
-if (userdata == "dhcpNo" )
+if (userdatastr == "dhcpNo" )
 {
    ipAddressInput->activate();
    netMaskInput->activate();
@@ -30,7 +32,7 @@ if (userdata == "dhcpNo" )
    nameserv1Input->activate();
    nameserv2Input->activate();
 }
-if (userdata == "ip" )
+if (userdatastr == "ip" )
 {
    string commandHead = "ipcalc -b ";
    string commandTail = "| cut -f2 -d=";
@@ -56,7 +58,7 @@ if (userdata == "ip" )
    gatewayInput->value(gw.c_str());
 }   
 
-if (userdata == "apply")
+if (userdatastr == "apply")
 {
    string interface = interfaceInput->value();
    string ipaddress = ipAddressInput->value();
@@ -124,7 +126,7 @@ if (userdata == "apply")
       system(command.c_str());
    }        
 }      
-if (userdata == "exit")
+if (userdatastr == "exit")
    exit(0);
 }
 
