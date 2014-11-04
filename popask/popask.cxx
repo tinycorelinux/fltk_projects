@@ -4,7 +4,7 @@
 // (c) Robert Shingledecker
 #include <iostream>
 #include <string>
-#include <Fl/fl_ask.H>
+#include <FL/fl_ask.H>
 using namespace std;
 
 int main(int argc, char **argv) {
