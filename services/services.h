@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <FL/Fl_Light_Button.H>
+#include <stdint.h>
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Pack.H>
 #endif

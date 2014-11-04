@@ -2,7 +2,7 @@
 version 1.0110 
 header_name {.h} 
 code_name {.cxx}
-decl {// Services gui v0.3 (C) Curaga} {selected global
+decl {// Services gui v0.3 (C) Curaga} {global
 } 
 
 decl {// Under the GPLv3} {global
@@ -21,6 +21,9 @@ decl {\#include <string.h>} {public global
 } 
 
 decl {\#include <FL/Fl_Light_Button.H>} {public global
+} 
+
+decl {\#include <stdint.h>} {public global
 } 
 
 decl {\#define bufsize 96} {global
@@ -185,12 +188,12 @@ fprintf(stderr,"Found total %d services.\\n",total);} {}
     Fl_Pack left {open
       private xywh {20 15 200 390}
       code0 {left->spacing(5);}
-      code1 {for (i=0; i<topa; i++) { lght[i]=new Fl_Light_Button(0,0,25,25,services[i]); lght[i]->selection_color(FL_GREEN); lght[i]->value(s_status[i]); lght[i]->callback((Fl_Callback*)toggle_service, (void*)i); }}
+      code1 {for (i=0; i<topa; i++) { lght[i]=new Fl_Light_Button(0,0,25,25,services[i]); lght[i]->selection_color(FL_GREEN); lght[i]->value(s_status[i]); lght[i]->callback((Fl_Callback*)toggle_service, (void*)(uintptr_t)i); }}
     } {}
     Fl_Pack right {open
       private xywh {260 15 200 390}
       code0 {right->spacing(5);}
-      code1 {for (i=13; i<topb; i++) { lght[i]=new Fl_Light_Button(0,0,25,25,services[i]); lght[i]->selection_color(FL_GREEN); lght[i]->value(s_status[i]); lght[i]->callback((Fl_Callback*)toggle_service, (void*)i); }}
+      code1 {for (i=13; i<topb; i++) { lght[i]=new Fl_Light_Button(0,0,25,25,services[i]); lght[i]->selection_color(FL_GREEN); lght[i]->value(s_status[i]); lght[i]->callback((Fl_Callback*)toggle_service, (void*)(uintptr_t)i); }}
     } {}
   }
 } 

@@ -150,12 +150,12 @@ fprintf(stderr,"Found total %d services.\n",total);
   { window = new Fl_Double_Window(480, 425, "Services");
     { left = new Fl_Pack(20, 15, 200, 390);
       left->spacing(5);
-      for (i=0; i<topa; i++) { lght[i]=new Fl_Light_Button(0,0,25,25,services[i]); lght[i]->selection_color(FL_GREEN); lght[i]->value(s_status[i]); lght[i]->callback((Fl_Callback*)toggle_service, (void*)i); }
+      for (i=0; i<topa; i++) { lght[i]=new Fl_Light_Button(0,0,25,25,services[i]); lght[i]->selection_color(FL_GREEN); lght[i]->value(s_status[i]); lght[i]->callback((Fl_Callback*)toggle_service, (void*)(uintptr_t)i); }
       left->end();
     } // Fl_Pack* left
     { right = new Fl_Pack(260, 15, 200, 390);
       right->spacing(5);
-      for (i=13; i<topb; i++) { lght[i]=new Fl_Light_Button(0,0,25,25,services[i]); lght[i]->selection_color(FL_GREEN); lght[i]->value(s_status[i]); lght[i]->callback((Fl_Callback*)toggle_service, (void*)i); }
+      for (i=13; i<topb; i++) { lght[i]=new Fl_Light_Button(0,0,25,25,services[i]); lght[i]->selection_color(FL_GREEN); lght[i]->value(s_status[i]); lght[i]->callback((Fl_Callback*)toggle_service, (void*)(uintptr_t)i); }
       right->end();
     } // Fl_Pack* right
     sprintf(wintitle,"Services: %d total",total); window->label(wintitle);
