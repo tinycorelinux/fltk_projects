@@ -23,7 +23,7 @@ decl {\#include <stdio.h>} {}
 
 decl {\#include <locale.h>} {} 
 
-decl {\#include <FL/fl_message.h>} {} 
+decl {\#include <FL/fl_ask.H>} {} 
 
 decl {using namespace std;} {} 
 

@@ -11,7 +11,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <locale.h>
-#include <FL/fl_message.h>
+#include <FL/fl_ask.H>
 using namespace std;
 static int locales_set=0; 
 static string target, logo; 
