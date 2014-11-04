@@ -7,7 +7,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <Fl/fl_ask.H>
+#include <FL/fl_ask.H>
 #include <locale.h>
 using namespace std;
 static int locales_set=0; 

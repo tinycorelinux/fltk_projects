@@ -15,7 +15,7 @@ decl {\#include <sstream>} {}
 
 decl {\#include <string>} {} 
 
-decl {\#include <Fl/fl_ask.H>} {} 
+decl {\#include <FL/fl_ask.H>} {} 
 
 decl {\#include <locale.h>} {} 
 
