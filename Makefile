@@ -1,10 +1,10 @@
 PREFIX = /usr/local
 INSTDIR = $(DESTDIR)/$(PREFIX)/bin
 
-DIRS = add2file appbrowser apps appsaudit cpanel datetool editor \
+DIRS = add2file apps cpanel datetool editor \
 	exittc fdtool filechooser filetool flpdf flrun \
 	loadpack mirrorpicker mnttool mousetool \
-	network popask popup scmapps scmbrowser services \
+	network popask popup services \
 	settheme stats swapfile tcemirror tc-grub4dos tc-install \
 	tc-wbarconf wallpaper wbarconf wbar_exclude
 
