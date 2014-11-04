@@ -2,11 +2,11 @@ PREFIX = /usr/local
 INSTDIR = $(DESTDIR)/$(PREFIX)/bin
 
 DIRS = add2file apps cpanel datetool editor \
-	exittc fdtool filechooser filetool flpdf flrun \
-	loadpack mirrorpicker mnttool mousetool \
+	exittc filetool flrun \
+	mirrorpicker mnttool mousetool \
 	network popask popup services \
-	settheme stats swapfile tcemirror tc-grub4dos tc-install \
-	tc-wbarconf wallpaper wbarconf wbar_exclude
+	settheme stats swapfile tc-install \
+	tc-wbarconf wallpaper wbarconf
 
 TARGETS = $(foreach dir, $(DIRS),$(dir)/$(dir))
 SRC = $(foreach dir, $(DIRS),$(wildcard $(dir)/*.cxx))
