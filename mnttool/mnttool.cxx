@@ -9,6 +9,7 @@
 #include <fstream>
 #include <vector>
 #include <locale.h>
+#include <stdint.h>
 #include <FL/Fl_Button.H>
 using namespace std;
 static int size, selected, xPos, yPos; 
@@ -38,7 +39,7 @@ for (int i=0; i < size; i++)
    btn[i] = new Fl_Button(0,0,80,25);
    btn[i]->label(mountList[i].c_str());
    btn[i]->tooltip(mountLabels[i].c_str());
-   btn[i]->callback((Fl_Callback*)btnCallback,(void*)i);
+   btn[i]->callback((Fl_Callback*)btnCallback,(void*)(uintptr_t)i);
 
    if ( mountState[i] == 0)
       btn[i]->color((Fl_Color)2);

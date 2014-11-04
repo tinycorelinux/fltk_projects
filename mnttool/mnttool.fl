@@ -22,6 +22,9 @@ decl {\#include <vector>} {}
 
 decl {\#include <locale.h>} {} 
 
+decl {\#include <stdint.h>} {global
+} 
+
 decl {\#include <FL/Fl_Button.H>} {} 
 
 decl {using namespace std;} {} 
@@ -63,7 +66,7 @@ for (int i=0; i < size; i++)
    btn[i] = new Fl_Button(0,0,80,25);
    btn[i]->label(mountList[i].c_str());
    btn[i]->tooltip(mountLabels[i].c_str());
-   btn[i]->callback((Fl_Callback*)btnCallback,(void*)i);
+   btn[i]->callback((Fl_Callback*)btnCallback,(void*)(uintptr_t)i);
 
    if ( mountState[i] == 0)
       btn[i]->color((Fl_Color)2);
