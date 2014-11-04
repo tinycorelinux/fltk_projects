@@ -21,8 +21,6 @@ decl {\#include <FL/fl_message.H>} {}
 
 decl {\#include <FL/Fl_File_Chooser.H>} {} 
 
-decl {\#include <FL/forms.h>} {} 
-
 decl {\#include <sys/types.h>} {} 
 
 decl {\#include <sys/stat.h>} {} 

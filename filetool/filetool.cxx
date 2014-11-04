@@ -10,7 +10,6 @@
 #include <string>
 #include <FL/fl_message.H>
 #include <FL/Fl_File_Chooser.H>
-#include <FL/forms.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
