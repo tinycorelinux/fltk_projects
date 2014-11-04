@@ -172,7 +172,6 @@ textdomain("tinycore");} {}
       user_data {"ok"}
       callback btn_callback
       xywh {15 150 70 20}
-      code0 {btnOK->take_focus();}
     }
     Fl_Button {} {
       label {&Cancel}
@@ -247,6 +246,9 @@ if ( option != string::npos )
 if (backup)
    device_output->value(backup_device.c_str());
    
-if (cmdline.find("xonly") != string::npos) btnExitPrompt->hide();} {selected
+if (cmdline.find("xonly") != string::npos) btnExitPrompt->hide();
+
+window->show(argc, argv);
+btnOK->take_focus();} {selected
   }
 } 

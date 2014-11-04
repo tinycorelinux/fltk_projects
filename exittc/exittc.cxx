@@ -151,7 +151,6 @@ textdomain("tinycore");
     } // Fl_Choice* choices
     { btnOK = new Fl_Return_Button(15, 150, 70, 20, gettext("&OK"));
       btnOK->callback((Fl_Callback*)btn_callback, (void*)("ok"));
-      btnOK->take_focus();
     } // Fl_Return_Button* btnOK
     { Fl_Button* o = new Fl_Button(100, 150, 70, 20, gettext("&Cancel"));
       o->callback((Fl_Callback*)btn_callback, (void*)("cancel"));
@@ -225,6 +224,9 @@ if (backup)
    device_output->value(backup_device.c_str());
    
 if (cmdline.find("xonly") != string::npos) btnExitPrompt->hide();
+
+window->show(argc, argv);
+btnOK->take_focus();
   window->show(argc, argv);
   return Fl::run();
 }
