@@ -87,7 +87,7 @@ w->position(xPos,yPos);
 w->redraw();} {}
 } 
 
-Function {getMountables()} {open return_type int
+Function {getMountables()} {open return_type void
 } {
   code {mountList.clear();
 mountState.clear();

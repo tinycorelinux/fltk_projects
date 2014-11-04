@@ -6,7 +6,7 @@
 #include <unistd.h>
 void getPos();
 void refresh();
-int getMountables();
+void getMountables();
 void btnCallback(Fl_Widget*, void* userdata);
 void btnRefreshCallback(Fl_Widget*, void* userdata);
 #include <FL/Fl_Double_Window.H>

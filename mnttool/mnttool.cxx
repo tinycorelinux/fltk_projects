@@ -62,7 +62,7 @@ w->position(xPos,yPos);
 w->redraw();
 }
 
-int getMountables() {
+void getMountables() {
   mountList.clear();
 mountState.clear();
 
