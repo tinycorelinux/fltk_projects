@@ -142,17 +142,17 @@ for (; i; i--) {
 free(results);
 }
 
+static Fl_Double_Window *w=(Fl_Double_Window *)0;
+
 Fl_Input_Choice *in_command=(Fl_Input_Choice *)0;
 
 Fl_Check_Button *sudobox=(Fl_Check_Button *)0;
 
 int main(int argc, char **argv) {
-  Fl_Double_Window* w;
   setlocale(LC_ALL, "");
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");
-  { Fl_Double_Window* o = new Fl_Double_Window(265, 125, gettext("FLRun"));
-    w = o;
+  { w = new Fl_Double_Window(265, 125, gettext("FLRun"));
     { Fl_Return_Button* o = new Fl_Return_Button(25, 85, 66, 20, gettext("OK"));
       o->callback((Fl_Callback*)btn_callback, (void*)("ok"));
     } // Fl_Return_Button* o
@@ -166,13 +166,14 @@ textdomain("tinycore");
       in_command->callback((Fl_Callback*)search_cb);
       in_command->align(FL_ALIGN_TOP);
       in_command->when(FL_WHEN_CHANGED);
-      in_command->take_focus();
     } // Fl_Input_Choice* in_command
     { sudobox = new Fl_Check_Button(25, 60, 215, 15, gettext("Run with sudo"));
       sudobox->down_box(FL_DOWN_BOX);
     } // Fl_Check_Button* sudobox
-    o->end();
-  } // Fl_Double_Window* o
+    w->end();
+  } // Fl_Double_Window* w
+  w->show(argc, argv);
+in_command->take_focus();
   w->show(argc, argv);
   return Fl::run();
 }

@@ -161,9 +161,9 @@ Function {} {open
   code {setlocale(LC_ALL, "");
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");} {}
-  Fl_Window {} {
+  Fl_Window w {
     label FLRun open
-    xywh {700 475 265 125} type Double hide
+    private xywh {700 475 265 125} type Double hide
   } {
     Fl_Return_Button {} {
       label OK
@@ -186,11 +186,12 @@ textdomain("tinycore");} {}
       label {Application launcher}
       callback search_cb open
       xywh {25 25 215 24} align 1 when 1
-      code0 {in_command->take_focus();}
     } {}
     Fl_Check_Button sudobox {
       label {Run with sudo}
       xywh {25 60 215 15} down_box DOWN_BOX
     }
   }
+  code {w->show(argc, argv);
+in_command->take_focus();} {}
 } 
