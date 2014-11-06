@@ -1,25 +1,33 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
+version 1.0303 
 i18n_type 1 
 i18n_include <libintl.h> 
 i18n_function gettext 
 header_name {.h} 
 code_name {.cxx}
-decl {// (c) Robert Shingledecker} {} 
+decl {// (c) Robert Shingledecker} {private local
+} 
 
-decl {\#include <cstdlib>} {} 
+decl {\#include <cstdlib>} {private local
+} 
 
-decl {\#include <iostream>} {} 
+decl {\#include <iostream>} {private local
+} 
 
-decl {\#include <fstream>} {} 
+decl {\#include <fstream>} {private local
+} 
 
-decl {\#include <string>} {} 
+decl {\#include <string>} {private local
+} 
 
-decl {\#include <locale.h>} {} 
+decl {\#include <locale.h>} {private local
+} 
 
-decl {using namespace std;} {} 
+decl {using namespace std;} {private local
+} 
 
-decl {string hostname;} {} 
+decl {string hostname;} {private local
+} 
 
 Function {btnCallback(Fl_Widget*, void* userdata)} {open return_type {static void}
 } {
@@ -138,8 +146,7 @@ if (userdatastr == "apply")
    }        
 }      
 if (userdatastr == "exit")
-   exit(0);} {selected
-  }
+   exit(0);} {}
 } 
 
 Function {} {open
@@ -148,13 +155,9 @@ Function {} {open
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");} {}
   Fl_Window {} {
-    label Network open
-    xywh {159 276 160 415} type Double hide
+    label Network open selected
+    xywh {159 288 160 428} type Double hide
   } {
-    Fl_Box {} {
-      label Network
-      xywh {30 2 90 28} labeltype ENGRAVED_LABEL labelsize 18
-    }
     Fl_Input interfaceInput {
       label Interface
       xywh {20 41 115 24} labelfont 1 labelsize 12 align 5
