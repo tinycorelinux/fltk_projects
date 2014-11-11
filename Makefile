@@ -6,7 +6,7 @@ DIRS = add2file apps cpanel datetool editor \
 	mirrorpicker mnttool mousetool \
 	network popask popup services \
 	stats swapfile tc-install \
-	tc-wbarconf wallpaper wbarconf
+	tc-wbarconf wallpaper
 
 TARGETS = $(foreach dir, $(DIRS),$(dir)/$(dir))
 SRC = $(foreach dir, $(DIRS),$(wildcard $(dir)/*.cxx))
