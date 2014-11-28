@@ -23,7 +23,8 @@ static void *testmirror(void *in) {
 	struct timeval start, end;
 	gettimeofday(&start, NULL);
 
-	system(tmp);
+	int ret = system(tmp);
+	ret = WEXITSTATUS(ret);
 
 	gettimeofday(&end, NULL);
 	unlink(target);
@@ -31,6 +32,10 @@ static void *testmirror(void *in) {
 	unsigned int usec = end.tv_sec - start.tv_sec;
 	usec *= 1e6;
 	usec += end.tv_usec - start.tv_usec;
+
+	// If the fetch failed, add 100 sec
+	if (ret)
+		usec += 100000000;
 
 	unsigned int *res = (unsigned int *) malloc(sizeof(unsigned int));
 	*res = usec;
@@ -113,7 +118,9 @@ void init(int argc, char **argv) {
 
 	// Wait for them
 	for (i = 0; i < count; i++) {
-		pthread_join(tids[i], (void **) &results[i]);
+		void *ptr;
+		pthread_join(tids[i], &ptr);
+		results[i] = * (unsigned *) ptr;
 		prog->value(i);
 		Fl::check();
 	}
