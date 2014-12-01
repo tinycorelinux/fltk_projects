@@ -17,7 +17,7 @@ static void *testmirror(void *in) {
 
 	mktemp(target);
 
-	snprintf(tmp, PATH_MAX, "wget -q -O %s %s/4.x/x86/tcz/info.lst.gz", target, url);
+	snprintf(tmp, PATH_MAX, "wget -q -O %s %s/6.x/x86/tcz/info.lst.gz", target, url);
 
 	// Temp name made. Start clocking
 	struct timeval start, end;
