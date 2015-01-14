@@ -135,9 +135,11 @@ Function {displayTabData()} {return_type void
 } {
   code {txtBuffer->loadfile("");
 FILE *pipe = popen(command.c_str(),"r");
-char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
+
 if (pipe)
 {
+   char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
+
    while(fgets(mbuf,PATH_MAX,pipe))
    {
       string line(mbuf);
@@ -153,9 +155,11 @@ Function {loadBrwExtnData()} {return_type void
 } {
   code {brwExtn->clear();
 FILE *pipe = popen(command.c_str(),"r");
-char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
+
 if (pipe)
 {
+   char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
+
    while(fgets(mbuf,PATH_MAX,pipe))
    {
       string line(mbuf);
@@ -170,9 +174,11 @@ if (pipe)
 Function {loadBrwResultsData()} {return_type void
 } {
   code {FILE *pipe = popen(command.c_str(),"r");
-char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
+
 if (pipe)
 {
+   char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
+
    while(fgets(mbuf,PATH_MAX,pipe))
    {
       string line(mbuf);
@@ -762,9 +768,10 @@ if (userdatastr == "updatedeps")
    brwResults->clear();
    command = "tce-audit fetchmissing";
    FILE *pipe = popen(command.c_str(),"r");
-   char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
+
    if (pipe)
    {
+      char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
       brwResults->clear();
       while(fgets(mbuf,PATH_MAX,pipe))
       {
