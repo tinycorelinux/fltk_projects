@@ -527,7 +527,7 @@ if (userdatastr == "go")
   txtBuffer->loadfile("");
   brwSelect->load(""); 
   cursor_wait();
-  command = command + " " + (string)search_field->value();
+  command = command + " \"" + (string)search_field->value() + "\"";
   FILE *pipe = popen(command.c_str(),"r");
   char *mbuf = (char *)calloc(PATH_MAX,sizeof(char));
   if (pipe)
