@@ -285,7 +285,7 @@ if (userdatastr == "tcz")
       search_field->activate();                                              
     } else
       fl_message("Error, check network, mirror or writable extension directory.");
-      
+
 } else if (userdatastr == "LoadLocal" )
 {
   auditView();
@@ -523,6 +523,12 @@ if (userdatastr == "go")
      
 } else if (userdatastr == "search")
 {
+  if (strlen(search_field->value()) == 0) {
+    char str[] = "tcz";
+    menuCB((Fl_Widget *) NULL, str); // On an empty search, reload the list.
+    return;
+  }
+
   if (search_choices->text() == string("Search"))
      command = "search.sh";
   else if (search_choices->text() == string("Tags"))
@@ -1238,7 +1244,7 @@ unlink(testfile.c_str());
         { search_field = new Fl_Input(165, 7, 520, 20);
           search_field->labeltype(FL_NO_LABEL);
           search_field->callback((Fl_Callback*)btnCB, (void*)("search"));
-          search_field->when(FL_WHEN_ENTER_KEY);
+          search_field->when(FL_WHEN_ENTER_KEY_ALWAYS);
           search_field->deactivate();
           Fl_Group::current()->resizable(search_field);
         } // Fl_Input* search_field

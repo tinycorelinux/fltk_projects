@@ -291,7 +291,7 @@ err_extn.replace(0,9,""); // Yes, hardcoded magic value. Bad.
 errwindow->show();} {}
 } 
 
-Function {menuCB(Fl_Widget *, void* userdata)} {open private return_type {static void}
+Function {menuCB(Fl_Widget *, void* userdata)} {open private return_type void
 } {
   code {const string userdatastr = userdata ? (char *) userdata : "";
 
@@ -320,7 +320,7 @@ if (userdatastr == "tcz")
       search_field->activate();                                              
     } else
       fl_message("Error, check network, mirror or writable extension directory.");
-      
+
 } else if (userdatastr == "LoadLocal" )
 {
   auditView();
@@ -560,6 +560,12 @@ if (userdatastr == "go")
      
 } else if (userdatastr == "search")
 {
+  if (strlen(search_field->value()) == 0) {
+    char str[] = "tcz";
+    menuCB((Fl_Widget *) NULL, str); // On an empty search, reload the list.
+    return;
+  }
+
   if (search_choices->text() == string("Search"))
      command = "search.sh";
   else if (search_choices->text() == string("Tags"))
@@ -1359,7 +1365,7 @@ outURI->value(mirror.c_str());}
         Fl_Input search_field {
           user_data {"search"}
           callback btnCB
-          xywh {165 7 520 20} labeltype NO_LABEL when 8 deactivate resizable
+          xywh {165 7 520 20} labeltype NO_LABEL when 10 deactivate resizable
         }
       }
       Fl_Box boxSelect {
