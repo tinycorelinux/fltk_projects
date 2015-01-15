@@ -25,7 +25,7 @@ CXXFLAGS += -ffunction-sections -fdata-sections
 LDFLAGS += -Wl,-O1 -Wl,-gc-sections
 LDFLAGS += -Wl,-as-needed
 
-CXXFLAGS += $(shell fltk-config --cxxflags)
+CXXFLAGS += $(shell fltk-config --cxxflags | sed 's@-I@-isystem @')
 LDFLAGS += $(shell fltk-config --ldflags)
 
 all: $(TARGETS)
