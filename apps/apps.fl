@@ -1143,7 +1143,7 @@ unlink(testfile.c_str());} {}
     label {Apps: Regular Applications (tcz)}
     user_data {"quit"}
     callback menuCB open
-    xywh {29 100 690 428} type Double hide resizable
+    xywh {29 100 690 428} type Double resizable size_range {690 428 0 0} visible
   } {
     Fl_Menu_Bar menuBarApps {
       xywh {5 7 55 20}

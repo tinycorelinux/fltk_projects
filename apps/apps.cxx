@@ -1369,6 +1369,7 @@ unlink(testfile.c_str());
       } // Fl_Output* outTCE
       grpAudit->end();
     } // Fl_Group* grpAudit
+    window->size_range(690, 428);
     window->end();
     window->resizable(window);
   } // Fl_Double_Window* window
