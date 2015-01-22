@@ -1081,6 +1081,8 @@ Fl_Menu_Item menu_menuBarDepends[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
+Fl_Group *resizeVictim=(Fl_Group *)0;
+
 Fl_Group *grpBrowse=(Fl_Group *)0;
 
 Fl_Group *grpSearch=(Fl_Group *)0;
@@ -1234,6 +1236,11 @@ unlink(testfile.c_str());
       menuBarDepends->hide();
       menuBarDepends->menu(menu_menuBarDepends);
     } // Fl_Menu_Bar* menuBarDepends
+    { resizeVictim = new Fl_Group(450, 275, 15, 15);
+      resizeVictim->hide();
+      resizeVictim->end();
+      Fl_Group::current()->resizable(resizeVictim);
+    } // Fl_Group* resizeVictim
     { grpBrowse = new Fl_Group(0, -1, 695, 426);
       { grpSearch = new Fl_Group(65, 7, 620, 20);
         { search_choices = new Fl_Choice(68, 7, 93, 20);
@@ -1299,6 +1306,7 @@ unlink(testfile.c_str());
           sizeTab->end();
         } // Fl_Group* sizeTab
         tabs->end();
+        Fl_Group::current()->resizable(tabs);
       } // Fl_Tabs* tabs
       { install_choices = new Fl_Choice(8, 380, 140, 20);
         install_choices->down_box(FL_BORDER_BOX);
@@ -1371,7 +1379,6 @@ unlink(testfile.c_str());
     } // Fl_Group* grpAudit
     window->size_range(690, 428);
     window->end();
-    window->resizable(window);
   } // Fl_Double_Window* window
   window->show(argc, argv);
   return Fl::run();

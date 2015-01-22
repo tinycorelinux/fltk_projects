@@ -28,6 +28,7 @@ extern void mirrorCB(Fl_Menu_*, void*);
 extern Fl_Menu_Bar *menuBarDepends;
 extern void dependsCB(Fl_Menu_*, void*);
 #include <FL/Fl_Group.H>
+extern Fl_Group *resizeVictim;
 extern Fl_Group *grpBrowse;
 extern Fl_Group *grpSearch;
 #include <FL/Fl_Choice.H>

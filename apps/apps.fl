@@ -1340,6 +1340,9 @@ outURI->value(mirror.c_str());}
         }
       }
     }
+    Fl_Group resizeVictim {
+      xywh {450 275 15 15} hide resizable
+    } {}
     Fl_Group grpBrowse {
       xywh {0 -1 695 426}
     } {
@@ -1377,7 +1380,7 @@ outURI->value(mirror.c_str());}
       }
       Fl_Tabs tabs {
         callback tabsGroupCB
-        xywh {210 27 475 350}
+        xywh {210 27 475 350} resizable
       } {
         Fl_Group infoTab {
           label Info open
