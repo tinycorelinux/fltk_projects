@@ -150,6 +150,7 @@ else
 Function {btnRefreshCallback(Fl_Widget*, void* userdata)} {open return_type {static void}
 } {
   code {getPos();
+system("sudo rebuildfstab");
 refresh();} {}
 } 
 

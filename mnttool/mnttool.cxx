@@ -120,6 +120,7 @@ else
 
 void btnRefreshCallback(Fl_Widget*, void* userdata) {
   getPos();
+system("sudo rebuildfstab");
 refresh();
 }
 
