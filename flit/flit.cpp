@@ -44,9 +44,9 @@
 #include <FL/Fl_Menu_Item.H>
 #include <FL/Fl_Tooltip.H>
 #include <FL/Enumerations.H>
-#include <FL/fl_draw.h>
-#include <FL/Fl_Help_Dialog.h>
-#include <FL/x.h>
+#include <FL/fl_draw.H>
+#include <FL/Fl_Help_Dialog.H>
+#include <FL/x.H>
 #include <X11/Xlib.h>
 
 #include "soundcard.h"
