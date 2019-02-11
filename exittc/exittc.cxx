@@ -99,6 +99,10 @@ if (userdatastr == "ok") {
 
 Fl_Double_Window *window=(Fl_Double_Window *)0;
 
+Fl_Round_Button *btnExitShutdown=(Fl_Round_Button *)0;
+
+Fl_Round_Button *btnExitReboot=(Fl_Round_Button *)0;
+
 Fl_Round_Button *btnExitPrompt=(Fl_Round_Button *)0;
 
 Fl_Output *device_output=(Fl_Output *)0;
@@ -122,17 +126,17 @@ textdomain("tinycore");
     window->box(FL_BORDER_BOX);
     window->align(FL_ALIGN_LEFT);
     { Fl_Group* o = new Fl_Group(25, 10, 115, 70);
-      { Fl_Round_Button* o = new Fl_Round_Button(25, 10, 85, 15, gettext("Shutdown"));
-        o->type(102);
-        o->down_box(FL_ROUND_DOWN_BOX);
-        o->value(1);
-        o->callback((Fl_Callback*)btn_callback, (void*)("shutdown"));
-      } // Fl_Round_Button* o
-      { Fl_Round_Button* o = new Fl_Round_Button(25, 30, 65, 15, gettext("Reboot"));
-        o->type(102);
-        o->down_box(FL_ROUND_DOWN_BOX);
-        o->callback((Fl_Callback*)btn_callback, (void*)("reboot"));
-      } // Fl_Round_Button* o
+      { btnExitShutdown = new Fl_Round_Button(25, 10, 85, 15, gettext("Shutdown"));
+        btnExitShutdown->type(102);
+        btnExitShutdown->down_box(FL_ROUND_DOWN_BOX);
+        btnExitShutdown->value(1);
+        btnExitShutdown->callback((Fl_Callback*)btn_callback, (void*)("shutdown"));
+      } // Fl_Round_Button* btnExitShutdown
+      { btnExitReboot = new Fl_Round_Button(25, 30, 65, 15, gettext("Reboot"));
+        btnExitReboot->type(102);
+        btnExitReboot->down_box(FL_ROUND_DOWN_BOX);
+        btnExitReboot->callback((Fl_Callback*)btn_callback, (void*)("reboot"));
+      } // Fl_Round_Button* btnExitReboot
       { btnExitPrompt = new Fl_Round_Button(25, 50, 110, 15, gettext("Exit to Prompt"));
         btnExitPrompt->type(102);
         btnExitPrompt->down_box(FL_ROUND_DOWN_BOX);
@@ -157,6 +161,34 @@ textdomain("tinycore");
     } // Fl_Button* o
     window->end();
   } // Fl_Double_Window* window
+  // Environmental value used to override default radio button for shutdown.
+// Valid values are "shutdown", "reboot", or "prompt"
+string exitpromptDefault;
+
+if ( getenv("EXITPROMPT"))
+{ // If environmental variable EXITPROMPT is set user wants to override default behavior.
+	exitpromptDefault  = getenv("EXITPROMPT");
+	btnExitShutdown->value(0);	// Clear current default.
+	if (exitpromptDefault == "shutdown")
+	{
+		action = 1;
+		btnExitShutdown->value(1);
+	}
+	else
+	if (exitpromptDefault == "reboot")
+	{
+		action = 2;
+		btnExitReboot->value(1);
+	}
+	else
+	if (exitpromptDefault == "prompt")
+	{
+		action = 3;
+		btnExitPrompt->value(1);
+	}
+	else // Invalid value for EXITPROMPT so revert to default behavior.
+		btnExitShutdown->value(1);
+}
   ifstream backup_device_file("/etc/sysconfig/backup_device");
 if ( backup_device_file.is_open())
 {

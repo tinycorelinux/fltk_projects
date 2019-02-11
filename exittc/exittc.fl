@@ -1,41 +1,57 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
-i18n_type 1 
-i18n_include <libintl.h> 
-i18n_function gettext 
-header_name {.h} 
+version 1.0304
+i18n_type 1
+i18n_include <libintl.h>
+i18n_function gettext
+header_name {.h}
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2008-2010} {} 
+decl {// (c) Robert Shingledecker 2008-2010} {private local
+}
 
-decl {\#include <cstdlib>} {} 
+decl {\#include <cstdlib>} {private local
+}
 
-decl {\#include <iostream>} {} 
+decl {\#include <iostream>} {private local
+}
 
-decl {\#include <stdio.h>} {} 
+decl {\#include <stdio.h>} {private local
+}
 
-decl {\#include <string>} {} 
+decl {\#include <string>} {private local
+}
 
-decl {\#include <fstream>} {} 
+decl {\#include <fstream>} {private local
+}
 
-decl {\#include <FL/fl_message.H>} {} 
+decl {\#include <FL/fl_message.H>} {private local
+}
 
-decl {\#include <locale.h>} {} 
+decl {\#include <locale.h>} {private local
+}
 
-decl {\#include <unistd.h>} {} 
+decl {\#include <unistd.h>} {private local
+}
 
-decl {\#include <string.h>} {} 
+decl {\#include <string.h>} {private local
+}
 
-decl {using namespace std;} {} 
+decl {using namespace std;} {private local
+}
 
-decl {string backup_device="", command;} {} 
+decl {string backup_device="", command;} {private local
+}
 
-decl {int action=1;} {} 
+decl {int action=1;} {private local
+}
 
-decl {bool backup=true;} {} 
+decl {bool backup=true;} {private local
+}
 
-decl {string commandStr = "exitcheck.sh ";} {} 
+decl {string commandStr = "exitcheck.sh ";} {private local
+}
 
-decl {string cmdline, actionStr, backup_options, backup_command;} {} 
+decl {string cmdline, actionStr, backup_options, backup_command;} {private local
+}
 
 Function {btn_callback(Fl_Widget*, void*userdata)} {open return_type {static void}
 } {
@@ -114,7 +130,7 @@ if (userdatastr == "ok") {
     exit(0);
   }  
 }} {}
-} 
+}
 
 Function {} {open
 } {
@@ -128,13 +144,13 @@ textdomain("tinycore");} {}
     Fl_Group {} {open
       xywh {25 10 115 70}
     } {
-      Fl_Round_Button {} {
+      Fl_Round_Button btnExitShutdown {
         label Shutdown
         user_data {"shutdown"}
         callback btn_callback
         xywh {25 10 85 15} type Radio down_box ROUND_DOWN_BOX value 1
       }
-      Fl_Round_Button {} {
+      Fl_Round_Button btnExitReboot {
         label Reboot
         user_data {"reboot"}
         callback btn_callback
@@ -179,6 +195,35 @@ textdomain("tinycore");} {}
       callback btn_callback
       xywh {100 150 70 20}
     }
+  }
+  code {// Environmental value used to override default radio button for shutdown.
+// Valid values are "shutdown", "reboot", or "prompt"
+string exitpromptDefault;
+
+if ( getenv("EXITPROMPT"))
+{ // If environmental variable EXITPROMPT is set user wants to override default behavior.
+	exitpromptDefault  = getenv("EXITPROMPT");
+	btnExitShutdown->value(0);	// Clear current default.
+	if (exitpromptDefault == "shutdown")
+	{
+		action = 1;
+		btnExitShutdown->value(1);
+	}
+	else
+	if (exitpromptDefault == "reboot")
+	{
+		action = 2;
+		btnExitReboot->value(1);
+	}
+	else
+	if (exitpromptDefault == "prompt")
+	{
+		action = 3;
+		btnExitPrompt->value(1);
+	}
+	else // Invalid value for EXITPROMPT so revert to default behavior.
+		btnExitShutdown->value(1);
+}} {selected
   }
   code {ifstream backup_device_file("/etc/sysconfig/backup_device");
 if ( backup_device_file.is_open())
@@ -249,6 +294,5 @@ if (backup)
 if (cmdline.find("xonly") != string::npos) btnExitPrompt->hide();
 
 window->show(argc, argv);
-btnOK->take_focus();} {selected
-  }
-} 
+btnOK->take_focus();} {}
+}
