@@ -1,5 +1,5 @@
 #makefile for fltk program
-CXXFLAGS=-march=i486 -mtune=i686 -Os -pipe -fno-exceptions -fno-rtti
+CXXFLAGS=-flto -fuse-linker-plugin -march=i486 -mtune=i686 -Os -pipe -fno-exceptions -fno-rtti
 PROG=flit
 VERSTR=1_3_1
 
@@ -15,7 +15,7 @@ install: compile
 compile:      	
 	g++ `fltk-config --cxxflags` ${CXXFLAGS} -c ${PROG}.cpp
 	g++ ${PROG}.o -o ${PROG} `fltk-config --use-images --use-forms --ldflags`
-	strip --strip-all ${PROG}
+	sstrip ${PROG}
 
 upx: compile
 	upx --ultra-brute ${PROG}
