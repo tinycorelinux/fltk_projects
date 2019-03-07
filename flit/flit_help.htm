@@ -1,0 +1,168 @@
+<html>
+<title>Flit Help</title>
+<body>
+<p>Version 1.3.1, July 2011</p>
+<a href="#clock">Clock</a><br>
+<a href="#sound">Sound Control</a><br>
+<a href="#batt">Battery Monitor</a><br>
+<a href="#general">General Options</a><br>
+<a href="#config">Saving Preferences</a><br>
+
+<H2>INTRO</H2>
+<p>Flit is an applet 'tray', currently offering clock, master sound volume
+control, and battery monitor. It is written to be small and low-overhead, 
+using the FLTK user interface library, so it is especially efficient on TinyCore Linux. 
+The source code of Flit is released under the GNU license. 
+See http://www.gnu.org/licenses/ for more details.
+</p>
+<p>Newest features: As of version 1.3.0, Jakob Bysewski has added code to 
+make Flit dockable in some window managers and to allow Flit to appear in 
+all desktop screens.  Also, code was added to prevent starting multiple 
+copies of flit unintentionally, although you may now pass a special option 
+to force Flit to launch again. Furthermore, you may specify the name of an
+alternative config file (besides .flit.conf).  See the Commandline options
+immediately below for more information</p>
+<p>Commandline options:</p>
+<p><b>-a = All desktops:</b> Make flit appear on all desktops (experimental)</p>
+<p><b>-d = Dock:</b> Make flit dock by setting _NET_WM_WINDOW_TYPE_DOCK</p>
+<p><b>-m = Multiple:</b> Allow multiple instances of flit (not allowed by default now)</p>
+<p><b>-c CONF = Config file:</b> use CONF instead of ~/.flit.conf for configuration</p>
+<p>By combining -m and -c, you can load differnt Flit applets into different 
+areas of your screen.</p>
+<p>There is a menu of choices made available through right-clicking on Flit.  The sound 
+control applet has several additional keyboard shortcuts (see <a href="#sound">below</a>).
+The Flit menu may optionally be opened automatically by a Ctrl key, as defined in the 
+<a href="#general">General Options</a> section.
+</p>
+<p>If you don't want to see all three applets, you can disable one or two 
+of them in the right-click menu, but not all three!</p>
+<p>
+'Hover' your mouse pointer over each applet to get more 
+detailed information.  The battery recharge time estimate is 
+approximate.</p>
+<p>
+If you want to start Flit automatically, invoke it in your /opt/bootlocal.sh 
+startup script or make a custom .xsession script file, and use a &amp; symbol to 
+return control immediately to the script, like this:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/path/to/flit &amp;<br>
+Note: The base configuration of TinyCore Linux versions 2.3 through 2.9
+automatically started Flit during the startx sequence.  Versions 2.10 and later do not, so
+you will need to update .xsession or /opt/bootlocal.sh as described above. </p>
+<a name="clock"></a>
+<H2>CLOCK</H2>
+<p>
+The only option for the clock is 24-hour time format, or 12-hour format with
+AM or PM indication.  Use the right-click menu to toggle between these modes. 
+Hover the mouse pointer to see date and year in addition to time.</p>
+
+<a name="sound"></a>
+<H2>SOUND CONTROL</H2>
+<p>
+The current sound volume level is indicated by the number and size of the 
+sound "rays" next to the speaker icon.  To adjust the volume, place your mouse 
+cursor over the speaker and use the mouse scroll wheel (or equivalent) to adjust 
+the sound volume in 5% increments. You may also use the following keystrokes:
+<br>
+Louder: Ctrl+U, or Up arrow cursor key, or + key<br>
+Quieter: Ctrl+L, or Down arrow cursor key, or - key<br>
+Mute/Unmute: Ctrl+M, or Pause key<br>
+<br> 
+Future versions may also provide a pop-up slider control. </p>
+<p>
+The sound control requires an OSS "mixer" device '/dev/mixer' or the ALSA
+amixer utility to be present. 
+
+There is a lot of variation in how sound devices can be controlled depending 
+on your audio hardware, but Flit 
+will try to support some common methods.  By default, Flit will try to find 
+an appropriate mixer control parameter to adjust the overall playback volume.  
+You can override this behavior by specifying an exact OSS or ALSA mixer 
+control name in the .flit.conf file, in the "sound_control_name =" statement.  If the name is 
+"autosel", Flit will do the default auto-selection.  But if you know that 
+you get best results from a specific mixer control, such as "vol" or "pcm" 
+or something else, put it name into the .flit.conf file, such as:<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>sound_control_name = pcm</code>
+<br>
+If flit is not successful in finding a suitable control (which must be marked 
+with the MASTER_VOLUME or PCM_VOLUME in OSS or pvolume in ALSA), you won't see 
+the sound control applet in Flit, and you won't be able to "unhide" it.  You may want to manually  experiment with one or move sound mixer utilities such as 
+ossxmix (note the X in the name) or amixer and experiment with the controls made available for your 
+hardware to see which ones can control the volume.  If OSS/ALSA + your hardware does
+not support an adjustable output volume, you may still be able to use a mute 
+control with Flit.</p>
+
+<p>LIMITATIONS: If using OSS, the vmix software mixer control will only work if vmix is fully 
+"attached" to your audio hardware (beyond the scope of this document). ALSA is now 
+supported, but is not widely tested with different sound devices.
+</p>
+
+<a name="batt"></a>
+<H2>BATTERY MONITOR</H2>
+<p>
+In the battery icon, charge is colored green if the level is 40% or higher, 
+yellow when 20% or higher, and red below 20%.  If the estimated charge 
+Is less than 13%, the outline of the battery icon will slowly flash red. 
+When recharging power is available, an AC power plug icon is shown over the 
+battery icon.  If the battry is discharging, the remaining charge percentage 
+number is shown above the battery icon.</p>
+<p>
+Version 1.2.0 now supports the OLPC XO-1 laptop and computers with the ACPI s
+system.  For ACPI, boot Linux with the 'laptop' kernel option or load the appropriate 
+ACPI kernel module to ensure Flit can find the info it needs under /proc/acpi.  
+About three minutes after a switch between charging 
+and discharging, Flit will begin showing estimates of the remaining time.</p>
+<p>
+<a name="general"></a>
+<H2>GENERAL OPTIONS</H2>
+By default, Flit will automatically pop up the right-click menu if Flit has the keyboard 
+focus and you press either Ctrl key, which you may do as part of a Ctrl+key 
+combination.  If you would prefer to not have Flit open the menu on Ctrl keypress, 
+select the 'Toggle Ctrl key menu activation' menu option and then <a href="#config">save</a> 
+the configuration.</p>
+<p>
+You can choose one of these appearance styles:<br>
+&nbsp;a) Normal: black on light gray, with a sunken tray effect <br>
+&nbsp;b) Inverse: light gray on black, also with a sunken tray effect <br>
+&nbsp;c) 'Transparent', which has a background color slightly lighter than the <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X11 root window where Flit plans to appear and a contrasting <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreground color, with a flat effect, which matches <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wbar nicely.  If the planned location is occupied<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by a window when Flit starts, its background color <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will be based on that.<br>
+&nbsp;d) Custom: The colors defined in the config file, or by default, a blue <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color that works with the default background to <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;make flit look invisible.<br>
+
+<p>
+You may reposition Flit with your mouse (left-click + drag), or hand-edit 
+the .flit.conf configuration file (see cautions below).  The location can be 
+defined to one of the four corners (se = SouthEast, i.e. the lower-right corner, and 
+so on) or a x,y pair.  See the configuration file for an example.</p>
+<p>
+As of version 1.2.0, you can scale the size of Flit!  If you have a high-resolution screen and you would
+like the Flit applets to be larger, you may enter a new zoom factor in the .flit.conf file.  First, make sure 
+you save your preferences (as described below), then edit the .flit.conf file in your home directory, changing 
+the line
+<code>zoom = 1.0</code>
+to new value.  A factor of 1.5 would be 150% of the normal size (50% larger), 2.0 would be double-size, and 
+so on.  Smaller than normal sizes are possible too.  Note that some factors will look better than others.  In
+general, factors that are nice ratios will work better, e.g. 3/4 = 0.75, 4/3 = 1.33, et cetera.
+<p>As of version 1.3.0, you may define foreground and background colors:<br>
+<code>custom_fg = 128,255,128</code><br>
+<code>custom_bg = 32,32,32</code><br>
+where the numbers range from 0 to 255 and specify amound of red, green, and blue respectively.
+</p>
+<a name="config"></a>
+<H2>SAVING PREFERENCES</H2>
+Use the 'Save configuration' command to make flit remember your preferences by 
+writing the .flit.conf file in your home directory (as defined by the $HOME 
+environment variable).  You may edit this file with a text editor, but please 
+preserve the spelling, capitalization, and spacing of content to prevent 
+parsing problems.  You can revert to default settings by deleting the 
+.flit.conf file and restarting Flit.</p>
+<p>Post bug reports and suggestions to the TinyCore Linux Forum (http://tinycorelinux.com/forum/)
+or email mlockmoore@gmail.com.</p>
+<p>Michael A. Losh</p>
+</body>
+</html>
