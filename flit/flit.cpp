@@ -93,9 +93,9 @@
 #include <FL/Fl_Menu_Item.H>
 #include <FL/Fl_Tooltip.H>
 #include <FL/Enumerations.H>
-#include <FL/fl_draw.h>
-#include <FL/Fl_Help_Dialog.h>
-#include <FL/x.h>
+#include <FL/fl_draw.H>
+#include <FL/Fl_Help_Dialog.H>
+#include <FL/x.H>
 #include <X11/Xlib.h>
 
 #include "soundcard.h"
@@ -127,7 +127,7 @@
 #define MIN_SAMPLES_BEFORE_ESTIMATION   36
 
 #define BATTERY_BASE_DIR "/proc/acpi/battery/"
-#define PATH_TO_FLIT_HELP "/usr/share/doc/tc/flit_help.htm"
+#define PATH_TO_FLIT_HELP "/usr/local/share/doc/flit/flit_help.htm"
 
 // argp stuff -----------------------------------------------------------------
 #define PROGNAME_VERSION PROG " " APP_VER
