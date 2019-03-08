@@ -1,5 +1,13 @@
 // flit.cpp -- Flit is a "tray" with clock, sound, and battery applets
 
+// Version 1.3.2 Added: saved_volume variable
+//				Updated: get_config and save_config to allow saving and restoring
+//						 volume level between sessions.
+//				Rewrote: ALSA and newvol Audio level calculations to round instead of truncate.
+//						 Old versions are commented out with //RR, new versions in following line.
+//				Updated: Lowered volume stepsize to 3% from 5% in do_sound_adj to fit better in
+//						 ALSAs 5 bit (0-31) volume level range.
+
 // Version 1.3.1 - M. Losh - Fix to make file to preserve root perms in /usr when installed   
 
 // Version 1.3.0 - M. Losh - Released with changes to default values of custom colors
@@ -114,7 +122,7 @@
 #define MIN(a, b)   (((a) < (b)) ? (a):(b))
 #endif
 
-#define APP_VER "1.3.1" // Last update 2011-07-23
+#define APP_VER "1.3.2" // Last update 2019-03-08
 #define PROG    "flit"
 #define METER_W     28
 #define SOUND_W     28
@@ -134,6 +142,9 @@
 
 const char *argp_program_version = PROGNAME_VERSION;
 const char *argp_program_bug_address = "<mlockmoore@gmail.com>; <jbysewski@googlemail.com>";
+
+// Volume level saved in config file.
+int saved_volume = -1;
 
 // This structure is used by main to communicate with parse_opt
 struct arguments
@@ -803,7 +814,8 @@ printf("Will autoselect sound control parameter\n");
                             rvol = v;
                         }
                         if (lvol >= 0 && rvol >= 0 && (mix_max > mix_min)) {
-                            pct = (int)(((float)(rvol + lvol)) * 100.0 / (2.0 * (float)(mix_max - mix_min)));
+//RR                            pct = (int)(((float)(rvol + lvol)) * 100.0 / (2.0 * (float)(mix_max - mix_min)));
+						pct = (int)(roundf(((rvol + lvol) * (100.0 / ((float)(mix_max - mix_min) * 2.0)))));
 #ifdef DIAG
                             printf("Sound level is %d %%\n", pct);
 #endif
@@ -826,7 +838,11 @@ printf("Will autoselect sound control parameter\n");
             oss_mixer_value vr;
             int newvol;
             int intended;
-            newvol = (int)((float)(vol * mix_max) / 100.0) - mix_min;
+//RR            newvol = (int)((float)(vol * mix_max) / 100.0) - mix_min;
+            newvol = (int)(roundf((vol * ((float)(mix_max - mix_min) / 100.0))));
+#ifdef DIAG
+            printf("vol=%d newvol=%d mix_max=%d mix_min=%d\n", vol, newvol, mix_max, mix_min);
+#endif
             if (sound_type == SOUND_TYPE_OSS && mixer_fd && mix_ctrl) {
                 info.dev = 0;
                 info.ctrl = mix_ctrl;               
@@ -908,7 +924,8 @@ printf("Will autoselect sound control parameter\n");
                         }
                     }
                     if (lvol >= 0 && rvol >= 0 && (mix_max > mix_min)) {
-                        actual_pct = (rvol + lvol) * 100.0 / (2.0 * (mix_max - mix_min));
+//RR                        actual_pct = (rvol + lvol) * 100.0 / (2.0 * (mix_max - mix_min));
+						actual_pct = (int)(roundf(((rvol + lvol) * (100.0 / ((float)(mix_max - mix_min) * 2.0)))));
 #ifdef DIAG
                         printf("Sound level after change is actually %d %%\n", actual_pct);
 #endif
@@ -1255,12 +1272,12 @@ printf("Will autoselect sound control parameter\n");
             vol = sound_p->value();
             if (direction < 0) {
                 prev_sound_vol = vol;
-                vol -= 5;
+                vol -= 3;
                 if (vol < 0) vol = 0;
             }
             else if (direction > 0) {
                 prev_sound_vol = vol;
-                vol += 5;
+                vol += 3;
                 if (vol > 100) vol = 100;
             }
             else {
@@ -1427,6 +1444,14 @@ printf("Will autoselect sound control parameter\n");
 #endif
                         
                     }
+                    else if (1 == sscanf(confline, "sound_volume_level = %d\n", &n)) {
+#ifdef DIAG     
+                        printf("volume is %d\n", n);
+#endif
+                        if((n >= 0) && (n <= 100))
+							saved_volume = n;
+                    }
+
                     else if (1 == sscanf(confline, "show24hr = %d\n", &n)) {
 #ifdef DIAG     
                         printf("show24hr is %d\n", n);
@@ -1684,6 +1709,9 @@ printf("Will autoselect sound control parameter\n");
                 fprintf(cfgf, "# OSS/ALSA sound control name to use, autosel means 'try to pick for me'\n");
                 fprintf(cfgf, "sound_control_name = %s\n", sound_control_name);
                 fprintf(cfgf, "\n");
+                fprintf(cfgf, "# OSS/ALSA sound volume level (0 to 100)\n");
+                fprintf(cfgf, "sound_volume_level = %d\n", sound_p->value());
+                fprintf(cfgf, "\n");
                 fprintf(cfgf, "# Automatically pop up right-click menu when Ctrl key is first pressed (1 = do, 0 = don't)\n");
                 fprintf(cfgf, "menu_hotkey_activation = %d\n", menu_hotkey_activation);
                 fprintf(cfgf, "\n");
@@ -1858,6 +1886,13 @@ int main(int argc, char** argv)
         make_window_dock();    
     }
 
+	if(saved_volume >= 0)
+	{
+		MainWnd.set_sound_level(saved_volume);
+#ifdef DIAG
+		printf("saved_volume=%d\n", saved_volume);
+#endif
+	}
     //XSetInputFocus(fl_display, PointerRoot, RevertToPointerRoot, CurrentTime);
     while(Running) {
         Fl::wait(5.0);
