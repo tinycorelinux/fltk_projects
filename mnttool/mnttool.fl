@@ -1,93 +1,98 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0303 
-i18n_type 1 
-i18n_include <libintl.h> 
-i18n_function gettext 
-header_name {.h} 
+version 1.0400
+i18n_type 1
+i18n_include {<libintl.h>}
+i18n_conditional {}
+i18n_gnu_function gettext
+i18n_gnu_static_function gettext_noop
+header_name {.h}
 code_name {.cxx}
 decl {// (c) Robert Shingledecker 2008-2011} {private local
-} 
+}
 
 decl {\#include <unistd.h>} {public global
-} 
+}
 
 decl {\#include <cstdlib>} {private local
-} 
+}
 
 decl {\#include <iostream>} {private local
-} 
+}
 
 decl {\#include <sstream>} {private local
-} 
+}
 
 decl {\#include <fstream>} {private local
-} 
+}
 
 decl {\#include <vector>} {private local
-} 
+}
 
 decl {\#include <locale.h>} {private local
-} 
+}
 
 decl {\#include <stdint.h>} {private global
-} 
+}
 
 decl {\#include <FL/Fl_Button.H>} {private local
-} 
+}
 
 decl {\#include <sys/inotify.h>} {private local
-} 
+}
 
 decl {using namespace std;} {private local
-} 
+}
 
 decl {int infd = -1; // inotify fd} {
   comment {for watching /etc/fstab} private local
-} 
+}
 
 decl {void infd_read(void *);} {private local
-} 
+}
 
 decl {void reset_watch();} {private local
-} 
+}
 
-decl {int size, selected, xPos, yPos;} {
+decl {int mount_list_size, selected, xPos, yPos;} {
   comment {other globals} private local
-} 
+}
 
 decl {string filemgr, winPos;} {private local
-} 
+}
 
 decl {istringstream ins;} {private local
-} 
+}
 
 decl {vector<string> mountList;} {private global
-} 
+}
 
 decl {vector<int> mountState;} {private local
-} 
+}
 
 decl {vector<Fl_Button*> btn;} {private local
-} 
+}
 
 decl {vector<string> mountLabels;} {private global
-} 
+}
 
 Function {getPos()} {open return_type {static void}
 } {
   code {xPos = w->x();
 yPos = w->y();} {}
-} 
+}
 
 Function {refresh()} {open
 } {
   code {getMountables();
-if ( size == 0 ) 
+if ( mount_list_size == 0 )
   exit(1);
 
 pack->clear();
 
-for (int i=0; i < size; i++)
+// width of the button pack
+size_t wotbp = 1;
+
+for (int i=0; i < mount_list_size; i++)
 {  
    Fl_Button* btn[i];
    
@@ -100,9 +105,10 @@ for (int i=0; i < size; i++)
       btn[i]->color((Fl_Color)2);
    else
       btn[i]->color((Fl_Color)1);
-      
+
    pack->add(btn[i]);
-      
+   if ( strlen(mountList[i].c_str()) > wotbp )
+      wotbp = strlen(mountList[i].c_str());
 }
 
 Fl_Button* btnRefresh;
@@ -112,11 +118,13 @@ btnRefresh->callback((Fl_Callback*)btnRefreshCallback);
 pack->add(btnRefresh);
 
 selected = 0;
+pack->resize(0,0,12*wotbp>80 ? 12*wotbp : 80,(25*(mount_list_size)));
 pack->redraw();
-w->resize(0,0,80,(25*(size+1)));
+w->resize(0,0,12*wotbp>80 ? 12*wotbp : 80,(25*(mount_list_size+1)));
 w->position(xPos,yPos);
-w->redraw();} {}
-} 
+w->redraw();} {selected
+  }
+}
 
 Function {getMountables()} {open return_type void
 } {
@@ -142,8 +150,8 @@ while ( getline(fin,line) )
 fin.close();
 unlink("/tmp/mountables");
 
-size = mountList.size();} {}
-} 
+mount_list_size = mountList.size();} {}
+}
 
 Function {btnCallback(Fl_Widget*, void* userdata)} {open return_type {static void}
 } {
@@ -173,21 +181,21 @@ else
       }
    }
 }} {}
-} 
+}
 
 Function {btnRefreshCallback(Fl_Widget*, void* userdata)} {open return_type {static void}
 } {
   code {getPos();
 system("sudo rebuildfstab");
 refresh();} {}
-} 
+}
 
 Function {infd_ready_cb(int, void *)} {
   comment {called by FLTK when infd has data; schedules infd_read()
 } open private return_type void
 } {
   code {Fl::add_timeout(0, infd_read); // schedule infd_read} {}
-} 
+}
 
 Function {infd_read(void *)} {
   comment {clear inotify queue, refresh, reset_watch} open private return_type void
@@ -199,7 +207,7 @@ read(infd, &iebuf, iebuflen);
 
 refresh();
 reset_watch(); // set new watch} {}
-} 
+}
 
 Function {reset_watch()} {
   comment {add inotify watch on /etc/fstab; ask FLTK to call infd_ready_cb() on changes} open private return_type void
@@ -218,7 +226,7 @@ Function {reset_watch()} {
     }
   
     Fl::add_fd(infd, FL_READ, infd_ready_cb);} {}
-} 
+}
 
 Function {} {open
 } {
@@ -227,8 +235,8 @@ setlocale(LC_ALL, "");
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");} {}
   Fl_Window w {
-    label mnttool open selected
-    xywh {267 20 85 745} type Double hide
+    label mnttool open
+    xywh {0 0 80 500} type Double visible
   } {
     Fl_Pack pack {open
       xywh {0 0 80 500}
@@ -248,4 +256,4 @@ if (getenv("MNTTOOL")) {
    
 refresh();
 reset_watch();} {}
-} 
+}
