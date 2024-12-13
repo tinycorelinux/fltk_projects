@@ -1,74 +1,100 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
-i18n_type 1 
-i18n_include <libintl.h> 
-i18n_function mygettext 
-header_name {.h} 
+version 1.0308
+i18n_type 1
+i18n_include <libintl.h>
+i18n_function mygettext
+header_name {.h}
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2008-2012} {} 
+decl {// (c) Robert Shingledecker 2008-2012} {private local
+}
 
-decl {\#include <iostream>} {} 
+decl {\#include <iostream>} {private local
+}
 
-decl {\#include <fstream>} {} 
+decl {\#include <fstream>} {private local
+}
 
-decl {\#include <cstdlib>} {} 
+decl {\#include <cstdlib>} {private local
+}
 
-decl {\#include <string>} {} 
+decl {\#include <string>} {private local
+}
 
-decl {\#include <FL/fl_message.H>} {} 
+decl {\#include <FL/fl_message.H>} {private local
+}
 
-decl {\#include <FL/Fl_File_Chooser.H>} {} 
+decl {\#include <FL/Fl_File_Chooser.H>} {private local
+}
 
-decl {\#include <sys/types.h>} {} 
+decl {\#include <sys/types.h>} {private local
+}
 
-decl {\#include <sys/stat.h>} {} 
+decl {\#include <sys/stat.h>} {private local
+}
 
-decl {\#include <fcntl.h>} {} 
+decl {\#include <fcntl.h>} {private local
+}
 
-decl {\#include <signal.h>} {} 
+decl {\#include <signal.h>} {private local
+}
 
-decl {\#include <locale.h>} {} 
+decl {\#include <locale.h>} {private local
+}
 
-decl {\#include <unistd.h>} {} 
+decl {\#include <unistd.h>} {private local
+}
 
-decl {\#include <string.h>} {} 
+decl {\#include <string.h>} {private local
+}
 
-decl {using namespace std;} {} 
+decl {using namespace std;} {private local
+}
 
-decl {string tcedir, target_dir, last_dir;} {} 
+decl {string tcedir, target_dir, last_dir;} {private local
+}
 
-decl {string select_extn, select_results, select_extn_file;} {} 
+decl {string select_extn, select_results, select_extn_file;} {private local
+}
 
-decl {string repository;} {} 
+decl {string repository;} {private local
+}
 
-decl {ifstream ifappserr;} {} 
+decl {ifstream ifappserr;} {private local
+}
 
-decl {string appserr,hilite;} {} 
+decl {string appserr,hilite;} {private local
+}
 
-decl {int results, locales_set=0;} {} 
+decl {int results, locales_set=0;} {private local
+}
 
-decl {string mode, command, msg, mirror, err_extn;} {} 
+decl {string mode, command, msg, mirror, err_extn;} {private local
+}
 
-decl {string option_type, report_type, update_type;} {} 
+decl {string option_type, report_type, update_type;} {private local
+}
 
-decl {string copy2fsList, copy2fsFlag, onbootName, onbootList, onbootTitle;} {} 
+decl {string copy2fsList, copy2fsFlag, onbootName, onbootList, onbootTitle;} {private local
+}
 
-decl {Fl_Text_Buffer *txtBuffer = new Fl_Text_Buffer;} {} 
+decl {Fl_Text_Buffer *txtBuffer = new Fl_Text_Buffer;} {private local
+}
 
-decl {void errhandler(const string &str);} {} 
+decl {void errhandler(const string &str);} {private local
+}
 
 Function {cursor_normal()} {private return_type void
 } {
   code {window->cursor(FL_CURSOR_DEFAULT);
 Fl::flush();} {}
-} 
+}
 
 Function {cursor_wait()} {private return_type void
 } {
   code {Fl::redraw();
 window->cursor(FL_CURSOR_WAIT);
 Fl::flush();} {}
-} 
+}
 
 Function {mygettext(const char *msgid)} {private return_type {char *}
 } {
@@ -83,7 +109,7 @@ locales_set=1;
 }
 
 return gettext(msgid);} {}
-} 
+}
 
 Function {auditView()} {open private return_type void
 } {
@@ -105,7 +131,7 @@ btnResults->hide();
 grpAudit->show();
 grpSingle->show();
 Fl::flush();} {}
-} 
+}
 
 Function {browseView()} {private return_type void
 } {
@@ -114,7 +140,7 @@ menuBarDepends->hide();
 grpMulti->hide();
 grpBrowse->show();
 Fl::flush();} {}
-} 
+}
 
 Function {protectChr()} {return_type void
 } {
@@ -129,7 +155,7 @@ do
       s = 2;
    }
 } while ( p > 0 );} {}
-} 
+}
 
 Function {displayTabData()} {return_type void
 } {
@@ -149,7 +175,7 @@ if (pipe)
    pclose(pipe);
    free(mbuf);
 }} {}
-} 
+}
 
 Function {loadBrwExtnData()} {return_type void
 } {
@@ -169,7 +195,7 @@ if (pipe)
    pclose(pipe);
    free(mbuf);
 }} {}
-} 
+}
 
 Function {loadBrwResultsData()} {return_type void
 } {
@@ -188,7 +214,7 @@ if (pipe)
    pclose(pipe);
    free(mbuf);
 }} {}
-} 
+}
 
 Function {fetch_extension()} {private return_type void
 } {
@@ -212,7 +238,7 @@ if (results == 0 )
   
 outputStatus->value(msg.c_str());  
 cursor_normal();} {}
-} 
+}
 
 Function {builddb()} {private return_type void
 } {
@@ -232,7 +258,7 @@ menu_marked->activate();
 menu_clearlst->activate();
 boxResults->label("Results");
 cursor_normal();} {}
-} 
+}
 
 Function {errhandler(const string &str)} {private return_type void
 } {
@@ -289,7 +315,7 @@ err_extn = str;
 err_extn.replace(0,9,""); // Yes, hardcoded magic value. Bad.
 
 errwindow->show();} {}
-} 
+}
 
 Function {menuCB(Fl_Widget *, void* userdata)} {open private return_type void
 } {
@@ -513,9 +539,8 @@ if (userdatastr == "tcz")
     unlink("/tmp/tags.lst");
     exit(0);
 
-  }} {selected
-  }
-} 
+  }} {}
+}
 
 Function {btnCB(Fl_Widget *, void* userdata)} {private return_type {static void}
 } {
@@ -599,7 +624,7 @@ if (userdatastr == "go")
   search_field->activate();                                              
       
 }} {}
-} 
+}
 
 Function {brwSelectCB(Fl_Widget *, void *)} {private return_type {static void}
 } {
@@ -655,7 +680,7 @@ Function {brwSelectCB(Fl_Widget *, void *)} {private return_type {static void}
       }
    }
 }} {}
-} 
+}
 
 Function {mirrorCB(Fl_Widget*, void*)} {private return_type {static void}
 } {
@@ -673,7 +698,7 @@ else {
    boxSelect->label("Select Mirror");
    boxSelect->activate();
 }} {}
-} 
+}
 
 Function {tabsGroupCB(Fl_Widget*, void*)} {private return_type {static void}
 } {
@@ -709,7 +734,7 @@ Function {tabsGroupCB(Fl_Widget*, void*)} {private return_type {static void}
    }
    cursor_normal();
 }} {}
-} 
+}
 
 Function {dependsCB(Fl_Widget *, void* userdata)} {return_type {static void}
 } {
@@ -843,7 +868,7 @@ menu_requiredby->deactivate();
 menu_missing->deactivate();
 menu_delete->deactivate();
 brwExtn->deselect();} {}
-} 
+}
 
 Function {brwExtnCB(Fl_Widget *, void *)} {return_type {static void}
 } {
@@ -864,7 +889,7 @@ Function {brwExtnCB(Fl_Widget *, void *)} {return_type {static void}
   brwResults->deselect();
   btnResults->deactivate();
 }} {}
-} 
+}
 
 Function {btnSingleCB(Fl_Widget *, void *)} {return_type {static void}
 } {
@@ -932,7 +957,7 @@ Function {btnSingleCB(Fl_Widget *, void *)} {return_type {static void}
 }
 btnSingle->deactivate();
 brwExtn->deselect();} {}
-} 
+}
 
 Function {brwMultiCB(Fl_Widget *, void *)} {return_type {static void}
 } {
@@ -953,7 +978,7 @@ if ( report_type == "updates" ) {
    }
 }
 cursor_normal();} {}
-} 
+}
 
 Function {btnMultiCB(Fl_Widget *, void *)} {return_type {static void}
 } {
@@ -996,7 +1021,7 @@ if (report_type == "md5s" )
 if (report_type == "updates" )
    brwResults->add("Updates complete. Reboot to effect.");
 cursor_normal();} {}
-} 
+}
 
 Function {brwResultsCB(Fl_Widget *, void *)} {open return_type {static void}
 } {
@@ -1011,7 +1036,7 @@ Function {brwResultsCB(Fl_Widget *, void *)} {open return_type {static void}
   brwExtn->deselect();
   btnSingle->deactivate();
 }} {}
-} 
+}
 
 Function {btnResultsCB(Fl_Widget *, void *)} {open return_type {static void}
 } {
@@ -1061,7 +1086,7 @@ Function {btnResultsCB(Fl_Widget *, void *)} {open return_type {static void}
    }  
 }
 btnResults->deactivate();} {}
-} 
+}
 
 Function {mirrorpicker()} {return_type void
 } {
@@ -1071,7 +1096,7 @@ Function {mirrorpicker()} {return_type void
 ifstream mirror_fin("/opt/tcemirror");
 getline(mirror_fin,mirror);
 mirror_fin.close();} {}
-} 
+}
 
 Function {} {open
 } {
@@ -1143,13 +1168,13 @@ unlink(testfile.c_str());} {}
     label {Apps: Regular Applications (tcz)}
     user_data {"quit"}
     callback menuCB open
-    xywh {29 100 690 428} type Double resizable size_range {690 428 0 0} visible
+    xywh {524 109 690 425} type Double hide resizable size_range {690 428 0 0}
   } {
-    Fl_Menu_Bar menuBarApps {
+    Fl_Menu_Bar menuBarApps {open
       xywh {5 7 55 20}
     } {
       Submenu menuApps {
-        label Apps
+        label {&Apps} selected
         xywh {0 0 55 20}
       } {
         Submenu {} {
@@ -1517,4 +1542,4 @@ outURI->value(mirror.c_str());}
       }
     }
   }
-} 
+}
