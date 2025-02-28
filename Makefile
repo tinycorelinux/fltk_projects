@@ -4,8 +4,12 @@ ARCH := $(shell uname -m)
 PREFIX = /usr/local
 INSTDIR = $(DESTDIR)/$(PREFIX)/bin
 
-DIRS = apps editor stats tc-install tc-wbarconf
-#DIRS = editor
+DIRS = add2file apps cpanel datetool editor \
+	exittc filetool flrun \
+	mirrorpicker mnttool mousetool \
+	network popask popup services \
+	stats swapfile tc-install \
+	tc-wbarconf wallpaper
 
 TARGETS = $(foreach dir, $(DIRS),$(dir)/$(dir))
 SRC = $(foreach dir, $(DIRS),$(wildcard $(dir)/*.cxx))
