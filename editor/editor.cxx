@@ -43,6 +43,10 @@
 //
 // --------------------------- End Log ---------------------------- //
 
+#define Editor_TextFont FL_COURIER
+#define Editor_TextSize 10
+
+
 #define Version "Ver 0.2 1/21/2025"
 
 // Uncomment the next line to disable drag and drop text.
@@ -234,6 +238,7 @@ void linenumbers_cb(Fl_Widget *w, void* v) {
   const Fl_Menu_Item* i = m->mvalue();
   if ( i->value() ) {
     e->editor->linenumber_width(line_num_width);	// enable
+    e->editor->linenumber_font(e->editor->textfont());
     e->editor->linenumber_size(e->editor->textsize());
   } else {
     e->editor->linenumber_width(0);	// disable
@@ -495,7 +500,8 @@ Fl_Window* new_view() {
     m->copy(menuitems, w);
     w->editor = new Fl_Text_Editor(0, 30, 660, 370);
     w->editor->buffer(textbuf);
-    w->editor->textfont(FL_COURIER);
+    w->editor->textfont(Editor_TextFont);
+    w->editor->textsize(Editor_TextSize);
   w->end();
   w->resizable(w->editor);
   w->callback((Fl_Callback *)close_cb, w);
