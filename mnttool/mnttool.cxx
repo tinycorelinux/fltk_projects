@@ -47,12 +47,19 @@ void refresh() {
 
   // width of the button pack
   size_t wotbp = 1;
+  for (int i=0; i < mount_list_size; i++)
+  {  
+     if ( strlen(mountList[i].c_str()) > wotbp )
+        wotbp = strlen(mountList[i].c_str());
+  }
+  wotbp = 12*wotbp>80 ? 12*wotbp : 80;
+  pack->resize(0,0,wotbp,(25*(mount_list_size)));
 
   for (int i=0; i < mount_list_size; i++)
   {  
      Fl_Button* btn[i];
      
-     btn[i] = new Fl_Button(0,0,80,25);
+     btn[i] = new Fl_Button(0,0,wotbp,25);
      btn[i]->label(mountList[i].c_str());
      btn[i]->tooltip(mountLabels[i].c_str());
      btn[i]->callback((Fl_Callback*)btnCallback,(void*)(uintptr_t)i);
@@ -63,20 +70,17 @@ void refresh() {
         btn[i]->color((Fl_Color)1);
 
      pack->add(btn[i]);
-     if ( strlen(mountList[i].c_str()) > wotbp )
-        wotbp = strlen(mountList[i].c_str());
   }
 
   Fl_Button* btnRefresh;
-  btnRefresh = new Fl_Button(0,0,80,25);
+  btnRefresh = new Fl_Button(0,0,wotbp,25);
   btnRefresh->label("Refresh");
   btnRefresh->callback((Fl_Callback*)btnRefreshCallback);
   pack->add(btnRefresh);
 
   selected = 0;
-  pack->resize(0,0,12*wotbp>80 ? 12*wotbp : 80,(25*(mount_list_size)));
   pack->redraw();
-  w->resize(0,0,12*wotbp>80 ? 12*wotbp : 80,(25*(mount_list_size+1)));
+  w->resize(0,0,wotbp,(25*(mount_list_size+1)));
   w->position(xPos,yPos);
   w->redraw();
 }
@@ -136,7 +140,7 @@ void btnCallback(Fl_Widget*, void* userdata) {
   }
 }
 
-void btnRefreshCallback(Fl_Widget*, void* userdata) {
+void btnRefreshCallback(Fl_Widget*, __attribute__ ((unused)) void* userdata) {
   getPos();
   system("sudo rebuildfstab");
   refresh();

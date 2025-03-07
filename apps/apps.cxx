@@ -1046,8 +1046,8 @@ outURI->value(mirror.c_str());
 
 Fl_Menu_Item menu_menuBarApps[] = {
  {mygettext("Apps"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
- {mygettext("Cloud (Remote)"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Browse"), 0,  (Fl_Callback*)menuCB, (void*)("tcz"), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {mygettext("Mirror Options"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Select Mirror"), 0,  (Fl_Callback*)mirrorCB, (void*)("mirror"), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {mygettext("Select fastest mirror"), 0,  (Fl_Callback*)cb_Select, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
