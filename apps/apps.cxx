@@ -62,7 +62,7 @@ static void auditView() {
   brwResults->clear();
   boxExtn->label("Select");
   boxResults->label("Results");
-  report_type.empty();
+  report_type.clear();
   btnSingle->label("Add Item");
   btnResults->label("Delete Item from list");
   btnSingle->deactivate();

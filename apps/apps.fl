@@ -118,7 +118,7 @@ brwMulti->clear();
 brwResults->clear();
 boxExtn->label("Select");
 boxResults->label("Results");
-report_type.empty();
+report_type.clear();
 btnSingle->label("Add Item");
 btnResults->label("Delete Item from list");
 btnSingle->deactivate();
@@ -127,7 +127,8 @@ btnSingle->hide();
 btnResults->hide();
 grpAudit->show();
 grpSingle->show();
-Fl::flush();} {}
+Fl::flush();} {selected
+  }
 }
 
 Function {browseView()} {private return_type void
