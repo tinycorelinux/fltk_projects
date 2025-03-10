@@ -10,12 +10,14 @@ const char *bestmirror;
 
 static void *testmirror(void *in) {
 
-	const char * const url = (const char * const) in;
+	const char * const url = (const char *) in;
 
 	char tmp[PATH_MAX];
 	char target[] = "/tmp/mp_XXXXXX";
 
-	mktemp(target);
+//	mktemp(target);
+	int fd = mkstemp(target);
+	close(fd);
 
 	snprintf(tmp, PATH_MAX, "busybox wget -q -O %s %s/15.x/x86/tcz/info.lst.gz", target, url);
 
