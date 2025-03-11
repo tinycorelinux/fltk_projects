@@ -1,49 +1,65 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0303
+version 1.0305
 i18n_type 1
 i18n_include <libintl.h>
 i18n_function mygettext
 header_name {.h}
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2011} {}
+decl {// (c) Robert Shingledecker 2011} {private local
+}
 
-decl {// Portions (c) Brian Smith 2011} {}
+decl {// Portions (c) Brian Smith 2011} {private local
+}
 
 decl {\#include <unistd.h>} {public global
 }
 
-decl {\#include <cstdlib>} {}
+decl {\#include <cstdlib>} {private local
+}
 
-decl {\#include <iostream>} {}
+decl {\#include <iostream>} {private local
+}
 
-decl {\#include <fstream>} {}
+decl {\#include <fstream>} {private local
+}
 
-decl {\#include <sstream>} {}
+decl {\#include <sstream>} {private local
+}
 
-decl {\#include <string>} {}
+decl {\#include <string>} {private local
+}
 
-decl {\#include <FL/Fl_File_Chooser.H>} {}
+decl {\#include <FL/Fl_File_Chooser.H>} {private local
+}
 
-decl {\#include <FL/fl_message.H>} {}
+decl {\#include <FL/fl_message.H>} {private local
+}
 
-decl {\#include <locale.h>} {}
+decl {\#include <locale.h>} {private local
+}
 
-decl {using namespace std;} {}
+decl {using namespace std;} {private local
+}
 
-decl {istringstream iss;} {}
+decl {istringstream iss;} {private local
+}
 
-decl {string command,msg,heading;} {}
+decl {string command,msg,heading;} {private local
+}
 
-decl {int results, locales_set=0, test4syslinux, test4mkdosfs, test4perl;} {}
+decl {int locales_set=0, test4mkdosfs, test4perl;} {private local
+}
 
-decl {string image,type,installMode, target,dev,format,path,coreplus,boot,flag, markActive,tcepath;} {}
+decl {string image,type,installMode, target,dev,format,path,coreplus,boot,flag, markActive,tcepath;} {private local
+}
 
-decl {string warn="Mark active if Tiny Core is the only operation system,\\nor Windows and Tiny Core are on the same disk.\\nOtherwise use Grub extension after installation.";} {}
+decl {string warn="Mark active if Tiny Core is the only operation system,\\nor Windows and Tiny Core are on the same disk.\\nOtherwise use Grub extension after installation.";} {private local
+}
 
-Function {selectFile()} {return_type void
+Function {selectFile()} {open return_type void
 } {
   code {brwTarget->deactivate();
-string target = "*core,corepure64*";
+string target = "*core*";
 string title = gettext("Select File for ");
 title = title + "core,corepure64";
 Fl_File_Chooser chooser("/",target.c_str(), Fl_File_Chooser::SINGLE, title.c_str());
@@ -57,7 +73,8 @@ if ( chooser.value() == NULL )
 }
 
 path = chooser.value();
-Fl::flush();} {}
+Fl::flush();} {selected
+  }
 }
 
 Function {prepTarget()} {return_type void
@@ -252,7 +269,7 @@ if (grpReview->visible())
 }} {}
 }
 
-Function {brwCB(Fl_Widget*, void*userdata)} {open return_type {static void}
+Function {brwCB(Fl_Widget*, __attribute__ ((unused)) void*userdata)} {open return_type {static void}
 } {
   code {if ( brwTarget->value() )
 {
@@ -268,11 +285,10 @@ Function {brwCB(Fl_Widget*, void*userdata)} {open return_type {static void}
    	btnBootloader->activate();
    else
    	btnBootloader->value(1);
-}} {selected
-  }
+}} {}
 }
 
-Function {btnProceedCB(Fl_Widget*, void* userdata)} {return_type {static void}
+Function {btnProceedCB(Fl_Widget*, __attribute__ ((unused)) void* userdata)} {return_type {static void}
 } {
   code {btnProceed->deactivate();
 grpButtons->deactivate();
@@ -346,7 +362,7 @@ Function {} {open
       code0 {wWizard->value(wWizard->child(0));}
     } {
       Fl_Group grpType {open
-        xywh {25 30 435 325}
+        xywh {25 30 435 325} hide
       } {
         Fl_Box lblPathCore {
           label {Path to core.gz:}
@@ -471,12 +487,13 @@ prepTarget();
         }
       }
       Fl_Group grpBoot {
-        label {Boot Options}
-        xywh {25 30 435 325} hide
+        label {Boot Options} open
+        xywh {25 30 435 325}
       } {
         Fl_Browser brwBootRef {
           label {Boot Options Reference List}
           xywh {35 55 415 235} align 1 textfont 4
+          code0 {brwBootRef->textsize(10);}
         }
         Fl_Input options {
           label {Enter Spaces Separated Options From Examples Above.
