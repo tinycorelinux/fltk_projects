@@ -451,6 +451,7 @@ void view_cb(Fl_Widget*, void*) {
   w->show();
 }
 
+#pragma GCC diagnostic ignored "-Wmissing-field-initializers"
 Fl_Menu_Item menuitems[] = {
     { "&File",              0, 0, 0, FL_SUBMENU },
     { "&New File",        0, (Fl_Callback *)new_cb },
@@ -492,6 +493,7 @@ Fl_Menu_Item menuitems[] = {
 
   { 0 }
 };
+#pragma GCC diagnostic warning "-Wmissing-field-initializers"
 
 Fl_Window* new_view() {
   EditorWindow* w = new EditorWindow(660, 400, title);

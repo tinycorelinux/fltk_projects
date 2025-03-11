@@ -20,7 +20,7 @@ OBJ = $(SRC:.cxx=.o)
 %.o : %.cxx
 	$(CXX) -c $(CXXFLAGS) $(CPPFLAGS) $< -o $@
 
-CXXFLAGS += -Os -s -Wall -Wextra -Wno-missing-field-initializers
+CXXFLAGS += -Os -s -Wall -Wextra
 CXXFLAGS += -fno-rtti -fno-exceptions
 CXXFLAGS += -ffunction-sections -fdata-sections
 
