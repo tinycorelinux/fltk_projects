@@ -1,27 +1,36 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
-i18n_type 1 
-i18n_include <libintl.h> 
-i18n_function mygettext 
-header_name {.h} 
+version 1.0305
+i18n_type 1
+i18n_include <libintl.h>
+i18n_function mygettext
+header_name {.h}
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2008} {} 
+decl {// (c) Robert Shingledecker 2008} {private local
+}
 
-decl {\#include <cstdlib>} {} 
+decl {\#include <cstdlib>} {private local
+}
 
-decl {\#include <iostream>} {} 
+decl {\#include <iostream>} {private local
+}
 
-decl {\#include <sstream>} {} 
+decl {\#include <sstream>} {private local
+}
 
-decl {\#include <string>} {} 
+decl {\#include <string>} {private local
+}
 
-decl {\#include <FL/fl_ask.H>} {} 
+decl {\#include <FL/fl_ask.H>} {private local
+}
 
-decl {\#include <locale.h>} {} 
+decl {\#include <locale.h>} {private local
+}
 
-decl {using namespace std;} {} 
+decl {using namespace std;} {private local
+}
 
-decl {int locales_set=0;} {} 
+decl {int locales_set=0;} {private local
+}
 
 Function {mygettext(const char *msgid)} {open return_type {char *}
 } {
@@ -36,7 +45,7 @@ locales_set=1;
 }
 
 return gettext(msgid);} {}
-} 
+}
 
 Function {btn_callback(Fl_Widget*, void* userdata)} {open return_type {static void}
 } {
@@ -60,19 +69,20 @@ if ( size < 1 )
    return;
    
 string command = "sudo dd if=/dev/zero of=" + str_mount + "/tc.swp bs=1024 count=" + str_size; 
-if ( fl_ask(command.c_str()) )
+if ( fl_choice(command.c_str(), "No", "Yes", NULL) )
 {
    system(command.c_str());
    system( ("sudo mkswap " + str_mount + "/tc.swp").c_str());
    system( ("sudo swapon " + str_mount + "/tc.swp").c_str());
    exit(0);
-}} {}
-} 
+}} {selected
+  }
+}
 
 Function {} {open
 } {
   Fl_Window {} {
-    label Swapfile open selected
+    label Swapfile open
     xywh {487 412 275 105} type Double hide
   } {
     Fl_Input inp_mount {
@@ -96,4 +106,4 @@ Function {} {open
       xywh {140 75 64 20}
     }
   }
-} 
+}
