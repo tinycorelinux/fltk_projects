@@ -1,37 +1,51 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
-i18n_type 1 
-i18n_include <libintl.h> 
-i18n_function mygettext 
-header_name {.h} 
+version 1.0305
+i18n_type 1
+i18n_include <libintl.h>
+i18n_function mygettext
+header_name {.h}
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2008- 2011} {} 
+decl {// (c) Robert Shingledecker 2008- 2011} {private local
+}
 
-decl {// Gradient addition by Brian Smith} {} 
+decl {// Gradient addition by Brian Smith} {private local
+}
 
-decl {\#include <cstdlib>} {} 
+decl {\#include <cstdlib>} {private local
+}
 
-decl {\#include <iostream>} {} 
+decl {\#include <iostream>} {private local
+}
 
-decl {\#include <fstream>} {} 
+decl {\#include <fstream>} {private local
+}
 
-decl {\#include <sstream>} {} 
+decl {\#include <sstream>} {private local
+}
 
-decl {\#include <string.h>} {} 
+decl {\#include <string.h>} {private local
+}
 
-decl {\#include <stdio.h>} {} 
+decl {\#include <stdio.h>} {private local
+}
 
-decl {\#include <locale.h>} {} 
+decl {\#include <locale.h>} {private local
+}
 
-decl {\#include <FL/fl_ask.H>} {} 
+decl {\#include <FL/fl_ask.H>} {private local
+}
 
-decl {using namespace std;} {} 
+decl {using namespace std;} {private local
+}
 
-decl {int locales_set=0;} {} 
+decl {int locales_set=0;} {private local
+}
 
-decl {string target, logo;} {} 
+decl {string target, logo;} {private local
+}
 
-decl {double r1,g1,b1,r2,g2,b2} {} 
+decl {double r1,g1,b1,r2,g2,b2} {private local
+}
 
 Function {mygettext(const char *msgid)} {open return_type {char *}
 } {
@@ -46,7 +60,7 @@ locales_set=1;
 }                      
               
 return gettext(msgid);} {}
-} 
+}
 
 Function {btnCallback(Fl_Widget*, void* userdata)} {open return_type {static void}
 } {
@@ -90,7 +104,7 @@ if (btnColor->value() == 1)
 	   gu = 255*colorChooserGradient1->g()+.5;
 	   bu = 255*colorChooserGradient1->b()+.5;
 	   char buffer[10];
-	   int n = sprintf(buffer,"%02X%02X%02X\\n",ru,gu,bu);
+	   sprintf(buffer,"%02X%02X%02X\\n",ru,gu,bu);
 	   string selectedColor = buffer;
 	   backgroundType = "solid";                                                  
 	   command = "setbackground " + logo + " " + backgroundType + " \\'\#" + selectedColor.substr(0,6) + "\\'";
@@ -129,7 +143,7 @@ if (btnColor->value() == 1)
 	}
 }} {selected
   }
-} 
+}
 
 Function {radioCallback()} {open return_type {static void}
 } {
@@ -141,7 +155,7 @@ Function {radioCallback()} {open return_type {static void}
 	boxColor2->show();
 	colorChooserGradient2->activate();
 }} {}
-} 
+}
 
 Function {modeCallback()} {open return_type {static void}
 } {
@@ -168,7 +182,7 @@ if (btnColor->value()==1){
 	logoBtn->activate();
 }
 radioCallback();} {}
-} 
+}
 
 Function {} {open
 } {
@@ -371,4 +385,4 @@ if (btnCenter->value() == 0 && btnFull->value() == 0 && btnTile->value() == 0 &&
 
 modeCallback();
 radioCallback();} {}
-} 
+}

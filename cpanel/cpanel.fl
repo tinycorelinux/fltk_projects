@@ -1,24 +1,29 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
-i18n_type 1 
-i18n_include <libintl.h> 
-i18n_function gettext 
-header_name {.h} 
+version 1.0305
+i18n_type 1
+i18n_include <libintl.h>
+i18n_function gettext
+header_name {.h}
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2008-2010} {} 
+decl {// (c) Robert Shingledecker 2008-2010} {private local
+}
 
-decl {\#include <cstdlib>} {} 
+decl {\#include <cstdlib>} {private local
+}
 
-decl {\#include <iostream>} {} 
+decl {\#include <iostream>} {private local
+}
 
-decl {\#include <locale.h>} {} 
+decl {\#include <locale.h>} {private local
+}
 
-decl {using namespace std;} {} 
+decl {using namespace std;} {private local
+}
 
-Function {btn_callback(Fl_Widget* w, void* userdata)} {open return_type {static void}
+Function {btn_callback( __attribute__ ((unused)) Fl_Widget* w, void* userdata)} {open selected return_type {static void}
 } {
   code {system((const char*)userdata);} {}
-} 
+}
 
 Function {} {open
 } {
@@ -110,7 +115,7 @@ textdomain("tinycore");} {}
     Fl_Button btnXvesa {
       label Xvesa
       user_data {"aterm +tr +sb -T \\"Xvesa Setup\\" -e xsetup.sh &"}
-      callback btn_callback selected
+      callback btn_callback
       xywh {305 135 120 30} deactivate
     }
   }
@@ -119,4 +124,4 @@ if ( results == 0 ) btnWbarConf->activate();
 
 results = system("which Xvesa >/dev/null 2>&1");
 if ( results == 0 ) btnXvesa->activate();} {}
-} 
+}
