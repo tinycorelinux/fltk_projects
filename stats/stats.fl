@@ -1,26 +1,32 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
-i18n_type 1 
-i18n_include <libintl.h> 
-i18n_function gettext 
-header_name {.h} 
+version 1.0305
+i18n_type 1
+i18n_include <libintl.h>
+i18n_function gettext
+header_name {.h}
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2008-2010} {} 
+decl {// (c) Robert Shingledecker 2008-2010} {private local
+}
 
-decl {\#include <cstdlib>} {} 
+decl {\#include <cstdlib>} {private local
+}
 
-decl {\#include <iostream>} {} 
+decl {\#include <iostream>} {private local
+}
 
-decl {\#include <locale.h>} {} 
+decl {\#include <locale.h>} {private local
+}
 
-decl {using namespace std;} {} 
+decl {using namespace std;} {private local
+}
 
-decl {Fl_Text_Buffer *txtBuffer = new Fl_Text_Buffer();} {} 
+decl {Fl_Text_Buffer *txtBuffer = new Fl_Text_Buffer();} {private local
+}
 
-Function {tabsGroupCB(Fl_Widget*, void*userdata)} {open return_type {static void}
+Function {tabsGroupCB(Fl_Widget*, __attribute__ ((unused)) void*userdata)} {open return_type {static void}
 } {
   code {tabs->value()->do_callback();} {}
-} 
+}
 
 Function {tabCB(Fl_Widget*, void*userdata)} {open return_type {static void}
 } {
@@ -52,7 +58,7 @@ if (userdatastr == "installed")
 if (userdatastr == "big")
   system("bigHomeFiles.sh > /tmp/stats.txt");
 txtBuffer->loadfile("/tmp/stats.txt");} {}
-} 
+}
 
 Function {} {open
 } {
@@ -60,7 +66,7 @@ Function {} {open
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");} {}
   Fl_Window {} {
-    label {Tiny Core System Stats} open selected
+    label {Tiny Core System Stats} open
     xywh {21 137 660 385} type Double hide resizable
   } {
     Fl_Tabs tabs {
@@ -76,6 +82,7 @@ textdomain("tinycore");} {}
         Fl_Text_Display cpuDisplay {
           xywh {0 0 660 335} textfont 4
           code0 {cpuDisplay->buffer(txtBuffer);}
+          code1 {cpuDisplay->textsize(10);}
         }
       }
       Fl_Group {} {
@@ -87,6 +94,7 @@ textdomain("tinycore");} {}
         Fl_Text_Display memDisplay {
           xywh {0 0 660 335} textfont 4
           code0 {memDisplay->buffer(txtBuffer);}
+          code1 {memDisplay->textsize(10);}
         }
       }
       Fl_Group {} {
@@ -98,6 +106,7 @@ textdomain("tinycore");} {}
         Fl_Text_Display netDisplay {
           xywh {0 0 660 335} textfont 4
           code0 {netDisplay->buffer(txtBuffer);}
+          code1 {netDisplay->textsize(10);}
         }
       }
       Fl_Group {} {
@@ -109,6 +118,7 @@ textdomain("tinycore");} {}
         Fl_Text_Display modulesDisplay {
           xywh {0 0 660 335} textfont 4
           code0 {modulesDisplay->buffer(txtBuffer);}
+          code1 {modulesDisplay->textsize(10);}
         }
       }
       Fl_Group {} {
@@ -120,6 +130,7 @@ textdomain("tinycore");} {}
         Fl_Text_Display processesDisplay {
           xywh {0 0 660 335} textfont 4
           code0 {processesDisplay->buffer(txtBuffer);}
+          code1 {processesDisplay->textsize(10);}
         }
       }
       Fl_Group {} {
@@ -131,6 +142,7 @@ textdomain("tinycore");} {}
         Fl_Text_Display dmesgDisplay {
           xywh {0 0 660 335} textfont 4
           code0 {dmesgDisplay->buffer(txtBuffer);}
+          code1 {dmesgDisplay->textsize(10);}
         }
       }
       Fl_Group {} {
@@ -142,6 +154,7 @@ textdomain("tinycore");} {}
         Fl_Text_Display mountsDisplay {
           xywh {0 0 660 335} textfont 4
           code0 {mountsDisplay->buffer(txtBuffer);}
+          code1 {mountsDisplay->textsize(10);}
         }
       }
       Fl_Group {} {
@@ -153,6 +166,7 @@ textdomain("tinycore");} {}
         Fl_Text_Display filesystemsDisplay {
           xywh {0 0 660 335} textfont 4
           code0 {filesystemsDisplay->buffer(txtBuffer);}
+          code1 {filesystemsDisplay->textsize(10);}
         }
       }
       Fl_Group {} {
@@ -164,6 +178,7 @@ textdomain("tinycore");} {}
         Fl_Text_Display bootDisplay {
           xywh {0 0 660 335} textfont 4
           code0 {bootDisplay->buffer(txtBuffer);}
+          code1 {bootDisplay->textsize(10);}
         }
       }
       Fl_Group {} {
@@ -175,6 +190,7 @@ textdomain("tinycore");} {}
         Fl_Text_Display extensionsDisplay {
           xywh {0 0 660 335} textfont 4
           code0 {extensionsDisplay->buffer(txtBuffer);}
+          code1 {extensionsDisplay->textsize(10);}
         }
       }
       Fl_Group {} {
@@ -183,13 +199,14 @@ textdomain("tinycore");} {}
         callback tabCB open
         xywh {0 5 660 350}
       } {
-        Fl_Text_Display bigDisplay {
+        Fl_Text_Display bigDisplay {selected
           xywh {0 0 660 335} textfont 4
           code0 {bigDisplay->buffer(txtBuffer);}
+          code1 {bigDisplay->textsize(10);}
         }
       }
     }
   }
   code {system("bigHomeFiles.sh > /tmp/stats.txt");
 txtBuffer->loadfile("/tmp/stats.txt");} {}
-} 
+}

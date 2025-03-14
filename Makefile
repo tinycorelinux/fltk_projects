@@ -20,7 +20,7 @@ OBJ = $(SRC:.cxx=.o)
 %.o : %.cxx
 	$(CXX) -c $(CXXFLAGS) $(CPPFLAGS) $< -o $@
 
-CXXFLAGS += -Os -s -Wall -Wextra -Wno-missing-field-initializers
+CXXFLAGS += -Os -s -Wall -Wextra
 CXXFLAGS += -fno-rtti -fno-exceptions
 CXXFLAGS += -ffunction-sections -fdata-sections
 
@@ -30,13 +30,17 @@ LDFLAGS += -Wl,-as-needed
 # Additional flags for x86
 ifeq ($(ARCH), i686)
 CXXFLAGS += -march=i486 -mtune=i686
+ifneq (ldscripts,$(findstring ldscripts, $(shell fltk-config --ldflags)))
 LDFLAGS += "-Wl,-T/usr/local/lib/ldscripts/elf_i386.xbn"
+endif
 endif
 
 # Additional flags for x86_64
 ifeq ($(ARCH), x86_64)
 CXXFLAGS += -mtune=generic
+ifneq (ldscripts,$(findstring ldscripts, $(shell fltk-config --ldflags)))
 LDFLAGS += "-Wl,-T/usr/local/lib/ldscripts/elf_x86_64.xbn"
+endif
 endif
 
 CXXFLAGS += $(shell fltk-config --cxxflags | sed 's@-I@-isystem @')

@@ -1,43 +1,60 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
-i18n_type 1 
-i18n_include <libintl.h> 
-i18n_function gettext 
-header_name {.h} 
+version 1.0305
+i18n_type 1
+i18n_include <libintl.h>
+i18n_function gettext
+header_name {.h}
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2010-2012} {} 
+decl {// (c) Robert Shingledecker 2010-2012} {private local
+}
 
-decl {// Zoom, Icon Size, Icon - Brian Smith} {} 
+decl {// Zoom, Icon Size, Icon - Brian Smith} {private local
+}
 
-decl {\#include <iostream>} {} 
+decl {\#include <iostream>} {private local
+}
 
-decl {\#include <fstream>} {} 
+decl {\#include <fstream>} {private local
+}
 
-decl {\#include <sstream>} {} 
+decl {\#include <sstream>} {private local
+}
 
-decl {\#include <string>} {} 
+decl {\#include <string>} {private local
+}
 
-decl {\#include <FL/fl_message.H>} {} 
+decl {\#include <FL/fl_message.H>} {private local
+}
 
-decl {\#include <FL/Fl_File_Chooser.H>} {} 
+decl {\#include <FL/Fl_File_Chooser.H>} {private local
+}
 
-decl {\#include <locale.h>} {} 
+decl {\#include <locale.h>} {private local
+}
 
-decl {\#include <unistd.h>} {} 
+decl {\#include <unistd.h>} {private local
+}
 
-decl {\#include <string.h>} {} 
+decl {\#include <string.h>} {private local
+}
 
-decl {using namespace std;} {} 
+decl {using namespace std;} {private local
+}
 
-decl {string home, tcedir, command, selected;} {} 
+decl {string home, tcedir, command, selected;} {private local
+}
 
-decl {int chosen,results;} {} 
+decl {int chosen;} {private local
+}
 
-decl {string widgetArray[4];} {} 
+decl {string widgetArray[4];} {private local
+}
 
-decl {string onbootList, wbarXlist, options;} {} 
+decl {string onbootList, wbarXlist, options;} {private local
+}
 
-decl {string wbarIcons = "/usr/local/tce.icons";} {} 
+decl {string wbarIcons = "/usr/local/tce.icons";} {private local
+}
 
 Function {genConf()} {return_type void
 } {
@@ -87,7 +104,7 @@ isize = stream.str();
 options += " --isize " + isize;
 txtFromGUI->value(options.c_str());
 options += " ";} {}
-} 
+}
 
 Function {brwWbarCB(Fl_Widget *, void *)} {return_type {static void}
 } {
@@ -100,7 +117,7 @@ Function {brwWbarCB(Fl_Widget *, void *)} {return_type {static void}
    brwXlist->add(selected.c_str());
    brwWbar->remove(chosen);
 }} {}
-} 
+}
 
 Function {brwXlistCB(Fl_Widget *, void *)} {return_type {static void}
 } {
@@ -113,7 +130,7 @@ Function {brwXlistCB(Fl_Widget *, void *)} {return_type {static void}
    brwXlist->remove(chosen);
    brwWbar->add(selected.c_str());
 }} {}
-} 
+}
 
 Function {btnApplyCB(Fl_Widget *, void *)} {return_type {static void}
 } {
@@ -132,7 +149,7 @@ fout.close();
 Fl::flush();
 command = "wbar.sh";
 system(command.c_str());} {}
-} 
+}
 
 Function {} {open
 } {
@@ -140,21 +157,23 @@ Function {} {open
 bindtextdomain("tinycore","/usr/local/share/locale");
 textdomain("tinycore");} {}
   Fl_Window window {
-    label {tc-wbarconf} open selected
+    label {tc-wbarconf} open
     xywh {15 327 435 333} type Double hide resizable
   } {
-    Fl_Group grpGUI {
+    Fl_Group grpGUI {open
       xywh {9 32 421 293}
     } {
       Fl_Browser brwWbar {
         label {Wbar Icons}
         callback brwWbarCB
         xywh {9 33 200 225} type Select align 1 textfont 4
+        code0 {brwWbar->textsize(10);}
       }
       Fl_Browser brwXlist {
         label {eXclude Icons}
         callback brwXlistCB
         xywh {219 33 210 225} type Select align 1 textfont 4
+        code0 {brwXlist->textsize(10);}
       }
       Fl_Choice posChoice {
         label Position
@@ -232,15 +251,16 @@ txtOptions->take_focus();}
         xywh {343 303 80 20}
       }
     }
-    Fl_Group grpOptions {
+    Fl_Group grpOptions {open
       xywh {8 9 426 316} hide
     } {
       Fl_Output txtFromGUI {
         xywh {11 9 415 20} color 29
       }
       Fl_Browser brwOptions {
-        label {Optionally Enter Additional Unique Options from above:}
+        label {Optionally Enter Additional Unique Options from above:} selected
         xywh {8 39 420 215} textfont 4
+        code0 {brwOptions->textsize(10);}
       }
       Fl_Input txtOptions {
         xywh {10 271 414 24}
@@ -347,4 +367,4 @@ txtOptions->value(otherOptions.c_str());
 
 grpGUI->show();
 Fl::flush();} {}
-} 
+}

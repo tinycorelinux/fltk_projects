@@ -1,62 +1,82 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
-i18n_type 1 
-i18n_include <libintl.h> 
-i18n_function mygettext 
-header_name {.h} 
+version 1.0305
+i18n_type 1
+i18n_include <libintl.h>
+i18n_function mygettext
+header_name {.h}
 code_name {.cxx}
-decl {// (c) Robert Shingledecker 2012} {} 
+decl {// (c) Robert Shingledecker 2012} {private local
+}
 
-decl {\#include <iostream>} {} 
+decl {\#include <iostream>} {private local
+}
 
-decl {\#include <sstream>} {} 
+decl {\#include <sstream>} {private local
+}
 
-decl {\#include <fstream>} {} 
+decl {\#include <fstream>} {private local
+}
 
-decl {\#include <cstdlib>} {} 
+decl {\#include <cstdlib>} {private local
+}
 
-decl {\#include <string>} {} 
+decl {\#include <string>} {private local
+}
 
-decl {\#include <FL/fl_message.H>} {} 
+decl {\#include <FL/fl_message.H>} {private local
+}
 
-decl {\#include <FL/Fl_File_Chooser.H>} {} 
+decl {\#include <FL/Fl_File_Chooser.H>} {private local
+}
 
-decl {\#include <sys/types.h>} {} 
+decl {\#include <sys/types.h>} {private local
+}
 
-decl {\#include <sys/stat.h>} {} 
+decl {\#include <sys/stat.h>} {private local
+}
 
-decl {\#include <fcntl.h>} {} 
+decl {\#include <fcntl.h>} {private local
+}
 
-decl {\#include <signal.h>} {} 
+decl {\#include <signal.h>} {private local
+}
 
-decl {\#include <locale.h>} {} 
+decl {\#include <locale.h>} {private local
+}
 
-decl {\#include <unistd.h>} {} 
+decl {\#include <unistd.h>} {private local
+}
 
-decl {\#include <string.h>} {} 
+decl {\#include <string.h>} {private local
+}
 
-decl {using namespace std;} {} 
+decl {using namespace std;} {private local
+}
 
-decl {int results, lineNbr, locales_set=0;} {} 
+decl {int lineNbr, locales_set=0;} {selected private local
+}
 
-decl {string selection, item, targetFile;} {} 
+decl {string selection, item, targetFile;} {private local
+}
 
-decl {string device_name;} {} 
+decl {string device_name;} {private local
+}
 
-decl {string command, msg;} {} 
+decl {string command, msg;} {private local
+}
 
 Function {cursor_normal()} {private return_type void
 } {
   code {window->cursor(FL_CURSOR_DEFAULT);
 Fl::flush();} {}
-} 
+}
 
 Function {cursor_wait()} {private return_type void
 } {
   code {Fl::redraw();
 window->cursor(FL_CURSOR_WAIT);
 Fl::flush();} {}
-} 
+}
 
 Function {updateDisplay()} {private return_type void
 } {
@@ -67,7 +87,7 @@ if (filesTab->visible())
 if (xFilesTab->visible())
    brwXfiles->load("/opt/.xfiletool.lst");
 cursor_normal();} {}
-} 
+}
 
 Function {selectItem()} {private return_type void
 } {
@@ -102,7 +122,7 @@ if (! fout.is_open())
 fout << chooser.value()+1 << endl;
 fout.close();
 updateDisplay();} {}
-} 
+}
 
 Function {mygettext(const char *msgid)} {private return_type {char *}
 } {
@@ -117,7 +137,7 @@ locales_set=1;
 }
 
 return gettext(msgid);} {}
-} 
+}
 
 Function {protectChr()} {return_type void
 } {
@@ -132,7 +152,7 @@ do
       s = 2;
    }
 } while ( p > 0 );} {}
-} 
+}
 
 Function {tabsGroupCB(Fl_Widget*, void*)} {private return_type {static void}
 } {
@@ -149,7 +169,7 @@ if (xFilesTab->visible())
 if (resultsTab->visible())
    grpAdd->deactivate();
 cursor_normal();} {}
-} 
+}
 
 Function {loadBrwResults()} {return_type void
 } {
@@ -168,7 +188,7 @@ if (pipe)
    free(mbuf);
 }
 cursor_normal();} {}
-} 
+}
 
 Function {} {open
 } {
@@ -177,7 +197,7 @@ bindtextdomain("tinycore", "/usr/local/share/locale");
 textdomain("tinycore");} {}
   Fl_Window window {
     label {Backup Restore and Lists Maintenance} user_data_type {void*} open
-    xywh {17 82 600 420} type Double resizable visible
+    xywh {690 37 600 420} type Double resizable visible
   } {
     Fl_Input input_device {
       label {Device:}
@@ -235,7 +255,7 @@ switch(filetool_action)
    
 if (action == "none")
 {
-   if (fl_ask("This will clear the selected backup device\\nand prevent the backup from occuring."))
+   if (fl_choice("This will clear the selected backup device\\nand prevent the backup from occuring.", "Cancel", "Continue", NULL))
    {
       system("> /etc/sysconfig/backup_device");
       exit(0);
@@ -325,7 +345,7 @@ grpAdd->activate();}
 brwXfiles->deselect();
 btnDelete->deactivate();
 grpAdd->activate();
-btnClear->deactivate();} selected
+btnClear->deactivate();}
       xywh {100 392 80 20} deactivate
     }
     Fl_Group grpAdd {open
@@ -361,4 +381,4 @@ if (device_name.size() != 0)
     backupChoice->value(1);
     btnGo->activate();
 }} {}
-} 
+}

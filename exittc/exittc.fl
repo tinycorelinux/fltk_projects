@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 i18n_type 1
 i18n_include <libintl.h>
 i18n_function gettext
@@ -223,8 +223,7 @@ if ( getenv("EXITPROMPT"))
 	}
 	else // Invalid value for EXITPROMPT so revert to default behavior.
 		btnExitShutdown->value(1);
-}} {selected
-  }
+}} {}
   code {ifstream backup_device_file("/etc/sysconfig/backup_device");
 if ( backup_device_file.is_open())
 {
@@ -252,7 +251,7 @@ getline(proc_cmdline_file,cmdline);
 proc_cmdline_file.close();
 
 int loc = cmdline.find("norestore");
-if ( loc == string::npos )
+if ( (unsigned)loc == string::npos )
 {
   if ( backup_device.size() == 0 )
   {
@@ -281,7 +280,7 @@ if ( loc == string::npos )
 
 
 int option = cmdline.find("safebackup");
-if ( option != string::npos )
+if ( (unsigned)option != string::npos )
 {
   backup = true;
   choices->value(2);
@@ -294,5 +293,6 @@ if (backup)
 if (cmdline.find("xonly") != string::npos) btnExitPrompt->hide();
 
 window->show(argc, argv);
-btnOK->take_focus();} {}
+btnOK->take_focus();} {selected
+  }
 }
