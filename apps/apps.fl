@@ -118,7 +118,7 @@ brwMulti->clear();
 brwResults->clear();
 boxExtn->label("Select");
 boxResults->label("Results");
-report_type.clear();
+report_type.empty();
 btnSingle->label("Add Item");
 btnResults->label("Delete Item from list");
 btnSingle->deactivate();
@@ -127,8 +127,7 @@ btnSingle->hide();
 btnResults->hide();
 grpAudit->show();
 grpSingle->show();
-Fl::flush();} {selected
-  }
+Fl::flush();} {}
 }
 
 Function {browseView()} {private return_type void
@@ -238,7 +237,7 @@ outputStatus->value(msg.c_str());
 cursor_normal();} {}
 }
 
-Function {builddb()} {open private return_type void
+Function {builddb()} {private return_type void
 } {
   code {cursor_wait();
 command = "tce-audit builddb " + target_dir +"/";
@@ -258,7 +257,7 @@ boxResults->label("Results");
 cursor_normal();} {}
 }
 
-Function {menuCB(Fl_Widget *, void* userdata)} {private return_type void
+Function {menuCB(Fl_Widget *, void* userdata)} {open private return_type void
 } {
   code {const string userdatastr = userdata ? (char *) userdata : "";
 
@@ -921,7 +920,7 @@ if ( report_type == "updates" ) {
 cursor_normal();} {}
 }
 
-Function {btnMultiCB(Fl_Widget *, void *)} {open return_type {static void}
+Function {btnMultiCB(Fl_Widget *, void *)} {return_type {static void}
 } {
   code {btnMulti->deactivate();
 cursor_wait();
@@ -1109,9 +1108,9 @@ unlink(testfile.c_str());} {}
     label {Apps: Regular Applications (tcz)}
     user_data {"quit"}
     callback menuCB open
-    xywh {677 76 690 428} type Double resizable size_range {690 428 0 0} visible
+    xywh {531 563 690 428} type Double resizable size_range {690 428 0 0} visible
   } {
-    Fl_Menu_Bar menuBarApps {open
+    Fl_Menu_Bar menuBarApps {
       xywh {5 7 55 20}
     } {
       Submenu menuApps {
@@ -1122,10 +1121,10 @@ unlink(testfile.c_str());} {}
           label Browse
           user_data {"tcz"}
           callback menuCB
-          xywh {0 0 30 20}
+          xywh {5 5 30 20}
         }
         Submenu {} {
-          label {Mirror Options}
+          label {Mirror Options} open
           xywh {0 0 63 20}
         } {
           MenuItem {} {
@@ -1219,7 +1218,7 @@ outURI->value(mirror.c_str());}
         }
       }
     }
-    Fl_Menu_Bar menuBarDepends {open
+    Fl_Menu_Bar menuBarDepends {
       xywh {5 7 120 20} hide
     } {
       Submenu {} {
@@ -1312,7 +1311,7 @@ outURI->value(mirror.c_str());}
     Fl_Group grpBrowse {open
       xywh {0 -1 695 426}
     } {
-      Fl_Group grpSearch {open
+      Fl_Group grpSearch {
         xywh {65 7 620 20}
       } {
         Fl_Choice search_choices {
@@ -1350,7 +1349,7 @@ outURI->value(mirror.c_str());}
         xywh {210 27 475 350} resizable
       } {
         Fl_Group infoTab {
-          label Info open
+          label Info
           xywh {210 52 475 325} when 1 hide deactivate
         } {
           Fl_Text_Display infoDisplay {
@@ -1360,7 +1359,7 @@ outURI->value(mirror.c_str());}
           }
         }
         Fl_Group filesTab {
-          label Files open
+          label Files
           xywh {210 52 475 325} when 1 hide deactivate
         } {
           Fl_Text_Display filesDisplay {
@@ -1370,7 +1369,7 @@ outURI->value(mirror.c_str());}
           }
         }
         Fl_Group dependsTab {
-          label Depends open
+          label Depends
           xywh {210 52 475 325} hide deactivate
         } {
           Fl_Text_Display dependsDisplay {
@@ -1380,7 +1379,7 @@ outURI->value(mirror.c_str());}
           }
         }
         Fl_Group sizeTab {
-          label Size open
+          label Size
           xywh {210 52 475 325} deactivate
         } {
           Fl_Text_Display sizeDisplay {
@@ -1442,7 +1441,7 @@ outURI->value(mirror.c_str());}
         label Select
         xywh {0 31 200 16}
       }
-      Fl_Group grpSingle {open
+      Fl_Group grpSingle {
         xywh {5 52 200 348}
       } {
         Fl_Browser brwExtn {
@@ -1460,7 +1459,7 @@ outURI->value(mirror.c_str());}
         label Results
         xywh {205 34 470 17} labelfont 1
       }
-      Fl_Group grpMulti {open
+      Fl_Group grpMulti {
         xywh {5 52 200 348}
       } {
         Fl_Browser brwMulti {
@@ -1475,7 +1474,7 @@ outURI->value(mirror.c_str());}
         }
       }
       Fl_Browser brwResults {
-        callback brwResultsCB
+        callback brwResultsCB selected
         xywh {210 52 475 325} type Hold textfont 4
         code0 {brwResults->textsize(10);}
       }
