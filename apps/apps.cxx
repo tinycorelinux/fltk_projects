@@ -1139,7 +1139,7 @@ int main(int argc, char **argv) {
   proc_cmdline.close();
   target_boot_option = "lst=";
   int sloc = cmdline.find(target_boot_option);
-  if ( (unsigned)sloc == string::npos ) {
+  if ( (long unsigned)sloc == string::npos ) {
      onbootName = "onboot.lst";
   } else {
      int eloc = cmdline.find(" ",sloc);

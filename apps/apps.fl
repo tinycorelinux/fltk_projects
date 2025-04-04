@@ -1075,7 +1075,7 @@ getline(proc_cmdline, cmdline);
 proc_cmdline.close();
 target_boot_option = "lst=";
 int sloc = cmdline.find(target_boot_option);
-if ( (unsigned)sloc == string::npos ) {
+if ( (long unsigned)sloc == string::npos ) {
    onbootName = "onboot.lst";
 } else {
    int eloc = cmdline.find(" ",sloc);
@@ -1103,7 +1103,8 @@ if (writest.fail()) {
    exit(1);
 }
 writest.close();
-unlink(testfile.c_str());} {}
+unlink(testfile.c_str());} {selected
+  }
   Fl_Window window {
     label {Apps: Regular Applications (tcz)}
     user_data {"quit"}
@@ -1474,7 +1475,7 @@ outURI->value(mirror.c_str());}
         }
       }
       Fl_Browser brwResults {
-        callback brwResultsCB selected
+        callback brwResultsCB
         xywh {210 52 475 325} type Hold textfont 4
         code0 {brwResults->textsize(10);}
       }
