@@ -43,6 +43,22 @@ LDFLAGS += "-Wl,-T/usr/local/lib/ldscripts/elf_x86_64.xbn"
 endif
 endif
 
+# Additional flags for aarch64
+ifeq ($(ARCH), aarch64)
+CXXFLAGS += -march=armv8-a+crc -mtune=cortex-a72
+ifneq (ldscripts,$(findstring ldscripts, $(shell fltk-config --ldflags)))
+LDFLAGS += 
+endif
+endif
+
+# Additional flags for armhf
+ifeq ($(ARCH), armv*)
+CXXFLAGS += -march=armv6zk -mtune=arm1176jzf-s -mfpu=vfp
+ifneq (ldscripts,$(findstring ldscripts, $(shell fltk-config --ldflags)))
+LDFLAGS += 
+endif
+endif
+
 CXXFLAGS += $(shell fltk-config --cxxflags | sed 's@-I@-isystem @')
 LDFLAGS += $(shell fltk-config --ldflags)
 
