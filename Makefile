@@ -22,7 +22,6 @@ OBJ = $(SRC:.cxx=.o)
 
 CXXFLAGS += -Os -s -Wall -Wextra
 CXXFLAGS += -fno-rtti -fno-exceptions
-CXXFLAGS += -ffunction-sections -fdata-sections
 
 LDFLAGS += -Wl,-O1 -Wl,-gc-sections
 LDFLAGS += -Wl,-as-needed
@@ -52,7 +51,7 @@ endif
 endif
 
 # Additional flags for armhf
-ifeq ($(ARCH), armv*)
+ifeq ($(ARCH), armv7l)
 CXXFLAGS += -march=armv6zk -mtune=arm1176jzf-s -mfpu=vfp
 ifneq (ldscripts,$(findstring ldscripts, $(shell fltk-config --ldflags)))
 LDFLAGS += 
