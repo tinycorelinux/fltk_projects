@@ -1138,12 +1138,12 @@ int main(int argc, char **argv) {
   getline(proc_cmdline, cmdline);
   proc_cmdline.close();
   target_boot_option = "lst=";
-  int sloc = cmdline.find(target_boot_option);
-  if ( (long unsigned)sloc == string::npos ) {
+  std::string::size_type sloc = cmdline.find(target_boot_option);
+  if ( sloc == string::npos ) {
      onbootName = "onboot.lst";
   } else {
-     int eloc = cmdline.find(" ",sloc);
-     int work = eloc - (sloc + target_boot_option.length());
+     std::string::size_type eloc = cmdline.find(" ",sloc);
+     std::string::size_type work = eloc - (sloc + target_boot_option.length());
      onbootName = cmdline.substr(sloc+target_boot_option.length(),work);
   }
   
