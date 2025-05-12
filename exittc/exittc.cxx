@@ -223,8 +223,8 @@ int main(int argc, char **argv) {
   getline(proc_cmdline_file,cmdline);                                        
   proc_cmdline_file.close();
   
-  int loc = cmdline.find("norestore");
-  if ( (unsigned)loc == string::npos )
+  std::string::size_type loc = cmdline.find("norestore");
+  if ( loc == string::npos )
   {
     if ( backup_device.size() == 0 )
     {
@@ -252,8 +252,8 @@ int main(int argc, char **argv) {
   }
   
   
-  int option = cmdline.find("safebackup");
-  if ( (unsigned)option != string::npos )
+  std::string::size_type option = cmdline.find("safebackup");
+  if ( option != string::npos )
   {
     backup = true;
     choices->value(2);
