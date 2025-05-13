@@ -46,7 +46,7 @@ endif
 ifeq ($(ARCH), aarch64)
 CXXFLAGS += -march=armv8-a+crc -mtune=cortex-a72
 ifneq (ldscripts,$(findstring ldscripts, $(shell fltk-config --ldflags)))
-LDFLAGS += 
+LDFLAGS += -z max-page-size=16384
 endif
 endif
 
